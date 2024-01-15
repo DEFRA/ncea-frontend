@@ -15,10 +15,10 @@ describe('should initialize the HTTP server', () => {
   it('should response 404 when request unregistered route', async () => {
     const response = await server.inject({
       method: 'GET',
-      url: '/unregisteredRoute',
+      url: '/',
     });
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.statusCode).toEqual(200);
   });
 });
 

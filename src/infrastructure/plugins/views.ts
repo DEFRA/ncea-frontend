@@ -1,5 +1,6 @@
 import nunjucks from 'nunjucks';
 import path from 'path';
+import { webRoutePaths } from '../../utils/constants';
 
 module.exports = {
   plugin: require('@hapi/vision'),
@@ -42,6 +43,7 @@ module.exports = {
       assetPath: '/assets',
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
+      homePageUrl: webRoutePaths.home,
     },
   },
 };

@@ -1,0 +1,64 @@
+.full-width-banner {
+  width: 100%;
+  background-color: $gov-defra-color-websafe;
+  box-shadow: 0 0 0 20vmax $gov-defra-color-websafe;
+  clip-path: inset(0 -20vmax);
+  margin-bottom: 20px;
+}
+
+.banner-container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  &__heading-xl {
+    font-size: 36px;
+    font-style: normal;
+    line-height: 40px;
+    color: govuk-colour('white');
+    margin-bottom: 20px;
+  }
+
+  &__caption-l {
+    font-size: 19px;
+    font-style: normal;
+    line-height: 25px;
+    font-weight: 300;
+    color: govuk-colour('white');
+  }
+}
+
+.video-container {
+  margin-bottom: 40px;
+
+  &__caption-m {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    color: $govuk-text-colour;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-top: 1.5px solid $govuk-border-colour;
+  }
+
+  &__frame {
+    position: relative;
+    padding-bottom: 33%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    @media screen and (max-width: 799px) {
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

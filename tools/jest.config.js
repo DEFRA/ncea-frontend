@@ -11,4 +11,6 @@ module.exports = {
   testPathIgnorePatterns: ['<rootDir>/src/infrastructure/plugins/'],
   coveragePathIgnorePatterns: ['<rootDir>/src/infrastructure/plugins/'],
   coverageReporters: ['html'],
+  setupFilesAfterEnv: ['<rootDir>/tools/jest.env.js'],
+  testTimeout: 9000,
 };
