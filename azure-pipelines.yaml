@@ -11,6 +11,7 @@ trigger:
 
 variables:
   isMaster: $[eq(variables['build.sourceBranch'], 'refs/heads/master')]
+  branch: $[replace(variables['Build.SourceBranch'], '/', '-')]
 
 pool:
     vmImage: 'ubuntu-latest'  
@@ -47,7 +48,7 @@ steps:
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
-      artifactName: ncea-frontend_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+      artifactName: ncea-frontend_$(variables.branch)_$(Date:yyyyMMdd)$(Rev:.r)
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
