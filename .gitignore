@@ -132,3 +132,5 @@ dist
 .pnp.*
 *.sqlite
 /.vs
+
+package-lock.json
