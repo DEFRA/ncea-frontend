@@ -13,4 +13,5 @@ module.exports = {
   coverageReporters: ['html'],
   setupFilesAfterEnv: ['<rootDir>/tools/jest.env.js'],
   testTimeout: 9000,
+  testResultsProcessor: "jest-sonar-reporter",
 };
