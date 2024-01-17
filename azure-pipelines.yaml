@@ -48,7 +48,7 @@ steps:
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
-      artifactName: 'ncea-frontend_$(Date:yyyyMMdd)$(Rev:.r)'
+      artifactName: 'ncea-frontend_$(Rev:.r)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
