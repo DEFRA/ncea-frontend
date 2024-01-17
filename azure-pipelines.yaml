@@ -48,9 +48,9 @@ steps:
 
   - script: |
       echo "Branch name: $(branch)"
-      echo "Artifact name1: ncea-frontend_$(Build.BuildID)_$(Build.BuildNumber)"
-      echo "Artifact name2: ncea-frontend_$(branch)_$(Build.BuildNumber)"
-    
+      echo "Artifact name1: ncea-frontend_$(Year:YYYY).$(Month).$(DayOfMonth)"
+      echo "Artifact name2: ncea-frontend_$(Date:yyyyMMdd)"
+
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
