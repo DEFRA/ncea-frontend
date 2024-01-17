@@ -32,15 +32,6 @@ steps:
       npm run test
     displayName: 'npm test'
 
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '**/TEST-*.xml'
-
-  - script: |
-      npm run coverage
-    displayName: 'Output code coverage'
-
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: Cobertura
@@ -57,7 +48,7 @@ steps:
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
-      artifactName: 'ncea-frontend_$(variables.branch)_$(Date:yyyyMMdd)$(Rev:.r)'
+      artifactName: 'ncea-frontend_$(Date:yyyyMMdd)$(Rev:.r)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
