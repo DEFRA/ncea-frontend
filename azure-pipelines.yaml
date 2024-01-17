@@ -11,9 +11,9 @@ trigger:
   - feature/*
 
 variables:
-  isMaster: $[eq(variables['build.sourceBranch'], 'refs/heads/master')]
+  isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
-  branch: $[replace(branchSource, '/', '-')]
+  branch: $[replace(variables['branchSource'], '/', '-')]
 
 pool:
     vmImage: 'ubuntu-latest'  
