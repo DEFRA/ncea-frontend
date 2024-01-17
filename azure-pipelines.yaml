@@ -23,6 +23,14 @@ steps:
     inputs:
       version: '16.x'
     displayName: 'Install Node.js'
+
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'defra-sonarcloud'
+      organization: 'defra'
+      scannerMode: 'MSBuild'
+      projectKey: 'DEFRA_ncea-infrastructure-core'
+      projectName: 'ncea-infrastructure-core'
   
   - script: |
       npm install
@@ -37,6 +45,7 @@ steps:
     inputs:
       codeCoverageTool: Cobertura
       summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+    displayName: 'Publish code coverage'  
 
   - task: CopyFiles@2
     inputs:
@@ -48,13 +57,11 @@ steps:
 
   - script: |
       echo "Branch name: $(branch)"
-      echo "Artifact name1: ncea-frontend_$(Year:YYYY).$(Month).$(DayOfMonth)"
-      echo "Artifact name2: ncea-frontend_$(Date:yyyyMMdd)"
 
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
-      artifactName: 'ncea-frontend_$(branch)_$(Build.BuildNumber)'
+      artifactName: 'ncea-frontend_$(Build.BuildNumber)_$(branch)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
