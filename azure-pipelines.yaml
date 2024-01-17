@@ -48,13 +48,13 @@ steps:
 
   - script: |
       echo "Branch name: $(branch)"
-      echo "Artifact name1: ncea-frontend_$(BuildID)_$(BuildNumber)"
-      echo "Artifact name2: ncea-frontend_$(branch)_$(BuildNumber)"
+      echo "Artifact name1: ncea-frontend_$(Build.BuildID)_$(Build.BuildNumber)"
+      echo "Artifact name2: ncea-frontend_$(branch)_$(Build.BuildNumber)"
     
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
-      artifactName: 'ncea-frontend_$(branch)_$(BuildNumber)'
+      artifactName: 'ncea-frontend_$(branch)_$(Build.BuildNumber)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
@@ -62,7 +62,7 @@ steps:
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
-      artifactName: 'ncea-frontend_$(BuildNumber)'
+      artifactName: 'ncea-frontend_$(Build.BuildNumber)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
