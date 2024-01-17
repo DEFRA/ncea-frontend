@@ -28,7 +28,6 @@ steps:
     inputs:
       SonarCloud: 'defra-sonarcloud'
       organization: 'defra'
-      scannerMode: 'MSBuild'
       projectKey: 'DEFRA_ncea-frontend'
       projectName: 'ncea-frontend'
     displayName: 'Prepare analysis on SonarCloud'
