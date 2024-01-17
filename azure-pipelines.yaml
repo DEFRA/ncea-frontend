@@ -44,6 +44,11 @@ steps:
          build/*
       targetFolder: '$(Build.ArtifactStagingDirectory)'
     displayName: 'Copy project files'
+
+  - script: |
+      echo "Branch name: $(branch)"
+      echo "Artifact name1: ncea-frontend_$(Rev:.r)"
+      echo "Artifact name2: 'ncea-frontend_$(branch)_$(Date:yyyyMMdd)$(Rev:.r)"
     
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
