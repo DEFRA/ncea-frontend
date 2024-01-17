@@ -1,5 +1,4 @@
 # Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -12,6 +11,7 @@ trigger:
 
 variables:
   isMaster: $[eq(variables['build.sourceBranch'], 'refs/heads/master')]
+
 pool:
     vmImage: 'ubuntu-latest'  
   
