@@ -37,6 +37,10 @@ steps:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/TEST-*.xml'
 
+  - script: |
+      npm run coverage
+    displayName: 'Output code coverage'
+
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: Cobertura
