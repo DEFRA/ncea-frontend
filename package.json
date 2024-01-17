@@ -20,7 +20,7 @@
     "prettier-watch:darwin:linux": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "test": "jest --config tools/jest.config.js --coverage -u",
-    "coverage": "jest --coverage --coverageReporters=cobertura",
+    "coverage": "jest --config tools/jest.config.js --coverage --coverageReporters=cobertura",
     "test:dev": "jest --watchAll --config tools/jest.config.js -u",
     "prepare": "husky install .husky"
   },
