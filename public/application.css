@@ -7502,6 +7502,86 @@
 
 
 
+/**
+ * Convert px units into rem values.
+ * @param {string} $values - Can be single, mix, or group of 3 or 4.
+ * @param {string} $fontBase [$fds-base-multiplier-rem] - Set unit base, or defaults to defined value in settings.
+ *
+ * @example scss - Use with single or multiple units
+ *  font-size: fds-rem(20px);
+ *  padding: fds-rem(20px 50px);
+ *
+ * @example scss - Use with a base unit size
+ *  font-size: fds-rem(20px, 10px);
+ */
+.quick_search-container__heading-m {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: "";
+  color: #0b0c0c;
+  margin: 0px;
+}
+.quick_search-container__heading-m--large {
+  font-size: 36px;
+}
+.quick_search-container__caption-m {
+  width: 630px;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  letter-spacing: "";
+  color: #0b0c0c;
+  padding-top: 20px;
+}
+@media screen and (max-width: 799px) {
+  .quick_search-container__caption-m {
+    width: 100%;
+  }
+}
+
+.search-block__form {
+  position: relative;
+  width: 630px;
+}
+@media screen and (max-width: 799px) {
+  .search-block__form {
+    width: 100%;
+  }
+}
+.search-block__label {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+.search-block__button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0;
+  background-color: #008938;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 100%;
+  background-image: url(/assets/images/search-icon.png);
+  background-repeat: no-repeat;
+  background-position: 10px 50%;
+  text-indent: -5000px;
+  overflow: hidden;
+}
+
 .app-main-class {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7520,31 +7600,36 @@
   padding-bottom: 30px;
 }
 .banner-container__heading-xl {
-  font-size: 36px;
+  font-size: 2.25rem;
   font-style: normal;
+  font-weight: 700;
   line-height: 40px;
+  letter-spacing: "";
   color: #ffffff;
   margin-bottom: 20px;
 }
 .banner-container__caption-l {
-  font-size: 19px;
+  font-size: 1.1875rem;
   font-style: normal;
-  line-height: 25px;
   font-weight: 300;
+  line-height: 30px;
+  letter-spacing: "";
   color: #ffffff;
 }
 
 .video-container {
   margin-bottom: 40px;
 }
-.video-container__caption-m {
-  font-size: 24px;
+.video-container__heading-m {
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: 30px;
+  letter-spacing: "";
   color: #0b0c0c;
   padding-top: 30px;
   padding-bottom: 30px;
+  margin: 0px;
   border-top: 1.5px solid #b1b4b6;
 }
 .video-container__frame {

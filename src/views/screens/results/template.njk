@@ -1,0 +1,28 @@
+{% extends "layout/template.njk" %}
+
+{% from "partials/quick_search/macro.njk" import quickSearch %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: homePageUrl
+      },
+      {
+        text: "Search results",
+        href: "#"
+      }
+    ]
+  }) }}
+{% endblock %}
+{% block content %}
+
+  {{ quickSearch({
+    isResultPage: true,
+    searchTerm: searchTerm
+  }) }}
+
+{% endblock %}

@@ -1,5 +1,7 @@
 {% extends "layout/template.njk" %}
 
+{% from "partials/quick_search/macro.njk" import quickSearch %}
+
 {% block content %}
   <div class="full-width-banner">
     <div class="banner-container">
@@ -8,9 +10,11 @@
     </div>
   </div>
 
+  {{ quickSearch() }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full video-container">
-      <span class="govuk-caption-m video-container__caption-m">What is natural capital?</span>
+      <h1 class="govuk-heading-m govuk-\!-static-margin-0 video-container__heading-m">What is natural capital?</h1>
       <div class="video-container__frame">
         <iframe width="630" height="354" src="https://www.youtube.com/embed/4wx0rMruSJo?si=h-SD8VoSUSNwqo1S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>

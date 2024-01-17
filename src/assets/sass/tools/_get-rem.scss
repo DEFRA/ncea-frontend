@@ -1,0 +1,51 @@
+// ================================
+// Tools: Get rem
+// ================================
+
+/**
+ * Convert px units into rem values.
+ * @param {string} $values - Can be single, mix, or group of 3 or 4.
+ * @param {string} $fontBase [$fds-base-multiplier-rem] - Set unit base, or defaults to defined value in settings.
+ *
+ * @example scss - Use with single or multiple units
+ *  font-size: fds-rem(20px);
+ *  padding: fds-rem(20px 50px);
+ *
+ * @example scss - Use with a base unit size
+ *  font-size: fds-rem(20px, 10px);
+ */
+
+// Function to get rem values
+@function fds-rem($values, $unitlessReturn: false, $fontBase: 16px) {
+  $list: ();
+  $unit: 'rem';
+
+  @each $value in $values {
+    // Check to see if unit is 0, auto, or inherited
+    // If so, do nothing and output unit instead
+    @if $value==0 or $value==auto or $value==inherit {
+      $list: append($list, $value);
+    }
+
+    @if $unitlessReturn {
+      $unit: '';
+    }
+
+    // If the unit is a pixel, convert to rem
+    @else if unit($value) == 'px' {
+      $list: append($list, #{calc($value/$fontBase)}#{$unit});
+    }
+
+    // If the value is unitless, assume it is a px value and convert to rem value
+    @else if unitless($value) {
+      $list: append($list, #{calc($value/stripped-unit($fontBase))}#{$unit});
+    }
+
+    // For everything else, keep as is
+    @else {
+      $list: append($list, $value);
+    }
+  }
+
+  @return $list;
+}

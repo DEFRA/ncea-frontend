@@ -11,18 +11,13 @@
   padding-bottom: 30px;
 
   &__heading-xl {
-    font-size: 36px;
-    font-style: normal;
-    line-height: 40px;
+    @include font-style-stack(36px, 40px);
     color: govuk-colour('white');
     margin-bottom: 20px;
   }
 
   &__caption-l {
-    font-size: 19px;
-    font-style: normal;
-    line-height: 25px;
-    font-weight: 300;
+    @include font-style-stack(19px, 30px, 300);
     color: govuk-colour('white');
   }
 }
@@ -30,14 +25,12 @@
 .video-container {
   margin-bottom: 40px;
 
-  &__caption-m {
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 30px;
+  &__heading-m {
+    @include font-style-stack(24px, 30px, 700);
     color: $govuk-text-colour;
     padding-top: 30px;
     padding-bottom: 30px;
+    margin: 0px;
     border-top: 1.5px solid $govuk-border-colour;
   }
 

@@ -3,4 +3,4 @@ build
 coverage
 src/views/**
 src/infrastructure/log_files/**
-src/assets/sass/**.scss
+src/assets/sass/**

@@ -1,0 +1,43 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full quick_search-container">
+    <h1 class="govuk-heading-m quick_search-container__heading-m {%- if params.isResultPage %} quick_search-container__heading-m--large {% endif %}">
+      {% if params.isResultPage %}
+        Search
+      {% else %}
+        Quick Search
+      {% endif %}
+    </h1>
+    {% if not params.isResultPage %}
+      <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
+    {% endif %}
+    <div class="search-block" data-module="search">
+      <form action="/search" method="get" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
+
+        {{ govukInput({
+          id: 'search',
+          name: 'q',
+          label: {
+            text: 'Search',
+            classes: 'search-block__label',
+            attributes: {
+              'aria-hidden': true
+            }
+          },
+          suffix: {
+            html: '<button type="submit" class="search-block__button">Search</button>'
+          },
+          classes: 'govuk-input govuk-!-margin-bottom-0 search-block__input',
+          spellcheck: false,
+          autocomplete: 'off',
+          value: params.searchTerm,
+          attributes: {
+            'aria-controls': 'search-results',
+            'placeholder': 'Search'
+          }
+        }) }}
+      </form>
+    </div>
+  </div>
+</div>

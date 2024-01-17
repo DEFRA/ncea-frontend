@@ -1,0 +1,23 @@
+// ================================
+// Tools: Fonts
+// ================================
+
+@import './get-rem';
+
+@mixin font-style-stack(
+  $size,
+  $height: '',
+  $weight: 700,
+  $style: normal,
+  $spacing: ''
+) {
+  font-size: fds-rem($size);
+  font-style: $style;
+  font-weight: $weight;
+  @if ($height) {
+    line-height: $height;
+  }
+  @if ($spacing) {
+    letter-spacing: $spacing;
+  }
+}
