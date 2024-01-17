@@ -66,9 +66,6 @@ steps:
       targetFolder: '$(Build.ArtifactStagingDirectory)'
     displayName: 'Copy project files'
 
-  - script: |
-      echo "Branch name: $(branch)"
-
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
     inputs:
