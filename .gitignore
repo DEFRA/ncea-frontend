@@ -133,6 +133,5 @@ dist
 *.sqlite
 /.vs
 
-package-lock.json
 /reports/test-report.xml
 /package-lock.json
