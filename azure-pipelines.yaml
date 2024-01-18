@@ -60,7 +60,10 @@ steps:
 
   - task: CopyFiles@2
     inputs:
-      sourceFolder: '$(Build.SourcesDirectory)'      
+      sourceFolder: '$(Build.SourcesDirectory)'
+      contents: |
+        build/**
+        public/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       cleanTargetFolder: true
     displayName: 'Copy project files'                  
