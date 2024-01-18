@@ -16,8 +16,8 @@ variables:
   branch: $[replace(variables['branchSource'], '/', '-')]
 
 pool:
-    vmImage: 'ubuntu-latest'  
-  
+  vmImage: 'ubuntu-latest'
+
 steps:
   - task: UseNode@1
     inputs:
@@ -32,7 +32,7 @@ steps:
       projectKey: 'DEFRA_ncea-frontend'
       projectName: 'ncea-frontend'
     displayName: 'Prepare analysis on SonarCloud'
-  
+
   - script: |
       npm install
       npm run build
@@ -63,10 +63,9 @@ steps:
       sourceFolder: '$(Build.SourcesDirectory)'
       contents: |
         build/**
-        public/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       cleanTargetFolder: true
-    displayName: 'Copy project files'                  
+    displayName: 'Copy project files'
 
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ne(variables.isMaster, true))
