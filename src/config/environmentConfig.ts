@@ -1,15 +1,17 @@
 'use strict';
 
 import * as joi from '@hapi/joi';
+import { EnvironmentConfig } from '../models/environmentConfig.interface';
 
 if (process.env.NODE_ENV === 'local') {
+  /* eslint-disable  @typescript-eslint/no-var-requires */
   require('dotenv').config();
 }
 
 const envs = ['local', 'development', 'qa', 'production', 'test'];
 
 const schema = joi.object().keys({
-  port: joi.number().default(3000),
+  port: joi.string().default('3000'),
   env: joi
     .string()
     .valid(...envs)
@@ -19,7 +21,7 @@ const schema = joi.object().keys({
   geoNetworkSearchAPI: joi.string().allow('').default(''),
 });
 
-const config = {
+const config: EnvironmentConfig = {
   port: process.env.PORT,
   env: process.env.NODE_ENV,
   appInsightsKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
@@ -27,10 +29,12 @@ const config = {
   geoNetworkSearchAPI: process.env.GEONETWORK_SEARCH_API,
 };
 
-const { error, value: Config } = schema.validate(config);
+const { error, value } = schema.validate(config);
 
 if (error) {
-  throw new Error(`The environment config is invalid. ${error.message}`);
+  throw new Error(`The environment config is invalid: ${error.message}`);
 }
+
+const Config: EnvironmentConfig = value;
 
 export { Config };
