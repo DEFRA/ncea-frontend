@@ -62,7 +62,8 @@ steps:
     inputs:
       sourceFolder: '$(Build.SourcesDirectory)'
       contents: |
-        '**/*'
+        build/*
+        public/*
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       cleanTargetFolder: true
     displayName: 'Copy project files'                  
