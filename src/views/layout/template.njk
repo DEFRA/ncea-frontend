@@ -19,10 +19,16 @@
 {% endblock %}
 
 {% block header %}
-  {{ govukHeader({
-    homepageUrl: homePageUrl,
-    serviceName: serviceName
-  }) }}
+  <header class="header-container">
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="{{ assetPath }}/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">{{serviceName}}</span></div>
+      </div>
+    </div>
+  </header>
 {% endblock %}
 
 {% set mainClasses = "app-main-class" %}
@@ -50,15 +56,15 @@
         },
         {
           href: "#",
+          text: "Privacy"
+        },
+        {
+          href: "#",
           text: "Cookies"
         },
         {
           href: "#",
-          text: "Contact"
-        },
-        {
-          href: "#",
-          text: "Terms and conditions"
+          text: "Accessibility statement"
         }
       ]
     }
