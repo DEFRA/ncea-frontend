@@ -68,7 +68,7 @@ steps:
     displayName: 'Copy project files'
 
   - task: PublishPipelineArtifact@1
-    condition: and(succeeded(), ne(variables.isMaster, true))
+    condition: and(and(succeeded(), ne(variables.isMaster, true)), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       artifactName: 'ncea-frontend_$(Build.BuildNumber)_$(branch)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
