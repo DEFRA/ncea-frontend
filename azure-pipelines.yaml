@@ -12,6 +12,7 @@ trigger:
 
 variables:
   isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
   branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
   branch: $[replace(variables['branchSource'], '/', '-')]
 
@@ -55,7 +56,7 @@ steps:
       jdkversion: 'JAVA_HOME_17_X64'
     displayName: 'Run Code Analysis'
 
-  - task: SonarCloudPublish@
+  - task: SonarCloudPublish@1
     condition: succeededOrFailed()
     inputs:
       pollingTimeoutSec: '300'
@@ -71,7 +72,7 @@ steps:
     displayName: 'Copy project files'
 
   - task: PublishPipelineArtifact@1
-    condition: and(and(succeeded(), ne(variables.isMaster, true)), ne(variables['Build.Reason'], 'PullRequest'))
+    condition: and(and(succeeded(), ne(variables.isMaster, true)), ne(variables.isPullRequest, true))
     inputs:
       artifactName: 'ncea-frontend_$(Build.BuildNumber)_$(branch)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
