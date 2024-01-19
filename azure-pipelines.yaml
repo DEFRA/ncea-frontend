@@ -55,7 +55,8 @@ steps:
       jdkversion: 'JAVA_HOME_17_X64'
     displayName: 'Run Code Analysis'
 
-  - task: SonarCloudPublish@1
+  - task: SonarCloudPublish@
+    condition: succeededOrFailed()
     inputs:
       pollingTimeoutSec: '300'
     displayName: 'Publish Quality Gate Result'
