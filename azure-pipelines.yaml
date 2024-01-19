@@ -51,13 +51,11 @@ steps:
     displayName: 'Publish code coverage result'
 
   - task: SonarCloudAnalyze@1
-    condition: succeededOrFailed()
     inputs:
       jdkversion: 'JAVA_HOME_17_X64'
     displayName: 'Run Code Analysis'
 
   - task: SonarCloudPublish@1
-    condition: succeededOrFailed()
     inputs:
       pollingTimeoutSec: '300'
     displayName: 'Publish Quality Gate Result'
