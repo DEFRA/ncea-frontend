@@ -1,7 +1,6 @@
 'use strict';
 
 import * as joi from '@hapi/joi';
-import dotenv from 'dotenv';
 
 describe('Environment Config', () => {
   let originalEnv: NodeJS.ProcessEnv;
