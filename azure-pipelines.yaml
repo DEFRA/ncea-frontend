@@ -17,7 +17,10 @@ variables:
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
   branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
   branch: $[replace(variables['branchSource'], '/', '-')]
-  artifactNameSuffix: ${{ if(eq(variables.isMaster, true), '', '$(branch)') }}
+  ${{ if(eq(variables.isMaster, true) }}:
+    artifactNameSuffix: ''
+  ${{ else }}:
+    artifactNameSuffix: _$(branch)
 
 pool:
   vmImage: 'ubuntu-latest'
