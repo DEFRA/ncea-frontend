@@ -132,6 +132,4 @@ dist
 .pnp.*
 *.sqlite
 /.vs
-
 /reports/test-report.xml
-/package-lock.json
