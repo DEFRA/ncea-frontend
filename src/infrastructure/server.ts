@@ -21,7 +21,12 @@ const initializeServer = async (): Promise<Server> => {
   await server.register([require('@hapi/inert'), require('@hapi/vision')]);
 
   // Register the custom plugins
-  await server.register([require('./plugins/views'), require('./plugins/router'), require('./plugins/logger')]);
+  await server.register([
+    require('./plugins/shared_data'),
+    require('./plugins/views'),
+    require('./plugins/router'),
+    require('./plugins/logger'),
+  ]);
 
   await server.initialize();
   return server;
