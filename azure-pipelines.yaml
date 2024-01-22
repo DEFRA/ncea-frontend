@@ -71,6 +71,11 @@ jobs:
       displayName: 'Publish Quality Gate Result'
 
     - task: CopyFiles@2
+      condition: |
+        or(
+            and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
+            and(succeeded(), eq(variables.isMaster, true))
+          )
       inputs:
         sourceFolder: '$(Build.SourcesDirectory)'
         contents: |
@@ -79,12 +84,7 @@ jobs:
         cleanTargetFolder: true
       displayName: 'Copy project files'
 
-    - task: PublishPipelineArtifact@1
-      condition: |
-        or(
-          and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
-          and(succeeded(), eq(variables.isMaster, true))
-        )
+    - task: PublishPipelineArtifact@1      
       inputs:
         artifactName: "ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)"
         targetPath: '$(Build.ArtifactStagingDirectory)'
