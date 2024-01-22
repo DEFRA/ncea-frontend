@@ -80,6 +80,8 @@ jobs:
       )
     
   steps:
+    - checkout: none
+
     - task: CopyFiles@2
       inputs:
         sourceFolder: '$(Build.SourcesDirectory)'
@@ -90,11 +92,11 @@ jobs:
       displayName: 'Copy project files'
     
     - bash: |
-        echo $(variables.artifactNameSuffix)
+        echo '$(artifactNameSuffix)'
 
     - task: PublishPipelineArtifact@1
       inputs:
-        artifactName: "ncea-frontend_$(Build.BuildNumber)_$(variables.artifactNameSuffix)"
+        artifactName: "ncea-frontend_$(Build.BuildNumber)_$(artifactNameSuffix)"
         targetPath: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'pipeline'
       displayName: 'Publish npm artifact'
