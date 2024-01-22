@@ -79,19 +79,12 @@ jobs:
         cleanTargetFolder: true
       displayName: 'Copy project files'
 
-- job: Publish
-  displayName: 'Publish'
-  dependsOn: Build
-  condition: |
-    or(
-        and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
-        and(succeeded(), eq(variables.isMaster, true))
-      )
-    
-  steps:
-    - checkout: none
-
     - task: PublishPipelineArtifact@1
+      condition: |
+        or(
+          and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
+          and(succeeded(), eq(variables.isMaster, true))
+        )
       inputs:
         artifactName: "ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)"
         targetPath: '$(Build.ArtifactStagingDirectory)'
