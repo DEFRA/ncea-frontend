@@ -70,12 +70,10 @@ jobs:
   displayName: 'Publish Artifact'
   dependsOn: Build
   condition: |
-    and(
-        or(
-            and(succeeded(), ne(variables.isMaster, true), ne(variables.isPullRequest, true)),
-            and(succeeded(), eq(variables.isMaster, true))
-          )
-        )
+    or(
+        and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
+        and(succeeded(), eq(variables.isMaster, true))
+      )
     
   steps:
     - task: CopyFiles@2
