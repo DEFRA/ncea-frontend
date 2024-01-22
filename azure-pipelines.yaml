@@ -25,68 +25,64 @@ variables:
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs:
-- job: Build
-  displayName: 'Build and Test'
+steps:
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
+    displayName: 'Install Node.js'
 
-  steps:
-    - task: UseNode@1
-      inputs:
-        version: '16.x'
-      displayName: 'Install Node.js'
+  - task: SonarCloudPrepare@1
+    inputs:
+      sonarCloud: 'defra-sonarcloud'
+      organization: 'defra'
+      scannerMode: CLI
+      projectKey: 'DEFRA_ncea-frontend'
+      projectName: 'ncea-frontend'
+    displayName: 'Prepare analysis on SonarCloud'
 
-    - task: SonarCloudPrepare@1
-      inputs:
-        SonarCloud: 'defra-sonarcloud'
-        organization: 'defra'
-        scannerMode: CLI
-        projectKey: 'DEFRA_ncea-frontend'
-        projectName: 'ncea-frontend'
-      displayName: 'Prepare analysis on SonarCloud'
+  - script: |
+      npm install
+      npm run build
+    displayName: 'npm install and build'
 
-    - script: |
-        npm install
-        npm run build
-      displayName: 'npm install and build'
+  - script: |
+      npm run test
+    displayName: 'npm test'
 
-    - script: |
-        npm run test
-      displayName: 'npm test'
+  - task: PublishCodeCoverageResults@1
+    condition: succeededOrFailed()
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+    displayName: 'Publish code coverage result'
 
-    - task: PublishCodeCoverageResults@1
-      condition: succeededOrFailed()
-      inputs:
-        codeCoverageTool: Cobertura
-        summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-      displayName: 'Publish code coverage result'
+  - task: SonarCloudAnalyze@1
+    inputs:
+      jdkversion: 'JAVA_HOME_17_X64'
+    displayName: 'Run Code Analysis'
 
-    - task: SonarCloudAnalyze@1
-      inputs:
-        jdkversion: 'JAVA_HOME_17_X64'
-      displayName: 'Run Code Analysis'
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
+    displayName: 'Publish Quality Gate Result'
 
-    - task: SonarCloudPublish@1
-      inputs:
-        pollingTimeoutSec: '300'
-      displayName: 'Publish Quality Gate Result'
+  - task: CopyFiles@2
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)'
+      contents: |
+        build/**
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+      cleanTargetFolder: true
+    displayName: 'Copy project files'
 
-    - task: CopyFiles@2
-      condition: |
+  - task: PublishPipelineArtifact@1
+    condition: |
         or(
             and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
             and(succeeded(), eq(variables.isMaster, true))
           )
-      inputs:
-        sourceFolder: '$(Build.SourcesDirectory)'
-        contents: |
-          build/**
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
-        cleanTargetFolder: true
-      displayName: 'Copy project files'
-
-    - task: PublishPipelineArtifact@1      
-      inputs:
-        artifactName: "ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)"
-        targetPath: '$(Build.ArtifactStagingDirectory)'
-        publishLocation: 'pipeline'
-      displayName: 'Publish npm artifact'
+    inputs:
+      artifactName: "ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)"
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      publishLocation: 'pipeline'
+    displayName: 'Publish npm artifact'
