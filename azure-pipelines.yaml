@@ -70,6 +70,15 @@ jobs:
         pollingTimeoutSec: '300'
       displayName: 'Publish Quality Gate Result'
 
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: '$(Build.SourcesDirectory)'
+        contents: |
+          build/**
+        targetFolder: '$(Build.ArtifactStagingDirectory)'
+        cleanTargetFolder: true
+      displayName: 'Copy project files'
+
 - job: Publish
   displayName: 'Publish'
   dependsOn: Build
@@ -82,21 +91,9 @@ jobs:
   steps:
     - checkout: none
 
-    - task: CopyFiles@2
-      inputs:
-        sourceFolder: '$(Build.SourcesDirectory)'
-        contents: |
-          build/**
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
-        cleanTargetFolder: true
-      displayName: 'Copy project files'
-    
-    - bash: |
-        echo '$(artifactNameSuffix)'
-
     - task: PublishPipelineArtifact@1
       inputs:
-        artifactName: "ncea-frontend_$(Build.BuildNumber)_$(artifactNameSuffix)"
+        artifactName: "ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)"
         targetPath: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'pipeline'
       displayName: 'Publish npm artifact'
