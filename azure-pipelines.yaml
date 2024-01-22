@@ -17,6 +17,7 @@ variables:
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
   branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
   branch: $[replace(variables['branchSource'], '/', '-')]
+  artifactNameSuffix: ${{ if(eq(variables.isMaster, true), '', '$(branch)') }}
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -86,9 +87,8 @@ jobs:
       displayName: 'Copy project files'
 
     - task: PublishPipelineArtifact@1
-      condition: and(and(succeeded(), ne(variables.isMaster, true)), ne(variables.isPullRequest, true))
       inputs:
-        artifactName: "ncea-frontend_$(Build.BuildNumber)_${{ if(eq(variables.isMaster, true), '', '_$(branch)') }}"
+        artifactName: "ncea-frontend_$(Build.BuildNumber)$(variables.artifactNameSuffix)"
         targetPath: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'pipeline'
       displayName: 'Publish npm artifact'
