@@ -33,7 +33,7 @@ steps:
 
   - task: SonarCloudPrepare@1
     inputs:
-      sonarCloud: 'defra-sonarcloud'
+      SonarCloud: 'defra-sonarcloud'
       organization: 'defra'
       scannerMode: CLI
       projectKey: 'DEFRA_ncea-frontend'
