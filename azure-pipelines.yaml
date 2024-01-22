@@ -66,8 +66,8 @@ jobs:
         pollingTimeoutSec: '300'
       displayName: 'Publish Quality Gate Result'
 
-- job: PublishArtifact
-  displayName: 'Publish Artifact'
+- job: Publish
+  displayName: 'Publish'
   dependsOn: Build
   condition: |
     or(
@@ -88,15 +88,7 @@ jobs:
     - task: PublishPipelineArtifact@1
       condition: and(and(succeeded(), ne(variables.isMaster, true)), ne(variables.isPullRequest, true))
       inputs:
-        artifactName: 'ncea-frontend_$(Build.BuildNumber)_$(branch)'
-        targetPath: '$(Build.ArtifactStagingDirectory)'
-        publishLocation: 'pipeline'
-      displayName: 'Publish npm artifact'
-
-    - task: PublishPipelineArtifact@1
-      condition: and(succeeded(), eq(variables.isMaster, true))
-      inputs:
-        artifactName: 'ncea-frontend_$(Build.BuildNumber)'
+        artifactName: "ncea-frontend_$(Build.BuildNumber)_${{ if(eq(variables.isMaster, true), '', '_$(branch)') }}"
         targetPath: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'pipeline'
       displayName: 'Publish npm artifact'
