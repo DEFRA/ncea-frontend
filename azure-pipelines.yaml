@@ -82,7 +82,8 @@ steps:
             and(succeeded(), eq(variables.isMaster, true))
           )
     inputs:
-      artifactName: "ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)"
+      artifactName: 'ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)'
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
+    
