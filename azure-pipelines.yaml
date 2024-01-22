@@ -88,10 +88,13 @@ jobs:
         targetFolder: '$(Build.ArtifactStagingDirectory)'
         cleanTargetFolder: true
       displayName: 'Copy project files'
+    
+    - bash: |
+        echo $(variables.artifactNameSuffix)
 
     - task: PublishPipelineArtifact@1
       inputs:
-        artifactName: "ncea-frontend_$(Build.BuildNumber)$(variables.artifactNameSuffix)"
+        artifactName: "ncea-frontend_$(Build.BuildNumber)_$(variables.artifactNameSuffix)"
         targetPath: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'pipeline'
       displayName: 'Publish npm artifact'
