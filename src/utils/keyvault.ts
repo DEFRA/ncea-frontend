@@ -10,7 +10,7 @@ import { getKeyVaultClient } from '../config/azureKeyVaultClient';
 
 const getSecret = async (secretKey: string) => {
   try {
-    const secretClient = await getKeyVaultClient();
+    const secretClient = getKeyVaultClient();
     const secret = await secretClient.getSecret(secretKey);
     return secret.value;
     /* eslint-disable  @typescript-eslint/no-explicit-any */

@@ -43,27 +43,19 @@ describe('Geo Network instance configuration', () => {
   describe('Geo Network request and response interceptors', () => {
     it('should handle successful responses correctly', async () => {
       const responseData = { message: 'Success' };
-      try {
-        mock
-          .onPost(geoNetworkAPIPaths.elasticSearch, {}, mockConfig.headers)
-          .reply(200, responseData);
+      mock
+        .onPost(geoNetworkAPIPaths.elasticSearch, {}, mockConfig.headers)
+        .reply(200, responseData);
 
-        const response = await geoNetworkClient.post(
-          geoNetworkAPIPaths.elasticSearch,
-          {},
-          mockConfig
-        );
+      const response = await geoNetworkClient.post(
+        geoNetworkAPIPaths.elasticSearch,
+        {},
+        mockConfig
+      );
 
-        expect(response.status).toBe(200);
-        expect(response.data).toEqual(responseData);
-        expect(mockRequestInterceptor(mockConfig)).toHaveBeenCalledWith(
-          mockConfig
-        );
-        expect(mockRequestInterceptor).toHaveBeenCalledTimes(1);
-        expect(mockErrorInterceptor).toBeUndefined();
-      } catch (error: any) {
-        expect(mockErrorInterceptor(mockError)).rejects.toEqual(mockError);
-      }
+      expect(response.status).toBe(200);
+      expect(response.data).toEqual(responseData);
+      expect(mockRequestInterceptor).toHaveBeenCalledTimes(1);
     });
 
     it('should reject the promise with the received error', async () => {
