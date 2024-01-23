@@ -44,6 +44,7 @@ describe('Server initialization', () => {
       require('@hapi/vision'),
     ]);
     expect(server.register).toHaveBeenCalledWith([
+      require('../../src/infrastructure/plugins/shared_data'),
       require('../../src/infrastructure/plugins/views'),
       require('../../src/infrastructure/plugins/router'),
       require('../../src/infrastructure/plugins/logger'),
