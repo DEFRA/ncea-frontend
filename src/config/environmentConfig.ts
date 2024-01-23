@@ -10,7 +10,7 @@
  */
 
 import * as joi from '@hapi/joi';
-import { EnvironmentConfig } from '../models/environmentConfig.interface';
+import { EnvironmentConfig } from '../models/interfaces/environmentConfig.interface';
 
 const envs = ['local', 'development', 'qa', 'production', 'test'];
 
