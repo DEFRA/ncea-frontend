@@ -17,7 +17,7 @@ variables:
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
   branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
   branch: $[replace(variables['branchSource'], '/', '-')]
-  ${{ if eq(variables.isMaster, true) }}:
+  ${{ if eq(variables.isMaster, 'true') }}:
     artifactNameSuffix: _$(branch)
   ${{ else }}:
     artifactNameSuffix: ''
