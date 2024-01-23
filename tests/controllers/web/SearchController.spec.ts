@@ -2,7 +2,7 @@
 
 import { mock } from 'jest-mock-extended';
 import { Request, ResponseToolkit } from '@hapi/hapi';
-import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
+import { SearchController } from '../../../src/controllers/web/SearchController';
 
 describe('Search Results Controller > deals with rendering search results handler', () => {
   const mockRequest = mock<Request>();
@@ -10,7 +10,7 @@ describe('Search Results Controller > deals with rendering search results handle
   const mockResponse = mock<ResponseToolkit>();
 
   beforeAll(() => {
-    return SearchResultsController.renderSearchResultsHandler(
+    return SearchController.renderSearchResultsHandler(
       mockRequest,
       mockResponse
     );

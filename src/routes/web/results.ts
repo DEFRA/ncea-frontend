@@ -1,12 +1,12 @@
 'use strict';
 
-import { SearchResultsController } from '../../controllers/web/SearchResultsController';
+import { SearchController } from '../../controllers/web/SearchController';
 import { webRoutePaths } from '../../utils/constants';
 
 module.exports = [
   {
     method: 'GET',
     path: webRoutePaths.results,
-    handler: SearchResultsController.renderSearchResultsHandler,
+    handler: SearchController.renderSearchResultsHandler,
   },
 ];
