@@ -43,7 +43,8 @@ describe('Azure Key Vault > Get Secrets', () => {
       await getSecret(secretKey);
       await expect(getSecret(secretKey)).toHaveBeenCalled();
       await expect(getSecret(secretKey)).toHaveBeenCalledTimes(1);
-    } catch (error) {
+    } catch (error: any) {
+      await expect(getSecret(secretKey)).rejects.toThrow(error);
       await expect(getSecret(secretKey)).rejects.toThrow(
         `Error retrieving secret ${secretKey}: ${mockErrorMessage}`
       );
