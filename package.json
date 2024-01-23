@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "build": "rimraf ./build && tsc",
+    "build": "rimraf ./build && tsc && npm run copy-files",
+    "copy-files": "ts-node copyNonTSFiles.ts",
     "start:dev": "cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json",
-    "start": "npm run build && node build/index.ts",
+    "start": "npm run build && node build/index.js",
     "lint": "npm run lint:javascript",
     "lint:javascript": "eslint --config tools/.eslintrc src/**/* --ext .js,.ts",
     "lint:javascript:fix": "eslint --config tools/.eslintrc src/**/* --fix --ext .js,.ts",
@@ -42,6 +43,7 @@
     "@types/jest": "29.5.11",
     "@types/node": "20.10.5",
     "@types/nunjucks": "3.2.6",
+    "@types/shelljs": "0.8.15",
     "@typescript-eslint/eslint-plugin": "6.15.0",
     "@typescript-eslint/parser": "6.15.0",
     "axios-mock-adapter": "^1.22.0",
@@ -55,6 +57,7 @@
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-mock-extended": "3.0.5",
+    "jest-sonar-reporter": "2.0.0",
     "nodemon": "3.0.2",
     "onchange": "7.1.0",
     "prettier": "3.1.1",
@@ -75,6 +78,12 @@
     "axios": "1.6.4",
     "govuk-frontend": "5.0.0",
     "hapi-pino": "12.1.0",
-    "nunjucks": "3.2.4"
+    "nunjucks": "3.2.4",
+    "shelljs": "0.8.5"
+  },
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
   }
 }
