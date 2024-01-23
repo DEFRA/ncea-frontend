@@ -1,7 +1,10 @@
 export const apiBasePath = '/api';
-export const apiBaseURL = 'https://jsonplaceholder.typicode.com/';
 
 export const webRoutePaths = {
   home: '/',
   results: '/search',
+};
+
+export const geoNetworkAPIPaths = {
+  elasticSearch: 'search/records/_search',
 };

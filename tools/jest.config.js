@@ -10,7 +10,8 @@ module.exports = {
   roots: ['<rootDir>/tests'],
   testPathIgnorePatterns: ['<rootDir>/src/infrastructure/plugins/'],
   coveragePathIgnorePatterns: ['<rootDir>/src/infrastructure/plugins/'],
-  coverageReporters: ['html'],
+  coverageReporters: ['lcov', 'cobertura', 'html'],
   setupFilesAfterEnv: ['<rootDir>/tools/jest.env.js'],
   testTimeout: 9000,
+  testResultsProcessor: 'jest-sonar-reporter',
 };

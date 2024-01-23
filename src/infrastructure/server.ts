@@ -1,12 +1,12 @@
 'use strict';
 
-import Hapi from '@hapi/hapi';
-import { Server } from '@hapi/hapi';
+import { Config } from '../config/environmentConfig';
+import Hapi, { Server } from '@hapi/hapi';
 
 // Create the hapi server
 const server: Server = Hapi.server({
-  host: process.env.HOST || 'localhost',
-  port: process.env.NODE_ENV !== 'test' ? process.env.PORT || 3000 : 4000,
+  host: process.env.HOST ?? 'localhost',
+  port: Config.env !== 'test' ? Config.port : 4000,
   routes: {
     validate: {
       options: {

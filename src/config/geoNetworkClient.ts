@@ -1,28 +1,49 @@
-import { apiBaseURL } from '../utils/constants';
+/**
+ * geoNetworkClient
+ *
+ * This module provides an Axios client instance configured with the necessary settings to make HTTP requests to a Geo Network API.
+ * It includes request and response interceptors for modifying requests and handling responses.
+ */
+
+import { Config } from './environmentConfig';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
+/**
+ * The Axios client instance for making HTTP requests to the Geo Network API.
+ */
 const geoNetworkClient = axios.create({
-  baseURL: apiBaseURL,
+  baseURL: Config.geoNetworkSearchAPI,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
 
-// Request interceptor
+/**
+ * Request interceptor
+ *
+ * Modifies the request configuration before sending the request.
+ *
+ * @param config - The request configuration object.
+ * @returns The modified request configuration.
+ */
 geoNetworkClient.interceptors.request.use(
   (config) => {
     // Modify config before sending the request
     // config.headers['Authorization'] = 'Bearer YOUR_ACCESS_TOKEN';
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (error: AxiosError) => Promise.reject(error),
 );
 
-// Response interceptor
-
+/**
+ * Response interceptor
+ *
+ * Handles the response received from the server.
+ *
+ * @param response - The response object received from the server.
+ * @returns The response object.
+ */
 geoNetworkClient.interceptors.response.use(
   (response: AxiosResponse) => {
     // if (check config condition) {

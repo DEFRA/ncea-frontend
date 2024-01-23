@@ -7590,8 +7590,8 @@
 .full-width-banner {
   width: 100%;
   background-color: #008938;
-  box-shadow: 0 0 0 20vmax #008938;
-  clip-path: inset(0 -20vmax);
+  box-shadow: 0 0 0 50vmax #008938;
+  clip-path: inset(0 -50vmax);
   margin-bottom: 20px;
 }
 
