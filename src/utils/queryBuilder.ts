@@ -13,9 +13,9 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
 
   if (searchFieldsObject?.searchTerm) {
     const matchQueries: IMatchQuery[] = [
-      { match: { field1: searchFieldsObject.searchTerm! } },
-      { match: { field2: searchFieldsObject.searchTerm! } },
-      { match: { field3: searchFieldsObject.searchTerm! } },
+      { match: { field1: searchFieldsObject.searchTerm } },
+      { match: { field2: searchFieldsObject.searchTerm } },
+      { match: { field3: searchFieldsObject.searchTerm } },
     ];
 
     boolQuery.bool.should = matchQueries;
