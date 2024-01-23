@@ -8,25 +8,33 @@ import {
 
 const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
   const boolQuery: IBoolQuery = {
-    bool: {},
+    bool: {
+      must: [],
+    },
   };
 
-  if (searchFieldsObject?.searchTerm) {
+  if (searchFieldsObject.searchTerm) {
     const matchQueries: IMatchQuery[] = [
       { match: { field1: searchFieldsObject.searchTerm } },
       { match: { field2: searchFieldsObject.searchTerm } },
       { match: { field3: searchFieldsObject.searchTerm } },
     ];
 
-    boolQuery.bool.should = matchQueries;
+    const matchShould: IBoolQuery = {
+      bool: {
+        should: matchQueries,
+      },
+    };
+
+    boolQuery.bool.must?.push(matchShould);
   }
 
-  if (searchFieldsObject?.startDate && searchFieldsObject?.endDate) {
+  if (searchFieldsObject.startDate && searchFieldsObject.endDate) {
     const rangeQuery: IRangeQuery = {
       range: {
         your_date_field: {
-          gte: searchFieldsObject?.startDate,
-          lte: searchFieldsObject?.endDate,
+          gte: searchFieldsObject.startDate,
+          lte: searchFieldsObject.endDate,
         },
       },
     };
