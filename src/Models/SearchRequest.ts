@@ -20,7 +20,7 @@ class Must {
 }
 
 class Querystring {
-  query!: string;
+  query!: string | null;
   default_operator!: string;
 }
 
