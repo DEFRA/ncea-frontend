@@ -5,5 +5,6 @@ declare module '@hapi/hapi' {
     getSharedData: () => ISharedData;
     updateSharedData: (key: string, value: string | number | null | object) => void;
     purgeSharedData: (key: string) => void;
+    resetSharedData: () => void;
   }
 }

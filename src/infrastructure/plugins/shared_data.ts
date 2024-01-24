@@ -4,7 +4,7 @@ import { Server } from '@hapi/hapi';
 module.exports = {
   name: 'SharedData',
   register: async (server: Server) => {
-    const sharedData: ISharedData = {};
+    let sharedData: ISharedData = {};
 
     server.decorate('server', 'getSharedData', () => sharedData);
 
@@ -14,6 +14,10 @@ module.exports = {
 
     server.decorate('server', 'purgeSharedData', (key: string) => {
       delete sharedData[key];
+    });
+
+    server.decorate('server', 'resetSharedData', () => {
+      sharedData = {};
     });
   },
 };
