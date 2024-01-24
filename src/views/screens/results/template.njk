@@ -18,34 +18,40 @@
     ]
   }) }}
 {% endblock %}
+
 {% block content %}
 
   {{ quickSearch({
     isResultPage: true,
-    searchTerm: SearchTerm
+    searchTerm: searchTerm
   }) }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       <p>&nbsp;</p>
     </div>
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m">{{SearchResults.hits.total.value}} results</h2>
+        <h2 class="govuk-heading-m">{{searchResults.hits.total.value}} results</h2>
       </div>
 
-      {% for item in SearchResults.hits.hits %}
-      <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m">{{item._source.resourceTitleObject.default}}</h2>
-        <p class="govuk-caption-m govuk-!-font-size-14"><b>Published by</b>  <span class="govuk-!-padding-left-5">{{item._source.OrgObject.default}}</span></p>
-        <p class="govuk-caption-m govuk-!-font-size-14"><b>Study period</b>  <span class="govuk-!-padding-left-5">02 May 2023 to 04 July 2024</span></p>
-        <p class="govuk-body">{{item._source.resourceAbstractObject.default}}</p>
-        <button type="submit" class="govuk-button govuk-button--primary" data-module="govuk-button">
+      {% for item in searchResults.hits.hits %}
+        <div class="govuk-section-break--visible">
+          <h2 class="govuk-heading-m">{{item._source.resourceTitleObject.default}}</h2>
+          <p class="govuk-caption-m govuk-!-font-size-14">
+            <b>Published by</b>
+            <span class="govuk-!-padding-left-5">{{item._source.OrgObject.default}}</span></p>
+          <p class="govuk-caption-m govuk-!-font-size-14">
+            <b>Study period</b>
+            <span class="govuk-!-padding-left-5">02 May 2023 to 04 July 2024</span></p>
+          <p class="govuk-body">{{item._source.resourceAbstractObject.default}}</p>
+          <button type="submit" class="govuk-button govuk-button--primary" data-module="govuk-button">
           Open data
         </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
           More info
         </button>
-      </div>
+        </div>
       {% endfor %}
 
     </div>

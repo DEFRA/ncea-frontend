@@ -6,9 +6,16 @@ import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const { q: searchTerm } = request.query;
-    const posts = await getSearchResults(searchTerm);
+    let searchResults = [];
+    if (searchTerm) {
+      const posts = await getSearchResults(searchTerm);
+      searchResults = posts.data;
+    }
 
-    return response.view('screens/results/template', { SearchResults: posts.data, SearchTerm: searchTerm });
+    return response.view('screens/results/template', {
+      searchResults,
+      searchTerm: searchTerm,
+    });
   },
 };
 
