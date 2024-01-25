@@ -124,7 +124,7 @@ exports[`Results Screen Results > Sanpshot verification should match the results
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-section-break--visible">
         <h2 class="govuk-heading-m"> results</h2>
-      </div><p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p></div>
+      </div><p class="govuk-caption-m govuk-!-font-size-14">No results.</p></div>
   </div>
 
         </main>
