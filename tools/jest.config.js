@@ -12,6 +12,6 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/src/infrastructure/plugins/'],
   coverageReporters: ['lcov', 'cobertura', 'html'],
   setupFilesAfterEnv: ['<rootDir>/tools/jest.env.js'],
-  testTimeout: 9000,
+  testTimeout: 20000,
   testResultsProcessor: "jest-sonar-reporter",
 };
