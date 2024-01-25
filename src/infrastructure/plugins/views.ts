@@ -24,13 +24,16 @@ module.exports = {
           /* eslint-disable  @typescript-eslint/no-explicit-any */
           next: () => any,
         ) => {
+          /* eslint-disable  @typescript-eslint/no-var-requires */
+          const dateFilter = require('nunjucks-date-filter');
           options.compileOptions.environment = nunjucks.configure(
-            [path.join(options.relativeTo || process.cwd(), options.path), 'node_modules/govuk-frontend/dist'],
+            [path.join(options.relativeTo, options.path), 'node_modules/govuk-frontend/dist'],
             {
               autoescape: true,
               watch: false,
             },
           );
+          options.compileOptions.environment.addFilter('date', dateFilter);
 
           return next();
         },
