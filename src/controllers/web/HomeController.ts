@@ -10,11 +10,13 @@
  *
  */
 
+import { webRoutePaths } from '../../utils/constants';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 const HomeController = {
   renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    return response.view('screens/home/template');
+    const quickSearchPath = webRoutePaths.quickSearch;
+    return response.view('screens/home/template', { quickSearchPath });
   },
 };
 

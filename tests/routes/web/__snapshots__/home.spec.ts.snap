@@ -86,7 +86,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
       <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
     
     <div class="search-block" data-module="search">
-      <form action="/search" method="get" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
+      <form action="/quick_search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
 
         
 
@@ -95,7 +95,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
     Search
   </label>
 
-<div class="govuk-input__wrapper"><input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search" name="q" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search"><div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button">Search</button></div>
+<div class="govuk-input__wrapper"><input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search"><div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button">Search</button></div>
   </div>
 
 </div>

@@ -138,7 +138,9 @@ describe('Home Screen', () => {
         const formElement =
           document?.querySelector('.search-block')?.firstElementChild;
         expect(formElement?.getAttribute('role')).toBe('search');
-        expect(formElement?.getAttribute('action')).toBe('/search');
+        expect(formElement?.getAttribute('action')).toBe(
+          webRoutePaths.quickSearch
+        );
       });
 
       it('should render the form classes', async () => {
@@ -184,7 +186,7 @@ describe('Home Screen', () => {
 
       it('should renders with name', () => {
         const inputElement = document?.querySelector('.search-block__input');
-        expect(inputElement?.getAttribute('name')).toEqual('q');
+        expect(inputElement?.getAttribute('name')).toEqual('search_term');
       });
 
       it('should renders with type="text" by default', () => {

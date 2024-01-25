@@ -14,7 +14,7 @@
         "functions": "ignore"
       }
     ],
-    "no-underscore-dangle": 1,
+    "no-underscore-dangle": 0,
     "no-undef": 1,
     "linebreak-style": [0, "unix"],
     "sort-imports": [

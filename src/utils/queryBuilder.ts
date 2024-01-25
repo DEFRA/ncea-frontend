@@ -1,9 +1,11 @@
 import {
   IBoolQuery,
+  IGeoShapeQuery,
   IMatchQuery,
   IQuery,
   IRangeQuery,
   ISearchFieldsObject,
+  IShapeCoordinates,
 } from '../models/interfaces/queryBuilder.interface';
 
 const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
@@ -23,6 +25,7 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
     const matchShould: IBoolQuery = {
       bool: {
         should: matchQueries,
+        minimum_should_match: 1,
       },
     };
 
@@ -32,7 +35,7 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
   if (searchFieldsObject.startDate && searchFieldsObject.endDate) {
     const rangeQuery: IRangeQuery = {
       range: {
-        your_date_field: {
+        resourceTemporalExtentDateRange: {
           gte: searchFieldsObject.startDate,
           lte: searchFieldsObject.endDate,
         },
@@ -40,6 +43,40 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
     };
 
     boolQuery.bool.must?.push(rangeQuery);
+  }
+
+  const geoCoordinates = searchFieldsObject.geoCoordinates;
+
+  if (
+    geoCoordinates !== undefined &&
+    geoCoordinates.north &&
+    geoCoordinates.south &&
+    geoCoordinates.east &&
+    geoCoordinates.west
+  ) {
+    const geoShape: IShapeCoordinates = {
+      type: 'envelope',
+      coordinates: [
+        [geoCoordinates.west, geoCoordinates.north],
+        [geoCoordinates.east, geoCoordinates.south],
+      ],
+    };
+
+    const geoShapeQuery: IGeoShapeQuery = {
+      geo_shape: {
+        geom: {
+          shape: geoShape,
+          relation: 'intersects',
+          ignore_unmapped: true,
+        },
+      },
+    };
+
+    if (geoCoordinates.depth) {
+      geoShapeQuery.geo_shape.geom.depth = geoCoordinates.depth;
+    }
+
+    boolQuery.bool.must?.push(geoShapeQuery);
   }
 
   const finalQuery: IQuery = {

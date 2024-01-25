@@ -7519,7 +7519,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 30px;
-  letter-spacing: "";
   color: #0b0c0c;
   margin: 0px;
 }
@@ -7532,7 +7531,6 @@
   font-style: normal;
   font-weight: 300;
   line-height: 25px;
-  letter-spacing: "";
   color: #0b0c0c;
   padding-top: 20px;
 }
@@ -7604,7 +7602,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 40px;
-  letter-spacing: "";
   color: #ffffff;
   margin-bottom: 20px;
 }
@@ -7613,7 +7610,6 @@
   font-style: normal;
   font-weight: 300;
   line-height: 30px;
-  letter-spacing: "";
   color: #ffffff;
 }
 
@@ -7625,7 +7621,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 30px;
-  letter-spacing: "";
   color: #0b0c0c;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -7759,4 +7754,65 @@
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 1px;
+}
+
+.search-result__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 20px;
+}
+.search-result__heading {
+  margin-bottom: 0;
+  color: #0b0c0c;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+}
+.search-result__heading--empty {
+  font-size: 24px;
+}
+.search-result__parameter {
+  display: flex;
+  gap: 10px;
+}
+.search-result__parameter-label {
+  color: #505a5f;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+.search-result__parameter-value {
+  color: #505a5f;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+.search-result__content {
+  margin: 0;
+  color: #0b0c0c;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+.search-result__content--empty {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+}
+.search-result__button-group {
+  margin-bottom: 25px;
+}
+.search-result__button-group > .govuk-button {
+  margin-bottom: 0;
 }

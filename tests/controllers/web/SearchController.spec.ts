@@ -3,6 +3,7 @@
 import { mock } from 'jest-mock-extended';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { SearchController } from '../../../src/controllers/web/SearchController';
+import { webRoutePaths } from '../../../src/utils/constants';
 
 describe('Search Results Controller > deals with rendering search results handler', () => {
   const mockRequest = mock<Request>();
@@ -18,7 +19,12 @@ describe('Search Results Controller > deals with rendering search results handle
 
   it('should call the Search view with context', async () => {
     expect(mockResponse.view).toHaveBeenCalledWith('screens/results/template', {
-      searchTerm: mockRequest.query?.q,
+      searchTerm: 'search keyword',
+      quickSearchPath: webRoutePaths.quickSearch,
+      searchResults: {
+        total: 0,
+        items: [],
+      },
     });
   });
 });

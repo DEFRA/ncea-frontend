@@ -6,7 +6,7 @@ import { Server } from '@hapi/hapi';
 const routes = [].concat(
   require('../../routes/web/assets'),
   require('../../routes/web/home'),
-  require('../../routes/web/results'),
+  require('../../routes/web/search'),
   require('../../routes/web/sample'),
   require('../../routes/api/api'),
 );

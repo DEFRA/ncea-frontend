@@ -1,0 +1,52 @@
+.search-result {
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  &__heading {
+    margin-bottom: 0;
+    color: $govuk-text-colour;
+    @include font-style-stack(19px, 30px);
+
+    &--empty {
+      font-size: 24px;
+    }
+  }
+
+  &__parameter {
+    display: flex;
+    gap: 10px;
+
+    &-label {
+      color: $govuk-secondary-text-colour;
+      @include font-style-stack(16px, 20px, 700, normal, true);
+    }
+
+    &-value {
+      color: $govuk-secondary-text-colour;
+      @include font-style-stack(16px, 20px, 300, normal, true);
+    }
+  }
+
+  &__content {
+    margin: 0;
+    color: $govuk-text-colour;
+    @include font-style-stack(16px, 20px, 300, normal, true);
+
+    &--empty {
+      @include font-style-stack(19px, 25px, 300, normal, true);
+    }
+  }
+
+  &__button-group {
+    margin-bottom: 25px;
+  }
+
+  &__button-group > .govuk-button {
+    margin-bottom: 0;
+  }
+}

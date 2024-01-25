@@ -10,6 +10,16 @@ describe('Build the search query', () => {
       searchTerm: 'example',
       startDate: '2022-01-01',
       endDate: '2022-12-31',
+      geoCoordinates: {
+        north: 123,
+        south: 345,
+        east: 678,
+        west: 901,
+        depth: {
+          from: 0,
+          to: 1,
+        },
+      },
     };
 
     const expectedQuery: IQuery = {
@@ -23,13 +33,33 @@ describe('Build the search query', () => {
                   { match: { field2: 'example' } },
                   { match: { field3: 'example' } },
                 ],
+                minimum_should_match: 1,
               },
             },
             {
               range: {
-                your_date_field: {
+                resourceTemporalExtentDateRange: {
                   gte: '2022-01-01',
                   lte: '2022-12-31',
+                },
+              },
+            },
+            {
+              geo_shape: {
+                geom: {
+                  shape: {
+                    type: 'envelope',
+                    coordinates: [
+                      [901, 123],
+                      [678, 345],
+                    ],
+                  },
+                  depth: {
+                    from: 0,
+                    to: 1,
+                  },
+                  relation: 'intersects',
+                  ignore_unmapped: true,
                 },
               },
             },
@@ -41,7 +71,7 @@ describe('Build the search query', () => {
     const result = buildSearchQuery(searchFieldsObject);
 
     expect(result).toEqual(expectedQuery);
-    expect(result.query.bool.must).toHaveLength(2);
+    expect(result.query.bool.must).toHaveLength(3);
   });
 
   it('should build the search query correctly with only search term', () => {
@@ -60,6 +90,7 @@ describe('Build the search query', () => {
                   { match: { field2: 'example' } },
                   { match: { field3: 'example' } },
                 ],
+                minimum_should_match: 1,
               },
             },
           ],
@@ -85,9 +116,97 @@ describe('Build the search query', () => {
           must: [
             {
               range: {
-                your_date_field: {
+                resourceTemporalExtentDateRange: {
                   gte: '2022-01-01',
                   lte: '2022-12-31',
+                },
+              },
+            },
+          ],
+        },
+      },
+    };
+
+    const result = buildSearchQuery(searchFieldsObject);
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query.bool.must).toHaveLength(1);
+  });
+
+  it('should build the search query correctly with only Geo Coordinates with depth', () => {
+    const searchFieldsObject: ISearchFieldsObject = {
+      geoCoordinates: {
+        north: 123,
+        south: 345,
+        east: 678,
+        west: 901,
+        depth: {
+          from: 0,
+          to: 1,
+        },
+      },
+    };
+
+    const expectedQuery: IQuery = {
+      query: {
+        bool: {
+          must: [
+            {
+              geo_shape: {
+                geom: {
+                  shape: {
+                    type: 'envelope',
+                    coordinates: [
+                      [901, 123],
+                      [678, 345],
+                    ],
+                  },
+                  depth: {
+                    from: 0,
+                    to: 1,
+                  },
+                  relation: 'intersects',
+                  ignore_unmapped: true,
+                },
+              },
+            },
+          ],
+        },
+      },
+    };
+
+    const result = buildSearchQuery(searchFieldsObject);
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query.bool.must).toHaveLength(1);
+  });
+
+  it('should build the search query correctly with only Geo Coordinates with out depth', () => {
+    const searchFieldsObject: ISearchFieldsObject = {
+      geoCoordinates: {
+        north: 123,
+        south: 345,
+        east: 678,
+        west: 901,
+      },
+    };
+
+    const expectedQuery: IQuery = {
+      query: {
+        bool: {
+          must: [
+            {
+              geo_shape: {
+                geom: {
+                  shape: {
+                    type: 'envelope',
+                    coordinates: [
+                      [901, 123],
+                      [678, 345],
+                    ],
+                  },
+                  relation: 'intersects',
+                  ignore_unmapped: true,
                 },
               },
             },
@@ -115,6 +234,7 @@ describe('Build the search query', () => {
 
     const result = buildSearchQuery(searchFieldsObject);
 
+    expect(result.query.bool.must).toEqual([]);
     expect(result).toEqual(expectedQuery);
   });
 });

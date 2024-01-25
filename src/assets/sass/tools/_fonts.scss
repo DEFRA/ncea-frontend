@@ -6,11 +6,15 @@
 
 @mixin font-style-stack(
   $size,
-  $height: '',
+  $height: null,
   $weight: 700,
   $style: normal,
-  $spacing: ''
+  $includeFamily: false,
+  $spacing: null
 ) {
+  @if ($includeFamily) {
+    font-family: 'GDS Transport', arial, sans-serif;
+  }
   font-size: fds-rem($size);
   font-style: $style;
   font-weight: $weight;

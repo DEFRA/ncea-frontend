@@ -10,7 +10,9 @@
     </div>
   </header>
 
-  {{ quickSearch() }}
+  {{ quickSearch({
+    quickSearchPath: quickSearchPath
+  }) }}
 
   <article class="govuk-grid-row" role="article">
     <div class="govuk-grid-column-full video-container">

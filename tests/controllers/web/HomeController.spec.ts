@@ -3,6 +3,7 @@
 import { mock } from 'jest-mock-extended';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { HomeController } from '../../../src/controllers/web/HomeController';
+import { webRoutePaths } from '../../../src/utils/constants';
 
 describe('Home Controller > deals with render home handler', () => {
   const mockRequest = mock<Request>();
@@ -14,6 +15,8 @@ describe('Home Controller > deals with render home handler', () => {
   });
 
   it('should call the home view with context', async () => {
-    expect(mockResponse.view).toHaveBeenCalledWith('screens/home/template');
+    expect(mockResponse.view).toHaveBeenCalledWith('screens/home/template', {
+      quickSearchPath: webRoutePaths.quickSearch,
+    });
   });
 });

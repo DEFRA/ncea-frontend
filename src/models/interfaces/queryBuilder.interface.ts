@@ -13,10 +13,30 @@ interface IRangeQuery {
   };
 }
 
+interface IShapeCoordinates {
+  type: string;
+  coordinates: [[number, number], [number, number]];
+}
+
+interface IGeoShapeQuery {
+  geo_shape: {
+    [key: string]: {
+      shape: IShapeCoordinates;
+      depth?: {
+        from: number;
+        to: number;
+      };
+      relation: string;
+      ignore_unmapped: boolean;
+    };
+  };
+}
+
 interface IBoolQuery {
   bool: {
-    must?: (IBoolQuery | IRangeQuery)[];
+    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery)[];
     should?: IMatchQuery[];
+    minimum_should_match?: number;
   };
 }
 
@@ -24,10 +44,31 @@ interface IQuery {
   query: IBoolQuery;
 }
 
+interface IGeoCoordinates {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+  depth?: {
+    from: number;
+    to: number;
+  };
+}
+
 interface ISearchFieldsObject {
   searchTerm?: string;
   startDate?: string;
   endDate?: string;
+  geoCoordinates?: IGeoCoordinates;
 }
 
-export { IMatchQuery, IBoolQuery, IRangeQuery, IQuery, ISearchFieldsObject };
+export {
+  IMatchQuery,
+  IBoolQuery,
+  IRangeQuery,
+  IQuery,
+  ISearchFieldsObject,
+  IShapeCoordinates,
+  IGeoShapeQuery,
+  IGeoCoordinates,
+};
