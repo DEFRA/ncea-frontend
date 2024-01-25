@@ -48,11 +48,10 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
   const geoCoordinates = searchFieldsObject.geoCoordinates;
 
   if (
-    geoCoordinates !== undefined &&
-    geoCoordinates.north &&
-    geoCoordinates.south &&
-    geoCoordinates.east &&
-    geoCoordinates.west
+    geoCoordinates?.north &&
+    geoCoordinates?.south &&
+    geoCoordinates?.east &&
+    geoCoordinates?.west
   ) {
     const geoShape: IShapeCoordinates = {
       type: 'envelope',
