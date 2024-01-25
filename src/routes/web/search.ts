@@ -14,4 +14,9 @@ module.exports = [
     path: webRoutePaths.results,
     handler: SearchController.renderSearchResultsHandler,
   },
+  {
+    method: 'POST',
+    path: webRoutePaths.guidedDateSearch,
+    handler: SearchController.doDateSearchHandler,
+  },
 ];

@@ -32,6 +32,17 @@ const SearchController = {
       searchResults,
     });
   },
+  doDateSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const searchFieldsObject: ISearchFieldsObject = {
+      startDate: '2008-02-23',
+      endDate: '2008-02-23',
+    };
+    const searchResults: ISearchResults = await getSearchResults(searchFieldsObject);
+    request.server.purgeSharedData(sharedDataStructure.searchTerm);
+    request.server.updateSharedData(sharedDataStructure.searchResults, searchResults);
+
+    return response.redirect(webRoutePaths.results);
+  },
 };
 
 export { SearchController };
