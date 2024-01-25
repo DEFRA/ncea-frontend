@@ -23,7 +23,7 @@
 
   {{ quickSearch({
     isResultPage: true,
-    searchTerm: searchTerm
+    searchTerm: SearchTerm
   }) }}
 
   <div class="govuk-grid-row">
@@ -32,18 +32,27 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m">{{searchResults.hits.total.value}} results</h2>
+        <h2 class="govuk-heading-m">{{SearchResults.hits.total.value}} results</h2>
       </div>
-
-      {% for item in searchResults.hits.hits %}
+      {%- if HasResult == true -%}
+      {%- if SearchResults.hits.total.value > 0 -%}
+      {% for item in SearchResults.hits.hits %}
         <div class="govuk-section-break--visible">
           <h2 class="govuk-heading-m">{{item._source.resourceTitleObject.default}}</h2>
           <p class="govuk-caption-m govuk-!-font-size-14">
             <b>Published by</b>
-            <span class="govuk-!-padding-left-5">{{item._source.OrgObject.default}}</span></p>
+            <span class="govuk-!-padding-left-5">
+              {% if item._source.contact|length > 0 %}
+              {{item._source.contact[0].organisationObject.default}}
+              {% endif %}
+            </span></p>
           <p class="govuk-caption-m govuk-!-font-size-14">
             <b>Study period</b>
-            <span class="govuk-!-padding-left-5">02 May 2023 to 04 July 2024</span></p>
+            <span class="govuk-!-padding-left-5">
+              {% if item._source.resourceTemporalExtentDetails|length > 0 %}
+              {{item._source.resourceTemporalExtentDetails[0].start.date | date("DD MMM YYYY")}} to {{item._source.resourceTemporalExtentDetails[0].end.date | date("DD MMM YYYY")}}
+              {% endif %}
+            </span></p>
           <p class="govuk-body">{{item._source.resourceAbstractObject.default}}</p>
           <button type="submit" class="govuk-button govuk-button--primary" data-module="govuk-button">
           Open data
@@ -53,6 +62,12 @@
         </button>
         </div>
       {% endfor %}
+      {%- else -%}
+        <p class="govuk-caption-m govuk-!-font-size-14">No results.</p>
+      {%- endif -%}
+      {%- else -%}
+        <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
+      {%- endif -%}
 
     </div>
   </div>
