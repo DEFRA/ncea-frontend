@@ -5,6 +5,7 @@ export const webRoutePaths = {
   quickSearch: '/quick_search',
   results: '/search',
   guidedDateSearch: '/date_search',
+  guidedSearch: '/guided-search',
 };
 
 export const geoNetworkAPIPaths = {

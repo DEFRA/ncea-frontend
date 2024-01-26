@@ -1,6 +1,7 @@
 {% extends "layout/template.njk" %}
 
 {% from "partials/quick_search/macro.njk" import quickSearch %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block content %}
   <header class="full-width-banner" role="banner">
@@ -13,6 +14,27 @@
   {{ quickSearch({
     quickSearchPath: quickSearchPath
   }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">
+        Questionnaire search
+      </h2>
+      <p class="govuk-body">
+        A set of questions to narrow down your search for data and information.<br> 
+        This may be useful if you're not sure what you're looking for.
+      </p>
+    </div>
+  </div>
+
+  <form action="/guided-search" method="get" role="guided-search">
+    {{ govukButton({
+      id: 'guided-search',
+      name: 'guided-search',
+      text: "Start",
+      isStartButton: true
+    }) }}
+  </form>
 
   <article class="govuk-grid-row" role="article">
     <div class="govuk-grid-column-full video-container">
