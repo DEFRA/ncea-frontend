@@ -9,6 +9,7 @@ describe('ApiResponse class', () => {
     });
 
     it('Should create ApiResponse instance', () => {
+        expect(apiResponse instanceof ApiResponse).toBeTruthy();
         expect(apiResponse).toBeDefined();
         expect(apiResponse.response).toBe(response);
         expect(apiResponse.status).toBe(200);
