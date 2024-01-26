@@ -50,6 +50,8 @@ steps:
       projectKey: 'DEFRA_ncea-frontend'
       projectName: 'ncea-frontend'
       extraProperties: |
+        sonar.pullrequest.provider=GitHub
+        sonar.pullrequest.github.repository=DEFRA/ncea-frontend
         sonar.pullrequest.key=$(System.PullRequest.PullRequestId)
         sonar.pullrequest.base=main
         sonar.pullrequest.branch=$(Build.SourceBranchName)
