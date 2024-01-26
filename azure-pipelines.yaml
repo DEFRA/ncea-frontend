@@ -32,6 +32,7 @@ steps:
     displayName: 'Install Node.js'
 
   - task: SonarCloudPrepare@1
+    condition: and(succeeded(), eq(variables.isPullRequest, false))
     inputs:
       SonarCloud: 'defra-sonarcloud'
       organization: 'defra'
@@ -39,6 +40,20 @@ steps:
       projectKey: 'DEFRA_ncea-frontend'
       projectName: 'ncea-frontend'
     displayName: 'Prepare analysis on SonarCloud'
+
+  - task: SonarCloudPrepare@1
+    condition: and(succeeded(), eq(variables.isPullRequest, true))
+    inputs:
+      SonarCloud: 'defra-sonarcloud'
+      organization: 'defra'
+      scannerMode: CLI
+      projectKey: 'DEFRA_ncea-frontend'
+      projectName: 'ncea-frontend'
+    extraProperties: |
+      sonar.pullrequest.key=$(System.PullRequest.PullRequestId)
+      sonar.pullrequest.base=main
+      sonar.pullrequest.branch=$(Build.SourceBranchName)
+    displayName: 'Prepare analysis on SonarCloud for PR'
 
   - script: |
       npm install
