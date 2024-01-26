@@ -10,7 +10,7 @@ export const dateSchema = Joi.object()
       'number.base': `The date must include a year`,
       'number.empty': `The date must include a year`,
       'any.required': `The date must include a year`,
-      'number.max': `The date must be in the past`
+      'number.max': `The date must be in the past`,
     }),
     'to-date-day': Joi.number().allow('').min(1).max(31).optional(),
     'to-date-month': Joi.number().allow('').min(1).max(12).optional(),
@@ -18,6 +18,6 @@ export const dateSchema = Joi.object()
       'number.base': `The date must include a year`,
       'number.empty': `The date must include a year`,
       'any.required': `The date must include a year`,
-      'number.max': `The date must be in the past`
+      'number.max': `The date must be in the past`,
     }),
   });
