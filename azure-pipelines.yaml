@@ -53,7 +53,7 @@ steps:
         sonar.pullrequest.provider=GitHub
         sonar.pullrequest.github.endpoint=https://api.github.com/
         sonar.pullrequest.github.repository=DEFRA/ncea-frontend
-        sonar.pullrequest.key=$(System.PullRequest.PullRequestId)
+        sonar.pullrequest.key=12
         sonar.pullrequest.base=main
         sonar.pullrequest.branch=$(Build.SourceBranchName)
     displayName: 'Prepare analysis on SonarCloud for PR'
