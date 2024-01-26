@@ -5,22 +5,11 @@ import { BoolModel, Must, Query, Querystring, SearchRequest } from '../../Models
 const url = 'http://20.77.9.229:8080/geonetwork/srv/api/search/records/_search?bucket=s101';
 
 const getSearchRequest = function (searchTerm: string | null) {
-  const queryString = new Querystring();
-  queryString.query = searchTerm;
-  queryString.default_operator = 'AND';
-
-  const must = new Must();
-  must.query_string = queryString;
-
-  const boolModel = new BoolModel();
-  boolModel.must.push(must);
-
-  const queryModel = new Query();
-  queryModel.bool = boolModel;
-
-  const searchRequestObj = new SearchRequest();
-  searchRequestObj.query = queryModel;
-
+  const queryString = new Querystring(searchTerm as string, 'AND');
+  const must = new Must(queryString);
+  const boolModel = new BoolModel([must]);
+  const queryModel = new Query(boolModel);
+  const searchRequestObj = new SearchRequest(queryModel,null);
   return searchRequestObj;
 };
 
