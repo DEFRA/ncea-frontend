@@ -25,14 +25,13 @@
     </div> 
   </div>
 
-  <form action="/guided-search" method="get" role="guided-search">  
-    {{ govukButton({
-      id: 'guided-search',
-      name: 'guided-search',
-      text: "Start",
-      isStartButton: true
-    }) }}
-  </form>
+  {{ govukButton({
+    id: 'guided-search',
+    name: 'guided-search',
+    text: "Start",
+    isStartButton: true,
+    href: '/guided-search'
+  }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full video-container">

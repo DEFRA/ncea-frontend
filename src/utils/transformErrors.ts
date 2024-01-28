@@ -19,9 +19,19 @@ const dateErrorHandler = (error: Joi.ValidationError): DateQuestionnaireError | 
       value: error._original[field],
     };
     let errorMessage = '';
-    const hasError = error.details.filter((ed) => ed.path[0] === field);
+    const hasError = error.details.filter((ed) => {
+      if (ed?.context?.errors) {
+        return ed.context.errors.includes(field);
+      } else {
+        return ed.path[0] === field;
+      }
+    });
     if (hasError && hasError.length > 0) {
       errorMessage = `${hasError[0].message}.`;
+      if (hasError[0].type === 'any.custom' && field !== 'to-date-year' && field !== 'from-date-year') {
+        errorMessage = '';
+      }
+      item.classes = `${item.classes} govuk-input--error`;
     }
 
     if (field.includes('from-')) {
