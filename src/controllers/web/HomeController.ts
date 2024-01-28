@@ -15,8 +15,11 @@ import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 const HomeController = {
   renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const quickSearchPath = webRoutePaths.quickSearch;
-    return response.view('screens/home/template', { quickSearchPath });
+    const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
+    return response.view('screens/home/template', {
+      quickSearchPath,
+      dateSearchPath,
+    });
   },
 };
 

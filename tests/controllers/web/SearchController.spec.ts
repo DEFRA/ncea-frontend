@@ -56,7 +56,7 @@ describe('Search Results Controller > deals with  handlers', () => {
   describe('Deals with Guided Date Search Handler', () => {
     it('should update shared data and redirect to results', async () => {
       const request: Request = {
-        payload: { search_term: 'example' },
+        payload: { 'from-date-year': 2022, 'to-date-year': 2023 },
         server: { updateSharedData: jest.fn(), purgeSharedData: jest.fn() },
       } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;

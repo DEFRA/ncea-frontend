@@ -15,8 +15,11 @@ describe('Home Controller > deals with render home handler', () => {
   });
 
   it('should call the home view with context', async () => {
+    const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } =
+      webRoutePaths;
     expect(mockResponse.view).toHaveBeenCalledWith('screens/home/template', {
-      quickSearchPath: webRoutePaths.quickSearch,
+      quickSearchPath,
+      dateSearchPath,
     });
   });
 });

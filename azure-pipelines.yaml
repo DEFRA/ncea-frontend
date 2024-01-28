@@ -9,8 +9,8 @@ trigger:
   branches:
     include:
       - main
-      - features/*
-      - feature/*
+      # - features/*
+      # - feature/*
 
 variables:
   isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]

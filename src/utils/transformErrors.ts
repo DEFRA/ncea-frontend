@@ -1,17 +1,21 @@
 import Joi from 'joi';
-import { DateQuestionnaireError, GovUKItems } from '../interfaces/guidedSearch';
 
-export const transformErrors = (error, formName): DateQuestionnaireError | undefined => {
-  if (formName === 'date-questionnaire') {
+import { formKeys } from './constants';
+import { FormFieldError, GovUKItems } from '../models/interfaces/guidedSearch';
+
+export const transformErrors = (error: Joi.ValidationError, formName: string): FormFieldError | undefined => {
+  if (formName === formKeys.dateQuestionnaire) {
     return dateErrorHandler(error);
   }
 };
 
-const dateErrorHandler = (error: Joi.ValidationError): DateQuestionnaireError | undefined => {
+const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefined => {
   let fromError: string = '';
   const fromItems: GovUKItems[] = [];
   let toError: string = '';
   const toItems: GovUKItems[] = [];
+  console.log(error);
+
   Object.keys(error._original).forEach((field) => {
     const item = {
       classes: `${field.includes('-year') ? 'govuk-input--width-4' : 'govuk-input--width-2'}`,

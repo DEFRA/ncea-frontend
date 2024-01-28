@@ -21,25 +21,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="govuk-grid-row">
-    <form method="POST" action="/guided-search" />
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-m">
+  <div class="govuk-grid-row">
+    <form method="POST" action="{{guidedDateSearchPath}}"/>
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
-        <h2 class="govuk-heading-m">
+      <h2 class="govuk-heading-m">
           From
         </h2>
-        {{ govukDateInput(fromDate) }}
-        <h2 class="govuk-heading-m">
+      {{ govukDateInput(fromDate) }}
+      <h2 class="govuk-heading-m">
           To
         </h2>
-        {{ govukDateInput(toDate) }}
+      {{ govukDateInput(toDate) }}
 
       {{ govukButton({
         text: "Show results"
       }) }}
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 {% endblock %}

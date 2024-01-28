@@ -1,8 +1,8 @@
 'use strict';
 
 import { SearchController } from '../../controllers/web/SearchController';
+import { dateSchema } from '../../models/schema/questionnaire.schema';
 import { webRoutePaths } from '../../utils/constants';
-import { dateSchema } from '../../utils/questionnaire.schema';
 
 module.exports = [
   {
@@ -16,27 +16,18 @@ module.exports = [
     handler: SearchController.renderSearchResultsHandler,
   },
   {
+    method: 'GET',
+    path: webRoutePaths.guidedDateSearch,
+    handler: SearchController.renderGuidedSearchHandler,
+  },
+  {
     method: 'POST',
     path: webRoutePaths.guidedDateSearch,
     handler: SearchController.doDateSearchHandler,
-  },
-
-  {
-    method: 'GET',
-    path: webRoutePaths.guidedSearch,
-    handler: SearchController.renderGuidedSearchHandler,
-  },
-  {
-    method: 'POST',
-    path: webRoutePaths.guidedSearch,
-    handler: SearchController.renderGuidedSearchHandler,
     options: {
       validate: {
         payload: dateSchema,
-        failAction: (request, h, error) => {
-          console.log(JSON.stringify(error));
-          return SearchController.guidedSearchFailActionHandler(h, error);
-        },
+        failAction: SearchController.doDateSearchFailActionHandler,
       },
     },
   },

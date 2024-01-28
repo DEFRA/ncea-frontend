@@ -1,44 +1,32 @@
 'use strict';
 
-import { IQuickSearchPayload } from '../../models/interfaces/searchPayload.interface';
+import { FormFieldError } from '../../models/interfaces/guidedSearch';
 import { ISearchFieldsObject } from '../../models/interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../models/interfaces/searchResponse.interface';
 import { ISharedData } from '../../models/interfaces/sharedData.interface';
-import { getSearchResults } from '../../services/handlers/searchApi';
+import Joi from 'joi';
+import { IDateSearchPayload, IQuickSearchPayload } from '../../models/interfaces/searchPayload.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { sharedDataStructure, webRoutePaths } from '../../utils/constants';
-import { fromDate, toDate } from '../../views/forms/dateQuestionnaireFields';
-import { DateQuestionnaireError } from '../../interfaces/guidedSearch';
+
+import { generateDateString } from '../../utils/generateDateString';
+import { getSearchResults } from '../../services/handlers/searchApi';
 import { transformErrors } from '../../utils/transformErrors';
+import { formKeys, sharedDataStructure, webRoutePaths } from '../../utils/constants';
+import { fromDate, toDate } from '../../views/forms/dateQuestionnaireFields';
 
 const SearchController = {
-  doQuickSearchHandler: async (
-    request: Request,
-    response: ResponseToolkit
-  ): Promise<ResponseObject> => {
-    const { search_term }: IQuickSearchPayload =
-      request.payload as IQuickSearchPayload;
+  doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { search_term }: IQuickSearchPayload = request.payload as IQuickSearchPayload;
     const searchFieldsObject: ISearchFieldsObject = {
       startDate: '2008-02-23',
       endDate: '2008-02-23',
     };
-    const searchResults: ISearchResults =
-      await getSearchResults(searchFieldsObject);
-    request.server.updateSharedData(
-      sharedDataStructure.searchTerm,
-      search_term
-    );
-    request.server.updateSharedData(
-      sharedDataStructure.searchResults,
-      searchResults
-    );
-
+    const searchResults: ISearchResults = await getSearchResults(searchFieldsObject);
+    request.server.updateSharedData(sharedDataStructure.searchTerm, search_term);
+    request.server.updateSharedData(sharedDataStructure.searchResults, searchResults);
     return response.redirect(webRoutePaths.results);
   },
-  renderSearchResultsHandler: async (
-    request: Request,
-    response: ResponseToolkit
-  ): Promise<ResponseObject> => {
+  renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const sharedData: ISharedData = request.server.getSharedData();
     const searchTerm = sharedData[sharedDataStructure.searchTerm];
     const searchResults = sharedData[sharedDataStructure.searchResults];
@@ -49,39 +37,46 @@ const SearchController = {
       searchResults,
     });
   },
-  doDateSearchHandler: async (
-    request: Request,
-    response: ResponseToolkit
-  ): Promise<ResponseObject> => {
-    const searchFieldsObject: ISearchFieldsObject = {
-      startDate: '2008-02-23',
-      endDate: '2008-02-23',
-    };
-    const searchResults: ISearchResults =
-      await getSearchResults(searchFieldsObject);
-    request.server.purgeSharedData(sharedDataStructure.searchTerm);
-    request.server.updateSharedData(
-      sharedDataStructure.searchResults,
-      searchResults
-    );
-
-    return response.redirect(webRoutePaths.results);
-  },
-
-  renderGuidedSearchHandler: async (
-    request: Request,
-    response: ResponseToolkit
-  ): Promise<ResponseObject> => {
+  renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const guidedDateSearchPath = webRoutePaths.guidedDateSearch;
     return response.view('screens/guided_search/date_questionnaire', {
       fromDate,
       toDate,
+      guidedDateSearchPath,
     });
   },
-  guidedSearchFailActionHandler: (h, error) => {
+  doDateSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const dateSearchPayload: IDateSearchPayload = request.payload as IDateSearchPayload;
+
+    const startDate = generateDateString({
+      year: dateSearchPayload['from-date-year'],
+      month: dateSearchPayload['from-date-month'],
+      day: dateSearchPayload['from-date-day'],
+    });
+    const endDate = generateDateString({
+      year: dateSearchPayload['to-date-year'],
+      month: dateSearchPayload['to-date-month'],
+      day: dateSearchPayload['to-date-day'],
+    });
+    const searchFieldsObject: ISearchFieldsObject = {
+      startDate,
+      endDate,
+    };
+    const searchResults: ISearchResults = await getSearchResults(searchFieldsObject);
+    request.server.purgeSharedData(sharedDataStructure.searchTerm);
+    request.server.updateSharedData(sharedDataStructure.searchResults, searchResults);
+    return response.redirect(webRoutePaths.results);
+  },
+  doDateSearchFailActionHandler: async (
+    request: Request,
+    response: ResponseToolkit,
+    error: Joi.ValidationError,
+  ): Promise<ResponseObject> => {
+    const guidedDateSearchPath = webRoutePaths.guidedDateSearch;
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
-      'date-questionnaire'
-    ) as DateQuestionnaireError;
+      formKeys.dateQuestionnaire,
+    ) as FormFieldError;
     const fromField = {
       ...fromDate,
       ...(fromError && { errorMessage: { text: fromError } }),
@@ -92,11 +87,13 @@ const SearchController = {
       ...(toError && { errorMessage: { text: toError } }),
       items: toItems,
     };
-    return h
+    return response
       .view('screens/guided_search/date_questionnaire', {
         fromDate: fromField,
         toDate: toField,
+        guidedDateSearchPath,
       })
+      .code(400)
       .takeover();
   },
 };
