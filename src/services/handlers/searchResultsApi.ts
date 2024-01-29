@@ -1,8 +1,9 @@
 import { ApiResponse } from '../../Models/ApiResponse';
 import { geoNetworkClient } from '../../config/geoNetworkClient';
+import { searchApiURL } from '../../utils/constants';
 import { BoolModel, Must, Query, Querystring, SearchRequest } from '../../Models/SearchRequest';
 
-const url = '/search/records/_search?bucket=s101';
+const url = searchApiURL;
 
 const getSearchRequest = function (searchTerm: string | null): SearchRequest {
   const queryString = new Querystring(searchTerm as string, 'AND');
