@@ -1,4 +1,4 @@
-import { ApiResponse } from '../../../src/models/ApiResponse';
+import { ApiResponse } from '../../../src/Models/ApiResponse';
 import { geoNetworkClient } from '../../../src/config/geoNetworkClient';
 import { getSearchResults } from '../../../src/services/handlers/searchResultsApi';
 

@@ -5,7 +5,7 @@ import {
   Query,
   Querystring,
   Source,
-} from '../../src/models/SearchRequest';
+} from '../../src/Models/SearchRequest';
 
 describe('SearchRequest class', () => {
   let queryString: Querystring;

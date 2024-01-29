@@ -11,7 +11,7 @@ import {
   Source,
   Total,
   UrlObject,
-} from '../../src/models/SearchResponse';
+} from '../../src/Models/SearchResponse';
 
 describe('SearchResponse class', () => {
   let searchResponse: SearchResponse;

@@ -1,6 +1,6 @@
-import { ApiResponse } from '../../models/ApiResponse';
+import { ApiResponse } from '../../Models/ApiResponse';
 import { geoNetworkClient } from '../../config/geoNetworkClient';
-import { BoolModel, Must, Query, Querystring, SearchRequest } from '../../models/SearchRequest';
+import { BoolModel, Must, Query, Querystring, SearchRequest } from '../../Models/SearchRequest';
 
 const url = '/search/records/_search?bucket=s101';
 
@@ -13,7 +13,7 @@ const getSearchRequest = function (searchTerm: string | null): SearchRequest {
   return searchRequestObj;
 };
 
-const getSearchResults = async function(query: string | null): Promise<ApiResponse> {
+const getSearchResults = async function (query: string | null): Promise<ApiResponse> {
   try {
     const searchRequestObj = getSearchRequest(query);
     const res = await geoNetworkClient.post(url, searchRequestObj);
@@ -21,6 +21,6 @@ const getSearchResults = async function(query: string | null): Promise<ApiRespon
   } catch (error) {
     return new ApiResponse({ message: 'Unable to fetch the search results.' }, 400);
   }
-}
+};
 
 export { getSearchResults };

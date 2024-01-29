@@ -4,7 +4,7 @@ import { mock } from 'jest-mock-extended';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
 import { getSearchResults } from '../../../src/services/handlers/searchResultsApi';
-import { ApiResponse } from '../../../src/models/ApiResponse';
+import { ApiResponse } from '../../../src/Models/ApiResponse';
 
 jest.mock('../../../src/services/handlers/searchResultsApi');
 
