@@ -5,13 +5,18 @@ import {
   sharedDataStructure,
   webRoutePaths,
 } from '../../../src/utils/constants';
+import {
+  fromDate,
+  toDate,
+} from '../../../src/views/forms/dateQuestionnaireFields';
+import Joi from 'joi';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
 }));
 
-describe('Search Results Controller > deals with  handlers', () => {
-  describe('Deals with the Quick Search Handler', () => {
+describe('Search Results Controller > deals with handlers', () => {
+  describe('Deals with the quick search handler', () => {
     it('should update shared data and redirect to results', async () => {
       const request: Request = {
         payload: { search_term: 'example' },
@@ -27,7 +32,7 @@ describe('Search Results Controller > deals with  handlers', () => {
     });
   });
 
-  describe('Deals with Search Results Handler', () => {
+  describe('Deals with search results handler', () => {
     it('should return the rendered view with shared data', async () => {
       const request: Request = {
         server: {
@@ -53,7 +58,23 @@ describe('Search Results Controller > deals with  handlers', () => {
     });
   });
 
-  describe('Deals with Guided Date Search Handler', () => {
+  describe('Deals with render guided date search handler', () => {
+    it('should render the guided data search handler', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await SearchController.renderGuidedSearchHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'screens/guided_search/date_questionnaire',
+        {
+          fromDate,
+          toDate,
+          guidedDateSearchPath: webRoutePaths.guidedDateSearch,
+        }
+      );
+    });
+  });
+
+  describe('Deals with guided date search consume API handler', () => {
     it('should update shared data and redirect to results', async () => {
       const request: Request = {
         payload: { 'from-date-year': 2022, 'to-date-year': 2023 },
