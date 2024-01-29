@@ -1,5 +1,5 @@
 export const apiBasePath = '/api';
-export const apiBaseURL = 'https://jsonplaceholder.typicode.com/';
+export const apiBaseURL = 'http://20.77.9.229:8080/geonetwork/srv/api';
 
 export const webRoutePaths = {
   home: '/',
