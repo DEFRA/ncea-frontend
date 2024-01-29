@@ -9,9 +9,9 @@ const SearchResultsController = {
 
     const results = {isSuccessful: true, response: {}}; //await getSearchResults(searchTerm);
     return response.view('screens/results/template', {
-      HasResult: results.isSuccessful,
-      SearchResults: results.response,
-      SearchTerm: searchTerm,
+      hasResult: results.isSuccessful,
+      searchResults: results.response,
+      searchTerm: searchTerm,
     });
   },
 };

@@ -1,6 +1,8 @@
 import nunjucks from 'nunjucks';
 import path from 'path';
 import { webRoutePaths } from '../../utils/constants';
+/* eslint-disable  @typescript-eslint/no-var-requires */
+const dateFilter = require('nunjucks-date-filter');
 
 module.exports = {
   plugin: require('@hapi/vision'),
@@ -23,9 +25,7 @@ module.exports = {
           },
           /* eslint-disable  @typescript-eslint/no-explicit-any */
           next: () => any,
-        ) => {
-          /* eslint-disable  @typescript-eslint/no-var-requires */
-          const dateFilter = require('nunjucks-date-filter');
+        ) => {          
           options.compileOptions.environment = nunjucks.configure(
             [path.join(options.relativeTo || process.cwd(), options.path), 'node_modules/govuk-frontend/dist'],
             {
