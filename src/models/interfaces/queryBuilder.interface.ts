@@ -32,9 +32,16 @@ interface IGeoShapeQuery {
   };
 }
 
+interface IQueryString {
+  query_string: {
+    query: string;
+    default_operator: string;
+  };
+}
+
 interface IBoolQuery {
   bool: {
-    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery)[];
+    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString)[];
     should?: IMatchQuery[];
     minimum_should_match?: number;
   };
@@ -71,4 +78,5 @@ export {
   IShapeCoordinates,
   IGeoShapeQuery,
   IGeoCoordinates,
+  IQueryString,
 };

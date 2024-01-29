@@ -3,24 +3,33 @@ import {
   IGeoShapeQuery,
   IMatchQuery,
   IQuery,
+  IQueryString,
   IRangeQuery,
   ISearchFieldsObject,
   IShapeCoordinates,
 } from '../models/interfaces/queryBuilder.interface';
 
-const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQuery => {
+const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
     },
   };
 
-  if (searchFieldsObject.searchTerm) {
-    const matchQueries: IMatchQuery[] = [
-      { match: { field1: searchFieldsObject.searchTerm } },
-      { match: { field2: searchFieldsObject.searchTerm } },
-      { match: { field3: searchFieldsObject.searchTerm } },
-    ];
+  if (!fieldsToSearch.length && searchFieldsObject.searchTerm) {
+    const queryString: IQueryString = {
+      query_string: {
+        query: searchFieldsObject.searchTerm,
+        default_operator: 'AND',
+      },
+    };
+    boolQuery.bool.must?.push(queryString);
+  }
+
+  if (searchFieldsObject.searchTerm && fieldsToSearch.length) {
+    const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
+      match: { [field]: searchFieldsObject.searchTerm },
+    })) as IMatchQuery[];
 
     const matchShould: IBoolQuery = {
       bool: {

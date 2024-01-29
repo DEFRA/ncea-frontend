@@ -5,6 +5,71 @@ import {
 import { buildSearchQuery } from '../../src/utils/queryBuilder';
 
 describe('Build the search query', () => {
+  it('should build the search query correctly with date range and when fields are not provided', () => {
+    const searchFieldsObject: ISearchFieldsObject = {
+      searchTerm: 'example',
+      startDate: '2022-01-01',
+      endDate: '2022-12-31',
+      geoCoordinates: {
+        north: 123,
+        south: 345,
+        east: 678,
+        west: 901,
+        depth: {
+          from: 0,
+          to: 1,
+        },
+      },
+    };
+
+    const expectedQuery: IQuery = {
+      query: {
+        bool: {
+          must: [
+            {
+              query_string: {
+                query: 'example',
+                default_operator: 'AND',
+              },
+            },
+            {
+              range: {
+                resourceTemporalExtentDateRange: {
+                  gte: '2022-01-01',
+                  lte: '2022-12-31',
+                },
+              },
+            },
+            {
+              geo_shape: {
+                geom: {
+                  shape: {
+                    type: 'envelope',
+                    coordinates: [
+                      [901, 123],
+                      [678, 345],
+                    ],
+                  },
+                  depth: {
+                    from: 0,
+                    to: 1,
+                  },
+                  relation: 'intersects',
+                  ignore_unmapped: true,
+                },
+              },
+            },
+          ],
+        },
+      },
+    };
+
+    const result = buildSearchQuery(searchFieldsObject);
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query.bool.must).toHaveLength(3);
+  });
+
   it('should build the search query correctly with both search term and date range', () => {
     const searchFieldsObject: ISearchFieldsObject = {
       searchTerm: 'example',
@@ -68,7 +133,11 @@ describe('Build the search query', () => {
       },
     };
 
-    const result = buildSearchQuery(searchFieldsObject);
+    const result = buildSearchQuery(searchFieldsObject, [
+      'field1',
+      'field2',
+      'field3',
+    ]);
 
     expect(result).toEqual(expectedQuery);
     expect(result.query.bool.must).toHaveLength(3);
@@ -98,7 +167,11 @@ describe('Build the search query', () => {
       },
     };
 
-    const result = buildSearchQuery(searchFieldsObject);
+    const result = buildSearchQuery(searchFieldsObject, [
+      'field1',
+      'field2',
+      'field3',
+    ]);
 
     expect(result).toEqual(expectedQuery);
     expect(result.query.bool.must).toHaveLength(1);
