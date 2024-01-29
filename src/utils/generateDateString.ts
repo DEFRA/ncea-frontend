@@ -1,4 +1,4 @@
-import { IDateObject } from '../models/interfaces/searchPayload.interface';
+import { IDateObject } from '../interfaces/searchPayload.interface';
 
 const generateDateString = (dateObject: IDateObject): string => {
   const month = dateObject.month ?? 1;

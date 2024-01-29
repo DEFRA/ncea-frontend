@@ -29,7 +29,8 @@
       "nunjucks",
       "hapi-pino",
       "jsdom",
-      "./src/models/types/types.d.ts"
+      "./src/types/types.d.ts",
+      "joi"
     ],
     "moduleDetection": "force"
   },

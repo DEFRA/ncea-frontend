@@ -7,9 +7,12 @@ import {
   IRangeQuery,
   ISearchFieldsObject,
   IShapeCoordinates,
-} from '../models/interfaces/queryBuilder.interface';
+} from '../interfaces/queryBuilder.interface';
 
-const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
+const buildSearchQuery = (
+  searchFieldsObject: ISearchFieldsObject,
+  fieldsToSearch: string[] = []
+): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -56,7 +59,12 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
 
   const geoCoordinates = searchFieldsObject.geoCoordinates;
 
-  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
+  if (
+    geoCoordinates?.north &&
+    geoCoordinates?.south &&
+    geoCoordinates?.east &&
+    geoCoordinates?.west
+  ) {
     const geoShape: IShapeCoordinates = {
       type: 'envelope',
       coordinates: [
