@@ -3,6 +3,11 @@ import { DefaultAzureCredential } from '@azure/identity';
 import { SecretClient } from '@azure/keyvault-secrets';
 
 /**
+ * Instance of SecretClient
+ */
+let keyVaultClient: SecretClient | null = null;
+
+/**
  * Function: getKeyVaultClient
  *
  * This function returns a new instance of SecretClient from the '@azure/keyvault-secrets' package.
@@ -11,6 +16,11 @@ import { SecretClient } from '@azure/keyvault-secrets';
  *
  * @returns {SecretClient} - A new instance of SecretClient.
  */
-const getKeyVaultClient = () => new SecretClient(Config.azureKeyVaultURL!, new DefaultAzureCredential());
+const getKeyVaultClient = (): SecretClient => {
+  if (!keyVaultClient) {
+    keyVaultClient = new SecretClient(Config.azureKeyVaultURL as string, new DefaultAzureCredential());
+  }
+  return keyVaultClient;
+};
 
 export { getKeyVaultClient };

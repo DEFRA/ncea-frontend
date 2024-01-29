@@ -32,6 +32,7 @@ The Natural Capital and Ecosystem Assessment programme (NCEA) is a DEFRA program
 - [Application Anatomy](#application-anatomy)
 - [Commands](#commands)
 - [Flow of Control](#flow-of-control)
+- [Environment Variables](#environment-variables)
 - [TODO](#todo)
 
 ## Prerequisites
@@ -118,12 +119,15 @@ npm run start:dev
 │   │   │   ├── router.ts  // Custom plugin to register the routes
 │   │   │   └── view.ts    // Custom plugin to register the vision api to render the nunjucks template
 │   │   └── server.ts      // Hapi.js server definition
+│   ├── interfaces         // To identify all the structures
 │   ├── routes             // Here is where all app routes are defined
 │   │   ├── api            // Rest API routes
 │   │   └── web            // WEB UI routes.
-│   │   │   └── assets.ts  // This is where all static asset routing requests are defined
+│   │       └── assets.ts  // This is where all static asset routing requests are defined
+│   ├── schema             // To identify all the schema related to Joi
 │   ├── services           // The definition of api clients and api handlers can be found heres
 │   │   └── handlers       // Contains all the API handlers, each endpoint will have its asynchronous
+│   ├── types              // To declare the custom type definitions
 │   ├── utils              // utils contains common utility and helper reusable methods that can be used by controllers function
 │   ├── views              // All server-rendered nunjucks templates, partials and helpers
 │   │   ├── layout         // Contains the basic customized layout of the template
@@ -200,6 +204,18 @@ We're using semi-colons and comma-last. No rhyme or reason; and some of the hapi
 - Once the server is up and running, set the breakpoint at the code, directly with the VS Code interface.
 - Switch to Run & Debug, and hit the green play button to start a debugging session.
 - The browser will stop and the IDE will offer you the debugging experience.
+
+## Environment Variables
+
+It is important to create the.env file at the root folder level, and the required keys are only required for local use.
+
+```bash
+PORT=
+NODE_ENV=
+APPINSIGHTS_INSTRUMENTATIONKEY=
+AZURE_KEYVAULT_URL=
+GEONETWORK_SEARCH_API=
+```
 
 ## TODO
 

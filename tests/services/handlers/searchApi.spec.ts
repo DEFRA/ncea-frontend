@@ -1,4 +1,4 @@
-import { ISearchFieldsObject } from '../../../src/models/interfaces/queryBuilder.interface';
+import { ISearchFieldsObject } from '../../../src/interfaces/queryBuilder.interface';
 import { buildSearchQuery } from '../../../src/utils/queryBuilder';
 import { geoNetworkClient } from '../../../src/config/geoNetworkClient';
 import { getSearchResults } from '../../../src/services/handlers/searchApi';

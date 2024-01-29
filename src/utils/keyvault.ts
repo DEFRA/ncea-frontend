@@ -8,11 +8,11 @@ import { getKeyVaultClient } from '../config/azureKeyVaultClient';
  * @throws {Error} - If there is an error retrieving the secret.
  */
 
-const getSecret = async (secretKey: string) => {
+const getSecret = async (secretKey: string): Promise<string> => {
   try {
     const secretClient = getKeyVaultClient();
     const secret = await secretClient.getSecret(secretKey);
-    return secret.value;
+    return secret.value!;
     /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (error: any) {
     throw new Error(`Error retrieving secret ${secretKey}: ${error.message}`);

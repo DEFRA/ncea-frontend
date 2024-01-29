@@ -9,10 +9,7 @@ import {
   IShapeCoordinates,
 } from '../interfaces/queryBuilder.interface';
 
-const buildSearchQuery = (
-  searchFieldsObject: ISearchFieldsObject,
-  fieldsToSearch: string[] = []
-): IQuery => {
+const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -59,12 +56,7 @@ const buildSearchQuery = (
 
   const geoCoordinates = searchFieldsObject.geoCoordinates;
 
-  if (
-    geoCoordinates?.north &&
-    geoCoordinates?.south &&
-    geoCoordinates?.east &&
-    geoCoordinates?.west
-  ) {
+  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
     const geoShape: IShapeCoordinates = {
       type: 'envelope',
       coordinates: [

@@ -22,7 +22,6 @@ jest.mock('../../src/config/environmentConfig', () => ({
 describe('Azure Key Vault Client', () => {
   afterEach(() => {
     jest.clearAllMocks();
-    jest.resetAllMocks();
   });
 
   it('should create a new instance of SecretClient with the correct parameters', () => {

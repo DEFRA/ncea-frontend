@@ -1,6 +1,4 @@
-import Hapi from '@hapi/hapi';
-import { Server } from '@hapi/hapi';
-import { ISharedData } from '../../../src/models/interfaces/sharedData.interface';
+import Hapi, { Server } from '@hapi/hapi';
 const sharedDataPlugin = require('../../../src/infrastructure/plugins/shared_data');
 
 describe('SharedData Plugin', () => {

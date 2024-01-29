@@ -1,7 +1,7 @@
 import {
   IQuery,
   ISearchFieldsObject,
-} from '../../src/models/interfaces/queryBuilder.interface';
+} from '../../src/interfaces/queryBuilder.interface';
 import { buildSearchQuery } from '../../src/utils/queryBuilder';
 
 describe('Build the search query', () => {

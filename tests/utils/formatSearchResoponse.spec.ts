@@ -1,4 +1,4 @@
-import { ISearchResults } from '../../src/models/interfaces/searchResponse.interface';
+import { ISearchResults } from '../../src/interfaces/searchResponse.interface';
 import { formatSearchResponse } from '../../src/utils/formatSearchResponse';
 describe('Format the search response', () => {
   it('should format the search response correctly', async () => {

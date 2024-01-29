@@ -1,6 +1,6 @@
 'use strict';
 
-import * as joi from '@hapi/joi';
+import Joi from 'joi';
 
 describe('Environment Config', () => {
   let originalEnv: NodeJS.ProcessEnv;
@@ -26,8 +26,6 @@ describe('Environment Config', () => {
         config: jest.fn(),
       }));
 
-      // const configSpy = jest.spyOn(dotenv, 'config');
-
       require('../../src/config/environmentConfig');
 
       expect(require('dotenv').config).toHaveBeenCalledTimes(1);
@@ -38,8 +36,6 @@ describe('Environment Config', () => {
       jest.mock('dotenv', () => ({
         config: jest.fn(),
       }));
-
-      // const configSpy = jest.spyOn(dotenv, 'config');
 
       require('../../src/config/environmentConfig');
 
@@ -65,15 +61,14 @@ describe('Environment Config', () => {
       };
       process.env = { ...mockConfig };
 
-      const schema = joi.object().keys({
-        port: joi.string().default('3000'),
-        env: joi
-          .string()
+      const schema = Joi.object().keys({
+        port: Joi.string().default('3000'),
+        env: Joi.string()
           .valid(...envs)
           .default(envs[0]),
-        appInsightsKey: joi.string().allow('').default(''),
-        azureKeyVaultURL: joi.string().allow('').default(''),
-        geoNetworkSearchAPI: joi.string().allow('').default(''),
+        appInsightsKey: Joi.string().allow('').default(''),
+        azureKeyVaultURL: Joi.string().allow('').default(''),
+        geoNetworkSearchAPI: Joi.string().allow('').default(''),
       });
 
       const { Config } = require('../../src/config/environmentConfig');
