@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { environmentSchema } from '../../../src/models/schema/environmentConfig.schema';
+import { environmentSchema } from '../../../src/schema/environmentConfig.schema';
 
 describe('Environment Configuration Schema', () => {
   describe('Check the Defaults', () => {

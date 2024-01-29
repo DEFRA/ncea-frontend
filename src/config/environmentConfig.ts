@@ -9,8 +9,8 @@
  * @returns {EnvironmentConfig} The validated environment configuration
  */
 
-import { EnvironmentConfig } from '../models/interfaces/environmentConfig.interface';
-import { environmentSchema } from '../models/schema/environmentConfig.schema';
+import { EnvironmentConfig } from '../interfaces/environmentConfig.interface';
+import { environmentSchema } from '../schema/environmentConfig.schema';
 
 const config: EnvironmentConfig = {
   port: process.env.PORT,
