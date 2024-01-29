@@ -25,7 +25,7 @@ module.exports = {
           },
           /* eslint-disable  @typescript-eslint/no-explicit-any */
           next: () => any,
-        ) => {          
+        ) => {
           options.compileOptions.environment = nunjucks.configure(
             [path.join(options.relativeTo || process.cwd(), options.path), 'node_modules/govuk-frontend/dist'],
             {
