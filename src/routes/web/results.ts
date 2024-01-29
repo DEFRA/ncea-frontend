@@ -23,7 +23,6 @@ module.exports = [
       validate: {
         payload: dateSchema,
         failAction: (request, h, error) => {
-          console.log(JSON.stringify(error));
           return SearchResultsController.guidedSearchFailActionHandler(h, error);
         },
       },
