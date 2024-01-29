@@ -35,7 +35,7 @@ export const dateSchema = Joi.object({
           `${fields['from-date-year']}-${fields['from-date-month']}-${fields['from-date-day']}`,
         );
         const toDate = new Date(`${fields['to-date-year']}-${fields['to-date-month']}-${fields['to-date-day']}`);
-        console.log({ fromDate, toDate });
+
         if (fromDate > toDate) {
           return helpers.error('any.custom', {
             errors: [
@@ -48,7 +48,7 @@ export const dateSchema = Joi.object({
             ],
           });
         }
-        return true;
+        return value;
       }
     }, 'date-questionnaire-validation'),
 }).options({ abortEarly: false });

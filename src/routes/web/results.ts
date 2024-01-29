@@ -1,7 +1,7 @@
 'use strict';
 
 import { SearchResultsController } from '../../controllers/web/SearchResultsController';
-import { dateSchema } from '../../utils/questionnaire.schema';
+import { dateSchema } from '../../schema/questionnaire.schema';
 import { webRoutePaths } from '../../utils/constants';
 
 module.exports = [
