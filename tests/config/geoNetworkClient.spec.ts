@@ -13,7 +13,7 @@ const mockConfig = {
 };
 const mockError = {
   response: {
-    statue: 404,
+    status: 404,
     data: 'Not Found',
   },
 };
@@ -59,13 +59,18 @@ describe('Geo Network instance configuration', () => {
     });
 
     it('should reject the promise with the received error', async () => {
+      mock.onGet('fake-url').reply(404, { message: 'Mock error' });
+
       try {
-        mock.onGet('fake-url').reply(404, { message: 'Mock error' });
         await geoNetworkClient.get('/fake-url');
+        fail('Promise should have been rejected');
       } catch (error: any) {
         await expect(error.response?.status).toBe(404);
         await expect(error.response?.data?.message).toEqual('Mock error');
-        expect(mockErrorInterceptor(mockError)).rejects.toEqual(mockError);
+        await expect(mockErrorInterceptor(mockError)).rejects.toEqual(
+          mockError
+        );
+        await expect(mockErrorInterceptor).toHaveBeenCalledWith(mockError);
       }
     });
   });

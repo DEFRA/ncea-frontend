@@ -9,26 +9,8 @@
  * @returns {EnvironmentConfig} The validated environment configuration
  */
 
-import * as joi from '@hapi/joi';
-import { EnvironmentConfig } from '../models/environmentConfig.interface';
-
-const envs = ['local', 'development', 'qa', 'production', 'test'];
-
-if ([envs[0], envs[4]].includes(process.env.NODE_ENV!)) {
-  /* eslint-disable  @typescript-eslint/no-var-requires */
-  require('dotenv').config();
-}
-
-const schema = joi.object().keys({
-  port: joi.string().default('3000'),
-  env: joi
-    .string()
-    .valid(...envs)
-    .default(envs[0]),
-  appInsightsKey: joi.string().allow('').default(''),
-  azureKeyVaultURL: joi.string().allow('').default(''),
-  geoNetworkSearchAPI: joi.string().allow('').default(''),
-});
+import { EnvironmentConfig } from '../models/interfaces/environmentConfig.interface';
+import { environmentSchema } from '../models/schema/environmentConfig.schema';
 
 const config: EnvironmentConfig = {
   port: process.env.PORT,
@@ -38,7 +20,7 @@ const config: EnvironmentConfig = {
   geoNetworkSearchAPI: process.env.GEONETWORK_SEARCH_API,
 };
 
-const { error, value } = schema.validate(config);
+const { error, value } = environmentSchema.validate(config);
 
 if (error) {
   throw new Error(`The environment config is invalid: ${error.message}`);
