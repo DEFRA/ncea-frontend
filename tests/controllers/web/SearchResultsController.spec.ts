@@ -11,11 +11,12 @@ jest.mock('../../../src/services/handlers/searchResultsApi');
 describe('Search Results Controller > deals with rendering search results handler', () => {
   let mockRequest = mock<Request>();
   const mockResponse = mock<ResponseToolkit>();
-  mockRequest.query["q"] = "test search term";
-  
+  mockRequest.query['q'] = 'test search term';
 
   beforeAll(async () => {
-    (getSearchResults as jest.Mock).mockResolvedValue(new ApiResponse({},200, true));
+    (getSearchResults as jest.Mock).mockResolvedValue(
+      new ApiResponse({}, 200, true)
+    );
     return SearchResultsController.renderSearchResultsHandler(
       mockRequest,
       mockResponse
@@ -26,7 +27,7 @@ describe('Search Results Controller > deals with rendering search results handle
     expect(mockResponse.view).toHaveBeenCalledWith('screens/results/template', {
       searchTerm: mockRequest.query?.q,
       searchResults: {},
-      hasResult: true
+      hasResult: true,
     });
   });
 });

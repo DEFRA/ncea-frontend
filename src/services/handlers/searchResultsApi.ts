@@ -2,7 +2,7 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { geoNetworkClient } from '../../config/geoNetworkClient';
 import { BoolModel, Must, Query, Querystring, SearchRequest } from '../../Models/SearchRequest';
 
-const url = 'https://20.77.9.229:8080/geonetwork/srv/api/search/records/_search?bucket=s101';
+const url = '/search/records/_search?bucket=s101';
 
 const getSearchRequest = function (searchTerm: string | null): SearchRequest {
   const queryString = new Querystring(searchTerm as string, 'AND');
