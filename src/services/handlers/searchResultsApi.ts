@@ -4,7 +4,7 @@ import { BoolModel, Must, Query, Querystring, SearchRequest } from '../../models
 
 const url = '/search/records/_search?bucket=s101';
 
-const getSearchRequest = function (searchTerm: string | null) {
+const getSearchRequest = function (searchTerm: string | null): SearchRequest {
   const queryString = new Querystring(searchTerm as string, 'AND');
   const must = new Must(queryString);
   const boolModel = new BoolModel([must]);
@@ -13,7 +13,7 @@ const getSearchRequest = function (searchTerm: string | null) {
   return searchRequestObj;
 };
 
-async function getSearchResults(query: string | null) {
+const getSearchResults = async function(query: string | null): Promise<ApiResponse> {
   try {
     const searchRequestObj = getSearchRequest(query);
     const res = await geoNetworkClient.post(url, searchRequestObj);

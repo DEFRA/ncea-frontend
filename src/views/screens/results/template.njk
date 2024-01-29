@@ -23,7 +23,7 @@
 
   {{ quickSearch({
     isResultPage: true,
-    searchTerm: SearchTerm
+    searchTerm: searchTerm
   }) }}
 
   <div class="govuk-grid-row">
@@ -32,11 +32,11 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m">{{SearchResults.hits.total.value}} results</h2>
+        <h2 class="govuk-heading-m">{{searchResults.hits.total.value}} results</h2>
       </div>
-      {%- if HasResult == true -%}
-      {%- if SearchResults.hits.total.value > 0 -%}
-      {% for item in SearchResults.hits.hits %}
+      {%- if hasResult == true -%}
+      {%- if searchResults.hits.total.value > 0 -%}
+      {% for item in searchResults.hits.hits %}
         <div class="govuk-section-break--visible">
           <h2 class="govuk-heading-m">{{item._source.resourceTitleObject.default}}</h2>
           <p class="govuk-caption-m govuk-!-font-size-14">

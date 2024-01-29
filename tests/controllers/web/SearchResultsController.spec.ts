@@ -25,9 +25,9 @@ describe('Search Results Controller > deals with rendering search results handle
 
   it('should call the Search view with context', async () => {
     expect(mockResponse.view).toHaveBeenCalledWith('screens/results/template', {
-      SearchTerm: mockRequest.query?.q,
-      SearchResults: {},
-      HasResult: true,
+      searchTerm: mockRequest.query?.q,
+      searchResults: {},
+      hasResult: true,
     });
   });
 });
