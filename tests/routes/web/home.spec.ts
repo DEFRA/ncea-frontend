@@ -268,4 +268,30 @@ describe('Home Screen', () => {
       });
     });
   });
+
+  describe('Questionnaire search container block heading', () => {
+    it('should render the questionnaire search container heading', async () => {
+      expect(
+        document
+          ?.querySelectorAll('.govuk-heading-m')?.[1]
+          ?.textContent?.trim()
+      ).toBe('Questionnaire search');
+    });
+
+    it('should not render the custom large class for heading', async () => {
+      expect(
+        document
+          ?.querySelectorAll('.govuk-heading-m')?.[1]
+          ?.classList.contains('govuk-heading-m--large')
+      ).toBeFalsy();
+    });
+  });
+
+  describe('Questionnaire search block action', () => {
+    it('should render the questionnaire search button', () => {
+      const anchorElement = document?.querySelector('.govuk-button--start');
+      expect(anchorElement?.tagName?.toLowerCase()).toBe('a');
+    });
+  });
+
 });
