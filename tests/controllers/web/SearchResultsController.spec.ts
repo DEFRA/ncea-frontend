@@ -3,17 +3,24 @@
 import { mock } from 'jest-mock-extended';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
+import { getSearchResults } from '../../../src/services/handlers/searchResultsApi';
+import { ApiResponse } from '../../../src/Models/ApiResponse';
 import { fromDate, toDate } from '../../../src/views/forms/dateQuestionnaireFields';
 import { dateQuestionChronologicalError, dateQuestionnaireGovUKError } from '../../data/dateQuestionnaire';
 import { DateQuestionnaireError } from '../../../src/interfaces/guidedSearch';
 import * as errorTransformer from '../../../src/utils/transformErrors';
 
+jest.mock('../../../src/services/handlers/searchResultsApi');
+
 describe('Search Results Controller > deals with rendering search results handler', () => {
-  const mockRequest = mock<Request>();
-
+  let mockRequest = mock<Request>();
   const mockResponse = mock<ResponseToolkit>();
+  mockRequest.query['q'] = 'test search term';
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    (getSearchResults as jest.Mock).mockResolvedValue(
+      new ApiResponse({}, 200, true)
+    );
     return SearchResultsController.renderSearchResultsHandler(
       mockRequest,
       mockResponse
@@ -23,6 +30,8 @@ describe('Search Results Controller > deals with rendering search results handle
   it('should call the Search view with context', async () => {
     expect(mockResponse.view).toHaveBeenCalledWith('screens/results/template', {
       searchTerm: mockRequest.query?.q,
+      searchResults: {},
+      hasResult: true,
     });
   });
 });

@@ -1,6 +1,8 @@
 import nunjucks from 'nunjucks';
 import path from 'path';
 import { webRoutePaths } from '../../utils/constants';
+/* eslint-disable  @typescript-eslint/no-var-requires */
+const dateFilter = require('nunjucks-date-filter');
 
 module.exports = {
   plugin: require('@hapi/vision'),
@@ -31,6 +33,7 @@ module.exports = {
               watch: false,
             },
           );
+          options.compileOptions.environment.addFilter('date', dateFilter);
 
           return next();
         },
