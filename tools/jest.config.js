@@ -8,6 +8,7 @@ module.exports = {
   testRegex: './tests/.*\\.(test|spec)?\\.(ts|js)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   roots: ['<rootDir>/tests', '<rootDir>/src'],
+  coveragePathIgnorePatterns: ['<rootDir>/tests/'],
   coverageReporters: ['lcov', 'cobertura', 'html'],
   setupFilesAfterEnv: ['<rootDir>/tools/jest.env.js'],
   testTimeout: 9000,

@@ -41,6 +41,10 @@ describe('Vision Plugin Configuration', () => {
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
     });
+    expect(mockEnvironment.addFilter).toHaveBeenCalledWith(
+      'date',
+      expect.any(Function)
+    );
   });
   it('should compile and render the template', () => {
     const nunjucksMock = jest.requireMock('nunjucks');
@@ -62,5 +66,24 @@ describe('Vision Plugin Configuration', () => {
     const renderedTemplate = compiledTemplate({ data: 'testData' });
     expect(nunjucksMock.compile).toHaveBeenCalledWith(src, mockEnvironment);
     expect(renderedTemplate).toBe('renderedTemplate: {"data":"testData"}');
+  });
+  it('should add a custom date filter to the environment', () => {
+    const nunjucksMock = jest.requireMock('nunjucks');
+    const { options } = require('../../../src/infrastructure/plugins/views');
+    const mockEnvironment = { addFilter: jest.fn() };
+    nunjucksMock.configure.mockReturnValueOnce(mockEnvironment);
+    const nextMock = jest.fn();
+    options.engines.njk.prepare(
+      {
+        compileOptions: { environment: mockEnvironment },
+        relativeTo: 'mockedRelativeTo',
+        path: 'mockedPath',
+      },
+      nextMock
+    );
+    expect(mockEnvironment.addFilter).toHaveBeenCalledWith(
+      'date',
+      expect.any(Function)
+    );
   });
 });

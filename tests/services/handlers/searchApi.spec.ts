@@ -44,23 +44,12 @@ describe('Search API', () => {
     expect(result).toEqual({ total: undefined, items: [] });
   });
   it('should handle errors and throw an error message', async () => {
-    jest.mock('../../../src/config/geoNetworkClient', () => ({
-      geoNetworkClient: {
-        post: jest.fn(() => {
-          throw new Error('Mocked error');
-        }),
-      },
-    }));
     const searchFieldsObject = { searchTerm: 'example' };
-    const consoleErrorSpy = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => {});
-    try {
-      await getSearchResults(searchFieldsObject);
-    } catch (error: any) {
-      expect(error.message).toContain('Error fetching results');
-      expect(error.message).toContain('Mocked error');
-      expect(consoleErrorSpy).toHaveBeenCalled();
-    }
+    geoNetworkClient.post = jest
+      .fn()
+      .mockRejectedValueOnce(new Error('Mocked error'));
+    await expect(getSearchResults(searchFieldsObject)).rejects.toThrow(
+      'Error fetching results: Mocked error'
+    );
   });
 });
