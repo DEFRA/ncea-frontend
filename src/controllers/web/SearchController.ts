@@ -12,7 +12,7 @@ import { generateDateString } from '../../utils/generateDateString';
 import { getSearchResults } from '../../services/handlers/searchApi';
 import { transformErrors } from '../../utils/transformErrors';
 import { formKeys, sharedDataStructure, webRoutePaths } from '../../utils/constants';
-import { fromDate, toDate } from '../../views/forms/dateQuestionnaireFields';
+import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const SearchController = {
   doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {

@@ -92,10 +92,12 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
         <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
-        <h2 class="govuk-heading-m">
-          From
-        </h2>
         
+
+<h2 class="govuk-heading-m">
+  From
+</h2>
+
 
 
 
@@ -158,10 +160,12 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
 </div>
 
-        <h2 class="govuk-heading-m">
-          To
-        </h2>
         
+
+<h2 class="govuk-heading-m">
+  To
+</h2>
+
 
 
 

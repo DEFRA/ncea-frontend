@@ -1,4 +1,6 @@
-export const fromDate = {
+import { IDateInputComponent } from '../interfaces/fieldsComponent.interface';
+
+export const fromDate: IDateInputComponent = {
   id: 'from-date',
   name: 'from-date',
   namePrefix: 'from-date',
@@ -12,7 +14,7 @@ export const fromDate = {
   },
 };
 
-export const toDate = {
+export const toDate: IDateInputComponent = {
   id: 'to-date',
   name: 'to-date',
   namePrefix: 'to-date',

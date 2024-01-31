@@ -11,7 +11,7 @@ import {
 import {
   fromDate,
   toDate,
-} from '../../../src/views/forms/dateQuestionnaireFields';
+} from '../../../src/data/dateQuestionnaireFieldOptions';
 import {
   dateQuestionChronologicalError,
   dateQuestionnaireGovUKError,
