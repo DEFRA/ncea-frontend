@@ -7,3 +7,8 @@ export interface GovUKItems {
 export interface FormFieldError {
   [fieldKey: string]: string | GovUKItems[];
 }
+
+export interface IFormValidatorOptions {
+  formId: string;
+  submitButtonId: string;
+}

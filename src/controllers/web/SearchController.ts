@@ -1,6 +1,6 @@
 'use strict';
 
-import { FormFieldError } from '../../interfaces/guidedSearch';
+import { FormFieldError } from '../../interfaces/guidedSearch.interface';
 import { ISearchFieldsObject } from '../../interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../interfaces/searchResponse.interface';
 import { ISharedData } from '../../interfaces/sharedData.interface';

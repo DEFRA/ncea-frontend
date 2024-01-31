@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { formKeys } from './constants';
-import { FormFieldError, GovUKItems } from '../interfaces/guidedSearch';
+import { FormFieldError, GovUKItems } from '../interfaces/guidedSearch.interface';
 
 export const transformErrors = (error: Joi.ValidationError, formName: string): FormFieldError | undefined => {
   if (formName === formKeys.dateQuestionnaire) {

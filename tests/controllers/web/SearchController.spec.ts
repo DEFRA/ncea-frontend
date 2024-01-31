@@ -1,7 +1,7 @@
 'use strict';
 
 import * as errorTransformer from '../../../src/utils/transformErrors';
-import { FormFieldError } from '../../../src/interfaces/guidedSearch';
+import { FormFieldError } from '../../../src/interfaces/guidedSearch.interface';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { SearchController } from '../../../src/controllers/web/SearchController';
 import {
