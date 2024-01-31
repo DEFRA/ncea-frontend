@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home Screen Home > Sanpshot verification should match the home screen snapshot 1`] = `
+exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Questionnaire > Sanpshot verification should match the date questionnaire screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
@@ -52,6 +52,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
   
       <div class="govuk-width-container">
         
+  
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
@@ -64,82 +65,177 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
 </div>
 
 
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+  
+    
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/">Home</a>
+    </li>
+    
+  
+    
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Questionnaire search</a>
+    </li>
+    
+  
+  </ol>
+</div>
+
+
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-  <header class="full-width-banner" role="banner">
-    <div class="banner-container">
-      <h1 class="govuk-heading-xl banner-container__heading-xl">Natural Capital Search Service</h1>
-      <span class="govuk-caption-l banner-container__caption-l">Use this service to search for data and information about the environment and ecosystems in the UK. This service can be used to support natural capital approaches to evidence and decision making</span>
-    </div>
-  </header>
-
-  
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m">
-      
-        Quick Search
-      
-    </h1>
-    
-      <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
-    
-    <div class="search-block" data-module="search">
-      <form action="/quick_search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
+  <div class="govuk-grid-row">
+    <form method="POST" action="/date-search">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-m">
+          When was the data or information collected?
+        </h1>
+        <h2 class="govuk-heading-m">
+          From
+        </h2>
         
 
-<div class="govuk-form-group">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search">
-    Search
-  </label>
 
-<div class="govuk-input__wrapper"><input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search"><div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button">Search</button></div>
-  </div>
-
-</div>
-
-      </form>
-    </div>
-  </div>
-</div>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m">
-        Questionnaire search
-      </h2>
-      <p class="govuk-body">
-        A set of questions to narrow down your search for data and information.<br> 
-        This may be useful if you're not sure what you're looking for.
-      </p>
-    </div>
-  </div>
 
   
+<div class="govuk-form-group">
+<fieldset class="govuk-fieldset" role="group" aria-describedby="from-date-hint">
+  
+  <legend class="govuk-fieldset__legend">
+  
+    You must enter a year, for example, 2007
+  
+  </legend>
+  
+
+  <div id="from-date-hint" class="govuk-hint">
+    You can choose to enter a day or month, for example, 27 3 2007
+  </div>
+
+
+  <div class="govuk-date-input" id="from-date">
+    
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-date-input__label" for="from-date-day">
+          Day
+        </label>
+      
+      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="from-date-day" name="from-date-day" type="text" inputmode="numeric">
+      
+      </div>
+    </div>
+  
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-date-input__label" for="from-date-month">
+          Month
+        </label>
+      
+      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="from-date-month" name="from-date-month" type="text" inputmode="numeric">
+      
+      </div>
+    </div>
+  
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-date-input__label" for="from-date-year">
+          Year
+        </label>
+      
+      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="from-date-year" name="from-date-year" type="text" inputmode="numeric">
+      
+      </div>
+    </div>
+  
+  </div>
+  
+
+</fieldset>
+
+
+</div>
+
+        <h2 class="govuk-heading-m">
+          To
+        </h2>
+        
+
+
+
+  
+<div class="govuk-form-group">
+<fieldset class="govuk-fieldset" role="group" aria-describedby="to-date-hint">
+  
+  <legend class="govuk-fieldset__legend">
+  
+    You must enter a year, for example, 2007
+  
+  </legend>
+  
+
+  <div id="to-date-hint" class="govuk-hint">
+    You can choose to enter a day or month, for example, 27 3 2007
+  </div>
+
+
+  <div class="govuk-date-input" id="to-date">
+    
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-date-input__label" for="to-date-day">
+          Day
+        </label>
+      
+      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="to-date-day" name="to-date-day" type="text" inputmode="numeric">
+      
+      </div>
+    </div>
+  
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-date-input__label" for="to-date-month">
+          Month
+        </label>
+      
+      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="to-date-month" name="to-date-month" type="text" inputmode="numeric">
+      
+      </div>
+    </div>
+  
+    <div class="govuk-date-input__item">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-date-input__label" for="to-date-year">
+          Year
+        </label>
+      
+      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="to-date-year" name="to-date-year" type="text" inputmode="numeric">
+      
+      </div>
+    </div>
+  
+  </div>
+  
+
+</fieldset>
+
+
+</div>
+
+        
   
     
   
 
-  
-  
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Show results
+</button>
 
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button" id="guided-search">
-  Start
-  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
-  </svg></a>
-
-
-  <article class="govuk-grid-row" role="article">
-    <div class="govuk-grid-column-full video-container">
-      <h1 class="govuk-heading-m govuk-\\!-static-margin-0 video-container__heading-m">What is natural capital?</h1>
-      <div class="video-container__frame">
-        <iframe width="630" height="354" src="https://www.youtube.com/embed/4wx0rMruSJo?si=h-SD8VoSUSNwqo1S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
-    </div>
-  </article>
+    </form>
+  </div>
 
         </main>
       </div>

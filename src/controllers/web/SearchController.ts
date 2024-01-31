@@ -1,15 +1,18 @@
 'use strict';
 
+import { FormFieldError } from '../../interfaces/guidedSearch';
 import { ISearchFieldsObject } from '../../interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../interfaces/searchResponse.interface';
 import { ISharedData } from '../../interfaces/sharedData.interface';
+import Joi from 'joi';
 import { IDateSearchPayload, IQuickSearchPayload } from '../../interfaces/searchPayload.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { generateDateString } from '../../utils/generateDateString';
 import { getSearchResults } from '../../services/handlers/searchApi';
+import { transformErrors } from '../../utils/transformErrors';
+import { formKeys, sharedDataStructure, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../views/forms/dateQuestionnaireFields';
-import { sharedDataStructure, webRoutePaths } from '../../utils/constants';
 
 const SearchController = {
   doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
@@ -62,6 +65,35 @@ const SearchController = {
     request.server.purgeSharedData(sharedDataStructure.searchTerm);
     request.server.updateSharedData(sharedDataStructure.searchResults, searchResults);
     return response.redirect(webRoutePaths.results);
+  },
+  doDateSearchFailActionHandler: async (
+    request: Request,
+    response: ResponseToolkit,
+    error: Joi.ValidationError,
+  ): Promise<ResponseObject> => {
+    const guidedDateSearchPath = webRoutePaths.guidedDateSearch;
+    const { fromError, fromItems, toError, toItems } = transformErrors(
+      error,
+      formKeys.dateQuestionnaire,
+    ) as FormFieldError;
+    const fromField = {
+      ...fromDate,
+      ...(fromError && { errorMessage: { text: fromError } }),
+      items: fromItems,
+    };
+    const toField = {
+      ...toDate,
+      ...(toError && { errorMessage: { text: toError } }),
+      items: toItems,
+    };
+    return response
+      .view('screens/guided_search/date_questionnaire', {
+        fromDate: fromField,
+        toDate: toField,
+        guidedDateSearchPath,
+      })
+      .code(400)
+      .takeover();
   },
 };
 

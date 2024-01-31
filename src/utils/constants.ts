@@ -1,5 +1,4 @@
 export const apiBasePath = '/api';
-
 export const webRoutePaths = {
   home: '/',
   quickSearch: '/quick_search',

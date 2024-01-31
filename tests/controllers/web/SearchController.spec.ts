@@ -1,4 +1,7 @@
 'use strict';
+
+import * as errorTransformer from '../../../src/utils/transformErrors';
+import { FormFieldError } from '../../../src/interfaces/guidedSearch';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { SearchController } from '../../../src/controllers/web/SearchController';
 import {
@@ -9,6 +12,10 @@ import {
   fromDate,
   toDate,
 } from '../../../src/views/forms/dateQuestionnaireFields';
+import {
+  dateQuestionChronologicalError,
+  dateQuestionnaireGovUKError,
+} from '../../data/dateQuestionnaire';
 import Joi from 'joi';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
@@ -90,6 +97,35 @@ describe('Search Results Controller > deals with handlers', () => {
         sharedDataStructure.searchTerm
       );
       expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
+    });
+  });
+
+  describe('Deals with the guided date search fail action handler', () => {
+    const request: Request = {} as any;
+    const response: ResponseToolkit = {
+      view: jest.fn().mockReturnValue({
+        takeover: jest.fn(),
+        code: jest.fn(),
+      }) as any,
+    } as any;
+
+    const error = {} as Joi.ValidationError;
+    jest
+      .spyOn(errorTransformer, 'transformErrors')
+      .mockReturnValue(dateQuestionChronologicalError as FormFieldError);
+    beforeAll(() => {
+      return SearchController.doDateSearchFailActionHandler(
+        request,
+        response,
+        error
+      );
+    });
+
+    it('should render the date questionnaire template with error messages', async () => {
+      expect(response.view).toHaveBeenCalledWith(
+        'screens/guided_search/date_questionnaire',
+        dateQuestionnaireGovUKError
+      );
     });
   });
 });
