@@ -32,6 +32,7 @@ The Natural Capital and Ecosystem Assessment programme (NCEA) is a DEFRA program
 - [Application Anatomy](#application-anatomy)
 - [Commands](#commands)
 - [Flow of Control](#flow-of-control)
+- [Environment Variables](#environment-variables)
 - [TODO](#todo)
 
 ## Prerequisites
@@ -200,6 +201,18 @@ We're using semi-colons and comma-last. No rhyme or reason; and some of the hapi
 - Once the server is up and running, set the breakpoint at the code, directly with the VS Code interface.
 - Switch to Run & Debug, and hit the green play button to start a debugging session.
 - The browser will stop and the IDE will offer you the debugging experience.
+
+## Environment Variables
+
+It is important to create the.env file at the root folder level, and the required keys are only required for local use.
+
+```bash
+PORT=
+NODE_ENV=
+APPINSIGHTS_INSTRUMENTATIONKEY=
+AZURE_KEYVAULT_URL=
+GEONETWORK_SEARCH_API=
+```
 
 ## TODO
 

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc && npm run copy-files",
     "copy-files": "ts-node copyNonTSFiles.ts",
-    "start:dev": "npx nodemon --config tools/nodemon.json",
+    "start:dev": "cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json",
     "start": "npm run build && node build/index.js",
     "lint": "npm run lint:javascript",
     "lint:javascript": "eslint --config tools/.eslintrc src/**/* --ext .js,.ts",
@@ -38,6 +38,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/hapi__hapi": "21.0.0",
+    "@types/hapi__joi": "17.1.14",
     "@types/hapi__vision": "5.5.7",
     "@types/jest": "29.5.11",
     "@types/node": "20.10.5",
@@ -45,6 +46,9 @@
     "@types/shelljs": "0.8.15",
     "@typescript-eslint/eslint-plugin": "6.15.0",
     "@typescript-eslint/parser": "6.15.0",
+    "axios-mock-adapter": "^1.22.0",
+    "cross-env": "7.0.3",
+    "dotenv": "16.3.1",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-jest": "27.6.0",
@@ -66,6 +70,8 @@
     "typescript": "5.3.3"
   },
   "dependencies": {
+    "@azure/identity": "4.0.0",
+    "@azure/keyvault-secrets": "4.7.0",
     "@hapi/hapi": "21.3.2",
     "@hapi/inert": "7.1.0",
     "@hapi/vision": "7.0.3",
@@ -73,7 +79,7 @@
     "axios": "1.6.4",
     "govuk-frontend": "5.0.0",
     "hapi-pino": "12.1.0",
-    "joi": "^17.12.0",
+    "joi": "17.12.1",
     "nunjucks": "3.2.4",
     "shelljs": "0.8.5"
   },

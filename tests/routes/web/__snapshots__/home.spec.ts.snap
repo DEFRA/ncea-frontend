@@ -66,12 +66,12 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-  <div class="full-width-banner">
+  <header class="full-width-banner" role="banner">
     <div class="banner-container">
       <h1 class="govuk-heading-xl banner-container__heading-xl">Natural Capital Search Service</h1>
       <span class="govuk-caption-l banner-container__caption-l">Use this service to search for data and information about the environment and ecosystems in the UK. This service can be used to support natural capital approaches to evidence and decision making</span>
     </div>
-  </div>
+  </header>
 
   
 
@@ -114,7 +114,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
         A set of questions to narrow down your search for data and information.<br> 
         This may be useful if you're not sure what you're looking for.
       </p>
-    </div> 
+    </div>
   </div>
 
   
@@ -132,14 +132,14 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
   </svg></a>
 
 
-  <div class="govuk-grid-row">
+  <article class="govuk-grid-row" role="article">
     <div class="govuk-grid-column-full video-container">
       <h1 class="govuk-heading-m govuk-\\!-static-margin-0 video-container__heading-m">What is natural capital?</h1>
       <div class="video-container__frame">
         <iframe width="630" height="354" src="https://www.youtube.com/embed/4wx0rMruSJo?si=h-SD8VoSUSNwqo1S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </div>
-  </div>
+  </article>
 
         </main>
       </div>
