@@ -118,7 +118,7 @@ describe('Date Questionnaire Schema', () => {
       const { error } = dateSchema.validate(invalidData);
       expect(error).toBeDefined();
       expect(error?.details[0].message).toContain(
-        '\\"Month\\" must be less than or equal to 12'
+        '"Month" must be less than or equal to 12'
       );
     });
   });

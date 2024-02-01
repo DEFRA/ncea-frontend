@@ -356,7 +356,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   (cov_r6mjnxpqp().s[4]++, document.getElementById(formValidatorOptions.submitButtonId));
   const fields =
   /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[5]++, Array.from(form.querySelectorAll('input[type="text"]')));
+  (cov_r6mjnxpqp().s[5]++, Array.from(form.querySelectorAll('input[type="text"], input[type="number"]')));
   /* istanbul ignore next */
   cov_r6mjnxpqp().s[6]++;
   const checkFields = () => {
