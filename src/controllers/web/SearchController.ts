@@ -1,17 +1,18 @@
 'use strict';
 
-import { FormFieldError } from '../../interfaces/guidedSearch.interface';
 import { ISearchFieldsObject } from '../../interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../interfaces/searchResponse.interface';
 import { ISharedData } from '../../interfaces/sharedData.interface';
 import Joi from 'joi';
+import { FormFieldError, IFormValidatorOptions } from '../../interfaces/guidedSearch.interface';
 import { IDateSearchPayload, IQuickSearchPayload } from '../../interfaces/searchPayload.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { generateDateString } from '../../utils/generateDateString';
 import { getSearchResults } from '../../services/handlers/searchApi';
+import { injectDynamicEnablingScript } from '../../utils/enableSubmitButton';
 import { transformErrors } from '../../utils/transformErrors';
-import { formKeys, sharedDataStructure, webRoutePaths } from '../../utils/constants';
+import { formKeys, formValidatorOptions, sharedDataStructure, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const SearchController = {
@@ -38,10 +39,17 @@ const SearchController = {
   },
   renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const guidedDateSearchPath = webRoutePaths.guidedDateSearch;
+    const dateFormOptions: IFormValidatorOptions = {
+      formId: formValidatorOptions.dateQuestionnaire.formId,
+      submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+    };
+    const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
     return response.view('screens/guided_search/date_questionnaire', {
       fromDate,
       toDate,
       guidedDateSearchPath,
+      dateFormOptions,
+      dynamicSubmitScript,
     });
   },
   doDateSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
@@ -64,7 +72,7 @@ const SearchController = {
     const searchResults: ISearchResults = await getSearchResults(searchFieldsObject);
     request.server.purgeSharedData(sharedDataStructure.searchTerm);
     request.server.updateSharedData(sharedDataStructure.searchResults, searchResults);
-    return response.redirect(webRoutePaths.results);
+    return response.redirect(webRoutePaths.geographySearch);
   },
   doDateSearchFailActionHandler: async (
     request: Request,
@@ -86,14 +94,35 @@ const SearchController = {
       ...(toError && { errorMessage: { text: toError } }),
       items: toItems,
     };
+    const dateFormOptions: IFormValidatorOptions = {
+      formId: formValidatorOptions.dateQuestionnaire.formId,
+      submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+    };
+    const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
     return response
       .view('screens/guided_search/date_questionnaire', {
         fromDate: fromField,
         toDate: toField,
         guidedDateSearchPath,
+        dateFormOptions,
+        dynamicSubmitScript,
       })
       .code(400)
       .takeover();
+  },
+  renderGeographySearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { geographySearch: geographySearchPath, guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const dateFormOptions: IFormValidatorOptions = {
+      formId: formValidatorOptions.dateQuestionnaire.formId,
+      submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+    };
+    const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
+    return response.view('screens/guided_search/geography_questionnaire', {
+      guidedDateSearchPath,
+      geographySearchPath,
+      dateFormOptions,
+      dynamicSubmitScript,
+    });
   },
 };
 

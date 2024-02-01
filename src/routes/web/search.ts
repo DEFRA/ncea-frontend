@@ -31,4 +31,9 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'GET',
+    path: webRoutePaths.geographySearch,
+    handler: SearchController.renderGeographySearchHandler,
+  },
 ];

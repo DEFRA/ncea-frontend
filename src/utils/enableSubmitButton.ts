@@ -17,4 +17,11 @@ const enableSubmitButton = async (formValidatorOptions: IFormValidatorOptions) =
   checkFields();
 };
 
-export { enableSubmitButton };
+const injectDynamicEnablingScript = (formValidatorOptions: IFormValidatorOptions) => {
+  const script = `<script>
+      (${enableSubmitButton.toString()})(${JSON.stringify(formValidatorOptions)});
+    </script>`;
+  return script;
+};
+
+export { enableSubmitButton, injectDynamicEnablingScript };

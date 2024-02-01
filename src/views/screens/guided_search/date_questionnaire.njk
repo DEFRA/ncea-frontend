@@ -22,15 +22,23 @@
 
 {% block content %}
   <div class="govuk-grid-row">
-    <form method="POST" action="{{guidedDateSearchPath}}">
+    <form method="POST" id="{{ dateFormOptions.formId }}" action="{{guidedDateSearchPath}}">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
         {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
         {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
-        {{ govukButton({ text: "Show results" }) }}
+        <div class="govuk-button-group">
+          {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary" }) }}
+          {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId }) }}
+        </div>
       </div>
     </form>
   </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  {{ dynamicSubmitScript | safe }}
 {% endblock %}

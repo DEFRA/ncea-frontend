@@ -4,6 +4,7 @@ export const webRoutePaths = {
   quickSearch: '/quick_search',
   results: '/search',
   guidedDateSearch: '/date-search',
+  geographySearch: '/coordinate-search',
 };
 
 export const geoNetworkAPIPaths = {
@@ -17,4 +18,15 @@ export const sharedDataStructure = {
 
 export const formKeys = {
   dateQuestionnaire: 'date-questionnaire',
+};
+
+export const formValidatorOptions = {
+  dateQuestionnaire: {
+    formId: 'date-form',
+    submitButtonId: 'date-submit',
+  },
+  geographyQuestionnaire: {
+    formId: 'coordinate-form',
+    submitButtonId: 'coordinate-submit',
+  },
 };

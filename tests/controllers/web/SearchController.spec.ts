@@ -1,10 +1,14 @@
 'use strict';
 
 import * as errorTransformer from '../../../src/utils/transformErrors';
-import { FormFieldError } from '../../../src/interfaces/guidedSearch.interface';
+import {
+  FormFieldError,
+  IFormValidatorOptions,
+} from '../../../src/interfaces/guidedSearch.interface';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { SearchController } from '../../../src/controllers/web/SearchController';
 import {
+  formValidatorOptions,
   sharedDataStructure,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -17,6 +21,7 @@ import {
   dateQuestionnaireGovUKError,
 } from '../../data/dateQuestionnaire';
 import Joi from 'joi';
+import { injectDynamicEnablingScript } from '../../../src/utils/enableSubmitButton';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
@@ -69,6 +74,13 @@ describe('Search Results Controller > deals with handlers', () => {
     it('should render the guided data search handler', async () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
+
+      const dateFormOptions: IFormValidatorOptions = {
+        formId: formValidatorOptions.dateQuestionnaire.formId,
+        submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+      };
+      const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
+
       await SearchController.renderGuidedSearchHandler(request, response);
       expect(response.view).toHaveBeenCalledWith(
         'screens/guided_search/date_questionnaire',
@@ -76,6 +88,8 @@ describe('Search Results Controller > deals with handlers', () => {
           fromDate,
           toDate,
           guidedDateSearchPath: webRoutePaths.guidedDateSearch,
+          dateFormOptions,
+          dynamicSubmitScript,
         }
       );
     });
@@ -96,7 +110,9 @@ describe('Search Results Controller > deals with handlers', () => {
       expect(request.server.purgeSharedData).toHaveBeenCalledWith(
         sharedDataStructure.searchTerm
       );
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
+      expect(response.redirect).toHaveBeenCalledWith(
+        webRoutePaths.geographySearch
+      );
     });
   });
 
@@ -122,6 +138,13 @@ describe('Search Results Controller > deals with handlers', () => {
       jest
         .spyOn(errorTransformer, 'transformErrors')
         .mockReturnValue(dateQuestionChronologicalError as FormFieldError);
+
+      const dateFormOptions: IFormValidatorOptions = {
+        formId: formValidatorOptions.dateQuestionnaire.formId,
+        submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+      };
+      const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
+
       await SearchController.doDateSearchFailActionHandler(
         request,
         response,
@@ -133,6 +156,8 @@ describe('Search Results Controller > deals with handlers', () => {
           fromDate: dateQuestionnaireGovUKError.fromDate,
           toDate: dateQuestionnaireGovUKError.toDate,
           guidedDateSearchPath: webRoutePaths.guidedDateSearch,
+          dateFormOptions,
+          dynamicSubmitScript,
         }
       );
     });

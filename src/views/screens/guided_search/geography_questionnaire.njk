@@ -1,0 +1,48 @@
+{% extends "layout/template.njk" %}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Back",
+        href: guidedDateSearchPath
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form method="POST" id="{{ dateFormOptions.formId }}" action="{{geographySearchPath}}">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <p>govuk-grid-column-full</p>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-m">
+          When was the data or information collected?
+        </h1>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary" }) }}
+      </div>
+      <div class="govuk-grid-column-one-half govuk-button-group">
+        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary" }) }}
+        {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  {{ dynamicSubmitScript | safe }}
+{% endblock %}
