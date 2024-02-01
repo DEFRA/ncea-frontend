@@ -2,6 +2,8 @@
 
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
+{% from "partials/results_count/macro.njk" import resultsCount %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block beforeContent %}
@@ -17,26 +19,33 @@
 {% endblock %}
 
 {% block content %}
+  {{resultsCount({ count: 24 })}}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
+      <h2 class="govuk-heading-l">What geography does it cover?</h2>
+      <h1 class="govuk-heading-m">Geographical coordinate box</h1>
+      <span class="govuk-caption-m">Enter a coordinate in each field to create a geographic bounding box. This will show you the data that exists within that geographical area.</span>
+    </div>
+  </div>
   <form method="POST" id="{{ dateFormOptions.formId }}" action="{{geographySearchPath}}">
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        <p>govuk-grid-column-full</p>
-      </div>
-    </div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-m">
-          When was the data or information collected?
-        </h1>
-      </div>
-    </div>
-    <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
-        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary" }) }}
+        <div class="geography-fields__container">
+          <div class="geography-fields__field">{{ govukInput(formFields.north) }}</div>
+          <div class="geography-fields__field">{{ govukInput(formFields.south) }}</div>
+          <div class="geography-fields__field">{{ govukInput(formFields.east) }}</div>
+          <div class="geography-fields__field">{{ govukInput(formFields.west) }}</div>
+          <div class="geography-fields__field">{{ govukInput(formFields.depth) }}</div>
+        </div>
       </div>
-      <div class="govuk-grid-column-one-half govuk-button-group">
-        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary" }) }}
-        {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId }) }}
+    </div>
+    <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-2">
+      <div class="govuk-grid-column-one-half">
+        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0" }) }}
+      </div>
+      <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0">
+        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0" }) }}
+        {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId, classes: "govuk-!-margin-bottom-0" }) }}
       </div>
     </div>
   </form>

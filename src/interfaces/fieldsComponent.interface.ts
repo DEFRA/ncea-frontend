@@ -91,4 +91,8 @@ interface IDateInputComponent extends IBasicFieldOptions {
   fieldset?: IFieldsetOptions;
 }
 
-export { ITextInputComponent, IDateInputComponent };
+interface IGeographyQuestionnaireOptions {
+  [key: string]: ITextInputComponent;
+}
+
+export { ITextInputComponent, IDateInputComponent, IGeographyQuestionnaireOptions };

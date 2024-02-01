@@ -9,6 +9,7 @@ import { IDateSearchPayload, IQuickSearchPayload } from '../../interfaces/search
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { generateDateString } from '../../utils/generateDateString';
+import { geographyQuestionnaireOptions } from '../../data/geographyQuestionnaireOptions';
 import { getSearchResults } from '../../services/handlers/searchApi';
 import { injectDynamicEnablingScript } from '../../utils/enableSubmitButton';
 import { transformErrors } from '../../utils/transformErrors';
@@ -121,6 +122,7 @@ const SearchController = {
       guidedDateSearchPath,
       geographySearchPath,
       dateFormOptions,
+      formFields: geographyQuestionnaireOptions,
       dynamicSubmitScript,
     });
   },
