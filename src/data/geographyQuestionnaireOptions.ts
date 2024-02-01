@@ -1,6 +1,6 @@
-import { IGeographyQuestionnaireOptions } from '../interfaces/fieldsComponent.interface';
+import { IFormFieldOptions } from '../interfaces/fieldsComponent.interface';
 
-const geographyQuestionnaireOptions: IGeographyQuestionnaireOptions = {
+const geographyQuestionnaireOptions: IFormFieldOptions = {
   north: {
     id: 'north',
     name: 'north',
@@ -13,6 +13,7 @@ const geographyQuestionnaireOptions: IGeographyQuestionnaireOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
+    type: 'number',
   },
   south: {
     id: 'south',
@@ -26,6 +27,7 @@ const geographyQuestionnaireOptions: IGeographyQuestionnaireOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
+    type: 'number',
   },
   east: {
     id: 'east',
@@ -39,6 +41,7 @@ const geographyQuestionnaireOptions: IGeographyQuestionnaireOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
+    type: 'number',
   },
   west: {
     id: 'west',
@@ -52,6 +55,7 @@ const geographyQuestionnaireOptions: IGeographyQuestionnaireOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
+    type: 'number',
   },
   depth: {
     id: 'depth',
@@ -65,6 +69,7 @@ const geographyQuestionnaireOptions: IGeographyQuestionnaireOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
+    type: 'number',
   },
 };
 

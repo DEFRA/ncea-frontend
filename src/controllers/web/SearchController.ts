@@ -12,9 +12,9 @@ import { generateDateString } from '../../utils/generateDateString';
 import { geographyQuestionnaireOptions } from '../../data/geographyQuestionnaireOptions';
 import { getSearchResults } from '../../services/handlers/searchApi';
 import { injectDynamicEnablingScript } from '../../utils/enableSubmitButton';
-import { transformErrors } from '../../utils/transformErrors';
 import { formKeys, formValidatorOptions, sharedDataStructure, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
+import { transformErrors, transformTextInputError } from '../../utils/transformErrors';
 
 const SearchController = {
   doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
@@ -112,6 +112,7 @@ const SearchController = {
       .takeover();
   },
   renderGeographySearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const formFields = { ...geographyQuestionnaireOptions };
     const { geographySearch: geographySearchPath, guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
     const dateFormOptions: IFormValidatorOptions = {
       formId: formValidatorOptions.dateQuestionnaire.formId,
@@ -122,9 +123,35 @@ const SearchController = {
       guidedDateSearchPath,
       geographySearchPath,
       dateFormOptions,
-      formFields: geographyQuestionnaireOptions,
+      formFields,
       dynamicSubmitScript,
     });
+  },
+  doGeographySearchFailActionHandler: async (
+    request: Request,
+    response: ResponseToolkit,
+    error: Joi.ValidationError,
+  ): Promise<ResponseObject> => {
+    const finalFormFields = await transformTextInputError({ ...geographyQuestionnaireOptions }, error);
+    const { geographySearch: geographySearchPath, guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const dateFormOptions: IFormValidatorOptions = {
+      formId: formValidatorOptions.dateQuestionnaire.formId,
+      submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+    };
+    const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
+    return response
+      .view('screens/guided_search/geography_questionnaire', {
+        guidedDateSearchPath,
+        geographySearchPath,
+        dateFormOptions,
+        formFields: finalFormFields,
+        dynamicSubmitScript,
+      })
+      .code(400)
+      .takeover();
+  },
+  doGeographySearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    return response.redirect(webRoutePaths.geographySearch);
   },
 };
 

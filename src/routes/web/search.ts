@@ -2,6 +2,7 @@
 
 import { SearchController } from '../../controllers/web/SearchController';
 import { dateSchema } from '../../schema/questionnaire.schema';
+import { geographyQuestionnaireSchema } from '../../schema/geographyQuestionnaire.schema';
 import { webRoutePaths } from '../../utils/constants';
 
 module.exports = [
@@ -35,5 +36,16 @@ module.exports = [
     method: 'GET',
     path: webRoutePaths.geographySearch,
     handler: SearchController.renderGeographySearchHandler,
+  },
+  {
+    method: 'POST',
+    path: webRoutePaths.geographySearch,
+    handler: SearchController.doGeographySearchHandler,
+    options: {
+      validate: {
+        payload: geographyQuestionnaireSchema,
+        failAction: SearchController.doGeographySearchFailActionHandler,
+      },
+    },
   },
 ];

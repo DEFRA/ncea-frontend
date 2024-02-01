@@ -5,3 +5,10 @@
     gap: 20px;
   }
 }
+
+.geography-buttons {
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

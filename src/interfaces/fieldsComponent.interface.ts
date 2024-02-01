@@ -83,6 +83,7 @@ interface ITextInputComponent extends IBasicFieldOptions {
   pattern?: string;
   autocomplete?: string;
   value?: string;
+  type?: string;
 }
 
 interface IDateInputComponent extends IBasicFieldOptions {
@@ -91,8 +92,8 @@ interface IDateInputComponent extends IBasicFieldOptions {
   fieldset?: IFieldsetOptions;
 }
 
-interface IGeographyQuestionnaireOptions {
+interface IFormFieldOptions {
   [key: string]: ITextInputComponent;
 }
 
-export { ITextInputComponent, IDateInputComponent, IGeographyQuestionnaireOptions };
+export { ITextInputComponent, IDateInputComponent, IFormFieldOptions };

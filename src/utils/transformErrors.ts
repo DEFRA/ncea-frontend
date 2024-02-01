@@ -1,11 +1,49 @@
 import Joi from 'joi';
 import { formKeys } from './constants';
 import { FormFieldError, GovUKItems } from '../interfaces/guidedSearch.interface';
+import { IFormFieldOptions, ITextInputComponent } from '../interfaces/fieldsComponent.interface';
 
-export const transformErrors = (error: Joi.ValidationError, formName: string): FormFieldError | undefined => {
+const transformErrors = (error: Joi.ValidationError, formName: string): FormFieldError | undefined => {
   if (formName === formKeys.dateQuestionnaire) {
     return dateErrorHandler(error);
   }
+};
+
+const transformTextInputError = async (
+  formOptions: IFormFieldOptions,
+  error: Joi.ValidationError,
+): Promise<IFormFieldOptions> => {
+  const newFormOptions = { ...formOptions };
+  Object.keys(error._original).forEach((field) => {
+    let fieldOptions: ITextInputComponent = { ...newFormOptions[field] };
+    fieldOptions = {
+      ...fieldOptions,
+      value: error._original[field],
+    };
+    let errorMessage = '';
+    const hasError = error.details.filter((item) => {
+      if (item?.context?.errors) {
+        return item.context.errors.includes(field);
+      } else {
+        return item.path.includes(field);
+      }
+    });
+
+    if (hasError && hasError.length > 0) {
+      errorMessage = `${hasError[0].message}.`;
+      const updatedClasses = fieldOptions.classes ? `${fieldOptions.classes} govuk-input--error` : 'govuk-input--error';
+      fieldOptions = {
+        ...fieldOptions,
+        classes: updatedClasses,
+        errorMessage: {
+          ...fieldOptions.errorMessage,
+          text: errorMessage,
+        },
+      };
+    }
+    newFormOptions[field] = { ...fieldOptions };
+  });
+  return newFormOptions;
 };
 
 const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefined => {
@@ -51,3 +89,5 @@ const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefine
     toItems,
   };
 };
+
+export { transformErrors, transformTextInputError };

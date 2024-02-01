@@ -418,7 +418,6 @@ describe('Geography Coordinate schema validation', () => {
         abortEarly: false,
       });
       expect(results.error).not.toBe(undefined);
-      console.log(results.error?.details);
       const errorMessages = results.error?.details.map(
         (detail) => detail.message
       );

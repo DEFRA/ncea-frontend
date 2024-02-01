@@ -7774,6 +7774,11 @@
   gap: 20px;
 }
 
+.geography-buttons__right {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .search-result__item {
   display: flex;
   flex-direction: column;
