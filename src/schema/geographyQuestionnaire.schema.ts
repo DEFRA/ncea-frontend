@@ -5,7 +5,7 @@ const geographyQuestionnaireSchema = Joi.object({
   north: Joi.number().optional().allow('').messages({
     'number.base': 'This is not a valid input',
   }),
-  south: Joi.number().optional().allow('').allow('').messages({
+  south: Joi.number().optional().allow('').messages({
     'number.base': 'This is not a valid input',
   }),
   west: Joi.number().optional().allow('').messages({
@@ -22,23 +22,17 @@ const geographyQuestionnaireSchema = Joi.object({
   .and('north', 'south', 'east', 'west')
   .custom((value, helpers) => {
     const { north, south, east, west } = value;
+    const coordinateFiledKeys: string[] = ['north', 'south', 'east', 'west'];
 
-    const hasSomeCoordinates: boolean =
-      !isEmpty(north) || !isEmpty(south) || !isEmpty(east) || !isEmpty(west);
-
-    const missingCoordinate: string[] = [];
+    const hasSomeCoordinates: boolean = !isEmpty(north) || !isEmpty(south) || !isEmpty(east) || !isEmpty(west);
 
     if (hasSomeCoordinates) {
-      if (isEmpty(north)) missingCoordinate.push('north');
-      if (isEmpty(south)) missingCoordinate.push('south');
-      if (isEmpty(east)) missingCoordinate.push('east');
-      if (isEmpty(west)) missingCoordinate.push('west');
-    }
-
-    if (missingCoordinate.length > 0) {
-      return helpers.error('coordinates.all_required', {
-        errors: missingCoordinate,
-      });
+      const missingCoordinates = coordinateFiledKeys.filter((point) => isEmpty(value[point]));
+      if (missingCoordinates.length > 0) {
+        return helpers.error('coordinates.all_required', {
+          errors: missingCoordinates,
+        });
+      }
     }
 
     return value;

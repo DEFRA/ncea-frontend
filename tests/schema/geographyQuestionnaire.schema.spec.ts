@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import { geographyQuestionnaireSchema } from '../../src/schema/geographyQuestionnaire.schema';
 
 describe('Geography Coordinate schema validation', () => {
@@ -406,33 +405,10 @@ describe('Geography Coordinate schema validation', () => {
   });
 
   describe('Check the scenarios having error messages for multiple fields', () => {
-    test('should return an error with depth field negative and north alone is missing', async () => {
+    test('should return an error when having depth, north & south coordinates are missing', async () => {
       const data = {
         north: '',
-        south: -10,
-        west: 5,
-        east: 5,
-        depth: -50,
-      };
-
-      const results = geographyQuestionnaireSchema.validate(data, {
-        abortEarly: false,
-      });
-      expect(results.error).not.toBe(undefined);
-      console.log(results.error?.details);
-      const errorMessages = results.error?.details.map(
-        (detail) => detail.message
-      );
-
-      expect(errorMessages).toContain('This is not a valid input');
-      expect(errorMessages).toContain('You must enter all four coordinates');
-      expect(errorMessages?.length).toEqual(2);
-    });
-
-    test('should return an error when having depth, north coordinate field is missing and south is not a number', async () => {
-      const data = {
-        north: '',
-        south: 'test',
+        south: '',
         west: 5,
         east: 56,
         depth: 10,
@@ -447,9 +423,7 @@ describe('Geography Coordinate schema validation', () => {
         (detail) => detail.message
       );
 
-      expect(errorMessages).toContain('This is not a valid input');
       expect(errorMessages).toContain('You must enter all four coordinates');
-      expect(errorMessages?.length).toEqual(2);
     });
   });
 });

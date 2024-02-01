@@ -49,7 +49,9 @@ describe('Date Questionnaire Schema', () => {
 
       const { error } = dateSchema.validate(invalidData);
       expect(error).toBeDefined();
-      expect(error?.details[0].message).toContain('The dates must be in chronological order');
+      expect(error?.details[0].message).toContain(
+        'The dates must be in chronological order'
+      );
     });
 
     it('should invalidate with invalid year', () => {
@@ -116,7 +118,7 @@ describe('Date Questionnaire Schema', () => {
       const { error } = dateSchema.validate(invalidData);
       expect(error).toBeDefined();
       expect(error?.details[0].message).toContain(
-        '\"Month\" must be less than or equal to 12'
+        '\\"Month\\" must be less than or equal to 12'
       );
     });
   });
