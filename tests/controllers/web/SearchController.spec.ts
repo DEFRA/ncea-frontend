@@ -22,6 +22,9 @@ import {
 } from '../../data/dateQuestionnaire';
 import Joi from 'joi';
 import { injectDynamicEnablingScript } from '../../../src/utils/enableSubmitButton';
+import { geographyQuestionnaireOptions } from '../../../src/data/geographyQuestionnaireOptions';
+import { geographyFormOptionWithDepthError } from '../../data/geographyQuestionnaire';
+import { IFormFieldOptions } from '../../../src/interfaces/fieldsComponent.interface';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
@@ -70,7 +73,7 @@ describe('Search Results Controller > deals with handlers', () => {
     });
   });
 
-  describe('Deals with render guided date search handler', () => {
+  describe('Deals with guided date search handler', () => {
     it('should render the guided data search handler', async () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -93,10 +96,8 @@ describe('Search Results Controller > deals with handlers', () => {
         }
       );
     });
-  });
 
-  describe('Deals with guided date search consume API handler', () => {
-    it('should update shared data and redirect to results', async () => {
+    it('should update shared data, consume API and redirect to next route', async () => {
       const request: Request = {
         payload: { 'from-date-year': 2022, 'to-date-year': 2023 },
         server: { updateSharedData: jest.fn(), purgeSharedData: jest.fn() },
@@ -114,10 +115,8 @@ describe('Search Results Controller > deals with handlers', () => {
         webRoutePaths.geographySearch
       );
     });
-  });
 
-  describe('Deals with the guided date search fail action handler', () => {
-    it('should render the date questionnaire template with error messages', async () => {
+    it('should validate the date questionnaire form', async () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = {
         view: jest.fn().mockReturnValue({
@@ -157,6 +156,96 @@ describe('Search Results Controller > deals with handlers', () => {
           toDate: dateQuestionnaireGovUKError.toDate,
           guidedDateSearchPath: webRoutePaths.guidedDateSearch,
           dateFormOptions,
+          dynamicSubmitScript,
+        }
+      );
+    });
+  });
+
+  describe('Deals with guided geography search handler', () => {
+    it('should render the guided geography search handler', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+
+      const formFields = { ...geographyQuestionnaireOptions };
+      const {
+        geographySearch: geographySearchPath,
+        guidedDateSearch: guidedDateSearchPath,
+      } = webRoutePaths;
+      const dateFormOptions: IFormValidatorOptions = {
+        formId: formValidatorOptions.dateQuestionnaire.formId,
+        submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+      };
+      const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
+
+      await SearchController.renderGeographySearchHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'screens/guided_search/geography_questionnaire',
+        {
+          guidedDateSearchPath,
+          geographySearchPath,
+          dateFormOptions,
+          formFields,
+          dynamicSubmitScript,
+        }
+      );
+    });
+
+    it('should update shared data, consume API and redirect to next route', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+      await SearchController.doGeographySearchHandler(request, response);
+      expect(response.redirect).toHaveBeenCalledWith(
+        webRoutePaths.geographySearch
+      );
+    });
+
+    it('should validate the geography questionnaire form', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = {
+        view: jest.fn().mockReturnValue({
+          code: jest.fn().mockReturnThis(),
+          takeover: jest.fn(),
+        }),
+      } as any;
+      const error = {
+        details: [
+          {
+            path: ['depth'],
+            type: 'number.positive',
+            message: 'This is not a valid input',
+            context: { errors: ['depth'] },
+          },
+        ],
+      } as unknown as Joi.ValidationError;
+      jest
+        .spyOn(errorTransformer, 'transformTextInputError')
+        .mockResolvedValue(
+          geographyFormOptionWithDepthError as IFormFieldOptions
+        );
+
+      const {
+        geographySearch: geographySearchPath,
+        guidedDateSearch: guidedDateSearchPath,
+      } = webRoutePaths;
+      const dateFormOptions: IFormValidatorOptions = {
+        formId: formValidatorOptions.dateQuestionnaire.formId,
+        submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+      };
+      const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
+
+      await SearchController.doGeographySearchFailActionHandler(
+        request,
+        response,
+        error
+      );
+      expect(response.view).toHaveBeenCalledWith(
+        'screens/guided_search/geography_questionnaire',
+        {
+          guidedDateSearchPath,
+          geographySearchPath,
+          dateFormOptions,
+          formFields: geographyFormOptionWithDepthError,
           dynamicSubmitScript,
         }
       );
