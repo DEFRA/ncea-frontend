@@ -368,7 +368,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
       /* istanbul ignore next */
       cov_r6mjnxpqp().f[2]++;
       cov_r6mjnxpqp().s[8]++;
-      return field.value.trim() !== '';
+      return field?.value.trim() !== '';
     }));
     /* istanbul ignore next */
     cov_r6mjnxpqp().s[9]++;
