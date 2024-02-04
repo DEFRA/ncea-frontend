@@ -1,9 +1,9 @@
 import MockAdapter from 'axios-mock-adapter';
-import { geoNetworkClient } from '../../src/config/geoNetworkClient';
-import { geoNetworkAPIPaths } from '../../src/utils/constants';
+import { elasticSearchClient } from '../../src/config/elasticSearchClient';
+import { elasticSearchAPIPaths } from '../../src/utils/constants';
 import { Config } from '../../src/config/environmentConfig';
 
-const mock = new MockAdapter(geoNetworkClient);
+const mock = new MockAdapter(elasticSearchClient);
 
 const mockConfig = {
   headers: {
@@ -19,7 +19,7 @@ const mockError = {
 };
 const mockErrorInterceptor = jest.fn((error) => Promise.reject(error));
 const mockRequestInterceptor = jest.fn((config) => config);
-geoNetworkClient.interceptors.request.use(
+elasticSearchClient.interceptors.request.use(
   mockRequestInterceptor,
   mockErrorInterceptor
 );
@@ -31,10 +31,10 @@ describe('Geo Network instance configuration', () => {
 
   describe('Geo Network instance creation', () => {
     it('should create Geo Network instance with correct base url and headers', async () => {
-      expect(geoNetworkClient.defaults.baseURL).toBe(
-        Config.geoNetworkSearchAPI
+      expect(elasticSearchClient.defaults.baseURL).toBe(
+        Config.elasticSearchAPI
       );
-      expect(geoNetworkClient.defaults.headers.Accept).toEqual(
+      expect(elasticSearchClient.defaults.headers.Accept).toEqual(
         'application/json'
       );
     });
@@ -44,11 +44,11 @@ describe('Geo Network instance configuration', () => {
     it('should handle successful responses correctly', async () => {
       const responseData = { message: 'Success' };
       mock
-        .onPost(geoNetworkAPIPaths.elasticSearch, {}, mockConfig.headers)
+        .onPost(elasticSearchAPIPaths.searchPath, {}, mockConfig.headers)
         .reply(200, responseData);
 
-      const response = await geoNetworkClient.post(
-        geoNetworkAPIPaths.elasticSearch,
+      const response = await elasticSearchClient.post(
+        elasticSearchAPIPaths.searchPath,
         {},
         mockConfig
       );
@@ -62,7 +62,7 @@ describe('Geo Network instance configuration', () => {
       mock.onGet('fake-url').reply(404, { message: 'Mock error' });
 
       try {
-        await geoNetworkClient.get('/fake-url');
+        await elasticSearchClient.get('/fake-url');
         fail('Promise should have been rejected');
       } catch (error: any) {
         await expect(error.response?.status).toBe(404);

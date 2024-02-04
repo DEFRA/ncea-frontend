@@ -1,5 +1,5 @@
 /**
- * geoNetworkClient
+ * elasticSearchClient
  *
  * This module provides an Axios client instance configured with the necessary settings to make HTTP requests to a Geo Network API.
  * It includes request and response interceptors for modifying requests and handling responses.
@@ -11,8 +11,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 /**
  * The Axios client instance for making HTTP requests to the Geo Network API.
  */
-const geoNetworkClient = axios.create({
-  baseURL: Config.geoNetworkSearchAPI,
+const elasticSearchClient = axios.create({
+  baseURL: Config.elasticSearchAPI,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -27,13 +27,13 @@ const geoNetworkClient = axios.create({
  * @param config - The request configuration object.
  * @returns The modified request configuration.
  */
-geoNetworkClient.interceptors.request.use(
+elasticSearchClient.interceptors.request.use(
   (config) => {
     // Modify config before sending the request
     // config.headers['Authorization'] = 'Bearer YOUR_ACCESS_TOKEN';
     return config;
   },
-  (error: AxiosError) => Promise.reject(error),
+  (error: AxiosError) => Promise.reject(error)
 );
 
 /**
@@ -44,7 +44,7 @@ geoNetworkClient.interceptors.request.use(
  * @param response - The response object received from the server.
  * @returns The response object.
  */
-geoNetworkClient.interceptors.response.use(
+elasticSearchClient.interceptors.response.use(
   (response: AxiosResponse) => {
     // if (check config condition) {
     // Trigger a toast/notification to handle message
@@ -58,7 +58,7 @@ geoNetworkClient.interceptors.response.use(
       // handle when the user token expires
     }
     return Promise.reject(error);
-  },
+  }
 );
 
-export { geoNetworkClient };
+export { elasticSearchClient };

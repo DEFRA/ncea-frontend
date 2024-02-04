@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import { environmentSchema } from '../../src/schema/environmentConfig.schema';
 
 describe('Environment Configuration Schema', () => {
@@ -9,7 +8,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.env).toEqual('local');
       expect(value.appInsightsKey).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
-      expect(value.geoNetworkSearchAPI).toEqual('');
+      expect(value.elasticSearchAPI).toEqual('');
     });
 
     it('should keep provided values for fields if available', () => {
@@ -23,7 +22,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.env).toEqual('qa');
       expect(value.appInsightsKey).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
-      expect(value.geoNetworkSearchAPI).toEqual('');
+      expect(value.elasticSearchAPI).toEqual('');
     });
   });
 
@@ -34,7 +33,7 @@ describe('Environment Configuration Schema', () => {
         env: 'development',
         appInsightsKey: 'your-key',
         azureKeyVaultURL: 'https://example-vault.vault.azure.net',
-        geoNetworkSearchAPI: 'https://example.com/api',
+        elasticSearchAPI: 'https://example.com/api',
       };
 
       const { error, value } = environmentSchema.validate(validConfig);
@@ -84,13 +83,13 @@ describe('Environment Configuration Schema', () => {
       const invalidConfig = {
         port: '3000',
         env: 'local',
-        geoNetworkSearchAPI: 'url',
+        elasticSearchAPI: 'url',
       };
 
       const { error } = environmentSchema.validate(invalidConfig);
       expect(error).toBeDefined();
       expect(error?.details[0].message).toContain(
-        'GeoNetwork Search API must be a valid URL or an empty string'
+        'Elasticsearch API must be a valid URL or an empty string'
       );
     });
   });

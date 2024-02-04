@@ -17,7 +17,7 @@ const config: EnvironmentConfig = {
   env: process.env.NODE_ENV,
   appInsightsKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
   azureKeyVaultURL: process.env.AZURE_KEYVAULT_URL,
-  geoNetworkSearchAPI: process.env.GEONETWORK_SEARCH_API,
+  elasticSearchAPI: process.env.ELASTICSEARCH_API,
 };
 
 const { error, value } = environmentSchema.validate(config);
