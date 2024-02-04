@@ -26,6 +26,8 @@ if (error) {
   throw new Error(`The environment config is invalid: ${error.message}`);
 }
 
-const Config = value as EnvironmentConfig;
+const environmentConfig = value as EnvironmentConfig;
 
-export { Config };
+environmentConfig.isLocal = value.env === 'local';
+
+export { environmentConfig };

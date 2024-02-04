@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import { elasticSearchClient } from '../../src/config/elasticSearchClient';
 import { elasticSearchAPIPaths } from '../../src/utils/constants';
-import { Config } from '../../src/config/environmentConfig';
+import { environmentConfig } from '../../src/config/environmentConfig';
 
 const mock = new MockAdapter(elasticSearchClient);
 
@@ -32,7 +32,7 @@ describe('Geo Network instance configuration', () => {
   describe('Geo Network instance creation', () => {
     it('should create Geo Network instance with correct base url and headers', async () => {
       expect(elasticSearchClient.defaults.baseURL).toBe(
-        Config.elasticSearchAPI
+        environmentConfig.elasticSearchAPI
       );
       expect(elasticSearchClient.defaults.headers.Accept).toEqual(
         'application/json'

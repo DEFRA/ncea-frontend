@@ -7,7 +7,7 @@ const routes = [].concat(
   require('../../routes/web/assets'),
   require('../../routes/web/home'),
   require('../../routes/web/search'),
-  require('../../routes/api/api')
+  require('../../routes/api/api'),
 );
 
 module.exports = {

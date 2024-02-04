@@ -7,8 +7,8 @@ export const webRoutePaths = {
 };
 
 export const elasticSearchAPIPaths = {
-  searchPath: '/_search',
-  countPath: '/_count',
+  searchPath: '_search',
+  countPath: '_count',
 };
 
 export const sharedDataStructure = {

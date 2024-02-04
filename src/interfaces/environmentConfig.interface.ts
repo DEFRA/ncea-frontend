@@ -4,4 +4,5 @@ export interface EnvironmentConfig {
   appInsightsKey: string | undefined;
   azureKeyVaultURL: string | undefined;
   elasticSearchAPI: string | undefined;
+  isLocal?: boolean;
 }

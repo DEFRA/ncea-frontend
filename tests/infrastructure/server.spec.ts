@@ -19,7 +19,7 @@ describe('Server initialization', () => {
     const { initializeServer } = require('../../src/infrastructure/server');
 
     jest.mock('../../src/config/environmentConfig', () => ({
-      Config: {
+      environmentConfig: {
         env: 'development',
         port: 3000,
       },

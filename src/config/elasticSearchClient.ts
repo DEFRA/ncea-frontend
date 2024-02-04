@@ -5,14 +5,14 @@
  * It includes request and response interceptors for modifying requests and handling responses.
  */
 
-import { Config } from './environmentConfig';
+import { environmentConfig } from './environmentConfig';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 /**
  * The Axios client instance for making HTTP requests to the Geo Network API.
  */
 const elasticSearchClient = axios.create({
-  baseURL: Config.elasticSearchAPI,
+  baseURL: environmentConfig.elasticSearchAPI,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -31,9 +31,12 @@ elasticSearchClient.interceptors.request.use(
   (config) => {
     // Modify config before sending the request
     // config.headers['Authorization'] = 'Bearer YOUR_ACCESS_TOKEN';
+    if (environmentConfig.isLocal && (config.method === 'post' || config.method === 'POST')) {
+      config.method = 'get';
+    }
     return config;
   },
-  (error: AxiosError) => Promise.reject(error)
+  (error: AxiosError) => Promise.reject(error),
 );
 
 /**
@@ -58,7 +61,7 @@ elasticSearchClient.interceptors.response.use(
       // handle when the user token expires
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export { elasticSearchClient };
