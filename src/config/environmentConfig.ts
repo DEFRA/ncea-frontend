@@ -18,6 +18,7 @@ const config: EnvironmentConfig = {
   appInsightsKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
   azureKeyVaultURL: process.env.AZURE_KEYVAULT_URL,
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
+  isLocal: process.env.NODE_ENV === 'local',
 };
 
 const { error, value } = environmentSchema.validate(config);
@@ -27,7 +28,5 @@ if (error) {
 }
 
 const environmentConfig = value as EnvironmentConfig;
-
-environmentConfig.isLocal = value.env === 'local';
 
 export { environmentConfig };

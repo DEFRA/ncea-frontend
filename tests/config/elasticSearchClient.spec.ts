@@ -24,13 +24,13 @@ elasticSearchClient.interceptors.request.use(
   mockErrorInterceptor
 );
 
-describe('Geo Network instance configuration', () => {
+describe('Elasticsearch instance configuration', () => {
   beforeEach(() => {
     mock.reset();
   });
 
-  describe('Geo Network instance creation', () => {
-    it('should create Geo Network instance with correct base url and headers', async () => {
+  describe('Elasticsearch instance creation', () => {
+    it('should create Elasticsearch instance with correct base url and headers', async () => {
       expect(elasticSearchClient.defaults.baseURL).toBe(
         environmentConfig.elasticSearchAPI
       );
@@ -40,7 +40,7 @@ describe('Geo Network instance configuration', () => {
     });
   });
 
-  describe('Geo Network request and response interceptors', () => {
+  describe('Elasticsearch request and response interceptors', () => {
     it('should handle successful responses correctly', async () => {
       const responseData = { message: 'Success' };
       mock

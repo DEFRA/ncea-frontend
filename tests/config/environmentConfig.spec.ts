@@ -50,7 +50,7 @@ describe('Environment environmentConfig', () => {
       } = require('../../src/config/environmentConfig');
       expect(environmentConfig).toBeDefined();
       expect(typeof environmentConfig).toBe('object');
-      expect(Object.keys(environmentConfig).length).toBe(5);
+      expect(Object.keys(environmentConfig).length).toBe(6);
     });
 
     it('should validate and export the configuration object', () => {
@@ -59,7 +59,7 @@ describe('Environment environmentConfig', () => {
         NODE_ENV: 'qa',
         APPINSIGHTS_INSTRUMENTATIONKEY: 'abc123',
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
-        GEONETWORK_SEARCH_API: 'https://geonetwork-api.com',
+        ELASTICSEARCH_API: 'https://elasticsearch-api.com',
       };
       process.env = { ...mockConfig };
 
@@ -70,7 +70,8 @@ describe('Environment environmentConfig', () => {
           .default(envs[0]),
         appInsightsKey: Joi.string().allow('').default(''),
         azureKeyVaultURL: Joi.string().allow('').default(''),
-        geoNetworkSearchAPI: Joi.string().allow('').default(''),
+        elasticSearchAPI: Joi.string().allow('').default(''),
+        isLocal: Joi.boolean().valid(true, false).default(false),
       });
 
       const {

@@ -9,6 +9,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.appInsightsKey).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
+      expect(value.isLocal).toEqual(false);
     });
 
     it('should keep provided values for fields if available', () => {
@@ -23,6 +24,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.appInsightsKey).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
+      expect(value.isLocal).toEqual(false);
     });
   });
 
@@ -34,6 +36,7 @@ describe('Environment Configuration Schema', () => {
         appInsightsKey: 'your-key',
         azureKeyVaultURL: 'https://example-vault.vault.azure.net',
         elasticSearchAPI: 'https://example.com/api',
+        isLocal: false,
       };
 
       const { error, value } = environmentSchema.validate(validConfig);
@@ -79,7 +82,7 @@ describe('Environment Configuration Schema', () => {
       );
     });
 
-    it('should invalidate a configuration with geo network search api as string instead of URL', () => {
+    it('should invalidate a configuration with elasticsearch api as string instead of URL', () => {
       const invalidConfig = {
         port: '3000',
         env: 'local',
@@ -91,6 +94,18 @@ describe('Environment Configuration Schema', () => {
       expect(error?.details[0].message).toContain(
         'Elasticsearch API must be a valid URL or an empty string'
       );
+    });
+
+    it('should invalidate a configuration with isLocal as string instead of boolea', () => {
+      const invalidConfig = {
+        port: '3000',
+        env: 'local',
+        isLocal: 'invalid',
+      };
+
+      const { error } = environmentSchema.validate(invalidConfig);
+      expect(error).toBeDefined();
+      expect(error?.details[0].message).toContain('Is Local is not valid');
     });
   });
 });
