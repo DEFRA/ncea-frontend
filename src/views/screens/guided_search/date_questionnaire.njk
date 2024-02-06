@@ -10,7 +10,10 @@
     items: [
       {
         text: "Home",
-        href: homePageUrl
+        href: homePageUrl,
+        attributes: {
+          onclick: "resetStorageData()"
+        }
       },
       {
         text: "Questionnaire search",
@@ -22,7 +25,7 @@
 
 {% block content %}
   <div class="govuk-grid-row">
-    <form method="POST" action="{{guidedDateSearchPath}}">
+    <form method="POST" action="{{guidedDateSearchPath}}" id="date-form">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
@@ -36,9 +39,22 @@
         </h2>
         {{ govukDateInput(toDate) }}
         {{ govukButton({
-            text: "Show results"
+            text: "Show results",
+            attributes: {
+              onclick: "storeFieldsData({ formId: 'date-form' })"
+            }
         }) }}
       </div>
     </form>
   </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      readStorageData({formId: 'date-form'});
+    });
+  </script>
 {% endblock %}

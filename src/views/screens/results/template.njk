@@ -10,7 +10,10 @@
     items: [
       {
         text: "Home",
-        href: homePageUrl
+        href: homePageUrl,
+        attributes: {
+          onclick: "resetStorageData()"
+        }
       },
       {
         text: "Search results",
@@ -91,4 +94,9 @@
     </div>
   </div>
 
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
 {% endblock %}
