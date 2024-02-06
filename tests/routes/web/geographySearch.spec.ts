@@ -150,7 +150,7 @@ describe('Guided Search - Geography Questionnaire Screen', () => {
 
     describe('Coordinate questionnaire form', () => {
       it('should render the form', async () => {
-        const formElement = document?.querySelector('#date-form');
+        const formElement = document?.querySelector('#coordinate-form');
         expect(formElement).toBeTruthy();
         expect(formElement?.tagName.toLowerCase()).toBe('form');
         expect(formElement?.getAttribute('action')).toBe(
@@ -184,7 +184,7 @@ describe('Guided Search - Geography Questionnaire Screen', () => {
     describe('Coordinate questionnaire buttons', () => {
       it('should renders 3 buttons', () => {
         const buttons = document?.querySelectorAll(
-          'button[data-module="govuk-button"]'
+          'button[data-module="govuk-button"], a[data-module="govuk-button"]'
         );
         expect(buttons).toBeTruthy();
         expect(buttons.length).toBe(3);
@@ -197,7 +197,9 @@ describe('Guided Search - Geography Questionnaire Screen', () => {
       });
 
       it('should renders 1 submit buttons', () => {
-        const buttons = document?.querySelectorAll('button[id="date-submit"]');
+        const buttons = document?.querySelectorAll(
+          'button[id="coordinate-submit"]'
+        );
         expect(buttons).toBeTruthy();
         expect(buttons.length).toBe(1);
       });
@@ -221,7 +223,7 @@ describe('Guided Search - Geography Questionnaire Screen', () => {
         expect(buttonBlock?.childElementCount).toBe(1);
         const childElements = buttonBlock?.children;
         Array.from(childElements!).forEach((childElement) => {
-          expect(childElement.tagName.toLowerCase()).toEqual('button');
+          expect(childElement.tagName.toLowerCase()).toEqual('a');
         });
       });
 

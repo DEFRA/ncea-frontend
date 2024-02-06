@@ -94,7 +94,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
       <span class="govuk-caption-m">Enter a coordinate in each field to create a geographic bounding box. This will show you the data that exists within that geographical area.</span>
     </div>
   </div>
-  <form method="POST" id="date-form" action="/coordinate-search">
+  <form method="POST" id="coordinate-form" action="/coordinate-search">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
         <div class="geography-fields__container">
@@ -195,9 +195,9 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">
+<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">
   Previous question
-</button>
+</a>
 
       </div>
       <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
@@ -219,7 +219,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" id="date-submit">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" onclick="storeFieldsData({formId: &#39;coordinate-form&#39;})" id="coordinate-submit">
   Next question
 </button>
 
@@ -317,6 +317,12 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
     initAll()
   </script>
 
+  <script src="/assets/scripts/browserStorage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      readStorageData({formId: "coordinate-form"});
+    });
+  </script>
   <script>
       (async formValidatorOptions => {
   /* istanbul ignore next */
@@ -358,7 +364,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   /* istanbul ignore next */
   cov_r6mjnxpqp().s[12]++;
   checkFields();
-})({"formId":"date-form","submitButtonId":"date-submit"});
+})({"formId":"coordinate-form","submitButtonId":"coordinate-submit"});
     </script>
 
   </body>

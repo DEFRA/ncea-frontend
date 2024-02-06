@@ -70,7 +70,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   
     
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/">Home</a>
+      <a class="govuk-breadcrumbs__link" href="/" onclick="resetStorageData()">Home</a>
     </li>
     
   
@@ -88,11 +88,12 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
           
   <div class="govuk-grid-row">
     <form method="POST" id="date-form" action="/date-search">
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-m">
+      <form method="POST" action="/date-search" id="date-form">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
-        
+          
 
 <h2 class="govuk-heading-m">
   From
@@ -160,7 +161,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
 </div>
 
-        
+          
 
 <h2 class="govuk-heading-m">
   To
@@ -228,32 +229,32 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
 </div>
 
-        <div class="govuk-button-group">
-          
+          <div class="govuk-button-group">
+            
   
 
   
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/coordinate-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" onclick="storeFieldsData({formId: &#39;date-form&#39;, isSkipped: true})">
   Skip question
-</button>
+</a>
 
-          
+            
   
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" id="date-submit">
+<button type="submit" class="govuk-button" data-module="govuk-button" onclick="storeFieldsData({formId: &#39;date-form&#39;})" id="date-submit">
   Next question
 </button>
 
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-
+      </form>
+    </div>
+  
         </main>
       </div>
     
@@ -336,7 +337,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
 
     
-  
+    
   
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
@@ -344,7 +345,13 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     initAll()
   </script>
 
-  <script>
+    <script src="/assets/scripts/browserStorage.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        readStorageData({formId: "date-form"});
+      });
+    </script>
+    <script>
       (async formValidatorOptions => {
   /* istanbul ignore next */
   cov_r6mjnxpqp().f[0]++;
@@ -387,7 +394,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   checkFields();
 })({"formId":"date-form","submitButtonId":"date-submit"});
     </script>
-
+  
   </body>
 </html>
 "
