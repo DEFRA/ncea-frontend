@@ -3,4 +3,6 @@ build
 coverage
 src/views/**
 src/infrastructure/log_files/**
+src/services/*.json
 src/assets/sass/**
+public/scripts/**

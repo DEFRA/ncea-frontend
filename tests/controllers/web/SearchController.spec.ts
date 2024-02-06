@@ -78,6 +78,10 @@ describe('Search Results Controller > deals with handlers', () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
 
+      const {
+        guidedDateSearch: guidedDateSearchPath,
+        geographySearch: skipPath,
+      } = webRoutePaths;
       const dateFormOptions: IFormValidatorOptions = {
         formId: formValidatorOptions.dateQuestionnaire.formId,
         submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
@@ -90,9 +94,10 @@ describe('Search Results Controller > deals with handlers', () => {
         {
           fromDate,
           toDate,
-          guidedDateSearchPath: webRoutePaths.guidedDateSearch,
+          guidedDateSearchPath,
           dateFormOptions,
           dynamicSubmitScript,
+          skipPath,
         }
       );
     });
@@ -138,6 +143,10 @@ describe('Search Results Controller > deals with handlers', () => {
         .spyOn(errorTransformer, 'transformErrors')
         .mockReturnValue(dateQuestionChronologicalError as FormFieldError);
 
+      const {
+        guidedDateSearch: guidedDateSearchPath,
+        geographySearch: skipPath,
+      } = webRoutePaths;
       const dateFormOptions: IFormValidatorOptions = {
         formId: formValidatorOptions.dateQuestionnaire.formId,
         submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
@@ -154,9 +163,10 @@ describe('Search Results Controller > deals with handlers', () => {
         {
           fromDate: dateQuestionnaireGovUKError.fromDate,
           toDate: dateQuestionnaireGovUKError.toDate,
-          guidedDateSearchPath: webRoutePaths.guidedDateSearch,
+          guidedDateSearchPath,
           dateFormOptions,
           dynamicSubmitScript,
+          skipPath,
         }
       );
     });
@@ -173,8 +183,9 @@ describe('Search Results Controller > deals with handlers', () => {
         guidedDateSearch: guidedDateSearchPath,
       } = webRoutePaths;
       const dateFormOptions: IFormValidatorOptions = {
-        formId: formValidatorOptions.dateQuestionnaire.formId,
-        submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+        formId: formValidatorOptions.geographyQuestionnaire.formId,
+        submitButtonId:
+          formValidatorOptions.geographyQuestionnaire.submitButtonId,
       };
       const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
 
@@ -229,8 +240,9 @@ describe('Search Results Controller > deals with handlers', () => {
         guidedDateSearch: guidedDateSearchPath,
       } = webRoutePaths;
       const dateFormOptions: IFormValidatorOptions = {
-        formId: formValidatorOptions.dateQuestionnaire.formId,
-        submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+        formId: formValidatorOptions.geographyQuestionnaire.formId,
+        submitButtonId:
+          formValidatorOptions.geographyQuestionnaire.submitButtonId,
       };
       const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
 

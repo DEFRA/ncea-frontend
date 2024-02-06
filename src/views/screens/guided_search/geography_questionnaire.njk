@@ -41,11 +41,13 @@
     </div>
     <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-2 geography-buttons">
       <div class="govuk-grid-column-one-half geography-buttons__left">
-        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0" }) }}
+        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: guidedDateSearchPath }) }}
       </div>
       <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
         {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0" }) }}
-        {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId, classes: "govuk-!-margin-bottom-0" }) }}
+        {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId, classes: "govuk-!-margin-bottom-0", attributes: {
+              onclick: "storeFieldsData({formId: '"+dateFormOptions.formId+"'})"
+            } }) }}
       </div>
     </div>
   </form>
@@ -53,5 +55,11 @@
 
 {% block bodyEnd %}
   {{ super() }}
+  <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      readStorageData({formId: "{{dateFormOptions.formId}}"});
+    });
+  </script>
   {{ dynamicSubmitScript | safe }}
 {% endblock %}

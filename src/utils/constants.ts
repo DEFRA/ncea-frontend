@@ -7,8 +7,9 @@ export const webRoutePaths = {
   geographySearch: '/coordinate-search',
 };
 
-export const geoNetworkAPIPaths = {
-  elasticSearch: 'search/records/_search',
+export const elasticSearchAPIPaths = {
+  searchPath: '_search',
+  countPath: '_count',
 };
 
 export const sharedDataStructure = {

@@ -2,7 +2,7 @@
 
 import Joi from 'joi';
 
-describe('Environment Config', () => {
+describe('Environment environmentConfig', () => {
   let originalEnv: NodeJS.ProcessEnv;
   const envs = ['local', 'development', 'qa', 'production', 'test'];
 
@@ -45,10 +45,12 @@ describe('Environment Config', () => {
 
   describe('Check environment configuration', () => {
     it('should be accessible and usable', () => {
-      const { Config } = require('../../src/config/environmentConfig');
-      expect(Config).toBeDefined();
-      expect(typeof Config).toBe('object');
-      expect(Object.keys(Config).length).toBe(5);
+      const {
+        environmentConfig,
+      } = require('../../src/config/environmentConfig');
+      expect(environmentConfig).toBeDefined();
+      expect(typeof environmentConfig).toBe('object');
+      expect(Object.keys(environmentConfig).length).toBe(6);
     });
 
     it('should validate and export the configuration object', () => {
@@ -57,7 +59,7 @@ describe('Environment Config', () => {
         NODE_ENV: 'qa',
         APPINSIGHTS_INSTRUMENTATIONKEY: 'abc123',
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
-        GEONETWORK_SEARCH_API: 'https://geonetwork-api.com',
+        ELASTICSEARCH_API: 'https://elasticsearch-api.com',
       };
       process.env = { ...mockConfig };
 
@@ -68,15 +70,18 @@ describe('Environment Config', () => {
           .default(envs[0]),
         appInsightsKey: Joi.string().allow('').default(''),
         azureKeyVaultURL: Joi.string().allow('').default(''),
-        geoNetworkSearchAPI: Joi.string().allow('').default(''),
+        elasticSearchAPI: Joi.string().allow('').default(''),
+        isLocal: Joi.boolean().valid(true, false).default(false),
       });
 
-      const { Config } = require('../../src/config/environmentConfig');
+      const {
+        environmentConfig,
+      } = require('../../src/config/environmentConfig');
 
-      const { error, value } = schema.validate(Config);
+      const { error, value } = schema.validate(environmentConfig);
 
       expect(error).toBeUndefined();
-      expect(value).toEqual(Config);
+      expect(value).toEqual(environmentConfig);
     });
 
     it('should throw an error uf tge configuration object is invalid', () => {

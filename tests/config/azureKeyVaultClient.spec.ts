@@ -1,6 +1,6 @@
 import { SecretClient } from '@azure/keyvault-secrets';
 import { DefaultAzureCredential } from '@azure/identity';
-import { Config } from '../../src/config/environmentConfig';
+import { environmentConfig } from '../../src/config/environmentConfig';
 import { getKeyVaultClient } from '../../src/config/azureKeyVaultClient';
 
 jest.mock('@azure/keyvault-secrets', () => ({
@@ -14,7 +14,7 @@ jest.mock('@azure/identity', () => ({
 }));
 
 jest.mock('../../src/config/environmentConfig', () => ({
-  Config: {
+  environmentConfig: {
     azureKeyVaultURL: 'https://example-vault.vault.azure.net',
   },
 }));
@@ -39,7 +39,7 @@ describe('Azure Key Vault Client', () => {
 
     expect(SecretClient).toHaveBeenCalledTimes(1);
     expect(SecretClient).toHaveBeenCalledWith(
-      Config.azureKeyVaultURL,
+      environmentConfig.azureKeyVaultURL,
       mockDefaultAzureCredential
     );
   });

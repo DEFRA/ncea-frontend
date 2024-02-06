@@ -39,7 +39,7 @@ const SearchController = {
     });
   },
   renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const guidedDateSearchPath = webRoutePaths.guidedDateSearch;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const dateFormOptions: IFormValidatorOptions = {
       formId: formValidatorOptions.dateQuestionnaire.formId,
       submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
@@ -51,6 +51,7 @@ const SearchController = {
       guidedDateSearchPath,
       dateFormOptions,
       dynamicSubmitScript,
+      skipPath,
     });
   },
   doDateSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
@@ -80,7 +81,7 @@ const SearchController = {
     response: ResponseToolkit,
     error: Joi.ValidationError,
   ): Promise<ResponseObject> => {
-    const guidedDateSearchPath = webRoutePaths.guidedDateSearch;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
       formKeys.dateQuestionnaire,
@@ -107,6 +108,7 @@ const SearchController = {
         guidedDateSearchPath,
         dateFormOptions,
         dynamicSubmitScript,
+        skipPath,
       })
       .code(400)
       .takeover();
@@ -115,8 +117,8 @@ const SearchController = {
     const formFields = { ...geographyQuestionnaireOptions };
     const { geographySearch: geographySearchPath, guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
     const dateFormOptions: IFormValidatorOptions = {
-      formId: formValidatorOptions.dateQuestionnaire.formId,
-      submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+      formId: formValidatorOptions.geographyQuestionnaire.formId,
+      submitButtonId: formValidatorOptions.geographyQuestionnaire.submitButtonId,
     };
     const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
     return response.view('screens/guided_search/geography_questionnaire', {
@@ -135,8 +137,8 @@ const SearchController = {
     const finalFormFields = await transformTextInputError({ ...geographyQuestionnaireOptions }, error);
     const { geographySearch: geographySearchPath, guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
     const dateFormOptions: IFormValidatorOptions = {
-      formId: formValidatorOptions.dateQuestionnaire.formId,
-      submitButtonId: formValidatorOptions.dateQuestionnaire.submitButtonId,
+      formId: formValidatorOptions.geographyQuestionnaire.formId,
+      submitButtonId: formValidatorOptions.geographyQuestionnaire.submitButtonId,
     };
     const dynamicSubmitScript = injectDynamicEnablingScript(dateFormOptions);
     return response

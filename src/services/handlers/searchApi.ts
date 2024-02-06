@@ -1,14 +1,14 @@
 import { ISearchFieldsObject } from '../../interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../interfaces/searchResponse.interface';
 import { buildSearchQuery } from '../../utils/queryBuilder';
+import { elasticSearchAPIPaths } from '../../utils/constants';
+import { elasticSearchClient } from '../../config/elasticSearchClient';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
-import { geoNetworkAPIPaths } from '../../utils/constants';
-import { geoNetworkClient } from '../../config/geoNetworkClient';
 
 const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promise<ISearchResults> => {
   try {
     const payload = buildSearchQuery(searchFieldsObject);
-    const response = await geoNetworkClient.post(geoNetworkAPIPaths.elasticSearch, payload);
+    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
     const finalResponse: ISearchResults = await formatSearchResponse(response.data);
     return finalResponse;
     /* eslint-disable  @typescript-eslint/no-explicit-any */

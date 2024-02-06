@@ -10,7 +10,10 @@
     items: [
       {
         text: "Home",
-        href: homePageUrl
+        href: homePageUrl,
+        attributes: {
+          onclick: "resetStorageData()"
+        }
       },
       {
         text: "Questionnaire search",
@@ -23,22 +26,33 @@
 {% block content %}
   <div class="govuk-grid-row">
     <form method="POST" id="{{ dateFormOptions.formId }}" action="{{guidedDateSearchPath}}">
-      <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-m">
+      <form method="POST" action="{{guidedDateSearchPath}}" id="date-form">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
-        {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
-        {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
-        <div class="govuk-button-group">
-          {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary" }) }}
-          {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId }) }}
+          {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
+          {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
+          <div class="govuk-button-group">
+            {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary", href: skipPath, attributes: {
+              onclick: "storeFieldsData({formId: '"+dateFormOptions.formId+"', isSkipped: true})"
+            } }) }}
+            {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId, attributes: {
+              onclick: "storeFieldsData({formId: '"+dateFormOptions.formId+"'})"
+            } }) }}
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-{% endblock %}
+      </form>
+    </div>
+  {% endblock %}
 
-{% block bodyEnd %}
-  {{ super() }}
-  {{ dynamicSubmitScript | safe }}
-{% endblock %}
+  {% block bodyEnd %}
+    {{ super() }}
+    <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        readStorageData({formId: "{{dateFormOptions.formId}}"});
+      });
+    </script>
+    {{ dynamicSubmitScript | safe }}
+  {% endblock %}
