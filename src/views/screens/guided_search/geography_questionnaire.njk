@@ -6,6 +6,11 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+{% endblock %}
+
 {% block beforeContent %}
   {{ super() }}
   {{ govukBreadcrumbs({
@@ -29,7 +34,7 @@
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div id="coordinate-map"></div>
+      <div id="coordinate-map" style="widht: 660px; height: 722px;"></div>
     </div>
   </div>
   <div class="govuk-grid-row">
@@ -66,6 +71,7 @@
 
 {% block bodyEnd %}
   {{ super() }}
+  <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
   <script type="module" src="{{ assetPath }}/scripts/searchCoordinates.js"></script>
   <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
   <script>

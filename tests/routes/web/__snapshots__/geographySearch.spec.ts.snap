@@ -22,7 +22,10 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
 
 
     
+  
   <link rel="stylesheet" href="/assets/application.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
 
     
   </head>
@@ -90,6 +93,17 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
+      <h1 class="govuk-heading-m">Draw area on map</h1>
+      <span class="govuk-caption-m">Click and drag to draw a boundary box. This will auto-populate the geographical coordinate box.</span>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div id="coordinate-map" style="widht: 660px; height: 722px;"></div>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h1 class="govuk-heading-m">Geographical coordinate box</h1>
       <span class="govuk-caption-m">Enter a coordinate in each field to create a geographic bounding box. This will show you the data that exists within that geographical area.</span>
     </div>
@@ -317,6 +331,8 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
     initAll()
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+  <script type="module" src="/assets/scripts/searchCoordinates.js"></script>
   <script src="/assets/scripts/browserStorage.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -324,46 +340,18 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
     });
   </script>
   <script>
-      (async formValidatorOptions => {
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().f[0]++;
-  const form =
-  /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[3]++, document.getElementById(formValidatorOptions.formId));
-  const submitButton =
-  /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[4]++, document.getElementById(formValidatorOptions.submitButtonId));
-  const fields =
-  /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[5]++, Array.from(form.querySelectorAll('input[type="text"], input[type="number"]')));
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().s[6]++;
-  const checkFields = () => {
-    /* istanbul ignore next */
-    cov_r6mjnxpqp().f[1]++;
-    const hasValue =
-    /* istanbul ignore next */
-    (cov_r6mjnxpqp().s[7]++, fields.some(field => {
-      /* istanbul ignore next */
-      cov_r6mjnxpqp().f[2]++;
-      cov_r6mjnxpqp().s[8]++;
-      return field?.value.trim() !== '';
-    }));
-    /* istanbul ignore next */
-    cov_r6mjnxpqp().s[9]++;
-    submitButton.disabled = !hasValue;
-  };
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().s[10]++;
-  fields.forEach(field => {
-    /* istanbul ignore next */
-    cov_r6mjnxpqp().f[3]++;
-    cov_r6mjnxpqp().s[11]++;
-    field.addEventListener('input', checkFields);
-  });
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().s[12]++;
-  checkFields();
+      (async (formValidatorOptions) => {
+    const form = document.getElementById(formValidatorOptions.formId);
+    const submitButton = document.getElementById(formValidatorOptions.submitButtonId);
+    const fields = Array.from(form.querySelectorAll('input[type="text"], input[type="number"]'));
+    const checkFields = () => {
+        const hasValue = fields.some((field) => (field === null || field === void 0 ? void 0 : field.value.trim()) !== '');
+        submitButton.disabled = !hasValue;
+    };
+    fields.forEach((field) => {
+        field.addEventListener('input', checkFields);
+    });
+    checkFields();
 })({"formId":"coordinate-form","submitButtonId":"coordinate-submit"});
     </script>
 

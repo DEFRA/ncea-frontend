@@ -352,46 +352,18 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
       });
     </script>
     <script>
-      (async formValidatorOptions => {
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().f[0]++;
-  const form =
-  /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[3]++, document.getElementById(formValidatorOptions.formId));
-  const submitButton =
-  /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[4]++, document.getElementById(formValidatorOptions.submitButtonId));
-  const fields =
-  /* istanbul ignore next */
-  (cov_r6mjnxpqp().s[5]++, Array.from(form.querySelectorAll('input[type="text"], input[type="number"]')));
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().s[6]++;
-  const checkFields = () => {
-    /* istanbul ignore next */
-    cov_r6mjnxpqp().f[1]++;
-    const hasValue =
-    /* istanbul ignore next */
-    (cov_r6mjnxpqp().s[7]++, fields.some(field => {
-      /* istanbul ignore next */
-      cov_r6mjnxpqp().f[2]++;
-      cov_r6mjnxpqp().s[8]++;
-      return field?.value.trim() !== '';
-    }));
-    /* istanbul ignore next */
-    cov_r6mjnxpqp().s[9]++;
-    submitButton.disabled = !hasValue;
-  };
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().s[10]++;
-  fields.forEach(field => {
-    /* istanbul ignore next */
-    cov_r6mjnxpqp().f[3]++;
-    cov_r6mjnxpqp().s[11]++;
-    field.addEventListener('input', checkFields);
-  });
-  /* istanbul ignore next */
-  cov_r6mjnxpqp().s[12]++;
-  checkFields();
+      (async (formValidatorOptions) => {
+    const form = document.getElementById(formValidatorOptions.formId);
+    const submitButton = document.getElementById(formValidatorOptions.submitButtonId);
+    const fields = Array.from(form.querySelectorAll('input[type="text"], input[type="number"]'));
+    const checkFields = () => {
+        const hasValue = fields.some((field) => (field === null || field === void 0 ? void 0 : field.value.trim()) !== '');
+        submitButton.disabled = !hasValue;
+    };
+    fields.forEach((field) => {
+        field.addEventListener('input', checkFields);
+    });
+    checkFields();
 })({"formId":"date-form","submitButtonId":"date-submit"});
     </script>
   

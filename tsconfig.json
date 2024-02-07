@@ -23,7 +23,11 @@
       "./src/types/types.d.ts",
       "joi"
     ],
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.js"],
   "exclude": ["node_modules", "build", "coverage", "reports", "tools", "tests"]

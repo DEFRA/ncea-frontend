@@ -4,4 +4,4 @@ coverage
 src/views/**
 src/infrastructure/log_files/**
 src/services/*.json
-src/assets/sass/**
+src/public/**

@@ -1,52 +1,38 @@
 'use strict';
 
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import VectorSource from 'ol/source/Vector';
-import VectorTileLayer from 'ol/layer/VectorTile';
-import Draw, { createBox } from 'ol/interaction/Draw';
-import { Fill, Stroke, Style } from 'ol/style';
-import Feature from 'ol/Feature';
-import Polygon from 'ol/geom/Polygon';
-
-const drawSource = VectorSource();
+const drawSource = new ol.source.Vector();
 
 const mapOptions = {
   target: 'coordinate-map',
   layers: [
-    new TileLayer({
-      source: new OSM(),
-    }),
-    new VectorTileLayer({
-      source: drawSource,
+    new ol.layer.Tile({
+      source: new ol.source.OSM(),
     }),
   ],
-  view: new View({
-    center: [-0.118092, 51.509865],
-    zoom: 5,
+  view: new ol.View({
+    center: ol.proj.fromLonLat([-0.118092, 51.509865]),
+    zoom: 2,
   }),
 };
 
-const map = new Map(mapOptions);
+const map = new ol.Map(mapOptions);
 
-const drawStyle = new Style({
-  stroke: new Stroke({
+const drawStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
     color: 'blue',
     width: 2,
   }),
-  fill: new Fill({
+  fill: new ol.style.Fill({
     color: 'rgb(0, 0, 255, 0.1)',
   }),
 });
 
-const completedStyle = new Style({
-  stroke: new Stroke({
+const completedStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
     color: 'red',
     width: 2,
   }),
-  fill: new Fill({
+  fill: new ol.style.Fill({
     color: 'rgb(255, 0, 0, 0.5)',
   }),
 });
@@ -62,8 +48,8 @@ const setCoordinates = (coordinates) => {
     return;
   }
 
-  const polygon = new Polygon([coordinates]);
-  const feature = new Feature({
+  const polygon = new ol.geom.Polygon([coordinates]);
+  const feature = new ol.Feature({
     geometry: polygon,
   });
   feature.setStyle(completedStyle);
@@ -115,10 +101,10 @@ const handleDrawEnd = (event) => {
   ]);
 };
 
-const draw = new Draw({
+const draw = new ol.interaction.Draw({
   source: drawSource,
   type: 'Circle',
-  geometryFunction: createBox(),
+  geometryFunction: ol.interaction.Draw.createBox(),
   style: drawStyle,
 });
 
