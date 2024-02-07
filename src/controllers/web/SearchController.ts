@@ -18,23 +18,44 @@ import { transformErrors, transformTextInputError } from '../../utils/transformE
 
 const SearchController = {
   doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { search_term }: IQuickSearchPayload = request.payload as IQuickSearchPayload;
-    const searchFieldsObject: ISearchFieldsObject = {
-      searchTerm: search_term,
-    };
-    const searchResults: ISearchResults = await getSearchResults(searchFieldsObject);
-    request.server.updateSharedData(sharedDataStructure.searchTerm, search_term);
-    request.server.updateSharedData(sharedDataStructure.searchResults, searchResults);
+    // const { search_term }: IQuickSearchPayload =
+    //   request.payload as IQuickSearchPayload;
+    // const searchFieldsObject: ISearchFieldsObject = {
+    //   searchTerm: search_term,
+    // };
+    // const searchResults: ISearchResults =
+    //   await getSearchResults(searchFieldsObject);
+    // request.server.updateSharedData(
+    //   sharedDataStructure.searchTerm,
+    //   search_term
+    // );
+    // request.server.updateSharedData(
+    //   sharedDataStructure.searchResults,
+    //   searchResults
+    // );
     return response.redirect(webRoutePaths.results);
   },
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const sharedData: ISharedData = request.server.getSharedData();
-    const searchTerm = sharedData[sharedDataStructure.searchTerm];
-    const searchResults = sharedData[sharedDataStructure.searchResults];
-    const quickSearchPath = webRoutePaths.quickSearch;
+    // const sharedData: ISharedData = request.server.getSharedData();
+    // const searchTerm = sharedData[sharedDataStructure.searchTerm];
+    // const searchResults = sharedData[sharedDataStructure.searchResults];
+    const { quickSearch: quickSearchPath, resultItems: resultItemsPath } = webRoutePaths;
+    const { quickSearch: quickSearchOptions } = formValidatorOptions;
     return response.view('screens/results/template', {
-      searchTerm,
+      // searchTerm,
       quickSearchPath,
+      // searchResults,
+      resultItemsPath,
+      quickSearchOptions,
+    });
+  },
+  renderSearchResultsBlockHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const fields = request.payload as any;
+    const searchFieldsObject: ISearchFieldsObject = {
+      searchTerm: fields['quick-search-form']['search_term'],
+    };
+    const searchResults: ISearchResults = await getSearchResults(searchFieldsObject);
+    return response.view('partials/results/template', {
       searchResults,
     });
   },

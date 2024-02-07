@@ -3,6 +3,7 @@ export const webRoutePaths = {
   home: '/',
   quickSearch: '/quick_search',
   results: '/search',
+  resultItems: '/search-query',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
 };
@@ -22,6 +23,10 @@ export const formKeys = {
 };
 
 export const formValidatorOptions = {
+  quickSearch: {
+    formId: 'quick-search-form',
+    submitButtonId: 'quick-search-submit',
+  },
   dateQuestionnaire: {
     formId: 'date-form',
     submitButtonId: 'date-submit',

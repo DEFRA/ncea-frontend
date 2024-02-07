@@ -10,15 +10,17 @@
  *
  */
 
-import { webRoutePaths } from '../../utils/constants';
+import { formValidatorOptions, webRoutePaths } from '../../utils/constants';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 const HomeController = {
   renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
+    const { quickSearch: quickSearchOptions } = formValidatorOptions;
     return response.view('screens/home/template', {
       quickSearchPath,
       dateSearchPath,
+      quickSearchOptions,
     });
   },
 };

@@ -42,7 +42,7 @@ const storeFieldsData = ({
   sessionStorage.setItem(key, JSON.stringify(sessionData));
 };
 
-const readStorageData = ({ formId, isCount = false, countTarget }) => {
+const readStorageData = ({ formId, isCount = false, countTarget = '' }) => {
   const sessionDataString = sessionStorage.getItem(key) || defaultSessionData;
   const sessionData = JSON.parse(sessionDataString);
   if (!isCount) {
@@ -70,4 +70,26 @@ const resetStorageData = () => {
 
 const purgeEntireStorageData = () => {
   sessionStorage.removeItem(key);
+};
+
+const getSearchResults = async (path) => {
+  try {
+    const sessionDataString = sessionStorage.getItem(key) || defaultSessionData;
+    const sessionData = JSON.parse(sessionDataString);
+    const response = await fetch(path, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(sessionData.fields),
+    });
+    if (response.ok) {
+      const searchResultsHtml = await response.text();
+      document.getElementById('results-block').innerHTML = searchResultsHtml;
+    } else {
+      console.error(`Failed to fetch the results view: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Error fetching HTML view: ${error.message}`);
+  }
 };

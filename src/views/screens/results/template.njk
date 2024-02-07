@@ -2,7 +2,6 @@
 
 {% from "partials/quick_search/macro.njk" import quickSearch %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
-{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block beforeContent %}
   {{ super() }}
@@ -27,70 +26,16 @@
   {{ quickSearch({
     isResultPage: true,
     searchTerm: searchTerm,
-    quickSearchPath: quickSearchPath
+    quickSearchPath: quickSearchPath,
+    quickSearchOptions: quickSearchOptions
   }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       <p>&nbsp;</p>
     </div>
-    <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m">
-          {% if searchResults.total %}
-            {{searchResults.total}} results
-          {% else %}
-            0 results found
-          {% endif %}
-        </h2>
-      </div>
-
-      {% for item in searchResults.items %}
-        <div class="search-result__items">
-          <div class="govuk-section-break--visible search-result__item">
-            <h2 class="govuk-heading-m search-result__heading">{{item.title}}</h2>
-            <div class="search-result__parameter">
-              <span class="search-result__parameter-label">Published by</span>
-              <span class="search-result__parameter-value">{{item.publishedBy}}</span>
-            </div>
-            {% if item.temporalExtentDetails.startDate or item.temporalExtentDetails.endDate %}
-              <div class="search-result__parameter">
-                <span class="search-result__parameter-label">Study period</span>
-                <span class="search-result__parameter-value">
-                  {% if item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
-                    {{item.temporalExtentDetails.startDate | date("DD MMM YYYY")}} to {{item.temporalExtentDetails.endDate | date("DD MMM YYYY")}}
-                  {% elif item.temporalExtentDetails.startDate and not item.temporalExtentDetails.endDate %}
-                    {{item.temporalExtentDetails.startDate | date("DD MMM YYYY")}}
-                  {% elif not item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
-                    {{item.temporalExtentDetails.endDate | date("DD MMM YYYY")}}
-                  {% endif %}
-                </span>
-              </div>
-            {% endif %}
-            <p class="search-result__content">
-              {{item.content}}
-            </p>
-            <div class="govuk-button-group search-result__button-group">
-              {{ govukButton({
-                text: "Open data"
-              }) }}
-
-              {{ govukButton({
-                text: "More info",
-                classes: "govuk-button--secondary"
-              }) }}
-            </div>
-          </div>
-        {% endfor %}
-
-        {% if not searchResults.total %}
-          <div class="search-result__item">
-            <h2 class="govuk-heading-m search-result__heading search-result__heading--empty">There are no matching results</h2>
-            <p class="search-result__content search-result__content--empty">Search with different keywords.</p>
-          </div>
-        </div>
-      {% endif %}
-
+    <div class="govuk-grid-column-two-thirds" id="results-block">
+      Loading...Please wait.
     </div>
   </div>
 
@@ -99,4 +44,10 @@
 {% block bodyEnd %}
   {{ super() }}
   <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      readStorageData({formId: "{{quickSearchOptions.formId}}"});
+      getSearchResults('{{resultItemsPath}}');
+    });
+  </script>
 {% endblock %}

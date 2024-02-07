@@ -12,7 +12,8 @@
   </header>
 
   {{ quickSearch({
-    quickSearchPath: quickSearchPath
+    quickSearchPath: quickSearchPath,
+    quickSearchOptions: quickSearchOptions
   }) }}
 
   <div class="govuk-grid-row">
@@ -43,4 +44,14 @@
       </div>
     </div>
   </article>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      readStorageData({formId: "{{quickSearchOptions.formId}}"});
+    });
+  </script>
 {% endblock %}
