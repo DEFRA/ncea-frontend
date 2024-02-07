@@ -37,7 +37,7 @@ const storeFieldsData = ({
   }
   if (isCount) {
     const countData = sessionData.count;
-    countData[fieldId] = countValue;
+    countData[formId] = countValue;
   }
   sessionStorage.setItem(key, JSON.stringify(sessionData));
 };

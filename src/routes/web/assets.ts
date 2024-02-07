@@ -11,7 +11,7 @@ module.exports = [
     path: '/assets/{path*}',
     handler: {
       directory: {
-        path: ['public', 'node_modules/govuk-frontend/dist/govuk/assets'],
+        path: ['src/public', 'node_modules/govuk-frontend/dist/govuk/assets'],
       },
     },
   },

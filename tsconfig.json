@@ -1,14 +1,9 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "typedocOptions": {
-    "entryPoints": ["src/**/*.ts"],
-    "out": "docs",
-    "name": "Natural Capital and Ecosystem Assessment"
-  },
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020", "dom"],
-    "module": "commonjs",
+    "target": "ES2018",
+    "lib": ["ES6", "dom"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "rootDir": "src/",
     "resolveJsonModule": true,
     "allowJs": true,
@@ -18,10 +13,6 @@
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "emitDeclarationOnly": true,
     "types": [
       "node",
       "jest",
@@ -34,6 +25,6 @@
     ],
     "moduleDetection": "force"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.js"],
   "exclude": ["node_modules", "build", "coverage", "reports", "tools", "tests"]
 }

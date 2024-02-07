@@ -23,6 +23,17 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
+      <h1 class="govuk-heading-m">Draw area on map</h1>
+      <span class="govuk-caption-m">Click and drag to draw a boundary box. This will auto-populate the geographical coordinate box.</span>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div id="coordinate-map"></div>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h1 class="govuk-heading-m">Geographical coordinate box</h1>
       <span class="govuk-caption-m">Enter a coordinate in each field to create a geographic bounding box. This will show you the data that exists within that geographical area.</span>
     </div>
@@ -55,6 +66,7 @@
 
 {% block bodyEnd %}
   {{ super() }}
+  <script type="module" src="{{ assetPath }}/scripts/searchCoordinates.js"></script>
   <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
