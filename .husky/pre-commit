@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "${0%/*}/_/h"
+
+npm run format-all
+npm run lint
+npm test
