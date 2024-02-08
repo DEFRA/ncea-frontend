@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Results Screen Results > Sanpshot verification should match the results screen snapshot 1`] = `
+exports[`Results Screen Results > Snapshot verification should match the results screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
