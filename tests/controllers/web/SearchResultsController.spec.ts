@@ -7,6 +7,7 @@ import { getSearchResults } from '../../../src/services/handlers/searchResultsAp
 import { ApiResponse } from '../../../src/Models/ApiResponse';
 import { fromDate, toDate } from '../../../src/views/forms/dateQuestionnaireFields';
 import { dateQuestionChronologicalError, dateQuestionnaireGovUKError } from '../../data/dateQuestionnaire';
+import { quickSearchJoiError } from '../../data/quickSearch';
 import { DateQuestionnaireError } from '../../../src/interfaces/guidedSearch';
 import * as errorTransformer from '../../../src/utils/transformErrors';
 
@@ -67,5 +68,47 @@ describe('Search Results Controller > guidedSearchFailActionHandler', () => {
 
   it('should render the date questionnaire template with error messages', async () => {
     expect(h.view).toHaveBeenCalledWith('screens/guided_search/date_questionnaire', dateQuestionnaireGovUKError);
+  });
+});
+
+describe('Search Results Controller > quickSearchFailActionHandler > home page', () => {
+  const h = {
+    view: jest.fn().mockReturnThis(),
+    takeover: jest.fn()
+  };
+  const request = {
+    payload: {
+      pageName: 'home'
+    }
+  }
+  beforeAll(() => {
+    return SearchResultsController.quickSearchFailActionHandler(request, h, quickSearchJoiError);
+  });
+
+  it('should render the home page with error messages', async () => {
+    expect(h.view).toHaveBeenCalledWith('screens/home/template', {searchInputError: {
+      text: 'Please enter keywords into the search field.'
+    }});
+  });
+});
+
+describe('Search Results Controller > quickSearchFailActionHandler > results page', () => {
+  const h = {
+    view: jest.fn().mockReturnThis(),
+    takeover: jest.fn()
+  };
+  const request = {
+    payload: {
+      pageName: 'results'
+    }
+  }
+  beforeAll(() => {
+    return SearchResultsController.quickSearchFailActionHandler(request, h, quickSearchJoiError);
+  });
+
+  it('should render the results page with error messages', async () => {
+    expect(h.view).toHaveBeenCalledWith('screens/results/template', {searchInputError: {
+      text: 'Please enter keywords into the search field.'
+    }});
   });
 });

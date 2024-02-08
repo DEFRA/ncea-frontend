@@ -35,7 +35,7 @@ describe('Results Screen', () => {
     server.stop().then(() => done());
   });
 
-  describe('Results > Sanpshot verification', () => {
+  describe('Results > Snapshot verification', () => {
     it('should match the results screen snapshot', async () => {
       expect(response.payload).toMatchSnapshot();
     });
