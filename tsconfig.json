@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "lib": ["ES6", "dom"],
+    "skipLibCheck": true,
+    "target": "es2022",
+    "lib": ["es2022"],
+
+    "esModuleInterop": true,
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "rootDir": "src/",
-    "resolveJsonModule": true,
+
     "allowJs": true,
-    "outDir": "build/",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
     "strict": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": false,
+
+    "outDir": "build",
+    "rootDir": "./src",
+    "baseUrl": "./src",
     "types": [
       "node",
       "jest",
@@ -20,15 +25,12 @@
       "nunjucks",
       "hapi-pino",
       "jsdom",
-      "./src/types/types.d.ts",
       "joi"
     ],
-    "moduleDetection": "force",
-    "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*"]
+      "@/*": ["*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.js"],
-  "exclude": ["node_modules", "build", "coverage", "reports", "tools", "tests"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"]
 }

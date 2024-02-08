@@ -1,7 +1,12 @@
-import { ISearchItem, ISearchResults } from '../interfaces/searchResponse.interface';
+import {
+  ISearchItem,
+  ISearchResults,
+} from '../interfaces/searchResponse.interface';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<ISearchResults> => {
+const formatSearchResponse = async (
+  apiResponse: Record<string, any>,
+): Promise<ISearchResults> => {
   const finalResponse: ISearchResults = {
     total: apiResponse?.hits?.total?.value,
     items: [],

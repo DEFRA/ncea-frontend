@@ -5,3 +5,6 @@ src/views/**
 src/infrastructure/log_files/**
 src/services/*.json
 src/public/**
+tools/**
+assets/**
+copyNonTSFiles.js

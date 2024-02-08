@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
-  "ext": ".ts,.js,.njk,.scss",
+  "ext": ".ts,.njk",
   "ignore": [],
-  "exec": "npm run sass:compile && npx ts-node ./src/index.ts"
+  "exec": "tsx ./src/index.ts"
 }

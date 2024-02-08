@@ -1,7 +1,15 @@
 'use strict';
 
 import { environmentConfig } from '../config/environmentConfig';
+import inert from '@hapi/inert';
+import vision from '@hapi/vision';
 import Hapi, { Server } from '@hapi/hapi';
+
+import {
+  customHapiPino,
+  customHapiRoutes,
+  customHapiViews,
+} from './plugins/index';
 
 // Create the hapi server
 const server: Server = Hapi.server({
@@ -18,15 +26,10 @@ const server: Server = Hapi.server({
 
 const initializeServer = async (): Promise<Server> => {
   // Register vendors plugins
-  await server.register([require('@hapi/inert'), require('@hapi/vision')]);
+  await server.register([inert, vision]);
 
   // Register the custom plugins
-  await server.register([
-    require('./plugins/shared_data'),
-    require('./plugins/views'),
-    require('./plugins/router'),
-    require('./plugins/logger'),
-  ]);
+  await server.register([customHapiViews, customHapiRoutes, customHapiPino]);
 
   await server.initialize();
   return server;

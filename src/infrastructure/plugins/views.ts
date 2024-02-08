@@ -1,15 +1,19 @@
 import nunjucks from 'nunjucks';
 import path from 'path';
+import vision from '@hapi/vision';
 import { webRoutePaths } from '../../utils/constants';
-/* eslint-disable  @typescript-eslint/no-var-requires */
-const dateFilter = require('nunjucks-date-filter');
 
-module.exports = {
-  plugin: require('@hapi/vision'),
+import * as dateFilter from 'nunjucks-date-filter';
+
+const customHapiViews = {
+  plugin: vision,
   options: {
     engines: {
       njk: {
-        compile: (src: string, options: { environment: nunjucks.Environment | undefined }) => {
+        compile: (
+          src: string,
+          options: { environment: nunjucks.Environment | undefined },
+        ) => {
           const template = nunjucks.compile(src, options.environment);
 
           return (context: object | undefined) => {
@@ -27,7 +31,10 @@ module.exports = {
           next: () => any,
         ) => {
           options.compileOptions.environment = nunjucks.configure(
-            [path.join(options.relativeTo, options.path), 'node_modules/govuk-frontend/dist'],
+            [
+              path.join(options.relativeTo, options.path),
+              'node_modules/govuk-frontend/dist',
+            ],
             {
               autoescape: true,
               watch: false,
@@ -50,3 +57,5 @@ module.exports = {
     },
   },
 };
+
+export { customHapiViews };

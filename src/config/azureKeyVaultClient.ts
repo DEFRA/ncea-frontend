@@ -19,7 +19,10 @@ let keyVaultClient: SecretClient | null = null;
  */
 const getKeyVaultClient = (): SecretClient => {
   if (!keyVaultClient) {
-    keyVaultClient = new SecretClient(environmentConfig.azureKeyVaultURL as string, new DefaultAzureCredential());
+    keyVaultClient = new SecretClient(
+      environmentConfig.azureKeyVaultURL as string,
+      new DefaultAzureCredential(),
+    );
   }
   return keyVaultClient;
 };

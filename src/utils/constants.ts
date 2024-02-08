@@ -1,10 +1,10 @@
-export const apiBasePath = '/api';
 export const webRoutePaths = {
   home: '/',
   quickSearch: '/quick_search',
   results: '/search',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
+  getResults: '/search-results',
 };
 
 export const elasticSearchAPIPaths = {
@@ -12,22 +12,12 @@ export const elasticSearchAPIPaths = {
   countPath: '_count',
 };
 
-export const sharedDataStructure = {
-  searchTerm: 'searchTerm',
-  searchResults: 'searchResults',
-};
-
 export const formKeys = {
   dateQuestionnaire: 'date-questionnaire',
 };
 
-export const formValidatorOptions = {
-  dateQuestionnaire: {
-    formId: 'date-form',
-    submitButtonId: 'date-submit',
-  },
-  geographyQuestionnaire: {
-    formId: 'coordinate-form',
-    submitButtonId: 'coordinate-submit',
-  },
+export const formIds = {
+  quickSearch: 'quick-search',
+  dataQuestionnaire: 'date-search',
+  geographyQuestionnaire: 'coordinate-search',
 };

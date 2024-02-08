@@ -31,7 +31,10 @@ elasticSearchClient.interceptors.request.use(
   (config) => {
     // Modify config before sending the request
     // config.headers['Authorization'] = 'Bearer YOUR_ACCESS_TOKEN';
-    if (environmentConfig.isLocal && (config.method === 'post' || config.method === 'POST')) {
+    if (
+      environmentConfig.isLocal &&
+      (config.method === 'post' || config.method === 'POST')
+    ) {
       config.method = 'get';
     }
     return config;

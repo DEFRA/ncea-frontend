@@ -1,16 +1,23 @@
 'use strict';
 
 import { Server } from '@hapi/hapi';
+import {
+  dateSearchRoutes,
+  geographySearchRoutes,
+  homeRoutes,
+  searchResultsRoutes,
+  staticRoutes,
+} from '../../../src/routes/index';
 
-/* eslint-disable  @typescript-eslint/no-var-requires */
-const routes = [].concat(
-  require('../../routes/web/assets'),
-  require('../../routes/web/home'),
-  require('../../routes/web/search'),
-  require('../../routes/api/api'),
-);
+const routes = [
+  ...staticRoutes,
+  ...homeRoutes,
+  ...dateSearchRoutes,
+  ...geographySearchRoutes,
+  ...searchResultsRoutes,
+];
 
-module.exports = {
+const customHapiRoutes = {
   plugin: {
     name: 'router',
     register: (server: Server) => {
@@ -18,3 +25,5 @@ module.exports = {
     },
   },
 };
+
+export { customHapiRoutes };

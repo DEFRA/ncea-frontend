@@ -24,10 +24,13 @@ const geographyQuestionnaireSchema = Joi.object({
     const { north, south, east, west } = value;
     const coordinateFiledKeys: string[] = ['north', 'south', 'east', 'west'];
 
-    const hasSomeCoordinates: boolean = !isEmpty(north) || !isEmpty(south) || !isEmpty(east) || !isEmpty(west);
+    const hasSomeCoordinates: boolean =
+      !isEmpty(north) || !isEmpty(south) || !isEmpty(east) || !isEmpty(west);
 
     if (hasSomeCoordinates) {
-      const missingCoordinates = coordinateFiledKeys.filter((point) => isEmpty(value[point]));
+      const missingCoordinates = coordinateFiledKeys.filter((point) =>
+        isEmpty(value[point]),
+      );
       if (missingCoordinates.length > 0) {
         return helpers.error('coordinates.all_required', {
           errors: missingCoordinates,
