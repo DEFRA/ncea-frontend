@@ -40,6 +40,18 @@ const SearchResultsController = {
     };
     return h.view('screens/guided_search/date_questionnaire', { fromDate: fromField, toDate: toField }).takeover();
   },
+  quickSearchFailActionHandler: (request, response, error) => {
+    const searchError: string | undefined = error?.details?.[0].message ? error?.details?.[0].message : undefined;
+    return response
+      .view(request.payload.pageName === 'home' ? 'screens/home/template' : 'screens/results/template', {
+        searchInputError: searchError
+          ? {
+              text: searchError,
+            }
+          : undefined,
+      })
+      .takeover();
+  },
 };
 
 export { SearchResultsController };

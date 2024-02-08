@@ -9,6 +9,7 @@ const routes = [].concat(
   require('../../routes/web/results'),
   require('../../routes/web/sample'),
   require('../../routes/api/api'),
+  require('../../routes/web/404'),
 );
 
 module.exports = {

@@ -98,8 +98,7 @@ exports[`Results Screen Results > Sanpshot verification should match the results
     </h1>
     
     <div class="search-block" data-module="search">
-      <form action="/search" method="get" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
+      <form action="/search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
         
 
 <div class="govuk-form-group">
@@ -112,19 +111,20 @@ exports[`Results Screen Results > Sanpshot verification should match the results
 
 </div>
 
+        <input type="hidden" name="pageName" value="results">
       </form>
     </div>
   </div>
 </div>
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       <p>&nbsp;</p>
     </div>
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m"> results</h2>
-      </div><p class="govuk-caption-m govuk-!-font-size-14">No results.</p></div>
+        <h2 class="govuk-heading-m">0 results found</h2>
+      </div><p class="govuk-heading-m">There are no matching results</p>
+        <p class="govuk-caption-m govuk-!-font-size-14">Search with different keywords.</p></div>
   </div>
 
         </main>
