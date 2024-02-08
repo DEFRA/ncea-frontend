@@ -88,7 +88,6 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
     
     <div class="search-block" data-module="search">
       <form action="/search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-        <input type="hidden" name="pageName" value="home">
         
 
 <div class="govuk-form-group">
@@ -101,6 +100,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
 
 </div>
 
+        <input type="hidden" name="pageName" value="home">
       </form>
     </div>
   </div>
