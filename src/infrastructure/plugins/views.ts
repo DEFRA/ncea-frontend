@@ -10,10 +10,7 @@ const customHapiViews = {
   options: {
     engines: {
       njk: {
-        compile: (
-          src: string,
-          options: { environment: nunjucks.Environment | undefined },
-        ) => {
+        compile: (src: string, options: { environment: nunjucks.Environment | undefined }) => {
           const template = nunjucks.compile(src, options.environment);
 
           return (context: object | undefined) => {
@@ -31,10 +28,7 @@ const customHapiViews = {
           next: () => any,
         ) => {
           options.compileOptions.environment = nunjucks.configure(
-            [
-              path.join(options.relativeTo, options.path),
-              'node_modules/govuk-frontend/dist',
-            ],
+            [path.join(options.relativeTo, options.path), 'node_modules/govuk-frontend/dist'],
             {
               autoescape: true,
               watch: false,

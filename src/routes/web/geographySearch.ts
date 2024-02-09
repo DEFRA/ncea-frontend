@@ -17,8 +17,7 @@ const geographySearchRoutes = [
     options: {
       validate: {
         payload: geographyQuestionnaireSchema,
-        failAction:
-          GeographySearchController.doGeographySearchFailActionHandler,
+        failAction: GeographySearchController.doGeographySearchFailActionHandler,
       },
     },
   },

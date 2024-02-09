@@ -10,10 +10,7 @@ import {
   IShapeCoordinates,
 } from '../interfaces/queryBuilder.interface';
 
-const buildSearchQuery = (
-  searchFieldsObject: ISearchFieldsObject,
-  fieldsToSearch: string[] = [],
-): IQuery => {
+const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -45,15 +42,10 @@ const buildSearchQuery = (
     boolQuery.bool.must?.push(matchShould);
   }
 
-  if (
-    searchFieldsObject['date-search']?.['from-date-year'] &&
-    searchFieldsObject['date-search']['to-date-year']
-  ) {
+  if (searchFieldsObject['date-search']?.['from-date-year'] && searchFieldsObject['date-search']['to-date-year']) {
     const startDate: string = generateDateString({
       year: parseInt(searchFieldsObject['date-search']['from-date-year']),
-      month: parseInt(
-        searchFieldsObject['date-search']['from-date-month'] ?? '',
-      ),
+      month: parseInt(searchFieldsObject['date-search']['from-date-month'] ?? ''),
       day: parseInt(searchFieldsObject['date-search']['from-date-day'] ?? ''),
     });
     const endDate: string = generateDateString({
@@ -76,12 +68,7 @@ const buildSearchQuery = (
 
   const geoCoordinates = searchFieldsObject['coordinate-search'];
 
-  if (
-    geoCoordinates?.north &&
-    geoCoordinates?.south &&
-    geoCoordinates?.east &&
-    geoCoordinates?.west
-  ) {
+  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
     const geoShape: IShapeCoordinates = {
       type: 'envelope',
       coordinates: [

@@ -2,26 +2,15 @@
 
 import { FormFieldError } from '../../interfaces/guidedSearch.interface';
 import Joi from 'joi';
-import {
-  Lifecycle,
-  Request,
-  ResponseObject,
-  ResponseToolkit,
-} from '@hapi/hapi';
+import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { transformErrors } from '../../utils/transformErrors';
 import { formIds, formKeys, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const DateSearchController = {
-  renderGuidedSearchHandler: async (
-    request: Request,
-    response: ResponseToolkit,
-  ): Promise<ResponseObject> => {
-    const {
-      guidedDateSearch: guidedDateSearchPath,
-      geographySearch: skipPath,
-    } = webRoutePaths;
+  renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaire;
     return response.view('screens/guided_search/date_questionnaire', {
       fromDate,
@@ -36,10 +25,7 @@ const DateSearchController = {
     response: ResponseToolkit,
     error: Joi.ValidationError,
   ): Promise<Lifecycle.ReturnValue> => {
-    const {
-      guidedDateSearch: guidedDateSearchPath,
-      geographySearch: skipPath,
-    } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
       formKeys.dateQuestionnaire,
@@ -66,10 +52,7 @@ const DateSearchController = {
       .code(400)
       .takeover();
   },
-  doDateSearchHandler: async (
-    request: Request,
-    response: ResponseToolkit,
-  ): Promise<ResponseObject> => {
+  doDateSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     return response.redirect(webRoutePaths.geographySearch);
   },
 };

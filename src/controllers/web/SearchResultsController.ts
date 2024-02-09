@@ -8,12 +8,8 @@ import { getSearchResults } from '../../services/handlers/searchApi';
 import { formIds, webRoutePaths } from '../../utils/constants';
 
 const SearchResultsController = {
-  renderSearchResultsHandler: async (
-    request: Request,
-    response: ResponseToolkit,
-  ): Promise<ResponseObject> => {
-    const { quickSearch: quickSearchPath, getResults: getResultsPath } =
-      webRoutePaths;
+  renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { quickSearch: quickSearchPath, getResults: getResultsPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     return response.view('screens/results/template', {
       quickSearchPath,
@@ -21,10 +17,7 @@ const SearchResultsController = {
       formId,
     });
   },
-  getSearchResultsHandler: async (
-    request: Request,
-    response: ResponseToolkit,
-  ): Promise<ResponseObject> => {
+  getSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const fields: ISearchFieldsObject = request.payload as ISearchFieldsObject;
     const searchResults: ISearchResults = await getSearchResults(fields);
     return response.view('partials/results/template', {

@@ -1,18 +1,9 @@
 import Joi from 'joi';
 import { formKeys } from './constants';
-import {
-  FormFieldError,
-  GovUKItems,
-} from '../interfaces/guidedSearch.interface';
-import {
-  IFormFieldOptions,
-  ITextInputComponent,
-} from '../interfaces/fieldsComponent.interface';
+import { FormFieldError, GovUKItems } from '../interfaces/guidedSearch.interface';
+import { IFormFieldOptions, ITextInputComponent } from '../interfaces/fieldsComponent.interface';
 
-const transformErrors = (
-  error: Joi.ValidationError,
-  formName: string,
-): FormFieldError | undefined => {
+const transformErrors = (error: Joi.ValidationError, formName: string): FormFieldError | undefined => {
   if (formName === formKeys.dateQuestionnaire) {
     return dateErrorHandler(error);
   }
@@ -40,9 +31,7 @@ const transformTextInputError = async (
 
     if (hasError && hasError.length > 0 && hasError[0]?.message) {
       errorMessage = `${hasError[0].message}.`;
-      const updatedClasses = fieldOptions.classes
-        ? `${fieldOptions.classes} govuk-input--error`
-        : 'govuk-input--error';
+      const updatedClasses = fieldOptions.classes ? `${fieldOptions.classes} govuk-input--error` : 'govuk-input--error';
       fieldOptions = {
         ...fieldOptions,
         classes: updatedClasses,
@@ -57,9 +46,7 @@ const transformTextInputError = async (
   return newFormOptions;
 };
 
-const dateErrorHandler = (
-  error: Joi.ValidationError,
-): FormFieldError | undefined => {
+const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefined => {
   let fromError: string = '';
   const fromItems: GovUKItems[] = [];
   let toError: string = '';
@@ -80,11 +67,7 @@ const dateErrorHandler = (
     });
     if (hasError && hasError.length > 0 && hasError[0]?.message) {
       errorMessage = `${hasError[0].message}.`;
-      if (
-        hasError[0].type === 'any.custom' &&
-        field !== 'to-date-year' &&
-        field !== 'from-date-year'
-      ) {
+      if (hasError[0].type === 'any.custom' && field !== 'to-date-year' && field !== 'from-date-year') {
         errorMessage = '';
       }
       item.classes = `${item.classes} govuk-input--error`;

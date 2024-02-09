@@ -5,11 +5,7 @@ import inert from '@hapi/inert';
 import vision from '@hapi/vision';
 import Hapi, { Server } from '@hapi/hapi';
 
-import {
-  customHapiPino,
-  customHapiRoutes,
-  customHapiViews,
-} from './plugins/index';
+import { customHapiPino, customHapiRoutes, customHapiViews } from './plugins/index';
 
 // Create the hapi server
 const server: Server = Hapi.server({

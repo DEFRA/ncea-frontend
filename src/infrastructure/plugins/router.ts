@@ -9,13 +9,7 @@ import {
   staticRoutes,
 } from '../../../src/routes/index';
 
-const routes = [
-  ...staticRoutes,
-  ...homeRoutes,
-  ...dateSearchRoutes,
-  ...geographySearchRoutes,
-  ...searchResultsRoutes,
-];
+const routes = [...staticRoutes, ...homeRoutes, ...dateSearchRoutes, ...geographySearchRoutes, ...searchResultsRoutes];
 
 const customHapiRoutes = {
   plugin: {

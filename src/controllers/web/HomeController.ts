@@ -14,12 +14,8 @@ import { formIds, webRoutePaths } from '../../utils/constants';
  */
 
 const HomeController = {
-  renderHomeHandler: async (
-    request: Request,
-    response: ResponseToolkit,
-  ): Promise<ResponseObject> => {
-    const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } =
-      webRoutePaths;
+  renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     return response.view('screens/home/template', {
       quickSearchPath,
@@ -27,10 +23,7 @@ const HomeController = {
       dateSearchPath,
     });
   },
-  doQuickSearchHandler: async (
-    request: Request,
-    response: ResponseToolkit,
-  ): Promise<ResponseObject> => {
+  doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     return response.redirect(webRoutePaths.results);
   },
 };
