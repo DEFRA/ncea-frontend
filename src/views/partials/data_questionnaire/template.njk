@@ -1,0 +1,6 @@
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+
+<h2 class="govuk-heading-m">
+  {{ params.fieldLabel }}
+</h2>
+{{ govukDateInput(params.fieldOptions) }}

@@ -1,4 +1,4 @@
-module.exports = [
+const staticRoutes = [
   {
     method: 'GET',
     path: '/assets/all.js',
@@ -11,8 +11,10 @@ module.exports = [
     path: '/assets/{path*}',
     handler: {
       directory: {
-        path: ['public', 'node_modules/govuk-frontend/dist/govuk/assets'],
+        path: ['src/public', 'node_modules/govuk-frontend/dist/govuk/assets'],
       },
     },
   },
 ];
+
+export { staticRoutes };

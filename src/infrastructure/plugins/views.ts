@@ -1,11 +1,11 @@
+import dateFilter from 'nunjucks-date-filter';
 import nunjucks from 'nunjucks';
 import path from 'path';
+import vision from '@hapi/vision';
 import { webRoutePaths } from '../../utils/constants';
-/* eslint-disable  @typescript-eslint/no-var-requires */
-const dateFilter = require('nunjucks-date-filter');
 
-module.exports = {
-  plugin: require('@hapi/vision'),
+const customHapiViews = {
+  plugin: vision,
   options: {
     engines: {
       njk: {
@@ -50,3 +50,5 @@ module.exports = {
     },
   },
 };
+
+export { customHapiViews };

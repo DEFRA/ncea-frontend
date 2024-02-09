@@ -1,3 +1,4 @@
+import { generateDateString } from './generateDateString';
 import {
   IBoolQuery,
   IGeoShapeQuery,
@@ -16,19 +17,19 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
     },
   };
 
-  if (!fieldsToSearch.length && searchFieldsObject.searchTerm) {
+  if (!fieldsToSearch.length && searchFieldsObject['quick-search']) {
     const queryString: IQueryString = {
       query_string: {
-        query: searchFieldsObject.searchTerm,
+        query: searchFieldsObject['quick-search'].search_term ?? '',
         default_operator: 'AND',
       },
     };
     boolQuery.bool.must?.push(queryString);
   }
 
-  if (searchFieldsObject.searchTerm && fieldsToSearch.length) {
+  if (searchFieldsObject['quick-search'] && fieldsToSearch.length) {
     const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
-      match: { [field]: searchFieldsObject.searchTerm },
+      match: { [field]: searchFieldsObject['quick-search']?.search_term },
     })) as IMatchQuery[];
 
     const matchShould: IBoolQuery = {
@@ -41,12 +42,23 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
     boolQuery.bool.must?.push(matchShould);
   }
 
-  if (searchFieldsObject.startDate && searchFieldsObject.endDate) {
+  if (searchFieldsObject['date-search']?.['from-date-year'] && searchFieldsObject['date-search']['to-date-year']) {
+    const startDate: string = generateDateString({
+      year: parseInt(searchFieldsObject['date-search']['from-date-year']),
+      month: parseInt(searchFieldsObject['date-search']['from-date-month'] ?? ''),
+      day: parseInt(searchFieldsObject['date-search']['from-date-day'] ?? ''),
+    });
+    const endDate: string = generateDateString({
+      year: parseInt(searchFieldsObject['date-search']['to-date-year']),
+      month: parseInt(searchFieldsObject['date-search']['to-date-month'] ?? ''),
+      day: parseInt(searchFieldsObject['date-search']['to-date-day'] ?? ''),
+    });
+
     const rangeQuery: IRangeQuery = {
       range: {
         resourceTemporalExtentDateRange: {
-          gte: searchFieldsObject.startDate,
-          lte: searchFieldsObject.endDate,
+          gte: startDate,
+          lte: endDate,
         },
       },
     };
@@ -54,14 +66,14 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
     boolQuery.bool.must?.push(rangeQuery);
   }
 
-  const geoCoordinates = searchFieldsObject.geoCoordinates;
+  const geoCoordinates = searchFieldsObject['coordinate-search'];
 
   if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
     const geoShape: IShapeCoordinates = {
       type: 'envelope',
       coordinates: [
-        [geoCoordinates.west, geoCoordinates.north],
-        [geoCoordinates.east, geoCoordinates.south],
+        [parseFloat(geoCoordinates.west), parseFloat(geoCoordinates.north)],
+        [parseFloat(geoCoordinates.east), parseFloat(geoCoordinates.south)],
       ],
     };
 
@@ -75,8 +87,11 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
       },
     };
 
-    if (geoCoordinates.depth) {
-      geoShapeQuery.geo_shape.geom.depth = geoCoordinates.depth;
+    if (geoCoordinates.depth && geoShapeQuery.geo_shape.geom) {
+      geoShapeQuery.geo_shape.geom.depth = {
+        from: 0,
+        to: parseInt(geoCoordinates.depth),
+      };
     }
 
     boolQuery.bool.must?.push(geoShapeQuery);

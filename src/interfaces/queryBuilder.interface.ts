@@ -63,10 +63,24 @@ interface IGeoCoordinates {
 }
 
 interface ISearchFieldsObject {
-  searchTerm?: string;
-  startDate?: string;
-  endDate?: string;
-  geoCoordinates?: IGeoCoordinates;
+  'quick-search'?: {
+    search_term?: string;
+  };
+  'date-search'?: {
+    'from-date-year'?: string;
+    'from-date-day'?: string;
+    'from-date-month'?: string;
+    'to-date-year'?: string;
+    'to-date-day'?: string;
+    'to-date-month'?: string;
+  };
+  'coordinate-search'?: {
+    depth?: string;
+    north?: string;
+    south?: string;
+    east?: string;
+    west?: string;
+  };
 }
 
 export {
