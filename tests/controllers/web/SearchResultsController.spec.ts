@@ -14,23 +14,26 @@ import * as errorTransformer from '../../../src/utils/transformErrors';
 jest.mock('../../../src/services/handlers/searchResultsApi');
 
 describe('Search Results Controller > deals with rendering search results handler', () => {
-  let mockRequest = mock<Request>();
   const mockResponse = mock<ResponseToolkit>();
-  mockRequest.query['q'] = 'test search term';
+  const mockRequest = {
+    payload: {
+      q: 'test search term'
+    }
+  };
 
   beforeAll(async () => {
     (getSearchResults as jest.Mock).mockResolvedValue(
       new ApiResponse({}, 200, true)
     );
     return SearchResultsController.renderSearchResultsHandler(
-      mockRequest,
+      mockRequest as Request,
       mockResponse
     );
   });
 
   it('should call the Search view with context', async () => {
     expect(mockResponse.view).toHaveBeenCalledWith('screens/results/template', {
-      searchTerm: mockRequest.query?.q,
+      searchTerm: mockRequest.payload?.q as string,
       searchResults: {},
       hasResult: true,
     });
@@ -58,7 +61,8 @@ describe('Search Results Controller > renderGuidedSearchHandler', () => {
 describe('Search Results Controller > guidedSearchFailActionHandler', () => {
   const h = {
     view: jest.fn().mockReturnThis(),
-    takeover: jest.fn()
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
   };
   const error = {};
   jest.spyOn(errorTransformer,'transformErrors').mockReturnValue(dateQuestionChronologicalError as DateQuestionnaireError);
@@ -74,7 +78,8 @@ describe('Search Results Controller > guidedSearchFailActionHandler', () => {
 describe('Search Results Controller > quickSearchFailActionHandler > home page', () => {
   const h = {
     view: jest.fn().mockReturnThis(),
-    takeover: jest.fn()
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
   };
   const request = {
     payload: {
@@ -95,7 +100,8 @@ describe('Search Results Controller > quickSearchFailActionHandler > home page',
 describe('Search Results Controller > quickSearchFailActionHandler > results page', () => {
   const h = {
     view: jest.fn().mockReturnThis(),
-    takeover: jest.fn()
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
   };
   const request = {
     payload: {

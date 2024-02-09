@@ -8,7 +8,7 @@ import { fromDate, toDate } from '../../views/forms/dateQuestionnaireFields';
 
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { q: searchTerm } = request.query;
+    const { q: searchTerm } = request.payload as Record<string, string>;
 
     let results = { isSuccessful: true, response: {} };
     if (searchTerm) {
@@ -41,7 +41,7 @@ const SearchResultsController = {
     return h.view('screens/guided_search/date_questionnaire', { fromDate: fromField, toDate: toField }).takeover();
   },
   quickSearchFailActionHandler: (request, response, error) => {
-    const searchError: string | undefined = error?.details?.[0].message ? error?.details?.[0].message : undefined;
+    const searchError: string | undefined = error?.details?.[0].message || undefined;
     return response
       .view(request.payload.pageName === 'home' ? 'screens/home/template' : 'screens/results/template', {
         searchInputError: searchError
@@ -50,6 +50,7 @@ const SearchResultsController = {
             }
           : undefined,
       })
+      .code(400)
       .takeover();
   },
 };
