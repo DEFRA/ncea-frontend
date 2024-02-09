@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/h"
-
-npm run format-all
+npm run format:all
 npm run lint
 npm test
