@@ -118,3 +118,23 @@ describe('Search Results Controller > quickSearchFailActionHandler > results pag
     }});
   });
 });
+
+describe('Search Results Controller > quickSearchFailActionHandler > no error', () => {
+  const h = {
+    view: jest.fn().mockReturnThis(),
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
+  };
+  const request = {
+    payload: {
+      pageName: 'home'
+    }
+  }
+  beforeAll(() => {
+    return SearchResultsController.quickSearchFailActionHandler(request, h, undefined);
+  });
+
+  it('should render the home page with error messages', async () => {
+    expect(h.view).toHaveBeenCalledWith('screens/home/template', {searchInputError: undefined});
+  });
+});
