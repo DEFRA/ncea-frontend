@@ -1,8 +1,4 @@
-
-import { createRequire } from 'module';
-
-const require = createRequire(import.meta.url);
-const shell = require('shelljs');
+import * as shell from 'shelljs';
 
 shell.mkdir('-p', 'build/infrastructure/log_files');
 shell.cp('-R', 'src/views', 'build/views');

@@ -11,7 +11,7 @@
     "start:dev": "concurrently \"npm run sass:compile\" \"npm run bundle:js\" \"npm run json-server\" \"cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json\"",
     "start": "npm run build && node ./build/src/index.js",
     "build": "rimraf ./build && tsc && npm run copy-files",
-    "copy-files": "node copyNonTSFiles.js",
+    "copy-files": "ts-node copyNonTSFiles.ts",
     "json-server": "json-server ./src/services/mock-data.json --port 3300",
     "lint": "npm run lint:javascript",
     "lint:javascript": "eslint --config tools/.eslintrc.js ./src/**/* --ext .js,.ts",
@@ -66,7 +66,6 @@
     "rimraf": "5.0.5",
     "sass": "1.70.0",
     "ts-jest": "29.1.2",
-    "ts-jest-mock-import-meta": "^1.2.0",
     "tsx": "4.7.0",
     "typescript": "5.3.3",
     "webpack": "5.90.1",
@@ -85,7 +84,8 @@
     "nunjucks": "3.2.4",
     "nunjucks-date-filter": "0.1.1",
     "ol": "8.2.0",
-    "shelljs": "0.8.5"
+    "shelljs": "0.8.5",
+    "ts-node": "10.9.2"
   },
   "jestSonar": {
     "reportPath": "reports",
