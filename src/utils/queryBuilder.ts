@@ -10,6 +10,68 @@ import {
   IShapeCoordinates,
 } from '../interfaces/queryBuilder.interface';
 
+const quickSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQueryString => {
+  const queryString: IQueryString = {
+    query_string: {
+      query: searchFieldsObject['quick-search']?.search_term ?? '',
+      default_operator: 'AND',
+    },
+  };
+  return queryString;
+};
+
+const quickSearchQueryWithFields = (
+  searchFieldsObject: ISearchFieldsObject,
+  fieldsToSearch: string[] = [],
+): IBoolQuery => {
+  const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
+    match: { [field]: searchFieldsObject['quick-search']?.search_term },
+  })) as IMatchQuery[];
+
+  const matchShould: IBoolQuery = {
+    bool: {
+      should: matchQueries,
+      minimum_should_match: 1,
+    },
+  };
+  return matchShould;
+};
+
+const dateQuery = (searchFieldsObject: ISearchFieldsObject): IRangeQuery => {
+  const startDate: string = generateDateString({
+    year: parseInt(
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-year'] as string) : '',
+    ),
+    month: parseInt(
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-month'] as string) : '',
+    ),
+    day: parseInt(
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-day'] as string) : '',
+    ),
+  });
+  const endDate: string = generateDateString({
+    year: parseInt(
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-year'] as string) : '',
+    ),
+    month: parseInt(
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-month'] as string) : '',
+    ),
+    day: parseInt(
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-day'] as string) : '',
+    ),
+  });
+
+  const rangeQuery: IRangeQuery = {
+    range: {
+      resourceTemporalExtentDateRange: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+  };
+  return rangeQuery;
+};
+
 const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
@@ -18,51 +80,17 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
   };
 
   if (!fieldsToSearch.length && searchFieldsObject['quick-search']) {
-    const queryString: IQueryString = {
-      query_string: {
-        query: searchFieldsObject['quick-search'].search_term ?? '',
-        default_operator: 'AND',
-      },
-    };
+    const queryString: IQueryString = quickSearchQuery(searchFieldsObject);
     boolQuery.bool.must?.push(queryString);
   }
 
   if (searchFieldsObject['quick-search'] && fieldsToSearch.length) {
-    const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
-      match: { [field]: searchFieldsObject['quick-search']?.search_term },
-    })) as IMatchQuery[];
-
-    const matchShould: IBoolQuery = {
-      bool: {
-        should: matchQueries,
-        minimum_should_match: 1,
-      },
-    };
-
+    const matchShould: IBoolQuery = quickSearchQueryWithFields(searchFieldsObject, fieldsToSearch);
     boolQuery.bool.must?.push(matchShould);
   }
 
   if (searchFieldsObject['date-search']?.['from-date-year'] && searchFieldsObject['date-search']['to-date-year']) {
-    const startDate: string = generateDateString({
-      year: parseInt(searchFieldsObject['date-search']['from-date-year']),
-      month: parseInt(searchFieldsObject['date-search']['from-date-month'] ?? ''),
-      day: parseInt(searchFieldsObject['date-search']['from-date-day'] ?? ''),
-    });
-    const endDate: string = generateDateString({
-      year: parseInt(searchFieldsObject['date-search']['to-date-year']),
-      month: parseInt(searchFieldsObject['date-search']['to-date-month'] ?? ''),
-      day: parseInt(searchFieldsObject['date-search']['to-date-day'] ?? ''),
-    });
-
-    const rangeQuery: IRangeQuery = {
-      range: {
-        resourceTemporalExtentDateRange: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-    };
-
+    const rangeQuery: IRangeQuery = dateQuery(searchFieldsObject);
     boolQuery.bool.must?.push(rangeQuery);
   }
 
