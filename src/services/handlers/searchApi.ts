@@ -13,6 +13,7 @@ const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promis
     return finalResponse;
     /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (error: any) {
+    console.log(error);
     throw new Error(`Error fetching results: ${error.message}`);
   }
 };

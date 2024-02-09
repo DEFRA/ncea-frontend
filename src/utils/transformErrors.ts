@@ -29,7 +29,7 @@ const transformTextInputError = async (
       }
     });
 
-    if (hasError && hasError.length > 0) {
+    if (hasError && hasError.length > 0 && hasError[0]?.message) {
       errorMessage = `${hasError[0].message}.`;
       const updatedClasses = fieldOptions.classes ? `${fieldOptions.classes} govuk-input--error` : 'govuk-input--error';
       fieldOptions = {
@@ -65,7 +65,7 @@ const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefine
         return ed.path[0] === field;
       }
     });
-    if (hasError && hasError.length > 0) {
+    if (hasError && hasError.length > 0 && hasError[0]?.message) {
       errorMessage = `${hasError[0].message}.`;
       if (hasError[0].type === 'any.custom' && field !== 'to-date-year' && field !== 'from-date-year') {
         errorMessage = '';

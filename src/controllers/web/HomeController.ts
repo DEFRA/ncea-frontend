@@ -1,5 +1,8 @@
 'use strict';
 
+import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
+import { formIds, webRoutePaths } from '../../utils/constants';
+
 /**
  * This code snippet exports a module named HomeController.
  * The renderHomeHandler method is an asynchronous function that takes a Request object and a ResponseToolkit object as parameters.
@@ -10,18 +13,18 @@
  *
  */
 
-import { formValidatorOptions, webRoutePaths } from '../../utils/constants';
-import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-
 const HomeController = {
   renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
-    const { quickSearch: quickSearchOptions } = formValidatorOptions;
+    const formId: string = formIds.quickSearch;
     return response.view('screens/home/template', {
       quickSearchPath,
+      formId,
       dateSearchPath,
-      quickSearchOptions,
     });
+  },
+  doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    return response.redirect(webRoutePaths.results);
   },
 };
 

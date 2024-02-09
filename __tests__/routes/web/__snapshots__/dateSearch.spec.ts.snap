@@ -1,0 +1,354 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Questionnaire > Sanpshot verification should match the date questionnaire screen snapshot 1`] = `
+"<!DOCTYPE html>
+<html lang="en" class="govuk-template app-html-class">
+  <head>
+    <meta charset="utf-8">
+    <title>
+  Natural Capital Search Service - GOV.UK
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
+
+    
+  
+      <link rel="icon" sizes="48x48" href="/assets/images/favicon.ico">
+      <link rel="icon" sizes="any" href="/assets/images/favicon.svg" type="image/svg+xml">
+      <link rel="mask-icon" href="/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+      <link rel="apple-touch-icon" href="/assets/images/govuk-icon-180.png">
+      <link rel="manifest" href="/assets/manifest.json">
+    
+
+
+    
+  <link rel="stylesheet" href="/assets/application.css">
+
+    
+  </head>
+  <body class="govuk-template__body app-body-class">
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+    
+
+    
+      <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+    
+
+    
+  <header class="header-container">
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
+      </div>
+    </div>
+  </header>
+
+
+    
+  
+      <div class="govuk-width-container">
+        
+  
+  <div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+    </span>
+  </p>
+</div>
+
+
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Questionnaire search</a>
+    </li>
+  
+
+  </ol>
+</div>
+
+
+        <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+          
+  <div class="govuk-grid-row">
+    <form method="POST" id="date-search" action="/date-search" data-toggle-submit-button data-do-browser-storage>
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-m">
+          When was the data or information collected?
+        </h1>
+        
+
+<h2 class="govuk-heading-m">
+  From
+</h2>
+
+
+
+
+  
+<div class="govuk-form-group">
+
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="from-date-hint">
+    
+    <legend class="govuk-fieldset__legend">
+    
+      You must enter a year, for example, 2007
+    
+    </legend>
+    
+  
+    <div id="from-date-hint" class="govuk-hint">
+      You can choose to enter a day or month, for example, 27 3 2007
+    </div>
+  
+  
+    <div class="govuk-date-input" id="from-date">
+      
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="from-date-day">
+            Day
+          </label>
+        
+        
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="from-date-day" name="from-date-day" type="text" inputmode="numeric">
+        
+        </div>
+      </div>
+    
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="from-date-month">
+            Month
+          </label>
+        
+        
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="from-date-month" name="from-date-month" type="text" inputmode="numeric">
+        
+        </div>
+      </div>
+    
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="from-date-year">
+            Year
+          </label>
+        
+        
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="from-date-year" name="from-date-year" type="text" inputmode="numeric">
+        
+        </div>
+      </div>
+    
+    </div>
+  
+  </fieldset>
+
+</div>
+
+        
+
+<h2 class="govuk-heading-m">
+  To
+</h2>
+
+
+
+
+  
+<div class="govuk-form-group">
+
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="to-date-hint">
+    
+    <legend class="govuk-fieldset__legend">
+    
+      You must enter a year, for example, 2007
+    
+    </legend>
+    
+  
+    <div id="to-date-hint" class="govuk-hint">
+      You can choose to enter a day or month, for example, 27 3 2007
+    </div>
+  
+  
+    <div class="govuk-date-input" id="to-date">
+      
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="to-date-day">
+            Day
+          </label>
+        
+        
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="to-date-day" name="to-date-day" type="text" inputmode="numeric">
+        
+        </div>
+      </div>
+    
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="to-date-month">
+            Month
+          </label>
+        
+        
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="to-date-month" name="to-date-month" type="text" inputmode="numeric">
+        
+        </div>
+      </div>
+    
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="to-date-year">
+            Year
+          </label>
+        
+        
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="to-date-year" name="to-date-year" type="text" inputmode="numeric">
+        
+        </div>
+      </div>
+    
+    </div>
+  
+  </fieldset>
+
+</div>
+
+        <div class="govuk-button-group">
+          
+  
+
+  
+    
+  
+
+<a href="/coordinate-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-skip="">
+  Skip question
+</a>
+
+          
+  
+    
+  
+
+<button type="submit" class="govuk-button" data-module="govuk-button" data-to-disable="">
+  Next question
+</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+        </main>
+      </div>
+    
+
+
+    
+  <footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-width-container">
+    
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          
+            <ul class="govuk-footer__inline-list">
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Help
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Privacy
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Cookies
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Accessibility statement
+                  </a>
+                </li>
+              
+            </ul>
+          
+          
+        
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41"
+        >
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+          />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          
+            All content is available under the
+            <a
+              class="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >Open Government Licence v3.0</a>, except where otherwise stated
+          
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+        >© Crown copyright</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+    
+  
+  <script type="module" src="/assets/all.js"></script>
+  <script type="module">
+    import {initAll} from '/assets/all.js'
+    initAll()
+  </script>
+  <script type="module" src="/assets/main.js"></script>
+
+  </body>
+</html>
+"
+`;

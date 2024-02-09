@@ -1,6 +1,6 @@
 {
-  "watch": ["src", "public/scripts"],
-  "ext": ".ts,.js,.njk,.scss",
+  "watch": ["src"],
+  "ext": ".ts,.njk",
   "ignore": [],
-  "exec": "npm run sass:compile && npx ts-node ./src/index.ts"
+  "exec": "tsx ./src/index.ts"
 }

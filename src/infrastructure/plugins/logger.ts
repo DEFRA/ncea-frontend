@@ -1,6 +1,6 @@
 import HapiPino from 'hapi-pino';
 
-module.exports = {
+const customHapiPino = {
   plugin: HapiPino,
   options: {
     level: 'info',
@@ -16,3 +16,5 @@ module.exports = {
     stream: `${__dirname}/../log_files/app_${new Date().toJSON().slice(0, 10)}.log`,
   },
 };
+
+export { customHapiPino };

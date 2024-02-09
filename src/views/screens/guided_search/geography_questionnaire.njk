@@ -6,6 +6,11 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+{% endblock %}
+
 {% block beforeContent %}
   {{ super() }}
   {{ govukBreadcrumbs({
@@ -27,7 +32,7 @@
       <span class="govuk-caption-m">Enter a coordinate in each field to create a geographic bounding box. This will show you the data that exists within that geographical area.</span>
     </div>
   </div>
-  <form method="POST" id="{{ dateFormOptions.formId }}" action="{{geographySearchPath}}">
+  <form method="POST" action="{{geographySearchPath}}" id="{{formId}}" data-do-browser-storage data-toggle-submit-button>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
         <div class="geography-fields__container">
@@ -44,22 +49,13 @@
         {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: guidedDateSearchPath }) }}
       </div>
       <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
-        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0" }) }}
-        {{ govukButton({ text: "Next question", id: dateFormOptions.submitButtonId, classes: "govuk-!-margin-bottom-0", attributes: {
-              onclick: "storeFieldsData({formId: '"+dateFormOptions.formId+"'})"
-            } }) }}
+        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: resultsPath, attributes: {
+            'data-do-storage-skip': ''
+          } }) }}
+        {{ govukButton({ text: "Show results", classes: "govuk-!-margin-bottom-0", attributes: {
+            'data-to-disable': ''
+          } }) }}
       </div>
     </div>
   </form>
-{% endblock %}
-
-{% block bodyEnd %}
-  {{ super() }}
-  <script src="{{ assetPath }}/scripts/browserStorage.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      readStorageData({formId: "{{dateFormOptions.formId}}"});
-    });
-  </script>
-  {{ dynamicSubmitScript | safe }}
 {% endblock %}

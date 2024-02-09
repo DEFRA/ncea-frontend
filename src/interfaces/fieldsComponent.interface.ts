@@ -67,8 +67,8 @@ interface IFieldsetOptions {
 }
 
 interface IBasicFieldOptions {
-  id: string;
-  name: string;
+  id?: string;
+  name?: string;
   hint?: IHintOptions;
   errorMessage?: IErrorMessageOptions;
   formGroup?: IFormGroupOptions;
