@@ -1,4 +1,4 @@
-import { sessionStorageKey } from './browserStorage.js';
+import { sessionStorageKey } from './browserStorage';
 
 const getSearchResults = async (path) => {
   try {

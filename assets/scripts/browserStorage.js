@@ -1,6 +1,8 @@
 'use strict';
 
-import { toggleSubmitButton } from './toggleFormSubmitButton.js';
+import { toggleSubmitButton } from './toggleFormSubmitButton';
+
+const timeOut = 500;
 
 const sessionStorageKey = 'ncea-search-data';
 const defaultSessionData = JSON.stringify({
@@ -15,11 +17,11 @@ const extractStorageData = () => {
   return sessionData;
 };
 
-const storeFieldsData = (form, clearData = false, forceStore = false) => {
+const storeFieldsData = (form, clearData = false) => {
   const sessionData = extractStorageData();
   const { fields: fieldsData } = sessionData;
   if (!clearData) {
-    let formData = fieldsData[form.id] || {};
+    const formData = fieldsData[form.id] || {};
     form.querySelectorAll('input').forEach((element) => {
       element.addEventListener('change', (event) => {
         const { name, value, checked } = event.target;
@@ -27,15 +29,7 @@ const storeFieldsData = (form, clearData = false, forceStore = false) => {
         fieldsData[form.id] = { ...fieldsData[form.id], ...formData };
         sessionStorage.setItem(sessionStorageKey, JSON.stringify(sessionData));
       });
-      if (forceStore) {
-        formData[element.name] =
-          element.type === 'checkbox' ? element.checked : element.value;
-      }
     });
-    if (forceStore) {
-      fieldsData[form.id] = { ...fieldsData[form.id], ...formData };
-      sessionStorage.setItem(sessionStorageKey, JSON.stringify(sessionData));
-    }
   } else {
     if (fieldsData.hasOwnProperty(form.id)) {
       delete fieldsData[form.id];
@@ -61,7 +55,33 @@ const hydrateFieldsData = (form) => {
   clearTimeout(form.detectFieldsStateTimeout);
   form.detectFieldsStateTimeout = setTimeout(() => {
     toggleSubmitButton(form);
-  }, 500);
+  }, timeOut);
+};
+
+const resetStorage = () => {
+  const resetElements = document.querySelectorAll('[data-do-storage-reset]');
+  if (resetElements.length > 0) {
+    resetElements.forEach((element) => {
+      element.addEventListener('click', () => {
+        sessionStorage.setItem(sessionStorageKey, defaultSessionData);
+      });
+    });
+  }
+};
+
+const skipStorage = () => {
+  const skipElements = document.querySelectorAll('[data-do-storage-skip]');
+  if (skipElements.length > 0) {
+    skipElements.forEach((element) => {
+      element.addEventListener('click', (event) => {
+        const associatedForm = event.target.closest('form');
+        if (associatedForm) {
+          storeFieldsData(associatedForm, true);
+          hydrateFieldsData(associatedForm);
+        }
+      });
+    });
+  }
 };
 
 const browserStorage = () => {
@@ -76,27 +96,8 @@ const browserStorage = () => {
       });
     }
 
-    const resetElements = document.querySelectorAll('[data-do-storage-reset]');
-    if (resetElements.length > 0) {
-      resetElements.forEach((element) => {
-        element.addEventListener('click', () => {
-          sessionStorage.setItem(sessionStorageKey, defaultSessionData);
-        });
-      });
-    }
-
-    const skipElements = document.querySelectorAll('[data-do-storage-skip]');
-    if (skipElements.length > 0) {
-      skipElements.forEach((element) => {
-        element.addEventListener('click', (event) => {
-          const associatedForm = event.target.closest('form');
-          if (associatedForm) {
-            storeFieldsData(associatedForm, true);
-            hydrateFieldsData(associatedForm);
-          }
-        });
-      });
-    }
+    resetStorage();
+    skipStorage();
   }
 };
 

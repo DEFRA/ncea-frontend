@@ -1,13 +1,13 @@
-import { browserStorage } from './browserStorage.js';
-import { fetchResults } from './fetchResults.js';
-import { renderMapToDrawPolygon } from './renderMapToDrawPolygon.js';
-import { toggleFormSubmitButton } from './toggleFormSubmitButton.js';
+import { browserStorage } from './browserStorage';
+import { fetchResults } from './fetchResults';
+import { toggleFormSubmitButton } from './toggleFormSubmitButton';
+import { renderMapToDrawPolygon } from './renderMapToDrawPolygon';
 
 const bundle = () => {
-  toggleFormSubmitButton();
-  renderMapToDrawPolygon();
   browserStorage();
   fetchResults();
+  toggleFormSubmitButton();
+  renderMapToDrawPolygon();
 };
 
 bundle();

@@ -964,25 +964,22 @@
       },
       f = function (t) {
         var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
-          i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-          n = g(),
-          s = n.fields;
-        if (e) s.hasOwnProperty(t.id) && delete s[t.id], sessionStorage.setItem(u, JSON.stringify(n));
+          i = g(),
+          n = i.fields;
+        if (e) n.hasOwnProperty(t.id) && delete n[t.id], sessionStorage.setItem(u, JSON.stringify(i));
         else {
-          var r = s[t.id] || {};
+          var s = n[t.id] || {};
           t.querySelectorAll('input').forEach(function (e) {
-            e.addEventListener('change', function (i) {
-              var o = i.target,
+            e.addEventListener('change', function (r) {
+              var o = r.target,
                 a = o.name,
                 h = o.value,
                 l = o.checked;
-              (r[a] = 'checkbox' === e.type ? l : h),
-                (s[t.id] = c(c({}, s[t.id]), r)),
-                sessionStorage.setItem(u, JSON.stringify(n));
-            }),
-              i && (r[e.name] = 'checkbox' === e.type ? e.checked : e.value);
-          }),
-            i && ((s[t.id] = c(c({}, s[t.id]), r)), sessionStorage.setItem(u, JSON.stringify(n)));
+              (s[a] = 'checkbox' === e.type ? l : h),
+                (n[t.id] = c(c({}, n[t.id]), s)),
+                sessionStorage.setItem(u, JSON.stringify(i));
+            });
+          });
         }
       },
       _ = function (t) {
@@ -1668,7 +1665,7 @@
         super(t), (this.key = e), (this.oldValue = i);
       }
     }
-    const J = class extends Z {
+    const $ = class extends Z {
         constructor(t) {
           super(), this.on, this.once, this.un, U(this), (this.values_ = null), void 0 !== t && this.setProperties(t);
         }
@@ -1722,7 +1719,7 @@
           }
         }
       },
-      $ = { CENTER: 'center', RESOLUTION: 'resolution', ROTATION: 'rotation' },
+      J = { CENTER: 'center', RESOLUTION: 'resolution', ROTATION: 'rotation' },
       Q = 42,
       tt = 256,
       et = {
@@ -2030,7 +2027,7 @@
       }
       return t;
     }
-    function Jt(t, e) {
+    function $t(t, e) {
       let i = !0;
       for (let n = t.length - 1; n >= 0; --n)
         if (t[n] != e[n]) {
@@ -2039,7 +2036,7 @@
         }
       return i;
     }
-    function $t(t, e) {
+    function Jt(t, e) {
       const i = Math.cos(e),
         n = Math.sin(e),
         s = t[0] * i - t[1] * n,
@@ -2216,7 +2213,7 @@
     function ke(t, e) {
       return (
         pe &&
-          !Jt(t, [0, 0]) &&
+          !$t(t, [0, 0]) &&
           t[0] >= -180 &&
           t[0] <= 180 &&
           t[1] >= -90 &&
@@ -2303,7 +2300,7 @@
     function He(t) {
       return 3 * t * t - 2 * t * t * t;
     }
-    function Je(t) {
+    function $e(t) {
       return t;
     }
     Se(lt),
@@ -2331,15 +2328,15 @@
           pt(t, e, Ne), pt(e, t, ze);
         });
       });
-    const $e =
+    const Je =
         'undefined' != typeof navigator && void 0 !== navigator.userAgent ? navigator.userAgent.toLowerCase() : '',
-      Qe = $e.includes('firefox'),
+      Qe = Je.includes('firefox'),
       ti =
-        ($e.includes('safari') &&
-          !$e.includes('chrom') &&
-          ($e.includes('version/15.4') || /cpu (os|iphone os) 15_4 like mac os x/.test($e)),
-        $e.includes('webkit') && !$e.includes('edge')),
-      ei = $e.includes('macintosh'),
+        (Je.includes('safari') &&
+          !Je.includes('chrom') &&
+          (Je.includes('version/15.4') || /cpu (os|iphone os) 15_4 like mac os x/.test(Je)),
+        Je.includes('webkit') && !Je.includes('edge')),
+      ei = Je.includes('macintosh'),
       ii = 'undefined' != typeof devicePixelRatio ? devicePixelRatio : 1,
       ni =
         'undefined' != typeof WorkerGlobalScope &&
@@ -2430,7 +2427,7 @@
     }
     new Array(6);
     const gi = [1, 0, 0, 1, 0, 0],
-      fi = class extends J {
+      fi = class extends $ {
         constructor() {
           super(),
             (this.extent_ = [1 / 0, 1 / 0, -1 / 0, -1 / 0]),
@@ -3056,7 +3053,7 @@
       }
       return !0;
     }
-    function Ji(t, e, i, n, s) {
+    function $i(t, e, i, n, s) {
       s = void 0 !== s && s;
       for (let r = 0, o = i.length; r < o; ++r) {
         const o = i[r],
@@ -3065,8 +3062,8 @@
       }
       return e;
     }
-    function $i(t, e, i, n, s) {
-      for (let r = 0, o = i.length; r < o; ++r) e = Ji(t, e, i[r], n, s);
+    function Ji(t, e, i, n, s) {
+      for (let r = 0, o = i.length; r < o; ++r) e = $i(t, e, i[r], n, s);
       return e;
     }
     class Qi extends pi {
@@ -3110,7 +3107,7 @@
         let e;
         return (
           void 0 !== t
-            ? ((e = this.getOrientedFlatCoordinates().slice()), Ji(e, 0, this.ends_, this.stride, t))
+            ? ((e = this.getOrientedFlatCoordinates().slice()), $i(e, 0, this.ends_, this.stride, t))
             : (e = this.flatCoordinates),
           Li(e, 0, this.ends_, this.stride)
         );
@@ -3156,7 +3153,7 @@
           Hi(t, 0, this.ends_, this.stride)
             ? (this.orientedFlatCoordinates_ = t)
             : ((this.orientedFlatCoordinates_ = t.slice()),
-              (this.orientedFlatCoordinates_.length = Ji(this.orientedFlatCoordinates_, 0, this.ends_, this.stride))),
+              (this.orientedFlatCoordinates_.length = $i(this.orientedFlatCoordinates_, 0, this.ends_, this.stride))),
             (this.orientedRevision_ = this.getRevision());
         }
         return this.orientedFlatCoordinates_;
@@ -3197,7 +3194,7 @@
     }
     function sn(t) {
       return (
-        !(t.sourceCenter && t.targetCenter && !Jt(t.sourceCenter, t.targetCenter)) &&
+        !(t.sourceCenter && t.targetCenter && !$t(t.sourceCenter, t.targetCenter)) &&
         t.sourceResolution === t.targetResolution &&
         t.sourceRotation === t.targetRotation
       );
@@ -3209,7 +3206,7 @@
         h = t[1] * r + t[0] * o;
       return (a += (e[0] / 2 - i[0]) * n), (h += (i[1] - e[1] / 2) * n), (o = -o), [a * r - h * o, h * r + a * o];
     }
-    const on = class extends J {
+    const on = class extends $ {
         constructor(t) {
           super(),
             this.on,
@@ -3235,7 +3232,7 @@
         }
         applyOptions_(t) {
           const e = Object.assign({}, t);
-          for (const t in $) delete e[t];
+          for (const t in J) delete e[t];
           this.setProperties(e, !0);
           const i = (function (t) {
             let e, i, n;
@@ -3534,7 +3531,7 @@
           return (
             void 0 !== n &&
               ((i = [n[0] - e[0], n[1] - e[1]]),
-              $t(i, t - this.getRotation()),
+              Jt(i, t - this.getRotation()),
               (r = e),
               ((s = i)[0] += +r[0]),
               (s[1] += +r[1])),
@@ -3570,7 +3567,7 @@
           return t ? Fe(t, this.getProjection()) : t;
         }
         getCenterInternal() {
-          return this.get($.CENTER);
+          return this.get(J.CENTER);
         }
         getConstraints() {
           return this.constraints_;
@@ -3618,7 +3615,7 @@
           return this.projection_;
         }
         getResolution() {
-          return this.get($.RESOLUTION);
+          return this.get(J.RESOLUTION);
         }
         getResolutions() {
           return this.resolutions_;
@@ -3642,7 +3639,7 @@
           };
         }
         getRotation() {
-          return this.get($.ROTATION);
+          return this.get(J.ROTATION);
         }
         getValueForResolutionFunction(t) {
           const e = Math.log(t || 2),
@@ -3853,9 +3850,9 @@
               i,
               this.calculateCenterShift(this.targetCenter_, r, n, s),
             );
-          this.get($.ROTATION) !== n && this.set($.ROTATION, n),
-            this.get($.RESOLUTION) !== r && (this.set($.RESOLUTION, r), this.set('zoom', this.getZoom(), !0)),
-            (o && this.get($.CENTER) && Jt(this.get($.CENTER), o)) || this.set($.CENTER, o),
+          this.get(J.ROTATION) !== n && this.set(J.ROTATION, n),
+            this.get(J.RESOLUTION) !== r && (this.set(J.RESOLUTION, r), this.set('zoom', this.getZoom(), !0)),
+            (o && this.get(J.CENTER) && $t(this.get(J.CENTER), o)) || this.set(J.CENTER, o),
             this.getAnimating() && !t && this.cancelAnimations(),
             (this.cancelAnchor_ = void 0);
         }
@@ -3884,7 +3881,7 @@
             (this.getResolution() === o &&
               this.getRotation() === s &&
               this.getCenterInternal() &&
-              Jt(this.getCenterInternal(), a)) ||
+              $t(this.getCenterInternal(), a)) ||
               (this.getAnimating() && this.cancelAnimations(),
               this.animateInternal({ rotation: s, center: a, resolution: o, duration: t, easing: Ue, anchor: i }));
         }
@@ -3919,7 +3916,7 @@
         super(t), (this.element = e), (this.index = i);
       }
     }
-    const un = class extends J {
+    const un = class extends $ {
         constructor(t, e) {
           if (
             (super(),
@@ -4381,7 +4378,7 @@
       Wn = 'maxZoom',
       Xn = 'minZoom',
       jn = 'source',
-      Yn = class extends J {
+      Yn = class extends $ {
         constructor(t) {
           super(), this.on, this.once, this.un, (this.background_ = t.background);
           const e = Object.assign({}, t);
@@ -4633,7 +4630,7 @@
     function Hn(t, e) {
       kn.expire();
     }
-    const Jn = class extends C {
+    const $n = class extends C {
         constructor(t) {
           super(), (this.map_ = t);
         }
@@ -4711,7 +4708,7 @@
           kn.canExpireCache() && t.postRenderFunctions.push(Hn);
         }
       },
-      $n = class extends x {
+      Jn = class extends x {
         constructor(t, e, i, n) {
           super(t), (this.inversePixelTransform = e), (this.frameState = i), (this.context = n);
         }
@@ -4773,7 +4770,7 @@
       ps = 'center',
       ms = 'middle',
       ys = [0, 0, 0, 0],
-      vs = new J();
+      vs = new $();
     let xs,
       ws = null;
     const Cs = {},
@@ -4862,7 +4859,7 @@
       const n = e.split('\n').reduce((e, i) => Math.max(e, bs(t, i)), 0);
       return (i[e] = n), n;
     }
-    const Rs = class extends Jn {
+    const Rs = class extends $n {
       constructor(t) {
         super(t),
           (this.fontChangeListenerKey_ = j(vs, w, t.redrawText.bind(t))),
@@ -4882,7 +4879,7 @@
       dispatchRenderEvent(t, e) {
         const i = this.getMap();
         if (i.hasListener(t)) {
-          const n = new $n(t, void 0, e);
+          const n = new Jn(t, void 0, e);
           i.dispatchEvent(n);
         }
       }
@@ -5369,7 +5366,7 @@
                 ((this.tilesLoadingKeys_[s] = !0), ++this.tilesLoading_, ++r, n.load());
         }
       },
-      qs = class extends J {
+      qs = class extends $ {
         constructor(t) {
           super();
           const e = t.element;
@@ -5569,7 +5566,7 @@
           this.rotation_ = i;
         }
       },
-      Js = class extends qs {
+      $s = class extends qs {
         constructor(t) {
           (t = t || {}), super({ element: document.createElement('div'), target: t.target });
           const e = void 0 !== t.className ? t.className : 'ol-zoom',
@@ -5614,7 +5611,7 @@
           }
         }
       },
-      $s = 'active';
+      Js = 'active';
     function Qs(t, e, i, n) {
       const s = t.getZoom();
       if (void 0 === s) return;
@@ -5623,7 +5620,7 @@
       t.getAnimating() && t.cancelAnimations(),
         t.animate({ resolution: o, anchor: i, duration: void 0 !== n ? n : 250, easing: Ue });
     }
-    const tr = class extends J {
+    const tr = class extends $ {
         constructor(t) {
           super(),
             this.on,
@@ -5634,7 +5631,7 @@
             this.setActive(!0);
         }
         getActive() {
-          return this.get($s);
+          return this.get(Js);
         }
         getMap() {
           return this.map_;
@@ -5643,7 +5640,7 @@
           return !0;
         }
         setActive(t) {
-          this.set($s, t);
+          this.set(Js, t);
         }
         setMap(t) {
           this.map_ = t;
@@ -5792,7 +5789,7 @@
                 (r = i.getResolution()),
                 (s[0] *= r),
                 (s[1] *= r),
-                $t(e, i.getRotation()),
+                Jt(e, i.getRotation()),
                 i.adjustCenterInternal(e);
             }
           } else this.kinetic_ && this.kinetic_.begin();
@@ -6003,14 +6000,14 @@
                 a = 0;
               n == Sr ? (a = -r) : n == wr ? (o = -r) : n == Cr ? (o = r) : (a = r);
               const h = [o, a];
-              $t(h, s.getRotation()),
+              Jt(h, s.getRotation()),
                 (function (t, e, i) {
                   const n = t.getCenterInternal();
                   if (n) {
                     const s = [n[0] + e[0], n[1] + e[1]];
                     t.animateInternal({
                       duration: void 0 !== i ? i : 250,
-                      easing: Je,
+                      easing: $e,
                       center: t.getConstrainedCenter(s),
                     });
                   }
@@ -6285,7 +6282,7 @@
         for (let t = 0, n = i.length; t < n; ++t) kr(i[t], e);
       }
     }
-    class Ar extends J {
+    class Ar extends $ {
       constructor(t) {
         if (
           (super(),
@@ -6813,7 +6810,7 @@
       constructor(t) {
         (t = t || {}),
           (this.geometry_ = null),
-          (this.geometryFunction_ = Jr),
+          (this.geometryFunction_ = $r),
           void 0 !== t.geometry && this.setGeometry(t.geometry),
           (this.fill_ = void 0 !== t.fill ? t.fill : null),
           (this.image_ = void 0 !== t.image ? t.image : null),
@@ -6895,7 +6892,7 @@
                 (this.geometryFunction_ = function () {
                   return t;
                 })
-              : (this.geometryFunction_ = Jr),
+              : (this.geometryFunction_ = $r),
           (this.geometry_ = t);
       }
       setZIndex(t) {
@@ -6911,10 +6908,10 @@
       }
       return Ur;
     }
-    function Jr(t) {
+    function $r(t) {
       return t.getGeometry();
     }
-    const $r = qr;
+    const Jr = qr;
     let Qr = null;
     class to extends A {
       constructor(t, e, i, n, s) {
@@ -8199,7 +8196,7 @@
                   })(t, i + 'cross-origin'),
                   p = (function (t, e) {
                     const i = t[e];
-                    if (void 0 !== i) return $o(i, e);
+                    if (void 0 !== i) return Jo(i, e);
                   })(t, i + 'offset'),
                   m = Uo(t, i + 'offset-origin'),
                   y = qo(t, i + 'width'),
@@ -8214,7 +8211,7 @@
                       return i;
                     }
                   })(t, i + 'size'),
-                  w = Jo(t, i + 'declutter'),
+                  w = $o(t, i + 'declutter'),
                   C = new no({
                     src: s,
                     anchorOrigin: u,
@@ -8256,7 +8253,7 @@
                     d = qo(t, i + 'radius1'),
                     g = qo(t, i + 'radius2'),
                     f = qo(t, i + 'angle'),
-                    _ = Jo(t, i + 'declutter-mode'),
+                    _ = $o(t, i + 'declutter-mode'),
                     p = new Xr({ points: s, radius: u, radius1: d, radius2: g, angle: f, declutterMode: _ });
                   return function (t) {
                     return (
@@ -8280,7 +8277,7 @@
                       a = Zo(t, i + 'displacement', e),
                       h = Xo(t, i + 'rotation', e),
                       l = Yo(t, i + 'rotate-with-view', e),
-                      c = Jo(t, i + 'declutter-mode'),
+                      c = $o(t, i + 'declutter-mode'),
                       u = new Yr({ radius: 5, declutterMode: c });
                     return function (t) {
                       return (
@@ -8300,7 +8297,7 @@
         o = Xo(t, 'z-index', e);
       if (!(i || n || s || r || k(t)))
         throw new Error('No fill, stroke, point, or text symbolizer properties in style: ' + JSON.stringify(t));
-      const a = new $r();
+      const a = new Jr();
       return function (t) {
         let e = !0;
         if (i) {
@@ -8396,14 +8393,14 @@
       if (!(e in t)) return null;
       const n = Fo(t[e], go, i);
       return function (t) {
-        return $o(n(t), e);
+        return Jo(n(t), e);
       };
     }
     function Zo(t, e, i) {
       if (!(e in t)) return null;
       const n = Fo(t[e], go, i);
       return function (t) {
-        const i = $o(n(t), e);
+        const i = Jo(n(t), e);
         if (2 !== i.length) throw new Error(`Expected two numbers for ${e}`);
         return i;
       };
@@ -8414,7 +8411,7 @@
       return function (t) {
         return (function (t, e) {
           if ('number' == typeof t) return t;
-          const i = $o(t, e);
+          const i = Jo(t, e);
           if (2 !== i.length) throw new Error(`Expected an array of two numbers for ${e}`);
           return i;
         })(n(t), e);
@@ -8442,7 +8439,7 @@
         return i;
       }
     }
-    function Jo(t, e) {
+    function $o(t, e) {
       const i = t[e];
       if (void 0 !== i) {
         if ('string' != typeof i) throw new Error(`Expected a string for ${e}`);
@@ -8451,7 +8448,7 @@
         return i;
       }
     }
-    function $o(t, e) {
+    function Jo(t, e) {
       if (!Array.isArray(t)) throw new Error(`Expected an array for ${e}`);
       const i = t.length;
       for (let n = 0; n < i; ++n) if ('number' != typeof t[n]) throw new Error(`Expected an array of numbers for ${e}`);
@@ -8467,7 +8464,7 @@
     }
     function ea(t, e) {
       if ('string' == typeof t) return t;
-      const i = $o(t, e),
+      const i = Jo(t, e),
         n = i.length;
       if (n < 3 || n > 4) throw new Error(`Expected a color with 3 or 4 values for ${e}`);
       return i;
@@ -8525,16 +8522,16 @@
             if (void 0 === t) return Hr;
             if (!t) return null;
             if ('function' == typeof t) return t;
-            if (t instanceof $r) return t;
+            if (t instanceof Jr) return t;
             if (!Array.isArray(t)) return Go([t]);
             if (0 === t.length) return [];
             const e = t.length,
               i = t[0];
-            if (i instanceof $r) {
+            if (i instanceof Jr) {
               const i = new Array(e);
               for (let n = 0; n < e; ++n) {
                 const e = t[n];
-                if (!(e instanceof $r)) throw new Error('Expected a list of style instances');
+                if (!(e instanceof Jr)) throw new Error('Expected a list of style instances');
                 i[n] = e;
               }
               return i;
@@ -9801,7 +9798,7 @@
       dispatchRenderEvent_(t, e, i) {
         const n = this.getLayer();
         if (n.hasListener(t)) {
-          const s = new $n(t, this.inversePixelTransform, i, e);
+          const s = new Jn(t, this.inversePixelTransform, i, e);
           n.dispatchEvent(s);
         }
       }
@@ -10254,8 +10251,8 @@
                   q = i[10];
                 let U = i[11];
                 const H = i[12];
-                let J = i[13];
-                const $ = i[14],
+                let $ = i[13];
+                const J = i[14],
                   Q = i[15];
                 if (!x && i.length >= 20) {
                   (w = i[19]), (C = i[20]), (S = i[21]), (E = i[22]);
@@ -10268,8 +10265,8 @@
                     (i[5] = _),
                     (B = x.height),
                     (i[6] = B),
-                    (J = x.width),
-                    (i[13] = J);
+                    ($ = x.width),
+                    (i[13] = $);
                 }
                 let tt, et, it, nt;
                 i.length > 25 && (tt = i[25]),
@@ -10277,13 +10274,13 @@
                   q && k ? (U += F) : q || k || (U -= F);
                 let st = 0;
                 for (; T < g; T += 2) {
-                  if (tt && tt[st++] < J / this.pixelRatio) continue;
+                  if (tt && tt[st++] < $ / this.pixelRatio) continue;
                   const i = this.calculateImageOrLabelDimensions_(
                       x.width,
                       x.height,
                       h[T],
                       h[T + 1],
-                      J,
+                      $,
                       B,
                       f,
                       _,
@@ -10298,8 +10295,8 @@
                     ),
                     n = [t, e, x, i, K, it ? M : null, nt ? P : null];
                   if (a) {
-                    if ('none' === $) continue;
-                    if ('obstacle' === $) {
+                    if ('none' === J) continue;
+                    if ('obstacle' === J) {
                       a.insert(i.declutterBox);
                       continue;
                     }
@@ -11761,7 +11758,7 @@
           this.unlisten_ && (this.unlisten_(), (this.unlisten_ = null));
         }
       },
-      Ja = class {
+      $a = class {
         constructor(t, e, i, n, s, r) {
           (this.sourceProj_ = t), (this.targetProj_ = e);
           let o = {};
@@ -11910,7 +11907,7 @@
           return this.triangles_;
         }
       };
-    let $a;
+    let Ja;
     const Qa = [];
     function th(t, e, i, n, s) {
       t.beginPath(),
@@ -11974,7 +11971,7 @@
           })(t, i, _, m);
         if (!isFinite(y) || y <= 0) return void (this.state = 4);
         const v = void 0 !== l ? l : 0.5;
-        if (((this.triangulation_ = new Ja(t, i, _, f, y * v, m)), 0 === this.triangulation_.getTriangles().length))
+        if (((this.triangulation_ = new $a(t, i, _, f, y * v, m)), 0 === this.triangulation_.getTriangles().length))
           return void (this.state = 4);
         this.sourceZ_ = e.getZForResolution(y);
         let x = this.triangulation_.calculateSourceExtent();
@@ -12096,16 +12093,16 @@
                   (g.save(),
                   g.beginPath(),
                   (function () {
-                    if (void 0 === $a) {
+                    if (void 0 === Ja) {
                       const t = os(6, 6, Qa);
                       (t.globalCompositeOperation = 'lighter'),
                         (t.fillStyle = 'rgba(210, 0, 0, 0.75)'),
                         th(t, 4, 5, 4, 0),
                         th(t, 4, 5, 0, 5);
                       const e = t.getImageData(0, 0, 3, 3).data;
-                      ($a = eh(e, 0) || eh(e, 4) || eh(e, 8)), as(t), Qa.push(t.canvas);
+                      (Ja = eh(e, 0) || eh(e, 4) || eh(e, 8)), as(t), Qa.push(t.canvas);
                     }
-                    return $a;
+                    return Ja;
                   })() || !u)
                 ) {
                   g.moveTo(S, E);
@@ -12827,7 +12824,7 @@
               }
         : null;
     }
-    const ph = class extends J {
+    const ph = class extends $ {
         constructor(t) {
           super(),
             (this.projection = we(t.projection)),
@@ -14587,8 +14584,8 @@
           this.changed();
       }
     }
-    const Jh = Hh;
-    class $h extends pi {
+    const $h = Hh;
+    class Jh extends pi {
       constructor(t, e, i) {
         if (
           (super(),
@@ -14628,7 +14625,7 @@
         const t = this.endss_.length,
           e = new Array(t);
         for (let i = 0; i < t; ++i) e[i] = this.endss_[i].slice();
-        const i = new $h(this.flatCoordinates.slice(), this.layout, e);
+        const i = new Jh(this.flatCoordinates.slice(), this.layout, e);
         return i.applyProperties(this), i;
       }
       closestPointXY(t, e, i, n) {
@@ -14679,7 +14676,7 @@
         let e;
         return (
           void 0 !== t
-            ? ((e = this.getOrientedFlatCoordinates().slice()), $i(e, 0, this.endss_, this.stride, t))
+            ? ((e = this.getOrientedFlatCoordinates().slice()), Ji(e, 0, this.endss_, this.stride, t))
             : (e = this.flatCoordinates),
           Fi(e, 0, this.endss_, this.stride)
         );
@@ -14696,7 +14693,7 @@
         return this.flatInteriorPoints_;
       }
       getInteriorPoints() {
-        return new Jh(this.getFlatInteriorPoints().slice(), 'XYM');
+        return new $h(this.getFlatInteriorPoints().slice(), 'XYM');
       }
       getOrientedFlatCoordinates() {
         if (this.orientedRevision_ != this.getRevision()) {
@@ -14710,7 +14707,7 @@
             return !0;
           })(t, 0, this.endss_, this.stride)
             ? ((this.orientedFlatCoordinates_ = t.slice()),
-              (this.orientedFlatCoordinates_.length = $i(this.orientedFlatCoordinates_, 0, this.endss_, this.stride)))
+              (this.orientedFlatCoordinates_.length = Ji(this.orientedFlatCoordinates_, 0, this.endss_, this.stride)))
             : (this.orientedFlatCoordinates_ = t),
             (this.orientedRevision_ = this.getRevision());
         }
@@ -14728,7 +14725,7 @@
             }
             return o;
           })(this.flatCoordinates, 0, this.endss_, this.stride, Math.sqrt(t), e, 0, i)),
-          new $h(e, 'XY', i)
+          new Jh(e, 'XY', i)
         );
       }
       getPolygon(t) {
@@ -14791,7 +14788,7 @@
         this.changed();
       }
     }
-    const Qh = $h,
+    const Qh = Jh,
       tl = 'drawstart';
     class el extends x {
       constructor(t, e) {
@@ -14911,7 +14908,7 @@
       fl = document.getElementById('east'),
       _l = document.getElementById('west'),
       pl = new Ch(),
-      ml = new (class extends J {
+      ml = new (class extends $ {
         constructor(t) {
           super(), (t = t || {}), this.on, this.once, this.un;
           const e = (function (t) {
@@ -15006,7 +15003,7 @@
                 t = t || {};
                 const e = new un();
                 return (
-                  (void 0 === t.zoom || t.zoom) && e.push(new Js(t.zoomOptions)),
+                  (void 0 === t.zoom || t.zoom) && e.push(new $s(t.zoomOptions)),
                   (void 0 === t.rotate || t.rotate) && e.push(new Hs(t.rotateOptions)),
                   (void 0 === t.attribution || t.attribution) && e.push(new Us(t.attributionOptions)),
                   e
@@ -15575,7 +15572,7 @@
         var e = t.feature.getGeometry().getCoordinates()[0];
         Cl(e);
       },
-      vl = new $r({ stroke: new Vr({ color: 'blue', width: 2 }), fill: new Kr({ color: 'rgb(0, 0, 255, 0.1)' }) }),
+      vl = new Jr({ stroke: new Vr({ color: 'blue', width: 2 }), fill: new Kr({ color: 'rgb(0, 0, 255, 0.1)' }) }),
       xl = new (class extends nr {
         constructor(t) {
           const e = t;
@@ -15669,7 +15666,7 @@
             this.setTrace(t.trace || !1),
             (this.traceState_ = { active: !1 }),
             (this.traceSource_ = t.traceSource || t.source || null),
-            this.addChangeListener($s, this.updateState_);
+            this.addChangeListener(Js, this.updateState_);
         }
         setTrace(t) {
           let e;
@@ -16046,7 +16043,7 @@
             ? (e.pop(), this.geometryFunction_(e, i, n))
             : 'Polygon' === this.mode_ && (e[0].pop(), this.geometryFunction_(e, i, n), (e = i.getCoordinates())),
             'MultiPoint' === this.type_
-              ? t.setGeometry(new Jh([e]))
+              ? t.setGeometry(new $h([e]))
               : 'MultiLineString' === this.type_
                 ? t.setGeometry(new Uh([e]))
                 : 'MultiPolygon' === this.type_ && t.setGeometry(new Qh([e])),
@@ -16123,7 +16120,7 @@
         },
         style: vl,
       }),
-      wl = new $r({ stroke: new Vr({ color: 'red', width: 2 }), fill: new Kr({ color: 'rgb(255, 0, 0, 0.5)' }) }),
+      wl = new Jr({ stroke: new Vr({ color: 'red', width: 2 }), fill: new Kr({ color: 'rgb(255, 0, 0, 0.5)' }) }),
       Cl = function (t) {
         if (5 === t.length) {
           var e = t.map(function (t) {
@@ -16165,9 +16162,39 @@
       El = new Ch(),
       Tl = new Ka({
         source: El,
-        style: new $r({ stroke: new Vr({ color: 'rgba(0, 0, 0, 0.5)', width: 1, lineDash: [5, 5] }) }),
+        style: new Jr({ stroke: new Vr({ color: 'rgba(0, 0, 0, 0.5)', width: 1, lineDash: [5, 5] }) }),
       });
-    a(),
+    (function () {
+      if ('undefined' != typeof Storage) {
+        var t = document.querySelectorAll('[data-do-browser-storage]');
+        t.length > 0 &&
+          t.forEach(function (t) {
+            t instanceof HTMLFormElement && (f(t), _(t));
+          }),
+          (i = document.querySelectorAll('[data-do-storage-reset]')).length > 0 &&
+            i.forEach(function (t) {
+              t.addEventListener('click', function () {
+                sessionStorage.setItem(u, d);
+              });
+            }),
+          (e = document.querySelectorAll('[data-do-storage-skip]')).length > 0 &&
+            e.forEach(function (t) {
+              t.addEventListener('click', function (t) {
+                var e = t.target.closest('form');
+                e && (f(e, !0), _(e));
+              });
+            });
+      }
+      var e, i;
+    })(),
+      document.addEventListener('DOMContentLoaded', function () {
+        var t = document.querySelector('[data-fetch-results]');
+        if (t) {
+          var e = t.getAttribute('data-action');
+          v(e);
+        }
+      }),
+      a(),
       document.getElementById('coordinate-map') &&
         ([dl, gl, fl, _l].forEach(function (t) {
           t.addEventListener('change', Sl);
@@ -16209,37 +16236,6 @@
                 }
               },
             )
-          : console.error('Geolocation is not supported by this browser.')),
-      (function () {
-        if ('undefined' != typeof Storage) {
-          var t = document.querySelectorAll('[data-do-browser-storage]');
-          t.length > 0 &&
-            t.forEach(function (t) {
-              t instanceof HTMLFormElement && (f(t), _(t));
-            });
-          var e = document.querySelectorAll('[data-do-storage-reset]');
-          e.length > 0 &&
-            e.forEach(function (t) {
-              t.addEventListener('click', function () {
-                sessionStorage.setItem(u, d);
-              });
-            });
-          var i = document.querySelectorAll('[data-do-storage-skip]');
-          i.length > 0 &&
-            i.forEach(function (t) {
-              t.addEventListener('click', function (t) {
-                var e = t.target.closest('form');
-                e && (f(e, !0), _(e));
-              });
-            });
-        }
-      })(),
-      document.addEventListener('DOMContentLoaded', function () {
-        var t = document.querySelector('[data-fetch-results]');
-        if (t) {
-          var e = t.getAttribute('data-action');
-          v(e);
-        }
-      });
+          : console.error('Geolocation is not supported by this browser.'));
   })();
 })();

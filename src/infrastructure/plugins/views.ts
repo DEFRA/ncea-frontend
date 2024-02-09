@@ -1,9 +1,8 @@
+import dateFilter from 'nunjucks-date-filter';
 import nunjucks from 'nunjucks';
 import path from 'path';
 import vision from '@hapi/vision';
 import { webRoutePaths } from '../../utils/constants';
-
-import * as dateFilter from 'nunjucks-date-filter';
 
 const customHapiViews = {
   plugin: vision,

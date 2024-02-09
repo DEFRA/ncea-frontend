@@ -99,7 +99,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div id="coordinate-map" style="widht: 660px; height: 722px;"></div>
+      <div id="coordinate-map" style="width: 660px; height: 623px;"></div>
     </div>
   </div>
   <div class="govuk-grid-row">

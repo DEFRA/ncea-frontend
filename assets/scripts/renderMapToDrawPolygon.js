@@ -1,26 +1,26 @@
-"use strict";
+'use strict';
 
-import { Map, View, Feature } from "ol/index.js";
-import VectorLayer from "ol/layer/Vector.js";
-import TileLayer from "ol/layer/Tile.js";
-import VectorSource from "ol/source/Vector.js";
-import OSM from "ol/source/OSM.js";
-import { fromLonLat, transform } from "ol/proj.js";
-import { Style, Fill, Stroke } from "ol/style.js";
-import { Polygon, LineString } from "ol/geom.js";
-import Draw, { createBox } from "ol/interaction/Draw.js";
-import { toggleSubmitButton } from "./toggleFormSubmitButton.js";
-import { storeFieldsData } from "./browserStorage.js";
+import { Map, View, Feature } from 'ol';
+import VectorLayer from 'ol/layer/Vector';
+import TileLayer from 'ol/layer/Tile';
+import VectorSource from 'ol/source/Vector';
+import OSM from 'ol/source/OSM';
+import { fromLonLat, transform } from 'ol/proj';
+import { Style, Fill, Stroke } from 'ol/style';
+import { Polygon, LineString } from 'ol/geom';
+import Draw, { createBox } from 'ol/interaction/Draw';
+import { toggleSubmitButton } from './toggleFormSubmitButton';
+import { storeFieldsData } from './browserStorage';
 
-const northInput = document.getElementById("north");
-const southInput = document.getElementById("south");
-const eastInput = document.getElementById("east");
-const westInput = document.getElementById("west");
+const northInput = document.getElementById('north');
+const southInput = document.getElementById('south');
+const eastInput = document.getElementById('east');
+const westInput = document.getElementById('west');
 
 const drawSource = new VectorSource();
 
 const mapOptions = {
-  target: "coordinate-map",
+  target: 'coordinate-map',
   layers: [
     new TileLayer({
       source: new OSM(),
@@ -47,39 +47,39 @@ const handleDrawEnd = (event) => {
 
 const drawStyle = new Style({
   stroke: new Stroke({
-    color: "blue",
+    color: 'blue',
     width: 2,
   }),
   fill: new Fill({
-    color: "rgb(0, 0, 255, 0.1)",
+    color: 'rgb(0, 0, 255, 0.1)',
   }),
 });
 
 const draw = new Draw({
   source: drawSource,
-  type: "Circle",
+  type: 'Circle',
   geometryFunction: createBox(),
   style: drawStyle,
 });
 
 const completedStyle = new Style({
   stroke: new Stroke({
-    color: "red",
+    color: 'red',
     width: 2,
   }),
   fill: new Fill({
-    color: "rgb(255, 0, 0, 0.5)",
+    color: 'rgb(255, 0, 0, 0.5)',
   }),
 });
 
 const setCoordinates = (coordinates) => {
   if (coordinates.length !== 5) {
-    console.error("Invalid rectangle coordinates");
+    console.error('Invalid rectangle coordinates');
     return;
   }
 
   const transformedCoordinates = coordinates.map((coord) => {
-    return transform(coord, "EPSG:3857", "EPSG:4326");
+    return transform(coord, 'EPSG:3857', 'EPSG:4326');
   });
 
   const west = transformedCoordinates[0][0];
@@ -91,12 +91,12 @@ const setCoordinates = (coordinates) => {
   eastInput.value = east;
   westInput.value = west;
   storeFieldsData(
-    document.querySelector("[data-do-browser-storage]"),
+    document.querySelector('[data-do-browser-storage]'),
     false,
     true,
   );
   setTimeout(() => {
-    toggleSubmitButton(document.querySelector("[data-do-browser-storage]"));
+    toggleSubmitButton(document.querySelector('[data-do-browser-storage]'));
   }, 200);
 
   const polygon = new Polygon([coordinates]);
@@ -116,7 +116,7 @@ const generateRectanglePolygon = () => {
   const west = parseFloat(westInput.value);
 
   if ((isNaN(north) || isNaN(south) || isNaN(east), isNaN(west))) {
-    console.error("Invalid coordinates. Please enter valid numbers");
+    console.error('Invalid coordinates. Please enter valid numbers');
     return;
   }
 
@@ -161,7 +161,7 @@ const gridLayer = new VectorLayer({
   source: gridSource,
   style: new Style({
     stroke: new Stroke({
-      color: "rgba(0, 0, 0, 0.5)",
+      color: 'rgba(0, 0, 0, 0.5)',
       width: 1,
       lineDash: [5, 5],
     }),
@@ -186,32 +186,32 @@ const callNavigator = () => {
       function (error) {
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            console.error("User denied the request for geolocation.");
+            console.error('User denied the request for geolocation.');
             break;
           case error.POSITION_UNAVAILABLE:
-            console.error("Location information is unavailable.");
+            console.error('Location information is unavailable.');
             break;
           case error.TIMEOUT:
-            console.error("The request to get user location timed out.");
+            console.error('The request to get user location timed out.');
             break;
           case error.UNKNOWN_ERROR:
-            console.error("An unknown error occurred.");
+            console.error('An unknown error occurred.');
             break;
         }
       },
     );
   } else {
-    console.error("Geolocation is not supported by this browser.");
+    console.error('Geolocation is not supported by this browser.');
   }
 };
 
 const renderMapToDrawPolygon = () => {
-  if (document.getElementById("coordinate-map")) {
+  if (document.getElementById('coordinate-map')) {
     [northInput, southInput, eastInput, westInput].forEach((input) => {
-      input.addEventListener("change", generateRectanglePolygon);
+      input.addEventListener('change', generateRectanglePolygon);
     });
 
-    draw.on("drawend", handleDrawEnd);
+    draw.on('drawend', handleDrawEnd);
 
     map.addInteraction(draw);
 
