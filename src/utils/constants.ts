@@ -3,7 +3,9 @@ export const webRoutePaths = {
   quickSearch: '/quick_search',
   results: '/search',
   guidedDateSearch: '/date-search',
+  geographySearch: '/coordinate-search',
   getResults: '/search-results',
+  getResultsCount: '/results-count',
 };
 
 export const elasticSearchAPIPaths = {
@@ -18,4 +20,5 @@ export const formKeys = {
 export const formIds = {
   quickSearch: 'quick-search',
   dataQuestionnaire: 'date-search',
+  geographyQuestionnaire: 'coordinate-search',
 };

@@ -17,7 +17,7 @@
 
     "outDir": "build",
     "rootDir": "./src",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "types": [
       "node",
       "jest",

@@ -2876,5 +2876,7 @@
       ]
     }
   },
-  "_count": {}
+  "_count": {
+    "totalResults": 24
+  }
 }

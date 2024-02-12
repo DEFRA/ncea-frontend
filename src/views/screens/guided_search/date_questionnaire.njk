@@ -25,19 +25,14 @@
 
 {% block content %}
   <div class="govuk-grid-row">
-    <form method="POST" id="{{formId}}" action="{{guidedDateSearchPath}}" data-toggle-submit-button data-do-browser-storage>
+    <form method="POST" id="{{formId}}" action="{{guidedDateSearchPath}}" data-do-browser-storage>
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
         {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
         {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
-        {{ govukButton({
-          text: "Show results",
-          attributes: {
-            'data-to-disable': ''
-          }
-        }) }}
+        {{ govukButton({text: "Show results"}) }}
       </div>
     </form>
   </div>

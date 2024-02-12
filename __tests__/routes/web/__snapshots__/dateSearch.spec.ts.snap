@@ -87,7 +87,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   <div class="govuk-grid-row">
-    <form method="POST" id="date-search" action="/date-search" data-toggle-submit-button data-do-browser-storage>
+    <form method="POST" id="date-search" action="/date-search" data-do-browser-storage>
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
@@ -237,7 +237,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" data-to-disable="">
+<button type="submit" class="govuk-button" data-module="govuk-button">
   Show results
 </button>
 
@@ -333,7 +333,8 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
-  <script type="module" src="/assets/main.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   </body>
 </html>

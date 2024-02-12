@@ -107,7 +107,6 @@ npm run start:dev
 ├── src                    // Keeps the application code
 │   ├── assets             // Contains all the sass styles and scripts
 │   │   ├── sass           // Contains all the sass styles and functions
-│   │   └── scripts        // Contains all the javascript modules or functions
 │   ├── config             // To define and initiate the configurations
 │   │   └── geoNetwork..ts // Here is where you can find the initialization of the axios clients
 │   ├── controllers        // The definition of all route handlers can be found here
@@ -135,6 +134,9 @@ npm run start:dev
 │   │   └── screens        // Contains the template for each screen, such as home, results, and so on.
 ├── └── index.ts           // The primary application entry point
 ├── public                 // Contains all the static files and files compiles from GDS
+│   ├── images             // Contains all the static rendering images
+│   ├── scripts            // Contains all the javascript modules or functions
+│   └── application.css    // Contains all the compiled styles of custom & GOV.UK
 ├── tools                  // Contains all tools, such as static code analysis and unit test configurations.
 │   ├── .eslintrc          // Define eslint rules
 │   ├── .prettierrc        // Define prettier rules to enforce a consistent code style
