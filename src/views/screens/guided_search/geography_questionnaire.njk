@@ -6,11 +6,6 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
-{% block head %}
-  {{ super() }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
-{% endblock %}
-
 {% block beforeContent %}
   {{ super() }}
   {{ govukBreadcrumbs({

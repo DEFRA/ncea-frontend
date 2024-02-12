@@ -22,10 +22,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
 
 
     
-  
   <link rel="stylesheet" href="/assets/application.css">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
 
     
   </head>
@@ -85,8 +82,8 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
           
   <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <div class="results-block">
-      <a href="#" class="govuk-link results-count-link">Click to see 24 results</a>
+    <div class="count-block">
+      <a href="" class="govuk-link count-block-link" data-form-id="" data-fetch-count data-action=""></a>
     </div>
   </div>
 </div>
@@ -323,7 +320,8 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
-  <script type="module" src="/assets/main.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   </body>
 </html>

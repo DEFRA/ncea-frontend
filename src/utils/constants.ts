@@ -1,10 +1,11 @@
 export const webRoutePaths = {
   home: '/',
-  quickSearch: '/quick_search',
+  quickSearch: '/quick-search',
   results: '/search',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
   getResults: '/search-results',
+  getResultsCount: '/results-count',
 };
 
 export const elasticSearchAPIPaths = {

@@ -13,7 +13,7 @@ import {
 const quickSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQueryString => {
   const queryString: IQueryString = {
     query_string: {
-      query: searchFieldsObject['quick-search']?.search_term ?? '',
+      query: searchFieldsObject['quick-search']?.search_term as string,
       default_operator: 'AND',
     },
   };
@@ -49,17 +49,20 @@ const dateQuery = (searchFieldsObject: ISearchFieldsObject): IRangeQuery => {
       searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-day'] as string) : '',
     ),
   });
-  const endDate: string = generateDateString({
-    year: parseInt(
-      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-year'] as string) : '',
-    ),
-    month: parseInt(
-      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-month'] as string) : '',
-    ),
-    day: parseInt(
-      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-day'] as string) : '',
-    ),
-  });
+  const endDate: string = generateDateString(
+    {
+      year: parseInt(
+        searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-year'] as string) : '',
+      ),
+      month: parseInt(
+        searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-month'] as string) : '',
+      ),
+      day: parseInt(
+        searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-day'] as string) : '',
+      ),
+    },
+    true,
+  );
 
   const rangeQuery: IRangeQuery = {
     range: {
@@ -72,7 +75,11 @@ const dateQuery = (searchFieldsObject: ISearchFieldsObject): IRangeQuery => {
   return rangeQuery;
 };
 
-const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
+const buildSearchQuery = (
+  searchFieldsObject: ISearchFieldsObject,
+  fieldsToSearch: string[] = [],
+  needTotalRecords: boolean = false,
+): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -128,6 +135,10 @@ const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearc
   const finalQuery: IQuery = {
     query: boolQuery,
   };
+
+  if (needTotalRecords) {
+    finalQuery.size = 0;
+  }
 
   return finalQuery;
 };

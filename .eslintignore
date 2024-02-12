@@ -4,7 +4,7 @@ coverage
 src/views/**
 src/infrastructure/log_files/**
 src/services/*.json
-src/public/**
 tools/**
-assets/**
+public/**
+src/assets/**
 copyNonTSFiles.js

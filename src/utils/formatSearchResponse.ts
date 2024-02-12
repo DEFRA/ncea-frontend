@@ -10,16 +10,8 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
 
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   apiSearchItems.map((searchItem: Record<string, any>) => {
-    const startDate: string =
-      searchItem?._source?.resourceTemporalExtentDetails.length &&
-      searchItem?._source?.resourceTemporalExtentDetails[0].start
-        ? searchItem?._source?.resourceTemporalExtentDetails[0].start.date || ''
-        : '';
-    const endDate: string =
-      searchItem?._source?.resourceTemporalExtentDetails.length &&
-      searchItem?._source?.resourceTemporalExtentDetails[0].end
-        ? searchItem?._source?.resourceTemporalExtentDetails[0].end.date || ''
-        : '';
+    const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
+    const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
     const item: ISearchItem = {
       id: searchItem?._id,
       title: searchItem?._source.resourceTitleObject.default,
