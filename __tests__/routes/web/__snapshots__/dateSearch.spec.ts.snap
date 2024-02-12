@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Questionnaire > Sanpshot verification should match the date questionnaire screen snapshot 1`] = `
+exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Questionnaire > Snapshot verification should match the date questionnaire screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
@@ -67,8 +67,6 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
   <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
-
-  
 
   
     <li class="govuk-breadcrumbs__list-item">

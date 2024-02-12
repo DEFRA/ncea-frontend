@@ -14,7 +14,7 @@ describe('Deals with search results controller', () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
 
-      const { quickSearch: quickSearchPath, getResults: getResultsPath } =
+      const { results: quickSearchPath, getResults: getResultsPath } =
         webRoutePaths;
       const formId: string = formIds.quickSearch;
       await SearchResultsController.renderSearchResultsHandler(

@@ -1,6 +1,8 @@
 'use strict';
 
-import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
+import Joi from 'joi';
+import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
+
 import { formIds, webRoutePaths } from '../../utils/constants';
 
 /**
@@ -14,16 +16,41 @@ import { formIds, webRoutePaths } from '../../utils/constants';
  */
 
 const HomeController = {
-  renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { quickSearch: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
+  renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    const { home: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     return response.view('screens/home/template', {
       quickSearchPath,
       formId,
       dateSearchPath,
+      searchInputError: undefined,
     });
   },
-  doQuickSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+  quickSearchFailActionHandler: (
+    request: Request,
+    response: ResponseToolkit,
+    error: Joi.ValidationError,
+  ): Lifecycle.ReturnValue => {
+    const { home, results, guidedDateSearch: dateSearchPath, getResults: getResultsPath } = webRoutePaths;
+    const formId: string = formIds.quickSearch;
+    const searchError: string | undefined = error?.details?.[0]?.message ?? undefined;
+    const payload = request.payload as Record<string, string>;
+    const searchInputError = searchError
+      ? {
+          text: searchError,
+        }
+      : (undefined as unknown as Joi.ValidationError);
+    const context = {
+      quickSearchPath: payload?.pageName === 'home' ? home : results,
+      formId,
+      dateSearchPath,
+      getResultsPath,
+      searchInputError,
+    };
+    const view: string = payload?.pageName === 'home' ? 'screens/home/template' : 'screens/results/template';
+    return response.view(view, context).code(400).takeover();
+  },
+  doQuickSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     return response.redirect(webRoutePaths.results);
   },
 };
