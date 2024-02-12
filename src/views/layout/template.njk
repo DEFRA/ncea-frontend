@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ assetPath }}/application.css">
+  <link rel="stylesheet" href="{{ assetPath }}/css/application.css">
 {% endblock %}
 
 {% block header %}
@@ -78,5 +78,6 @@
     import {initAll} from '{{ assetPath }}/all.js'
     initAll()
   </script>
-  <script type="module" src="{{ assetPath }}/main.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/customScripts.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/fetchResults.js"></script>
 {% endblock %}

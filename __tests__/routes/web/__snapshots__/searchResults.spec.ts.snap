@@ -22,7 +22,7 @@ exports[`Results Screen Results > Sanpshot verification should match the results
 
 
     
-  <link rel="stylesheet" href="/assets/application.css">
+  <link rel="stylesheet" href="/assets/css/application.css">
 
     
   </head>
@@ -112,7 +112,7 @@ exports[`Results Screen Results > Sanpshot verification should match the results
     
     <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search">
       
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button">Search</button></div>
+    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
     
   </div>
 
@@ -221,7 +221,8 @@ exports[`Results Screen Results > Sanpshot verification should match the results
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
-  <script type="module" src="/assets/main.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   </body>
 </html>

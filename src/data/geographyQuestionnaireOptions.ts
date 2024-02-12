@@ -13,7 +13,7 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
-    type: 'number',
+    type: 'text',
   },
   south: {
     id: 'south',
@@ -27,7 +27,7 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
-    type: 'number',
+    type: 'text',
   },
   east: {
     id: 'east',
@@ -41,7 +41,7 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
-    type: 'number',
+    type: 'text',
   },
   west: {
     id: 'west',
@@ -55,7 +55,7 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
-    type: 'number',
+    type: 'text',
   },
   depth: {
     id: 'depth',
@@ -69,7 +69,7 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
     formGroup: {
       classes: 'govuk-!-margin-0',
     },
-    type: 'number',
+    type: 'text',
   },
 };
 

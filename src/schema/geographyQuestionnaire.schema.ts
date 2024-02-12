@@ -2,22 +2,46 @@ import Joi from 'joi';
 import { isEmpty } from '../utils/isEmpty';
 
 const geographyQuestionnaireSchema = Joi.object({
-  north: Joi.number().optional().allow('').messages({
-    'number.base': 'This is not a valid input',
-  }),
-  south: Joi.number().optional().allow('').messages({
-    'number.base': 'This is not a valid input',
-  }),
-  west: Joi.number().optional().allow('').messages({
-    'number.base': 'This is not a valid input',
-  }),
-  east: Joi.number().optional().allow('').messages({
-    'number.base': 'This is not a valid input',
-  }),
-  depth: Joi.number().optional().allow('').positive().messages({
-    'number.base': 'This is not a valid input',
-    'number.positive': 'This is not a valid input',
-  }),
+  north: Joi.string()
+    .optional()
+    .allow('')
+    .pattern(/^[-]?([0-9]|[1-8][0-9]|90)(\.\d+)?$/)
+    .messages({
+      'string.base': 'This is not a valid input',
+      'string.pattern.base': 'This is not a valid input',
+    }),
+  south: Joi.string()
+    .optional()
+    .allow('')
+    .pattern(/^[-]?([0-9]|[1-8][0-9]|90)(\.\d+)?$/)
+    .messages({
+      'string.base': 'This is not a valid input',
+      'string.pattern.base': 'This is not a valid input',
+    }),
+  west: Joi.string()
+    .optional()
+    .allow('')
+    .pattern(/^[-]?((1[0-7][0-9])|([0-9]{1,2}))(\.\d+)?|180(\.0+)?$/)
+    .messages({
+      'string.base': 'This is not a valid input',
+      'string.pattern.base': 'This is not a valid input',
+    }),
+  east: Joi.string()
+    .optional()
+    .allow('')
+    .pattern(/^[-]?((1[0-7][0-9])|([0-9]{1,2}))(\.\d+)?|180(\.0+)?$/)
+    .messages({
+      'string.base': 'This is not a valid input',
+      'string.pattern.base': 'This is not a valid input',
+    }),
+  depth: Joi.string()
+    .optional()
+    .allow('')
+    .pattern(/^[0-9]+$/)
+    .messages({
+      'string.base': 'This is not a valid input',
+      'string.pattern.base': 'This is not a valid input',
+    }),
 })
   .and('north', 'south', 'east', 'west')
   .custom((value, helpers) => {

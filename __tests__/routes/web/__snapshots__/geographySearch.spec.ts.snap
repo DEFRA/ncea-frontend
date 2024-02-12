@@ -23,9 +23,10 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
 
     
   
-  <link rel="stylesheet" href="/assets/application.css">
+  <link rel="stylesheet" href="/assets/css/application.css">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+  <link rel="stylesheet" href="/assets/css/ol.css">
+  <script src="/assets/scripts/ol.js"></script>
 
     
   </head>
@@ -85,8 +86,8 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
           
   <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <div class="results-block">
-      <a href="#" class="govuk-link results-count-link">Click to see 24 results</a>
+    <div class="count-block">
+      <a href="/search" class="govuk-link count-block-link" data-form-id="coordinate-search" data-fetch-count data-action="/results-count"></a>
     </div>
   </div>
 </div>
@@ -126,7 +127,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   </div>
 
 
-  <input class="govuk-input" id="north" name="north" type="number" aria-describedby="north-hint">
+  <input class="govuk-input" id="north" name="north" type="text" aria-describedby="north-hint">
 
 </div>
 </div>
@@ -144,7 +145,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   </div>
 
 
-  <input class="govuk-input" id="south" name="south" type="number" aria-describedby="south-hint">
+  <input class="govuk-input" id="south" name="south" type="text" aria-describedby="south-hint">
 
 </div>
 </div>
@@ -162,7 +163,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   </div>
 
 
-  <input class="govuk-input" id="east" name="east" type="number" aria-describedby="east-hint">
+  <input class="govuk-input" id="east" name="east" type="text" aria-describedby="east-hint">
 
 </div>
 </div>
@@ -180,7 +181,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   </div>
 
 
-  <input class="govuk-input" id="west" name="west" type="number" aria-describedby="west-hint">
+  <input class="govuk-input" id="west" name="west" type="text" aria-describedby="west-hint">
 
 </div>
 </div>
@@ -198,7 +199,7 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   </div>
 
 
-  <input class="govuk-input" id="depth" name="depth" type="number" aria-describedby="depth-hint">
+  <input class="govuk-input" id="depth" name="depth" type="text" aria-describedby="depth-hint">
 
 </div>
 </div>
@@ -329,12 +330,16 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
 
     
   
+  
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
-  <script type="module" src="/assets/main.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  <script type="module" src="/assets/scripts/fetchResults.js"></script>
+
+  <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
 </html>

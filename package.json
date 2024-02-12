@@ -1,5 +1,5 @@
 {
-  "name": "typescript-esm-tsx-starter",
+  "name": "natural-capital-and-ecosystem-assessment",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -8,7 +8,7 @@
     "src"
   ],
   "scripts": {
-    "start:dev": "concurrently \"npm run sass:compile\" \"npm run bundle:js\" \"npm run json-server\" \"cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json\"",
+    "start:dev": "concurrently \"npm run sass:compile\" \"npm run json-server\" \"cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json\"",
     "start": "npm run build && node ./build/src/index.js",
     "build": "rimraf ./build && tsc && npm run copy-files",
     "copy-files": "ts-node copyNonTSFiles.ts",
@@ -16,8 +16,7 @@
     "lint": "npm run lint:javascript",
     "lint:javascript": "eslint --config tools/.eslintrc.js ./src/**/* --ext .js,.ts",
     "lint:javascript:fix": "eslint --config tools/.eslintrc.js ./src/**/* --fix --ext .js,.ts",
-    "bundle:js": "webpack -c tools/webpack.config.js --mode=production --watch",
-    "sass:compile": "sass --watch --no-source-map --load-path=node_modules/govuk-frontend/dist/ --quiet-deps assets/sass/_root.scss src/public/application.css",
+    "sass:compile": "sass --watch --no-source-map --load-path=node_modules/govuk-frontend/dist/ --quiet-deps src/assets/sass/_root.scss public/css/application.css",
     "format:all": "prettier --config tools/.prettierrc.json --ignore-path .gitignore --write \"./src/**/*.+(js|ts|jsx|tsx)\"",
     "format:check": "prettier --config tools/.prettierrc.json --ignore-path .gitignore --check \"./src/**/*.+(js|ts|jsx|tsx)\"",
     "test": "jest --config tools/jest/jest.config.js --coverage -u",
@@ -67,9 +66,7 @@
     "sass": "1.70.0",
     "ts-jest": "29.1.2",
     "tsx": "4.7.0",
-    "typescript": "5.3.3",
-    "webpack": "5.90.1",
-    "webpack-cli": "5.1.4"
+    "typescript": "5.3.3"
   },
   "dependencies": {
     "@azure/identity": "4.0.1",

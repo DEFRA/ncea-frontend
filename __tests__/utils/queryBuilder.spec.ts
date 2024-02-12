@@ -189,6 +189,34 @@ describe('Build the search query', () => {
     expect(result.query.bool.must).toHaveLength(1);
   });
 
+  it('should build the search query correctly with only search term without fields', () => {
+    const searchFieldsObject: ISearchFieldsObject = {
+      'quick-search': {
+        search_term: 'example',
+      },
+    };
+
+    const expectedQuery: IQuery = {
+      query: {
+        bool: {
+          must: [
+            {
+              query_string: {
+                query: 'example',
+                default_operator: 'AND',
+              },
+            },
+          ],
+        },
+      },
+    };
+
+    const result = buildSearchQuery(searchFieldsObject, []);
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query.bool.must).toHaveLength(1);
+  });
+
   it('should build the search query correctly with only date range', () => {
     const searchFieldsObject: ISearchFieldsObject = {
       'date-search': {
@@ -304,6 +332,47 @@ describe('Build the search query', () => {
     };
 
     const result = buildSearchQuery(searchFieldsObject);
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query.bool.must).toHaveLength(1);
+  });
+
+  it('should build the search query correctly for return only total number of documents', () => {
+    const searchFieldsObject: ISearchFieldsObject = {
+      'coordinate-search': {
+        north: '123',
+        south: '345',
+        east: '678',
+        west: '901',
+      },
+    };
+
+    const expectedQuery: IQuery = {
+      query: {
+        bool: {
+          must: [
+            {
+              geo_shape: {
+                geom: {
+                  shape: {
+                    type: 'envelope',
+                    coordinates: [
+                      [901, 123],
+                      [678, 345],
+                    ],
+                  },
+                  relation: 'intersects',
+                  ignore_unmapped: true,
+                },
+              },
+            },
+          ],
+        },
+      },
+      size: 0,
+    };
+
+    const result = buildSearchQuery(searchFieldsObject, [], true);
 
     expect(result).toEqual(expectedQuery);
     expect(result.query.bool.must).toHaveLength(1);

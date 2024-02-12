@@ -13,9 +13,23 @@ const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promis
     return finalResponse;
     /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (error: any) {
-    console.log(error);
     throw new Error(`Error fetching results: ${error.message}`);
   }
 };
 
-export { getSearchResults };
+const getSearchResultsCount = async (searchFieldsObject: ISearchFieldsObject): Promise<{ totalResults: number }> => {
+  try {
+    const payload = buildSearchQuery(searchFieldsObject, [], true);
+    if (payload.query.bool.must?.length) {
+      const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
+      return await response.data;
+    } else {
+      return Promise.resolve({ totalResults: 0 });
+    }
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+  } catch (error: any) {
+    throw new Error(`Error fetching results: ${error.message}`);
+  }
+};
+
+export { getSearchResults, getSearchResultsCount };

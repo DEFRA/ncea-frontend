@@ -5,6 +5,7 @@ export const webRoutePaths = {
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
   getResults: '/search-results',
+  getResultsCount: '/results-count',
 };
 
 export const elasticSearchAPIPaths = {

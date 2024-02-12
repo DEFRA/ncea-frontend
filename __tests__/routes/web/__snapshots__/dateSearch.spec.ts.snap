@@ -22,7 +22,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
 
     
-  <link rel="stylesheet" href="/assets/application.css">
+  <link rel="stylesheet" href="/assets/css/application.css">
 
     
   </head>
@@ -346,7 +346,8 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
-  <script type="module" src="/assets/main.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   </body>
 </html>
