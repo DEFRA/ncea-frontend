@@ -33,7 +33,7 @@ const HomeController = {
   ): Lifecycle.ReturnValue => {
     const { home, results, guidedDateSearch: dateSearchPath, getResults: getResultsPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
-    const searchError: string | undefined = error?.details?.[0]?.message || undefined;
+    const searchError: string | undefined = error?.details?.[0]?.message ?? undefined;
     const payload = request.payload as Record<string, string>;
     const searchInputError = searchError
       ? {
