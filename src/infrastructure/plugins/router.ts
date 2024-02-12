@@ -1,9 +1,15 @@
 'use strict';
 
 import { Server } from '@hapi/hapi';
-import { dateSearchRoutes, homeRoutes, searchResultsRoutes, staticRoutes } from '../../../src/routes/index';
+import {
+  dateSearchRoutes,
+  errorRoutes,
+  homeRoutes,
+  searchResultsRoutes,
+  staticRoutes,
+} from '../../../src/routes/index';
 
-const routes = [...staticRoutes, ...homeRoutes, ...dateSearchRoutes, ...searchResultsRoutes];
+const routes = [...errorRoutes, ...staticRoutes, ...homeRoutes, ...dateSearchRoutes, ...searchResultsRoutes];
 
 const customHapiRoutes = {
   plugin: {

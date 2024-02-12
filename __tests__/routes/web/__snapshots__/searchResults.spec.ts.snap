@@ -98,7 +98,7 @@ exports[`Results Screen Results > Sanpshot verification should match the results
     </h1>
     
     <div class="search-block" data-module="search">
-      <form action="/quick_search" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
+      <form action="/search" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
 
         
 
@@ -118,6 +118,7 @@ exports[`Results Screen Results > Sanpshot verification should match the results
 
 </div>
 
+        <input type="hidden" name="pageName" value="results">
       </form>
     </div>
   </div>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home Screen Home > Sanpshot verification should match the home screen snapshot 1`] = `
+exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
@@ -66,88 +66,25 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-  <header class="full-width-banner" role="banner">
-    <div class="banner-container">
-      <h1 class="govuk-heading-xl banner-container__heading-xl">Natural Capital Search Service</h1>
-      <span class="govuk-caption-l banner-container__caption-l">Use this service to search for data and information about the environment and ecosystems in the UK. This service can be used to support natural capital approaches to evidence and decision making</span>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+            <p>&nbsp;</p>
+        </div>
+        <div class="govuk-grid-column-full">
+            <h1 class="govuk-heading-m">
+                Error 404 page not found
+            </h1>
+            <p class="govuk-caption-m govuk-!-font-size-14">
+                If you typed the web address, check it is correct.
+            </P>
+            <p class="govuk-caption-m govuk-!-font-size-14">
+                If you pasted the web address, check you copied the entire address.
+            </P>
+            <p class="govuk-caption-m govuk-!-font-size-14">
+                If the web address is correct or you selected a link or button, you can <a href="#">contact us</a> to receive support.
+            </P>
+        </div>
     </div>
-  </header>
-
-  
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m">
-      
-        Quick Search
-        
-      
-    </h1>
-    
-      <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
-    
-    <div class="search-block" data-module="search">
-      <form action="/" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
-        
-
-<div class="govuk-form-group">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
-    Search
-  </label>
-
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="home">
-      </form>
-    </div>
-  </div>
-</div>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m">
-        Questionnaire search
-      </h2>
-      <p class="govuk-body">
-        A set of questions to narrow down your search for data and information.<br> 
-        This may be useful if you're not sure what you're looking for.
-      </p>
-    </div>
-  </div>
-
-  
-  
-
-  
-    
-  
-
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button" data-do-quick-search="false" id="guided-search">
-  Start
-  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
-  </svg>
-</a>
-
-
-  <article class="govuk-grid-row" role="article">
-    <div class="govuk-grid-column-full video-container">
-      <h1 class="govuk-heading-m govuk-\\!-static-margin-0 video-container__heading-m">What is natural capital?</h1>
-      <div class="video-container__frame">
-        <iframe width="630" height="354" src="https://www.youtube.com/embed/4wx0rMruSJo?si=h-SD8VoSUSNwqo1S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-    </div>
-  </article>
 
         </main>
       </div>

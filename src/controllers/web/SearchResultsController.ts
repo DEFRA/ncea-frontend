@@ -9,7 +9,7 @@ import { getSearchResults, getSearchResultsCount } from '../../services/handlers
 
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { quickSearch: quickSearchPath, getResults: getResultsPath } = webRoutePaths;
+    const { results: quickSearchPath, getResults: getResultsPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     return response.view('screens/results/template', {
       quickSearchPath,
