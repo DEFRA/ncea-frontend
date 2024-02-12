@@ -7504,11 +7504,11 @@
   overflow: hidden;
 }
 
-.results-block {
+.count-block {
   border-bottom: 2px solid #b1b4b6;
   padding-bottom: 30px;
 }
-.results-count-link {
+.count-block-link {
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;

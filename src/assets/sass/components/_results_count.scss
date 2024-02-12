@@ -1,11 +1,11 @@
-.results {
+.count {
   &-block {
     border-bottom: 2px solid #b1b4b6;
     padding-bottom: 30px;
-  }
 
-  &-count-link {
-    @include font-style-stack(24px, 30px);
-    text-decoration-line: underline;
+    &-link {
+      @include font-style-stack(24px, 30px);
+      text-decoration-line: underline;
+    }
   }
 }

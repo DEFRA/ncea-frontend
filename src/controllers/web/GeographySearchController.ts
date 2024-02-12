@@ -14,6 +14,7 @@ const GeographySearchController = {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
       results: resultsPath,
+      getResultsCount: resultsCountPath,
     } = webRoutePaths;
     const formId: string = formIds.geographyQuestionnaire;
     return response.view('screens/guided_search/geography_questionnaire', {
@@ -22,6 +23,7 @@ const GeographySearchController = {
       formFields,
       formId,
       resultsPath,
+      resultsCountPath,
     });
   },
   doGeographySearchFailActionHandler: async (
@@ -30,7 +32,12 @@ const GeographySearchController = {
     error: Joi.ValidationError,
   ): Promise<Lifecycle.ReturnValue> => {
     const finalFormFields = await transformTextInputError({ ...geographyQuestionnaireOptions }, error);
-    const { geographySearch: geographySearchPath, guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const {
+      geographySearch: geographySearchPath,
+      guidedDateSearch: guidedDateSearchPath,
+      results: resultsPath,
+      getResultsCount: resultsCountPath,
+    } = webRoutePaths;
     const formId: string = formIds.geographyQuestionnaire;
     return response
       .view('screens/guided_search/geography_questionnaire', {
@@ -38,6 +45,8 @@ const GeographySearchController = {
         geographySearchPath,
         formFields: finalFormFields,
         formId,
+        resultsPath,
+        resultsCountPath,
       })
       .code(400)
       .takeover();

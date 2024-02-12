@@ -19,6 +19,7 @@ describe('Deals with guided geography search handler', () => {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
       results: resultsPath,
+      getResultsCount: resultsCountPath,
     } = webRoutePaths;
     const formId: string = formIds.geographyQuestionnaire;
 
@@ -34,6 +35,7 @@ describe('Deals with guided geography search handler', () => {
         formFields,
         formId,
         resultsPath,
+        resultsCountPath,
       },
     );
   });
@@ -72,6 +74,8 @@ describe('Deals with guided geography search handler', () => {
     const {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
+      results: resultsPath,
+      getResultsCount: resultsCountPath,
     } = webRoutePaths;
     const formId: string = formIds.geographyQuestionnaire;
 
@@ -87,6 +91,8 @@ describe('Deals with guided geography search handler', () => {
         geographySearchPath,
         formFields: geographyFormOptionWithDepthError,
         formId,
+        resultsPath,
+        resultsCountPath,
       },
     );
   });
