@@ -4,7 +4,7 @@
 
 'use strict';
 
-import { Server, ServerInjectResponse } from '@hapi/hapi';
+import { Server } from '@hapi/hapi';
 
 import { initializeServer } from '../../../src/infrastructure/server';
 import supertest from 'supertest';

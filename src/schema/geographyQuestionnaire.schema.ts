@@ -1,47 +1,31 @@
 import Joi from 'joi';
 import { isEmpty } from '../utils/isEmpty';
 
+const coordinatePattern = /^-?(\d|[1-8]\d|90)(\.\d+)?$/;
+const longitudePattern = /^-?((1[0-7]\d)|(\d{1,2})|180)(\.\d+)?$/;
+const depthPattern = /^\d+$/;
+
 const geographyQuestionnaireSchema = Joi.object({
-  north: Joi.string()
-    .optional()
-    .allow('')
-    .pattern(/^[-]?([0-9]|[1-8][0-9]|90)(\.\d+)?$/)
-    .messages({
-      'string.base': 'This is not a valid input',
-      'string.pattern.base': 'This is not a valid input',
-    }),
-  south: Joi.string()
-    .optional()
-    .allow('')
-    .pattern(/^[-]?([0-9]|[1-8][0-9]|90)(\.\d+)?$/)
-    .messages({
-      'string.base': 'This is not a valid input',
-      'string.pattern.base': 'This is not a valid input',
-    }),
-  west: Joi.string()
-    .optional()
-    .allow('')
-    .pattern(/^[-]?((1[0-7][0-9])|([0-9]{1,2}))(\.\d+)?|180(\.0+)?$/)
-    .messages({
-      'string.base': 'This is not a valid input',
-      'string.pattern.base': 'This is not a valid input',
-    }),
-  east: Joi.string()
-    .optional()
-    .allow('')
-    .pattern(/^[-]?((1[0-7][0-9])|([0-9]{1,2}))(\.\d+)?|180(\.0+)?$/)
-    .messages({
-      'string.base': 'This is not a valid input',
-      'string.pattern.base': 'This is not a valid input',
-    }),
-  depth: Joi.string()
-    .optional()
-    .allow('')
-    .pattern(/^[0-9]+$/)
-    .messages({
-      'string.base': 'This is not a valid input',
-      'string.pattern.base': 'This is not a valid input',
-    }),
+  north: Joi.string().optional().allow('').pattern(coordinatePattern).messages({
+    'string.base': 'This is not a valid input',
+    'string.pattern.base': 'This is not a valid input',
+  }),
+  south: Joi.string().optional().allow('').pattern(coordinatePattern).messages({
+    'string.base': 'This is not a valid input',
+    'string.pattern.base': 'This is not a valid input',
+  }),
+  west: Joi.string().optional().allow('').pattern(longitudePattern).messages({
+    'string.base': 'This is not a valid input',
+    'string.pattern.base': 'This is not a valid input',
+  }),
+  east: Joi.string().optional().allow('').pattern(longitudePattern).messages({
+    'string.base': 'This is not a valid input',
+    'string.pattern.base': 'This is not a valid input',
+  }),
+  depth: Joi.string().optional().allow('').pattern(depthPattern).messages({
+    'string.base': 'This is not a valid input',
+    'string.pattern.base': 'This is not a valid input',
+  }),
 })
   .and('north', 'south', 'east', 'west')
   .custom((value, helpers) => {

@@ -246,7 +246,6 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
       </div>
     </div>
   </form>
-<<<<<<< HEAD
 
         </main>
       </div>
@@ -341,8 +340,6 @@ exports[`Guided Search - Geography Questionnaire Screen Geography Questionnaire 
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
-=======
->>>>>>> features/294976-search-using-geography-coordinates
 
   </body>
 </html>

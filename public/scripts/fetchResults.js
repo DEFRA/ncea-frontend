@@ -62,18 +62,26 @@ const getSearchResults = async (path) => {
   }
 };
 
+const hideSkipButton = (element) => {
+  element.style.display = 'none;';
+  document.querySelector('.count-block').style.paddingBottom = 0;
+  const skipQuestion = document.querySelector('[data-do-storage-skip]');
+  if (skipQuestion) {
+    skipQuestion.style.display = 'none';
+  }
+};
+
 const getResultsCount = async (path, element) => {
   const response = await invokeAjaxCall(path);
-  const searchResultsCount = await response.json();
-  if (searchResultsCount['totalResults'] !== 0) {
-    element.innerHTML = `Click to see ${searchResultsCount['totalResults']} results`;
-  } else {
-    element.style.display = 'none;';
-    document.querySelector('.count-block').style.paddingBottom = 0;
-    const skipQuestion = document.querySelector('[data-do-storage-skip]');
-    if (skipQuestion) {
-      skipQuestion.style.display = 'none';
+  if (response) {
+    const searchResultsCount = await response.json();
+    if (searchResultsCount && searchResultsCount['totalResults'] !== 0) {
+      element.innerHTML = `Click to see ${searchResultsCount['totalResults']} results`;
+    } else {
+      hideSkipButton(element);
     }
+  } else {
+    hideSkipButton(element);
   }
 };
 
