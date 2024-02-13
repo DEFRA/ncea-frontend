@@ -19,7 +19,7 @@ const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promis
 
 const getSearchResultsCount = async (searchFieldsObject: ISearchFieldsObject): Promise<{ totalResults: number }> => {
   try {
-    const payload = buildSearchQuery(searchFieldsObject, [], true);
+    const payload = buildSearchQuery(searchFieldsObject, []);
     if (payload.query.bool.must?.length) {
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
       return await response.data;

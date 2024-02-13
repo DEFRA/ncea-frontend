@@ -369,10 +369,9 @@ describe('Build the search query', () => {
           ],
         },
       },
-      size: 0,
     };
 
-    const result = buildSearchQuery(searchFieldsObject, [], true);
+    const result = buildSearchQuery(searchFieldsObject, []);
 
     expect(result).toEqual(expectedQuery);
     expect(result.query.bool.must).toHaveLength(1);

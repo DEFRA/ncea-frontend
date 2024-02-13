@@ -75,11 +75,7 @@ const dateQuery = (searchFieldsObject: ISearchFieldsObject): IRangeQuery => {
   return rangeQuery;
 };
 
-const buildSearchQuery = (
-  searchFieldsObject: ISearchFieldsObject,
-  fieldsToSearch: string[] = [],
-  needTotalRecords: boolean = false,
-): IQuery => {
+const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -135,10 +131,6 @@ const buildSearchQuery = (
   const finalQuery: IQuery = {
     query: boolQuery,
   };
-
-  if (needTotalRecords) {
-    finalQuery.size = 0;
-  }
 
   return finalQuery;
 };
