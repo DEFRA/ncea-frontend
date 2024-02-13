@@ -45,8 +45,15 @@ describe('Generate Date string', () => {
     });
 
     it('should generate a date string when day is empty then with last month of the day if the provided month is current month', () => {
-      const dateObject = { year: 2023, month: 2 };
-      expect(generateDateString(dateObject, true)).toBe('2023-02-12');
+      const currentDate = new Date();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+      const dateObject = { year: 2023, month };
+      const expectedMonth = month.toString().length === 1 ? `0${month}` : month;
+      const expectedDay = day.toString().length === 1 ? `0${day}` : day;
+      expect(generateDateString(dateObject, true)).toBe(
+        `2023-${expectedMonth}-${expectedDay}`,
+      );
     });
   });
 });

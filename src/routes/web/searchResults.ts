@@ -1,6 +1,5 @@
 'use strict';
 
-import { HomeController } from '../../controllers/web/HomeController';
 import { SearchResultsController } from '../../controllers/web/SearchResultsController';
 
 import { searchSchema } from '../../schema/search.schema';
@@ -15,11 +14,11 @@ const searchResultsRoutes = [
   {
     method: 'POST',
     path: webRoutePaths.results,
-    handler: HomeController.doQuickSearchHandler,
+    handler: SearchResultsController.renderSearchResultsHandler,
     options: {
       validate: {
         payload: searchSchema,
-        failAction: HomeController.quickSearchFailActionHandler,
+        failAction: SearchResultsController.quickSearchFailActionHandler,
       },
     },
   },

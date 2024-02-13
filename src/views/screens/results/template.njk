@@ -31,13 +31,15 @@
     searchInputError : searchInputError
   }) }}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-      <p>&nbsp;</p>
+  {%if searchInputError === undefined %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        <p>&nbsp;</p>
+      </div>
+      <div class="govuk-grid-column-two-thirds" id="results-block" data-action="{{getResultsPath}}" data-fetch-results>
+        <p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>
+      </div>
     </div>
-    <div class="govuk-grid-column-two-thirds" id="results-block" data-action="{{getResultsPath}}" data-fetch-results>
-      Your search request is being served...
-    </div>
-  </div>
+  {% endif %}
 
 {% endblock %}
