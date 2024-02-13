@@ -146,7 +146,7 @@ npm run start:dev
 ├── .eslintignore          // Ignores certain files for eslint rules
 ├── package.json           // It records important metadata about a project, scripts, and dependencies.
 ├── tsconfig.json          // To compile the project, the root files and compiler options need to be specified.
-└── tests                  // To organize the test cases in a similar manner to the folder structure present in the `src` folder..
+└── __tests__              // To organize the test cases in a similar manner to the folder structure present in the `src` folder..
 
 ```
 
