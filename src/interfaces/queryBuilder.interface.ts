@@ -49,7 +49,6 @@ interface IBoolQuery {
 
 interface IQuery {
   query: IBoolQuery;
-  size?: number;
 }
 
 interface IGeoCoordinates {
