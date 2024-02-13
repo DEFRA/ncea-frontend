@@ -16,7 +16,7 @@
     "noImplicitAny": false,
 
     "outDir": "build",
-    "rootDir": "./",
+    "rootDir": "./src",
     "baseUrl": ".",
     "types": [
       "node",
@@ -31,6 +31,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["src/**/*", "public/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "build"]
 }

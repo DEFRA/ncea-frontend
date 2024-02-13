@@ -1,10 +1,10 @@
 'use strict';
 
 // Initialize form object
-const defaultSessionData = {
+const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
-};
+});
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;
 
@@ -45,7 +45,7 @@ const checkStorageExpiry = (storeTimestamp) => {
 const getStorageData = () => {
   const sessionData =
     localStorage.getItem(localStorageKey) || defaultSessionData;
-  const isStorageExpired = checkStorageExpiry(sessionData.version);
+  const isStorageExpired = checkStorageExpiry(sessionData.version ?? '');
   return isStorageExpired ? defaultSessionData : JSON.parse(sessionData);
 };
 
@@ -67,14 +67,14 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  return Object.values(form).some((value) => value.trim() !== '');
+  return !Object.values(form).some((value) => value.trim() !== '');
 };
 
 // Function to update submit button state
 const updateSubmitButtonState = (form) => {
   const submitButton = form.querySelector('button[data-to-disable]');
   if (submitButton) {
-    submitButton.disabled = !isAllFieldEmpty(form.id);
+    submitButton.disabled = isAllFieldEmpty(form.id);
   }
 };
 
@@ -110,7 +110,7 @@ const resetStorage = () => {
   if (resetElements.length > 0) {
     resetElements.forEach((element) => {
       element.addEventListener('click', () => {
-        storeStorageData(defaultSessionData);
+        storeStorageData(JSON.parse(defaultSessionData));
       });
     });
   }
@@ -155,14 +155,14 @@ const handleSearchJourney = (event) => {
       updateSession = true;
     }
   } else {
-    if (sessionData.fields.hasOwnProperty(formKey)) {
+    const hasQuickSearchData = sessionData.fields.hasOwnProperty(formKey);
+    if (hasQuickSearchData) {
       delete sessionData.fields[formKey];
       updateSession = true;
     }
   }
   if (updateSession) {
     storeStorageData(sessionData);
-    updateSession = false;
   }
 };
 

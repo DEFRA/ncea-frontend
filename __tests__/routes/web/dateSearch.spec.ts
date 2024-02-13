@@ -35,7 +35,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
     server.stop().then(() => done());
   });
 
-  describe('Guided Search > Date Questionnaire > Sanpshot verification', () => {
+  describe('Guided Search > Date Questionnaire > Snapshot verification', () => {
     it('should match the date questionnaire screen snapshot', async () => {
       expect(response.payload).toMatchSnapshot();
     });

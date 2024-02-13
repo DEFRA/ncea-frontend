@@ -9,7 +9,7 @@ import { formIds, formKeys, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const DateSearchController = {
-  renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+  renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaire;
     return response.view('screens/guided_search/date_questionnaire', {
@@ -20,11 +20,11 @@ const DateSearchController = {
       formId,
     });
   },
-  doDateSearchFailActionHandler: async (
+  doDateSearchFailActionHandler: (
     request: Request,
     response: ResponseToolkit,
     error: Joi.ValidationError,
-  ): Promise<Lifecycle.ReturnValue> => {
+  ): Lifecycle.ReturnValue => {
     const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
@@ -52,7 +52,7 @@ const DateSearchController = {
       .code(400)
       .takeover();
   },
-  doDateSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+  doDateSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     return response.redirect(webRoutePaths.geographySearch);
   },
 };

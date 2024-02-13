@@ -4,7 +4,6 @@ coverage
 src/views/**
 src/infrastructure/log_files/**
 src/services/*.json
-src/public/**
 tools/**
 public/**
 src/assets/**

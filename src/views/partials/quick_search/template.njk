@@ -7,6 +7,7 @@
         Search
       {% else %}
         Quick Search
+        {{ searchError }}
       {% endif %}
     </h1>
     {% if not params.isResultPage %}
@@ -35,8 +36,10 @@
           attributes: {
             'aria-controls': 'search-results',
             'placeholder': 'Search'
-          }
+          },
+          errorMessage: params.searchInputError
         }) }}
+        <input type="hidden" name="pageName" value="{% if not params.isResultPage %}home{% else %}results{% endif %}">
       </form>
     </div>
   </div>

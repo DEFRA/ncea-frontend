@@ -2,7 +2,7 @@
 const alwaysMultiLine = 'always-multiline';
 module.exports = {
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  ignorePatterns: ['build/**/*.js', 'public/**/*.js'],
+  ignorePatterns: ['build/**/*.js'],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'prettier', 'jest'],
   root: true,

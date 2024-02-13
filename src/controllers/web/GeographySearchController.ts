@@ -51,7 +51,7 @@ const GeographySearchController = {
       .code(400)
       .takeover();
   },
-  doGeographySearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+  doGeographySearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     return response.redirect(webRoutePaths.results);
   },
 };

@@ -1,6 +1,5 @@
 export const webRoutePaths = {
   home: '/',
-  quickSearch: '/quick_search',
   results: '/search',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',

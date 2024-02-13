@@ -138,9 +138,7 @@ describe('Home Screen', () => {
         const formElement =
           document?.querySelector('.search-block')?.firstElementChild;
         expect(formElement?.getAttribute('role')).toBe('search');
-        expect(formElement?.getAttribute('action')).toBe(
-          webRoutePaths.quickSearch,
-        );
+        expect(formElement?.getAttribute('action')).toBe(webRoutePaths.results);
       });
 
       it('should render the form classes', async () => {

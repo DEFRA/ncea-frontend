@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start:dev": "concurrently \"npm run sass:compile\" \"npm run json-server\" \"cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json\"",
-    "start": "npm run build && node ./build/src/index.js",
+    "start": "npm run build && node ./build/index.js",
     "build": "rimraf ./build && tsc && npm run copy-files",
     "copy-files": "ts-node copyNonTSFiles.ts",
     "json-server": "json-server ./src/services/mock-data.json --port 3300",
@@ -64,6 +64,7 @@
     "prettier": "3.2.5",
     "rimraf": "5.0.5",
     "sass": "1.70.0",
+    "supertest": "6.3.4",
     "ts-jest": "29.1.2",
     "tsx": "4.7.0",
     "typescript": "5.3.3"

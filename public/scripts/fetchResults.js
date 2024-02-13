@@ -2,30 +2,64 @@ import { getStorageData, storeStorageData } from './customScripts.js';
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 
-const invokeAjaxCall = async (path) => {
-  try {
-    const sessionData = getStorageData();
-    const response = await fetch(path, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(sessionData.fields),
-    });
-    if (response.ok) {
-      return response;
-    } else {
-      console.error(`Failed to fetch the results: ${response.status}`);
+const checkProperties = (dataObject, seen = new Set()) => {
+  Object.keys(dataObject).forEach((key) => {
+    if (
+      dataObject[key] === null ||
+      dataObject[key] === '' ||
+      (typeof dataObject[key] === 'object' &&
+        Object.keys(dataObject[key]).length === 0)
+    ) {
+      delete dataObject[key];
+    } else if (
+      typeof dataObject[key] === 'object' &&
+      !seen.has(dataObject[key])
+    ) {
+      seen.add(dataObject[key]);
+      checkProperties(dataObject[key]);
+      if (Object.keys(dataObject[key]).length === 0) {
+        delete dataObject[key];
+      }
     }
-  } catch (error) {
-    console.error(`Error fetching results: ${error.message}`);
+  });
+  return dataObject;
+};
+
+const invokeAjaxCall = async (path) => {
+  const sessionData = getStorageData();
+  const fieldsData = checkProperties(sessionData.fields);
+  if (Object.keys(fieldsData).length) {
+    try {
+      const response = await fetch(path, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sessionData.fields),
+      });
+      if (response.ok) {
+        return response;
+      } else {
+        console.error(`Failed to fetch the results: ${response.status}`);
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error fetching results: ${error.message}`);
+      return null;
+    }
   }
+  return null;
 };
 
 const getSearchResults = async (path) => {
   const response = await invokeAjaxCall(path);
-  const searchResultsHtml = await response.text();
-  document.getElementById('results-block').innerHTML = searchResultsHtml;
+  if (response) {
+    const searchResultsHtml = await response.text();
+    document.getElementById('results-block').innerHTML = searchResultsHtml;
+  } else {
+    document.getElementById('results-block').innerHTML =
+      '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';
+  }
 };
 
 const getResultsCount = async (path, element) => {

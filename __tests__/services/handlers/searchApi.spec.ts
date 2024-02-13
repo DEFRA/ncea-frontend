@@ -77,7 +77,6 @@ describe('Search API', () => {
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { totalResults: 10 },
       });
-      const payload: IQuery = buildSearchQuery(searchFieldsObject);
       await getSearchResultsCount(searchFieldsObject);
       expect(elasticSearchClient.post).toHaveBeenCalledTimes(1);
     });

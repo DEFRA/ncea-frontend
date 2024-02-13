@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Questionnaire > Sanpshot verification should match the date questionnaire screen snapshot 1`] = `
+exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Questionnaire > Snapshot verification should match the date questionnaire screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
@@ -87,7 +87,11 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   <div class="govuk-grid-row">
+<<<<<<< HEAD
     <form method="POST" id="date-search" action="/date-search" data-toggle-submit-button data-do-browser-storage>
+=======
+    <form method="POST" id="date-search" action="/date-search" data-do-browser-storage>
+>>>>>>> features/294976-search-using-geography-coordinates
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
