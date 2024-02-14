@@ -5,18 +5,11 @@ import { elasticSearchAPIPaths } from '../../utils/constants';
 import { elasticSearchClient } from '../../config/elasticSearchClient';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 
-const getSearchResults = async (
-  searchFieldsObject: ISearchFieldsObject,
-): Promise<ISearchResults> => {
+const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promise<ISearchResults> => {
   try {
     const payload = buildSearchQuery(searchFieldsObject);
-    const response = await elasticSearchClient.post(
-      elasticSearchAPIPaths.searchPath,
-      payload,
-    );
-    const finalResponse: ISearchResults = await formatSearchResponse(
-      response.data,
-    );
+    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
+    const finalResponse: ISearchResults = await formatSearchResponse(response.data);
     return finalResponse;
     /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (error: any) {
@@ -24,16 +17,11 @@ const getSearchResults = async (
   }
 };
 
-const getSearchResultsCount = async (
-  searchFieldsObject: ISearchFieldsObject,
-): Promise<{ totalResults: number }> => {
+const getSearchResultsCount = async (searchFieldsObject: ISearchFieldsObject): Promise<{ totalResults: number }> => {
   try {
     const payload = buildSearchQuery(searchFieldsObject, []);
     if (payload.query.bool.must?.length) {
-      const response = await elasticSearchClient.post(
-        elasticSearchAPIPaths.countPath,
-        payload,
-      );
+      const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
       return await response.data;
     } else {
       return Promise.resolve({ totalResults: 0 });

@@ -10,9 +10,7 @@ import {
   IShapeCoordinates,
 } from '../interfaces/queryBuilder.interface';
 
-const quickSearchQuery = (
-  searchFieldsObject: ISearchFieldsObject,
-): IQueryString => {
+const quickSearchQuery = (searchFieldsObject: ISearchFieldsObject): IQueryString => {
   const queryString: IQueryString = {
     query_string: {
       query: searchFieldsObject['quick-search']?.search_term as string,
@@ -42,37 +40,25 @@ const quickSearchQueryWithFields = (
 const dateQuery = (searchFieldsObject: ISearchFieldsObject): IRangeQuery => {
   const startDate: string = generateDateString({
     year: parseInt(
-      searchFieldsObject['date-search']
-        ? (searchFieldsObject['date-search']['from-date-year'] as string)
-        : '',
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-year'] as string) : '',
     ),
     month: parseInt(
-      searchFieldsObject['date-search']
-        ? (searchFieldsObject['date-search']['from-date-month'] as string)
-        : '',
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-month'] as string) : '',
     ),
     day: parseInt(
-      searchFieldsObject['date-search']
-        ? (searchFieldsObject['date-search']['from-date-day'] as string)
-        : '',
+      searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['from-date-day'] as string) : '',
     ),
   });
   const endDate: string = generateDateString(
     {
       year: parseInt(
-        searchFieldsObject['date-search']
-          ? (searchFieldsObject['date-search']['to-date-year'] as string)
-          : '',
+        searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-year'] as string) : '',
       ),
       month: parseInt(
-        searchFieldsObject['date-search']
-          ? (searchFieldsObject['date-search']['to-date-month'] as string)
-          : '',
+        searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-month'] as string) : '',
       ),
       day: parseInt(
-        searchFieldsObject['date-search']
-          ? (searchFieldsObject['date-search']['to-date-day'] as string)
-          : '',
+        searchFieldsObject['date-search'] ? (searchFieldsObject['date-search']['to-date-day'] as string) : '',
       ),
     },
     true,
@@ -89,10 +75,7 @@ const dateQuery = (searchFieldsObject: ISearchFieldsObject): IRangeQuery => {
   return rangeQuery;
 };
 
-const buildSearchQuery = (
-  searchFieldsObject: ISearchFieldsObject,
-  fieldsToSearch: string[] = [],
-): IQuery => {
+const buildSearchQuery = (searchFieldsObject: ISearchFieldsObject, fieldsToSearch: string[] = []): IQuery => {
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -105,29 +88,18 @@ const buildSearchQuery = (
   }
 
   if (searchFieldsObject['quick-search'] && fieldsToSearch.length) {
-    const matchShould: IBoolQuery = quickSearchQueryWithFields(
-      searchFieldsObject,
-      fieldsToSearch,
-    );
+    const matchShould: IBoolQuery = quickSearchQueryWithFields(searchFieldsObject, fieldsToSearch);
     boolQuery.bool.must?.push(matchShould);
   }
 
-  if (
-    searchFieldsObject['date-search']?.['from-date-year'] &&
-    searchFieldsObject['date-search']['to-date-year']
-  ) {
+  if (searchFieldsObject['date-search']?.['from-date-year'] && searchFieldsObject['date-search']['to-date-year']) {
     const rangeQuery: IRangeQuery = dateQuery(searchFieldsObject);
     boolQuery.bool.must?.push(rangeQuery);
   }
 
   const geoCoordinates = searchFieldsObject['coordinate-search'];
 
-  if (
-    geoCoordinates?.north &&
-    geoCoordinates?.south &&
-    geoCoordinates?.east &&
-    geoCoordinates?.west
-  ) {
+  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
     const geoShape: IShapeCoordinates = {
       type: 'envelope',
       coordinates: [
