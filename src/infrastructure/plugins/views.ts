@@ -47,6 +47,7 @@ module.exports = {
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
+      appInsightsConnectionString: 'InstrumentationKey=beb07cdc-ed03-493a-88e3-ce52a5db8a99;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com'
     },
   },
 };
