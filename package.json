@@ -76,12 +76,17 @@
     "@hapi/inert": "7.1.0",
     "@hapi/vision": "7.0.3",
     "@types/hapi__joi": "^17.1.14",
+    "applicationinsights": "^2.9.2",
     "axios": "1.6.4",
     "govuk-frontend": "5.0.0",
     "hapi-pino": "12.1.0",
     "joi": "17.12.1",
     "nunjucks": "3.2.4",
-    "shelljs": "0.8.5"
+    "pino-applicationinsights": "^2.1.0",
+    "pino-multi-stream": "^6.0.0",
+    "shelljs": "0.8.5",
+    "winston": "^3.11.0",
+    "winston-azure-application-insights": "^4.0.0"
   },
   "jestSonar": {
     "reportPath": "reports",
