@@ -1,4 +1,5 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 <div class="govuk-section-break--visible">
   <h2 class="govuk-heading-m">
@@ -8,6 +9,30 @@
             0 results found
           {% endif %}
   </h2>
+  <div class="option-container">
+    {{ govukSelect({
+        id: "sort",
+        name: "sort",
+        label: {
+          text: "Sort by",
+          classes: "option-label"
+        },
+        classes: "option-block",
+        formGroup: {
+          classes: "option-group"
+        },
+        items: [
+          {
+            value: "best_match",
+            text: "Best match"
+          },
+          {
+            value: "recent_study",
+            text: "Most recent study"
+          }
+        ]
+      }) }}
+  </div>
 </div>
 
 {% for item in searchResults.items %}

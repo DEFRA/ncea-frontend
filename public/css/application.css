@@ -7763,3 +7763,27 @@
 .search-result__button-group > .govuk-button {
   margin-bottom: 0;
 }
+
+.option-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.option-group {
+  margin-bottom: 20px;
+}
+.option-block {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  min-width: auto;
+  width: 160px;
+}
+.option-label {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  display: inline-block;
+}

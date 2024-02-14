@@ -3,7 +3,7 @@ import { elasticSearchAPIPaths } from '../../../src/utils/constants';
 import { elasticSearchClient } from '../../../src/config/elasticSearchClient';
 import {
   IQuery,
-  ISearchFieldsObject,
+  ISearchPayload,
 } from '../../../src/interfaces/queryBuilder.interface';
 import {
   getSearchResults,
@@ -29,10 +29,13 @@ describe('Search API', () => {
   });
   describe('Search API - To fetch the search results', () => {
     it('should call elasticSearchClient.post with correct arguments', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
+        sort: '',
       };
       const payload: IQuery = buildSearchQuery(searchFieldsObject);
       await getSearchResults(searchFieldsObject);
@@ -43,20 +46,26 @@ describe('Search API', () => {
     });
 
     it('should return the response from elasticSearchClient.post', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
+        sort: 'best_match',
       };
       const result = await getSearchResults(searchFieldsObject);
       expect(result).toEqual({ total: undefined, items: [] });
     });
 
     it('should handle errors and throw an error message', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
+        sort: '',
       };
       elasticSearchClient.post = jest
         .fn()
@@ -69,10 +78,13 @@ describe('Search API', () => {
 
   describe('Search API - To fetch the search results count', () => {
     it('should call elasticSearchClient.post with correct arguments', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
+        sort: '',
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { totalResults: 10 },
@@ -82,10 +94,13 @@ describe('Search API', () => {
     });
 
     it('should return the total results count', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
+        sort: '',
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { totalResults: 10 },
@@ -95,15 +110,18 @@ describe('Search API', () => {
     });
 
     it('should return the total results count as 0 if no must conditions are provided', async () => {
-      const result = await getSearchResultsCount({});
+      const result = await getSearchResultsCount({ fields: {}, sort: '' });
       expect(result).toEqual({ totalResults: 0 });
     });
 
     it('should handle errors and throw an error message', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
+        sort: '',
       };
       elasticSearchClient.post = jest
         .fn()

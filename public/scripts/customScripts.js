@@ -4,6 +4,9 @@
 const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
+  sort: 'best_match',
+  filters: {},
+  pagination: { rowsPerPage: '', totalRecords: '', currentPage: '' },
 });
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;

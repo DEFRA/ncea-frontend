@@ -47,8 +47,15 @@ interface IBoolQuery {
   };
 }
 
+interface ISortQuery {
+  [key: string]: {
+    order: string;
+  };
+}
+
 interface IQuery {
   query: IBoolQuery;
+  sort?: ISortQuery[];
 }
 
 interface IGeoCoordinates {
@@ -62,7 +69,7 @@ interface IGeoCoordinates {
   };
 }
 
-interface ISearchFieldsObject {
+interface ISearchFields {
   'quick-search'?: {
     search_term?: string;
   };
@@ -83,14 +90,21 @@ interface ISearchFieldsObject {
   };
 }
 
+interface ISearchPayload {
+  fields: ISearchFields;
+  sort: string;
+}
+
 export {
   IMatchQuery,
   IBoolQuery,
   IRangeQuery,
   IQuery,
-  ISearchFieldsObject,
+  ISearchPayload,
+  ISearchFields,
   IShapeCoordinates,
   IGeoShapeQuery,
   IGeoCoordinates,
   IQueryString,
+  ISortQuery,
 };

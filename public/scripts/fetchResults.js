@@ -26,16 +26,16 @@ const checkProperties = (dataObject, seen = new Set()) => {
 };
 
 const invokeAjaxCall = async (path) => {
-  const sessionData = getStorageData();
-  const fieldsData = checkProperties(sessionData.fields);
-  if (Object.keys(fieldsData).length) {
+  const { fields, sort } = getStorageData();
+  const fieldsData = checkProperties(fields);
+  if (Object.keys(fieldsData).length && sort) {
     try {
       const response = await fetch(path, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(sessionData.fields),
+        body: JSON.stringify({ fields, sort }),
       });
       if (response.ok) {
         return response;

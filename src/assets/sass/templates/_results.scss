@@ -50,3 +50,26 @@
     margin-bottom: 0;
   }
 }
+
+.option {
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  &-group {
+    margin-bottom: 20px;
+  }
+
+  &-block {
+    @include font-style-stack(19px, 25px, 300, normal);
+    min-width: auto;
+    width: 160px;
+  }
+
+  &-label {
+    @include font-style-stack(16px, 20px, 300, normal);
+    display: inline-block;
+  }
+}

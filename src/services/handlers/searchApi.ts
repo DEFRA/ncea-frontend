@@ -1,11 +1,11 @@
-import { ISearchFieldsObject } from '../../interfaces/queryBuilder.interface';
+import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../interfaces/searchResponse.interface';
 import { buildSearchQuery } from '../../utils/queryBuilder';
 import { elasticSearchAPIPaths } from '../../utils/constants';
 import { elasticSearchClient } from '../../config/elasticSearchClient';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 
-const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promise<ISearchResults> => {
+const getSearchResults = async (searchFieldsObject: ISearchPayload): Promise<ISearchResults> => {
   try {
     const payload = buildSearchQuery(searchFieldsObject);
     const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
@@ -17,9 +17,9 @@ const getSearchResults = async (searchFieldsObject: ISearchFieldsObject): Promis
   }
 };
 
-const getSearchResultsCount = async (searchFieldsObject: ISearchFieldsObject): Promise<{ totalResults: number }> => {
+const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promise<{ totalResults: number }> => {
   try {
-    const payload = buildSearchQuery(searchFieldsObject, []);
+    const payload = buildSearchQuery(searchFieldsObject);
     if (payload.query.bool.must?.length) {
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
       return await response.data;
