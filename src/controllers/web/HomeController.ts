@@ -14,17 +14,9 @@ import { formIds, webRoutePaths } from '../../utils/constants';
  */
 
 const HomeController = {
-  renderHomeHandler: (
-    request: Request,
-    response: ResponseToolkit,
-  ): ResponseObject => {
-    const { results: quickSearchPath, guidedDateSearch: dateSearchPath } =
-      webRoutePaths;
+  renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    const { results: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
-    request.logger.info('Fujale - This is from pino logger');
-    request.log(['info'], 'Fujale - This is from default logger');
-    console.log('Fujale - This is from console log');
-    console.error('Fujale - This is from console error');
     return response.view('screens/home/template', {
       quickSearchPath,
       formId,
