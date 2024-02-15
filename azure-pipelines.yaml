@@ -12,105 +12,130 @@ trigger:
       - features/*
       - feature/*
 
-variables:
-  isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
-  branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
-  branch: $[replace(variables['branchSource'], '/', '-')]
-  ${{ if ne(variables.isMaster, 'true') }}:
-    artifactNameSuffix: _$(branch)
-  ${{ else }}:
-    artifactNameSuffix: ''
+variables:  
+  ARM.ServiceConnection : AZR-NCE-SND1
   ACR.ServiceConnection : acr-AZR-NCE-SND1
   ACR.ContainerRepository: defra/ncea-fe
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-  - task: UseNode@1
-    inputs:
-      version: '18.x'
-    displayName: 'Install Node.js'
+stages:
+- stage: 'Build'
+  displayName: 'Build FE'
+  jobs: 
+  - job: 'Build'
+    displayName: 'Build job'
+    pool:
+      vmImage: 'ubuntu-latest'
+      demands:
+      - npm
 
-  - task: SonarCloudPrepare@1
-    inputs:
-      SonarCloud: 'defra-sonarcloud'
-      organization: 'defra'
-      scannerMode: CLI
-      projectKey: 'DEFRA_ncea-frontend'
-      projectName: 'ncea-frontend'
-    displayName: 'Prepare analysis on SonarCloud'
+    variables:
+      isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+      isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
+      branchSource: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
+      branch: $[replace(variables['branchSource'], '/', '-')]
+      ${{ if ne(variables.isMaster, 'true') }}:
+        artifactNameSuffix: _$(branch)
+      ${{ else }}:
+        artifactNameSuffix: ''
 
-  - script: |
-      npm install
-      npm run build
-    displayName: 'npm install and build'
+    steps:
+    - task: UseNode@1
+      inputs:
+        version: '18.x'
+      displayName: 'Install Node.js'
 
-  # - script: |
-  #     npm run test
-  #   displayName: 'npm test'
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'defra-sonarcloud'
+        organization: 'defra'
+        scannerMode: CLI
+        projectKey: 'DEFRA_ncea-frontend'
+        projectName: 'ncea-frontend'
+      displayName: 'Prepare analysis on SonarCloud'
 
-  # - task: PublishCodeCoverageResults@1
-  #   condition: succeededOrFailed()
-  #   inputs:
-  #     codeCoverageTool: Cobertura
-  #     summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-  #   displayName: 'Publish code coverage result'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
 
-  # - task: SonarCloudAnalyze@1
-  #   inputs:
-  #     jdkversion: 'JAVA_HOME_17_X64'
-  #   displayName: 'Run Code Analysis'
+    # - script: |
+    #     npm run test
+    #   displayName: 'npm test'
 
-  # - task: SonarCloudPublish@1
-  #   inputs:
-  #     pollingTimeoutSec: '300'
-  #   displayName: 'Publish Quality Gate Result'
+    # - task: PublishCodeCoverageResults@1
+    #   condition: succeededOrFailed()
+    #   inputs:
+    #     codeCoverageTool: Cobertura
+    #     summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+    #   displayName: 'Publish code coverage result'
 
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: '$(Build.SourcesDirectory)'
-      contents: |
-        build/**
-      targetFolder: '$(Build.ArtifactStagingDirectory)'
-      cleanTargetFolder: true
-    displayName: 'Copy project files'
+    # - task: SonarCloudAnalyze@1
+    #   inputs:
+    #     jdkversion: 'JAVA_HOME_17_X64'
+    #   displayName: 'Run Code Analysis'
 
-  - task: PublishPipelineArtifact@1
-    condition: |
-      or(
-          and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
-          and(succeeded(), eq(variables.isMaster, true))
-        )
-    inputs:
-      artifactName: 'ncea-frontend_$(Build.BuildNumber)$(artifactNameSuffix)'
-      targetPath: '$(Build.ArtifactStagingDirectory)'
-      publishLocation: 'pipeline'
-    displayName: 'Publish npm artifact'
+    # - task: SonarCloudPublish@1
+    #   inputs:
+    #     pollingTimeoutSec: '300'
+    #   displayName: 'Publish Quality Gate Result'
 
-  - task: Docker@2
-    displayName: Login to ACR
-    inputs:
-      command: login
-      containerRegistry: $(ACR.ServiceConnection)
+    - task: Docker@2
+      displayName: Login to ACR
+      inputs:
+        command: login
+        containerRegistry: $(ACR.ServiceConnection)
 
-  - task: Docker@2
-    displayName: 'Build'
-    inputs:
-      command: build
-      containerRegistry: $(ACR.ServiceConnection)
-      repository: $(ACR.ContainerRepository)
-      tags: |
-        latest
-        $(Build.BuildId)
+    - task: Docker@2
+      displayName: 'Build'
+      inputs:
+        command: build
+        containerRegistry: $(ACR.ServiceConnection)
+        repository: $(ACR.ContainerRepository)
+        tags: $(Build.BuildId)
 
-  - task: Docker@2
-    displayName: Push
-    inputs:
-      command: push
-      containerRegistry: $(ACR.ServiceConnection)
-      repository: $(ACR.ContainerRepository)
-      tags: |
-        latest
-        $(Build.BuildId)
+    - task: Docker@2
+      displayName: 
+      condition: |
+        or(
+            and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
+            and(succeeded(), eq(variables.isMaster, true))
+          )  
+      inputs:
+        command: push
+        containerRegistry: $(ACR.ServiceConnection)
+        repository: $(ACR.ContainerRepository)
+        tags: $(Build.BuildId)
+
+    - task: HelmDeploy@0
+      inputs:
+        command: package
+        chartPath: $(chartPath)
+        chartVersion: $(Build.SourceBranchName)
+        arguments: '--app-version $(Build.SourceBranchName)'
+        destination: $(Build.ArtifactStagingDirectory)
+  
+    - task: AzureCLI@1
+      inputs:
+        azureSubscription: $(Arm.ServiceConnection)
+        scriptLocation: inlineScript
+        inlineScript: az acr helm push -n $(acrName) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
+
+# - stage: 'Dev'
+#   displayName: 'Deploy to the dev environment'
+#   dependsOn: Build
+#   condition:  succeeded()
+#   jobs:
+#   - deployment: Deploy
+#     pool:
+#       vmImage: 'ubuntu-latest'
+#     environment: dev
+#     variables:
+#     - group: Release
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#             - template: 
