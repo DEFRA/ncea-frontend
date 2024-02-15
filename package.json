@@ -81,7 +81,6 @@
     "joi": "17.12.1",
     "nunjucks": "3.2.4",
     "nunjucks-date-filter": "0.1.1",
-    "ol": "8.2.0",
     "shelljs": "0.8.5",
     "ts-node": "10.9.2"
   },
