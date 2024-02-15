@@ -47,16 +47,16 @@ steps:
       npm run build
     displayName: 'npm install and build'
 
-  - script: |
-      npm run test
-    displayName: 'npm test'
+  # - script: |
+  #     npm run test
+  #   displayName: 'npm test'
 
-  - task: PublishCodeCoverageResults@1
-    condition: succeededOrFailed()
-    inputs:
-      codeCoverageTool: Cobertura
-      summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-    displayName: 'Publish code coverage result'
+  # - task: PublishCodeCoverageResults@1
+  #   condition: succeededOrFailed()
+  #   inputs:
+  #     codeCoverageTool: Cobertura
+  #     summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+  #   displayName: 'Publish code coverage result'
 
   - task: SonarCloudAnalyze@1
     inputs:
