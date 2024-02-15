@@ -40,7 +40,7 @@ stages:
         artifactNameSuffix: _$(branch)
       ${{ else }}:
         artifactNameSuffix: ''
-
+      chartPath: 'helm-charts' 
     steps:
     - task: UseNode@1
       inputs:
@@ -89,7 +89,7 @@ stages:
         containerRegistry: $(ACR.ServiceConnection)
 
     - task: Docker@2
-      displayName: 'Build'
+      displayName: 'Docker Build'
       inputs:
         command: build
         containerRegistry: $(ACR.ServiceConnection)
@@ -97,7 +97,7 @@ stages:
         tags: $(Build.BuildId)
 
     - task: Docker@2
-      displayName: 
+      displayName: 'Docker Push'
       condition: |
         or(
             and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
@@ -110,6 +110,7 @@ stages:
         tags: $(Build.BuildId)
 
     - task: HelmDeploy@0
+      displayName: 'Helm Package'  
       inputs:
         command: package
         chartPath: $(chartPath)
