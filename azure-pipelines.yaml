@@ -42,7 +42,7 @@ stages:
         artifactNameSuffix: _$(branch)
       ${{ else }}:
         artifactNameSuffix: ''
-      chartPath: 'helm-charts' 
+      chartPath: 'NCEA-FRONTEND/helm-charts' 
     steps:
     - task: UseNode@1
       inputs:
