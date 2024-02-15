@@ -8,9 +8,9 @@ const winston = require('winston');
 const appInsights = require("applicationinsights");
 const { AzureApplicationInsightsLogger } = require('winston-azure-application-insights');
 
-const shouldPushToAppInsights = 'SHOULD_PUSH_TO_APPINSIGHTS' in process.env;
+const shouldPushToAppInsights = Config.env === 'local';
 
-if (shouldPushToAppInsights) {  
+if (!shouldPushToAppInsights) {  
   appInsights
   .setup("InstrumentationKey=beb07cdc-ed03-493a-88e3-ce52a5db8a99;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/")
   .enableWebInstrumentation(true)
@@ -58,7 +58,6 @@ const initializeServer = async (): Promise<Server> => {
   // Register the custom plugins
   await server.register([require('./plugins/views'), require('./plugins/router'), require('./plugins/logger')]);
 
-  const appInsightsConnectionString = await getSecret("ApplicationInsights--ConnectionString");  
   await server.initialize();
   return server;
 };
