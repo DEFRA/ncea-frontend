@@ -159,4 +159,4 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
   return finalQuery;
 };
 
-export { buildSearchQuery };
+export { buildSearchQuery, buildCustomSortScriptForStudyPeriod };

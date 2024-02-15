@@ -1,6 +1,7 @@
 import { getStorageData, storeStorageData } from './customScripts.js';
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
+const resultsBlockId = 'results-block';
 
 const checkProperties = (dataObject, seen = new Set()) => {
   Object.keys(dataObject).forEach((key) => {
@@ -11,14 +12,14 @@ const checkProperties = (dataObject, seen = new Set()) => {
         Object.keys(dataObject[key]).length === 0)
     ) {
       delete dataObject[key];
-    } else if (
-      typeof dataObject[key] === 'object' &&
-      !seen.has(dataObject[key])
-    ) {
-      seen.add(dataObject[key]);
-      checkProperties(dataObject[key]);
-      if (Object.keys(dataObject[key]).length === 0) {
-        delete dataObject[key];
+    } else {
+      const hasSeen = seen.has(dataObject[key]);
+      if (typeof dataObject[key] === 'object' && !hasSeen) {
+        seen.add(dataObject[key]);
+        checkProperties(dataObject[key]);
+        if (Object.keys(dataObject[key]).length === 0) {
+          delete dataObject[key];
+        }
       }
     }
   });
@@ -51,13 +52,53 @@ const invokeAjaxCall = async (path) => {
   return null;
 };
 
+const invokeSearchResults = () => {
+  const fetchResults = document.querySelector('[data-fetch-results]');
+  if (fetchResults) {
+    const action = fetchResults.getAttribute('data-action');
+    getSearchResults(action);
+  }
+};
+
+const hydrateSortOption = () => {
+  const { sort } = getStorageData();
+  const hasSortElement = document.getElementById('sort');
+  if (hasSortElement && sort) {
+    for (const option of hasSortElement.options) {
+      if (option.value === sort) {
+        option.selected = true;
+        break;
+      }
+    }
+  }
+};
+
+const attacheSortChangeListener = () => {
+  const hasSortElement = document.getElementById('sort');
+  if (hasSortElement) {
+    hasSortElement.addEventListener('change', () => {
+      const selectedValue =
+        hasSortElement.options[hasSortElement.selectedIndex];
+      const sessionData = getStorageData();
+      sessionData.sort = selectedValue.value;
+      storeStorageData(sessionData);
+      invokeSearchResults();
+    });
+  }
+};
+
 const getSearchResults = async (path) => {
+  document.getElementById(resultsBlockId).innerHTML =
+    '<p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>';
   const response = await invokeAjaxCall(path);
   if (response) {
     const searchResultsHtml = await response.text();
-    document.getElementById('results-block').innerHTML = searchResultsHtml;
+    document.getElementById(resultsBlockId).innerHTML = searchResultsHtml;
+
+    hydrateSortOption();
+    attacheSortChangeListener();
   } else {
-    document.getElementById('results-block').innerHTML =
+    document.getElementById(resultsBlockId).innerHTML =
       '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';
   }
 };
@@ -112,15 +153,15 @@ const attachClickResultsEvent = (element) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  const fetchResults = document.querySelector('[data-fetch-results]');
-  if (fetchResults) {
-    const action = fetchResults.getAttribute('data-action');
-    getSearchResults(action);
-  }
+  invokeSearchResults();
   const fetchResultsCount = document.querySelector('[data-fetch-count]');
   if (fetchResultsCount) {
     attachClickResultsEvent(fetchResultsCount);
     const action = fetchResultsCount.getAttribute('data-action');
-    getResultsCount(action, fetchResultsCount);
+    if (action) {
+      getResultsCount(action, fetchResultsCount);
+    }
   }
 });
+
+export { hydrateSortOption, invokeSearchResults };

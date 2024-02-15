@@ -2,7 +2,12 @@ import {
   IQuery,
   ISearchPayload,
 } from '../../src/interfaces/queryBuilder.interface';
-import { buildSearchQuery } from '../../src/utils/queryBuilder';
+import {
+  buildCustomSortScriptForStudyPeriod,
+  buildSearchQuery,
+} from '../../src/utils/queryBuilder';
+
+const recentStudySortScript = buildCustomSortScriptForStudyPeriod();
 
 describe('Build the search query', () => {
   describe('Search query without sort', () => {
@@ -847,13 +852,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -931,13 +930,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -977,13 +970,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -1019,13 +1006,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -1064,13 +1045,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1119,13 +1094,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1169,13 +1138,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            'resourceTemporalExtentDateRange.gte': {
-              order: 'desc',
-            },
-          },
-        ],
+        sort: [recentStudySortScript],
       };
 
       const result = buildSearchQuery(searchFieldsObject);

@@ -1,5 +1,7 @@
 'use strict';
 
+import { hydrateSortOption, invokeSearchResults } from './fetchResults.js';
+
 // Initialize form object
 const defaultSessionData = JSON.stringify({
   version: '',
@@ -99,13 +101,6 @@ const attachEventListeners = (form) => {
       updateSubmitButtonState(form);
     });
   });
-};
-
-// To update storage with new count data
-const updateCountData = (formId, count) => {
-  const sessionData = getStorageData();
-  sessionData.count[formId] = count;
-  storeStorageData(sessionData);
 };
 
 const resetStorage = () => {
@@ -210,6 +205,11 @@ window.addEventListener('storage', (event) => {
         updateSubmitButtonState(form);
       }
     });
+
+    if (updatedData.sort) {
+      hydrateSortOption();
+      invokeSearchResults();
+    }
   }
 });
 
