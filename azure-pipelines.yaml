@@ -117,11 +117,11 @@ stages:
         arguments: '--app-version $(Build.SourceBranchName)'
         destination: $(Build.ArtifactStagingDirectory)
   
-    - task: AzureCLI@1
-      inputs:
-        azureSubscription: $(Arm.ServiceConnection)
-        scriptLocation: inlineScript
-        inlineScript: az acr helm push -n $(acrName) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
+    # - task: AzureCLI@1
+    #   inputs:
+    #     azureSubscription: $(Arm.ServiceConnection)
+    #     scriptLocation: inlineScript
+    #     inlineScript: az acr helm push -n $(acrName) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
 
 # - stage: 'Dev'
 #   displayName: 'Deploy to the dev environment'
