@@ -120,15 +120,15 @@ stages:
         arguments: '--app-version $(Build.SourceBranchName)'
         destination: $(Build.ArtifactStagingDirectory)
 
-    - task: HelmDeploy@0
-      displayName: Helm save
-      inputs:
-        command: save
-        chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildId)'
-        chartPathForACR: $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
-        azureSubscriptionEndpointForACR: $(ACR.ServiceConnection)
-        azureResourceGroupForACR: $(ACR.ResourceGroupName)
-        azureContainerRegistry: $(ACR.ContainerRepository)
+    # - task: HelmDeploy@0
+    #   displayName: Helm save
+    #   inputs:
+    #     command: save
+    #     chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildId)'
+    #     chartPathForACR: $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
+    #     azureSubscriptionEndpointForACR: $(ACR.ServiceConnection)
+    #     azureResourceGroupForACR: $(ACR.ResourceGroupName)
+    #     azureContainerRegistry: $(ACR.ContainerRepository)
     
     # - task: AzureCLI@1
     #   inputs:
