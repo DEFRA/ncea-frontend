@@ -58,15 +58,15 @@ steps:
   #     summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
   #   displayName: 'Publish code coverage result'
 
-  - task: SonarCloudAnalyze@1
-    inputs:
-      jdkversion: 'JAVA_HOME_17_X64'
-    displayName: 'Run Code Analysis'
+  # - task: SonarCloudAnalyze@1
+  #   inputs:
+  #     jdkversion: 'JAVA_HOME_17_X64'
+  #   displayName: 'Run Code Analysis'
 
-  - task: SonarCloudPublish@1
-    inputs:
-      pollingTimeoutSec: '300'
-    displayName: 'Publish Quality Gate Result'
+  # - task: SonarCloudPublish@1
+  #   inputs:
+  #     pollingTimeoutSec: '300'
+  #   displayName: 'Publish Quality Gate Result'
 
   - task: CopyFiles@2
     inputs:
