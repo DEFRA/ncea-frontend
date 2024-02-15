@@ -18,7 +18,7 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
       'string.base': 'Environment must be a string',
       'any.only': 'Provided Environment is not valid',
     }),
-  appInsightsKey: Joi.string().allow('').default('').messages({
+  appInsightsConnectionString: Joi.string().allow('').default('').messages({
     'string.base': 'Insights key must be a string',
   }),
   azureKeyVaultURL: Joi.string().uri().allow('').default('').messages({

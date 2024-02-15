@@ -1,5 +1,11 @@
 FROM node:lts-alpine
 
+ENV PORT='3000'
+ENV NODE_ENV='local'
+ENV AZURE_KEYVAULT_URL='https://nceakv.vault.azure.net/'
+ENV ELASTICSEARCH_API='http://localhost:3300/'
+ENV APPLICATIONINSIGHTS_CONNECTION_STRING='InstrumentationKey=beb07cdc-ed03-493a-88e3-ce52a5db8a99;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/'
+
 # Change the working directory on the Docker image to /app
 WORKDIR /app
 

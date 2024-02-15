@@ -15,7 +15,7 @@ import { environmentSchema } from '../schema/environmentConfig.schema';
 const config: EnvironmentConfig = {
   port: process.env.PORT,
   env: process.env.NODE_ENV,
-  appInsightsKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
+  appInsightsConnectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
   azureKeyVaultURL: process.env.AZURE_KEYVAULT_URL,
   geoNetworkSearchAPI: process.env.GEONETWORK_SEARCH_API,
 };

@@ -2,7 +2,6 @@
 
 import { Config } from '../config/environmentConfig';
 import Hapi, { Server } from '@hapi/hapi';
-import { getSecret } from '../utils/keyvault';
 
 const winston = require('winston');
 const appInsights = require("applicationinsights");
@@ -12,7 +11,7 @@ const shouldPushToAppInsights = Config.env === 'local';
 
 if (!shouldPushToAppInsights) {  
   appInsights
-  .setup("InstrumentationKey=beb07cdc-ed03-493a-88e3-ce52a5db8a99;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/")
+  .setup(Config.appInsightsConnectionString)
   .enableWebInstrumentation(true)
   .setAutoDependencyCorrelation(true)
   .setAutoCollectRequests(true)
@@ -40,7 +39,7 @@ global.logger = winston;
 
 // Create the hapi server
 const server: Server = Hapi.server({
-  host: process.env.HOST ?? 'localhost',
+  host: process.env.HOST ?? '0.0.0.0',
   port: Config.env !== 'test' ? Config.port : 4000,
   routes: {
     validate: {
