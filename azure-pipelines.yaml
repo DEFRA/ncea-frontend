@@ -21,6 +21,8 @@ variables:
     artifactNameSuffix: _$(branch)
   ${{ else }}:
     artifactNameSuffix: ''
+  ACR.ServiceConnection : acr-AZR-NCE-SND1
+  ACR.ContainerRepository: defra/ncea-fe
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -86,3 +88,29 @@ steps:
       targetPath: '$(Build.ArtifactStagingDirectory)'
       publishLocation: 'pipeline'
     displayName: 'Publish npm artifact'
+
+  - task: Docker@2
+    displayName: Login to ACR
+    inputs:
+      command: login
+      containerRegistry: $(ACR.ServiceConnection)
+
+  - task: Docker@2
+    displayName: 'Build'
+    inputs:
+      command: build
+      containerRegistry: $(ACR.ServiceConnection)
+      repository: $(ACR.ContainerRepository)
+      tags: |
+        latest
+        $(Build.BuildId)
+
+  - task: Docker@2
+    displayName: Push
+    inputs:
+      command: push
+      containerRegistry: $(ACR.ServiceConnection)
+      repository: $(ACR.ContainerRepository)
+      tags: |
+        latest
+        $(Build.BuildId)
