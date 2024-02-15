@@ -47,10 +47,17 @@ interface IBoolQuery {
   };
 }
 
-interface ISortQuery {
-  [key: string]: {
-    order: string;
+interface ISortOrder {
+  order: string;
+}
+interface ICustomSortScript extends ISortOrder {
+  type: string;
+  script: {
+    source: string;
   };
+}
+interface ISortQuery {
+  [key: string]: ISortOrder | ICustomSortScript;
 }
 
 interface IQuery {
@@ -107,4 +114,5 @@ export {
   IGeoCoordinates,
   IQueryString,
   ISortQuery,
+  ICustomSortScript,
 };

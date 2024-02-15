@@ -75,6 +75,7 @@
     "@hapi/hapi": "21.3.3",
     "@hapi/inert": "7.1.0",
     "@hapi/vision": "7.0.3",
+    "applicationinsights": "2.9.2",
     "axios": "1.6.7",
     "govuk-frontend": "5.1.0",
     "hapi-pino": "12.1.0",
