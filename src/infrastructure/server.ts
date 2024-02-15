@@ -38,7 +38,6 @@ console.log('Initialized app insights');
 }
 global.logger = winston;
 
-
 // Create the hapi server
 const server: Server = Hapi.server({
   host: process.env.HOST ?? 'localhost',
