@@ -13,10 +13,15 @@
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 const HomeController = {
-  renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+  renderHomeHandler: async (
+    request: Request,
+    response: ResponseToolkit
+  ): Promise<ResponseObject> => {
     global.logger.info('Test FE logs');
     global.logger.error('Test FE logs-1');
-    return response.view('screens/home/template');
+    return response.view('screens/home/template', {
+      searchInputError: undefined,
+    });
   },
 };
 

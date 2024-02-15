@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Results Screen Results > Sanpshot verification should match the results screen snapshot 1`] = `
+exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
@@ -52,7 +52,6 @@ exports[`Results Screen Results > Sanpshot verification should match the results
   
       <div class="govuk-width-container">
         
-  
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
@@ -65,67 +64,27 @@ exports[`Results Screen Results > Sanpshot verification should match the results
 </div>
 
 
-  <div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-  
-    
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/">Home</a>
-    </li>
-    
-  
-    
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
-    
-  
-  </ol>
-</div>
-
-
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-
-  
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
-      
-        Search
-      
-    </h1>
-    
-    <div class="search-block" data-module="search">
-      <form action="/search" method="get" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
-        
-
-<div class="govuk-form-group">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search">
-    Search
-  </label>
-
-<div class="govuk-input__wrapper"><input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search" name="q" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search"><div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button">Search</button></div>
-  </div>
-
-</div>
-
-      </form>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+            <p>&nbsp;</p>
+        </div>
+        <div class="govuk-grid-column-full">
+            <h1 class="govuk-heading-m">
+                Error 404 page not found
+            </h1>
+            <p class="govuk-caption-m govuk-!-font-size-14">
+                If you typed the web address, check it is correct.
+            </P>
+            <p class="govuk-caption-m govuk-!-font-size-14">
+                If you pasted the web address, check you copied the entire address.
+            </P>
+            <p class="govuk-caption-m govuk-!-font-size-14">
+                If the web address is correct or you selected a link or button, you can <a href="#">contact us</a> to receive support.
+            </P>
+        </div>
     </div>
-  </div>
-</div>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-      <p>&nbsp;</p>
-    </div>
-    <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-section-break--visible">
-        <h2 class="govuk-heading-m"> results</h2>
-      </div><p class="govuk-caption-m govuk-!-font-size-14">No results.</p></div>
-  </div>
 
         </main>
       </div>

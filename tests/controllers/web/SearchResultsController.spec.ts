@@ -7,29 +7,33 @@ import { getSearchResults } from '../../../src/services/handlers/searchResultsAp
 import { ApiResponse } from '../../../src/Models/ApiResponse';
 import { fromDate, toDate } from '../../../src/views/forms/dateQuestionnaireFields';
 import { dateQuestionChronologicalError, dateQuestionnaireGovUKError } from '../../data/dateQuestionnaire';
+import { quickSearchJoiError } from '../../data/quickSearch';
 import { DateQuestionnaireError } from '../../../src/interfaces/guidedSearch';
 import * as errorTransformer from '../../../src/utils/transformErrors';
 
 jest.mock('../../../src/services/handlers/searchResultsApi');
 
 describe('Search Results Controller > deals with rendering search results handler', () => {
-  let mockRequest = mock<Request>();
   const mockResponse = mock<ResponseToolkit>();
-  mockRequest.query['q'] = 'test search term';
+  const mockRequest = {
+    payload: {
+      q: 'test search term'
+    }
+  };
 
   beforeAll(async () => {
     (getSearchResults as jest.Mock).mockResolvedValue(
       new ApiResponse({}, 200, true)
     );
     return SearchResultsController.renderSearchResultsHandler(
-      mockRequest,
+      mockRequest as Request,
       mockResponse
     );
   });
 
   it('should call the Search view with context', async () => {
     expect(mockResponse.view).toHaveBeenCalledWith('screens/results/template', {
-      searchTerm: mockRequest.query?.q,
+      searchTerm: mockRequest.payload?.q as string,
       searchResults: {},
       hasResult: true,
     });
@@ -57,7 +61,8 @@ describe('Search Results Controller > renderGuidedSearchHandler', () => {
 describe('Search Results Controller > guidedSearchFailActionHandler', () => {
   const h = {
     view: jest.fn().mockReturnThis(),
-    takeover: jest.fn()
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
   };
   const error = {};
   jest.spyOn(errorTransformer,'transformErrors').mockReturnValue(dateQuestionChronologicalError as DateQuestionnaireError);
@@ -67,5 +72,69 @@ describe('Search Results Controller > guidedSearchFailActionHandler', () => {
 
   it('should render the date questionnaire template with error messages', async () => {
     expect(h.view).toHaveBeenCalledWith('screens/guided_search/date_questionnaire', dateQuestionnaireGovUKError);
+  });
+});
+
+describe('Search Results Controller > quickSearchFailActionHandler > home page', () => {
+  const h = {
+    view: jest.fn().mockReturnThis(),
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
+  };
+  const request = {
+    payload: {
+      pageName: 'home'
+    }
+  }
+  beforeAll(() => {
+    return SearchResultsController.quickSearchFailActionHandler(request, h, quickSearchJoiError);
+  });
+
+  it('should render the home page with error messages', async () => {
+    expect(h.view).toHaveBeenCalledWith('screens/home/template', {searchInputError: {
+      text: 'Please enter keywords into the search field.'
+    }});
+  });
+});
+
+describe('Search Results Controller > quickSearchFailActionHandler > results page', () => {
+  const h = {
+    view: jest.fn().mockReturnThis(),
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
+  };
+  const request = {
+    payload: {
+      pageName: 'results'
+    }
+  }
+  beforeAll(() => {
+    return SearchResultsController.quickSearchFailActionHandler(request, h, quickSearchJoiError);
+  });
+
+  it('should render the results page with error messages', async () => {
+    expect(h.view).toHaveBeenCalledWith('screens/results/template', {searchInputError: {
+      text: 'Please enter keywords into the search field.'
+    }});
+  });
+});
+
+describe('Search Results Controller > quickSearchFailActionHandler > no error', () => {
+  const h = {
+    view: jest.fn().mockReturnThis(),
+    takeover: jest.fn(),
+    code: jest.fn().mockReturnThis(),
+  };
+  const request = {
+    payload: {
+      pageName: 'home'
+    }
+  }
+  beforeAll(() => {
+    return SearchResultsController.quickSearchFailActionHandler(request, h, undefined);
+  });
+
+  it('should render the home page with error messages', async () => {
+    expect(h.view).toHaveBeenCalledWith('screens/home/template', {searchInputError: undefined});
   });
 });

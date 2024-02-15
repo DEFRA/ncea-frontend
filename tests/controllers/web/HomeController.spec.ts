@@ -14,6 +14,6 @@ describe('Home Controller > deals with render home handler', () => {
   });
 
   it('should call the home view with context', async () => {
-    expect(mockResponse.view).toHaveBeenCalledWith('screens/home/template');
+    expect(mockResponse.view).toHaveBeenCalledWith('screens/home/template', {"searchInputError": undefined});
   });
 });

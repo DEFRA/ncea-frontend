@@ -7,14 +7,14 @@
         Search
       {% else %}
         Quick Search
+        {{ searchError }}
       {% endif %}
     </h1>
     {% if not params.isResultPage %}
       <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
     {% endif %}
     <div class="search-block" data-module="search">
-      <form action="/search" method="get" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
+      <form action="/search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
         {{ govukInput({
           id: 'search',
           name: 'q',
@@ -35,8 +35,10 @@
           attributes: {
             'aria-controls': 'search-results',
             'placeholder': 'Search'
-          }
+          },
+          errorMessage: params.searchInputError
         }) }}
+        <input type="hidden" name="pageName" value="{% if not params.isResultPage %}home{% else %}results{% endif %}">
       </form>
     </div>
   </div>

@@ -80,14 +80,14 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
     <h1 class="govuk-heading-m quick_search-container__heading-m">
       
         Quick Search
+        
       
     </h1>
     
       <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
     
     <div class="search-block" data-module="search">
-      <form action="/search" method="get" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
+      <form action="/search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
         
 
 <div class="govuk-form-group">
@@ -100,6 +100,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
 
 </div>
 
+        <input type="hidden" name="pageName" value="home">
       </form>
     </div>
   </div>
