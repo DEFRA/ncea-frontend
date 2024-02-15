@@ -14,6 +14,8 @@ trigger:
 
 variables:  
   ARM.ServiceConnection : AZR-NCE-SND1
+  ACR.Name: nceapocsbox
+  ACR.ResourceGroupName: NCEA-NW-POC
   ACR.ServiceConnection : acr-AZR-NCE-SND1
   ACR.ContainerRepository: defra/ncea-fe
 
@@ -117,7 +119,17 @@ stages:
         chartVersion: $(Build.SourceBranchName)
         arguments: '--app-version $(Build.SourceBranchName)'
         destination: $(Build.ArtifactStagingDirectory)
-  
+
+    - task: HelmDeploy@0
+      displayName: Helm save
+      inputs:
+        command: save
+        chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildId)'
+        chartPathForACR: $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
+        azureSubscriptionEndpointForACR: $(ACR.ServiceConnection)
+        azureResourceGroupForACR: $(ACR.ResourceGroupName)
+        azureContainerRegistry: $(ACR.ContainerRepository)
+    
     # - task: AzureCLI@1
     #   inputs:
     #     azureSubscription: $(Arm.ServiceConnection)
