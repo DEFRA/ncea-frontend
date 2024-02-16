@@ -11,14 +11,14 @@ const checkProperties = (dataObject, seen = new Set()) => {
         Object.keys(dataObject[key]).length === 0)
     ) {
       delete dataObject[key];
-    } else if (
-      typeof dataObject[key] === 'object' &&
-      !seen.has(dataObject[key])
-    ) {
-      seen.add(dataObject[key]);
-      checkProperties(dataObject[key]);
-      if (Object.keys(dataObject[key]).length === 0) {
-        delete dataObject[key];
+    } else {
+      const hasSeen = seen.has(dataObject[key]);
+      if (typeof dataObject[key] === 'object' && !hasSeen) {
+        seen.add(dataObject[key]);
+        checkProperties(dataObject[key]);
+        if (Object.keys(dataObject[key]).length === 0) {
+          delete dataObject[key];
+        }
       }
     }
   });

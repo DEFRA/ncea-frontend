@@ -44,16 +44,21 @@ describe('Generate Date string', () => {
       expect(generateDateString(dateObject, true)).toBe('2023-10-31');
     });
 
-    it('should generate a date string when day is empty then with last month of the day if the provided month is current month', () => {
+    it('should generate a date string when day is empty with current day of the month if the provided month is current month and year is current year', () => {
       const currentDate = new Date();
       const month = currentDate.getMonth() + 1;
       const day = currentDate.getDate();
-      const dateObject = { year: 2023, month };
+      const dateObject = { year: 2024, month };
       const expectedMonth = month.toString().length === 1 ? `0${month}` : month;
       const expectedDay = day.toString().length === 1 ? `0${day}` : day;
       expect(generateDateString(dateObject, true)).toBe(
-        `2023-${expectedMonth}-${expectedDay}`,
+        `2024-${expectedMonth}-${expectedDay}`,
       );
+    });
+
+    it('should generate a date string when day is empty with last day of the month if the provided month is current month and year is less than the current year', () => {
+      const dateObject = { year: 2023, month: 2 };
+      expect(generateDateString(dateObject, true)).toBe(`2023-02-28`);
     });
   });
 });
