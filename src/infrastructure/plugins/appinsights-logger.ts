@@ -1,9 +1,5 @@
-
-'use strict';
-
 import { Config } from '../../config/environmentConfig'
 import winston from 'winston';
-
 
 const appInsights = require("applicationinsights");
 const AzureApplicationInsightsLogger = require('winston-azure-application-insights').AzureApplicationInsightsLogger;
