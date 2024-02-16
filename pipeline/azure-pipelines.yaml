@@ -41,12 +41,12 @@ stages:
         artifactNameSuffix: _$(branch)
       ${{ else }}:
         artifactNameSuffix: ''
-      chartPath: 'NCEA-FRONTEND/helm-charts'
+      chartPath: 'helm-charts'
       
     steps:
       - template: steps-build-and-test.yaml
       - template: steps-build-and-push-docker-images.yaml
-      # - template: steps-package-and-push-helm-charts.yaml
+      - template: steps-package-and-push-helm-charts.yaml
 
 # - stage: 'Dev'
 #   displayName: 'Deploy to the dev environment'
