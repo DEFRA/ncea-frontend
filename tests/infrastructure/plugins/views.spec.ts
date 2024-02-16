@@ -1,5 +1,6 @@
 import path from 'path';
 import { webRoutePaths } from '../../../src/utils/constants';
+import { Config } from '../../../src/config/environmentConfig'
 import nunjucks, { Environment } from 'nunjucks';
 jest.mock('nunjucks');
 describe('Vision Plugin Configuration', () => {
@@ -40,7 +41,7 @@ describe('Vision Plugin Configuration', () => {
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
-      appInsightsConnectionString: 'InstrumentationKey=beb07cdc-ed03-493a-88e3-ce52a5db8a99;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com'
+      appInsightsConnectionString: Config.appInsightsConnectionString
     });
   });
   it('should compile and render the template', () => {

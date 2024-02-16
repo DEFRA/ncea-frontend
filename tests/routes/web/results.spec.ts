@@ -12,6 +12,9 @@ import { getSearchResults } from '../../../src/services/handlers/searchResultsAp
 import {ApiResponse} from '../../../src/Models/ApiResponse';
 
 jest.mock('../../../src/services/handlers/searchResultsApi');
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  logger: jest.fn()
+}));
 
 describe('Results Screen', () => {
   let server: Server;

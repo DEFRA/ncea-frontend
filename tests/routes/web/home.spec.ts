@@ -9,6 +9,10 @@ import { Server, ServerInjectResponse } from '@hapi/hapi';
 import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  logger: jest.fn()
+}));
+
 describe('Home Screen', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;

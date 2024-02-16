@@ -7,7 +7,7 @@ describe('Environment Configuration Schema', () => {
       const { value } = environmentSchema.validate({});
       expect(value.port).toEqual('3000');
       expect(value.env).toEqual('local');
-      expect(value.appInsightsKey).toEqual('');
+      expect(value.appInsightsConnectionString).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
       expect(value.geoNetworkSearchAPI).toEqual('');
     });
@@ -21,7 +21,7 @@ describe('Environment Configuration Schema', () => {
       const { value } = environmentSchema.validate(partialConfig);
       expect(value.port).toEqual('5000');
       expect(value.env).toEqual('qa');
-      expect(value.appInsightsKey).toEqual('');
+      expect(value.appInsightsConnectionString).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
       expect(value.geoNetworkSearchAPI).toEqual('');
     });
@@ -32,7 +32,7 @@ describe('Environment Configuration Schema', () => {
       const validConfig = {
         port: '4000',
         env: 'development',
-        appInsightsKey: 'your-key',
+        appInsightsConnectionString: 'your-key',
         azureKeyVaultURL: 'https://example-vault.vault.azure.net',
         geoNetworkSearchAPI: 'https://example.com/api',
       };

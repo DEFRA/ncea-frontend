@@ -17,8 +17,11 @@ const HomeController = {
     request: Request,
     response: ResponseToolkit
   ): Promise<ResponseObject> => {
-    global.logger.info('Test FE logs');
-    global.logger.error('Test FE logs-1');
+    // request.logger.info('Test FE logs - request logger');
+    // request.log('Test FE logs - request log');
+    // global.logger.info('Test FE logs');
+    // global.logger.error('Test FE logs-1');
+    
     return response.view('screens/home/template', {
       searchInputError: undefined,
     });

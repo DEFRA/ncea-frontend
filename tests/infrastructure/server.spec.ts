@@ -10,6 +10,16 @@ jest.mock('@hapi/hapi', () => ({
   Server: jest.fn(),
 }));
 
+// jest.mock('applicationinsights', () => ({
+//   ApplicationInsights: jest.fn().mockImplementation(() => ({
+//     setup: jest.fn()
+//   })),
+// }));
+
+jest.mock('../../src/infrastructure/plugins/appinsights-logger', () => ({
+  logger: jest.fn()
+}));
+
 describe('Server initialization', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -22,12 +32,13 @@ describe('Server initialization', () => {
       Config: {
         env: 'development',
         port: 3000,
+        appInsightsConnectionString: 'test'
       },
     }));
-
+    
     const server = await initializeServer();
     expect(Hapi.server).toHaveBeenCalledWith({
-      host: 'localhost',
+      host: '0.0.0.0',
       port: 3000,
       routes: {
         validate: {

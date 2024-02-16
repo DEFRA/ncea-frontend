@@ -63,26 +63,26 @@ stages:
         npm run build
       displayName: 'npm install and build'
 
-    # - script: |
-    #     npm run test
-    #   displayName: 'npm test'
+    - script: |
+        npm run test
+      displayName: 'npm test'
 
-    # - task: PublishCodeCoverageResults@1
-    #   condition: succeededOrFailed()
-    #   inputs:
-    #     codeCoverageTool: Cobertura
-    #     summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-    #   displayName: 'Publish code coverage result'
+    - task: PublishCodeCoverageResults@1
+      condition: succeededOrFailed()
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+      displayName: 'Publish code coverage result'
 
-    # - task: SonarCloudAnalyze@1
-    #   inputs:
-    #     jdkversion: 'JAVA_HOME_17_X64'
-    #   displayName: 'Run Code Analysis'
+    - task: SonarCloudAnalyze@1
+      inputs:
+        jdkversion: 'JAVA_HOME_17_X64'
+      displayName: 'Run Code Analysis'
 
-    # - task: SonarCloudPublish@1
-    #   inputs:
-    #     pollingTimeoutSec: '300'
-    #   displayName: 'Publish Quality Gate Result'
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: 'Publish Quality Gate Result'
 
     - task: Docker@2
       displayName: Login to ACR
@@ -111,14 +111,14 @@ stages:
         repository: $(ACR.ContainerRepository)
         tags: $(Build.BuildId)
 
-    - task: HelmDeploy@0
-      displayName: 'Helm Package'  
-      inputs:
-        command: package
-        chartPath: $(chartPath)
-        chartVersion: $(Build.SourceBranchName)
-        arguments: '--app-version $(Build.SourceBranchName)'
-        destination: $(Build.ArtifactStagingDirectory)
+    # - task: HelmDeploy@0
+    #   displayName: 'Helm Package'  
+    #   inputs:
+    #     command: package
+    #     chartPath: $(chartPath)
+    #     chartVersion: $(Build.SourceBranchName)
+    #     arguments: '--app-version $(Build.SourceBranchName)'
+    #     destination: $(Build.ArtifactStagingDirectory)
 
     # - task: HelmDeploy@0
     #   displayName: Helm save

@@ -55,7 +55,7 @@ describe('Environment Config', () => {
       const mockConfig = {
         PORT: '5000',
         NODE_ENV: 'qa',
-        APPINSIGHTS_INSTRUMENTATIONKEY: 'abc123',
+        APPLICATIONINSIGHTS_CONNECTION_STRING: 'abc123',
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
         GEONETWORK_SEARCH_API: 'https://geonetwork-api.com',
       };
@@ -66,7 +66,7 @@ describe('Environment Config', () => {
         env: Joi.string()
           .valid(...envs)
           .default(envs[0]),
-        appInsightsKey: Joi.string().allow('').default(''),
+        appInsightsConnectionString: Joi.string().allow('').default(''),
         azureKeyVaultURL: Joi.string().allow('').default(''),
         geoNetworkSearchAPI: Joi.string().allow('').default(''),
       });

@@ -4,6 +4,10 @@ import { Server } from '@hapi/hapi';
 
 import { initializeServer } from '../../../src/infrastructure/server';
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  logger: jest.fn()
+}));
+
 describe('Sample Routes', () => {
   let server: Server;
 

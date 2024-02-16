@@ -80,6 +80,7 @@
     "axios": "1.6.4",
     "govuk-frontend": "5.0.0",
     "hapi-pino": "12.1.0",
+    "hapi-winston": "^2.5.0",
     "joi": "17.12.1",
     "nunjucks": "3.2.4",
     "pino-applicationinsights": "^2.1.0",
