@@ -83,8 +83,6 @@
     "hapi-winston": "^2.5.0",
     "joi": "17.12.1",
     "nunjucks": "3.2.4",
-    "pino-applicationinsights": "^2.1.0",
-    "pino-multi-stream": "^6.0.0",
     "shelljs": "0.8.5",
     "winston": "^3.11.0",
     "winston-azure-application-insights": "^4.0.0"

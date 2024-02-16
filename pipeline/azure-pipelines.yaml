@@ -42,99 +42,12 @@ stages:
         artifactNameSuffix: _$(branch)
       ${{ else }}:
         artifactNameSuffix: ''
-      chartPath: 'NCEA-FRONTEND/helm-charts' 
+      chartPath: 'NCEA-FRONTEND/helm-charts'
+      
     steps:
-    - task: UseNode@1
-      inputs:
-        version: '18.x'
-      displayName: 'Install Node.js'
-
-    - task: SonarCloudPrepare@1
-      inputs:
-        SonarCloud: 'defra-sonarcloud'
-        organization: 'defra'
-        scannerMode: CLI
-        projectKey: 'DEFRA_ncea-frontend'
-        projectName: 'ncea-frontend'
-      displayName: 'Prepare analysis on SonarCloud'
-
-    - script: |
-        npm install
-        npm run build
-      displayName: 'npm install and build'
-
-    - script: |
-        npm run test
-      displayName: 'npm test'
-
-    - task: PublishCodeCoverageResults@1
-      condition: succeededOrFailed()
-      inputs:
-        codeCoverageTool: Cobertura
-        summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-      displayName: 'Publish code coverage result'
-
-    - task: SonarCloudAnalyze@1
-      inputs:
-        jdkversion: 'JAVA_HOME_17_X64'
-      displayName: 'Run Code Analysis'
-
-    - task: SonarCloudPublish@1
-      inputs:
-        pollingTimeoutSec: '300'
-      displayName: 'Publish Quality Gate Result'
-
-    - task: Docker@2
-      displayName: Login to ACR
-      inputs:
-        command: login
-        containerRegistry: $(ACR.ServiceConnection)
-
-    - task: Docker@2
-      displayName: 'Docker Build'
-      inputs:
-        command: build
-        containerRegistry: $(ACR.ServiceConnection)
-        repository: $(ACR.ContainerRepository)
-        tags: $(Build.BuildId)
-
-    - task: Docker@2
-      displayName: 'Docker Push'
-      condition: |
-        or(
-            and(and(succeeded(), eq(variables.isMaster, false)), eq(variables.isPullRequest, false)),
-            and(succeeded(), eq(variables.isMaster, true))
-          )  
-      inputs:
-        command: push
-        containerRegistry: $(ACR.ServiceConnection)
-        repository: $(ACR.ContainerRepository)
-        tags: $(Build.BuildId)
-
-    # - task: HelmDeploy@0
-    #   displayName: 'Helm Package'  
-    #   inputs:
-    #     command: package
-    #     chartPath: $(chartPath)
-    #     chartVersion: $(Build.SourceBranchName)
-    #     arguments: '--app-version $(Build.SourceBranchName)'
-    #     destination: $(Build.ArtifactStagingDirectory)
-
-    # - task: HelmDeploy@0
-    #   displayName: Helm save
-    #   inputs:
-    #     command: save
-    #     chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildId)'
-    #     chartPathForACR: $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
-    #     azureSubscriptionEndpointForACR: $(ACR.ServiceConnection)
-    #     azureResourceGroupForACR: $(ACR.ResourceGroupName)
-    #     azureContainerRegistry: $(ACR.ContainerRepository)
-    
-    # - task: AzureCLI@1
-    #   inputs:
-    #     azureSubscription: $(Arm.ServiceConnection)
-    #     scriptLocation: inlineScript
-    #     inlineScript: az acr helm push -n $(acrName) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
+      - template: steps-build-and-test.yaml
+      - template: steps-build-and-push-docker-images.yaml
+      - template: steps-package-and-push-helm-charts.yaml
 
 # - stage: 'Dev'
 #   displayName: 'Deploy to the dev environment'
