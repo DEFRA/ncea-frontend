@@ -13,6 +13,7 @@ trigger:
       - feature/*
 
 variables:
+
   ACR.Name: nceapocsbox
   ACR.ResourceGroupName: NCEA-NW-POC
   ACR.ServiceConnection : acr-AZR-NCE-SND1
@@ -41,7 +42,7 @@ stages:
         artifactNameSuffix: _$(branch)
       ${{ else }}:
         artifactNameSuffix: ''
-      chartPath: 'helm-chart'
+      chartPath: 'ncea-fe'
       
     steps:
       - template: steps-build-and-test.yaml
