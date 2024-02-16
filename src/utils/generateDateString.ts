@@ -6,7 +6,7 @@ const generateDateString = (dateObject: IDateObject, isToDate = false): string =
   const month = !isEmpty(dateObject.month) && !isNaN(dateObject.month!) ? dateObject.month! : 1;
   let day: number;
   if (isToDate && (isEmpty(dateObject.day) || isNaN(dateObject.day!))) {
-    if (month === currentDate.getMonth() + 1) {
+    if (month === currentDate.getMonth() + 1 && dateObject.year === currentDate.getFullYear()) {
       day = currentDate.getDate();
     } else {
       day = new Date(Date.UTC(dateObject.year, month, 0)).getDate();
