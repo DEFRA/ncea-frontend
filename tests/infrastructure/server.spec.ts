@@ -10,12 +10,6 @@ jest.mock('@hapi/hapi', () => ({
   Server: jest.fn(),
 }));
 
-// jest.mock('applicationinsights', () => ({
-//   ApplicationInsights: jest.fn().mockImplementation(() => ({
-//     setup: jest.fn()
-//   })),
-// }));
-
 jest.mock('../../src/infrastructure/plugins/appinsights-logger', () => ({
   logger: jest.fn()
 }));
@@ -35,7 +29,7 @@ describe('Server initialization', () => {
         appInsightsConnectionString: 'test'
       },
     }));
-    
+
     const server = await initializeServer();
     expect(Hapi.server).toHaveBeenCalledWith({
       host: '0.0.0.0',
