@@ -184,7 +184,7 @@ crossOrigin: "anonymous",
 // onInit: null,
 // cr: 0,
 cfg: { // Application Insights Configuration
- connectionString:"InstrumentationKey=56541827-927a-4133-84d6-50498541530a;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/"
+ connectionString:""
 }});
 </script>
 

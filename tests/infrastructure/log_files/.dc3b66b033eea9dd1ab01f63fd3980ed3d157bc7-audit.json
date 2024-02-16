@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "C:\\Users\\795110\\Fujale - Space\\Work\\Projects\\NCEA - Beta\\Remote\\ncea-frontend\\tests\\infrastructure\\log_files\\.dc3b66b033eea9dd1ab01f63fd3980ed3d157bc7-audit.json",
+    "files": [
+        {
+            "date": 1708091872773,
+            "name": "C:\\Users\\795110\\Fujale - Space\\Work\\Projects\\NCEA - Beta\\Remote\\ncea-frontend\\tests\\infrastructure\\log_files\\app_winston_log.2024-02-16",
+            "hash": "ae1df26dab78fc8182836fc75d07a08a1f9a599f6061876580d74d7514d0d454"
+        }
+    ],
+    "hashType": "sha256"
+}

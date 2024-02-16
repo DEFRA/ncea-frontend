@@ -1,7 +1,7 @@
 import nunjucks from 'nunjucks';
 import path from 'path';
 import { webRoutePaths } from '../../utils/constants';
-import { Config } from '../../config/environmentConfig'
+import { Config } from '../../config/environmentConfig';
 /* eslint-disable  @typescript-eslint/no-var-requires */
 const dateFilter = require('nunjucks-date-filter');
 
@@ -48,7 +48,7 @@ module.exports = {
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
-      appInsightsConnectionString: Config.appInsightsConnectionString
+      appInsightsConnectionString: Config.appInsightsConnectionString,
     },
   },
 };

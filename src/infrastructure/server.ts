@@ -30,9 +30,9 @@ const initializeServer = async (): Promise<Server> => {
   return server;
 };
 
-const startServer = async (): Promise<Server> => {  
+const startServer = async (): Promise<Server> => {
   await server.start();
-  console.log(`Server running at: ${server.info.uri}`);  
+  console.log(`Server running at: ${server.info.uri}`);
   return server;
 };
 

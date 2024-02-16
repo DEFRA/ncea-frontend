@@ -11,14 +11,10 @@
  */
 
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import logger from '../../infrastructure/plugins/appinsights-logger'
+import logger from '../../infrastructure/plugins/appinsights-logger';
 
 const HomeController = {
-  renderHomeHandler: async (
-    request: Request,
-    response: ResponseToolkit
-  ): Promise<ResponseObject> => {
-
+  renderHomeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     logger.info('inside home controller');
 
     return response.view('screens/home/template', {
