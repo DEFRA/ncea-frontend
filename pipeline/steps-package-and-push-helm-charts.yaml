@@ -1,14 +1,13 @@
 steps:
 
-
-# - task: HelmDeploy@0
-#   displayName: 'Helm Package'  
-#   inputs:
-#     command: package
-#     chartPath: $(chartPath)
-#     chartVersion: $(Build.SourceBranchName)
-#     arguments: '--app-version $(Build.SourceBranchName)'
-#     destination: $(Build.ArtifactStagingDirectory)
+- task: HelmDeploy@0
+  displayName: 'Helm Package'  
+  inputs:
+    command: package
+    chartPath: $(chartPath)
+    chartVersion: $(Build.SourceBranchName)
+    arguments: '--app-version $(Build.SourceBranchName)'
+    destination: $(Build.ArtifactStagingDirectory)
 
 # - task: HelmDeploy@0
 #   displayName: Helm save
