@@ -10,7 +10,7 @@ import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
-  logger: jest.fn()
+  info: jest.fn()
 }));
 
 describe('Home Screen', () => {

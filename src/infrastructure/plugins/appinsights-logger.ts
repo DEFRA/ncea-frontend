@@ -4,8 +4,10 @@
 import { Config } from '../../config/environmentConfig'
 import winston from 'winston';
 
+
 const appInsights = require("applicationinsights");
 const AzureApplicationInsightsLogger = require('winston-azure-application-insights').AzureApplicationInsightsLogger;
+const DailyRotateFile = require('winston-daily-rotate-file');
 const shouldPushToAppInsights = Config.env === 'local';
 
 if (!shouldPushToAppInsights) {  
@@ -33,7 +35,12 @@ winston.add(new AzureApplicationInsightsLogger({
 console.log('Initialized app insights');
 } else {
     winston.add(new winston.transports.Console());
+    winston.add(new DailyRotateFile({
+        filename:  `${__dirname}/../log_files/app_winston_log`,
+        zippedArchive: true,
+        maxSize: '20m',
+        maxFiles: '7d',
+      }))
 }
 
 export default winston
-  

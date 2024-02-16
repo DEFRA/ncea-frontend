@@ -4,6 +4,10 @@ import { mock } from 'jest-mock-extended';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import { HomeController } from '../../../src/controllers/web/HomeController';
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  info: jest.fn()
+}));
+
 describe('Home Controller > deals with render home handler', () => {
   const mockRequest = mock<Request>();
 

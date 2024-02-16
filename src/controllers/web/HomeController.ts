@@ -11,17 +11,16 @@
  */
 
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
+import logger from '../../infrastructure/plugins/appinsights-logger'
 
 const HomeController = {
   renderHomeHandler: async (
     request: Request,
     response: ResponseToolkit
   ): Promise<ResponseObject> => {
-    // request.logger.info('Test FE logs - request logger');
-    // request.log('Test FE logs - request log');
-    // global.logger.info('Test FE logs');
-    // global.logger.error('Test FE logs-1');
-    
+
+    logger.info('inside home controller');
+
     return response.view('screens/home/template', {
       searchInputError: undefined,
     });
