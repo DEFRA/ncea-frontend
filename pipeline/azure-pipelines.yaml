@@ -41,7 +41,7 @@ stages:
         artifactNameSuffix: _$(branch)
       ${{ else }}:
         artifactNameSuffix: ''
-      chartPath: 'helm-charts'
+      chartPath: 'helm-chart'
       
     steps:
       - template: steps-build-and-test.yaml
