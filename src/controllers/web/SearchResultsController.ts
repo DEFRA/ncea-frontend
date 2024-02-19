@@ -1,57 +1,58 @@
 'use strict';
 
-import { DateQuestionnaireError } from '../../interfaces/guidedSearch';
-import { getSearchResults } from '../../services/handlers/searchResultsApi';
-import { transformErrors } from '../../utils/transformErrors';
+import { ISearchFieldsObject } from '../../interfaces/queryBuilder.interface';
+import { ISearchResults } from '../../interfaces/searchResponse.interface';
+import Joi from 'joi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { fromDate, toDate } from '../../views/forms/dateQuestionnaireFields';
+
+import { formIds, webRoutePaths } from '../../utils/constants';
+import { getSearchResults, getSearchResultsCount } from '../../services/handlers/searchApi';
 
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { q: searchTerm } = request.payload as Record<string, string>;
-
-    let results = { isSuccessful: true, response: {} };
-    if (searchTerm) {
-      results = await getSearchResults(searchTerm);
+    const { results: quickSearchPath, getResults: getResultsPath } = webRoutePaths;
+    const formId: string = formIds.quickSearch;
+    if (request?.headers?.referer) {
+      return response.view('screens/results/template', {
+        quickSearchPath,
+        getResultsPath,
+        formId,
+      });
+    } else {
+      return response.redirect(webRoutePaths.home);
     }
-    return response.view('screens/results/template', {
-      hasResult: results.isSuccessful,
-      searchResults: results.response,
-      searchTerm: searchTerm,
-    });
-  },
-  renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    return response.view('screens/guided_search/date_questionnaire', { fromDate, toDate });
-  },
-  guidedSearchFailActionHandler: (h, error) => {
-    const { fromError, fromItems, toError, toItems } = transformErrors(
-      error,
-      'date-questionnaire',
-    ) as DateQuestionnaireError;
-    const fromField = {
-      ...fromDate,
-      ...(fromError && { errorMessage: { text: fromError } }),
-      items: fromItems,
-    };
-    const toField = {
-      ...toDate,
-      ...(toError && { errorMessage: { text: toError } }),
-      items: toItems,
-    };
-    return h.view('screens/guided_search/date_questionnaire', { fromDate: fromField, toDate: toField }).takeover();
   },
   quickSearchFailActionHandler: (request, response, error) => {
-    const searchError: string | undefined = error?.details?.[0].message || undefined;
-    return response
-      .view(request.payload.pageName === 'home' ? 'screens/home/template' : 'screens/results/template', {
-        searchInputError: searchError
-          ? {
-              text: searchError,
-            }
-          : undefined,
-      })
-      .code(400)
-      .takeover();
+    const { results, guidedDateSearch: dateSearchPath, getResults: getResultsPath } = webRoutePaths;
+    const formId: string = formIds.quickSearch;
+    const searchError: string | undefined = error?.details?.[0]?.message ?? undefined;
+    const payload = request.payload as Record<string, string>;
+    const searchInputError = searchError
+      ? {
+          text: searchError,
+        }
+      : (undefined as unknown as Joi.ValidationError);
+    const context = {
+      quickSearchPath: results,
+      formId,
+      dateSearchPath,
+      getResultsPath,
+      searchInputError,
+    };
+    const view: string = payload?.pageName === 'home' ? 'screens/home/template' : 'screens/results/template';
+    return response.view(view, context).code(400).takeover();
+  },
+  getSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const fields: ISearchFieldsObject = request.payload as ISearchFieldsObject;
+    const searchResults: ISearchResults = await getSearchResults(fields);
+    return response.view('partials/results/template', {
+      searchResults,
+    });
+  },
+  getResultsCountHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const fields: ISearchFieldsObject = request.payload as ISearchFieldsObject;
+    const searchResultsCount: { totalResults: number } = await getSearchResultsCount(fields);
+    return response.response(searchResultsCount);
   },
 };
 

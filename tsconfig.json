@@ -1,20 +1,36 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "lib": ["es6", "dom"],
-    "module": "commonjs",
-    "rootDir": "src",
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "outDir": "build",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": false,
     "skipLibCheck": true,
-    "types": ["node", "jest", "hapi__vision", "nunjucks", "hapi-pino", "jsdom"],
-    "moduleDetection": "force"
+    "target": "es2022",
+    "lib": ["es2022"],
+
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    "allowJs": true,
+    "resolveJsonModule": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": false,
+
+    "outDir": "build",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "types": [
+      "node",
+      "jest",
+      "hapi__vision",
+      "nunjucks",
+      "hapi-pino",
+      "jsdom",
+      "joi"
+    ],
+    "paths": {
+      "@/*": ["*"]
+    }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "build"]
 }

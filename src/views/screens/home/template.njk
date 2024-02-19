@@ -11,7 +11,12 @@
     </div>
   </header>
 
-  {{ quickSearch({isResultPage: false, searchInputError : searchInputError}) }}
+  {{ quickSearch({
+    quickSearchPath: quickSearchPath,
+    formId: formId,
+    isResultPage: false,
+    searchInputError : searchInputError
+  }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -30,7 +35,10 @@
     name: 'guided-search',
     text: "Start",
     isStartButton: true,
-    href: '/guided-search'
+    href: dateSearchPath,
+    attributes: {
+      'data-do-quick-search': false
+    }
   }) }}
 
   <article class="govuk-grid-row" role="article">

@@ -1,14 +1,14 @@
-import { Config } from '../../config/environmentConfig';
+import { environmentConfig } from '../../config/environmentConfig';
 import winston from 'winston';
-
+/* eslint-disable  @typescript-eslint/no-var-requires */
 const appInsights = require('applicationinsights');
 const AzureApplicationInsightsLogger = require('winston-azure-application-insights').AzureApplicationInsightsLogger;
 const DailyRotateFile = require('winston-daily-rotate-file');
-const shouldPushToAppInsights = Config.env === 'local';
+const shouldPushToAppInsights = environmentConfig.env === 'local';
 
 if (!shouldPushToAppInsights) {
   appInsights
-    .setup(Config.appInsightsConnectionString)
+    .setup(environmentConfig.appInsightsConnectionString)
     .enableWebInstrumentation(true)
     .setAutoDependencyCorrelation(true)
     .setAutoCollectRequests(true)

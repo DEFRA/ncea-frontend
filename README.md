@@ -107,7 +107,6 @@ npm run start:dev
 ├── src                    // Keeps the application code
 │   ├── assets             // Contains all the sass styles and scripts
 │   │   ├── sass           // Contains all the sass styles and functions
-│   │   └── scripts        // Contains all the javascript modules or functions
 │   ├── config             // To define and initiate the configurations
 │   │   └── geoNetwork..ts // Here is where you can find the initialization of the axios clients
 │   ├── controllers        // The definition of all route handlers can be found here
@@ -119,12 +118,15 @@ npm run start:dev
 │   │   │   ├── router.ts  // Custom plugin to register the routes
 │   │   │   └── view.ts    // Custom plugin to register the vision api to render the nunjucks template
 │   │   └── server.ts      // Hapi.js server definition
+│   ├── interfaces         // To identify all the structures
 │   ├── routes             // Here is where all app routes are defined
 │   │   ├── api            // Rest API routes
 │   │   └── web            // WEB UI routes.
-│   │   │   └── assets.ts  // This is where all static asset routing requests are defined
+│   │       └── assets.ts  // This is where all static asset routing requests are defined
+│   ├── schema             // To identify all the schema related to Joi
 │   ├── services           // The definition of api clients and api handlers can be found heres
 │   │   └── handlers       // Contains all the API handlers, each endpoint will have its asynchronous
+│   ├── types              // To declare the custom type definitions
 │   ├── utils              // utils contains common utility and helper reusable methods that can be used by controllers function
 │   ├── views              // All server-rendered nunjucks templates, partials and helpers
 │   │   ├── layout         // Contains the basic customized layout of the template
@@ -132,6 +134,9 @@ npm run start:dev
 │   │   └── screens        // Contains the template for each screen, such as home, results, and so on.
 ├── └── index.ts           // The primary application entry point
 ├── public                 // Contains all the static files and files compiles from GDS
+│   ├── images             // Contains all the static rendering images
+│   ├── scripts            // Contains all the javascript modules or functions
+│   └── application.css    // Contains all the compiled styles of custom & GOV.UK
 ├── tools                  // Contains all tools, such as static code analysis and unit test configurations.
 │   ├── .eslintrc          // Define eslint rules
 │   ├── .prettierrc        // Define prettier rules to enforce a consistent code style
@@ -141,7 +146,7 @@ npm run start:dev
 ├── .eslintignore          // Ignores certain files for eslint rules
 ├── package.json           // It records important metadata about a project, scripts, and dependencies.
 ├── tsconfig.json          // To compile the project, the root files and compiler options need to be specified.
-└── tests                  // To organize the test cases in a similar manner to the folder structure present in the `src` folder..
+└── __tests__              // To organize the test cases in a similar manner to the folder structure present in the `src` folder..
 
 ```
 
@@ -211,7 +216,7 @@ PORT=
 NODE_ENV=
 APPINSIGHTS_INSTRUMENTATIONKEY=
 AZURE_KEYVAULT_URL=
-GEONETWORK_SEARCH_API=
+ELASTICSEARCH_API=
 ```
 
 ## TODO

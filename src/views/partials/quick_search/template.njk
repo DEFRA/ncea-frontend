@@ -14,10 +14,11 @@
       <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
     {% endif %}
     <div class="search-block" data-module="search">
-      <form action="/search" method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
+      <form action="{{ params.quickSearchPath }}" id="{{params.formId}}" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
+
         {{ govukInput({
-          id: 'search',
-          name: 'q',
+          id: 'search_term',
+          name: 'search_term',
           label: {
             text: 'Search',
             classes: 'search-block__label',
@@ -26,7 +27,7 @@
             }
           },
           suffix: {
-            html: '<button type="submit" class="search-block__button">Search</button>'
+            html: '<button type="submit" class="search-block__button" data-do-quick-search="true">Search</button>'
           },
           classes: 'govuk-input govuk-!-margin-bottom-0 search-block__input',
           spellcheck: false,

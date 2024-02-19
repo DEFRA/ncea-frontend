@@ -48,7 +48,7 @@ export const dateSchema = Joi.object({
             ],
           });
         }
-        return value;
       }
+      return value;
     }, 'date-questionnaire-validation'),
 }).options({ abortEarly: false });

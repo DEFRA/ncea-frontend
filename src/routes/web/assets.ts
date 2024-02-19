@@ -1,4 +1,4 @@
-module.exports = [
+const staticRoutes = [
   {
     method: 'GET',
     path: '/assets/all.js',
@@ -16,3 +16,5 @@ module.exports = [
     },
   },
 ];
+
+export { staticRoutes };

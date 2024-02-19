@@ -17,7 +17,8 @@ const config: EnvironmentConfig = {
   env: process.env.NODE_ENV,
   appInsightsConnectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
   azureKeyVaultURL: process.env.AZURE_KEYVAULT_URL,
-  geoNetworkSearchAPI: process.env.GEONETWORK_SEARCH_API,
+  elasticSearchAPI: process.env.ELASTICSEARCH_API,
+  isLocal: process.env.NODE_ENV === 'local',
 };
 
 const { error, value } = environmentSchema.validate(config);
@@ -26,6 +27,6 @@ if (error) {
   throw new Error(`The environment config is invalid: ${error.message}`);
 }
 
-const Config = value as EnvironmentConfig;
+const environmentConfig = value as EnvironmentConfig;
 
-export { Config };
+export { environmentConfig };

@@ -3,4 +3,9 @@ build
 coverage
 src/views/**
 src/infrastructure/log_files/**
-src/assets/sass/**
+src/services/*.json
+src/public/**
+tools/**
+public/**
+src/assets/**
+copyNonTSFiles.js

@@ -1,12 +1,12 @@
+import dateFilter from 'nunjucks-date-filter';
+import { environmentConfig } from '../../config/environmentConfig';
 import nunjucks from 'nunjucks';
 import path from 'path';
+import vision from '@hapi/vision';
 import { webRoutePaths } from '../../utils/constants';
-import { Config } from '../../config/environmentConfig';
-/* eslint-disable  @typescript-eslint/no-var-requires */
-const dateFilter = require('nunjucks-date-filter');
 
-module.exports = {
-  plugin: require('@hapi/vision'),
+const customHapiViews = {
+  plugin: vision,
   options: {
     engines: {
       njk: {
@@ -48,7 +48,9 @@ module.exports = {
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
-      appInsightsConnectionString: Config.appInsightsConnectionString,
+      appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
     },
   },
 };
+
+export { customHapiViews };

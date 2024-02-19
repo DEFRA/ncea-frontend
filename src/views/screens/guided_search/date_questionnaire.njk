@@ -1,7 +1,7 @@
 {% extends "layout/template.njk" %}
 
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
-{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block beforeContent %}
@@ -10,7 +10,10 @@
     items: [
       {
         text: "Home",
-        href: homePageUrl
+        href: homePageUrl,
+        attributes: {
+          'data-do-storage-reset': ''
+        }
       },
       {
         text: "Questionnaire search",
@@ -21,23 +24,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="govuk-grid-row">
-    <form method="POST" action="/guided-search" />
+  <div class="govuk-grid-row">
+    <form method="POST" id="{{formId}}" action="{{guidedDateSearchPath}}" data-do-browser-storage>
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
-        <h2 class="govuk-heading-m">
-          From
-        </h2>
-        {{ govukDateInput(fromDate) }}
-        <h2 class="govuk-heading-m">
-          To
-        </h2>
-        {{ govukDateInput(toDate) }}
-        {{ govukButton({
-          text: "Show results"
-        }) }}
+        {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
+        {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
+        {{ govukButton({text: "Show results"}) }}
       </div>
     </form>
   </div>

@@ -3,5 +3,6 @@ export interface EnvironmentConfig {
   env: string | undefined;
   appInsightsConnectionString: string | undefined;
   azureKeyVaultURL: string | undefined;
-  geoNetworkSearchAPI: string | undefined;
+  elasticSearchAPI: string | undefined;
+  isLocal?: boolean;
 }

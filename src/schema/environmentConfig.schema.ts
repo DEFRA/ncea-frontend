@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 const envs = ['local', 'development', 'qa', 'production', 'test'];
 
-if ([envs[0], envs[4]].includes(process.env.NODE_ENV!)) {
+if ([envs[0], envs[4]].includes(process.env.NODE_ENV)) {
   dotenv.config();
 }
 
@@ -24,7 +24,11 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   azureKeyVaultURL: Joi.string().uri().allow('').default('').messages({
     'string.uri': 'Azure Key Vault URI must be a valid URL or an empty string',
   }),
-  geoNetworkSearchAPI: Joi.string().uri().allow('').default('').messages({
-    'string.uri': 'GeoNetwork Search API must be a valid URL or an empty string',
+  elasticSearchAPI: Joi.string().uri().allow('').default('').messages({
+    'string.uri': 'Elasticsearch API must be a valid URL or an empty string',
+  }),
+  isLocal: Joi.boolean().valid(true, false).default(false).messages({
+    'boolean.base': 'Is Local must be a boolean value',
+    'any.only': 'Is Local is not valid',
   }),
 });
