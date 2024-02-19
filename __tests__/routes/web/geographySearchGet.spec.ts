@@ -9,7 +9,7 @@ import { Server, ServerInjectResponse } from '@hapi/hapi';
 import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
 
-describe('Guided Search - Geography Questionnaire Screen', () => {
+describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;
   let document: Document;
