@@ -219,6 +219,7 @@ exports[`Results Screen Sanpshot verification & status code should match the res
 
     
   
+  
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
     import {initAll} from '/assets/all.js'
@@ -226,6 +227,8 @@ exports[`Results Screen Sanpshot verification & status code should match the res
   </script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
+
+  <script type="module" src="/assets/scripts/dataModal.js"></script>
 
   </body>
 </html>

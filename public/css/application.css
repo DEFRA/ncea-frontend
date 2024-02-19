@@ -7547,10 +7547,8 @@
   height: 100%;
   background-color: #2a3034;
   opacity: 0.6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 999;
+  display: none;
 }
 
 .modal {
@@ -7563,6 +7561,12 @@
   transform: translate(-50%, -50%);
   z-index: 1000;
   width: 600px;
+  display: none;
+}
+
+#overlay.active,
+#modal.active {
+  display: block;
 }
 
 .modal-content {
