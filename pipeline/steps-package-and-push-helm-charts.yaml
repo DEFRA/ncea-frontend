@@ -2,6 +2,7 @@ steps:
 
 - task: HelmDeploy@0
   displayName: Helm package
+  condition: and(succeeded(), eq(variables.isPullRequest, false))
   inputs:
     command: package
     chartPath: $(chartPath)

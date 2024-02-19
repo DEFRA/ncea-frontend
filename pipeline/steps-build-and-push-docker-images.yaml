@@ -2,7 +2,7 @@ steps:
 
 - task: Docker@2
   displayName: 'Docker Build'
-  condition: and(failed(), ne(variables['Build.Reason'], 'PullRequest'))
+  condition: and(succeeded(), eq(variables.isPullRequest, false))
   inputs:
     command: build
     containerRegistry: $(ACR.ServiceConnection)
@@ -11,11 +11,7 @@ steps:
 
 - task: Docker@2
   displayName: 'Docker Push'
-  condition: |
-    or(
-        and(and(succeeded(), eq(variables.isMain, false)), eq(variables.isPullRequest, false)),
-        and(succeeded(), eq(variables.isMain, true))
-      )  
+  condition: and(succeeded(), eq(variables.isPullRequest, false))
   inputs:
     command: push
     containerRegistry: $(ACR.ServiceConnection)
