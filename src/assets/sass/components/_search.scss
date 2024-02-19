@@ -55,7 +55,7 @@
     right: 0;
     border: 0;
     background-color: $gov-defra-color-websafe;
-    color: govuk-colour('white');
+    color: govuk-colour("white");
     cursor: pointer;
     padding: 0;
     width: 40px;
@@ -65,5 +65,25 @@
     background-position: 10px 50%;
     text-indent: -5000px;
     overflow: hidden;
+  }
+}
+
+.data-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 30px;
+
+  &__heading-l {
+    @include font-style-stack(36px, 40px);
+    color: govuk-colour("white");
+  }
+
+  &__body-l {
+    @include font-style-stack(19px, 24px, 300);
+    color: govuk-colour("white");
+  }
+
+  &__button-group {
+    justify-content: center;
   }
 }
