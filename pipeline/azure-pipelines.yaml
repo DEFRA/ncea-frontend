@@ -19,9 +19,6 @@ variables:
   ACR.ServiceConnection : acr-AZR-NCE-SND1
   ACR.ContainerRepository: defra/ncea-fe
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 stages:
 - stage: 'Build'
   displayName: 'Build FE'
