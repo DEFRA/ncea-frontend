@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: nceapocsbox.azurecr.io/defra/ncea-fe
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -20,10 +20,11 @@ serviceAccount:
   # Automatically mount a ServiceAccount's API credentials?
   automount: true
   # Annotations to add to the service account
-  annotations: {}
+  annotations:
+    azure.workload.identity/client-id: "<client-id-of-your-managed-identity>"
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "workload-identity-sa"
 
 podAnnotations: {}
 podLabels: {}
