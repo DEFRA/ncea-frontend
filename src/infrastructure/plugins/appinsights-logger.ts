@@ -6,9 +6,10 @@ const appInsights = require('applicationinsights');
 const AzureApplicationInsightsLogger = require('winston-azure-application-insights').AzureApplicationInsightsLogger;
 const DailyRotateFile = require('winston-daily-rotate-file');
 const shouldPushToAppInsights = environmentConfig.env === 'local';
+const appInsightsConnectionStringSecretName = environmentConfig.appInsightsSecretName;
 
 if (shouldPushToAppInsights) {
-  getSecret('ApplicationInsights--ConnectionString')
+  getSecret(appInsightsConnectionStringSecretName)
     .then(appInsightsConnectionString => {
       appInsights
         .setup(appInsightsConnectionString)

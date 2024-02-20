@@ -21,6 +21,9 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   appInsightsConnectionString: Joi.string().allow('').default('').messages({
     'string.base': 'Insights key must be a string',
   }),
+  appInsightsSecretName: Joi.string().allow('').default('').messages({
+    'string.base': 'Insights secret name must be a string',
+  }),
   azureKeyVaultURL: Joi.string().uri().allow('').default('').messages({
     'string.uri': 'Azure Key Vault URI must be a valid URL or an empty string',
   }),
