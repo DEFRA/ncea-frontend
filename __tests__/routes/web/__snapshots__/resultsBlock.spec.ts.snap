@@ -168,13 +168,19 @@ exports[`Results block template Quick search journey Search results with data sh
         <p class='search-result__content'>
           Content 1
         </p>
+
+        
+        
+          
+        
+
         <div class='govuk-button-group search-result__button-group'>
           
   
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" onclick="openDataModal(&#39;undefined&#39;)">
+<button type="submit" class="govuk-button" data-module="govuk-button" disabled="true">
   Open data
 </button>
 
@@ -212,13 +218,19 @@ exports[`Results block template Quick search journey Search results with data sh
         <p class='search-result__content'>
           Content 2
         </p>
+
+        
+        
+          
+        
+
         <div class='govuk-button-group search-result__button-group'>
           
   
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" onclick="openDataModal(&#39;undefined&#39;)">
+<button type="submit" class="govuk-button" data-module="govuk-button" disabled="true">
   Open data
 </button>
 

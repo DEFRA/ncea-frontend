@@ -64,12 +64,20 @@
         <p class='search-result__content'>
           {{item.content}}
         </p>
+
+        {% set openDataAttributes = {} %}
+        {% if item.resourceLocator %}
+          {% set openDataAttributes = openDataAttributes | merge({
+            onclick: "openDataModal('" + item.resourceLocator + "')"
+          }) %}
+        {% else %}
+          {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
+        {% endif %}
+
         <div class='govuk-button-group search-result__button-group'>
           {{ govukButton({
             text: 'Open data',
-            attributes: {
-              onclick: "openDataModal('" + item.resourceLocator + "')"
-            }
+            attributes: openDataAttributes
           }) }}
 
           {{ govukButton({
