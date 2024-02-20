@@ -8,6 +8,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.env).toEqual('local');
       expect(value.appInsightsConnectionString).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
+      expect(value.appInsightsSecretName).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
     });
@@ -23,6 +24,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.env).toEqual('qa');
       expect(value.appInsightsConnectionString).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
+      expect(value.appInsightsSecretName).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
     });
@@ -35,6 +37,7 @@ describe('Environment Configuration Schema', () => {
         env: 'development',
         appInsightsConnectionString: 'your-key',
         azureKeyVaultURL: 'https://example-vault.vault.azure.net',
+        appInsightsSecretName: 'secret-name',
         elasticSearchAPI: 'https://example.com/api',
         isLocal: false,
       };

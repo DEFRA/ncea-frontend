@@ -18,7 +18,7 @@ jest.mock('@hapi/hapi', () => ({
 }));
 
 jest.mock('../../src/infrastructure/plugins/appinsights-logger', () => ({
-  logger: jest.fn()
+  info: jest.fn()
 }));
 
 describe('Server initialization', () => {

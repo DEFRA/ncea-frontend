@@ -50,7 +50,7 @@ describe('Environment environmentConfig', () => {
       } = require('../../src/config/environmentConfig');
       expect(environmentConfig).toBeDefined();
       expect(typeof environmentConfig).toBe('object');
-      expect(Object.keys(environmentConfig).length).toBe(6);
+      expect(Object.keys(environmentConfig).length).toBe(7);
     });
 
     it('should validate and export the configuration object', () => {
@@ -70,6 +70,7 @@ describe('Environment environmentConfig', () => {
           .valid(...envs)
           .default(envs[0]),
         appInsightsConnectionString: Joi.string().allow('').default(''),
+        appInsightsSecretName: Joi.string().allow('').default(''),
         azureKeyVaultURL: Joi.string().allow('').default(''),
         elasticSearchAPI: Joi.string().allow('').default(''),
         isLocal: Joi.boolean().valid(true, false).default(false),
