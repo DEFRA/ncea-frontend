@@ -16,15 +16,15 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Automatically mount a ServiceAccount's API credentials?
   automount: true
   # Annotations to add to the service account
   annotations:
-    azure.workload.identity/client-id: "<client-id-of-your-managed-identity>"
+    azure.workload.identity/client-id: "160e4bea-7717-47dc-aa04-6436d683494e"
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "workload-identity-sa"
+  name: "serviceaccount-nceafrontend-sbox"
 
 podAnnotations: {}
 podLabels: {}
@@ -92,6 +92,8 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
+keyvaultName: ""
+secretName: ""
 nodeSelector: {}
 
 tolerations: []

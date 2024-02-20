@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "ncea-fe.fullname" . }}
   labels:
+    azure.workload.identity/use: "true"
     {{- include "ncea-fe.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -54,6 +55,11 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+          - name: KEYVAULT_NAME
+            value: {{ .Values.keyvaultName }}
+          - name: SECRET_NAME
+            value: {{ .Values.secretName }}
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
