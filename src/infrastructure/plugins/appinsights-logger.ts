@@ -8,7 +8,7 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 const shouldPushToAppInsights = environmentConfig.env === 'local';
 const appInsightsConnectionStringSecretName = environmentConfig.appInsightsSecretName || 'ApplicationInsights--ConnectionString';
 
-if (shouldPushToAppInsights) {
+if (!shouldPushToAppInsights) {
   getSecret(appInsightsConnectionStringSecretName)
     .then(appInsightsConnectionString => {
       appInsights
