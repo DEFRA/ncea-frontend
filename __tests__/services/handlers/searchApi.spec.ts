@@ -3,7 +3,7 @@ import { elasticSearchAPIPaths } from '../../../src/utils/constants';
 import { elasticSearchClient } from '../../../src/config/elasticSearchClient';
 import {
   IQuery,
-  ISearchFieldsObject,
+  ISearchPayload,
 } from '../../../src/interfaces/queryBuilder.interface';
 import {
   getSearchResults,
@@ -29,9 +29,11 @@ describe('Search API', () => {
   });
   describe('Search API - To fetch the search results', () => {
     it('should call elasticSearchClient.post with correct arguments', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
       };
       const payload: IQuery = buildSearchQuery(searchFieldsObject);
@@ -43,9 +45,11 @@ describe('Search API', () => {
     });
 
     it('should return the response from elasticSearchClient.post', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
       };
       const result = await getSearchResults(searchFieldsObject);
@@ -53,9 +57,11 @@ describe('Search API', () => {
     });
 
     it('should handle errors and throw an error message', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
       };
       elasticSearchClient.post = jest
@@ -65,13 +71,20 @@ describe('Search API', () => {
         'Error fetching results: Mocked error',
       );
     });
+
+    it('should return the default response when no fields data is present', async () => {
+      const result = await getSearchResults({ fields: {} });
+      expect(result).toEqual({ total: 0, items: [] });
+    });
   });
 
   describe('Search API - To fetch the search results count', () => {
     it('should call elasticSearchClient.post with correct arguments', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
@@ -82,27 +95,31 @@ describe('Search API', () => {
     });
 
     it('should return the total results count', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
-        data: { totalResults: 10 },
+        data: { count: 10 },
       });
       const result = await getSearchResultsCount(searchFieldsObject);
       expect(result).toEqual({ totalResults: 10 });
     });
 
     it('should return the total results count as 0 if no must conditions are provided', async () => {
-      const result = await getSearchResultsCount({});
+      const result = await getSearchResultsCount({ fields: {} });
       expect(result).toEqual({ totalResults: 0 });
     });
 
     it('should handle errors and throw an error message', async () => {
-      const searchFieldsObject: ISearchFieldsObject = {
-        'quick-search': {
-          search_term: 'example',
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
         },
       };
       elasticSearchClient.post = jest
