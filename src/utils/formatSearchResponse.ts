@@ -14,9 +14,9 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
     const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
     const item: ISearchItem = {
       id: searchItem?._id,
-      title: searchItem?._source.resourceTitleObject.default,
-      publishedBy: searchItem?._source.OrgObject.default,
-      content: searchItem?._source.resourceAbstractObject.default,
+      title: searchItem?._source?.resourceTitleObject?.default,
+      publishedBy: searchItem?._source?.OrgObject?.default,
+      content: searchItem?._source?.resourceAbstractObject?.default,
       temporalExtentDetails: {
         startDate,
         endDate,
