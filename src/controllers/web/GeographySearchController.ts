@@ -13,6 +13,7 @@ const GeographySearchController = {
     const {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
+      results: skipPath,
       results: resultsPath,
       getResultsCount: resultsCountPath,
     } = webRoutePaths;
@@ -22,6 +23,7 @@ const GeographySearchController = {
       geographySearchPath,
       formFields,
       formId,
+      skipPath,
       resultsPath,
       resultsCountPath,
     });
@@ -35,6 +37,7 @@ const GeographySearchController = {
     const {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
+      results: skipPath,
       results: resultsPath,
       getResultsCount: resultsCountPath,
     } = webRoutePaths;
@@ -45,6 +48,7 @@ const GeographySearchController = {
         geographySearchPath,
         formFields: finalFormFields,
         formId,
+        skipPath,
         resultsPath,
         resultsCountPath,
       })

@@ -1,18 +1,20 @@
 {% from 'govuk/components/button/macro.njk' import govukButton %}
 {% from 'govuk/components/select/macro.njk' import govukSelect %}
 
-<div class='govuk-section-break--visible'>
-  <h2 class='govuk-heading-m'>
-    {% if searchResults.total %}
-      {{searchResults.total}} results
-          {% else %}
-            0 results found
-          {% endif %}
-  </h2>
-  <div class='option-container'>
-    {{ govukSelect({
-        id: 'sort',
-        name: 'sort',
+{% if hasError %}
+  <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
+{% endif %}
+
+{% if not hasError %}
+  <div class='govuk-section-break--visible'>
+    <h2 class='govuk-heading-m results-stats'>
+      {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
+    </h2>
+
+    <div class="option-container">
+      {{ govukSelect({
+        id: "sort",
+        name: "sort",
         label: {
           text: 'Sort by',
           classes: 'option-label'
@@ -32,57 +34,78 @@
           }
         ]
       }) }}
-  </div>
-</div>
-
-{% for item in searchResults.items %}
-  <div class='search-result__items'>
-    <div class='govuk-section-break--visible search-result__item'>
-      <h2 class='govuk-heading-m search-result__heading'>{{item.title}}</h2>
-      <div class='search-result__parameter'>
-        <span class='search-result__parameter-label'>Published by</span>
-        <span class='search-result__parameter-value'>{{item.publishedBy}}</span>
-      </div>
-      {% if item.temporalExtentDetails.startDate or item.temporalExtentDetails.endDate %}
-        <div class='search-result__parameter'>
-          <span class='search-result__parameter-label'>Study period</span>
-          <span class='search-result__parameter-value'>
-            {% if item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
-              {{item.temporalExtentDetails.startDate | date('DD MMM YYYY')}} to {{item.temporalExtentDetails.endDate | date('DD MMM YYYY')}}
-            {% elif item.temporalExtentDetails.startDate and not item.temporalExtentDetails.endDate %}
-              {{item.temporalExtentDetails.startDate | date('DD MMM YYYY')}}
-            {% elif not item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
-              {{item.temporalExtentDetails.endDate | date('DD MMM YYYY')}}
-            {% endif %}
-          </span>
-        </div>
-      {% endif %}
-      <p class='search-result__content'>
-        {{item.content}}
-      </p>
-      <div class='govuk-button-group search-result__button-group'>
-        {{ govukButton({
-          text: 'Open data',
-        attributes: {
-          onclick: 'openDataModal("https://medin.org.uk")'
-        }
-        }) }}
-        {{ govukButton({
-          text: 'More info',
-          classes: 'govuk-button--secondary'
-        }) }}
-      </div>
-    </div>
-  {% endfor %}
-
-  {% if not searchResults.total %}
-    <div class='search-result__item'>
-      <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-      <p class='search-result__content search-result__content--empty'>Search with different keywords.</p>
     </div>
   </div>
 {% endif %}
 
-{% if searchResults.total %}
+{% if not hasError and searchResults.total %}
+  <div class='search-result__items'>
+    {% for item in searchResults.items %}
+      <div class='govuk-section-break--visible search-result__item'>
+        <h2 class='govuk-heading-m search-result__heading'>{{item.title}}</h2>
+        <div class='search-result__parameter'>
+          <span class='search-result__parameter-label search-result__published-label'>Published by</span>
+          <span class='search-result__parameter-value search-result__published-value'>{{item.publishedBy}}</span>
+        </div>
+        {% if item.temporalExtentDetails.startDate or item.temporalExtentDetails.endDate %}
+          <div class='search-result__parameter'>
+            <span class='search-result__parameter-label search-result__study-label'>Study period</span>
+            <span class='search-result__parameter-value search-result__study-value'>
+              {% if item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
+                {{item.temporalExtentDetails.startDate | date('DD MMM YYYY')}} to {{item.temporalExtentDetails.endDate | date('DD MMM YYYY')}}
+              {% elif item.temporalExtentDetails.startDate and not item.temporalExtentDetails.endDate %}
+                {{item.temporalExtentDetails.startDate | date('DD MMM YYYY')}}
+              {% elif not item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
+                {{item.temporalExtentDetails.endDate | date('DD MMM YYYY')}}
+              {% endif %}
+            </span>
+          </div>
+        {% endif %}
+        <p class='search-result__content'>
+          {{item.content}}
+        </p>
+        <div class='govuk-button-group search-result__button-group'>
+          {{ govukButton({
+            text: 'Open data',
+            attributes: {
+              onclick: 'openDataModal("https://medin.org.uk")'
+            }
+          }) }}
+
+          {{ govukButton({
+            text: 'More info',
+            classes: 'govuk-button--secondary'
+          }) }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if not searchResults.total and not hasError %}
+  <div class='search-result__item'>
+    <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
+    <p class='search-result__content search-result__content--empty'>
+      {% if isQuickSearchJourney %}
+        Search with different keywords.
+      {% else %}
+        Choose different answers to see results.
+      {% endif %}
+
+      {% if not isQuickSearchJourney %}
+        <div class="govuk-button-group">
+          {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary", attributes: {
+            onclick: 'history.back()'
+          } }) }}
+          {{ govukButton({ text: "Restart questionnaire search", classes: "govuk-button--secondary", href: dateSearchPath, attributes: {
+            'data-do-storage-reset': ''
+          } }) }}
+        </div>
+      {% endif %}
+    </p>
+  </div>
+{% endif %}
+
+{% if searchResults.total and not hasError %}
   {%- include 'partials/open_data/template.njk' -%}
 {% endif %}

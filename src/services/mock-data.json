@@ -2877,6 +2877,12 @@
     }
   },
   "_count": {
-    "totalResults": 24
+    "count": 4,
+    "_shards": {
+      "total": 3,
+      "successful": 3,
+      "skipped": 0,
+      "failed": 0
+    }
   }
 }
