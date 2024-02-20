@@ -21,6 +21,7 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
         startDate,
         endDate,
       },
+      resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
     };
 
     finalResponse.items.push(item);

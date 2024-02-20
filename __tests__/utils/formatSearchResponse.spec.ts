@@ -20,6 +20,13 @@ describe('Format the search response', () => {
                   end: {},
                 },
               ],
+              resourceIdentifier: [
+                {
+                  code: 'CEFAS268',
+                  codeSpace: 'https://data.cefas.co.uk',
+                  link: '',
+                },
+              ],
             },
           },
           {
@@ -55,6 +62,7 @@ describe('Format the search response', () => {
             startDate: '1960-01-04',
             endDate: '',
           },
+          resourceLocator: 'https://data.cefas.co.uk',
         },
         {
           id: '2',
@@ -65,6 +73,7 @@ describe('Format the search response', () => {
             startDate: '1960-01-04',
             endDate: '2009-01-12',
           },
+          resourceLocator: '',
         },
       ],
     };

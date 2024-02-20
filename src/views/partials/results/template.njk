@@ -68,7 +68,7 @@
           {{ govukButton({
             text: 'Open data',
             attributes: {
-              onclick: 'openDataModal("https://medin.org.uk")'
+              onclick: "openDataModal('" + item.resourceLocator + "')"
             }
           }) }}
 

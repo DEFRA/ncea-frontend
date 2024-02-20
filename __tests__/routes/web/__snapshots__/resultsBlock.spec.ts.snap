@@ -81,6 +81,8 @@ exports[`Results block template Guided search journey Search results with empty 
       
     </p>
   </div>
+
+
 "
 `;
 
@@ -90,6 +92,8 @@ exports[`Results block template Guided search journey Search results with error 
 
 
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
+
+
 
 
 
@@ -170,7 +174,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button">
+<button type="submit" class="govuk-button" data-module="govuk-button" onclick="openDataModal(&#39;undefined&#39;)">
   Open data
 </button>
 
@@ -214,7 +218,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button">
+<button type="submit" class="govuk-button" data-module="govuk-button" onclick="openDataModal(&#39;undefined&#39;)">
   Open data
 </button>
 
@@ -236,7 +240,43 @@ exports[`Results block template Quick search journey Search results with data sh
   </div>
 
 
-"
+
+
+<div id="overlay" class="overlay"></div>
+<div id="modal" class="modal">
+  <div class="modal-content">
+    
+  <div class='data-container'>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
+    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue hosted by:"<span id='resource_locator'></span>"</p>
+    <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
+      
+  
+
+  
+    
+  
+
+<button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" onclick="closeDataModal()">
+  Cancel
+</button>
+
+      
+  
+
+  
+    
+  
+
+<a href="#" role="button" draggable="false" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" onclick="closeDataModal()" target="_blank" id="resource-locator-link">
+  Open site
+</a>
+
+    </div>
+  </div>
+
+  </div>
+</div>"
 `;
 
 exports[`Results block template Quick search journey Search results with empty data should match the results screen snapshot 1`] = `
@@ -295,6 +335,8 @@ exports[`Results block template Quick search journey Search results with empty d
       
     </p>
   </div>
+
+
 "
 `;
 
@@ -304,6 +346,8 @@ exports[`Results block template Quick search journey Search results with error s
 
 
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
+
+
 
 
 
