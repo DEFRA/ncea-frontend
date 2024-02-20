@@ -1,18 +1,13 @@
-# Default values for ncea-fe.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 1
 
 image:
   repository: nceapocsbox.azurecr.io/defra/ncea-fe
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "20240220.23_feature-298132-integerate-azure-appinsights"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "ncea-search-frontend"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -41,17 +36,19 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
+  targetPort: 3000
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
+  annotations: {
+    kubernetes.io/ingress.class: nginx
+  }
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
+    - host: dev-ncea-search.azure.defra.cloud
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -96,7 +93,7 @@ port: 80
 nodeEnv: "sandbox"
 keyvaultUrl: "https://nceapocsbox.vault.azure.net/"
 appInsightsSecretName: "ApplicationInsights--ConnectionString"
-elasticSearchApi: "http://localhost:3300/"
+elasticSearchApi: "http://geonetwork.azure-adventures.co.uk/geonetwork/srv/api/search/records/_search"
 
 nodeSelector: {}
 
