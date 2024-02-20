@@ -4,7 +4,7 @@ import Joi from 'joi';
 
 describe('Environment environmentConfig', () => {
   let originalEnv: NodeJS.ProcessEnv;
-  const envs = ['local', 'development', 'qa', 'production', 'test'];
+  const envs = ['local', 'sandbox', 'dev', 'qa', 'test', 'preprod', 'prod'];
 
   beforeAll(() => {
     originalEnv = { ...process.env };
@@ -32,7 +32,7 @@ describe('Environment environmentConfig', () => {
     });
 
     it('should not call dotenv.config() when NODE_ENV is not set to local', () => {
-      process.env.NODE_ENV = 'production';
+      process.env.NODE_ENV = 'prod';
       jest.mock('dotenv', () => ({
         config: jest.fn(),
       }));

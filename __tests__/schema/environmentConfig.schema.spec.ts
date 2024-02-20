@@ -34,7 +34,7 @@ describe('Environment Configuration Schema', () => {
     it('should validate a valid environment configuration', () => {
       const validConfig = {
         port: '4000',
-        env: 'development',
+        env: 'dev',
         appInsightsConnectionString: 'your-key',
         azureKeyVaultURL: 'https://example-vault.vault.azure.net',
         appInsightsSecretName: 'secret-name',

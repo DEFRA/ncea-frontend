@@ -36,19 +36,17 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
-  targetPort: 3000
 
 ingress:
   enabled: true
-  className: ""
-  annotations: {
-    kubernetes.io/ingress.class: nginx
-  }
+  className: "webapprouting.kubernetes.azure.com"
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: dev-ncea-search.azure.defra.cloud
+    - host: nceasearchsnd.azure-adventures.co.uk
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -93,7 +91,7 @@ port: 80
 nodeEnv: "sandbox"
 keyvaultUrl: "https://nceapocsbox.vault.azure.net/"
 appInsightsSecretName: "ApplicationInsights--ConnectionString"
-elasticSearchApi: "http://geonetwork.azure-adventures.co.uk/geonetwork/srv/api/search/records/_search"
+elasticSearchApi: "http://elasticsearch.azure-adventures.co.uk/"
 
 nodeSelector: {}
 
