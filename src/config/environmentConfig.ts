@@ -17,7 +17,7 @@ const config: EnvironmentConfig = {
   env: process.env.NODE_ENV,
   appInsightsConnectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
   azureKeyVaultURL: process.env.AZURE_KEYVAULT_URL,
-  appInsightsSecretName: process.env.APPLICATIONINSIGHTS_SECRET_NAME,
+  appInsightsSecretName: process.env.APPINSIGHTS_SECRET_NAME,
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
   isLocal: process.env.NODE_ENV === 'local',
 };

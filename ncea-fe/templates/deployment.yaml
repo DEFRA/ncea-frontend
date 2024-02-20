@@ -56,10 +56,16 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
-          - name: KEYVAULT_NAME
-            value: {{ .Values.keyvaultName }}
-          - name: SECRET_NAME
-            value: {{ .Values.secretName }}
+          - name: PORT
+            value: {{ .Values.port }}
+          - name: NODE_ENV
+            value: {{ .Values.nodeEnv }}
+          - name: APPINSIGHTS_SECRET_NAME
+            value: {{ .Values.appInsightsSecretName }}
+          - name: AZURE_KEYVAULT_URL
+            value: {{ .Values.keyvaultUrl }}
+          - name: ELASTICSEARCH_API
+            value: {{ .Values.elasticSearchApi }}
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

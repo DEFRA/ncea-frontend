@@ -92,8 +92,12 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-keyvaultName: ""
-secretName: ""
+port: 80
+nodeEnv: "sandbox"
+keyvaultUrl: "https://nceapocsbox.vault.azure.net/"
+appInsightsSecretName: "ApplicationInsights--ConnectionString"
+elasticSearchApi: "http://localhost:3300/"
+
 nodeSelector: {}
 
 tolerations: []
