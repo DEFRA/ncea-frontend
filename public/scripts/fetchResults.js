@@ -74,18 +74,8 @@ const getSearchResults = async (path) => {
   }
 };
 
-<<<<<<< HEAD
-const hideSkipButton = (element) => {
-  element.style.display = 'none;';
-  document.querySelector('.count-block').style.paddingBottom = 0;
-  const skipQuestion = document.querySelector('[data-do-storage-skip]');
-  if (skipQuestion) {
-    skipQuestion.style.display = 'none';
-  }
-=======
 const adjustPadding = () => {
   document.querySelector('.count-block').style.paddingBottom = 0;
->>>>>>> features/294976-search-using-geography-coordinates
 };
 
 const getResultsCount = async (path, element) => {
@@ -95,17 +85,10 @@ const getResultsCount = async (path, element) => {
     if (searchResultsCount && searchResultsCount['totalResults'] !== 0) {
       element.innerHTML = `Click to see ${searchResultsCount['totalResults']} results`;
     } else {
-<<<<<<< HEAD
-      hideSkipButton(element);
-    }
-  } else {
-    hideSkipButton(element);
-=======
       adjustPadding();
     }
   } else {
     adjustPadding();
->>>>>>> features/294976-search-using-geography-coordinates
   }
 };
 
