@@ -3,7 +3,7 @@ export interface EnvironmentConfig {
   env: string | undefined;
   appInsightsConnectionString: string | undefined;
   azureKeyVaultURL: string | undefined;
-  appInsightsSecretName: string;
+  appInsightsSecretName?: string;
   elasticSearchAPI: string | undefined;
   isLocal?: boolean;
 }
