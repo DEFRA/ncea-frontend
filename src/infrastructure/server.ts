@@ -4,7 +4,6 @@ import { environmentConfig } from '../config/environmentConfig';
 import inert from '@hapi/inert';
 import vision from '@hapi/vision';
 import Hapi, { Server } from '@hapi/hapi';
-import logger from '../infrastructure/plugins/appinsights-logger';
 
 import { customHapiPino, customHapiRoutes, customHapiViews } from './plugins/index';
 
@@ -33,7 +32,6 @@ const initializeServer = async (): Promise<Server> => {
 };
 
 const startServer = async (): Promise<Server> => {
-  logger.info('Initializing server');
   await server.start();  
   console.log(`Server running at: ${server.info.uri}`);
   return server;

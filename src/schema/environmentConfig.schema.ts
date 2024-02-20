@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 
 const envs = ['local', 'sandbox', 'dev', 'qa', 'test', 'preprod', 'prod'];
 
-if ([envs[0], envs[4]].includes(process.env.NODE_ENV)) {
-  dotenv.config();
+if ([envs[0],envs[1],envs[6]].includes(process.env.NODE_ENV)) {
+  dotenv.config()
 }
 
 export const environmentSchema: Joi.ObjectSchema = Joi.object({
