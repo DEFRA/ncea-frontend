@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 const envs = ['local', 'sandbox', 'dev', 'qa', 'test', 'preprod', 'prod'];
 
-if ([envs[0],envs[1],envs[6]].includes(process.env.NODE_ENV)) {
+if ([envs[0]].includes(process.env.NODE_ENV)) {
   dotenv.config()
 }
 
