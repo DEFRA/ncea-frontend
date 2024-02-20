@@ -133,5 +133,6 @@ dist
 *.sqlite
 /.vs
 /reports/test-report.xml
-src/infrastructure/log_files/
+src/infrastructure/log_files/*_log.*
+src/infrastructure/log_files/*.json
 __tests__/infrastructure/log_files/
