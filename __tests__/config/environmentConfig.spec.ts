@@ -59,6 +59,7 @@ describe('Environment environmentConfig', () => {
         NODE_ENV: 'qa',
         APPLICATIONINSIGHTS_CONNECTION_STRING: 'abc123',
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
+        APPINSIGHTS_SECRET_NAME: 'appinsights--connections string',
         ELASTICSEARCH_API: 'https://elasticsearch-api.com',
       };
       process.env = { ...mockConfig };
