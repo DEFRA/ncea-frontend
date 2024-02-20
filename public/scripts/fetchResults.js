@@ -1,4 +1,8 @@
-import { getStorageData, storeStorageData } from './customScripts.js';
+import {
+  getStorageData,
+  resetStorage,
+  storeStorageData,
+} from './customScripts.js';
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 const resultsBlockId = 'results-block';
@@ -28,28 +32,24 @@ const checkProperties = (dataObject, seen = new Set()) => {
 
 const invokeAjaxCall = async (path) => {
   const { fields, sort } = getStorageData();
-  const fieldsData = checkProperties(fields);
-  if (Object.keys(fieldsData).length && sort) {
-    try {
-      const response = await fetch(path, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ fields, sort }),
-      });
-      if (response.ok) {
-        return response;
-      } else {
-        console.error(`Failed to fetch the results: ${response.status}`);
-        return null;
-      }
-    } catch (error) {
-      console.error(`Error fetching results: ${error.message}`);
+  try {
+    const response = await fetch(path, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fields, sort }),
+    });
+    if (response.ok) {
+      return response;
+    } else {
+      console.error(`Failed to fetch the results: ${response.status}`);
       return null;
     }
+  } catch (error) {
+    console.error(`Error fetching results: ${error.message}`);
+    return null;
   }
-  return null;
 };
 
 const invokeSearchResults = () => {
@@ -103,13 +103,8 @@ const getSearchResults = async (path) => {
   }
 };
 
-const hideSkipButton = (element) => {
-  element.style.display = 'none;';
+const adjustPadding = () => {
   document.querySelector('.count-block').style.paddingBottom = 0;
-  const skipQuestion = document.querySelector('[data-do-storage-skip]');
-  if (skipQuestion) {
-    skipQuestion.style.display = 'none';
-  }
 };
 
 const getResultsCount = async (path, element) => {
@@ -119,10 +114,10 @@ const getResultsCount = async (path, element) => {
     if (searchResultsCount && searchResultsCount['totalResults'] !== 0) {
       element.innerHTML = `Click to see ${searchResultsCount['totalResults']} results`;
     } else {
-      hideSkipButton(element);
+      adjustPadding();
     }
   } else {
-    hideSkipButton(element);
+    adjustPadding();
   }
 };
 

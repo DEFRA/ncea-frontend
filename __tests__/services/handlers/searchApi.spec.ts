@@ -74,6 +74,11 @@ describe('Search API', () => {
         'Error fetching results: Mocked error',
       );
     });
+
+    it('should return the default response when no fields data is present', async () => {
+      const result = await getSearchResults({ fields: {}, sort: '' });
+      expect(result).toEqual({ total: 0, items: [] });
+    });
   });
 
   describe('Search API - To fetch the search results count', () => {
@@ -103,7 +108,7 @@ describe('Search API', () => {
         sort: '',
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
-        data: { totalResults: 10 },
+        data: { count: 10 },
       });
       const result = await getSearchResultsCount(searchFieldsObject);
       expect(result).toEqual({ totalResults: 10 });

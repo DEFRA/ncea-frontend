@@ -43,11 +43,25 @@ const SearchResultsController = {
     return response.view(view, context).code(400).takeover();
   },
   getSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { guidedDateSearch: dateSearchPath } = webRoutePaths;
     const payload: ISearchPayload = request.payload as ISearchPayload;
-    const searchResults: ISearchResults = await getSearchResults(payload);
-    return response.view('partials/results/template', {
-      searchResults,
-    });
+    const { fields } = payload;
+    const isQuickSearchJourney = Object.prototype.hasOwnProperty.call(fields, 'quick-search');
+    try {
+      const searchResults: ISearchResults = await getSearchResults(payload);
+      return response.view('partials/results/template', {
+        searchResults,
+        hasError: false,
+        isQuickSearchJourney,
+        dateSearchPath,
+      });
+    } catch (error) {
+      return response.view('partials/results/template', {
+        error,
+        hasError: true,
+        isQuickSearchJourney,
+      });
+    }
   },
   getResultsCountHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload: ISearchPayload = request.payload as ISearchPayload;
