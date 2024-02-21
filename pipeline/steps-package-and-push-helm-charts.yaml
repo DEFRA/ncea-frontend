@@ -17,8 +17,8 @@ steps:
     command: save
     chartNameForACR: $(ACR.Name).azurecr.io/helm/$(ACR.ContainerRepository):$(Build.BuildNumber)
     chartPathForACR:  $(chartPath)
-    azureResourceGroupForACR: $(ACR.ResourceGroupName)
-    azureContainerRegistry: $(ACR.ContainerRepository)
+    # azureResourceGroupForACR: $(ACR.ResourceGroupName)
+    # azureContainerRegistry: $(ACR.ContainerRepository)
 
 # - task: AzureCLI@1
 #   inputs:
