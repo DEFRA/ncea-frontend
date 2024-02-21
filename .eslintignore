@@ -1,11 +1,12 @@
 node_modules
 build
 coverage
+reports
 src/views/**
 src/infrastructure/log_files/**
 src/services/*.json
-src/public/**
 tools/**
+__tests__
 public/**
 src/assets/**
 copyNonTSFiles.js

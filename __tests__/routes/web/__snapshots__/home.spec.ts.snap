@@ -84,7 +84,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
       
     </h1>
     
-      <span class="govuk-caption-m quick_search-container__caption-m">You can search by date, report title, theme or project codes, for example "seagrass beds, Porth Dinllaen, 2012".</span>
+      <span class="govuk-caption-m quick_search-container__caption-m">You can search by keyword, theme, title or project code, for example: "hedgehog population Bristol", "Community Supported Fisheries", "AE0101".</span>
     
     <div class="search-block" data-module="search">
       <form action="/search" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">

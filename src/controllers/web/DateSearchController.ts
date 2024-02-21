@@ -10,12 +10,13 @@ import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const DateSearchController = {
   renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const { guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaire;
     return response.view('screens/guided_search/date_questionnaire', {
       fromDate,
       toDate,
       guidedDateSearchPath,
+      skipPath,
       formId,
     });
   },
@@ -24,7 +25,7 @@ const DateSearchController = {
     response: ResponseToolkit,
     error: Joi.ValidationError,
   ): Lifecycle.ReturnValue => {
-    const { guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
       formKeys.dateQuestionnaire,
@@ -45,13 +46,14 @@ const DateSearchController = {
         fromDate: fromField,
         toDate: toField,
         guidedDateSearchPath,
+        skipPath,
         formId,
       })
       .code(400)
       .takeover();
   },
   doDateSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.redirect(webRoutePaths.results);
+    return response.redirect(webRoutePaths.geographySearch);
   },
 };
 

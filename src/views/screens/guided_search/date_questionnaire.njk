@@ -32,7 +32,14 @@
         </h1>
         {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
         {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
-        {{ govukButton({text: "Show results"}) }}
+        <div class="govuk-button-group">
+          {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary", href: skipPath, attributes: {
+            'data-do-storage-skip': ''
+          } }) }}
+          {{ govukButton({ text: "Next question", attributes: {
+            'data-to-disable': ''
+          } }) }}
+        </div>
       </div>
     </form>
   </div>

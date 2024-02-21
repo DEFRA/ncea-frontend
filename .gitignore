@@ -133,6 +133,8 @@ dist
 *.sqlite
 /.vs
 /reports/test-report.xml
+
+# winston log files
 log_files/*_log.*
 log_files/*.json
 __tests__/infrastructure/log_files/

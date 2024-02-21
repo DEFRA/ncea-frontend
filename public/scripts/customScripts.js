@@ -60,6 +60,24 @@ const hydrateFormFromStorage = (form) => {
   });
 };
 
+// Function to check if any field is empty
+const isAllFieldEmpty = (formId) => {
+  const sessionData = getStorageData();
+  const form = sessionData.fields[formId];
+  if (!form) {
+    return true;
+  }
+  return !Object.values(form).some((value) => value.trim() !== '');
+};
+
+// Function to update submit button state
+const updateSubmitButtonState = (form) => {
+  const submitButton = form.querySelector('button[data-to-disable]');
+  if (submitButton) {
+    submitButton.disabled = isAllFieldEmpty(form.id);
+  }
+};
+
 //Listen for the input event on input fields
 const attachEventListeners = (form) => {
   const sessionData = getStorageData();
@@ -74,6 +92,8 @@ const attachEventListeners = (form) => {
       sessionData.fields[form.id][fieldName] = value;
 
       storeStorageData(sessionData);
+
+      updateSubmitButtonState(form);
     });
   });
 };
@@ -154,6 +174,8 @@ if (typeof Storage !== 'undefined') {
         if (form instanceof HTMLFormElement) {
           hydrateFormFromStorage(form);
 
+          updateSubmitButtonState(form);
+
           attachEventListeners(form);
         }
       });
@@ -182,6 +204,7 @@ window.addEventListener('storage', (event) => {
       const form = document.getElementById(formId);
       if (form) {
         hydrateFormFromStorage(form);
+        updateSubmitButtonState(form);
       }
     });
   }
@@ -189,7 +212,9 @@ window.addEventListener('storage', (event) => {
 
 export {
   hydrateFormFromStorage,
+  updateSubmitButtonState,
   storeStorageData,
   getStorageData,
   fireEventAfterStorage,
+  resetStorage,
 };

@@ -1,12 +1,14 @@
-@import 'govuk/all';
+@import "govuk/all";
 
-@import './settings/colors';
+@import "./settings/colors";
 
-@import './tools/fonts';
+@import "./tools/fonts";
 
-@import './components/search';
+@import "./components/search";
+@import "./components/results_count";
 
-@import './templates/layout';
-@import './templates/home';
-@import './templates/header';
-@import './templates/results';
+@import "./templates/layout";
+@import "./templates/home";
+@import "./templates/header";
+@import "./templates/geography";
+@import "./templates/results";

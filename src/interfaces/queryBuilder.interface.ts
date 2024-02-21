@@ -62,7 +62,7 @@ interface IGeoCoordinates {
   };
 }
 
-interface ISearchFieldsObject {
+interface ISearchFields {
   'quick-search'?: {
     search_term?: string;
   };
@@ -83,14 +83,19 @@ interface ISearchFieldsObject {
   };
 }
 
+interface ISearchPayload {
+  fields: ISearchFields;
+}
+
 export {
   IMatchQuery,
   IBoolQuery,
   IRangeQuery,
   IQuery,
-  ISearchFieldsObject,
+  ISearchFields,
   IShapeCoordinates,
   IGeoShapeQuery,
   IGeoCoordinates,
   IQueryString,
+  ISearchPayload,
 };

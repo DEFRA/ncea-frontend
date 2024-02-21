@@ -1,11 +1,13 @@
 'use strict';
 
+import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import Joi from 'joi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 
 import { quickSearchJoiError } from '../../data/quickSearch';
 import { formIds, webRoutePaths } from '../../../src/utils/constants';
+import { getSearchResults } from '../../../src/services/handlers/searchApi';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
@@ -43,11 +45,29 @@ describe('Deals with search results controller', () => {
     });
 
     it('should fetch the data and return the view', async () => {
-      const request: Request = {} as any;
+      const { guidedDateSearch: dateSearchPath } = webRoutePaths;
+      const request: Request = { payload: { fields: {} } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       await SearchResultsController.getSearchResultsHandler(request, response);
       expect(response.view).toHaveBeenCalledWith('partials/results/template', {
+        dateSearchPath,
+        hasError: false,
+        isQuickSearchJourney: false,
         searchResults: undefined,
+      });
+    });
+
+    it('should show an error when something fails at API layer', async () => {
+      const request: Request = { payload: { fields: {} } } as any;
+      const payload = request.payload as ISearchPayload;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const error = new Error('Mocked error');
+      (getSearchResults as jest.Mock).mockRejectedValue(error);
+      await SearchResultsController.getSearchResultsHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('partials/results/template', {
+        error,
+        hasError: true,
+        isQuickSearchJourney: false,
       });
     });
   });

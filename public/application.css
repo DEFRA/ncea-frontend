@@ -7450,7 +7450,7 @@
   font-size: 36px;
 }
 .quick_search-container__caption-m {
-  width: 630px;
+  width: 640px;
   font-size: 1.1875rem;
   font-style: normal;
   font-weight: 300;
@@ -7502,6 +7502,18 @@
   background-position: 10px 50%;
   text-indent: -5000px;
   overflow: hidden;
+}
+
+.count-block {
+  border-bottom: 2px solid #b1b4b6;
+  padding-bottom: 30px;
+}
+.count-block-link {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  text-decoration-line: underline;
 }
 
 .app-main-class {
@@ -7678,6 +7690,17 @@
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 1px;
+}
+
+.geography-fields__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.geography-buttons__right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .search-result__item {

@@ -1,0 +1,14 @@
+.geography-fields {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+.geography-buttons {
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

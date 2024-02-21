@@ -4,11 +4,11 @@ describe('Geography Coordinate schema validation', () => {
   describe('Check the scenarios have no errors', () => {
     test('should validate with no errors with all fields present', async () => {
       const data = {
-        north: 10,
-        south: -10,
-        west: -5,
-        east: 5,
-        depth: 20,
+        north: '10',
+        south: '-10',
+        west: '-5',
+        east: '5',
+        depth: '20',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -19,10 +19,10 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should validate with no errors with no depth alone present', async () => {
       const data = {
-        north: 10,
-        south: -10,
-        west: -5,
-        east: 5,
+        north: '10',
+        south: '-10',
+        west: '-5',
+        east: '5',
         depth: '',
       };
 
@@ -34,10 +34,10 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should validate with no errors with decimal coordinate and no depth', async () => {
       const data = {
-        north: 4.23222,
-        south: -10,
-        west: -5,
-        east: 5,
+        north: '4.23222',
+        south: '-10',
+        west: '-5',
+        east: '5',
         depth: '',
       };
 
@@ -49,11 +49,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should validate with no errors with decimal coordinate having depth', async () => {
       const data = {
-        north: -4.23222,
-        south: -10,
-        west: -5,
-        east: 5,
-        depth: 5000,
+        north: '-4.23222',
+        south: '-10',
+        west: '-5',
+        east: '5',
+        depth: '5000',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -68,7 +68,7 @@ describe('Geography Coordinate schema validation', () => {
         south: '',
         west: '',
         east: '',
-        depth: 5000,
+        depth: '5000',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -118,10 +118,10 @@ describe('Geography Coordinate schema validation', () => {
     test('should return an error with north field not a number and having depth field', async () => {
       const data = {
         north: 'test',
-        south: -10,
-        west: -5,
-        east: 5,
-        depth: 50,
+        south: '-10',
+        west: '-5',
+        east: '5',
+        depth: '50',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -135,11 +135,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error with south field not a number and having depth field', async () => {
       const data = {
-        north: 50.99,
+        north: '50.99',
         south: 'test',
-        west: -5,
-        east: 5,
-        depth: 50,
+        west: '-5',
+        east: '5',
+        depth: '50',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -153,11 +153,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error with west field not a number and having depth field', async () => {
       const data = {
-        north: 50.99,
-        south: -10,
+        north: '50.99',
+        south: '-10',
         west: 'test',
-        east: 5,
-        depth: 50,
+        east: '5',
+        depth: '50',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -171,11 +171,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error with east field not a number and having depth field', async () => {
       const data = {
-        north: 50.99,
-        south: -10,
-        west: 5,
+        north: '50.99',
+        south: '-10',
+        west: '5',
         east: 'test',
-        depth: 50,
+        depth: '50',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -190,9 +190,9 @@ describe('Geography Coordinate schema validation', () => {
     test('should return an error with north field not a number and having no depth field', async () => {
       const data = {
         north: 'test',
-        south: -10,
-        west: -5,
-        east: 5,
+        south: '-10',
+        west: '-5',
+        east: '5',
         depth: '',
       };
 
@@ -207,10 +207,10 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error with south field not a number and having no depth field', async () => {
       const data = {
-        north: 50.99,
+        north: '50.99',
         south: 'test',
-        west: -5,
-        east: 5,
+        west: '-5',
+        east: '5',
         depth: '',
       };
 
@@ -225,10 +225,10 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error with west field not a number and having no depth field', async () => {
       const data = {
-        north: 50.99,
-        south: -10,
+        north: '50.99',
+        south: '-10',
         west: 'test',
-        east: 5,
+        east: '5',
         depth: '',
       };
 
@@ -243,9 +243,9 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error with east field not a number and having no depth field', async () => {
       const data = {
-        north: 50.99,
-        south: -10,
-        west: 5,
+        north: '50.99',
+        south: '-10',
+        west: '5',
         east: 'test',
         depth: '',
       };
@@ -262,10 +262,10 @@ describe('Geography Coordinate schema validation', () => {
     test('should return an error when having depth and north coordinate field is missing', async () => {
       const data = {
         north: '',
-        south: -10,
-        west: 5,
-        east: 56,
-        depth: 10,
+        south: '-10',
+        west: '5',
+        east: '56',
+        depth: '10',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -279,11 +279,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error when having depth and south coordinate field is missing', async () => {
       const data = {
-        north: -10,
+        north: '-10',
         south: '',
-        west: 5,
-        east: 56,
-        depth: 10,
+        west: '5',
+        east: '56',
+        depth: '10',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -297,11 +297,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error when having depth and west coordinate field is missing', async () => {
       const data = {
-        north: -10,
-        south: 5,
+        north: '-10',
+        south: '5',
         west: '',
-        east: 56,
-        depth: 10,
+        east: '56',
+        depth: '10',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -315,11 +315,11 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error when having depth and east coordinate field is missing', async () => {
       const data = {
-        north: -10,
-        south: 5,
-        west: 56,
+        north: '-10',
+        south: '5',
+        west: '56',
         east: '',
-        depth: 10,
+        depth: '10',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {
@@ -334,9 +334,9 @@ describe('Geography Coordinate schema validation', () => {
     test('should return an error when north coordinate field is missing and having no depth', async () => {
       const data = {
         north: '',
-        south: -10,
-        west: 5,
-        east: 56,
+        south: '-10',
+        west: '5',
+        east: '56',
         depth: '',
       };
 
@@ -351,10 +351,10 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error when south coordinate field is missing and having no depth', async () => {
       const data = {
-        north: -10,
+        north: '-10',
         south: '',
-        west: 5,
-        east: 56,
+        west: '5',
+        east: '56',
         depth: '',
       };
 
@@ -369,10 +369,10 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error when west coordinate field is missing and having no depth', async () => {
       const data = {
-        north: -10,
-        south: 5,
+        north: '-10',
+        south: '5',
         west: '',
-        east: 56,
+        east: '56',
         depth: '',
       };
 
@@ -387,9 +387,9 @@ describe('Geography Coordinate schema validation', () => {
 
     test('should return an error when east coordinate field is missing and having no depth', async () => {
       const data = {
-        north: -10,
-        south: 5,
-        west: 56,
+        north: '-10',
+        south: '5',
+        west: '56',
         east: '',
         depth: '',
       };
@@ -409,9 +409,9 @@ describe('Geography Coordinate schema validation', () => {
       const data = {
         north: '',
         south: '',
-        west: 5,
-        east: 56,
-        depth: 10,
+        west: '5',
+        east: '56',
+        depth: '10',
       };
 
       const results = geographyQuestionnaireSchema.validate(data, {

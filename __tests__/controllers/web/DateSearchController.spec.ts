@@ -19,7 +19,10 @@ describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
     const request: Request = {} as any;
     const response: ResponseToolkit = { view: jest.fn() } as any;
-    const { guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const {
+      guidedDateSearch: guidedDateSearchPath,
+      geographySearch: skipPath,
+    } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaire;
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(
@@ -28,6 +31,7 @@ describe('Deals with the Date Search Controller', () => {
         fromDate,
         toDate,
         guidedDateSearchPath,
+        skipPath,
         formId,
       },
     );
@@ -38,7 +42,9 @@ describe('Deals with the Date Search Controller', () => {
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
     await DateSearchController.doDateSearchHandler(request, response);
-    expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
+    expect(response.redirect).toHaveBeenCalledWith(
+      webRoutePaths.geographySearch,
+    );
   });
 
   it('should validate the date questionnaire form', async () => {
@@ -64,7 +70,10 @@ describe('Deals with the Date Search Controller', () => {
       .mockReturnValue(dateQuestionChronologicalError as FormFieldError);
     const formId: string = formIds.dataQuestionnaire;
 
-    const { guidedDateSearch: guidedDateSearchPath } = webRoutePaths;
+    const {
+      guidedDateSearch: guidedDateSearchPath,
+      geographySearch: skipPath,
+    } = webRoutePaths;
 
     await DateSearchController.doDateSearchFailActionHandler(
       request,
@@ -77,6 +86,7 @@ describe('Deals with the Date Search Controller', () => {
         fromDate: dateQuestionnaireGovUKError.fromDate,
         toDate: dateQuestionnaireGovUKError.toDate,
         guidedDateSearchPath,
+        skipPath,
         formId,
       },
     );
