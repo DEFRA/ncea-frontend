@@ -1,3 +1,4 @@
+import { environmentConfig } from '../../../src/config/environmentConfig';
 import path from 'path';
 import { webRoutePaths } from '../../../src/utils/constants';
 import nunjucks, { Environment } from 'nunjucks';
@@ -41,6 +42,8 @@ describe('Vision Plugin Configuration', () => {
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
+      appInsightsConnectionString:
+        environmentConfig.appInsightsConnectionString,
     });
     expect(mockEnvironment.addFilter).toHaveBeenCalledTimes(1);
   });

@@ -6,8 +6,9 @@ describe('Environment Configuration Schema', () => {
       const { value } = environmentSchema.validate({});
       expect(value.port).toEqual('3000');
       expect(value.env).toEqual('local');
-      expect(value.appInsightsKey).toEqual('');
+      expect(value.appInsightsConnectionString).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
+      expect(value.appInsightsSecretName).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
     });
@@ -21,8 +22,9 @@ describe('Environment Configuration Schema', () => {
       const { value } = environmentSchema.validate(partialConfig);
       expect(value.port).toEqual('5000');
       expect(value.env).toEqual('qa');
-      expect(value.appInsightsKey).toEqual('');
+      expect(value.appInsightsConnectionString).toEqual('');
       expect(value.azureKeyVaultURL).toEqual('');
+      expect(value.appInsightsSecretName).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
     });
@@ -32,9 +34,10 @@ describe('Environment Configuration Schema', () => {
     it('should validate a valid environment configuration', () => {
       const validConfig = {
         port: '4000',
-        env: 'development',
-        appInsightsKey: 'your-key',
+        env: 'dev',
+        appInsightsConnectionString: 'your-key',
         azureKeyVaultURL: 'https://example-vault.vault.azure.net',
+        appInsightsSecretName: 'secret-name',
         elasticSearchAPI: 'https://example.com/api',
         isLocal: false,
       };
