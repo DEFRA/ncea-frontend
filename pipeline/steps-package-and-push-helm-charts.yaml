@@ -17,7 +17,6 @@ steps:
     command: save
     chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildNumber)$(artifactNameSuffix)'
     chartPathForACR:  $(chartPath)
-    azureSubscriptionEndpointForACR: $(ACR.ServiceConnection)
     azureResourceGroupForACR: $(ACR.ResourceGroupName)
     azureContainerRegistry: $(ACR.ContainerRepository)
 
