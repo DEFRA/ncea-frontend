@@ -6,7 +6,7 @@ steps:
   inputs:
     command: package
     chartPath: $(chartPath)
-    chartVersion: $(Build.SourceBranchName)
+    chartVersion: $(Build.BuildNumber)$(artifactNameSuffix)
     destination: $(Build.ArtifactStagingDirectory)
 
 - task: HelmDeploy@0
@@ -15,13 +15,13 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceConnection: aksServiceConn-AZR-NCE-SND1
     command: save
-    chartNameForACR: $(ACR.Name).azurecr.io/helm/charts/$(ACR.ContainerRepository):$(Build.BuildNumber)$(artifactNameSuffix)
-    chartPathForACR:  charts/$(chartPath)
+    chartNameForACR: $(ACR.Name).azurecr.io/helm/$(ACR.ContainerRepository):$(Build.BuildNumber)$(artifactNameSuffix)
+    chartPathForACR:  $(chartPath)
     azureResourceGroupForACR: $(ACR.ResourceGroupName)
     azureContainerRegistry: $(ACR.ContainerRepository)
 
-# - task: AzureCLI@1
-#   inputs:
-#     azureSubscription: $(Arm.ServiceConnection)
-#     scriptLocation: inlineScript
-#     inlineScript: az acr helm push -n $(acrName) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildId).tgz
+- task: AzureCLI@1
+  inputs:
+    azureSubscription: aksServiceConn-AZR-NCE-SND1
+    scriptLocation: inlineScript
+    inlineScript: az acr helm push -n $(ACR.Name) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildNumber)$(artifactNameSuffix).tgz
