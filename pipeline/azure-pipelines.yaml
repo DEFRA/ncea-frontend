@@ -17,6 +17,7 @@ variables:
   ACR.Name: nceapocsbox
   ACR.ResourceGroupName: NCEA-NW-POC
   ACR.ServiceConnection : acr-AZR-NCE-SND1
+  AKS.ServiceConnection : aksServiceConn-AZR-NCE-SND1
   ACR.ContainerRepository: defra/ncea-fe
 
 stages:
