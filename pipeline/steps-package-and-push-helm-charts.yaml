@@ -20,8 +20,8 @@ steps:
     azureResourceGroupForACR: $(ACR.ResourceGroupName)
     azureContainerRegistry: $(ACR.ContainerRepository)
 
-- task: AzureCLI@1
-  inputs:
-    azureSubscription: aksServiceConn-AZR-NCE-SND1
-    scriptLocation: inlineScript
-    inlineScript: az acr helm push -n $(ACR.Name) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildNumber)$(artifactNameSuffix).tgz
+# - task: AzureCLI@1
+#   inputs:
+#     azureSubscription: aksServiceConn-AZR-NCE-SND1
+#     scriptLocation: inlineScript
+#     inlineScript: az acr helm push -n $(ACR.Name) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildNumber)$(artifactNameSuffix).tgz
