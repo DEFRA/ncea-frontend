@@ -1,13 +1,7 @@
 'use strict';
 
 import { Server } from '@hapi/hapi';
-import {
-  dateSearchRoutes,
-  errorRoutes,
-  homeRoutes,
-  searchResultsRoutes,
-  staticRoutes,
-} from '../../routes/index';
+import { dateSearchRoutes, errorRoutes, homeRoutes, searchResultsRoutes, staticRoutes } from '../../routes/index';
 
 const routes = [...errorRoutes, ...staticRoutes, ...homeRoutes, ...dateSearchRoutes, ...searchResultsRoutes];
 

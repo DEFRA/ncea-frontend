@@ -36,6 +36,9 @@ COPY --from=builder /app/node_modules ./node_modules
 # Copy the 'public' folder from the builder stage
 COPY --from=builder /app/public ./public
 
+# Create the 'log_files' folder
+RUN mkdir /app/log_files
+
 # Expose application port
 EXPOSE 3000
 

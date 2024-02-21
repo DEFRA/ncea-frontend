@@ -32,7 +32,7 @@ const initializeServer = async (): Promise<Server> => {
 };
 
 const startServer = async (): Promise<Server> => {
-  await server.start();  
+  await server.start();
   console.log(`Server running at: ${server.info.uri}`);
   return server;
 };
