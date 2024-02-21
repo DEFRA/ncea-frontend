@@ -10,6 +10,10 @@ import { initializeServer } from '../../../src/infrastructure/server';
 import supertest from 'supertest';
 import { webRoutePaths } from '../../../src/utils/constants';
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  info: jest.fn(),
+}));
+
 let serverRequest;
 
 const getHTMLDocument = (rawHTML) => {

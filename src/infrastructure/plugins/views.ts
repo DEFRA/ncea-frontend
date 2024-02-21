@@ -1,4 +1,5 @@
 import dateFilter from 'nunjucks-date-filter';
+import { environmentConfig } from '../../config/environmentConfig';
 import nunjucks from 'nunjucks';
 import path from 'path';
 import vision from '@hapi/vision';
@@ -50,6 +51,7 @@ const customHapiViews = {
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
       homePageUrl: webRoutePaths.home,
+      appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
     },
   },
 };

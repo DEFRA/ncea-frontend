@@ -15,8 +15,9 @@ import { environmentSchema } from '../schema/environmentConfig.schema';
 const config: EnvironmentConfig = {
   port: process.env.PORT,
   env: process.env.NODE_ENV,
-  appInsightsKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
+  appInsightsConnectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
   azureKeyVaultURL: process.env.AZURE_KEYVAULT_URL,
+  appInsightsSecretName: process.env.APPINSIGHTS_SECRET_NAME,
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
   isLocal: process.env.NODE_ENV === 'local',
 };

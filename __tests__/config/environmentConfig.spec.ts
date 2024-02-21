@@ -4,7 +4,7 @@ import Joi from 'joi';
 
 describe('Environment environmentConfig', () => {
   let originalEnv: NodeJS.ProcessEnv;
-  const envs = ['local', 'development', 'qa', 'production', 'test'];
+  const envs = ['local', 'sandbox', 'dev', 'qa', 'test', 'preprod', 'prod'];
 
   beforeAll(() => {
     originalEnv = { ...process.env };
@@ -32,7 +32,7 @@ describe('Environment environmentConfig', () => {
     });
 
     it('should not call dotenv.config() when NODE_ENV is not set to local', () => {
-      process.env.NODE_ENV = 'production';
+      process.env.NODE_ENV = 'prod';
       jest.mock('dotenv', () => ({
         config: jest.fn(),
       }));
@@ -50,15 +50,16 @@ describe('Environment environmentConfig', () => {
       } = require('../../src/config/environmentConfig');
       expect(environmentConfig).toBeDefined();
       expect(typeof environmentConfig).toBe('object');
-      expect(Object.keys(environmentConfig).length).toBe(6);
+      expect(Object.keys(environmentConfig).length).toBe(7);
     });
 
     it('should validate and export the configuration object', () => {
       const mockConfig = {
         PORT: '5000',
         NODE_ENV: 'qa',
-        APPINSIGHTS_INSTRUMENTATIONKEY: 'abc123',
+        APPLICATIONINSIGHTS_CONNECTION_STRING: 'abc123',
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
+        APPINSIGHTS_SECRET_NAME: 'appinsights--connections string',
         ELASTICSEARCH_API: 'https://elasticsearch-api.com',
       };
       process.env = { ...mockConfig };
@@ -68,7 +69,8 @@ describe('Environment environmentConfig', () => {
         env: Joi.string()
           .valid(...envs)
           .default(envs[0]),
-        appInsightsKey: Joi.string().allow('').default(''),
+        appInsightsConnectionString: Joi.string().allow('').default(''),
+        appInsightsSecretName: Joi.string().allow('').default(''),
         azureKeyVaultURL: Joi.string().allow('').default(''),
         elasticSearchAPI: Joi.string().allow('').default(''),
         isLocal: Joi.boolean().valid(true, false).default(false),

@@ -9,7 +9,7 @@ import { customHapiPino, customHapiRoutes, customHapiViews } from './plugins/ind
 
 // Create the hapi server
 const server: Server = Hapi.server({
-  host: process.env.HOST ?? 'localhost',
+  host: process.env.HOST ?? '0.0.0.0',
   port: environmentConfig.env !== 'test' ? environmentConfig.port : 4000,
   routes: {
     validate: {
@@ -34,7 +34,7 @@ const initializeServer = async (): Promise<Server> => {
 
 const startServer = async (): Promise<Server> => {
   await server.start();
-  console.log(`Server running at: ${server.info.uri}`);
+  console.log(`Server running at: http://localhost:${server.info.port}`);
   return server;
 };
 

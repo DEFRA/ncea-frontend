@@ -9,7 +9,6 @@
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="{{ assetPath }}/css/ol.css">
-  <script src="{{ assetPath }}/scripts/ol.js"></script>
 {% endblock %}
 
 {% block beforeContent %}
@@ -74,5 +73,6 @@
 
 {% block bodyEnd %}
   {{ super() }}
+  <script src="{{ assetPath }}/scripts/ol.js"></script>
   <script type="module" src="{{ assetPath }}/scripts/renderMapToDrawPolygon.js"></script>
 {% endblock %}

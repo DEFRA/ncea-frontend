@@ -4,6 +4,10 @@ import { Request, ResponseToolkit } from '@hapi/hapi';
 import { HomeController } from '../../../src/controllers/web/HomeController';
 import { formIds, webRoutePaths } from '../../../src/utils/constants';
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  info: jest.fn(),
+}));
+
 describe('Deals with Home Controller > renderHomeHandler', () => {
   it('should call the home view with context', async () => {
     const request: Request = {} as any;

@@ -236,6 +236,10 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
