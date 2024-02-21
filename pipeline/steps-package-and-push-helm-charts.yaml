@@ -15,8 +15,8 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceConnection: aksServiceConn-AZR-NCE-SND1
     command: save
-    chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildNumber)$(artifactNameSuffix)'
-    chartPathForACR:  $(chartPath)
+    chartNameForACR: $(ACR.Name).azurecr.io/helm/charts/$(ACR.ContainerRepository):$(Build.BuildNumber)$(artifactNameSuffix)
+    chartPathForACR:  charts/$(chartPath)
     azureResourceGroupForACR: $(ACR.ResourceGroupName)
     azureContainerRegistry: $(ACR.ContainerRepository)
 
