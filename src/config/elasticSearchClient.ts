@@ -31,9 +31,6 @@ elasticSearchClient.interceptors.request.use(
   (config) => {
     // Modify config before sending the request
     // config.headers['Authorization'] = 'Bearer YOUR_ACCESS_TOKEN';
-    if (environmentConfig.isLocal && config?.method?.toUpperCase() === 'POST') {
-      config.method = 'get';
-    }
     return config;
   },
   (error: AxiosError) => Promise.reject(error),

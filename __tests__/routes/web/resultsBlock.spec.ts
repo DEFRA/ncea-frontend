@@ -19,6 +19,10 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
 }));
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  info: jest.fn(),
+}));
+
 let serverRequest;
 
 const invokeRoute = async (route, payload) => {

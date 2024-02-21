@@ -9,6 +9,10 @@ import { Server, ServerInjectResponse } from '@hapi/hapi';
 import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
 
+jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
+  info: jest.fn(),
+}));
+
 describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;

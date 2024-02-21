@@ -34,7 +34,6 @@ describe('Azure Key Vault > Get Secrets', () => {
     const mockGetSecret = jest
       .fn()
       .mockRejectedValue(new Error(mockErrorMessage));
-    const mockSecretClient = { getSecret: mockGetSecret };
     (getKeyVaultClient as jest.Mock).mockReturnValue({
       getSecret: mockGetSecret,
     });
@@ -46,7 +45,7 @@ describe('Azure Key Vault > Get Secrets', () => {
     } catch (error: any) {
       await expect(getSecret(secretKey)).rejects.toThrow(error);
       await expect(getSecret(secretKey)).rejects.toThrow(
-        `Error retrieving secret ${secretKey}: ${mockErrorMessage}`
+        `Error retrieving secret ${secretKey}: ${mockErrorMessage}`,
       );
     }
   });
