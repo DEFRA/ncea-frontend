@@ -67,13 +67,8 @@ const buildCustomSortScriptForStudyPeriod = (): ISortQuery => {
   const customScript: ICustomSortScript = {
     type: 'number',
     script: {
-      source: ` 
-      if (doc['resourceTemporalExtentDateRange.lte'].size() > 0) {
-        return doc['resourceTemporalExtentDateRange.lte'].value.millis;
-      } else {
-        return doc['resourceTemporalExtentDateRange.gte'].value.millis;
-      }
-      `,
+      source:
+        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
     },
     order: 'desc',
   };

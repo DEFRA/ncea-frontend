@@ -18,7 +18,7 @@ jest.mock('@hapi/hapi', () => ({
 }));
 
 jest.mock('../../src/infrastructure/plugins/appinsights-logger', () => ({
-  info: jest.fn()
+  info: jest.fn(),
 }));
 
 describe('Server initialization', () => {
@@ -33,7 +33,7 @@ describe('Server initialization', () => {
       environmentConfig: {
         env: 'development',
         port: 3000,
-        appInsightsConnectionString: 'test'
+        appInsightsConnectionString: 'test',
       },
     }));
 
@@ -66,7 +66,7 @@ describe('Server initialization', () => {
     const server = await startServer();
     expect(server.start).toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
-      `Server running at: ${server.info.uri}`,
+      `Server running at: http://localhost:${server.info.port}`,
     );
     consoleSpy.mockRestore();
   });

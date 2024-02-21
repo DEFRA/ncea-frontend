@@ -8,7 +8,7 @@
     "src"
   ],
   "scripts": {
-    "start:dev": "concurrently \"npm run sass:compile\" \"npm run json-server\" \"cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json\"",
+    "start:dev": "concurrently \"npm run sass:compile\" \"cross-env NODE_ENV=local npx nodemon --config tools/nodemon.json\"",
     "start": "npm run build && node ./build/index.js",
     "build": "rimraf ./build && tsc && npm run copy-files",
     "copy-files": "ts-node copyNonTSFiles.ts",
