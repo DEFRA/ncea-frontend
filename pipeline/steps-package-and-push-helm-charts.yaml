@@ -13,7 +13,7 @@ steps:
   displayName: Helm save
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceConnection: $(AKS.ServiceConnection)
+    kubernetesServiceConnection: aksServiceConn-AZR-NCE-SND1
     command: save
     chartNameForACR: 'charts/$(ACR.ContainerRepository):$(Build.BuildNumber)$(artifactNameSuffix)'
     chartPathForACR:  $(chartPath)
