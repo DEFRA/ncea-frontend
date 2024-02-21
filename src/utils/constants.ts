@@ -1,3 +1,5 @@
+import { IAggregationOptions } from '../interfaces/searchResponse.interface';
+
 export const webRoutePaths = {
   home: '/',
   results: '/search',
@@ -5,6 +7,7 @@ export const webRoutePaths = {
   geographySearch: '/coordinate-search',
   getResults: '/search-results',
   getResultsCount: '/results-count',
+  getFilters: '/search-filters',
 };
 
 export const elasticSearchAPIPaths = {
@@ -23,3 +26,5 @@ export const formIds = {
 };
 
 export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];

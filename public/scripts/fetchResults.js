@@ -6,6 +6,7 @@ import {
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 const resultsBlockId = 'results-block';
+const filterBlockId = 'filter-block';
 
 const checkProperties = (dataObject, seen = new Set()) => {
   Object.keys(dataObject).forEach((key) => {
@@ -31,14 +32,14 @@ const checkProperties = (dataObject, seen = new Set()) => {
 };
 
 const invokeAjaxCall = async (path) => {
-  const { fields, sort } = getStorageData();
+  const { fields, sort, filter } = getStorageData();
   try {
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fields, sort }),
+      body: JSON.stringify({ fields, sort, filter }),
     });
     if (response.ok) {
       return response;
@@ -57,6 +58,22 @@ const invokeSearchResults = () => {
   if (fetchResults) {
     const action = fetchResults.getAttribute('data-action');
     getSearchResults(action);
+  }
+};
+
+const getSearchFilters = async (path) => {
+  const response = await invokeAjaxCall(path);
+  if (response) {
+    const searchFiltersHtml = await response.text();
+    document.getElementById(filterBlockId).innerHTML = searchFiltersHtml;
+  }
+};
+
+const invokeSearchFilters = () => {
+  const fetchFilters = document.querySelector('[data-fetch-filters]');
+  if (fetchFilters) {
+    const action = fetchFilters.getAttribute('data-action');
+    getSearchFilters(action);
   }
 };
 
@@ -149,6 +166,7 @@ const attachClickResultsEvent = (element) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   invokeSearchResults();
+  invokeSearchFilters();
   const fetchResultsCount = document.querySelector('[data-fetch-count]');
   if (fetchResultsCount) {
     attachClickResultsEvent(fetchResultsCount);

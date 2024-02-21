@@ -7,7 +7,7 @@ const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
   sort: 'best_match',
-  filters: {},
+  filter: { resourceType: 'all' },
   pagination: { rowsPerPage: '', totalRecords: '', currentPage: '' },
 });
 const localStorageKey = 'ncea-search-data';

@@ -14,3 +14,10 @@ export interface ISearchResults {
   total: number;
   items: ISearchItem[];
 }
+
+export interface IAggregationOption {
+  value: string;
+  text: string;
+}
+
+export interface IAggregationOptions extends Array<IAggregationOption> {}

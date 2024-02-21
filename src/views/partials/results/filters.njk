@@ -1,0 +1,26 @@
+{% from 'govuk/components/select/macro.njk' import govukSelect %}
+{% from 'govuk/components/button/macro.njk' import govukButton %}
+
+<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2'>
+  Filters
+</h2>
+
+{{ govukSelect({
+  id: 'resourceType',
+  name: 'resourceType',
+  label: {
+    text: 'Resource type',
+    classes: 'filter-options-label'
+  },
+  items: resourceTypeOptions,
+  formGroup: {
+    classes: 'govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3'
+  }
+}) }}
+
+{{ govukButton({
+  text: 'Filter results',
+  classes: 'filter-button govuk-!-margin-bottom-3'
+}) }}
+
+<a href='#' class='govuk-link filter-reset'>Reset filters</a>

@@ -32,6 +32,11 @@ const searchResultsRoutes = [
     path: webRoutePaths.getResultsCount,
     handler: SearchResultsController.getResultsCountHandler,
   },
+  {
+    method: 'POST',
+    path: webRoutePaths.getFilters,
+    handler: SearchResultsController.getSearchFiltersHandler,
+  },
 ];
 
 export { searchResultsRoutes };

@@ -60,9 +60,19 @@ interface ISortQuery {
   [key: string]: ISortOrder | ICustomSortScript;
 }
 
+interface IAggregateQuery {
+  unique_values?: {
+    terms?: {
+      field?: string;
+    };
+  };
+}
+
 interface IQuery {
+  size?: number;
   query: IBoolQuery;
   sort?: ISortQuery[];
+  aggs?: IAggregateQuery;
 }
 
 interface IGeoCoordinates {
@@ -97,9 +107,14 @@ interface ISearchFields {
   };
 }
 
+interface ISearchFilter {
+  [key: string]: string;
+}
+
 interface ISearchPayload {
   fields: ISearchFields;
   sort: string;
+  filter: ISearchFilter;
 }
 
 export {
@@ -115,4 +130,6 @@ export {
   IQueryString,
   ISortQuery,
   ICustomSortScript,
+  IAggregateQuery,
+  ISearchFilter,
 };

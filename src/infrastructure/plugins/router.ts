@@ -8,7 +8,7 @@ import {
   homeRoutes,
   searchResultsRoutes,
   staticRoutes,
-} from '../../../src/routes/index';
+} from '../../routes/index';
 
 const routes = [
   ...errorRoutes,

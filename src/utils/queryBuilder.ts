@@ -1,5 +1,6 @@
 import { generateDateString } from './generateDateString';
 import {
+  IAggregateQuery,
   IBoolQuery,
   ICustomSortScript,
   IGeoShapeQuery,
@@ -23,9 +24,9 @@ const quickSearchQuery = (fields: ISearchFields): IQueryString => {
   return queryString;
 };
 
-const quickSearchQueryWithFields = (fields: ISearchFields, fieldsToSearch: string[] = []): IBoolQuery => {
+const searchQueryWithFields = (searchTerm: string, fieldsToSearch: string[] = []): IBoolQuery => {
   const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
-    match: { [field]: fields['quick-search']?.search_term },
+    match: { [field]: searchTerm },
   })) as IMatchQuery[];
 
   const matchShould: IBoolQuery = {
@@ -67,13 +68,8 @@ const buildCustomSortScriptForStudyPeriod = (): ISortQuery => {
   const customScript: ICustomSortScript = {
     type: 'number',
     script: {
-      source: ` 
-      if (doc['resourceTemporalExtentDateRange.lte'].size() > 0) {
-        return doc['resourceTemporalExtentDateRange.lte'].value.millis;
-      } else {
-        return doc['resourceTemporalExtentDateRange.gte'].value.millis;
-      }
-      `,
+      source:
+        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
     },
     order: 'desc',
   };
@@ -89,8 +85,14 @@ const buildBestScoreSort = (): ISortQuery => ({
   },
 });
 
-const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: string[] = []): IQuery => {
-  const { fields, sort } = searchFieldsObject;
+const buildSearchQuery = (
+  searchFieldsObject: ISearchPayload,
+  fieldsToSearch: string[] = [],
+  isCount: boolean = false,
+  ignoreAggregation: boolean = false,
+  aggregationField: string = '',
+): IQuery => {
+  const { fields, sort, filter: filterOptions } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -102,9 +104,18 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
     boolQuery.bool.must?.push(queryString);
   }
 
-  if (fields['quick-search'] && fieldsToSearch.length) {
-    const matchShould: IBoolQuery = quickSearchQueryWithFields(fields, fieldsToSearch);
+  if (fields['quick-search'] && fields['quick-search']?.search_term && fieldsToSearch.length) {
+    const matchShould: IBoolQuery = searchQueryWithFields(fields['quick-search']?.search_term, fieldsToSearch);
     boolQuery.bool.must?.push(matchShould);
+  }
+
+  if (filterOptions && Object.keys(filterOptions).length && !isCount && ignoreAggregation) {
+    const filteredOptions = Object.values(filterOptions).filter((value) => value !== 'all') ?? {};
+
+    Object.keys(filteredOptions).forEach((key) => {
+      const matchShould: IBoolQuery = searchQueryWithFields(filteredOptions[key] as string, [key]);
+      boolQuery.bool.must?.push(matchShould);
+    });
   }
 
   if (fields['date-search']?.['from-date-year'] && fields['date-search']['to-date-year']) {
@@ -144,16 +155,32 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
   }
 
   const finalQuery: IQuery = {
+    size: 0,
     query: boolQuery,
     sort: [],
+    aggs: {},
   };
 
-  if (sort) {
+  if (sort && !isCount) {
     const sortQuery: ISortQuery =
       sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : buildBestScoreSort();
     finalQuery.sort?.push(sortQuery);
   } else {
     delete finalQuery.sort;
+  }
+
+  if (!ignoreAggregation && !isCount) {
+    const aggregateQuery: IAggregateQuery = {
+      unique_values: {
+        terms: {
+          field: aggregationField,
+        },
+      },
+    };
+    finalQuery.aggs = aggregateQuery;
+  } else {
+    delete finalQuery.size;
+    delete finalQuery.aggs;
   }
 
   return finalQuery;
