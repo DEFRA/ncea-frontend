@@ -31,14 +31,14 @@ const checkProperties = (dataObject, seen = new Set()) => {
 };
 
 const invokeAjaxCall = async (path) => {
-  const { fields, sort } = getStorageData();
+  const { fields, sort, rowsPerPage } = getStorageData();
   try {
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fields, sort }),
+      body: JSON.stringify({ fields, sort, rowsPerPage }),
     });
     if (response.ok) {
       return response;
@@ -87,6 +87,33 @@ const attacheSortChangeListener = () => {
   }
 };
 
+const attachPageResultsChangeListener = () => {
+  const hasPageResultElement = document.getElementById('page-results');
+  if (hasPageResultElement) {
+    hasPageResultElement.addEventListener('change', () => {
+      const selectedPageValue =
+      hasPageResultElement.options[hasPageResultElement.selectedIndex];
+      const sessionData = getStorageData();
+      sessionData.rowsPerPage = selectedPageValue.value;
+      storeStorageData(sessionData);
+      invokeSearchResults();
+    });
+  }
+};
+
+const hydratePageResultsOption = () => {
+  const { rowsPerPage } = getStorageData();
+  const hasPageResultElement = document.getElementById('page-results');
+  if (hasPageResultElement && rowsPerPage) {
+    for (const option of hasPageResultElement.options) {
+      if (option.value === rowsPerPage) {
+        option.selected = true;
+        break;
+      }
+    }
+  }
+};
+
 const getSearchResults = async (path) => {
   document.getElementById(resultsBlockId).innerHTML =
     '<p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>';
@@ -97,6 +124,8 @@ const getSearchResults = async (path) => {
 
     hydrateSortOption();
     attacheSortChangeListener();
+    hydratePageResultsOption();
+    attachPageResultsChangeListener();
   } else {
     document.getElementById(resultsBlockId).innerHTML =
       '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';
@@ -159,4 +188,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-export { hydrateSortOption, invokeSearchResults };
+export { hydrateSortOption, hydratePageResultsOption, invokeSearchResults };
