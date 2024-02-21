@@ -135,5 +135,6 @@ dist
 /reports/test-report.xml
 
 # winston log files
-src/infrastructure/log_files/*_log.*
-src/infrastructure/log_files/*.json
+log_files/*_log.*
+log_files/*.json
+__tests__/infrastructure/log_files/

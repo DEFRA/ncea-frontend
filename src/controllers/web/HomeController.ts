@@ -1,6 +1,7 @@
 'use strict';
 
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
+
 import { formIds, webRoutePaths } from '../../utils/constants';
 
 /**

@@ -26,7 +26,6 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
   <link rel="stylesheet" href="/assets/css/application.css">
 
   <link rel="stylesheet" href="/assets/css/ol.css">
-  <script src="/assets/scripts/ol.js"></script>
 
     
   </head>
@@ -344,9 +343,14 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
     import {initAll} from '/assets/all.js'
     initAll()
   </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
+  <script src="/assets/scripts/ol.js"></script>
   <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
