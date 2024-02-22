@@ -7438,10 +7438,6 @@
  * @example scss - Use with a base unit size
  *  font-size: fds-rem(20px, 10px);
  */
-.make-full-screen {
-  max-width: 97% !important;
-}
-
 .quick_search-container__heading-m {
   font-size: 1.5rem;
   font-style: normal;
