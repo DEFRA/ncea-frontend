@@ -1,6 +1,5 @@
 'use strict';
 
-import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import Joi from 'joi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
 import { Request, ResponseToolkit } from '@hapi/hapi';
@@ -30,6 +29,7 @@ describe('Deals with search results controller', () => {
         quickSearchPath,
         getResultsPath,
         formId,
+        makeFullScreen: true,
       });
     });
 
@@ -59,7 +59,6 @@ describe('Deals with search results controller', () => {
 
     it('should show an error when something fails at API layer', async () => {
       const request: Request = { payload: { fields: {} } } as any;
-      const payload = request.payload as ISearchPayload;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       const error = new Error('Mocked error');
       (getSearchResults as jest.Mock).mockRejectedValue(error);
@@ -119,6 +118,7 @@ describe('Deals with search results controller', () => {
         dateSearchPath,
         getResultsPath,
         searchInputError,
+        makeFullScreen: false,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/home/template',
@@ -163,6 +163,7 @@ describe('Deals with search results controller', () => {
         dateSearchPath,
         getResultsPath,
         searchInputError,
+        makeFullScreen: true,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/results/template',
@@ -205,6 +206,7 @@ describe('Deals with search results controller', () => {
         dateSearchPath,
         getResultsPath,
         searchInputError,
+        makeFullScreen: false,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/home/template',

@@ -17,6 +17,7 @@ const SearchResultsController = {
         quickSearchPath,
         getResultsPath,
         formId,
+        makeFullScreen: true,
       });
     } else {
       return response.redirect(webRoutePaths.home);
@@ -38,6 +39,7 @@ const SearchResultsController = {
       dateSearchPath,
       getResultsPath,
       searchInputError,
+      makeFullScreen: payload?.pageName === 'results',
     };
     const view: string = payload?.pageName === 'home' ? 'screens/home/template' : 'screens/results/template';
     return response.view(view, context).code(400).takeover();
