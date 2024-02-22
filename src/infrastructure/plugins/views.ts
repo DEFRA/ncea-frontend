@@ -36,7 +36,7 @@ const customHapiViews = {
           );
           options.compileOptions.environment.addFilter('date', dateFilter);
           options.compileOptions.environment.addFilter('merge', (obj1, obj2) => {
-            return Object.assign({}, obj1, obj2);
+            return { ...obj1, ...obj2 };
           });
 
           return next();
