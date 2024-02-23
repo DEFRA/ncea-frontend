@@ -37,6 +37,7 @@ describe('Search API', () => {
         },
         sort: '',
         filter: {},
+        rowsPerPage: 20,
       };
       const payload: IQuery = buildSearchQuery(searchFieldsObject);
       await getSearchResults(searchFieldsObject);
@@ -55,6 +56,7 @@ describe('Search API', () => {
         },
         sort: 'best_match',
         filter: {},
+        rowsPerPage: 20,
       };
       const result = await getSearchResults(searchFieldsObject);
       expect(result).toEqual({ total: undefined, items: [] });
@@ -69,6 +71,7 @@ describe('Search API', () => {
         },
         sort: '',
         filter: {},
+        rowsPerPage: 20,
       };
       elasticSearchClient.post = jest
         .fn()
@@ -82,6 +85,7 @@ describe('Search API', () => {
       const result = await getSearchResults({
         fields: {},
         sort: '',
+        rowsPerPage: 20,
         filter: {},
       });
       expect(result).toEqual({ total: 0, items: [] });
@@ -98,6 +102,7 @@ describe('Search API', () => {
         },
         sort: '',
         filter: {},
+        rowsPerPage: 20,
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { totalResults: 10 },
@@ -115,6 +120,7 @@ describe('Search API', () => {
         },
         sort: '',
         filter: {},
+        rowsPerPage: 20,
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { count: 10 },
@@ -127,6 +133,7 @@ describe('Search API', () => {
       const result = await getSearchResultsCount({
         fields: {},
         sort: '',
+        rowsPerPage: 20,
         filter: {},
       });
       expect(result).toEqual({ totalResults: 0 });
@@ -141,6 +148,7 @@ describe('Search API', () => {
         },
         sort: '',
         filter: {},
+        rowsPerPage: 20,
       };
       elasticSearchClient.post = jest
         .fn()

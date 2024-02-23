@@ -115,6 +115,7 @@ interface ISearchPayload {
   fields: ISearchFields;
   sort: string;
   filter: ISearchFilter;
+  rowsPerPage: number;
 }
 
 export {

@@ -92,7 +92,7 @@ const buildSearchQuery = (
   ignoreAggregation: boolean = false,
   aggregationField: string = '',
 ): IQuery => {
-  const { fields, sort, filter: filterOptions } = searchFieldsObject;
+  const { fields, sort, rowsPerPage, filter: filterOptions } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -155,10 +155,10 @@ const buildSearchQuery = (
   }
 
   const finalQuery: IQuery = {
-    size: 0,
     query: boolQuery,
     sort: [],
     aggs: {},
+    size: rowsPerPage,
   };
 
   if (sort && !isCount) {
@@ -178,8 +178,8 @@ const buildSearchQuery = (
       },
     };
     finalQuery.aggs = aggregateQuery;
+    finalQuery.size = 0;
   } else {
-    delete finalQuery.size;
     delete finalQuery.aggs;
   }
 

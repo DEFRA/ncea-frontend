@@ -39,6 +39,40 @@ exports[`Results block template Guided search journey Search results with empty 
   </select>
 </div>
 
+
+      
+
+
+<div class="govuk-form-group option-group">
+  <label class="govuk-label option-label" for="page-results">
+    Results per page
+  </label>
+
+
+  <select class="govuk-select option-items" id="page-results" name="page-results">
+  
+    
+      
+      
+      <option value="20">20</option>
+    
+  
+    
+      
+      
+      <option value="50">50</option>
+    
+  
+    
+      
+      
+      <option value="100">100</option>
+    
+  
+  </select>
+</div>
+
+
     </div>
   </div>
 
@@ -141,6 +175,40 @@ exports[`Results block template Quick search journey Search results with data sh
   
   </select>
 </div>
+
+
+      
+
+
+<div class="govuk-form-group option-group">
+  <label class="govuk-label option-label" for="page-results">
+    Results per page
+  </label>
+
+
+  <select class="govuk-select option-items" id="page-results" name="page-results">
+  
+    
+      
+      
+      <option value="20">20</option>
+    
+  
+    
+      
+      
+      <option value="50">50</option>
+    
+  
+    
+      
+      
+      <option value="100">100</option>
+    
+  
+  </select>
+</div>
+
 
     </div>
   </div>
@@ -329,6 +397,40 @@ exports[`Results block template Quick search journey Search results with empty d
   
   </select>
 </div>
+
+
+      
+
+
+<div class="govuk-form-group option-group">
+  <label class="govuk-label option-label" for="page-results">
+    Results per page
+  </label>
+
+
+  <select class="govuk-select option-items" id="page-results" name="page-results">
+  
+    
+      
+      
+      <option value="20">20</option>
+    
+  
+    
+      
+      
+      <option value="50">50</option>
+    
+  
+    
+      
+      
+      <option value="100">100</option>
+    
+  
+  </select>
+</div>
+
 
     </div>
   </div>
