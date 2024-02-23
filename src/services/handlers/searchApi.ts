@@ -1,7 +1,7 @@
 import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { buildSearchQuery } from '../../utils/queryBuilder';
 import { elasticSearchClient } from '../../config/elasticSearchClient';
-import { formatAggregationResponse } from '@/src/utils/formatAggregationResponse';
+import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 import { IAggregationOptions, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { elasticSearchAPIPaths, resourceTypeOptions } from '../../utils/constants';

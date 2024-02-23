@@ -169,7 +169,7 @@ const buildSearchQuery = (
     delete finalQuery.sort;
   }
 
-  if (!ignoreAggregation && !isCount) {
+  if (!ignoreAggregation && !isCount && aggregationField) {
     const aggregateQuery: IAggregateQuery = {
       unique_values: {
         terms: {

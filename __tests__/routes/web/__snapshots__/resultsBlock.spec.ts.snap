@@ -8,7 +8,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
   <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
+    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
       0 results found 
     </h2>
 
@@ -111,7 +111,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
   <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
+    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
       2 results
     </h2>
 
@@ -299,7 +299,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
 
   <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
+    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
       0 results found 
     </h2>
 

@@ -19,8 +19,11 @@ describe('Deals with search results controller', () => {
       const request: Request = { headers: { referer: 'some_referer' } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
 
-      const { results: quickSearchPath, getResults: getResultsPath } =
-        webRoutePaths;
+      const {
+        results: quickSearchPath,
+        getResults: getResultsPath,
+        getFilters: getFiltersPath,
+      } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       await SearchResultsController.renderSearchResultsHandler(
         request,
@@ -30,6 +33,7 @@ describe('Deals with search results controller', () => {
         quickSearchPath,
         getResultsPath,
         formId,
+        getFiltersPath,
       });
     });
 
@@ -108,6 +112,7 @@ describe('Deals with search results controller', () => {
         results: quickSearchPath,
         guidedDateSearch: dateSearchPath,
         getResults: getResultsPath,
+        getFilters: getFiltersPath,
       } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       const searchInputError = {
@@ -119,6 +124,7 @@ describe('Deals with search results controller', () => {
         dateSearchPath,
         getResultsPath,
         searchInputError,
+        getFiltersPath,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/home/template',
@@ -152,6 +158,7 @@ describe('Deals with search results controller', () => {
         results: quickSearchPath,
         guidedDateSearch: dateSearchPath,
         getResults: getResultsPath,
+        getFilters: getFiltersPath,
       } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       const searchInputError = {
@@ -163,6 +170,7 @@ describe('Deals with search results controller', () => {
         dateSearchPath,
         getResultsPath,
         searchInputError,
+        getFiltersPath,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/results/template',
@@ -196,6 +204,7 @@ describe('Deals with search results controller', () => {
         results: quickSearchPath,
         guidedDateSearch: dateSearchPath,
         getResults: getResultsPath,
+        getFilters: getFiltersPath,
       } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       const searchInputError = undefined;
@@ -205,6 +214,7 @@ describe('Deals with search results controller', () => {
         dateSearchPath,
         getResultsPath,
         searchInputError,
+        getFiltersPath,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/home/template',
