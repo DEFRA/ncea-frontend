@@ -40,7 +40,6 @@ steps:
         env.port=$(port)
         env.nodeEnv=$(nodeEnv)
         env.keyVaultUri=$(keyVaultUri)
-        env.appInsightsSecretName=$(appInsightsSecretName)
         env.elasticSearchApi=$(elasticSearchApi)
         ingress.hosts.host=$(hostName)
     install: true
