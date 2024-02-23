@@ -67,3 +67,23 @@
     overflow: hidden;
   }
 }
+
+.data-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 30px;
+
+  &__heading-l {
+    @include font-style-stack(36px, 40px);
+    color: govuk-colour("white");
+  }
+
+  &__body-l {
+    @include font-style-stack(19px, 24px, 300);
+    color: govuk-colour("white");
+  }
+
+  &__button-group {
+    justify-content: center;
+  }
+}

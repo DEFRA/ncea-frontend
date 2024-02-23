@@ -43,3 +43,8 @@
   {% endif %}
 
 {% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
+{% endblock %}

@@ -7,6 +7,7 @@ export interface ISearchItem {
     startDate: string;
     endDate: string;
   };
+  resourceLocator: string;
 }
 
 export interface ISearchResults {
