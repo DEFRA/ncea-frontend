@@ -2,26 +2,15 @@ steps:
 
 - task: HelmDeploy@0
   displayName: Helm package
-  condition: and(succeeded(), eq(variables.isPullRequest, false))
+  condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
   inputs:
     command: package
     chartPath: $(chartPath)
     chartVersion: $(Build.BuildNumber)
     destination: $(Build.ArtifactStagingDirectory)
 
-- task: HelmDeploy@0
-  displayName: Helm save
+- task: PublishPipelineArtifact@1
+  condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
   inputs:
-    connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceConnection: aksServiceConn-AZR-NCE-SND1
-    command: save
-    chartNameForACR: $(ACR.Name).azurecr.io/helm/$(ACR.ContainerRepository):$(Build.BuildNumber)
-    chartPathForACR:  $(chartPath)
-    # azureResourceGroupForACR: $(ACR.ResourceGroupName)
-    # azureContainerRegistry: $(ACR.ContainerRepository)
-
-# - task: AzureCLI@1
-#   inputs:
-#     azureSubscription: aksServiceConn-AZR-NCE-SND1
-#     scriptLocation: inlineScript
-#     inlineScript: az acr helm push -n $(ACR.Name) $(Build.ArtifactStagingDirectory)/$(ACR.ContainerRepository)-$(Build.BuildNumber)$(artifactNameSuffix).tgz
+    targetPath: $(Build.ArtifactStagingDirectory)/ncea-fe-$(Build.BuildNumber).tgz
+    artifactName: charts

@@ -2,18 +2,18 @@ steps:
 
 - task: Docker@2
   displayName: 'Docker Build'
-  condition: and(succeeded(), eq(variables.isPullRequest, false))
+  condition: succeeded()
   inputs:
     command: build
-    containerRegistry: $(ACR.ServiceConnection)
-    repository: $(ACR.ContainerRepository)
-    tags: '$(Build.BuildNumber)$(artifactNameSuffix)'
+    containerRegistry: $(acrContainerRegistryServiceConnection)
+    repository: $(acrContainerRepositoryHarvester)
+    tags: '$(imageTag)'
 
 - task: Docker@2
   displayName: 'Docker Push'
-  condition: and(succeeded(), eq(variables.isPullRequest, false))
+  condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
   inputs:
     command: push
-    containerRegistry: $(ACR.ServiceConnection)
-    repository: $(ACR.ContainerRepository)
-    tags: '$(Build.BuildNumber)$(artifactNameSuffix)'
+    containerRegistry: $(acrContainerRegistryServiceConnection)
+    repository: $(acrContainerRepositoryHarvester)
+    tags: '$(imageTag)'

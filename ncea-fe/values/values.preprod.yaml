@@ -1,0 +1,70 @@
+replicaCount: 1
+
+image:
+  repository: 
+  pullPolicy: IfNotPresent
+  tag: 
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "ncea-search-frontend"
+
+serviceAccount:  
+  create: false 
+  automount: false  
+  annotations: {}  
+  name: 
+
+podAnnotations: {}
+podLabels: 
+  azure.workload.identity/use: "true"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: "webapprouting.kubernetes.azure.com"
+  annotations: {}
+  hosts:
+    - host: 
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  - name: PORT
+    value: 
+  - name: NODE_ENV
+    value: dev
+  - name: APPINSIGHTS_SECRET_NAME
+    value: ApplicationInsights--ConnectionString
+  - name: AZURE_KEYVAULT_URL
+    value: 
+  - name: ELASTICSEARCH_API
+    value: 

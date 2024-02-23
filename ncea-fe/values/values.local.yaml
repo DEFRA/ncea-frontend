@@ -1,0 +1,70 @@
+replicaCount: 1
+
+image:
+  repository: nceapocsbox.azurecr.io/defra/ncea-fe
+  pullPolicy: IfNotPresent
+  tag: "20240220.30_feature-298132-integerate-azure-appinsights"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "ncea-search-frontend"
+
+serviceAccount:  
+  create: false 
+  automount: false  
+  annotations: {}  
+  name: "serviceaccount-nceafrontend-sbox"
+
+podAnnotations: {}
+podLabels: 
+  azure.workload.identity/use: "true"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: "webapprouting.kubernetes.azure.com"
+  annotations: {}
+  hosts:
+    - host: nceasearchsnd.azure-adventures.co.uk
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+- name: PORT
+  value: 80
+- name: NODE_ENV
+  value: sandbox
+- name: APPINSIGHTS_SECRET_NAME
+  value: ApplicationInsights--ConnectionString
+- name: AZURE_KEYVAULT_URL
+  value: https://nceapocsbox.vault.azure.net/
+- name: ELASTICSEARCH_API
+  value: http://elasticsearch.azure-adventures.co.uk/
