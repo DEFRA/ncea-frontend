@@ -8,9 +8,8 @@ const defaultSessionData = JSON.stringify({
   fields: {},
   sort: 'best_match',
   filters: {},
-  rowsPerPage : 20,
+  rowsPerPage : 2,
   page : 1,
-  //pagination: { rowsPerPage: 20, totalRecords: '', currentPage: '' },
 });
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;

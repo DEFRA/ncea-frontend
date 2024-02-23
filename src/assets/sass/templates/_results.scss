@@ -79,3 +79,15 @@
     width: 80px;
   }
 }
+.govuk-pagination__item--current{
+  background-color: #00703C;
+}
+.govuk-link:link {
+  color: #00703C;
+}
+.govuk-link:visited{
+  color: #00703C;
+}
+.govuk-pagination__item--current:hover {
+  background-color: #00703C;
+}

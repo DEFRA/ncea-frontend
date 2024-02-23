@@ -31,14 +31,14 @@ const checkProperties = (dataObject, seen = new Set()) => {
 };
 
 const invokeAjaxCall = async (path) => {
-  const { fields, sort, rowsPerPage } = getStorageData();
+  const { fields, sort, rowsPerPage, page } = getStorageData();
   try {
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fields, sort, rowsPerPage }),
+      body: JSON.stringify({ fields, sort, rowsPerPage, page }),
     });
     if (response.ok) {
       return response;
@@ -87,6 +87,17 @@ const attacheSortChangeListener = () => {
   }
 };
 
+const storePageNumber = () => {
+  const hasPageIntheUrl = document.location.search.includes('page');
+  if(hasPageIntheUrl) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageNumber = urlParams.get('page');
+    const sessionData = getStorageData();
+    sessionData.page = parseInt(pageNumber);
+    storeStorageData(sessionData);
+  }
+}
+
 const attachPageResultsChangeListener = () => {
   const hasPageResultElement = document.getElementById('page-results');
   if (hasPageResultElement) {
@@ -126,6 +137,7 @@ const getSearchResults = async (path) => {
     attacheSortChangeListener();
     hydratePageResultsOption();
     attachPageResultsChangeListener();
+    storePageNumber();
   } else {
     document.getElementById(resultsBlockId).innerHTML =
       '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';

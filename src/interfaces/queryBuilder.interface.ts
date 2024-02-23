@@ -102,6 +102,7 @@ interface ISearchPayload {
   fields: ISearchFields;
   sort: string;
   rowsPerPage: number;
+  page: number;
 }
 
 export {
