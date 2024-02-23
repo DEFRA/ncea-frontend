@@ -8,6 +8,7 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: "ncea-search-frontend"
+hostName:
 
 serviceAccount:  
   create: false 

@@ -41,7 +41,7 @@ steps:
         env.nodeEnv=$(nodeEnv)
         env.keyVaultUri=$(keyVaultUri)
         env.elasticSearchApi=$(elasticSearchApi)
-        ingress.hosts.host=$(hostName)
+        hostName=$(hostName)
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
