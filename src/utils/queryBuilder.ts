@@ -24,7 +24,10 @@ const quickSearchQuery = (fields: ISearchFields): IQueryString => {
   return queryString;
 };
 
-const searchQueryWithFields = (searchTerm: string, fieldsToSearch: string[] = []): IBoolQuery => {
+const searchQueryWithFields = (
+  searchTerm: string,
+  fieldsToSearch: string[] = [],
+): IBoolQuery => {
   const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
     match: { [field]: searchTerm },
   })) as IMatchQuery[];
@@ -40,15 +43,39 @@ const searchQueryWithFields = (searchTerm: string, fieldsToSearch: string[] = []
 
 const dateQuery = (fields: ISearchFields): IRangeQuery => {
   const startDate: string = generateDateString({
-    year: parseInt(fields['date-search'] ? (fields['date-search']['from-date-year'] as string) : ''),
-    month: parseInt(fields['date-search'] ? (fields['date-search']['from-date-month'] as string) : ''),
-    day: parseInt(fields['date-search'] ? (fields['date-search']['from-date-day'] as string) : ''),
+    year: parseInt(
+      fields['date-search']
+        ? (fields['date-search']['from-date-year'] as string)
+        : '',
+    ),
+    month: parseInt(
+      fields['date-search']
+        ? (fields['date-search']['from-date-month'] as string)
+        : '',
+    ),
+    day: parseInt(
+      fields['date-search']
+        ? (fields['date-search']['from-date-day'] as string)
+        : '',
+    ),
   });
   const endDate: string = generateDateString(
     {
-      year: parseInt(fields['date-search'] ? (fields['date-search']['to-date-year'] as string) : ''),
-      month: parseInt(fields['date-search'] ? (fields['date-search']['to-date-month'] as string) : ''),
-      day: parseInt(fields['date-search'] ? (fields['date-search']['to-date-day'] as string) : ''),
+      year: parseInt(
+        fields['date-search']
+          ? (fields['date-search']['to-date-year'] as string)
+          : '',
+      ),
+      month: parseInt(
+        fields['date-search']
+          ? (fields['date-search']['to-date-month'] as string)
+          : '',
+      ),
+      day: parseInt(
+        fields['date-search']
+          ? (fields['date-search']['to-date-day'] as string)
+          : '',
+      ),
     },
     true,
   );
@@ -85,6 +112,34 @@ const buildBestScoreSort = (): ISortQuery => ({
   },
 });
 
+const buildGeoShapeQuery = (north, south, east, west, depth) => {
+  const geoShape: IShapeCoordinates = {
+    type: 'envelope',
+    coordinates: [
+      [parseFloat(west), parseFloat(north)],
+      [parseFloat(east), parseFloat(south)],
+    ],
+  };
+
+  const geoShapeQuery: IGeoShapeQuery = {
+    geo_shape: {
+      geom: {
+        shape: geoShape,
+        relation: 'intersects',
+        ignore_unmapped: true,
+      },
+    },
+  };
+
+  if (depth && geoShapeQuery.geo_shape.geom) {
+    geoShapeQuery.geo_shape.geom.depth = {
+      from: 0,
+      to: parseInt(depth),
+    };
+  }
+  return geoShapeQuery;
+};
+
 const buildSearchQuery = (
   searchFieldsObject: ISearchPayload,
   fieldsToSearch: string[] = [],
@@ -92,7 +147,12 @@ const buildSearchQuery = (
   ignoreAggregation: boolean = false,
   aggregationField: string = '',
 ): IQuery => {
-  const { fields, sort, rowsPerPage, filter: filterOptions } = searchFieldsObject;
+  const {
+    fields,
+    sort,
+    rowsPerPage,
+    filter: filterOptions,
+  } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -104,52 +164,55 @@ const buildSearchQuery = (
     boolQuery.bool.must?.push(queryString);
   }
 
-  if (fields['quick-search'] && fields['quick-search']?.search_term && fieldsToSearch.length) {
-    const matchShould: IBoolQuery = searchQueryWithFields(fields['quick-search']?.search_term, fieldsToSearch);
+  if (fields['quick-search'] && fieldsToSearch.length) {
+    const matchShould: IBoolQuery = searchQueryWithFields(
+      fields['quick-search']?.search_term!,
+      fieldsToSearch,
+    );
     boolQuery.bool.must?.push(matchShould);
   }
 
-  if (filterOptions && Object.keys(filterOptions).length && !isCount && ignoreAggregation) {
-    const filteredOptions = Object.values(filterOptions).filter((value) => value !== 'all') ?? {};
+  if (
+    filterOptions &&
+    Object.keys(filterOptions).length &&
+    !isCount &&
+    ignoreAggregation
+  ) {
+    const filteredOptions =
+      Object.values(filterOptions).filter((value) => value !== 'all') ?? {};
 
     Object.keys(filteredOptions).forEach((key) => {
-      const matchShould: IBoolQuery = searchQueryWithFields(filteredOptions[key] as string, [key]);
+      const matchShould: IBoolQuery = searchQueryWithFields(
+        filteredOptions[key] as string,
+        [key],
+      );
       boolQuery.bool.must?.push(matchShould);
     });
   }
 
-  if (fields['date-search']?.['from-date-year'] && fields['date-search']['to-date-year']) {
+  if (
+    fields['date-search']?.['from-date-year'] &&
+    fields['date-search']['to-date-year']
+  ) {
     const rangeQuery: IRangeQuery = dateQuery(fields);
     boolQuery.bool.must?.push(rangeQuery);
   }
 
   const geoCoordinates = fields['coordinate-search'];
 
-  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
-    const geoShape: IShapeCoordinates = {
-      type: 'envelope',
-      coordinates: [
-        [parseFloat(geoCoordinates.west), parseFloat(geoCoordinates.north)],
-        [parseFloat(geoCoordinates.east), parseFloat(geoCoordinates.south)],
-      ],
-    };
-
-    const geoShapeQuery: IGeoShapeQuery = {
-      geo_shape: {
-        geom: {
-          shape: geoShape,
-          relation: 'intersects',
-          ignore_unmapped: true,
-        },
-      },
-    };
-
-    if (geoCoordinates.depth && geoShapeQuery.geo_shape.geom) {
-      geoShapeQuery.geo_shape.geom.depth = {
-        from: 0,
-        to: parseInt(geoCoordinates.depth),
-      };
-    }
+  if (
+    geoCoordinates?.north &&
+    geoCoordinates?.south &&
+    geoCoordinates?.east &&
+    geoCoordinates?.west
+  ) {
+    const geoShapeQuery = buildGeoShapeQuery(
+      geoCoordinates?.north,
+      geoCoordinates?.south,
+      geoCoordinates?.east,
+      geoCoordinates?.west,
+      geoCoordinates.depth,
+    );
 
     boolQuery.bool.must?.push(geoShapeQuery);
   }
@@ -163,7 +226,9 @@ const buildSearchQuery = (
 
   if (sort && !isCount) {
     const sortQuery: ISortQuery =
-      sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : buildBestScoreSort();
+      sort === 'recent_study'
+        ? buildCustomSortScriptForStudyPeriod()
+        : buildBestScoreSort();
     finalQuery.sort?.push(sortQuery);
   } else {
     delete finalQuery.sort;
