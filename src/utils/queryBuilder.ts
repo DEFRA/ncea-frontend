@@ -85,7 +85,7 @@ const buildBestScoreSort = (): ISortQuery => ({
 });
 
 const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: string[] = []): IQuery => {
-  const { fields, sort } = searchFieldsObject;
+  const { fields, sort, rowsPerPage } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -141,6 +141,7 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
   const finalQuery: IQuery = {
     query: boolQuery,
     sort: [],
+    size: rowsPerPage,
   };
 
   if (sort) {

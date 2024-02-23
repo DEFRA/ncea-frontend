@@ -63,6 +63,7 @@ interface ISortQuery {
 interface IQuery {
   query: IBoolQuery;
   sort?: ISortQuery[];
+  size: number;
 }
 
 interface IGeoCoordinates {
@@ -100,6 +101,7 @@ interface ISearchFields {
 interface ISearchPayload {
   fields: ISearchFields;
   sort: string;
+  rowsPerPage: number;
 }
 
 export {

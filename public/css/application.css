@@ -7823,7 +7823,7 @@
 
 .option-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.8fr 1.4fr;
   gap: 10px;
 }
 .option-group {
@@ -7843,4 +7843,12 @@
   font-weight: 300;
   line-height: 25px;
   display: inline-block;
+}
+.option-items {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  min-width: auto;
+  width: 80px;
 }
