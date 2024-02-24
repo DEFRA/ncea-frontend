@@ -64,6 +64,7 @@ interface IQuery {
   query: IBoolQuery;
   sort?: ISortQuery[];
   size: number;
+  from: number;
 }
 
 interface IGeoCoordinates {

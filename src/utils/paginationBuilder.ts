@@ -37,13 +37,18 @@ const generatePaginationNumbers = (currentPage, totalPages, maxPagesDisplayed) =
 export const getPaginationItems = (currentPage: number, totalItems: number, itemsPerPage: number) => {
   const maxPagesDisplayed = 5;
   const paginationItems = {};
+  if (totalItems === 0) {
+    return paginationItems;
+  }
   const totalPaginationPages = Math.ceil(totalItems / itemsPerPage);
   const paginationNumbers = generatePaginationNumbers(currentPage, totalPaginationPages, maxPagesDisplayed);
-
   // Previous page button
   if (currentPage > 1) {
     paginationItems['previous'] = {
-      href: `?page=${currentPage - 1}`,
+      href: 'javascript:void()',
+      attributes: {
+        'data-page-id': `${currentPage - 1}`,
+      },
     };
   }
 
@@ -58,12 +63,18 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
         paginationItems['items'].push({
           number: page,
           current: true,
-          href: '#',
+          href: 'javascript:void()',
+          attributes: {
+            'data-page-id': page,
+          },
         });
       } else {
         paginationItems['items'].push({
           number: page,
-          href: `?page=${page}`,
+          href: 'javascript:void()',
+          attributes: {
+            'data-page-id': page,
+          },
         });
       }
     }
@@ -72,7 +83,10 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
   // Next page button
   if (currentPage < totalPaginationPages) {
     paginationItems['next'] = {
-      href: `?page=${currentPage + 1}`,
+      href: 'javascript:void()',
+      attributes: {
+        'data-page-id': `${currentPage + 1}`,
+      },
     };
   }
 

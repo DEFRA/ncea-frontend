@@ -7,6 +7,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
 
+
   <div class='govuk-section-break--visible'>
     <h2 class='govuk-heading-m results-stats'>
       0 results found 
@@ -125,6 +126,7 @@ exports[`Results block template Guided search journey Search results with error 
 
 
 
+
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
 
 
@@ -139,6 +141,7 @@ exports[`Results block template Guided search journey Search results with error 
 
 exports[`Results block template Quick search journey Search results with data should match the results screen snapshot 1`] = `
 "
+
 
 
 
@@ -319,6 +322,14 @@ exports[`Results block template Quick search journey Search results with data sh
     
   </div>
 
+<nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item govuk-pagination__item--current">
+            <a class="govuk-link govuk-pagination__link" href="javascript:void()" aria-label="Page 1" aria-current="page" data-page-id="1">
+              1
+            </a>
+          </li></ul></nav>
+
+
+
 
 
 
@@ -361,6 +372,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 exports[`Results block template Quick search journey Search results with empty data should match the results screen snapshot 1`] = `
 "
+
 
 
 
@@ -456,6 +468,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
 exports[`Results block template Quick search journey Search results with error should match the results screen snapshot 1`] = `
 "
+
 
 
 

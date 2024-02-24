@@ -1,5 +1,6 @@
 'use strict';
 
+import { getPaginationItems } from '../../../src/utils/paginationBuilder';
 import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import Joi from 'joi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
@@ -54,6 +55,7 @@ describe('Deals with search results controller', () => {
         hasError: false,
         isQuickSearchJourney: false,
         searchResults: undefined,
+        paginationItems: {}
       });
     });
 

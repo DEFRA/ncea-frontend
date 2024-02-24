@@ -3,10 +3,9 @@
 import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { ISearchResults } from '../../interfaces/searchResponse.interface';
 import Joi from 'joi';
-import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-
-import { formIds, webRoutePaths } from '../../utils/constants';
 import { getPaginationItems } from '../../utils/paginationBuilder';
+import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
+import { formIds, webRoutePaths } from '../../utils/constants';
 import { getSearchResults, getSearchResultsCount } from '../../services/handlers/searchApi';
 
 const SearchResultsController = {
@@ -50,7 +49,7 @@ const SearchResultsController = {
     const isQuickSearchJourney = Object.prototype.hasOwnProperty.call(fields, 'quick-search');
     try {
       const searchResults: ISearchResults = await getSearchResults(payload);
-      const paginationItems = getPaginationItems(page, searchResults.total, rowsPerPage);
+      const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage);
       return response.view('partials/results/template', {
         searchResults,
         hasError: false,

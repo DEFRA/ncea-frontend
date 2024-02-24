@@ -34,7 +34,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -77,7 +78,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -109,7 +111,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -156,7 +159,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -177,7 +181,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -197,7 +202,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -218,7 +224,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -234,7 +241,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -256,7 +264,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -274,7 +283,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -295,7 +305,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -324,7 +335,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -344,7 +356,8 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -369,7 +382,8 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -379,7 +393,7 @@ describe('Build the search query', () => {
     });
 
     it('should handle missing search fields', () => {
-      const searchFieldsObject = { fields: {}, sort: '', rowsPerPage: 20 };
+      const searchFieldsObject = { fields: {}, sort: '', rowsPerPage: 20, page: 1 };
 
       const expectedQuery = {
         query: {
@@ -387,7 +401,8 @@ describe('Build the search query', () => {
             must: [],
           },
         },
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -421,7 +436,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -471,7 +487,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -503,7 +520,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -557,7 +575,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -578,7 +597,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -605,7 +625,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -626,7 +647,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -649,7 +671,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -671,7 +694,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -696,7 +720,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -717,7 +742,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -753,7 +779,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -773,7 +800,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -805,7 +833,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -839,7 +868,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -883,7 +913,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -915,7 +946,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -963,7 +995,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -984,7 +1017,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -1005,7 +1039,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -1026,7 +1061,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -1043,7 +1079,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -1065,7 +1102,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -1084,7 +1122,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1105,7 +1144,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -1135,7 +1175,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1155,7 +1196,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        rowsPerPage: 20
+        rowsPerPage: 20,
+        page: 1
       };
 
       const expectedQuery: IQuery = {
@@ -1181,7 +1223,8 @@ describe('Build the search query', () => {
           },
         },
         sort: [recentStudySortScript],
-        size: 20
+        size: 20,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1215,7 +1258,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 50
+        rowsPerPage: 50,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -1265,7 +1309,8 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 50
+        size: 50,
+        from: 0
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1297,7 +1342,8 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        rowsPerPage: 100
+        rowsPerPage: 100,
+        page : 1
       };
 
       const expectedQuery: IQuery = {
@@ -1351,7 +1397,185 @@ describe('Build the search query', () => {
             },
           },
         ],
-        size: 100
+        size: 100,
+        from: 0
+      };
+
+      const result = buildSearchQuery(searchFieldsObject, [
+        'field1',
+        'field2',
+        'field3',
+      ]);
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(3);
+    });
+  });
+  describe('Search query with pagination', () => {
+    it('should build the search query correctly with pagination for page 1', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+          'date-search': {
+            'from-date-year': '2022',
+            'from-date-day': '01',
+            'from-date-month': '01',
+            'to-date-year': '2022',
+            'to-date-day': '31',
+            'to-date-month': '12',
+          },
+          'coordinate-search': {
+            north: '123',
+            south: '345',
+            east: '678',
+            west: '901',
+            depth: '1',
+          },
+        },
+        sort: 'best_match',
+        rowsPerPage: 20,
+        page : 1
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                range: {
+                  resourceTemporalExtentDateRange: {
+                    gte: '2022-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    depth: {
+                      from: 0,
+                      to: 1,
+                    },
+                    relation: 'intersects',
+                    ignore_unmapped: true,
+                  },
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 0
+      };
+
+      const result = buildSearchQuery(searchFieldsObject);
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(3);
+    });
+
+    it('should build the search query correctly with pagination for page 5', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+          'date-search': {
+            'from-date-year': '2022',
+            'from-date-day': '01',
+            'from-date-month': '01',
+            'to-date-year': '2022',
+            'to-date-day': '31',
+            'to-date-month': '12',
+          },
+          'coordinate-search': {
+            north: '123',
+            south: '345',
+            east: '678',
+            west: '901',
+            depth: '1',
+          },
+        },
+        sort: 'best_match',
+        rowsPerPage: 20,
+        page : 5
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                bool: {
+                  should: [
+                    { match: { field1: 'example' } },
+                    { match: { field2: 'example' } },
+                    { match: { field3: 'example' } },
+                  ],
+                  minimum_should_match: 1,
+                },
+              },
+              {
+                range: {
+                  resourceTemporalExtentDateRange: {
+                    gte: '2022-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    depth: {
+                      from: 0,
+                      to: 1,
+                    },
+                    relation: 'intersects',
+                    ignore_unmapped: true,
+                  },
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 80
       };
 
       const result = buildSearchQuery(searchFieldsObject, [

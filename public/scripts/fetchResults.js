@@ -87,17 +87,6 @@ const attacheSortChangeListener = () => {
   }
 };
 
-const storePageNumber = () => {
-  const hasPageIntheUrl = document.location.search.includes('page');
-  if(hasPageIntheUrl) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageNumber = urlParams.get('page');
-    const sessionData = getStorageData();
-    sessionData.page = parseInt(pageNumber);
-    storeStorageData(sessionData);
-  }
-}
-
 const attachPageResultsChangeListener = () => {
   const hasPageResultElement = document.getElementById('page-results');
   if (hasPageResultElement) {
@@ -137,7 +126,7 @@ const getSearchResults = async (path) => {
     attacheSortChangeListener();
     hydratePageResultsOption();
     attachPageResultsChangeListener();
-    storePageNumber();
+    attachClickPaginationEvent();
   } else {
     document.getElementById(resultsBlockId).innerHTML =
       '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';
@@ -199,5 +188,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+const attachClickPaginationEvent = () => {
+  const pageLinks = document.getElementsByClassName('govuk-link govuk-pagination__link');
+  console.log({pageLinks});
+  for(let i=0; i< pageLinks.length; i++){
+    pageLinks[i].addEventListener('click', () => {
+      const pageNumber = pageLinks[i].getAttribute('data-page-id');
+      console.log({pageNumber});
+      if (pageNumber) {
+        const sessionData = getStorageData();
+        sessionData.page = parseInt(pageNumber);
+        storeStorageData(sessionData);
+        invokeSearchResults();
+      }
+    });
+  }
+}
 
 export { hydrateSortOption, hydratePageResultsOption, invokeSearchResults };
