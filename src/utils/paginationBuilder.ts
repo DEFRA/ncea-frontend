@@ -45,7 +45,7 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
   // Previous page button
   if (currentPage > 1) {
     paginationItems['previous'] = {
-      href: 'javascript:void()',
+      href: '#!',
       attributes: {
         'data-page-id': `${currentPage - 1}`,
       },
@@ -58,32 +58,30 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
       paginationItems['items'].push({
         ellipsis: true,
       });
+    } else if (page === currentPage) {
+      paginationItems['items'].push({
+        number: page,
+        current: true,
+        href: '#!',
+        attributes: {
+          'data-page-id': page,
+        },
+      });
     } else {
-      if (page === currentPage) {
-        paginationItems['items'].push({
-          number: page,
-          current: true,
-          href: 'javascript:void()',
-          attributes: {
-            'data-page-id': page,
-          },
-        });
-      } else {
-        paginationItems['items'].push({
-          number: page,
-          href: 'javascript:void()',
-          attributes: {
-            'data-page-id': page,
-          },
-        });
-      }
+      paginationItems['items'].push({
+        number: page,
+        href: '#!',
+        attributes: {
+          'data-page-id': page,
+        },
+      });
     }
   });
 
   // Next page button
   if (currentPage < totalPaginationPages) {
     paginationItems['next'] = {
-      href: 'javascript:void()',
+      href: '#!',
       attributes: {
         'data-page-id': `${currentPage + 1}`,
       },

@@ -68,14 +68,11 @@ interface IQuery {
 }
 
 interface IGeoCoordinates {
-  north: number;
-  south: number;
-  east: number;
-  west: number;
-  depth?: {
-    from: number;
-    to: number;
-  };
+  north: string;
+  south: string;
+  east: string;
+  west: string;
+  depth?: string;
 }
 
 interface ISearchFields {

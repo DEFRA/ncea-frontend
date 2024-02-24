@@ -14,35 +14,35 @@ describe('Build the pagination items', () => {
                   "data-page-id": 1,
                 },
                 "current": true,
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 1,
               },
               {
                 "attributes": {
                   "data-page-id": 2,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 2,
               },
               {
                 "attributes": {
                   "data-page-id": 3,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 3,
               },
               {
                 "attributes": {
                   "data-page-id": 4,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 4,
               },
               {
                 "attributes": {
                   "data-page-id": 5,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 5,
               },
             ],
@@ -50,7 +50,7 @@ describe('Build the pagination items', () => {
               "attributes": {
                 "data-page-id": "2",
               },
-              "href": "javascript:void()",
+              "href": "#!",
             },
           }
         expect(result).toEqual(paginationItems);
@@ -63,28 +63,28 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 1,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 1,
               },
               {
                 "attributes": {
                   "data-page-id": 2,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 2,
               },
               {
                 "attributes": {
                   "data-page-id": 3,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 3,
               },
               {
                 "attributes": {
                   "data-page-id": 4,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 4,
               },
               {
@@ -92,7 +92,7 @@ describe('Build the pagination items', () => {
                   "data-page-id": 5,
                 },
                 "current": true,
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 5,
               },
             ],
@@ -100,7 +100,7 @@ describe('Build the pagination items', () => {
               "attributes": {
                 "data-page-id": "4",
               },
-              "href": "javascript:void()",
+              "href": "#!",
             },
           }
         expect(result).toEqual(paginationItems);
@@ -113,7 +113,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 1,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 1,
               },
               {
@@ -123,7 +123,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 6,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 6,
               },
               {
@@ -131,14 +131,14 @@ describe('Build the pagination items', () => {
                   "data-page-id": 7,
                 },
                 "current": true,
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 7,
               },
               {
                 "attributes": {
                   "data-page-id": 8,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 8,
               },
               {
@@ -148,7 +148,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 10,
                 },
-                "href": "javascript:void()",
+                "href": "#!",
                 "number": 10,
               },
             ],
@@ -156,13 +156,13 @@ describe('Build the pagination items', () => {
               "attributes": {
                 "data-page-id": "8",
               },
-              "href": "javascript:void()",
+              "href": "#!",
             },
             "previous": {
               "attributes": {
                 "data-page-id": "6",
               },
-              "href": "javascript:void()",
+              "href": "#!",
             },
           }
         expect(result).toEqual(paginationItems);
