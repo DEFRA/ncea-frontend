@@ -37,6 +37,7 @@ steps:
         image.repository=$(containerRepositoryFullPath)
         image.tag=$(imageTag)
         serviceAccount.name=$(serviceAccountHarvester)
+        env.PORT=$(port)
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
