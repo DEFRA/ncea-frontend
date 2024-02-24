@@ -38,6 +38,10 @@ steps:
         image.tag=$(imageTag)
         serviceAccount.name=$(serviceAccountHarvester)
         env.PORT=$(port)
+        env.NODE_ENV=$(nodeEnv)
+        env.AZURE_KEYVAULT_URL=$(keyVaultUri)
+        env.ELASTICSEARCH_API=$(elasticSearchApi)
+        hostName=$(hostName)
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
