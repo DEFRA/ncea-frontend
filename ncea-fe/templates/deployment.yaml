@@ -54,11 +54,18 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.env }}
+          {{- end }}          
           env:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+          - name: PORT
+            value: "{{ .Values.env.PORT }}"
+          - name: NODE_ENV
+            value: "{{ .Values.env.NODE_ENV }}"
+          - name: APPINSIGHTS_SECRET_NAME
+            value: "{{ .Values.env.APPINSIGHTS_SECRET_NAME }}"
+          - name: AZURE_KEYVAULT_URL
+            value: "{{ .Values.env.AZURE_KEYVAULT_URL }}"
+          - name: ELASTICSEARCH_API
+            value: "{{ .Values.env.ELASTICSEARCH_API }}"
 
       {{- with .Values.volumes }}
       volumes:
