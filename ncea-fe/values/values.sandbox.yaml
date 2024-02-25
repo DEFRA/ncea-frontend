@@ -58,6 +58,7 @@ tolerations: []
 affinity: {}
 
 env:
+  HOST:
   PORT:
   NODE_ENV:
   APPINSIGHTS_SECRET_NAME: ApplicationInsights--ConnectionString
