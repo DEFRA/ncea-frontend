@@ -7,7 +7,7 @@ image:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: "ncea-search-application"
+fullnameOverride: ""
 
 serviceAccount:  
   create: false 

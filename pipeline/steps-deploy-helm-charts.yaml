@@ -36,7 +36,7 @@ steps:
     overrideValues: |
         image.repository=$(containerRepositoryFullPath)
         image.tag=$(imageTag)
-        serviceAccount.name=$(serviceAccountHarvester)
+        serviceAccount.name=$(serviceAccountSearchWebApp)
         env.PORT=$(port)
         env.NODE_ENV=$(nodeEnv)
         env.APPINSIGHTS_SECRET_NAME=$(appinsightsSecretName)
