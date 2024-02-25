@@ -1,72 +1,14 @@
 {% from 'govuk/components/button/macro.njk' import govukButton %}
-{% from 'govuk/components/select/macro.njk' import govukSelect %}
 
-{% if hasError %}
-  <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
-{% endif %}
+<div class='govuk-section-break--visible'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
+    {{searchResults.total}} results
+  </h2>
 
-{% if not hasError %}
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
-      {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
-    </h2>
+  {% include 'partials/results/options.njk' %}
+</div>
 
-    <div class="option-container">
-      {{ govukSelect({
-        id: "sort",
-        name: "sort",
-        label: {
-          text: "Sort by",
-          classes: "option-label"
-        },
-        classes: "option-block",
-        formGroup: {
-          classes: "option-group"
-        },
-        items: [
-          {
-            value: "best_match",
-            text: "Best match"
-          },
-          {
-            value: "recent_study",
-            text: "Most recent study"
-          }
-        ]
-      }) }}
-
-      {{ govukSelect({
-        id: "page-results",
-        name: "page-results",
-        label: {
-          text: "Results per page",
-          classes: "option-label"
-        },
-        classes: "option-items",
-        formGroup: {
-          classes: "option-group"
-        },
-        items: [
-          {
-            value: "20",
-            text: "20"
-          },
-          {
-            value: "50",
-            text: "50"
-          },
-          {
-            value: "100",
-            text: "100"
-          }
-        ]
-      }) }}
-
-    </div>
-  </div>
-{% endif %}
-
-{% if not hasError and searchResults.total %}
+{% if searchResults.total %}
   <div class='search-result__items'>
     {% for item in searchResults.items %}
       <div class='govuk-section-break--visible search-result__item'>
@@ -115,30 +57,6 @@
         </div>
       </div>
     {% endfor %}
-  </div>
-{% endif %}
-
-{% if not searchResults.total and not hasError %}
-  <div class='search-result__item'>
-    <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-    <p class='search-result__content search-result__content--empty'>
-      {% if isQuickSearchJourney %}
-        Search with different keywords.
-      {% else %}
-        Choose different answers to see results.
-      {% endif %}
-
-      {% if not isQuickSearchJourney %}
-        <div class="govuk-button-group">
-          {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary", attributes: {
-            onclick: 'history.back()'
-          } }) }}
-          {{ govukButton({ text: "Restart questionnaire search", classes: "govuk-button--secondary", href: dateSearchPath, attributes: {
-            'data-do-storage-reset': ''
-          } }) }}
-        </div>
-      {% endif %}
-    </p>
   </div>
 {% endif %}
 

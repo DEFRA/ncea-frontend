@@ -1,156 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Results block template Guided search journey Search results with empty data should match the results screen snapshot 1`] = `
-"
+exports[`Results block template Guided search journey Search results with empty data should match the results screen snapshot 1`] = `""`;
 
-
-
-
-
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
-      0 results found 
-    </h2>
-
-    <div class="option-container">
-      
-
-
-<div class="govuk-form-group option-group">
-  <label class="govuk-label option-label" for="sort">
-    Sort by
-  </label>
-
-
-  <select class="govuk-select option-block" id="sort" name="sort">
-  
-    
-      
-      
-      <option value="best_match">Best match</option>
-    
-  
-    
-      
-      
-      <option value="recent_study">Most recent study</option>
-    
-  
-  </select>
-</div>
-
-
-      
-
-
-<div class="govuk-form-group option-group">
-  <label class="govuk-label option-label" for="page-results">
-    Results per page
-  </label>
-
-
-  <select class="govuk-select option-items" id="page-results" name="page-results">
-  
-    
-      
-      
-      <option value="20">20</option>
-    
-  
-    
-      
-      
-      <option value="50">50</option>
-    
-  
-    
-      
-      
-      <option value="100">100</option>
-    
-  
-  </select>
-</div>
-
-
-    </div>
-  </div>
-
-
-
-
-
-  <div class='search-result__item'>
-    <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-    <p class='search-result__content search-result__content--empty'>
-      
-        Choose different answers to see results.
-      
-
-      
-        <div class="govuk-button-group">
-          
-  
-
-  
-    
-  
-
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" onclick="history.back()">
-  Previous question
-</button>
-
-          
-  
-
-  
-    
-  
-
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
-  Restart questionnaire search
-</a>
-
-        </div>
-      
-    </p>
-  </div>
-
-
-"
-`;
-
-exports[`Results block template Guided search journey Search results with error should match the results screen snapshot 1`] = `
-"
-
-
-
-  <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
-
-
-
-
-
-
-
-
-"
-`;
+exports[`Results block template Guided search journey Search results with error should match the results screen snapshot 1`] = `""`;
 
 exports[`Results block template Quick search journey Search results with data should match the results screen snapshot 1`] = `
 "
 
+<div class='govuk-section-break--visible'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
+    2 results
+  </h2>
 
+  
 
-
-
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
-      2 results
-    </h2>
-
-    <div class="option-container">
-      
+<div class="option-container">
+  
 
 
 <div class="govuk-form-group option-group">
@@ -177,7 +42,7 @@ exports[`Results block template Quick search journey Search results with data sh
 </div>
 
 
-      
+  
 
 
 <div class="govuk-form-group option-group">
@@ -209,10 +74,8 @@ exports[`Results block template Quick search journey Search results with data sh
   </select>
 </div>
 
-
-    </div>
-  </div>
-
+</div>
+</div>
 
 
   <div class='search-result__items'>
@@ -320,9 +183,6 @@ exports[`Results block template Quick search journey Search results with data sh
   </div>
 
 
-
-
-<div id="overlay" class="overlay"></div>
 <div id="modal" class="modal">
   <div class="modal-content">
     
@@ -359,114 +219,6 @@ exports[`Results block template Quick search journey Search results with data sh
 </div>"
 `;
 
-exports[`Results block template Quick search journey Search results with empty data should match the results screen snapshot 1`] = `
-"
+exports[`Results block template Quick search journey Search results with empty data should match the results screen snapshot 1`] = `""`;
 
-
-
-
-
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-4'>
-      0 results found 
-    </h2>
-
-    <div class="option-container">
-      
-
-
-<div class="govuk-form-group option-group">
-  <label class="govuk-label option-label" for="sort">
-    Sort by
-  </label>
-
-
-  <select class="govuk-select option-block" id="sort" name="sort">
-  
-    
-      
-      
-      <option value="best_match">Best match</option>
-    
-  
-    
-      
-      
-      <option value="recent_study">Most recent study</option>
-    
-  
-  </select>
-</div>
-
-
-      
-
-
-<div class="govuk-form-group option-group">
-  <label class="govuk-label option-label" for="page-results">
-    Results per page
-  </label>
-
-
-  <select class="govuk-select option-items" id="page-results" name="page-results">
-  
-    
-      
-      
-      <option value="20">20</option>
-    
-  
-    
-      
-      
-      <option value="50">50</option>
-    
-  
-    
-      
-      
-      <option value="100">100</option>
-    
-  
-  </select>
-</div>
-
-
-    </div>
-  </div>
-
-
-
-
-
-  <div class='search-result__item'>
-    <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-    <p class='search-result__content search-result__content--empty'>
-      
-        Search with different keywords.
-      
-
-      
-    </p>
-  </div>
-
-
-"
-`;
-
-exports[`Results block template Quick search journey Search results with error should match the results screen snapshot 1`] = `
-"
-
-
-
-  <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
-
-
-
-
-
-
-
-
-"
-`;
+exports[`Results block template Quick search journey Search results with error should match the results screen snapshot 1`] = `""`;

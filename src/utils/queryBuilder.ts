@@ -149,7 +149,7 @@ const buildSearchQuery = (
   ignoreAggregation: boolean = false,
   aggregationField: string = '',
 ): IQuery => {
-  const { fields, sort, rowsPerPage, filter: filterOptions } = searchFieldsObject;
+  const { fields, sort, rowsPerPage, filters: filterOptions } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -168,10 +168,10 @@ const buildSearchQuery = (
   }
 
   if (filterOptions && Object.keys(filterOptions).length && !isCount && ignoreAggregation) {
-    const filteredOptions = Object.values(filterOptions).filter((value) => value !== 'all') ?? {};
+    const filteredOptions = Object.keys(filterOptions).filter((key) => filterOptions[key] !== 'all') ?? [];
 
-    Object.keys(filteredOptions).forEach((key) => {
-      const matchShould: IBoolQuery = searchQueryWithFields(filteredOptions[key] as string, [key]);
+    filteredOptions.forEach((key) => {
+      const matchShould: IBoolQuery = searchQueryWithFields(filterOptions[key] as string, [key]);
       boolQuery.bool.must?.push(matchShould);
     });
   }
@@ -205,6 +205,10 @@ const buildSearchQuery = (
   finalQuery = buildSortQuery(finalQuery, sort, isCount);
 
   finalQuery = buildAggregationQuery(finalQuery, ignoreAggregation, isCount, aggregationField);
+
+  if (isCount) {
+    delete finalQuery.size;
+  }
 
   return finalQuery;
 };

@@ -325,6 +325,7 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     

@@ -1,4 +1,4 @@
-{% extends "layout/template.njk" %}
+{% extends "layout/default.njk" %}
 
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
@@ -10,7 +10,7 @@
     items: [
       {
         text: "Home",
-        href: homePageUrl,
+        href: routes.homePage,
         attributes: {
           'data-do-storage-reset': ''
         }

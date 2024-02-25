@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Results Screen Sanpshot verification & status code should match the results screen snapshot 1`] = `
+exports[`Empty results template Validate error results page should match the error screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
@@ -126,10 +126,10 @@ exports[`Results Screen Sanpshot verification & status code should match the res
 
   
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third"  id="filter-block" data-action="/search-filters" data-fetch-filters >&nbsp;</div>
+      <div class="govuk-grid-column-one-third" >&nbsp;</div>
       
-  <div class="govuk-grid-column-two-thirds" id="results-block" data-action="/search-results" data-fetch-results>
-    <p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
   </div>
 
     </div>

@@ -6,6 +6,14 @@ import { customHapiViews } from '../../../src/infrastructure/plugins/views';
 
 jest.mock('nunjucks');
 
+const {
+  home: homePage,
+  results: searchResults,
+  guidedDateSearch: guidedSearch,
+  getFilters,
+  getResults,
+} = webRoutePaths;
+
 describe('Vision Plugin Configuration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -43,7 +51,13 @@ describe('Vision Plugin Configuration', () => {
       assetPath: '/assets',
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
-      homePageUrl: webRoutePaths.home,
+      routes: {
+        homePage,
+        searchResults,
+        guidedSearch,
+        getFilters,
+        getResults,
+      },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,
     });

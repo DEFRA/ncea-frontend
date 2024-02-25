@@ -7823,7 +7823,7 @@
 
 .option-container {
   display: grid;
-  grid-template-columns: 0.8fr 1.4fr;
+  grid-template-columns: 0.9fr 1.4fr;
   gap: 10px;
 }
 .option-group {
@@ -7842,6 +7842,7 @@
   font-style: normal;
   font-weight: 300;
   line-height: 25px;
+  margin-right: 10px;
   display: inline-block;
 }
 .option-items {
@@ -7851,4 +7852,58 @@
   line-height: 25px;
   min-width: auto;
   width: 80px;
+}
+
+#results-block {
+  margin-top: 50px;
+}
+
+.data-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 30px;
+}
+.data-container__heading-l {
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  color: #ffffff;
+}
+.data-container__body-l {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
+  color: #ffffff;
+}
+.data-container__button-group {
+  justify-content: center;
+}
+
+.filter-heading {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+}
+.filter-options-label {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+}
+.filter-button {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  display: block;
+}
+.filter-reset {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  color: #008938 !important;
 }

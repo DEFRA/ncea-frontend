@@ -337,6 +337,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     

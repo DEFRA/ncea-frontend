@@ -333,6 +333,7 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     

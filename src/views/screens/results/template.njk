@@ -1,48 +1,7 @@
-{% extends "layout/template.njk" %}
+{% extends "layout/results.njk" %}
 
-{% from "partials/quick_search/macro.njk" import quickSearch %}
-{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
-{% from "govuk/components/button/macro.njk" import govukButton %}
-
-{% block beforeContent %}
-  {{ super() }}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: homePageUrl,
-        attributes: {
-          'data-do-storage-reset': ''
-        }
-      },
-      {
-        text: "Search results",
-        href: "#"
-      }
-    ]
-  }) }}
-{% endblock %}
-{% block content %}
-
-  {{ quickSearch({
-    isResultPage: true,
-    quickSearchPath: quickSearchPath,
-    formId: formId,
-    searchInputError : searchInputError
-  }) }}
-
-  {%if searchInputError === undefined %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third" id="filter-block" data-action="{{getFiltersPath}}" data-fetch-filters></div>
-      <div class="govuk-grid-column-two-thirds" id="results-block" data-action="{{getResultsPath}}" data-fetch-results>
-        <p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>
-      </div>
-    </div>
-  {% endif %}
-
-{% endblock %}
-
-{% block bodyEnd %}
-  {{ super() }}
-  <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
+{% block resultsBlock %}
+  <div class="govuk-grid-column-two-thirds" id="results-block" data-action="{{routes.getResults}}" data-fetch-results>
+    <p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>
+  </div>
 {% endblock %}

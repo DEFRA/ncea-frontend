@@ -10,26 +10,17 @@ import { getResourceTypeOptions, getSearchResults, getSearchResultsCount } from 
 
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { results: quickSearchPath, getResults: getResultsPath, getFilters: getFiltersPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     if (request?.headers?.referer) {
       return response.view('screens/results/template', {
-        quickSearchPath,
-        getResultsPath,
         formId,
-        getFiltersPath,
+        hasError: false,
       });
     } else {
       return response.redirect(webRoutePaths.home);
     }
   },
   quickSearchFailActionHandler: (request, response, error) => {
-    const {
-      results,
-      guidedDateSearch: dateSearchPath,
-      getResults: getResultsPath,
-      getFilters: getFiltersPath,
-    } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     const searchError: string | undefined = error?.details?.[0]?.message ?? undefined;
     const payload = request.payload as Record<string, string>;
@@ -39,41 +30,50 @@ const SearchResultsController = {
         }
       : (undefined as unknown as Joi.ValidationError);
     const context = {
-      quickSearchPath: results,
       formId,
-      dateSearchPath,
-      getResultsPath,
       searchInputError,
-      getFiltersPath,
+      hasError: false,
     };
     const view: string = payload?.pageName === 'home' ? 'screens/home/template' : 'screens/results/template';
     return response.view(view, context).code(400).takeover();
   },
   getSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { guidedDateSearch: dateSearchPath } = webRoutePaths;
     const payload: ISearchPayload = request.payload as ISearchPayload;
     const { fields } = payload;
     const isQuickSearchJourney = Object.prototype.hasOwnProperty.call(fields, 'quick-search');
     try {
       const searchResults: ISearchResults = await getSearchResults(payload);
-      return response.view('partials/results/template', {
-        searchResults,
-        hasError: false,
-        isQuickSearchJourney,
-        dateSearchPath,
-      });
+      if (searchResults.total > 0) {
+        return response.view('partials/results/summary', {
+          searchResults,
+          hasError: false,
+          isQuickSearchJourney,
+        });
+      } else {
+        return response.redirect(
+          isQuickSearchJourney ? webRoutePaths.emptyQuickSearch : webRoutePaths.emptyGuidedSearch,
+        );
+      }
     } catch (error) {
-      return response.view('partials/results/template', {
-        error,
-        hasError: true,
-        isQuickSearchJourney,
-      });
+      return response.redirect(webRoutePaths.searchError);
     }
   },
   getResultsCountHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload: ISearchPayload = request.payload as ISearchPayload;
-    const searchResultsCount: { totalResults: number } = await getSearchResultsCount(payload);
-    return response.response(searchResultsCount);
+    const { fields } = payload;
+    const isQuickSearchJourney = Object.prototype.hasOwnProperty.call(fields, 'quick-search');
+    try {
+      const searchResultsCount: { totalResults: number } = await getSearchResultsCount(payload);
+      if (searchResultsCount.totalResults > 0) {
+        return response.response(searchResultsCount);
+      } else {
+        return response.redirect(
+          isQuickSearchJourney ? webRoutePaths.emptyQuickSearch : webRoutePaths.emptyGuidedSearch,
+        );
+      }
+    } catch (error) {
+      return response.redirect(webRoutePaths.searchError);
+    }
   },
   getSearchFiltersHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload: ISearchPayload = request.payload as ISearchPayload;
@@ -87,6 +87,32 @@ const SearchResultsController = {
         error,
         resourceTypeOptions,
       });
+    }
+  },
+  getNoResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    if (request?.headers?.referer) {
+      const requestUrl: string = request.url.pathname;
+      const isQuickSearchJourney = requestUrl === webRoutePaths.emptyQuickSearch;
+
+      const formId: string = formIds.quickSearch;
+      return response.view('screens/results/no_results', {
+        isQuickSearchJourney,
+        formId,
+        hasError: false,
+      });
+    } else {
+      return response.redirect(webRoutePaths.home);
+    }
+  },
+  getSearchErrorHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    if (request?.headers?.referer) {
+      const formId: string = formIds.quickSearch;
+      return response.view('screens/results/error', {
+        formId,
+        hasError: true,
+      });
+    } else {
+      return response.redirect(webRoutePaths.home);
     }
   },
 };

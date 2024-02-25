@@ -5,6 +5,14 @@ import path from 'path';
 import vision from '@hapi/vision';
 import { webRoutePaths } from '../../utils/constants';
 
+const {
+  home: homePage,
+  results: searchResults,
+  guidedDateSearch: guidedSearch,
+  getResults,
+  getFilters,
+} = webRoutePaths;
+
 const customHapiViews = {
   plugin: vision,
   options: {
@@ -50,7 +58,13 @@ const customHapiViews = {
       assetPath: '/assets',
       serviceName: 'Natural Capital Search Service',
       pageTitle: 'Natural Capital Search Service - GOV.UK',
-      homePageUrl: webRoutePaths.home,
+      routes: {
+        homePage,
+        searchResults,
+        guidedSearch,
+        getFilters,
+        getResults,
+      },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
     },
   },

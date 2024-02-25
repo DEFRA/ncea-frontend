@@ -1,4 +1,4 @@
-{% extends "layout/template.njk" %}
+{% extends "layout/default.njk" %}
 
 {% from "partials/quick_search/macro.njk" import quickSearch %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -12,7 +12,7 @@
   </header>
 
   {{ quickSearch({
-    quickSearchPath: quickSearchPath,
+    searchPath: routes.searchResults,
     formId: formId,
     isResultPage: false,
     searchInputError : searchInputError
@@ -35,7 +35,7 @@
     name: 'guided-search',
     text: "Start",
     isStartButton: true,
-    href: dateSearchPath,
+    href: routes.guidedSearch,
     attributes: {
       'data-do-quick-search': false
     }

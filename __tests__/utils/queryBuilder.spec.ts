@@ -34,7 +34,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -110,7 +110,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -180,7 +180,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -223,7 +223,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -262,7 +262,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -302,7 +302,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -352,7 +352,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -392,7 +392,7 @@ describe('Build the search query', () => {
         fields: {},
         sort: '',
         rowsPerPage: 20,
-        filter: {},
+        filters: {},
       };
 
       const expectedQuery = {
@@ -435,7 +435,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -518,7 +518,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -595,7 +595,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -645,7 +645,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -691,7 +691,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -738,7 +738,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -795,7 +795,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -862,7 +862,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -939,7 +939,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -1010,7 +1010,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -1054,7 +1054,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -1094,7 +1094,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -1135,7 +1135,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -1186,7 +1186,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
-        filter: {},
+        filters: {},
         rowsPerPage: 20,
       };
 
@@ -1247,7 +1247,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 50,
       };
 
@@ -1330,7 +1330,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filter: {},
+        filters: {},
         rowsPerPage: 100,
       };
 

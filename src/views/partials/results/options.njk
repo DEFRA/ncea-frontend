@@ -1,0 +1,53 @@
+{% from 'govuk/components/select/macro.njk' import govukSelect %}
+
+<div class="option-container">
+  {{ govukSelect({
+        id: "sort",
+        name: "sort",
+        label: {
+          text: "Sort by",
+          classes: "option-label"
+        },
+        classes: "option-block",
+        formGroup: {
+          classes: "option-group"
+        },
+        items: [
+          {
+            value: "best_match",
+            text: "Best match"
+          },
+          {
+            value: "recent_study",
+            text: "Most recent study"
+          }
+        ]
+      }) }}
+
+  {{ govukSelect({
+        id: "page-results",
+        name: "page-results",
+        label: {
+          text: "Results per page",
+          classes: "option-label"
+        },
+        classes: "option-items",
+        formGroup: {
+          classes: "option-group"
+        },
+        items: [
+          {
+            value: "20",
+            text: "20"
+          },
+          {
+            value: "50",
+            text: "50"
+          },
+          {
+            value: "100",
+            text: "100"
+          }
+        ]
+      }) }}
+</div>

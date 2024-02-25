@@ -1,8 +1,4 @@
-import {
-  getStorageData,
-  resetStorage,
-  storeStorageData,
-} from './customScripts.js';
+import { getStorageData, storeStorageData } from './customScripts.js';
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 const resultsBlockId = 'results-block';
@@ -31,23 +27,35 @@ const checkProperties = (dataObject, seen = new Set()) => {
   return dataObject;
 };
 
-const invokeAjaxCall = async (path) => {
-  const { fields, sort, rowsPerPage, filter } = getStorageData();
+const toggleOverlay = (showOverlay) => {
+  const overlayContainer = document.getElementById('overlay');
+  if (showOverlay && overlayContainer) {
+    overlayContainer.classList.toggle('active');
+  }
+};
+
+const invokeAjaxCall = async (path, showOverlay = false) => {
+  const { fields, sort, rowsPerPage, filters } = getStorageData();
+  toggleOverlay(showOverlay);
   try {
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fields, sort, rowsPerPage, filter }),
+      body: JSON.stringify({ fields, sort, rowsPerPage, filters }),
     });
-    if (response.ok) {
+    if (response.ok && !response.redirected) {
+      toggleOverlay(showOverlay);
       return response;
+    } else if (response.ok && response.redirected) {
+      window.location.href = response.url;
     } else {
       console.error(`Failed to fetch the results: ${response.status}`);
       return null;
     }
   } catch (error) {
+    toggleOverlay(showOverlay);
     console.error(`Error fetching results: ${error.message}`);
     return null;
   }
@@ -61,11 +69,53 @@ const invokeSearchResults = () => {
   }
 };
 
+const hydrateFilterOption = () => {
+  const { filters } = getStorageData();
+  const hasResourceType = document.getElementById('resourceType');
+  if (hasResourceType && filters?.resourceType) {
+    for (const option of hasResourceType.options) {
+      if (option.value === filters.resourceType) {
+        option.selected = true;
+        break;
+      }
+    }
+  }
+};
+
+const attachFilterListener = (isReset = false) => {
+  const filterElements = document.querySelectorAll('.filterOptions');
+  filterElements.forEach((filterElement) => {
+    const selectedValue =
+      filterElement.options[isReset ? 0 : filterElement.selectedIndex];
+    const sessionData = getStorageData();
+    sessionData.filters = {
+      ...sessionData.filters,
+      [filterElement.getAttribute('id')]: selectedValue.value,
+    };
+    storeStorageData(sessionData);
+    hydrateFilterOption();
+    invokeSearchResults();
+  });
+};
+
 const getSearchFilters = async (path) => {
   const response = await invokeAjaxCall(path);
   if (response) {
     const searchFiltersHtml = await response.text();
     document.getElementById(filterBlockId).innerHTML = searchFiltersHtml;
+
+    hydrateFilterOption();
+    const filterButton = document.getElementById('filter_results');
+    if (filterButton) {
+      filterButton.addEventListener('click', () => attachFilterListener(false));
+    }
+
+    const resetFilterElement = document.getElementById('reset_filter');
+    if (resetFilterElement) {
+      resetFilterElement.addEventListener('click', () =>
+        attachFilterListener(true),
+      );
+    }
   }
 };
 
@@ -149,21 +199,13 @@ const getSearchResults = async (path) => {
   }
 };
 
-const adjustPadding = () => {
-  document.querySelector('.count-block').style.paddingBottom = 0;
-};
-
 const getResultsCount = async (path, element) => {
-  const response = await invokeAjaxCall(path);
+  const response = await invokeAjaxCall(path, true);
   if (response) {
     const searchResultsCount = await response.json();
     if (searchResultsCount && searchResultsCount['totalResults'] !== 0) {
       element.innerHTML = `Click to see ${searchResultsCount['totalResults']} results`;
-    } else {
-      adjustPadding();
     }
-  } else {
-    adjustPadding();
   }
 };
 

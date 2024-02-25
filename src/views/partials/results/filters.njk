@@ -15,12 +15,14 @@
   items: resourceTypeOptions,
   formGroup: {
     classes: 'govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3'
-  }
+  },
+  classes: 'filterOptions'
 }) }}
 
 {{ govukButton({
   text: 'Filter results',
+  id: 'filter_results',
   classes: 'filter-button govuk-!-margin-bottom-3'
 }) }}
 
-<a href='#' class='govuk-link filter-reset'>Reset filters</a>
+<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a>
