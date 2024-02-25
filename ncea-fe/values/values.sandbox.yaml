@@ -32,7 +32,7 @@ ingress:
   className: "webapprouting.kubernetes.azure.com"
   annotations: {}
   hosts:
-    - host: 
+    - host: nceasearchsnd.azure-adventures.co.uk
       paths:
         - path: /
           pathType: ImplementationSpecific
