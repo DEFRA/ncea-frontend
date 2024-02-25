@@ -24,7 +24,7 @@ const quickSearchQuery = (fields: ISearchFields): IQueryString => {
   return queryString;
 };
 
-const searchQueryWithFields = (searchTerm: string, fieldsToSearch: string[] = []): IBoolQuery => {
+const searchQueryWithFields = (searchTerm: string, fieldsToSearch: string[]): IBoolQuery => {
   const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
     match: { [field]: searchTerm },
   })) as IMatchQuery[];

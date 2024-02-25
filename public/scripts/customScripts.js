@@ -214,6 +214,11 @@ window.addEventListener('storage', (event) => {
   }
 });
 
+window.addEventListener('popstate', () => {
+  console.log('Browser Navigation');
+  location.reload();
+});
+
 export {
   hydrateFormFromStorage,
   updateSubmitButtonState,
