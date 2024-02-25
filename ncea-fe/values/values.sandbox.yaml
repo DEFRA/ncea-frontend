@@ -32,7 +32,7 @@ ingress:
   className: "webapprouting.kubernetes.azure.com"
   annotations: {}
   hosts:
-    - host: nceasearchsnd.azure-adventures.co.uk
+    - host: 
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -58,7 +58,6 @@ tolerations: []
 affinity: {}
 
 env:
-  HOST:
   PORT:
   NODE_ENV:
   APPINSIGHTS_SECRET_NAME: ApplicationInsights--ConnectionString
