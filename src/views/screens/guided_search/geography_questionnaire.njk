@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-  {{resultsCount({action: resultsCountPath, formId: formId, resultsPath: resultsPath})}}
+  {{resultsCount({action: routes.getResultsCount, formId: formId, resultsPath: routes.searchResults})}}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
