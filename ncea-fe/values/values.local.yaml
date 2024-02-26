@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: nceapocsbox.azurecr.io/defra/ncea-fe
   pullPolicy: IfNotPresent
-  tag: "20240225.13_feature-308801-create-deployment-pipeline"
+  tag: "20240221.3_feature-298132-integerate-azure-appinsights"
 
 imagePullSecrets: []
 nameOverride: ""
