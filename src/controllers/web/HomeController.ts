@@ -11,7 +11,6 @@ import { formIds, webRoutePaths } from '../../utils/constants';
  *
  * The renderHomeHandler method is responsible for rendering the home template by calling the view method on the response object.
  * The view method takes the name of the template as an argument and returns a ResponseObject.
- *
  */
 
 const HomeController = {
