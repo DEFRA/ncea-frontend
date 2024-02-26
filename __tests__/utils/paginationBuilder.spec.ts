@@ -22,6 +22,7 @@ describe('Build the pagination items', () => {
                   "data-page-id": 2,
                 },
                 "href": "#!",
+                "current": false,
                 "number": 2,
               },
               {
@@ -29,6 +30,7 @@ describe('Build the pagination items', () => {
                   "data-page-id": 3,
                 },
                 "href": "#!",
+                "current": false,
                 "number": 3,
               },
               {
@@ -36,12 +38,14 @@ describe('Build the pagination items', () => {
                   "data-page-id": 4,
                 },
                 "href": "#!",
+                "current": false,
                 "number": 4,
               },
               {
                 "attributes": {
                   "data-page-id": 5,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 5,
               },
@@ -63,6 +67,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 1,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 1,
               },
@@ -70,6 +75,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 2,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 2,
               },
@@ -77,6 +83,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 3,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 3,
               },
@@ -84,6 +91,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 4,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 4,
               },
@@ -113,6 +121,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 1,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 1,
               },
@@ -123,6 +132,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 6,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 6,
               },
@@ -138,6 +148,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 8,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 8,
               },
@@ -148,6 +159,7 @@ describe('Build the pagination items', () => {
                 "attributes": {
                   "data-page-id": 10,
                 },
+                "current": false,
                 "href": "#!",
                 "number": 10,
               },

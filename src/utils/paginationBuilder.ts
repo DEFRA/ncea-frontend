@@ -52,29 +52,16 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
     };
   }
 
-  paginationItems['items'] = [];
-  paginationNumbers.forEach((page) => {
+  paginationItems['items'] = paginationNumbers.map((page) => {
     if (page === '...') {
-      paginationItems['items'].push({
-        ellipsis: true,
-      });
-    } else if (page === currentPage) {
-      paginationItems['items'].push({
-        number: page,
-        current: true,
-        href: '#!',
-        attributes: {
-          'data-page-id': page,
-        },
-      });
+      return { ellipsis: true };
     } else {
-      paginationItems['items'].push({
+      return {
         number: page,
+        current: page === currentPage,
         href: '#!',
-        attributes: {
-          'data-page-id': page,
-        },
-      });
+        attributes: { 'data-page-id': page },
+      };
     }
   });
 
