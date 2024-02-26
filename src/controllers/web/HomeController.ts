@@ -4,8 +4,6 @@ import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { formIds, webRoutePaths } from '../../utils/constants';
 
-import logger from '../../infrastructure/plugins/appinsights-logger';
-
 /**
  * This code snippet exports a module named HomeController.
  * The renderHomeHandler method is an asynchronous function that takes a Request object and a ResponseToolkit object as parameters.
@@ -19,7 +17,6 @@ const HomeController = {
   renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     const { results: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
-    logger.info('inside home controller');
     return response.view('screens/home/template', {
       quickSearchPath,
       formId,

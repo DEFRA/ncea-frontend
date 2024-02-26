@@ -220,6 +220,26 @@ ELASTICSEARCH_API=
 APPINSIGHTS_SECRET_NAME=
 ```
 
+***Pipeline Variables***
+Variable Groups
+- pipelineVariables
+    - *acrConatinerRegistry*
+    - *acrContainerRepositoryHarvester*
+    - *acrName*
+    - *sonarCloudOrganization*
+    - *sonarProjectKeySearchWebApp*
+    - *sonarProjectNameSerachWebApp*
+- azureVariables-[dev/test/sandbox/...]
+    - *aksNamespace*
+    - *blobStorageUri*
+    - *keyVaultUri*
+    - *serviceBusHostName*
+- *harvesterServiceVariables-[dev/test/sandbox/...]*
+    - *containerRepostitoryFullPath*
+    - *jnccSchedule*
+    - *medinSchedule*
+    - *serviceAccountHarvester
+
 ## TODO
 
 - [ ] Make sure to update the readme.md file if it is outdated or contains new information
