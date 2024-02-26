@@ -28,12 +28,13 @@ const initializeServer = async (): Promise<Server> => {
   await server.register([customHapiViews, customHapiRoutes, customHapiPino]);
 
   await server.initialize();
+
   return server;
 };
 
 const startServer = async (): Promise<Server> => {
   await server.start();
-  console.log(`Server running at: ${server.info.uri}`);
+  console.log(`Server running at: http://localhost:${server.info.port}`);
   return server;
 };
 

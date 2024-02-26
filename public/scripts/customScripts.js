@@ -1,9 +1,16 @@
 'use strict';
 
+import { hydrateSortOption, invokeSearchResults } from './fetchResults.js';
+
 // Initialize form object
 const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
+  sort: 'best_match',
+  filters: {},
+  rowsPerPage : 20,
+  page : 1,
+  //pagination: { rowsPerPage: 20, totalRecords: '', currentPage: '' },
 });
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;
@@ -96,13 +103,6 @@ const attachEventListeners = (form) => {
       updateSubmitButtonState(form);
     });
   });
-};
-
-// To update storage with new count data
-const updateCountData = (formId, count) => {
-  const sessionData = getStorageData();
-  sessionData.count[formId] = count;
-  storeStorageData(sessionData);
 };
 
 const resetStorage = () => {
@@ -207,6 +207,11 @@ window.addEventListener('storage', (event) => {
         updateSubmitButtonState(form);
       }
     });
+
+    if (updatedData.sort) {
+      hydrateSortOption();
+      invokeSearchResults();
+    }
   }
 });
 

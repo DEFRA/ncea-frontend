@@ -47,8 +47,23 @@ interface IBoolQuery {
   };
 }
 
+interface ISortOrder {
+  order: string;
+}
+interface ICustomSortScript extends ISortOrder {
+  type: string;
+  script: {
+    source: string;
+  };
+}
+interface ISortQuery {
+  [key: string]: ISortOrder | ICustomSortScript;
+}
+
 interface IQuery {
   query: IBoolQuery;
+  sort?: ISortQuery[];
+  size: number;
 }
 
 interface IGeoCoordinates {
@@ -85,6 +100,8 @@ interface ISearchFields {
 
 interface ISearchPayload {
   fields: ISearchFields;
+  sort: string;
+  rowsPerPage: number;
 }
 
 export {
@@ -92,10 +109,12 @@ export {
   IBoolQuery,
   IRangeQuery,
   IQuery,
+  ISearchPayload,
   ISearchFields,
   IShapeCoordinates,
   IGeoShapeQuery,
   IGeoCoordinates,
   IQueryString,
-  ISearchPayload,
+  ISortQuery,
+  ICustomSortScript,
 };

@@ -1,6 +1,7 @@
 import { generateDateString } from './generateDateString';
 import {
   IBoolQuery,
+  ICustomSortScript,
   IGeoShapeQuery,
   IMatchQuery,
   IQuery,
@@ -9,6 +10,7 @@ import {
   ISearchFields,
   ISearchPayload,
   IShapeCoordinates,
+  ISortQuery,
 } from '../interfaces/queryBuilder.interface';
 
 const quickSearchQuery = (fields: ISearchFields): IQueryString => {
@@ -61,8 +63,29 @@ const dateQuery = (fields: ISearchFields): IRangeQuery => {
   return rangeQuery;
 };
 
+const buildCustomSortScriptForStudyPeriod = (): ISortQuery => {
+  const customScript: ICustomSortScript = {
+    type: 'number',
+    script: {
+      source:
+        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
+    },
+    order: 'desc',
+  };
+  const sortQuery: ISortQuery = {
+    _script: customScript,
+  };
+  return sortQuery;
+};
+
+const buildBestScoreSort = (): ISortQuery => ({
+  _score: {
+    order: 'desc',
+  },
+});
+
 const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: string[] = []): IQuery => {
-  const { fields } = searchFieldsObject;
+  const { fields, sort, rowsPerPage } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -117,9 +140,19 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
 
   const finalQuery: IQuery = {
     query: boolQuery,
+    sort: [],
+    size: rowsPerPage,
   };
+
+  if (sort) {
+    const sortQuery: ISortQuery =
+      sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : buildBestScoreSort();
+    finalQuery.sort?.push(sortQuery);
+  } else {
+    delete finalQuery.sort;
+  }
 
   return finalQuery;
 };
 
-export { buildSearchQuery };
+export { buildSearchQuery, buildCustomSortScriptForStudyPeriod };

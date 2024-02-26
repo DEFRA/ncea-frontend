@@ -1,4 +1,5 @@
 {% from 'govuk/components/button/macro.njk' import govukButton %}
+{% from 'govuk/components/select/macro.njk' import govukSelect %}
 
 {% if hasError %}
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
@@ -9,6 +10,59 @@
     <h2 class='govuk-heading-m results-stats'>
       {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
     </h2>
+
+    <div class="option-container">
+      {{ govukSelect({
+        id: "sort",
+        name: "sort",
+        label: {
+          text: "Sort by",
+          classes: "option-label"
+        },
+        classes: "option-block",
+        formGroup: {
+          classes: "option-group"
+        },
+        items: [
+          {
+            value: "best_match",
+            text: "Best match"
+          },
+          {
+            value: "recent_study",
+            text: "Most recent study"
+          }
+        ]
+      }) }}
+
+      {{ govukSelect({
+        id: "page-results",
+        name: "page-results",
+        label: {
+          text: "Results per page",
+          classes: "option-label"
+        },
+        classes: "option-items",
+        formGroup: {
+          classes: "option-group"
+        },
+        items: [
+          {
+            value: "20",
+            text: "20"
+          },
+          {
+            value: "50",
+            text: "50"
+          },
+          {
+            value: "100",
+            text: "100"
+          }
+        ]
+      }) }}
+
+    </div>
   </div>
 {% endif %}
 
@@ -38,15 +92,26 @@
         <p class='search-result__content'>
           {{item.content}}
         </p>
+
+        {% set openDataAttributes = {} %}
+        {% if item.resourceLocator %}
+          {% set openDataAttributes = openDataAttributes | merge({
+            onclick: "openDataModal('" + item.resourceLocator + "')"
+          }) %}
+        {% else %}
+          {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
+        {% endif %}
+
         <div class='govuk-button-group search-result__button-group'>
           {{ govukButton({
-          text: 'Open data'
-        }) }}
+            text: 'Open data',
+            attributes: openDataAttributes
+          }) }}
 
           {{ govukButton({
-          text: 'More info',
-          classes: 'govuk-button--secondary'
-        }) }}
+            text: 'More info',
+            classes: 'govuk-button--secondary'
+          }) }}
         </div>
       </div>
     {% endfor %}
@@ -75,4 +140,8 @@
       {% endif %}
     </p>
   </div>
+{% endif %}
+
+{% if searchResults.total and not hasError %}
+  {%- include 'partials/open_data/template.njk' -%}
 {% endif %}

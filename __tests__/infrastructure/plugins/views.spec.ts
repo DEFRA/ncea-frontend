@@ -3,7 +3,9 @@ import path from 'path';
 import { webRoutePaths } from '../../../src/utils/constants';
 import nunjucks, { Environment } from 'nunjucks';
 import { customHapiViews } from '../../../src/infrastructure/plugins/views';
+
 jest.mock('nunjucks');
+
 describe('Vision Plugin Configuration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -45,7 +47,7 @@ describe('Vision Plugin Configuration', () => {
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,
     });
-    expect(mockEnvironment.addFilter).toHaveBeenCalledTimes(1);
+    expect(mockEnvironment.addFilter).toHaveBeenCalledTimes(2);
   });
   it('should compile and render the template', () => {
     const nunjucksMock = jest.requireMock('nunjucks');
@@ -84,6 +86,41 @@ describe('Vision Plugin Configuration', () => {
       },
       nextMock,
     );
-    expect(mockEnvironment.addFilter).toHaveBeenCalledTimes(1);
+    expect(mockEnvironment.addFilter).toHaveBeenCalledWith(
+      'date',
+      expect.any(Function),
+    );
+  });
+
+  it('should add a custom merge filter to the environment', () => {
+    const nunjucksMock = jest.requireMock('nunjucks');
+    const { options } = customHapiViews;
+
+    const mockEnvironment: Environment = {
+      addFilter: jest.fn(),
+    } as unknown as Environment;
+
+    nunjucksMock.configure.mockReturnValueOnce(mockEnvironment);
+
+    const nextMock = jest.fn();
+    options.engines.njk.prepare(
+      {
+        compileOptions: { environment: mockEnvironment },
+        relativeTo: 'mockedRelativeTo',
+        path: 'mockedPath',
+      },
+      nextMock,
+    );
+
+    const addFilterMock = mockEnvironment.addFilter as jest.Mock;
+    const mergeFilterFunction = addFilterMock.mock.calls.find(
+      (call) => call[0] === 'merge',
+    )[1] as Function;
+
+    const obj1 = { a: 1, b: 2 };
+    const obj2 = { c: 3, d: 4 };
+    const mergedObject = mergeFilterFunction(obj1, obj2);
+
+    expect(mergedObject).toEqual({ a: 1, b: 2, c: 3, d: 4 });
   });
 });
