@@ -191,11 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const attachClickPaginationEvent = () => {
   const pageLinks = document.getElementsByClassName('govuk-link govuk-pagination__link');
-  console.log({pageLinks});
-  for(let i=0; i< pageLinks.length; i++){
-    pageLinks[i].addEventListener('click', () => {
-      const pageNumber = pageLinks[i].getAttribute('data-page-id');
-      console.log({pageNumber});
+  for(const element of pageLinks){
+    element.addEventListener('click', () => {
+      const pageNumber = element.getAttribute('data-page-id');
       if (pageNumber) {
         const sessionData = getStorageData();
         sessionData.page = parseInt(pageNumber);
