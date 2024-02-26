@@ -215,7 +215,7 @@ exports[`Empty results template Validate empty guided search journey results pag
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" onclick="history.back()">
+<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-previous-page="">
   Previous question
 </button>
 

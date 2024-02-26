@@ -147,7 +147,6 @@ describe('Results block template', () => {
 
     describe('Search results with empty data', () => {
       let response;
-      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
@@ -157,7 +156,6 @@ describe('Results block template', () => {
           fields: { 'quick-search': { search_term: 'test' } },
         });
         response = responseObject.response;
-        document = responseObject.document;
       });
 
       it('should match the results screen snapshot', async () => {
@@ -206,7 +204,6 @@ describe('Results block template', () => {
   describe('Guided search journey', () => {
     describe('Search results with empty data', () => {
       let response;
-      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
@@ -218,7 +215,6 @@ describe('Results block template', () => {
           },
         });
         response = responseObject.response;
-        document = responseObject.document;
       });
 
       it('should match the results screen snapshot', async () => {
@@ -239,7 +235,6 @@ describe('Results block template', () => {
 
     describe('Search results with error', () => {
       let response;
-      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockRejectedValue(
@@ -251,7 +246,6 @@ describe('Results block template', () => {
           },
         });
         response = responseObject.response;
-        document = responseObject.document;
       });
 
       it('should match the results screen snapshot', async () => {

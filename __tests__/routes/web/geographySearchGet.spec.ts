@@ -63,11 +63,11 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
     });
 
     describe('Breadcrumb list items', () => {
-      it('should render 1 list item', async () => {
+      it('should render 2 list item', async () => {
         const breadcrumbList = document?.querySelector(
           '.govuk-breadcrumbs__list',
         );
-        expect(breadcrumbList?.childElementCount).toEqual(1);
+        expect(breadcrumbList?.childElementCount).toEqual(2);
       });
     });
 
@@ -81,10 +81,21 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(anchor?.getAttribute('class')).toEqual(
           'govuk-breadcrumbs__link',
         );
-        expect(anchor?.getAttribute('href')).toEqual(
-          webRoutePaths.guidedDateSearch,
+        expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.home);
+        expect(anchor?.textContent?.trim()).toEqual('Home');
+      });
+
+      it('should render search results list item as a second child', async () => {
+        const item = document.querySelector(
+          '.govuk-breadcrumbs__list',
+        )?.lastElementChild;
+        const anchor = item?.firstElementChild;
+        expect(anchor?.tagName.toLowerCase()).toBe('a');
+        expect(anchor?.getAttribute('class')).toEqual(
+          'govuk-breadcrumbs__link',
         );
-        expect(anchor?.textContent?.trim()).toEqual('Back');
+        expect(anchor?.getAttribute('href')).toEqual('#');
+        expect(anchor?.textContent?.trim()).toEqual('Questionnaire search');
       });
     });
   });

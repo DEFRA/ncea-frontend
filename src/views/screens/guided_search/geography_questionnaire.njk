@@ -1,6 +1,5 @@
 {% extends "layout/default.njk" %}
 
-{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
 {% from "partials/results_count/macro.njk" import resultsCount %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
@@ -13,14 +12,7 @@
 
 {% block beforeContent %}
   {{ super() }}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Back",
-        href: guidedDateSearchPath
-      }
-    ]
-  }) }}
+  {% include "partials/guided_search_breadcrumb/template.njk" %}
 {% endblock %}
 
 {% block content %}
@@ -64,7 +56,8 @@
             'data-do-storage-skip': ''
           } }) }}
         {{ govukButton({ text: "Show results", classes: "govuk-!-margin-bottom-0", attributes: {
-            'data-to-disable': ''
+            'data-to-disable': '',
+            'data-next-question': ''
           } }) }}
       </div>
     </div>

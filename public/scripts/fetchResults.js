@@ -3,6 +3,7 @@ import { getStorageData, storeStorageData } from './customScripts.js';
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 const resultsBlockId = 'results-block';
 const filterBlockId = 'filter-block';
+const actionDataAttribute = 'data-action';
 
 const checkProperties = (dataObject, seen = new Set()) => {
   Object.keys(dataObject).forEach((key) => {
@@ -34,16 +35,15 @@ const toggleOverlay = (showOverlay) => {
   }
 };
 
-const invokeAjaxCall = async (path, showOverlay = false) => {
-  const { fields, sort, rowsPerPage, filters } = getStorageData();
-  toggleOverlay(showOverlay);
+const invokeAjaxCall = async (path, payload, showOverlay = false) => {
   try {
+    toggleOverlay(showOverlay);
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fields, sort, rowsPerPage, filters }),
+      body: JSON.stringify(payload),
     });
     if (response.ok && !response.redirected) {
       toggleOverlay(showOverlay);
@@ -59,12 +59,13 @@ const invokeAjaxCall = async (path, showOverlay = false) => {
     console.error(`Error fetching results: ${error.message}`);
     return null;
   }
+  return null;
 };
 
 const invokeSearchResults = () => {
   const fetchResults = document.querySelector('[data-fetch-results]');
   if (fetchResults) {
-    const action = fetchResults.getAttribute('data-action');
+    const action = fetchResults.getAttribute(actionDataAttribute);
     getSearchResults(action);
   }
 };
@@ -99,7 +100,9 @@ const attachFilterListener = (isReset = false) => {
 };
 
 const getSearchFilters = async (path) => {
-  const response = await invokeAjaxCall(path);
+  const { fields } = getStorageData();
+  const payload = { fields, sort: '', rowsPerPage: 0, filters: {} };
+  const response = await invokeAjaxCall(path, payload);
   if (response) {
     const searchFiltersHtml = await response.text();
     document.getElementById(filterBlockId).innerHTML = searchFiltersHtml;
@@ -122,7 +125,7 @@ const getSearchFilters = async (path) => {
 const invokeSearchFilters = () => {
   const fetchFilters = document.querySelector('[data-fetch-filters]');
   if (fetchFilters) {
-    const action = fetchFilters.getAttribute('data-action');
+    const action = fetchFilters.getAttribute(actionDataAttribute);
     getSearchFilters(action);
   }
 };
@@ -184,7 +187,9 @@ const hydratePageResultsOption = () => {
 const getSearchResults = async (path) => {
   document.getElementById(resultsBlockId).innerHTML =
     '<p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>';
-  const response = await invokeAjaxCall(path);
+  const { fields, sort, rowsPerPage, filters } = getStorageData();
+  const payload = { fields, sort, rowsPerPage, filters };
+  const response = await invokeAjaxCall(path, payload);
   if (response) {
     const searchResultsHtml = await response.text();
     document.getElementById(resultsBlockId).innerHTML = searchResultsHtml;
@@ -199,12 +204,47 @@ const getSearchResults = async (path) => {
   }
 };
 
+const filterObjectByKeys = (sourceObject, keysArray) => {
+  const filteredObject = {};
+  keysArray.forEach((key) => {
+    if (sourceObject.hasOwnProperty(key)) {
+      filteredObject[key] = sourceObject[key];
+    }
+  });
+  return filteredObject;
+};
+
+const getCountPayload = (formId) => {
+  let filteredObject = {};
+  const { fields } = getStorageData();
+  const properKeys = getProperKeys(formId);
+  if (properKeys.length) {
+    filteredObject = filterObjectByKeys(fields, properKeys);
+  }
+  return { fields: filteredObject, sort: '', rowsPerPage: 0, filters: {} };
+};
+
 const getResultsCount = async (path, element) => {
-  const response = await invokeAjaxCall(path, true);
-  if (response) {
-    const searchResultsCount = await response.json();
-    if (searchResultsCount && searchResultsCount['totalResults'] !== 0) {
-      element.innerHTML = `Click to see ${searchResultsCount['totalResults']} results`;
+  const { stepState } = getStorageData();
+  const formId = element.getAttribute('data-form-id');
+  const selectedIndex = guidedSearchFormIds.indexOf(formId);
+  if (selectedIndex !== -1 || selectedIndex !== 0) {
+    const previousFormId = guidedSearchFormIds[selectedIndex - 1];
+    if (
+      stepState.hasOwnProperty(previousFormId) &&
+      stepState[previousFormId] !== 'skipped'
+    ) {
+      const payload = getCountPayload(formId);
+      const response = await invokeAjaxCall(path, payload, true);
+      if (response) {
+        const searchResultsCount = await response.json();
+        element.innerHTML =
+          searchResultsCount && searchResultsCount['totalResults'] !== 0
+            ? `Click to see ${searchResultsCount['totalResults']} results`
+            : '';
+      }
+    } else {
+      document.querySelector('.count-block').style.paddingBottom = 0;
     }
   }
 };
@@ -241,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fetchResultsCount = document.querySelector('[data-fetch-count]');
   if (fetchResultsCount) {
     attachClickResultsEvent(fetchResultsCount);
-    const action = fetchResultsCount.getAttribute('data-action');
+    const action = fetchResultsCount.getAttribute(actionDataAttribute);
     if (action) {
       getResultsCount(action, fetchResultsCount);
     }

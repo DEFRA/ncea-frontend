@@ -7578,6 +7578,10 @@
   padding-bottom: 10px;
 }
 
+.govuk-breadcrumbs__list .govuk-breadcrumbs__list-item:last-child a {
+  text-decoration: none;
+}
+
 .full-width-banner {
   width: 100%;
   background-color: #008938;

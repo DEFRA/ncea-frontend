@@ -1,26 +1,11 @@
 {% extends "layout/default.njk" %}
 
-{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block beforeContent %}
   {{ super() }}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: routes.homePage,
-        attributes: {
-          'data-do-storage-reset': ''
-        }
-      },
-      {
-        text: "Questionnaire search",
-        href: "#"
-      }
-    ]
-  }) }}
+  {% include "partials/guided_search_breadcrumb/template.njk" %}
 {% endblock %}
 
 {% block content %}
@@ -37,7 +22,8 @@
             'data-do-storage-skip': ''
           } }) }}
           {{ govukButton({ text: "Next question", attributes: {
-            'data-to-disable': ''
+            'data-to-disable': '',
+            'data-next-question': ''
           } }) }}
         </div>
       </div>

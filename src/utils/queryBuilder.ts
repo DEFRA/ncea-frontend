@@ -99,7 +99,6 @@ const buildGeoShapeQuery = (north, south, east, west, depth) => {
       geom: {
         shape: geoShape,
         relation: 'intersects',
-        ignore_unmapped: true,
       },
     },
   };
@@ -208,6 +207,7 @@ const buildSearchQuery = (
 
   if (isCount) {
     delete finalQuery.size;
+    delete finalQuery.aggs;
   }
 
   return finalQuery;
