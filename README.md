@@ -234,11 +234,14 @@ Variable Groups
     - *blobStorageUri*
     - *keyVaultUri*
     - *serviceBusHostName*
-- *harvesterServiceVariables-[dev/test/sandbox/...]*
-    - *containerRepostitoryFullPath*
-    - *jnccSchedule*
-    - *medinSchedule*
-    - *serviceAccountHarvester
+- *searchWebAppVariables-[dev/test/sandbox/...]*
+    - *appinsightsSecretName*
+    - *containerRepositoryFullPath*
+    - *elasticSearchApi*
+    - *hostName*
+    - *nodeEnv*
+    - *port*
+    - *serviceAccountSearchWebApp*
 
 ## TODO
 
