@@ -312,6 +312,7 @@ const attachClickPaginationEvent = () => {
         sessionData.page = parseInt(pageNumber);
         storeStorageData(sessionData);
         invokeSearchResults();
+        window.scrollTo(0, 0);
       }
     });
   }
