@@ -147,6 +147,7 @@ describe('Results block template', () => {
 
     describe('Search results with empty data', () => {
       let response;
+      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
@@ -156,25 +157,43 @@ describe('Results block template', () => {
           fields: { 'quick-search': { search_term: 'test' } },
         });
         response = responseObject.response;
+        document = responseObject.document;
       });
 
       it('should match the results screen snapshot', async () => {
         expect(response.text).toMatchSnapshot();
       });
 
-      it('should route works with status code 302', async () => {
-        expect(response.statusCode).toEqual(302);
+      it('should route works with status code 200', async () => {
+        expect(response.statusCode).toEqual(200);
       });
 
-      it('should route to empty quick search page', async () => {
-        expect(response.header.location).toEqual(
-          webRoutePaths.emptyQuickSearch,
-        );
+      it('should render results stats properly', async () => {
+        expect(
+          document.querySelector('.results-stats')?.textContent?.trim(),
+        ).toEqual(`${searchResultsWithEmptyData.total} results found`);
+      });
+
+      it('should render results empty heading properly', async () => {
+        expect(
+          document
+            .querySelector('.search-result__heading')
+            ?.textContent?.trim(),
+        ).toEqual('There are no matching results');
+      });
+
+      it('should render results empty content properly', async () => {
+        expect(
+          document
+            .querySelector('.search-result__content')
+            ?.textContent?.trim(),
+        ).toEqual('Search with different keywords.');
       });
     });
 
     describe('Search results with error', () => {
       let response;
+      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockRejectedValue(
@@ -191,12 +210,14 @@ describe('Results block template', () => {
         expect(response.text).toMatchSnapshot();
       });
 
-      it('should route works with status code 302', async () => {
-        expect(response.statusCode).toEqual(302);
+      it('should route works with status code 200', async () => {
+        expect(response.statusCode).toEqual(200);
       });
 
-      it('should route to search error page', async () => {
-        expect(response.header.location).toEqual(webRoutePaths.searchError);
+      it('should render the error message', async () => {
+        expect(
+          document.querySelector('.govuk-caption-m')?.textContent?.trim(),
+        ).toEqual('Unable to fetch the search results. Please try again.');
       });
     });
   });
@@ -204,6 +225,7 @@ describe('Results block template', () => {
   describe('Guided search journey', () => {
     describe('Search results with empty data', () => {
       let response;
+      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
@@ -215,26 +237,49 @@ describe('Results block template', () => {
           },
         });
         response = responseObject.response;
+        document = responseObject.document;
       });
 
       it('should match the results screen snapshot', async () => {
         expect(response.text).toMatchSnapshot();
       });
 
-      it('should route works with status code 302', async () => {
-        console.log(response);
-        expect(response.statusCode).toEqual(302);
+      it('should route works with status code 200', async () => {
+        expect(response.statusCode).toEqual(200);
       });
 
-      it('should route to empty guided search page', async () => {
-        expect(response.header.location).toEqual(
-          webRoutePaths.emptyGuidedSearch,
-        );
+      it('should render results stats properly', async () => {
+        expect(
+          document.querySelector('.results-stats')?.textContent?.trim(),
+        ).toEqual(`${searchResultsWithEmptyData.total} results found`);
+      });
+
+      it('should render results empty heading properly', async () => {
+        expect(
+          document
+            .querySelector('.search-result__heading')
+            ?.textContent?.trim(),
+        ).toEqual('There are no matching results');
+      });
+
+      it('should render results empty content properly', async () => {
+        expect(
+          document
+            .querySelector('.search-result__content')
+            ?.textContent?.trim(),
+        ).toEqual('Choose different answers to see results.');
+      });
+
+      it('should render two secondary buttons', async () => {
+        expect(
+          document.querySelectorAll('.govuk-button--secondary')?.length,
+        ).toBe(2);
       });
     });
 
     describe('Search results with error', () => {
       let response;
+      let document;
 
       beforeAll(async () => {
         (getSearchResults as jest.Mock).mockRejectedValue(
@@ -246,18 +291,21 @@ describe('Results block template', () => {
           },
         });
         response = responseObject.response;
+        document = responseObject.document;
       });
 
       it('should match the results screen snapshot', async () => {
         expect(response.text).toMatchSnapshot();
       });
 
-      it('should route works with status code 302', async () => {
-        expect(response.statusCode).toEqual(302);
+      it('should route works with status code 200', async () => {
+        expect(response.statusCode).toEqual(200);
       });
 
-      it('should route to search error page', async () => {
-        expect(response.header.location).toEqual(webRoutePaths.searchError);
+      it('should render the error message', async () => {
+        expect(
+          document.querySelector('.govuk-caption-m')?.textContent?.trim(),
+        ).toEqual('Unable to fetch the search results. Please try again.');
       });
     });
   });

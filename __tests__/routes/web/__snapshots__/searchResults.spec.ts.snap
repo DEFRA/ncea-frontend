@@ -126,12 +126,10 @@ exports[`Results Screen Sanpshot verification & status code should match the res
 
   
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third"  id="filter-block" data-action="/search-filters" data-fetch-filters >&nbsp;</div>
-      
-  <div class="govuk-grid-column-two-thirds" id="results-block" data-action="/search-results" data-fetch-results>
-    <p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>
-  </div>
-
+      <div class="govuk-grid-column-one-third" id="filter-block" data-action="/search-filters" data-fetch-filters>&nbsp;</div>
+      <div class="govuk-grid-column-two-thirds" id="results-block" data-action="/search-results" data-fetch-results>
+        <p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>
+      </div>
     </div>
   
 

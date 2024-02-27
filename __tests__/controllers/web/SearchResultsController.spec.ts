@@ -32,7 +32,6 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
         formId,
-        hasError: false,
       });
     });
 
@@ -65,47 +64,61 @@ describe('Deals with search results controller', () => {
       });
     });
 
-    it('should redirect to quick search no results page', async () => {
+    it('should render the no results page for quick search journey', async () => {
       const request: Request = {
         payload: { fields: { 'quick-search': { search_term: 'test' } } },
       } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
       (getSearchResults as jest.Mock).mockResolvedValue({
         total: 0,
         items: [],
       });
       await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(
-        webRoutePaths.emptyQuickSearch,
-      );
+      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
+        hasError: false,
+        isQuickSearchJourney: true,
+        searchResults: {
+          total: 0,
+          items: [],
+        },
+      });
     });
 
-    it('should redirect to guided search no results page', async () => {
+    it('should render the no results page for guided search journey', async () => {
       const request: Request = {
         payload: {
           fields: {
-            'date-search': { 'from-date-year': '2022', 'to-date-year': '2022' },
+            'date-search': { 'form-date-year': '2022', 'to-date-year': '2023' },
           },
         },
       } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
       (getSearchResults as jest.Mock).mockResolvedValue({
         total: 0,
         items: [],
       });
       await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(
-        webRoutePaths.emptyGuidedSearch,
-      );
+      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
+        hasError: false,
+        isQuickSearchJourney: false,
+        searchResults: {
+          total: 0,
+          items: [],
+        },
+      });
     });
 
     it('should show an error when something fails at API layer', async () => {
       const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
       const error = new Error('Mocked error');
       (getSearchResults as jest.Mock).mockRejectedValue(error);
       await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.searchError);
+      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
+        error,
+        hasError: true,
+        isQuickSearchJourney: false,
+      });
     });
   });
 
@@ -122,45 +135,27 @@ describe('Deals with search results controller', () => {
       expect(response.response).toHaveBeenCalledTimes(1);
     });
 
-    it('should redirect to quick search no results page', async () => {
-      const request: Request = {
-        payload: { fields: { 'quick-search': { search_term: 'test' } } },
-      } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
-      (getSearchResultsCount as jest.Mock).mockResolvedValue({
-        totalResults: 0,
-      });
-      await SearchResultsController.getResultsCountHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(
-        webRoutePaths.emptyQuickSearch,
-      );
-    });
-
-    it('should redirect to guided search no results page', async () => {
-      const request: Request = {
-        payload: {
-          fields: {
-            'date-search': { 'from-date-year': '2022', 'to-date-year': '2022' },
-          },
-        },
-      } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
-      (getSearchResultsCount as jest.Mock).mockResolvedValue({
-        totalResults: 0,
-      });
-      await SearchResultsController.getResultsCountHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(
-        webRoutePaths.emptyGuidedSearch,
-      );
-    });
-
-    it('should show an error when something fails at API layer', async () => {
+    it('should redirect to search page when result count is 0', async () => {
       const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+      const response: ResponseToolkit = {
+        redirect: jest.fn(),
+      } as any;
+      (getSearchResultsCount as jest.Mock).mockResolvedValue({
+        totalResults: 0,
+      });
+      await SearchResultsController.getResultsCountHandler(request, response);
+      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
+    });
+
+    it('should redirect to search page when error occurs', async () => {
+      const request: Request = { payload: { fields: {} } } as any;
+      const response: ResponseToolkit = {
+        redirect: jest.fn(),
+      } as any;
       const error = new Error('Mocked error');
       (getSearchResultsCount as jest.Mock).mockRejectedValue(error);
       await SearchResultsController.getResultsCountHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.searchError);
+      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
     });
   });
 
@@ -198,7 +193,6 @@ describe('Deals with search results controller', () => {
       const context = {
         formId,
         searchInputError,
-        hasError: false,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/home/template',
@@ -241,7 +235,6 @@ describe('Deals with search results controller', () => {
       const context = {
         formId,
         searchInputError,
-        hasError: false,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/results/template',
@@ -282,7 +275,6 @@ describe('Deals with search results controller', () => {
       const context = {
         formId,
         searchInputError,
-        hasError: false,
       };
       expect(response.view).toHaveBeenCalledWith(
         'screens/home/template',
@@ -323,54 +315,6 @@ describe('Deals with search results controller', () => {
           },
         ],
       });
-    });
-  });
-
-  describe('Deals with no search results handler', () => {
-    it('should return the rendered view with context', async () => {
-      const request: Request = {
-        url: { pathname: webRoutePaths.emptyQuickSearch },
-        headers: { referer: 'some_referer' },
-      } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-
-      const formId: string = formIds.quickSearch;
-      await SearchResultsController.getNoResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('screens/results/no_results', {
-        isQuickSearchJourney: true,
-        formId,
-        hasError: false,
-      });
-    });
-
-    it('should redirect to home if we access the search page directly', async () => {
-      const request: Request = {} as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
-
-      await SearchResultsController.getNoResultsHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.home);
-    });
-  });
-
-  describe('Deals with search error handler', () => {
-    it('should return the rendered view with context', async () => {
-      const request: Request = { headers: { referer: 'some_referer' } } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-
-      const formId: string = formIds.quickSearch;
-      await SearchResultsController.getSearchErrorHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('screens/results/error', {
-        formId,
-        hasError: true,
-      });
-    });
-
-    it('should redirect to home if we access the search page directly', async () => {
-      const request: Request = {} as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
-
-      await SearchResultsController.getSearchErrorHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.home);
     });
   });
 });

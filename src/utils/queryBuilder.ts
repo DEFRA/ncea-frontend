@@ -14,10 +14,10 @@ import {
   ISortQuery,
 } from '../interfaces/queryBuilder.interface';
 
-const quickSearchQuery = (fields: ISearchFields): IQueryString => {
+const quickSearchQuery = (searchTerm: string): IQueryString => {
   const queryString: IQueryString = {
     query_string: {
-      query: fields['quick-search']?.search_term as string,
+      query: searchTerm,
       default_operator: 'AND',
     },
   };
@@ -85,7 +85,13 @@ const buildBestScoreSort = (): ISortQuery => ({
   },
 });
 
-const buildGeoShapeQuery = (north, south, east, west, depth) => {
+const buildGeoShapeQuery = (
+  north: string,
+  south: string,
+  east: string,
+  west: string,
+  depth: string,
+): IGeoShapeQuery => {
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
@@ -112,7 +118,7 @@ const buildGeoShapeQuery = (north, south, east, west, depth) => {
   return geoShapeQuery;
 };
 
-const buildSortQuery = (finalQuery, sort, isCount) => {
+const buildSortQuery = (finalQuery: IQuery, sort: string, isCount: boolean): IQuery => {
   if (sort && !isCount) {
     const sortQuery: ISortQuery =
       sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : buildBestScoreSort();
@@ -123,7 +129,12 @@ const buildSortQuery = (finalQuery, sort, isCount) => {
   return finalQuery;
 };
 
-const buildAggregationQuery = (finalQuery, ignoreAggregation, isCount, aggregationField) => {
+const buildAggregationQuery = (
+  finalQuery: IQuery,
+  ignoreAggregation: boolean,
+  isCount: boolean,
+  aggregationField: string,
+): IQuery => {
   if (!ignoreAggregation && !isCount && aggregationField) {
     const aggregateQuery: IAggregateQuery = {
       unique_values: {
@@ -155,15 +166,15 @@ const buildSearchQuery = (
     },
   };
 
-  if (!fieldsToSearch.length && fields['quick-search']) {
-    const queryString: IQueryString = quickSearchQuery(fields);
-    boolQuery.bool.must?.push(queryString);
-  }
-
-  if (fields['quick-search'] && fieldsToSearch.length) {
+  if (fields['quick-search']) {
     const searchTerm = fields['quick-search']?.search_term as string;
-    const matchShould: IBoolQuery = searchQueryWithFields(searchTerm, fieldsToSearch);
-    boolQuery.bool.must?.push(matchShould);
+    let queryString: IQueryString | IBoolQuery;
+    if (fieldsToSearch.length) {
+      queryString = searchQueryWithFields(searchTerm, fieldsToSearch);
+    } else {
+      queryString = quickSearchQuery(searchTerm);
+    }
+    boolQuery.bool.must?.push(queryString);
   }
 
   if (filterOptions && Object.keys(filterOptions).length && !isCount && ignoreAggregation) {
@@ -188,7 +199,7 @@ const buildSearchQuery = (
       geoCoordinates?.south,
       geoCoordinates?.east,
       geoCoordinates?.west,
-      geoCoordinates.depth,
+      geoCoordinates?.depth ?? '',
     );
 
     boolQuery.bool.must?.push(geoShapeQuery);
@@ -207,7 +218,6 @@ const buildSearchQuery = (
 
   if (isCount) {
     delete finalQuery.size;
-    delete finalQuery.aggs;
   }
 
   return finalQuery;

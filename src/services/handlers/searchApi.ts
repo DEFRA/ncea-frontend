@@ -28,7 +28,7 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
     if (payload.query.bool.must?.length) {
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
       const data = await response.data;
-      return { totalResults: data?.count };
+      return { totalResults: data?.count ?? 0 };
     } else {
       return Promise.resolve({ totalResults: 0 });
     }

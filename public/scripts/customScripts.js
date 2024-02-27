@@ -260,4 +260,5 @@ export {
   getStorageData,
   fireEventAfterStorage,
   resetStorage,
+  previousQuestion,
 };

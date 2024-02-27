@@ -1,4 +1,8 @@
-import { getStorageData, storeStorageData } from './customScripts.js';
+import {
+  getStorageData,
+  previousQuestion,
+  storeStorageData,
+} from './customScripts.js';
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 const resultsBlockId = 'results-block';
@@ -198,6 +202,7 @@ const getSearchResults = async (path) => {
     attacheSortChangeListener();
     hydratePageResultsOption();
     attachPageResultsChangeListener();
+    previousQuestion();
   } else {
     document.getElementById(resultsBlockId).innerHTML =
       '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';

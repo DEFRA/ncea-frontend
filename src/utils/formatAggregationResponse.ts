@@ -14,7 +14,7 @@ const formatAggregationResponse = async (apiResponse: Record<string, any>): Prom
     const apiAggregationOptions = apiResponse?.aggregations?.unique_values?.buckets;
 
     /* eslint-disable  @typescript-eslint/no-explicit-any */
-    apiAggregationOptions.map((aggregationOption: Record<string, any>) => {
+    apiAggregationOptions.forEach((aggregationOption: Record<string, any>) => {
       const option: IAggregationOption = {
         value: aggregationOption.key,
         text: capitalizeWords(aggregationOption.key),

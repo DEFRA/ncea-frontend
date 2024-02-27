@@ -9,7 +9,7 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
   const apiSearchItems = apiResponse?.hits?.hits;
 
   /* eslint-disable  @typescript-eslint/no-explicit-any */
-  apiSearchItems.map((searchItem: Record<string, any>) => {
+  apiSearchItems.forEach((searchItem: Record<string, any>) => {
     const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
     const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
     const item: ISearchItem = {

@@ -8,9 +8,6 @@ export const webRoutePaths = {
   getResults: '/search-results',
   getResultsCount: '/results-count',
   getFilters: '/search-filters',
-  emptyQuickSearch: '/empty-quick-search',
-  emptyGuidedSearch: '/empty-guided-search',
-  searchError: '/search-error',
 };
 
 export const elasticSearchAPIPaths = {
