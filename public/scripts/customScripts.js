@@ -88,9 +88,9 @@ const updateSubmitButtonState = (form) => {
 
 //Listen for the input event on input fields
 const attachEventListeners = (form) => {
-  const sessionData = getStorageData();
   form.querySelectorAll('input').forEach((input) => {
     input.addEventListener('input', () => {
+      const sessionData = getStorageData();
       const fieldName = input.getAttribute('name');
       const value = input.value;
 
