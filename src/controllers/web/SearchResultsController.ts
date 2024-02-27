@@ -5,6 +5,7 @@ import Joi from 'joi';
 import { IAggregationOptions, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
+import { getPaginationItems } from '../../utils/paginationBuilder';
 import { formIds, resourceTypeOptions, webRoutePaths } from '../../utils/constants';
 import { getResourceTypeOptions, getSearchResults, getSearchResultsCount } from '../../services/handlers/searchApi';
 
@@ -37,14 +38,16 @@ const SearchResultsController = {
   },
   getSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload: ISearchPayload = request.payload as ISearchPayload;
-    const { fields } = payload;
+    const { fields, rowsPerPage, page } = payload;
     const isQuickSearchJourney = Object.prototype.hasOwnProperty.call(fields, 'quick-search');
     try {
       const searchResults: ISearchResults = await getSearchResults(payload);
+      const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage);
       return response.view('partials/results/summary', {
         searchResults,
         hasError: false,
         isQuickSearchJourney,
+        paginationItems,
       });
     } catch (error) {
       return response.view('partials/results/summary', {

@@ -18,6 +18,7 @@ const getSearchResults = async (searchFieldsObject: ISearchPayload): Promise<ISe
     }
     /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (error: any) {
+    console.log(error);
     throw new Error(`Error fetching results: ${error.message}`);
   }
 };

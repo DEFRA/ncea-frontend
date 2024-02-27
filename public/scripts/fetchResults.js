@@ -105,7 +105,7 @@ const attachFilterListener = (isReset = false) => {
 
 const getSearchFilters = async (path) => {
   const { fields } = getStorageData();
-  const payload = { fields, sort: '', rowsPerPage: 0, filters: {} };
+  const payload = { fields, sort: '', rowsPerPage: 0, filters: {}, page: null };
   const response = await invokeAjaxCall(path, payload);
   if (response) {
     const searchFiltersHtml = await response.text();
@@ -191,8 +191,8 @@ const hydratePageResultsOption = () => {
 const getSearchResults = async (path) => {
   document.getElementById(resultsBlockId).innerHTML =
     '<p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>';
-  const { fields, sort, rowsPerPage, filters } = getStorageData();
-  const payload = { fields, sort, rowsPerPage, filters };
+  const { fields, sort, rowsPerPage, filters, page } = getStorageData();
+  const payload = { fields, sort, rowsPerPage, filters, page: page ?? 1 };
   const response = await invokeAjaxCall(path, payload);
   if (response) {
     const searchResultsHtml = await response.text();
@@ -203,6 +203,7 @@ const getSearchResults = async (path) => {
     hydratePageResultsOption();
     attachPageResultsChangeListener();
     previousQuestion();
+    attachClickPaginationEvent();
   } else {
     document.getElementById(resultsBlockId).innerHTML =
       '<p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>';
@@ -226,7 +227,13 @@ const getCountPayload = (formId) => {
   if (properKeys.length) {
     filteredObject = filterObjectByKeys(fields, properKeys);
   }
-  return { fields: filteredObject, sort: '', rowsPerPage: 0, filters: {} };
+  return {
+    fields: filteredObject,
+    sort: '',
+    rowsPerPage: 0,
+    filters: {},
+    page: null,
+  };
 };
 
 const getResultsCount = async (path, element) => {
@@ -292,5 +299,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+const attachClickPaginationEvent = () => {
+  const pageLinks = document.getElementsByClassName(
+    'govuk-link govuk-pagination__link',
+  );
+  for (const element of pageLinks) {
+    element.addEventListener('click', () => {
+      const pageNumber = element.getAttribute('data-page-id');
+      if (pageNumber) {
+        const sessionData = getStorageData();
+        sessionData.page = parseInt(pageNumber);
+        storeStorageData(sessionData);
+        invokeSearchResults();
+      }
+    });
+  }
+};
 
 export { hydrateSortOption, hydratePageResultsOption, invokeSearchResults };

@@ -154,7 +154,7 @@ const buildSearchQuery = (
   ignoreAggregation: boolean = false,
   aggregationField: string = '',
 ): IQuery => {
-  const { fields, sort, rowsPerPage, filters: filterOptions } = searchFieldsObject;
+  const { fields, sort, rowsPerPage, page, filters: filterOptions } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
       must: [],
@@ -199,6 +199,7 @@ const buildSearchQuery = (
     sort: [],
     aggs: {},
     size: rowsPerPage,
+    ...(page && { from: page === 1 ? 0 : (page - 1) * rowsPerPage }),
   };
 
   finalQuery = buildSortQuery(finalQuery, sort, isCount);

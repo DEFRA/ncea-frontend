@@ -124,3 +124,18 @@
     color: $gov-defra-color-websafe !important;
   }
 }
+.govuk-pagination {
+  margin-top: 20px;
+}
+.govuk-pagination__item--current {
+  background-color: #00703c;
+}
+.govuk-link:link {
+  color: #00703c;
+}
+.govuk-link:visited {
+  color: #00703c;
+}
+.govuk-pagination__item--current:hover {
+  background-color: #00703c;
+}

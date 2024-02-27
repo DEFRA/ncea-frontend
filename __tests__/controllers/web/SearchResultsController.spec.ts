@@ -1,5 +1,6 @@
 'use strict';
 
+import { getPaginationItems } from '../../../src/utils/paginationBuilder';
 import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import Joi from 'joi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
@@ -49,18 +50,12 @@ describe('Deals with search results controller', () => {
     it('should fetch the data and return the view', async () => {
       const request: Request = { payload: { fields: {} } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
-      (getSearchResults as jest.Mock).mockResolvedValue({
-        total: 10,
-        items: [],
-      });
       await SearchResultsController.getSearchResultsHandler(request, response);
       expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
         hasError: false,
         isQuickSearchJourney: false,
-        searchResults: {
-          total: 10,
-          items: [],
-        },
+        searchResults: undefined,
+        paginationItems: {},
       });
     });
 
@@ -81,6 +76,7 @@ describe('Deals with search results controller', () => {
           total: 0,
           items: [],
         },
+        paginationItems: {},
       });
     });
 
@@ -105,6 +101,7 @@ describe('Deals with search results controller', () => {
           total: 0,
           items: [],
         },
+        paginationItems: {},
       });
     });
 

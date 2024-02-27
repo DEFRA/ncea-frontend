@@ -72,6 +72,7 @@ interface IQuery {
   query: IBoolQuery;
   sort?: ISortQuery[];
   aggs?: IAggregateQuery;
+  from?: number;
 }
 
 interface IGeoCoordinates {
@@ -112,6 +113,7 @@ interface ISearchPayload {
   sort: string;
   filters: ISearchFilter;
   rowsPerPage: number;
+  page: number;
 }
 
 export {
