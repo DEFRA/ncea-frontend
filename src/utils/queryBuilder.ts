@@ -3,6 +3,7 @@ import {
   IAggregateQuery,
   IBoolQuery,
   ICustomSortScript,
+  IGeoCoordinates,
   IGeoShapeQuery,
   IMatchQuery,
   IQuery,
@@ -85,18 +86,12 @@ const buildBestScoreSort = (): ISortQuery => ({
   },
 });
 
-const buildGeoShapeQuery = (
-  north: string,
-  south: string,
-  east: string,
-  west: string,
-  depth: string,
-): IGeoShapeQuery => {
+const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => {
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
-      [parseFloat(west), parseFloat(north)],
-      [parseFloat(east), parseFloat(south)],
+      [parseFloat(geoCoordinates.west), parseFloat(geoCoordinates.north)],
+      [parseFloat(geoCoordinates.east), parseFloat(geoCoordinates.south)],
     ],
   };
 
@@ -109,10 +104,10 @@ const buildGeoShapeQuery = (
     },
   };
 
-  if (depth && geoShapeQuery.geo_shape.geom) {
+  if (geoCoordinates.depth && geoShapeQuery.geo_shape.geom) {
     geoShapeQuery.geo_shape.geom.depth = {
       from: 0,
-      to: parseInt(depth),
+      to: parseInt(geoCoordinates.depth),
     };
   }
   return geoShapeQuery;
@@ -191,16 +186,10 @@ const buildSearchQuery = (
     boolQuery.bool.must?.push(rangeQuery);
   }
 
-  const geoCoordinates = fields['coordinate-search'];
+  const geoCoordinates: IGeoCoordinates = fields['coordinate-search'] as IGeoCoordinates;
 
   if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
-    const geoShapeQuery = buildGeoShapeQuery(
-      geoCoordinates?.north,
-      geoCoordinates?.south,
-      geoCoordinates?.east,
-      geoCoordinates?.west,
-      geoCoordinates?.depth ?? '',
-    );
+    const geoShapeQuery: IGeoShapeQuery = buildGeoShapeQuery(geoCoordinates);
 
     boolQuery.bool.must?.push(geoShapeQuery);
   }
