@@ -1,18 +1,49 @@
-# steps:
+parameters:
+  - name: envName
+    type: string
+  - name: releaseName
+    type: string
+  - name: aksServiceConnection
+    type: string
 
-# - task: HelmDeploy@0
-#   displayName: 'Helm Deploy'
-#   inputs:
-#     connectionType: 'Azure Resource Manager'
-#     azureSubscription: 'AzureMSDN'
-#     azureResourceGroup: 'container-pipelines-demo'
-#     kubernetesCluster: 'dev-container-demo'
-#     useClusterAdmin: true
-#     namespace: 'apps'
-#     command: 'upgrade'
-#     chartType: 'Name'
-#     chartName: '$(containerRegistry)/$(containerRepository)'
-#     releaseName: '$(containerRepository)'
-      # valueFile: values-${{ parameters.environment }}.yml
-#     overrideValues: 'ingress.basedomain=$(aksHostDev),image.tag=$(Build.BuildNumber),image.repository=$(containerRegistry).azurecr.io/$(containerRepository)'
-#     force: true
+steps:
+
+- task: DownloadPipelineArtifact@2
+  displayName: 'Download Helm Charts'
+  condition: succeeded()
+  inputs:
+    buildType: 'current'
+    artifact: charts
+
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '$(Pipeline.Workspace)/charts/*.tgz'
+    cleanDestinationFolder: true
+    overwriteExistingFiles: true
+    destinationFolder: '$(Pipeline.Workspace)/chart' 
+
+- task: HelmDeploy@0
+  displayName: 'Helm Deploy'
+  condition: succeeded()
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceConnection: ${{ parameters.aksServiceConnection }}
+    namespace: $(aksNamespace)
+    command: 'upgrade'
+    chartType: 'FilePath'
+    chartPath: '$(Pipeline.Workspace)/ncea-fe-$(Build.BuildNumber).tgz'
+    valueFile: $(Pipeline.Workspace)/chart/ncea-fe/values/values.${{ parameters.envName }}.yaml
+    overrideValues: |
+        image.repository=$(containerRepositoryFullPath)
+        image.tag=$(imageTag)
+        serviceAccount.name=$(serviceAccountSearchWebApp)
+        ingress.hosts[0].host=$(hostName)
+        env.PORT=$(port)
+        env.NODE_ENV=$(nodeEnv)
+        env.APPINSIGHTS_SECRET_NAME=$(appinsightsSecretName)
+        env.AZURE_KEYVAULT_URL=$(keyVaultUri)
+        env.ELASTICSEARCH_API=$(elasticSearchApi)
+        
+    install: true
+    force: true
+    releaseName: ${{ parameters.releaseName }}

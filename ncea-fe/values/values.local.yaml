@@ -1,0 +1,65 @@
+replicaCount: 1
+
+image:
+  repository: nceapocsbox.azurecr.io/defra/ncea-fe
+  pullPolicy: IfNotPresent
+  tag: "20240225.19_feature-308801-create-deployment-pipeline"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:  
+  create: false 
+  automount: false  
+  annotations: {}  
+  name: "serviceaccount-nceafrontend-sbox"
+
+podAnnotations: {}
+podLabels: 
+  azure.workload.identity/use: "true"
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: "webapprouting.kubernetes.azure.com"
+  annotations: {}
+  hosts:
+    - host: nceasearchsnd.azure-adventures.co.uk
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  PORT: 80
+  NODE_ENV: "sandbox"
+  APPINSIGHTS_SECRET_NAME: "ApplicationInsights--ConnectionString"
+  AZURE_KEYVAULT_URL: "https://nceapocsbox.vault.azure.net/"
+  ELASTICSEARCH_API: "http://elasticsearch.azure-adventures.co.uk/"

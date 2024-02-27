@@ -1,5 +1,4 @@
 steps:
-- checkout: self
 
 - task: UseNode@1
   inputs:
@@ -9,10 +8,10 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'defra-sonarcloud'
-    organization: 'defra'
+    organization: '$(sonarCloudOrganization)'
     scannerMode: CLI
-    projectKey: 'DEFRA_ncea-frontend'
-    projectName: 'ncea-frontend'
+    projectKey: '$(sonarProjectKeySearchWebApp)'
+    projectName: '$(sonarProjectNameSearchWebApp)'    
   displayName: 'Prepare analysis on SonarCloud'
 
 - script: |

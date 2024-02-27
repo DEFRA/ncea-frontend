@@ -19,7 +19,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        azure.workload.identity/use: "true"
         {{- include "ncea-fe.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
@@ -55,18 +54,19 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
-          {{- end }}
+          {{- end }}          
           env:
           - name: PORT
-            value: "{{ .Values.port }}"
+            value: "{{ .Values.env.PORT }}"
           - name: NODE_ENV
-            value: "{{ .Values.nodeEnv }}"
+            value: "{{ .Values.env.NODE_ENV }}"
           - name: APPINSIGHTS_SECRET_NAME
-            value: "{{ .Values.appInsightsSecretName }}"
+            value: "{{ .Values.env.APPINSIGHTS_SECRET_NAME }}"
           - name: AZURE_KEYVAULT_URL
-            value: "{{ .Values.keyvaultUrl }}"
+            value: "{{ .Values.env.AZURE_KEYVAULT_URL }}"
           - name: ELASTICSEARCH_API
-            value: "{{ .Values.elasticSearchApi }}"
+            value: "{{ .Values.env.ELASTICSEARCH_API }}"
+
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
