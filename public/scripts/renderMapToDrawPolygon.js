@@ -88,7 +88,11 @@ function calculateCoordinates() {
     const form = document.querySelector('[data-do-browser-storage]');
     if (form) {
       const sessionData = getStorageData();
+      if (!sessionData.fields.hasOwnProperty(form.id)) {
+        sessionData.fields[form.id] = {};
+      }
       sessionData.fields[form.id] = {
+        ...sessionData.fields[form.id],
         north: north.toFixed(precision),
         south: south.toFixed(precision),
         east: east.toFixed(precision),

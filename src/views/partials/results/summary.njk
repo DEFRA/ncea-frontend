@@ -62,7 +62,6 @@
           }
         ]
       }) }}
-
     </div>
   </div>
 {% endif %}
@@ -72,10 +71,12 @@
     {% for item in searchResults.items %}
       <div class='govuk-section-break--visible search-result__item'>
         <h2 class='govuk-heading-m search-result__heading'>{{item.title}}</h2>
-        <div class='search-result__parameter'>
-          <span class='search-result__parameter-label search-result__published-label'>Published by</span>
-          <span class='search-result__parameter-value search-result__published-value'>{{item.publishedBy}}</span>
-        </div>
+        {% if item.publishedBy %}
+          <div class='search-result__parameter'>
+            <span class='search-result__parameter-label search-result__published-label'>Published by</span>
+            <span class='search-result__parameter-value search-result__published-value'>{{item.publishedBy}}</span>
+          </div>
+        {% endif %}
         {% if item.temporalExtentDetails.startDate or item.temporalExtentDetails.endDate %}
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
@@ -118,7 +119,7 @@
     {% endfor %}
   </div>
 
-{{ govukPagination(paginationItems) }}
+  {{ govukPagination(paginationItems) }}
 
 {% endif %}
 
@@ -135,7 +136,7 @@
       {% if not isQuickSearchJourney %}
         <div class="govuk-button-group">
           {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary", attributes: {
-            onclick: 'history.back()'
+            'data-do-previous-page': ''
           } }) }}
           {{ govukButton({ text: "Restart questionnaire search", classes: "govuk-button--secondary", href: dateSearchPath, attributes: {
             'data-do-storage-reset': ''

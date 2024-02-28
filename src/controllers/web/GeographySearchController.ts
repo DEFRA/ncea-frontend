@@ -14,8 +14,6 @@ const GeographySearchController = {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
       results: skipPath,
-      results: resultsPath,
-      getResultsCount: resultsCountPath,
     } = webRoutePaths;
     const formId: string = formIds.geographyQuestionnaire;
     return response.view('screens/guided_search/geography_questionnaire', {
@@ -24,8 +22,6 @@ const GeographySearchController = {
       formFields,
       formId,
       skipPath,
-      resultsPath,
-      resultsCountPath,
     });
   },
   doGeographySearchFailActionHandler: async (
@@ -38,8 +34,6 @@ const GeographySearchController = {
       geographySearch: geographySearchPath,
       guidedDateSearch: guidedDateSearchPath,
       results: skipPath,
-      results: resultsPath,
-      getResultsCount: resultsCountPath,
     } = webRoutePaths;
     const formId: string = formIds.geographyQuestionnaire;
     return response
@@ -49,8 +43,6 @@ const GeographySearchController = {
         formFields: finalFormFields,
         formId,
         skipPath,
-        resultsPath,
-        resultsCountPath,
       })
       .code(400)
       .takeover();

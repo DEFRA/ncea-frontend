@@ -73,7 +73,6 @@ exports[`Results block template Guided search journey Search results with empty 
   </select>
 </div>
 
-
     </div>
   </div>
 
@@ -97,7 +96,7 @@ exports[`Results block template Guided search journey Search results with empty 
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" onclick="history.back()">
+<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-previous-page="">
   Previous question
 </button>
 
@@ -108,9 +107,9 @@ exports[`Results block template Guided search journey Search results with empty 
     
   
 
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
   Restart questionnaire search
-</a>
+</button>
 
         </div>
       
@@ -212,7 +211,6 @@ exports[`Results block template Quick search journey Search results with data sh
   </select>
 </div>
 
-
     </div>
   </div>
 
@@ -222,10 +220,12 @@ exports[`Results block template Quick search journey Search results with data sh
     
       <div class='govuk-section-break--visible search-result__item'>
         <h2 class='govuk-heading-m search-result__heading'>Title 1</h2>
-        <div class='search-result__parameter'>
-          <span class='search-result__parameter-label search-result__published-label'>Published by</span>
-          <span class='search-result__parameter-value search-result__published-value'>Organization 1</span>
-        </div>
+        
+          <div class='search-result__parameter'>
+            <span class='search-result__parameter-label search-result__published-label'>Published by</span>
+            <span class='search-result__parameter-value search-result__published-value'>Organization 1</span>
+          </div>
+        
         
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
@@ -272,10 +272,12 @@ exports[`Results block template Quick search journey Search results with data sh
     
       <div class='govuk-section-break--visible search-result__item'>
         <h2 class='govuk-heading-m search-result__heading'>Title 2</h2>
-        <div class='search-result__parameter'>
-          <span class='search-result__parameter-label search-result__published-label'>Published by</span>
-          <span class='search-result__parameter-value search-result__published-value'>Organization 2</span>
-        </div>
+        
+          <div class='search-result__parameter'>
+            <span class='search-result__parameter-label search-result__published-label'>Published by</span>
+            <span class='search-result__parameter-value search-result__published-value'>Organization 2</span>
+          </div>
+        
         
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
@@ -322,8 +324,8 @@ exports[`Results block template Quick search journey Search results with data sh
     
   </div>
 
-<nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item govuk-pagination__item--current">
-            <a class="govuk-link govuk-pagination__link" href="#!" aria-label="Page 1" aria-current="page" data-page-id="1">
+  <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item">
+            <a class="govuk-link govuk-pagination__link" href="#!" aria-label="Page 1" data-page-id="1">
               1
             </a>
           </li></ul></nav>
@@ -333,7 +335,6 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
-<div id="overlay" class="overlay"></div>
 <div id="modal" class="modal">
   <div class="modal-content">
     
@@ -442,7 +443,6 @@ exports[`Results block template Quick search journey Search results with empty d
   
   </select>
 </div>
-
 
     </div>
   </div>

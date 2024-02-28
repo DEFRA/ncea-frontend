@@ -7537,6 +7537,10 @@
   font-weight: 700;
   line-height: 30px;
   text-decoration-line: underline;
+  color: #1d70b8 !important;
+}
+.count-block-link:visited {
+  color: #4c2c92 !important;
 }
 
 .overlay {

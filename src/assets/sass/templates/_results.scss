@@ -54,7 +54,7 @@
 .option {
   &-container {
     display: grid;
-    grid-template-columns: 0.8fr 1.4fr;
+    grid-template-columns: 0.9fr 1.4fr;
     gap: 10px;
   }
 
@@ -70,6 +70,7 @@
 
   &-label {
     @include font-style-stack(19px, 25px, 300, normal);
+    margin-right: 10px;
     display: inline-block;
   }
 
@@ -79,18 +80,62 @@
     width: 80px;
   }
 }
-.govuk-pagination{
+
+#results-block {
+  margin-top: 50px;
+}
+
+.data-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 30px;
+
+  &__heading-l {
+    @include font-style-stack(36px, 40px);
+    color: govuk-colour("white");
+  }
+
+  &__body-l {
+    @include font-style-stack(19px, 24px, 300);
+    color: govuk-colour("white");
+  }
+
+  &__button-group {
+    justify-content: center;
+  }
+}
+
+.filter {
+  &-heading {
+    @include font-style-stack(24px, 30px);
+  }
+
+  &-options-label {
+    @include font-style-stack(19px, 25px, 300);
+  }
+
+  &-button {
+    @include font-style-stack(19px, 25px, 300);
+    display: block;
+  }
+
+  &-reset {
+    @include font-style-stack(19px, 25px, 300);
+    color: $gov-defra-color-websafe !important;
+  }
+}
+.govuk-pagination {
   margin-top: 20px;
 }
-.govuk-pagination__item--current{
-  background-color: #00703C;
+.govuk-pagination__item--current {
+  background-color: #00703c;
 }
 .govuk-link:link {
-  color: #00703C;
+  color: #00703c;
 }
-.govuk-link:visited{
-  color: #00703C;
+.govuk-link:visited {
+  color: #00703c;
 }
 .govuk-pagination__item--current:hover {
-  background-color: #00703C;
+  background-color: #00703c;
 }

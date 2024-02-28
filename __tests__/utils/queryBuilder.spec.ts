@@ -34,6 +34,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -81,7 +82,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -110,6 +111,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -161,11 +163,12 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        ['field1', 'field2', 'field3'],
+        false,
+        false,
+      );
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -179,6 +182,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -204,11 +208,12 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        ['field1', 'field2', 'field3'],
+        false,
+        false,
+      );
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -222,6 +227,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -243,7 +249,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, []);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -262,6 +268,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -285,7 +292,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -303,6 +310,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -336,7 +344,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -353,6 +361,7 @@ describe('Build the search query', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -382,7 +391,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -393,6 +402,7 @@ describe('Build the search query', () => {
         fields: {},
         sort: '',
         rowsPerPage: 20,
+        filters: {},
         page: 1,
       };
 
@@ -406,7 +416,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result.query.bool.must).toEqual([]);
       expect(result).toEqual(expectedQuery);
@@ -437,6 +447,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -491,7 +502,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -520,6 +531,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -578,11 +590,12 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        ['field1', 'field2', 'field3'],
+        false,
+        false,
+      );
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -596,6 +609,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -628,11 +642,12 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        ['field1', 'field2', 'field3'],
+        false,
+        false,
+      );
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -646,6 +661,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -674,7 +690,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, []);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -693,6 +709,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -723,7 +740,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -741,6 +758,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -781,7 +799,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -798,6 +816,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -834,7 +853,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -865,6 +884,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -913,7 +933,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -942,6 +962,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -994,11 +1015,12 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        ['field1', 'field2', 'field3'],
+        false,
+        false,
+      );
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1012,6 +1034,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -1038,11 +1061,12 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        ['field1', 'field2', 'field3'],
+        false,
+        false,
+      );
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1056,6 +1080,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -1078,7 +1103,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, []);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1097,6 +1122,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -1121,7 +1147,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1139,6 +1165,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -1173,7 +1200,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1190,6 +1217,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'recent_study',
+        filters: {},
         rowsPerPage: 20,
         page: 1,
       };
@@ -1220,7 +1248,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery(searchFieldsObject, [], false, false);
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1251,6 +1279,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 50,
         page: 1,
       };
@@ -1334,6 +1363,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 100,
         page: 1,
       };
@@ -1427,6 +1457,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
+        filters: {},
         page: 1,
       };
 
@@ -1511,6 +1542,7 @@ describe('Build the search query', () => {
         sort: 'best_match',
         rowsPerPage: 20,
         page: 5,
+        filters: {},
       };
 
       const expectedQuery: IQuery = {
@@ -1575,6 +1607,202 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
+    });
+  });
+
+  describe('Search query with filters', () => {
+    it('should build the search query when filter resourceType is all', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 0,
+      };
+
+      const result = buildSearchQuery(searchFieldsObject, [], false, true);
+      const filteredOptions = Object.keys(searchFieldsObject.filters).filter(
+        (key) => searchFieldsObject.filters[key] !== 'all',
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+
+      expect(filteredOptions).not.toContain('resourceType');
+      expect(filteredOptions.length).toBe(0);
+    });
+
+    it('should build the search query when filter resourceType is dataset', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'dataset' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                bool: {
+                  should: [{ match: { resourceType: 'dataset' } }],
+                  minimum_should_match: 1,
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 0,
+      };
+
+      const result = buildSearchQuery(searchFieldsObject, [], false, true);
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(2);
+    });
+  });
+
+  describe('Search query for resourceType aggregations', () => {
+    it('should build the search query for resourceType aggregation', () => {
+      const aggregationField = 'resourceType';
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        aggs: {
+          unique_values: {
+            terms: {
+              field: aggregationField,
+            },
+          },
+        },
+        size: 0,
+        from: 0,
+      };
+
+      const result = buildSearchQuery(
+        searchFieldsObject,
+        [],
+        false,
+        false,
+        aggregationField,
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+    });
+  });
+
+  describe('Search query for count', () => {
+    it('should build the search query to get only count of documents', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        from: 0,
+      };
+
+      const result = buildSearchQuery(searchFieldsObject, [], true, true);
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
     });
   });
 });

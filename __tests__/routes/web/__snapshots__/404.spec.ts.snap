@@ -66,25 +66,25 @@ exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snap
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-third">
-            <p>&nbsp;</p>
-        </div>
-        <div class="govuk-grid-column-full">
-            <h1 class="govuk-heading-m">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <p>&nbsp;</p>
+    </div>
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-m">
                 Error 404 page not found
             </h1>
-            <p class="govuk-caption-m govuk-!-font-size-14">
+      <p class="govuk-caption-m govuk-!-font-size-14">
                 If you typed the web address, check it is correct.
             </P>
-            <p class="govuk-caption-m govuk-!-font-size-14">
+      <p class="govuk-caption-m govuk-!-font-size-14">
                 If you pasted the web address, check you copied the entire address.
             </P>
-            <p class="govuk-caption-m govuk-!-font-size-14">
+      <p class="govuk-caption-m govuk-!-font-size-14">
                 If the web address is correct or you selected a link or button, you can <a href="#">contact us</a> to receive support.
             </P>
-        </div>
     </div>
+  </div>
 
         </main>
       </div>
@@ -165,6 +165,7 @@ exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snap
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     

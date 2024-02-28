@@ -1,14 +1,23 @@
 import { buildSearchQuery } from '../../../src/utils/queryBuilder';
-import { elasticSearchAPIPaths } from '../../../src/utils/constants';
 import { elasticSearchClient } from '../../../src/config/elasticSearchClient';
 import {
   IQuery,
   ISearchPayload,
 } from '../../../src/interfaces/queryBuilder.interface';
 import {
+  elasticSearchAPIPaths,
+  resourceTypeOptions,
+} from '../../../src/utils/constants';
+import {
+  formattedResourceTypeResponse,
+  resourceTypeAPIResponse,
+} from '../../data/resourceTypeResponse';
+import {
+  getResourceTypeOptions,
   getSearchResults,
   getSearchResultsCount,
 } from '../../../src/services/handlers/searchApi';
+import { formatAggregationResponse } from '../../../src/utils/formatAggregationResponse';
 
 jest.mock('../../../src/config/elasticSearchClient', () => ({
   elasticSearchClient: {
@@ -23,6 +32,11 @@ jest.mock('../../../src/utils/formatSearchResponse', () => ({
     items: [],
   })),
 }));
+
+jest.mock('../../../src/utils/formatAggregationResponse', () => ({
+  formatAggregationResponse: jest.fn(),
+}));
+
 describe('Search API', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -36,8 +50,9 @@ describe('Search API', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
       const payload: IQuery = buildSearchQuery(searchFieldsObject);
       await getSearchResults(searchFieldsObject);
@@ -55,8 +70,9 @@ describe('Search API', () => {
           },
         },
         sort: 'best_match',
+        filters: {},
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
       const result = await getSearchResults(searchFieldsObject);
       expect(result).toEqual({ total: undefined, items: [] });
@@ -70,8 +86,9 @@ describe('Search API', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
       elasticSearchClient.post = jest
         .fn()
@@ -82,7 +99,13 @@ describe('Search API', () => {
     });
 
     it('should return the default response when no fields data is present', async () => {
-      const result = await getSearchResults({ fields: {}, sort: '', rowsPerPage: 20, page: 1});
+      const result = await getSearchResults({
+        fields: {},
+        sort: '',
+        rowsPerPage: 20,
+        filters: {},
+        page: 1,
+      });
       expect(result).toEqual({ total: 0, items: [] });
     });
   });
@@ -96,8 +119,9 @@ describe('Search API', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { totalResults: 10 },
@@ -114,8 +138,9 @@ describe('Search API', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: { count: 10 },
@@ -125,7 +150,13 @@ describe('Search API', () => {
     });
 
     it('should return the total results count as 0 if no must conditions are provided', async () => {
-      const result = await getSearchResultsCount({ fields: {}, sort: '', rowsPerPage: 20, page: 1 });
+      const result = await getSearchResultsCount({
+        fields: {},
+        sort: '',
+        rowsPerPage: 20,
+        filters: {},
+        page: 1,
+      });
       expect(result).toEqual({ totalResults: 0 });
     });
 
@@ -137,8 +168,9 @@ describe('Search API', () => {
           },
         },
         sort: '',
+        filters: {},
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
       elasticSearchClient.post = jest
         .fn()
@@ -146,6 +178,61 @@ describe('Search API', () => {
       await expect(getSearchResultsCount(searchFieldsObject)).rejects.toThrow(
         'Error fetching results: Mocked error',
       );
+    });
+  });
+
+  describe('Search API - To fetch the aggregated results for filters', () => {
+    it('should return the response from elasticSearchClient.post', async () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'dataset' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce(
+        resourceTypeAPIResponse,
+      );
+      (formatAggregationResponse as jest.Mock).mockResolvedValueOnce(
+        formattedResourceTypeResponse,
+      );
+      const result = await getResourceTypeOptions(searchFieldsObject);
+      expect(result).toEqual(formattedResourceTypeResponse);
+    });
+
+    it('should handle errors and throw an error message', async () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: '',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+      elasticSearchClient.post = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Mocked error'));
+      await expect(getResourceTypeOptions(searchFieldsObject)).rejects.toThrow(
+        'Error fetching results: Mocked error',
+      );
+    });
+
+    it('should return the default response when no fields data is present', async () => {
+      const result = await getResourceTypeOptions({
+        fields: {},
+        sort: '',
+        rowsPerPage: 20,
+        filters: {},
+        page: 1,
+      });
+      expect(result).toEqual(resourceTypeOptions);
     });
   });
 });

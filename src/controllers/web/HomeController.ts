@@ -2,7 +2,7 @@
 
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
-import { formIds, webRoutePaths } from '../../utils/constants';
+import { formIds } from '../../utils/constants';
 
 /**
  * This code snippet exports a module named HomeController.
@@ -15,12 +15,9 @@ import { formIds, webRoutePaths } from '../../utils/constants';
 
 const HomeController = {
   renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const { results: quickSearchPath, guidedDateSearch: dateSearchPath } = webRoutePaths;
     const formId: string = formIds.quickSearch;
     return response.view('screens/home/template', {
-      quickSearchPath,
       formId,
-      dateSearchPath,
       searchInputError: undefined,
     });
   },

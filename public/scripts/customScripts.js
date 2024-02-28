@@ -7,9 +7,11 @@ const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
   sort: 'best_match',
-  filters: {},
-  rowsPerPage : 20,
-  page : 1,
+  filters: { resourceType: 'all' },
+  rowsPerPage: 20,
+  page: 1,
+  stepState: {},
+  previousStep: '',
 });
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;
@@ -86,13 +88,13 @@ const updateSubmitButtonState = (form) => {
 
 //Listen for the input event on input fields
 const attachEventListeners = (form) => {
-  const sessionData = getStorageData();
   form.querySelectorAll('input').forEach((input) => {
     input.addEventListener('input', () => {
+      const sessionData = getStorageData();
       const fieldName = input.getAttribute('name');
       const value = input.value;
 
-      if (!sessionData.fields[form.id]) {
+      if (!sessionData.fields.hasOwnProperty(form.id)) {
         sessionData.fields[form.id] = {};
       }
       sessionData.fields[form.id][fieldName] = value;
@@ -115,6 +117,20 @@ const resetStorage = () => {
   }
 };
 
+const previousQuestion = () => {
+  const previousQuestionElements = document.querySelectorAll(
+    '[data-do-previous-page]',
+  );
+  if (previousQuestionElements.length > 0) {
+    previousQuestionElements.forEach((element) => {
+      element.addEventListener('click', () => {
+        const { previousStep } = getStorageData();
+        window.location.pathname = previousStep;
+      });
+    });
+  }
+};
+
 const skipStorage = () => {
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
   if (skipElements.length > 0) {
@@ -126,6 +142,27 @@ const skipStorage = () => {
           if (sessionData.fields.hasOwnProperty(associatedForm.id)) {
             delete sessionData.fields[associatedForm.id];
           }
+          sessionData.stepState[associatedForm.id] = 'skipped';
+          sessionData.previousStep = window.location.pathname;
+          storeStorageData(sessionData);
+        }
+      });
+    });
+  }
+};
+
+const nextQuestion = () => {
+  const nextQuestionElements = document.querySelectorAll(
+    '[data-next-question]',
+  );
+  if (nextQuestionElements.length > 0) {
+    nextQuestionElements.forEach((element) => {
+      element.addEventListener('click', (event) => {
+        const associatedForm = event.target.closest('form');
+        if (associatedForm) {
+          const sessionData = getStorageData();
+          sessionData.stepState[associatedForm.id] = 'submitted';
+          sessionData.previousStep = window.location.pathname;
           storeStorageData(sessionData);
         }
       });
@@ -182,6 +219,8 @@ if (typeof Storage !== 'undefined') {
 
     resetStorage();
     skipStorage();
+    nextQuestion();
+    previousQuestion();
 
     const searchJourneyElement = document.querySelectorAll(
       '[data-do-quick-search]',
@@ -221,4 +260,5 @@ export {
   getStorageData,
   fireEventAfterStorage,
   resetStorage,
+  previousQuestion,
 };

@@ -1,6 +1,5 @@
-{% extends "layout/template.njk" %}
+{% extends "layout/default.njk" %}
 
-{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
 {% from "partials/results_count/macro.njk" import resultsCount %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
@@ -13,18 +12,11 @@
 
 {% block beforeContent %}
   {{ super() }}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Back",
-        href: guidedDateSearchPath
-      }
-    ]
-  }) }}
+  {% include "partials/guided_search_breadcrumb/template.njk" %}
 {% endblock %}
 
 {% block content %}
-  {{resultsCount({action: resultsCountPath, formId: formId, resultsPath: resultsPath})}}
+  {{resultsCount({action: routes.getResultsCount, formId: formId, resultsPath: routes.searchResults})}}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
@@ -64,7 +56,8 @@
             'data-do-storage-skip': ''
           } }) }}
         {{ govukButton({ text: "Show results", classes: "govuk-!-margin-bottom-0", attributes: {
-            'data-to-disable': ''
+            'data-to-disable': '',
+            'data-next-question': ''
           } }) }}
       </div>
     </div>

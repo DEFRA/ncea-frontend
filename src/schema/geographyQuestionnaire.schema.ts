@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import { isEmpty } from '../utils/isEmpty';
 
-const coordinatePattern = /^-?(\d|[1-8]\d|90)(\.\d+)?$/;
-const longitudePattern = /^-?((1[0-7]\d)|(\d{1,2})|180)(\.\d+)?$/;
+const coordinatePattern = /^[-+]?([1-8]?\d(?:\.\d{1,6})?|90)$/;
+const longitudePattern = /^[-+]?(180(\.0{1,6})?|1[0-7]\d?|\d{1,2}(\.\d{1,6})?)$/;
 const depthPattern = /^\d+$/;
 
 const geographyQuestionnaireSchema = Joi.object({

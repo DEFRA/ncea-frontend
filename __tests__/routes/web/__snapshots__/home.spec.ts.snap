@@ -227,6 +227,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     

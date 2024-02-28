@@ -68,12 +68,20 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
 </div>
 
 
-  <div class="govuk-breadcrumbs">
+  
+
+<div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
 
   
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/date-search">Back</a>
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Questionnaire search</a>
     </li>
   
 
@@ -238,7 +246,7 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-to-disable="">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-to-disable="" data-next-question="">
   Show results
 </button>
 
@@ -325,6 +333,7 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     

@@ -65,7 +65,9 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 </div>
 
 
-  <div class="govuk-breadcrumbs">
+  
+
+<div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
 
   
@@ -249,7 +251,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" data-to-disable="">
+<button type="submit" class="govuk-button" data-module="govuk-button" data-to-disable="" data-next-question="">
   Next question
 </button>
 
@@ -337,6 +339,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   </div>
 </footer>
 
+  <div id="overlay" class="overlay"></div>
 
 
     
