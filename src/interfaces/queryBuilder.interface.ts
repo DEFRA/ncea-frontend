@@ -27,7 +27,6 @@ interface IGeoShapeQuery {
         to: number;
       };
       relation: string;
-      ignore_unmapped: boolean;
     };
   };
 }

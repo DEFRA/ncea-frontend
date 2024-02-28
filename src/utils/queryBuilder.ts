@@ -24,7 +24,10 @@ const quickSearchQuery = (fields: ISearchFields): IQueryString => {
   return queryString;
 };
 
-const quickSearchQueryWithFields = (fields: ISearchFields, fieldsToSearch: string[] = []): IBoolQuery => {
+const quickSearchQueryWithFields = (
+  fields: ISearchFields,
+  fieldsToSearch: string[] = [],
+): IBoolQuery => {
   const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
     match: { [field]: fields['quick-search']?.search_term },
   })) as IMatchQuery[];
@@ -40,15 +43,39 @@ const quickSearchQueryWithFields = (fields: ISearchFields, fieldsToSearch: strin
 
 const dateQuery = (fields: ISearchFields): IRangeQuery => {
   const startDate: string = generateDateString({
-    year: parseInt(fields['date-search'] ? (fields['date-search']['from-date-year'] as string) : ''),
-    month: parseInt(fields['date-search'] ? (fields['date-search']['from-date-month'] as string) : ''),
-    day: parseInt(fields['date-search'] ? (fields['date-search']['from-date-day'] as string) : ''),
+    year: parseInt(
+      fields['date-search']
+        ? (fields['date-search']['from-date-year'] as string)
+        : '',
+    ),
+    month: parseInt(
+      fields['date-search']
+        ? (fields['date-search']['from-date-month'] as string)
+        : '',
+    ),
+    day: parseInt(
+      fields['date-search']
+        ? (fields['date-search']['from-date-day'] as string)
+        : '',
+    ),
   });
   const endDate: string = generateDateString(
     {
-      year: parseInt(fields['date-search'] ? (fields['date-search']['to-date-year'] as string) : ''),
-      month: parseInt(fields['date-search'] ? (fields['date-search']['to-date-month'] as string) : ''),
-      day: parseInt(fields['date-search'] ? (fields['date-search']['to-date-day'] as string) : ''),
+      year: parseInt(
+        fields['date-search']
+          ? (fields['date-search']['to-date-year'] as string)
+          : '',
+      ),
+      month: parseInt(
+        fields['date-search']
+          ? (fields['date-search']['to-date-month'] as string)
+          : '',
+      ),
+      day: parseInt(
+        fields['date-search']
+          ? (fields['date-search']['to-date-day'] as string)
+          : '',
+      ),
     },
     true,
   );
@@ -85,7 +112,9 @@ const buildBestScoreSort = (): ISortQuery => ({
   },
 });
 
-const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => {
+const buildGeoShapeQuery = (
+  geoCoordinates: IGeoCoordinates,
+): IGeoShapeQuery => {
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
@@ -99,7 +128,6 @@ const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => 
       geom: {
         shape: geoShape,
         relation: 'intersects',
-        ignore_unmapped: true,
       },
     },
   };
@@ -113,7 +141,10 @@ const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => 
   return geoShapeQuery;
 };
 
-const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: string[] = []): IQuery => {
+const buildSearchQuery = (
+  searchFieldsObject: ISearchPayload,
+  fieldsToSearch: string[] = [],
+): IQuery => {
   const { fields, sort, rowsPerPage, page } = searchFieldsObject;
   const boolQuery: IBoolQuery = {
     bool: {
@@ -127,18 +158,31 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
   }
 
   if (fields['quick-search'] && fieldsToSearch.length) {
-    const matchShould: IBoolQuery = quickSearchQueryWithFields(fields, fieldsToSearch);
+    const matchShould: IBoolQuery = quickSearchQueryWithFields(
+      fields,
+      fieldsToSearch,
+    );
     boolQuery.bool.must?.push(matchShould);
   }
 
-  if (fields['date-search']?.['from-date-year'] && fields['date-search']['to-date-year']) {
+  if (
+    fields['date-search']?.['from-date-year'] &&
+    fields['date-search']['to-date-year']
+  ) {
     const rangeQuery: IRangeQuery = dateQuery(fields);
     boolQuery.bool.must?.push(rangeQuery);
   }
 
-  const geoCoordinates: IGeoCoordinates = fields['coordinate-search'] as IGeoCoordinates;
+  const geoCoordinates: IGeoCoordinates = fields[
+    'coordinate-search'
+  ] as IGeoCoordinates;
 
-  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
+  if (
+    geoCoordinates?.north &&
+    geoCoordinates?.south &&
+    geoCoordinates?.east &&
+    geoCoordinates?.west
+  ) {
     const geoShapeQuery: IGeoShapeQuery = buildGeoShapeQuery(geoCoordinates);
     boolQuery.bool.must?.push(geoShapeQuery);
   }
@@ -152,7 +196,9 @@ const buildSearchQuery = (searchFieldsObject: ISearchPayload, fieldsToSearch: st
 
   if (sort) {
     const sortQuery: ISortQuery =
-      sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : buildBestScoreSort();
+      sort === 'recent_study'
+        ? buildCustomSortScriptForStudyPeriod()
+        : buildBestScoreSort();
     finalQuery.sort?.push(sortQuery);
   } else {
     delete finalQuery.sort;

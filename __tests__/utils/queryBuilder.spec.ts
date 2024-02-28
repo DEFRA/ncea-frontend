@@ -35,7 +35,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -71,7 +71,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -112,7 +111,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -152,7 +151,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -160,7 +158,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -182,7 +180,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -203,7 +201,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -225,7 +223,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -242,7 +240,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -265,7 +263,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -284,7 +282,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -306,7 +304,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -328,7 +326,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -336,7 +333,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -357,7 +354,7 @@ describe('Build the search query', () => {
         },
         sort: '',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -375,7 +372,6 @@ describe('Build the search query', () => {
                       ],
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -383,7 +379,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -393,7 +389,12 @@ describe('Build the search query', () => {
     });
 
     it('should handle missing search fields', () => {
-      const searchFieldsObject = { fields: {}, sort: '', rowsPerPage: 20, page: 1 };
+      const searchFieldsObject = {
+        fields: {},
+        sort: '',
+        rowsPerPage: 20,
+        page: 1,
+      };
 
       const expectedQuery = {
         query: {
@@ -402,7 +403,7 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -437,7 +438,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -473,7 +474,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -488,7 +488,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -521,7 +521,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -561,7 +561,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -576,7 +575,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -598,7 +597,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -626,7 +625,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -648,7 +647,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -672,7 +671,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -695,7 +694,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -721,7 +720,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -743,7 +742,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -765,7 +764,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -780,7 +778,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -801,7 +799,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -819,7 +817,6 @@ describe('Build the search query', () => {
                       ],
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -834,7 +831,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -869,7 +866,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -905,7 +902,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -914,7 +910,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -947,7 +943,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -987,7 +983,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -996,7 +991,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -1018,7 +1013,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1040,7 +1035,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -1062,7 +1057,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1080,7 +1075,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, []);
@@ -1103,7 +1098,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1123,7 +1118,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1145,7 +1140,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1167,7 +1162,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -1176,7 +1170,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1197,7 +1191,7 @@ describe('Build the search query', () => {
         },
         sort: 'recent_study',
         rowsPerPage: 20,
-        page: 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1215,7 +1209,6 @@ describe('Build the search query', () => {
                       ],
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -1224,7 +1217,7 @@ describe('Build the search query', () => {
         },
         sort: [recentStudySortScript],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1259,7 +1252,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 50,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1295,7 +1288,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -1310,7 +1302,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 50,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1343,7 +1335,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 100,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1383,7 +1375,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -1398,7 +1389,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 100,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
@@ -1436,7 +1427,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page : 1
+        page: 1,
       };
 
       const expectedQuery: IQuery = {
@@ -1472,7 +1463,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -1487,7 +1477,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 0
+        from: 0,
       };
 
       const result = buildSearchQuery(searchFieldsObject);
@@ -1520,7 +1510,7 @@ describe('Build the search query', () => {
         },
         sort: 'best_match',
         rowsPerPage: 20,
-        page : 5
+        page: 5,
       };
 
       const expectedQuery: IQuery = {
@@ -1560,7 +1550,6 @@ describe('Build the search query', () => {
                       to: 1,
                     },
                     relation: 'intersects',
-                    ignore_unmapped: true,
                   },
                 },
               },
@@ -1575,7 +1564,7 @@ describe('Build the search query', () => {
           },
         ],
         size: 20,
-        from: 80
+        from: 80,
       };
 
       const result = buildSearchQuery(searchFieldsObject, [
