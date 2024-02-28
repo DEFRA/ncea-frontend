@@ -1,7 +1,13 @@
-import { ISearchItem, ISearchResults } from '../interfaces/searchResponse.interface';
+import { encryptData } from './crypto';
+import {
+  ISearchItem,
+  ISearchResults,
+} from '../interfaces/searchResponse.interface';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<ISearchResults> => {
+const formatSearchResponse = async (
+  apiResponse: Record<string, any>,
+): Promise<ISearchResults> => {
   const finalResponse: ISearchResults = {
     total: apiResponse?.hits?.total?.value,
     items: [],
@@ -10,8 +16,11 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
 
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   apiSearchItems.map((searchItem: Record<string, any>) => {
-    const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
-    const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
+    const startDate: string =
+      searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ??
+      '';
+    const endDate: string =
+      searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
     const item: ISearchItem = {
       id: searchItem?._id,
       title: searchItem?._source?.resourceTitleObject?.default,
@@ -21,7 +30,9 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
         startDate,
         endDate,
       },
-      resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+      resourceLocator:
+        searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+      resourceURL: encryptData(`${searchItem?._id}@${searchItem?._index}`),
     };
 
     finalResponse.items.push(item);
