@@ -8,6 +8,10 @@ export interface ISearchItem {
     endDate: string;
   };
   resourceLocator: string;
+  abstract?: string;
+  language?: string;
+  keywords?: string;
+  topic_categories?: string;
 }
 
 export interface ISearchResults {

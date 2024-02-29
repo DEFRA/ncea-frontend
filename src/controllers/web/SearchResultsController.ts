@@ -6,7 +6,7 @@ import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfac
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { getPaginationItems } from '../../utils/paginationBuilder';
-import { formIds, resourceTypeOptions, webRoutePaths } from '../../utils/constants';
+import { detailsTabOptions, formIds, resourceTypeOptions, webRoutePaths } from '../../utils/constants';
 import {
   getDocumentDetails,
   getResourceTypeOptions,
@@ -95,6 +95,7 @@ const SearchResultsController = {
       const docDetails: ISearchItem = await getDocumentDetails(docId);
       return response.view('screens/details/template', {
         docDetails,
+        detailsTabOptions,
       });
     } catch (error) {
       return response.view('screens/details/template', {

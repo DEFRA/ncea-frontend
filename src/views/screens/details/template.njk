@@ -2,33 +2,61 @@
 
 {% from 'govuk/components/breadcrumbs/macro.njk' import govukBreadcrumbs %}
 {% from 'govuk/components/tabs/macro.njk' import govukTabs %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% from 'partials/details/macro.njk' import details %}
 
 {% block beforeContent %}
   {{ super() }}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: 'Home',
-        href: routes.homePage,
-        attributes: {
-          'data-do-storage-reset': ''
-        }
-      },
-      {
-        text: 'Search results',
-        href: routes.searchResults
+
+  {% set breadcrumbItems = [{
+      text: 'Home',
+      href: routes.homePage,
+      attributes: {
+        'data-do-storage-reset': ''
       }
-    ]
+    },
+    {
+      text: 'Search results',
+      href: routes.searchResults
+    }]
+  %}
+
+  {% if docDetails.title %}
+    {% set breadcrumbItems = breadcrumbItems.concat([
+      {
+        text: docDetails.title,
+        href: '#'
+      }
+    ]) %}
+  {% endif %}
+
+  {{ govukBreadcrumbs({
+    items: breadcrumbItems
   }) }}
 {% endblock %}
 
 {% block content %}
+  {% if docDetails !== undefined and docDetails.title %}
+    {% set generalHTML = details({options: detailsTabOptions.general, docDetails: docDetails}) %}
 
-  {% set generalHTML %}
-  {% include 'partials/details/general.njk' %}
-  {% endset %}
+    <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
 
-  {{ govukTabs({
+    {% set openDataAttributes = {} %}
+    {% if item.resourceLocator %}
+      {% set openDataAttributes = openDataAttributes | merge({
+        onclick: "openDataModal('" + item.resourceLocator + "')"
+      }) %}
+    {% else %}
+      {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
+    {% endif %}
+    {{ govukButton({
+    text: 'Open data',
+    attributes: openDataAttributes,
+    classes: 'govuk-!-margin-bottom-4'
+  }) }}
+
+    {{ govukTabs({
     items: [
       {
         label: 'General',
@@ -81,4 +109,8 @@
       }
     ]
   }) }}
+
+  {% else %}
+    <p>Error</p>
+  {% endif %}
 {% endblock %}

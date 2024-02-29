@@ -7935,3 +7935,57 @@
 .govuk-pagination__item--current:hover {
   background-color: #00703c;
 }
+
+.details-title {
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  width: 630px;
+}
+
+.govuk-tabs__list-item .govuk-tabs__tab {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 19px;
+  color: #0b0c0c;
+}
+
+.tab-content-container {
+  display: grid;
+  gap: 15px;
+}
+.tab-content-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.tab-content-label {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  width: 170px;
+  text-align: left;
+  vertical-align: top;
+  color: #000;
+  margin: 0;
+}
+.tab-content-value {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  color: #0b0c0c;
+  text-align: left;
+}
+.tab-content-value__not-provided {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 1px;
+  width: 130px;
+  padding: 5px 1px 5px 5px;
+  margin: 0;
+}

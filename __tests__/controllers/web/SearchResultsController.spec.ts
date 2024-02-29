@@ -16,7 +16,11 @@ import {
   IAggregationOption,
   ISearchItem,
 } from '../../../src/interfaces/searchResponse.interface';
-import { formIds, webRoutePaths } from '../../../src/utils/constants';
+import {
+  detailsTabOptions,
+  formIds,
+  webRoutePaths,
+} from '../../../src/utils/constants';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
@@ -332,6 +336,7 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
         docDetails: expectedResponse,
+        detailsTabOptions,
       });
     });
     it('should fetch the data as empty object when the API does not found the document and return the view', async () => {
@@ -344,6 +349,7 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
         docDetails: {},
+        detailsTabOptions,
       });
     });
 

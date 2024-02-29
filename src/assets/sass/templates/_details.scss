@@ -1,0 +1,45 @@
+.details {
+  &-title {
+    @include font-style-stack(36px, 40px);
+    width: 630px;
+  }
+}
+
+.govuk-tabs__list-item .govuk-tabs__tab {
+  @include font-style-stack(19px, 19px, 300);
+  color: $govuk-text-colour;
+}
+
+.tab-content {
+  &-container {
+    display: grid;
+    gap: 15px;
+  }
+
+  &-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  &-label {
+    @include font-style-stack(16px, 20px, 700);
+    width: 170px;
+    text-align: left;
+    vertical-align: top;
+    color: #000;
+    margin: 0;
+  }
+
+  &-value {
+    @include font-style-stack(16px, 20px, 300);
+    color: $govuk-text-colour;
+    text-align: left;
+
+    &__not-provided {
+      @include font-style-stack(16px, 16px, 700, normal, false, 1px);
+      width: 130px;
+      padding: 5px 1px 5px 5px;
+      margin: 0;
+    }
+  }
+}

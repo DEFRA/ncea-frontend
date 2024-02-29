@@ -1,0 +1,25 @@
+{%- from "govuk/components/tag/macro.njk" import govukTag -%}
+
+{% if params.options and params.docDetails.title %}
+  <div class='tab-content-container'>
+    {% for option in params.options %}
+      {% if option.label %}
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>{{option.label}}</h2>
+          {% if option
+            .column and params
+            .docDetails[option.column] %}
+            <span class='tab-content-value'>
+              {{params.docDetails[option.column]}}
+            </span>
+          {% else %}
+            {{govukTag({
+              text: "NOT PROVIDED",
+              classes: "govuk-tag--grey tab-content-value__not-provided"
+            })}}
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

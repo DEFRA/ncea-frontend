@@ -21,10 +21,10 @@ import {
 import {
   detailsEmptyAPIResponse,
   detailsSuccessAPIResponse,
-  formattedDetailsResponse,
 } from '../../data/documentDetailsResponse';
 import { formatAggregationResponse } from '../../../src/utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../../src/utils/formatSearchResponse';
+import { ISearchResults } from '../../../src/interfaces/searchResponse.interface';
 
 jest.mock('../../../src/config/elasticSearchClient', () => ({
   elasticSearchClient: {
@@ -249,9 +249,8 @@ describe('Search API', () => {
       (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
         data: detailsSuccessAPIResponse,
       });
-      (formatSearchResponse as jest.Mock).mockResolvedValueOnce(
-        formattedDetailsResponse,
-      );
+      const formattedDetailsResponse: ISearchResults =
+        await formatSearchResponse(detailsSuccessAPIResponse, true);
       const result = await getDocumentDetails(docId);
       expect(result).toEqual(formattedDetailsResponse?.items?.[0]);
     });

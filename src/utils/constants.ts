@@ -28,3 +28,28 @@ export const formIds = {
 export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
+
+export const detailsTabOptions = {
+  general: [
+    {
+      label: 'Abstract',
+      column: 'abstract',
+    },
+    {
+      label: 'Study periods',
+      column: '',
+    },
+    {
+      label: 'Topic categories',
+      column: 'topic_categories',
+    },
+    {
+      label: 'Keywords',
+      column: 'keywords',
+    },
+    {
+      label: 'Languages',
+      column: 'language',
+    },
+  ],
+};

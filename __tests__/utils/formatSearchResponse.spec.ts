@@ -1,5 +1,11 @@
 import { ISearchResults } from '../../src/interfaces/searchResponse.interface';
 import { formatSearchResponse } from '../../src/utils/formatSearchResponse';
+import {
+  detailsSuccessAPIFullData,
+  detailsSuccessAPIResponse,
+  formattedDetailsFullResponse,
+  formattedDetailsResponse,
+} from '../data/documentDetailsResponse';
 describe('Format the search response', () => {
   it('should format the search response correctly', async () => {
     const apiResponse = {
@@ -78,6 +84,20 @@ describe('Format the search response', () => {
       ],
     };
     const result = await formatSearchResponse(apiResponse);
+    expect(result).toEqual(expectedResponse);
+  });
+
+  it('should format the document details response correctly', async () => {
+    const apiResponse = detailsSuccessAPIResponse;
+    const expectedResponse: ISearchResults = formattedDetailsResponse;
+    const result = await formatSearchResponse(apiResponse, true);
+    expect(result).toEqual(expectedResponse);
+  });
+
+  it('should format the document details response correctly with full response', async () => {
+    const apiResponse = detailsSuccessAPIFullData;
+    const expectedResponse: ISearchResults = formattedDetailsFullResponse;
+    const result = await formatSearchResponse(apiResponse, true);
     expect(result).toEqual(expectedResponse);
   });
 });

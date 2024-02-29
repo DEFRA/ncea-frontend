@@ -73,7 +73,7 @@ const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
     const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
     const responseData = response?.data;
     if (responseData?.hits?.total?.value) {
-      const finalResponse: ISearchResults = await formatSearchResponse(responseData);
+      const finalResponse: ISearchResults = await formatSearchResponse(responseData, true);
       return finalResponse?.items?.[0] as ISearchItem;
     } else {
       return Promise.resolve({} as ISearchItem);
