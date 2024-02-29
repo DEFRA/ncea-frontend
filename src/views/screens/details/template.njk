@@ -1,0 +1,84 @@
+{% extends 'layout/default.njk' %}
+
+{% from 'govuk/components/breadcrumbs/macro.njk' import govukBreadcrumbs %}
+{% from 'govuk/components/tabs/macro.njk' import govukTabs %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: 'Home',
+        href: routes.homePage,
+        attributes: {
+          'data-do-storage-reset': ''
+        }
+      },
+      {
+        text: 'Search results',
+        href: routes.searchResults
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  {% set generalHTML %}
+  {% include 'partials/details/general.njk' %}
+  {% endset %}
+
+  {{ govukTabs({
+    items: [
+      {
+        label: 'General',
+        id: 'general',
+        panel: {
+          html: generalHTML
+        }
+      },
+      {
+        label: 'Access',
+        id: 'access',
+        panel: {
+          html: accessHtml
+        }
+      },
+      {
+        label: 'Natural Capital',
+        id: 'natural-capital',
+        panel: {
+          html: naturalCapitalHTML
+        }
+      },
+      {
+        label: 'Quality',
+        id: 'quality',
+        panel: {
+          html: qualityHtml
+        }
+      },
+      {
+        label: 'Geography',
+        id: 'geography',
+        panel: {
+          html: geographyHtml
+        }
+      },
+      {
+        label: 'Governance',
+        id: 'governance',
+        panel: {
+          html: governanceHtml
+        }
+      },
+      {
+        label: 'License',
+        id: 'license',
+        panel: {
+          html: plicenseHtml
+        }
+      }
+    ]
+  }) }}
+{% endblock %}

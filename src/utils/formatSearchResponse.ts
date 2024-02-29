@@ -26,7 +26,6 @@ const formatSearchResponse = async (apiResponse: Record<string, any>): Promise<I
 
     finalResponse.items.push(item);
   });
-
   return finalResponse;
 };
 

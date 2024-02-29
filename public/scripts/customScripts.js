@@ -8,7 +8,7 @@ const defaultSessionData = JSON.stringify({
   fields: {},
   sort: 'best_match',
   filters: { resourceType: 'all' },
-  rowsPerPage: 20,
+  rowsPerPage: '20',
   page: 1,
   stepState: {},
   previousStep: '',

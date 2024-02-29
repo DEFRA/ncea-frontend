@@ -1,24 +1,28 @@
 'use strict';
 
-import { getPaginationItems } from '../../../src/utils/paginationBuilder';
-import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import Joi from 'joi';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 
 import {
+  getDocumentDetails,
   getSearchResults,
   getSearchResultsCount,
   getResourceTypeOptions,
 } from '../../../src/services/handlers/searchApi';
 import { quickSearchJoiError } from '../../data/quickSearch';
+import { formattedDetailsResponse } from '../../data/documentDetailsResponse';
+import {
+  IAggregationOption,
+  ISearchItem,
+} from '../../../src/interfaces/searchResponse.interface';
 import { formIds, webRoutePaths } from '../../../src/utils/constants';
-import { IAggregationOption } from '../../../src/interfaces/searchResponse.interface';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
   getSearchResultsCount: jest.fn(),
   getResourceTypeOptions: jest.fn(),
+  getDocumentDetails: jest.fn(),
 }));
 describe('Deals with search results controller', () => {
   describe('Deals with search results handler', () => {
@@ -311,6 +315,50 @@ describe('Deals with search results controller', () => {
             text: 'All',
           },
         ],
+      });
+    });
+  });
+
+  describe('Deals with document details handler', () => {
+    it('should fetch the data and return the view', async () => {
+      const request: Request = { params: { id: '123' } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const expectedResponse: ISearchItem = formattedDetailsResponse
+        ?.items?.[0] as ISearchItem;
+      (getDocumentDetails as jest.Mock).mockResolvedValue(expectedResponse);
+      await SearchResultsController.renderSearchDetailsHandler(
+        request,
+        response,
+      );
+      expect(response.view).toHaveBeenCalledWith('screens/details/template', {
+        docDetails: expectedResponse,
+      });
+    });
+    it('should fetch the data as empty object when the API does not found the document and return the view', async () => {
+      const request: Request = { params: { id: '123' } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      (getDocumentDetails as jest.Mock).mockResolvedValue({});
+      await SearchResultsController.renderSearchDetailsHandler(
+        request,
+        response,
+      );
+      expect(response.view).toHaveBeenCalledWith('screens/details/template', {
+        docDetails: {},
+      });
+    });
+
+    it('should show an error when something fails at API layer', async () => {
+      const request: Request = { params: { id: '123' } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const error = new Error('Mocked error');
+      (getDocumentDetails as jest.Mock).mockRejectedValue(error);
+      await SearchResultsController.renderSearchDetailsHandler(
+        request,
+        response,
+      );
+      expect(response.view).toHaveBeenCalledWith('screens/details/template', {
+        error,
+        docDetails: undefined,
       });
     });
   });

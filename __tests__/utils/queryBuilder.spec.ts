@@ -82,7 +82,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -163,12 +163,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        ['field1', 'field2', 'field3'],
-        false,
-        false,
-      );
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -208,12 +206,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        ['field1', 'field2', 'field3'],
-        false,
-        false,
-      );
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -249,7 +245,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -292,7 +288,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -344,7 +340,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -391,7 +387,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -416,7 +412,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result.query.bool.must).toEqual([]);
       expect(result).toEqual(expectedQuery);
@@ -502,7 +498,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -590,12 +586,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        ['field1', 'field2', 'field3'],
-        false,
-        false,
-      );
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -642,12 +636,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        ['field1', 'field2', 'field3'],
-        false,
-        false,
-      );
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -690,7 +682,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -740,7 +732,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -799,7 +791,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -853,7 +845,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -933,7 +925,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1015,12 +1007,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        ['field1', 'field2', 'field3'],
-        false,
-        false,
-      );
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1061,12 +1051,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        ['field1', 'field2', 'field3'],
-        false,
-        false,
-      );
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1103,7 +1091,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1147,7 +1135,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1200,7 +1188,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1248,7 +1236,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, false);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1334,7 +1322,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1422,11 +1410,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1511,7 +1498,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject);
+      const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1599,11 +1586,10 @@ describe('Build the search query', () => {
         from: 80,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [
-        'field1',
-        'field2',
-        'field3',
-      ]);
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        fieldsToSearch: ['field1', 'field2', 'field3'],
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(3);
@@ -1648,7 +1634,7 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, true);
+      const result = buildSearchQuery({ searchFieldsObject });
       const filteredOptions = Object.keys(searchFieldsObject.filters).filter(
         (key) => searchFieldsObject.filters[key] !== 'all',
       );
@@ -1660,7 +1646,7 @@ describe('Build the search query', () => {
       expect(filteredOptions.length).toBe(0);
     });
 
-    it('should build the search query when filter resourceType is dataset', () => {
+    it('should build the search query when filter resourceType as dataset', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           'quick-search': {
@@ -1703,7 +1689,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], false, true);
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(2);
@@ -1756,13 +1745,10 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(
+      const result = buildSearchQuery({
         searchFieldsObject,
-        [],
-        false,
-        false,
         aggregationField,
-      );
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);
@@ -1799,7 +1785,81 @@ describe('Build the search query', () => {
         from: 0,
       };
 
-      const result = buildSearchQuery(searchFieldsObject, [], true, true);
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        isCount: true,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+    });
+  });
+
+  describe('Search query to fetch single document details', () => {
+    it('should build query with docId to fetch single document details', async () => {
+      const result = buildSearchQuery({ docId: '12313-123232-1231231' });
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                bool: {
+                  should: [
+                    {
+                      match: {
+                        _id: '12313-123232-1231231',
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
+                },
+              },
+            ],
+          },
+        },
+      };
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+    });
+
+    it('should not consider docId when fields are present', async () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        docId: '12313-123232-1231231',
+        isCount: true,
+        ignoreAggregation: true,
+      });
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        from: 0,
+      };
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);

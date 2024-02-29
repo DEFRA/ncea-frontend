@@ -1,15 +1,19 @@
-import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { buildSearchQuery } from '../../utils/queryBuilder';
 import { elasticSearchClient } from '../../config/elasticSearchClient';
 import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
-import { IAggregationOptions, ISearchResults } from '../../interfaces/searchResponse.interface';
+import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
+import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { elasticSearchAPIPaths, resourceTypeOptions } from '../../utils/constants';
 
 const getSearchResults = async (searchFieldsObject: ISearchPayload): Promise<ISearchResults> => {
   try {
     if (Object.keys(searchFieldsObject.fields).length) {
-      const payload = buildSearchQuery(searchFieldsObject, [], false, true);
+      const searchBuilderPayload: ISearchBuilderPayload = {
+        searchFieldsObject,
+        ignoreAggregation: true,
+      };
+      const payload = buildSearchQuery(searchBuilderPayload);
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
       const finalResponse: ISearchResults = await formatSearchResponse(response.data);
       return finalResponse;
@@ -24,7 +28,12 @@ const getSearchResults = async (searchFieldsObject: ISearchPayload): Promise<ISe
 
 const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promise<{ totalResults: number }> => {
   try {
-    const payload = buildSearchQuery(searchFieldsObject, [], true, true);
+    const searchBuilderPayload: ISearchBuilderPayload = {
+      searchFieldsObject,
+      isCount: true,
+      ignoreAggregation: true,
+    };
+    const payload = buildSearchQuery(searchBuilderPayload);
     if (payload.query.bool.must?.length) {
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
       const data = await response.data;
@@ -41,7 +50,11 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
 const getResourceTypeOptions = async (searchFieldsObject: ISearchPayload): Promise<IAggregationOptions> => {
   try {
     if (Object.keys(searchFieldsObject.fields).length) {
-      const payload = buildSearchQuery(searchFieldsObject, [], false, false, 'resourceType');
+      const searchBuilderPayload: ISearchBuilderPayload = {
+        searchFieldsObject,
+        aggregationField: 'resourceType',
+      };
+      const payload = buildSearchQuery(searchBuilderPayload);
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
       const finalResponse: IAggregationOptions = await formatAggregationResponse(response.data);
       return finalResponse;
@@ -54,4 +67,21 @@ const getResourceTypeOptions = async (searchFieldsObject: ISearchPayload): Promi
   }
 };
 
-export { getResourceTypeOptions, getSearchResults, getSearchResultsCount };
+const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
+  try {
+    const payload = buildSearchQuery({ docId });
+    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
+    const responseData = response?.data;
+    if (responseData?.hits?.total?.value) {
+      const finalResponse: ISearchResults = await formatSearchResponse(responseData);
+      return finalResponse?.items?.[0] as ISearchItem;
+    } else {
+      return Promise.resolve({} as ISearchItem);
+    }
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+  } catch (error: any) {
+    throw new Error(`Error fetching results: ${error.message}`);
+  }
+};
+
+export { getDocumentDetails, getResourceTypeOptions, getSearchResultsCount, getSearchResults };

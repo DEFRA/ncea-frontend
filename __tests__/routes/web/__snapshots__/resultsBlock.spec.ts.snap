@@ -263,9 +263,9 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/1" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
-</button>
+</a>
 
         </div>
       </div>
@@ -315,9 +315,9 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/2" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
-</button>
+</a>
 
         </div>
       </div>
