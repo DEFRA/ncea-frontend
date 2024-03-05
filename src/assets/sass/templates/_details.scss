@@ -43,3 +43,17 @@
     }
   }
 }
+
+.open-data-block {
+  &--disabled {
+    padding-left: 15px;
+    border-left: 5px solid $govuk-error-colour;
+    margin-bottom: 25px;
+  }
+
+  &--tag {
+    @include font-style-stack(19px, 25px, 700, normal, true);
+    color: $govuk-error-colour;
+    display: block;
+  }
+}

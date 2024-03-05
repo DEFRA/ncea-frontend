@@ -2,6 +2,8 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
 
+{% from 'partials/open_data/macro.njk' import openData %}
+
 {% if hasError %}
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
 {% endif %}
@@ -95,20 +97,8 @@
           {{item.content}}
         </p>
 
-        {% set openDataAttributes = {} %}
-        {% if item.resourceLocator %}
-          {% set openDataAttributes = openDataAttributes | merge({
-            onclick: "openDataModal('" + item.resourceLocator + "')"
-          }) %}
-        {% else %}
-          {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
-        {% endif %}
-
         <div class='govuk-button-group search-result__button-group'>
-          {{ govukButton({
-            text: 'Open data',
-            attributes: openDataAttributes
-          }) }}
+          {{ openData({ resourceLocator: item.resourceLocator, isDetailsPage: false }) }}
 
           {{ govukButton({
             text: 'More info',
@@ -149,5 +139,5 @@
 {% endif %}
 
 {% if searchResults.total and not hasError %}
-  {%- include 'partials/open_data/template.njk' -%}
+  {%- include 'partials/open_data/modal.njk' -%}
 {% endif %}

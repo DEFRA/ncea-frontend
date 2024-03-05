@@ -5,6 +5,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% from 'partials/details/macro.njk' import details %}
+{% from 'partials/open_data/macro.njk' import openData %}
 
 {% block beforeContent %}
   {{ super() }}
@@ -42,19 +43,12 @@
 
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
 
-    {% set openDataAttributes = {} %}
-    {% if item.resourceLocator %}
-      {% set openDataAttributes = openDataAttributes | merge({
-        onclick: "openDataModal('" + item.resourceLocator + "')"
-      }) %}
-    {% else %}
-      {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
-    {% endif %}
-    {{ govukButton({
-    text: 'Open data',
-    attributes: openDataAttributes,
-    classes: 'govuk-!-margin-bottom-4'
-  }) }}
+    <div {% if not docDetails.resourceLocator %} class="open-data-block--disabled" {% endif %}>
+      {{ openData({ resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}
+      {% if not docDetails.resourceLocator %}
+        <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access tab for further details</span>
+      {% endif %}
+    </div>
 
     {{ govukTabs({
     items: [
@@ -113,4 +107,13 @@
   {% else %}
     <p>Error</p>
   {% endif %}
+
+  {% if docDetails.resourceLocator %}
+    {%- include 'partials/open_data/modal.njk' -%}
+  {% endif %}
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
 {% endblock %}

@@ -185,12 +185,6 @@ describe('Deals with search results controller', () => {
     });
 
     it('should render the home page with error messages', async () => {
-      const {
-        results: quickSearchPath,
-        guidedDateSearch: dateSearchPath,
-        getResults: getResultsPath,
-        getFilters: getFiltersPath,
-      } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       const searchInputError = {
         text: 'Please enter keywords into the search field.',
@@ -227,12 +221,6 @@ describe('Deals with search results controller', () => {
     });
 
     it('should render the results page with error messages', async () => {
-      const {
-        results: quickSearchPath,
-        guidedDateSearch: dateSearchPath,
-        getResults: getResultsPath,
-        getFilters: getFiltersPath,
-      } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       const searchInputError = {
         text: 'Please enter keywords into the search field.',
@@ -269,12 +257,6 @@ describe('Deals with search results controller', () => {
     });
 
     it('should render the home page with error messages', async () => {
-      const {
-        results: quickSearchPath,
-        guidedDateSearch: dateSearchPath,
-        getResults: getResultsPath,
-        getFilters: getFiltersPath,
-      } = webRoutePaths;
       const formId: string = formIds.quickSearch;
       const searchInputError = undefined;
       const context = {

@@ -1,29 +1,18 @@
-{% extends 'partials/modal/template.njk' %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
-{% from 'govuk/components/button/macro.njk' import govukButton %}
+{% if params.isDetailsPage %}
+  {% set buttonClasses = 'govuk-!-margin-bottom-4' %}
+{% else %}
+  {% set buttonClasses = 'govuk-!-margin-bottom-0' %}
+{% endif %}
 
-{% block modalContent %}
-  <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
-    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue hosted by: "<span id='resource_locator'></span>"</p>
-    <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
-      {{ govukButton({
-        text: 'Cancel',
-        classes: 'govuk-button--secondary govuk-!-margin-bottom-0',
-        attributes: {
-          onclick: 'closeDataModal()'
-        }
-    }) }}
-      {{ govukButton({
-        text: 'Open site',
-        classes: 'govuk-!-margin-bottom-0',
-        id: 'resource-locator-link',
-        href: '#',
-        attributes: {
-          onclick: 'closeDataModal()',
-          target: '_blank'
-        }
-    }) }}
-    </div>
-  </div>
-{% endblock %}
+{% set openDataAttributes = {} %}
+{% if params.resourceLocator %}
+  {% set openDataAttributes = openDataAttributes | merge({
+    onclick: "openDataModal('" + params.resourceLocator + "')"
+  }) %}
+{% else %}
+  {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
+{% endif %}
+
+{{ govukButton({ text: 'Open data', attributes: openDataAttributes, classes: buttonClasses }) }}
