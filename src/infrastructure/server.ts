@@ -1,11 +1,15 @@
 'use strict';
 
 import { environmentConfig } from '../config/environmentConfig';
+import { getSecret } from '../utils/keyvault';
 import inert from '@hapi/inert';
 import vision from '@hapi/vision';
 import Hapi, { Server } from '@hapi/hapi';
 
 import { customHapiPino, customHapiRoutes, customHapiViews } from './plugins/index';
+const appInsightsConnectionStringSecretName =
+  environmentConfig.appInsightsSecretName ?? 'ApplicationInsights--ConnectionString';
+const shouldPushToAppInsights = environmentConfig.env === 'local';
 
 // Create the hapi server
 const server: Server = Hapi.server({
@@ -21,6 +25,11 @@ const server: Server = Hapi.server({
 });
 
 const initializeServer = async (): Promise<Server> => {
+  if (!shouldPushToAppInsights) {
+    const appInsightsConnectionString = await getSecret(appInsightsConnectionStringSecretName);
+    environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
+    customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
+  }
   // Register vendors plugins
   await server.register([inert, vision]);
 
