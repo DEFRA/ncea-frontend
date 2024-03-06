@@ -209,8 +209,10 @@ describe('Details route template', () => {
         const valueElement = rowElement?.children?.[1];
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Study periods');
-        expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('NOT PROVIDED');
+        expect(valueElement?.tagName.toLowerCase()).toBe('span');
+        expect(valueElement?.textContent?.trim()).toBe(
+          detailsFullResponse?.studyPeriod,
+        );
       });
 
       it('should render the topic categories details', async () => {
