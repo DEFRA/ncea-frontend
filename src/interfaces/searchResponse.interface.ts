@@ -3,12 +3,8 @@ export interface ISearchItem {
   title: string;
   publishedBy: string;
   content: string;
-  temporalExtentDetails: {
-    startDate: string;
-    endDate: string;
-  };
+  studyPeriod: string;
   resourceLocator: string;
-  abstract?: string;
   language?: string;
   keywords?: string;
   topic_categories?: string;

@@ -197,7 +197,7 @@ describe('Details route template', () => {
         expect(labelElement?.textContent?.trim()).toBe('Abstract');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
-          detailsFullResponse?.abstract,
+          detailsFullResponse?.content,
         );
       });
 

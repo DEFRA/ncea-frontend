@@ -25,7 +25,7 @@ export const formIds = {
   geographyQuestionnaire: 'coordinate-search',
 };
 
-export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+export const months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
 
@@ -33,11 +33,11 @@ export const detailsTabOptions = {
   general: [
     {
       label: 'Abstract',
-      column: 'abstract',
+      column: 'content',
     },
     {
       label: 'Study periods',
-      column: '',
+      column: 'studyPeriod',
     },
     {
       label: 'Topic categories',

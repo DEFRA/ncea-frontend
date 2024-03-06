@@ -1,3 +1,4 @@
+import { formatDate } from './formatDate';
 import { ISearchItem, ISearchResults } from '../interfaces/searchResponse.interface';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -15,15 +16,14 @@ const formatSearchResponse = async (
   apiSearchItems.forEach((searchItem: Record<string, any>) => {
     const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
     const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
+    const studyPeriod = getStudyPeriod(startDate, endDate);
+
     const item: ISearchItem = {
       id: searchItem?._id,
       title: searchItem?._source?.resourceTitleObject?.default ?? '',
       publishedBy: searchItem?._source?.OrgObject?.default ?? '',
-      content: searchItem?._source?.resourceAbstractObject?.default,
-      temporalExtentDetails: {
-        startDate,
-        endDate,
-      },
+      content: searchItem?._source?.resourceAbstractObject?.default ?? '',
+      studyPeriod,
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
     };
     if (isDetails) {
@@ -35,8 +35,22 @@ const formatSearchResponse = async (
   return finalResponse;
 };
 
+const getStudyPeriod = (startDate: string, endDate: string): string => {
+  const formattedStartDate: string = formatDate(startDate);
+  const formattedEndDate: string = formatDate(endDate);
+  let studyPeriod = '';
+  if (formattedStartDate && formattedEndDate) {
+    studyPeriod = `${formattedStartDate} to ${formattedEndDate}`;
+  } else if (formattedStartDate && !formattedEndDate) {
+    studyPeriod = formattedStartDate;
+  } else if (!formattedStartDate && formattedEndDate) {
+    studyPeriod = formattedEndDate;
+  }
+
+  return studyPeriod;
+};
+
 const getOtherDetails = (item: ISearchItem, searchItem: Record<string, any>) => {
-  item.abstract = searchItem?._source?.resourceAbstractObject?.default ?? '';
   item.language = searchItem?._source?.mainLanguage?.toUpperCase() ?? '';
   item.keywords = searchItem?._source?.tag.map((item) => item.default).join(', ') ?? '';
   item.topic_categories = searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '';
