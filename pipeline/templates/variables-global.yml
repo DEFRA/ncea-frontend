@@ -26,3 +26,10 @@ variables:
 
   - name : chartPath
     value: 'ncea-fe'
+
+  - name: solution
+    value: '**/*.sln'
+  - name: buildPlatform
+    value: Any CPU
+  - name: buildConfiguration
+    value: Release

@@ -1,0 +1,18 @@
+steps:
+
+  - checkout: ncea-test-automation
+
+  - task: NuGetToolInstaller@1
+    displayName: Install NuGet
+
+  - task: NuGetCommand@2
+    displayName: NuGet restore
+    inputs:
+      restoreSolution: $(solution)
+
+  - task: VSBuild@1
+    displayName: Build solution
+    inputs:
+      solution: $(solution)
+      platform: $(buildPlatform)
+      configuration: $(buildConfiguration)

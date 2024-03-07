@@ -1,0 +1,23 @@
+steps:
+
+  - download: current
+    displayName: Download tests
+    artifact: tests
+
+  - task: VSTest@2
+    displayName: Run tests
+    inputs:
+      platform: $(buildPlatform)
+      configuration: $(buildConfiguration)
+      testAssemblyVer2: |
+        **\*Specs.dll
+        !**\*TestAdapter.dll
+        !**\obj\**  
+      searchFolder: $(Pipeline.Workspace)/tests
+      testRunTitle: End-to-end tests - Test
+      runSettingsFile: $(Pipeline.Workspace)/tests/CI.runsettings
+      # Handled via SpecFlow+ Runner
+      rerunFailedTests: false
+      publishRunAttachments: true
+      uiTests: true 
+      runInParallel: true
