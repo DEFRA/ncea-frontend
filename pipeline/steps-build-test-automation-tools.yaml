@@ -16,3 +16,7 @@ steps:
       solution: $(solution)
       platform: $(buildPlatform)
       configuration: $(buildConfiguration)
+
+  - publish: $(Build.SourcesDirectory)/src/bin/$(buildConfiguration)
+    artifact: tests
+    displayName: Publish test artifact
