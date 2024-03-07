@@ -37,7 +37,7 @@ stages:
       - template: steps-build-and-push-docker-images.yaml
       - template: steps-package-and-push-helm-charts.yaml
     
-  - job: 'Build-test-tools'
+  - job: 'BuildTestTools'
     displayName: 'Build test tools'
     condition:  and(succeeded(), eq(variables.isPullRequest, true))
     pool:
