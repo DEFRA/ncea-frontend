@@ -7,9 +7,9 @@
 {% endif %}
 
 {% set openDataAttributes = {} %}
-{% if params.resourceLocator %}
+{% if params.resourceLocator and params.publishedBy %}
   {% set openDataAttributes = openDataAttributes | merge({
-    onclick: "openDataModal('" + params.resourceLocator + "')"
+    onclick: "openDataModal('" + params.publishedBy + "', '" + params.resourceLocator + "')"
   }) %}
 {% else %}
   {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
