@@ -41,7 +41,7 @@ stages:
     displayName: 'Build test tools'
     condition:  and(succeeded(), eq(variables.isPullRequest, true))
     pool:
-      vmImage: 'windos-latest'
+      vmImage: 'windows-latest'
     variables:
       - template: templates/variables-build.yml      
     steps:
