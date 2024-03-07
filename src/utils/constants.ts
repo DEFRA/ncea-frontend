@@ -1,5 +1,5 @@
 import { IAggregationOptions } from '../interfaces/searchResponse.interface';
-import { tabOptions } from '../interfaces/detailsTab.interface';
+import { TabOptions } from '../interfaces/detailsTab.interface';
 
 export const webRoutePaths = {
   home: '/',
@@ -30,7 +30,7 @@ export const months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'
 
 export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
 
-export const detailsTabOptions: tabOptions = {
+export const detailsTabOptions: TabOptions = {
   general: [
     {
       label: 'Abstract',

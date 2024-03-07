@@ -1,11 +1,11 @@
 'use strict';
 
+import { FormattedTabOptions } from '../../interfaces/detailsTab.interface';
 import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import Joi from 'joi';
 import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
-import { formattedTabOptions } from '../../interfaces/detailsTab.interface';
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import { formIds, resourceTypeOptions, webRoutePaths } from '../../utils/constants';
@@ -95,7 +95,7 @@ const SearchResultsController = {
     try {
       const docId = request.params.id;
       const docDetails: ISearchItem = await getDocumentDetails(docId);
-      const detailsTabOptions: formattedTabOptions = await processDetailsTabData(docDetails);
+      const detailsTabOptions: FormattedTabOptions = await processDetailsTabData(docDetails);
       return response.view('screens/details/template', {
         docDetails,
         detailsTabOptions,

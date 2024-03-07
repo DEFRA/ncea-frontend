@@ -1,4 +1,4 @@
-import { formattedTabOptions } from '../../src/interfaces/detailsTab.interface';
+import { FormattedTabOptions } from '../../src/interfaces/detailsTab.interface';
 import { ISearchItem } from '../../src/interfaces/searchResponse.interface';
 import { formattedDetailsFullResponse } from '../data/documentDetailsResponse';
 
@@ -15,7 +15,7 @@ describe('Process details tab data function', () => {
     const {
       processDetailsTabData,
     } = require('../../src/utils/processDetailsTabData');
-    const processedData: formattedTabOptions =
+    const processedData: FormattedTabOptions =
       await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
   });
@@ -32,7 +32,7 @@ describe('Process details tab data function', () => {
     const docDetails: ISearchItem = {
       ...(formattedDetailsFullResponse.items[0] as ISearchItem),
     };
-    const processedData: formattedTabOptions =
+    const processedData: FormattedTabOptions =
       await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
@@ -53,7 +53,7 @@ describe('Process details tab data function', () => {
     const docDetails: ISearchItem = {
       ...(formattedDetailsFullResponse.items[0] as ISearchItem),
     };
-    const processedData: formattedTabOptions =
+    const processedData: FormattedTabOptions =
       await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
@@ -74,7 +74,7 @@ describe('Process details tab data function', () => {
     const docDetails: ISearchItem = {
       ...(formattedDetailsFullResponse.items[0] as ISearchItem),
     };
-    const processedData: formattedTabOptions =
+    const processedData: FormattedTabOptions =
       await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
@@ -95,7 +95,7 @@ describe('Process details tab data function', () => {
     const docDetails: ISearchItem = {
       ...(formattedDetailsFullResponse.items[0] as ISearchItem),
     };
-    const processedData: formattedTabOptions =
+    const processedData: FormattedTabOptions =
       await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
@@ -114,10 +114,31 @@ describe('Process details tab data function', () => {
     const docDetails: ISearchItem = {
       ...(formattedDetailsFullResponse.items[0] as ISearchItem),
     };
-    const processedData: formattedTabOptions =
+    const processedData: FormattedTabOptions =
       await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe('');
+  });
+
+  it('should process the value with the given format when having two columns', async () => {
+    jest.mock('../../src/utils/constants', () => ({
+      detailsTabOptions: {
+        mock: [{ label: 'Title', column: 'title (resourceLocator)' }],
+      },
+    }));
+    const {
+      processDetailsTabData,
+    } = require('../../src/utils/processDetailsTabData');
+    const docDetails: ISearchItem = {
+      ...(formattedDetailsFullResponse.items[0] as ISearchItem),
+    };
+    const processedData: FormattedTabOptions =
+      await processDetailsTabData(docDetails);
+    expect(processedData).toBeDefined();
+    expect(processedData['mock']).toBeDefined();
+    expect(processedData?.['mock']?.[0]?.displayValue).toBe(
+      `${docDetails.title} (<a href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
+    );
   });
 });

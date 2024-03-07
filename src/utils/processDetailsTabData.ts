@@ -1,11 +1,11 @@
+import { FormattedTabOptions } from '../interfaces/detailsTab.interface';
 import { ISearchItem } from '../interfaces/searchResponse.interface';
 import { detailsTabOptions } from './constants';
-import { formattedTabOptions } from '../interfaces/detailsTab.interface';
 
 const processDetailsTabData = async (
   docDetails: ISearchItem | Record<string, unknown>,
-): Promise<formattedTabOptions> => {
-  const processedTabOption: formattedTabOptions = {};
+): Promise<FormattedTabOptions> => {
+  const processedTabOption: FormattedTabOptions = {};
   Object.keys(detailsTabOptions).forEach((tabKey) => {
     const tabOptions = detailsTabOptions[tabKey];
     if (tabOptions && Array.isArray(tabOptions)) {
