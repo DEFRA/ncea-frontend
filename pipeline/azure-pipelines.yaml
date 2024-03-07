@@ -35,7 +35,7 @@ stages:
     steps:
       - template: steps-build-and-test.yaml
       - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
-        - template: steps-build-test-automation-tools
+        - template: steps-build-test-automation-tools.yaml
 
       - template: steps-build-and-push-docker-images.yaml
       - template: steps-package-and-push-helm-charts.yaml
