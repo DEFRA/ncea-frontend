@@ -1,26 +1,23 @@
 'use strict';
 
 import Joi from 'joi';
+import {
+  IAggregationOption,
+  ISearchItem,
+} from '../../../src/interfaces/searchResponse.interface';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 
+import { formattedDetailsResponse } from '../../data/documentDetailsResponse';
+import { processDetailsTabData } from '../../../src/utils/processDetailsTabData';
+import { quickSearchJoiError } from '../../data/quickSearch';
 import {
   getDocumentDetails,
   getSearchResults,
   getSearchResultsCount,
   getResourceTypeOptions,
 } from '../../../src/services/handlers/searchApi';
-import { quickSearchJoiError } from '../../data/quickSearch';
-import { formattedDetailsResponse } from '../../data/documentDetailsResponse';
-import {
-  IAggregationOption,
-  ISearchItem,
-} from '../../../src/interfaces/searchResponse.interface';
-import {
-  detailsTabOptions,
-  formIds,
-  webRoutePaths,
-} from '../../../src/utils/constants';
+import { formIds, webRoutePaths } from '../../../src/utils/constants';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
@@ -28,6 +25,7 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
   getResourceTypeOptions: jest.fn(),
   getDocumentDetails: jest.fn(),
 }));
+
 describe('Deals with search results controller', () => {
   describe('Deals with search results handler', () => {
     it('should return the rendered view with context', async () => {
@@ -318,7 +316,7 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
         docDetails: expectedResponse,
-        detailsTabOptions,
+        detailsTabOptions: await processDetailsTabData(expectedResponse),
       });
     });
     it('should fetch the data as empty object when the API does not found the document and return the view', async () => {
@@ -331,7 +329,7 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
         docDetails: {},
-        detailsTabOptions,
+        detailsTabOptions: await processDetailsTabData({}),
       });
     });
 
