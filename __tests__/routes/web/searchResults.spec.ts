@@ -14,6 +14,10 @@ jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
   info: jest.fn(),
 }));
 
+jest.mock('../../../src/utils/keyvault', () => ({
+  getSecret: jest.fn(),
+}));
+
 let serverRequest;
 
 const invokeRoute = async (route, payload) => {
