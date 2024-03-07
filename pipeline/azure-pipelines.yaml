@@ -34,7 +34,7 @@ stages:
       - template: templates/variables-build.yml      
     steps:
       - template: steps-build-and-test.yaml
-      - ${{ if eq(variables.isPullRequest, true) }}:
+      - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
         - template: steps-build-test-automation-tools
 
       - template: steps-build-and-push-docker-images.yaml
