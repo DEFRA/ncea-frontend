@@ -1,5 +1,7 @@
 steps:
 
+- checkout: self
+
 - task: UseNode@1
   inputs:
     version: '18.x'
