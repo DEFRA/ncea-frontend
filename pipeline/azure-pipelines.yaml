@@ -34,11 +34,18 @@ stages:
       - template: templates/variables-build.yml      
     steps:
       - template: steps-build-and-test.yaml
-      - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
-        - template: steps-build-test-automation-tools.yaml
-
       - template: steps-build-and-push-docker-images.yaml
       - template: steps-package-and-push-helm-charts.yaml
+    
+  - job: 'Build-test-tools'
+    displayName: 'Build test tools'
+    condition:  and(succeeded(), eq(variables.isPullRequest, true))
+    pool:
+      vmImage: 'windos-latest'
+    variables:
+      - template: templates/variables-build.yml      
+    steps:
+      - template: steps-build-test-automation-tools.yaml 
 
 - stage: 'sandbox'
   displayName: 'Deploy to Sandbox'
