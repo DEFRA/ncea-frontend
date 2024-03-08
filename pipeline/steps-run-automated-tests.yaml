@@ -9,12 +9,6 @@ steps:
       buildType: 'current'
       artifact: tests
 
-  - task: CmdLine@2
-    inputs:
-      script: |
-        echo "$(Pipeline.Workspace)"
-        tree $(Pipeline.Workspace)  
-
   - task: VSTest@2
     displayName: Run tests
     inputs:
