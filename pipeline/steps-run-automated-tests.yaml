@@ -24,9 +24,9 @@ steps:
         **\*Specs.dll
         !**\*TestAdapter.dll
         !**\obj\**  
-      searchFolder: $(Pipeline.Workspace)/net481
+      searchFolder: $(Pipeline.Workspace)
       testRunTitle: End-to-end tests - Test
-      runSettingsFile: $(Pipeline.Workspace)/net481/CI.runsettings
+      runSettingsFile: $(Pipeline.Workspace)/CI.runsettings
       # Handled via SpecFlow+ Runner
       rerunFailedTests: false
       publishRunAttachments: true
