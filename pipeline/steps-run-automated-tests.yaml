@@ -1,8 +1,13 @@
 steps:
 
-  - download: current
-    displayName: Download tests
-    artifact: tests
+  - checkout: none
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download test tools'
+    condition: succeeded()
+    inputs:
+      buildType: 'current'
+      artifact: tests      
 
   - task: VSTest@2
     displayName: Run tests

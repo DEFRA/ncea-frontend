@@ -17,6 +17,8 @@ steps:
       platform: $(buildPlatform)
       configuration: $(buildConfiguration)
 
-  - publish: $(Build.SourcesDirectory)/src/bin/$(buildConfiguration)
-    artifact: tests
-    displayName: Publish test artifact
+  - task: PublishPipelineArtifact@1
+    condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
+    inputs:
+      targetPath: $(Build.SourcesDirectory)/src/bin/$(buildConfiguration)
+      artifactName: tests
