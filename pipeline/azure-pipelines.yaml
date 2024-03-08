@@ -69,7 +69,13 @@ stages:
                 envName: sandbox
                 releaseName: ncea-fe-sandbox
                 aksServiceConnection: aksServiceConn-AZR-NCE-SND1
-            - template: steps-run-automated-tests.yaml   
+
+  - job: RunTests
+    dependsOn: Deploy
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - template: steps-run-automated-tests.yaml
 
 - stage: 'dev'
   displayName: 'Deploy to Dev'
