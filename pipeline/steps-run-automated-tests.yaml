@@ -7,7 +7,19 @@ steps:
     condition: succeeded()
     inputs:
       buildType: 'current'
-      artifact: tests      
+      artifact: tests
+
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo "$(Pipeline.Workspace)"
+        tree $(Pipeline.Workspace)
+
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo "$(System.DefaultWorkingDirectory)"
+        tree $(System.DefaultWorkingDirectory)
 
   - task: VSTest@2
     displayName: Run tests
@@ -18,9 +30,9 @@ steps:
         **\*Specs.dll
         !**\*TestAdapter.dll
         !**\obj\**  
-      searchFolder: $(Pipeline.Workspace)/tests/net481
+      searchFolder: $(System.DefaultWorkingDirectory)/tests/net481
       testRunTitle: End-to-end tests - Test
-      runSettingsFile: $(Pipeline.Workspace)/tests/net481/CI.runsettings
+      runSettingsFile: $(System.DefaultWorkingDirectory)/tests/net481/CI.runsettings
       # Handled via SpecFlow+ Runner
       rerunFailedTests: false
       publishRunAttachments: true
