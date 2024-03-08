@@ -13,13 +13,7 @@ steps:
     inputs:
       script: |
         echo "$(Pipeline.Workspace)"
-        tree $(Pipeline.Workspace)
-
-  - task: CmdLine@2
-    inputs:
-      script: |
-        echo "$(System.DefaultWorkingDirectory)"
-        tree $(System.DefaultWorkingDirectory)
+        tree $(Pipeline.Workspace)  
 
   - task: VSTest@2
     displayName: Run tests
@@ -30,9 +24,9 @@ steps:
         **\*Specs.dll
         !**\*TestAdapter.dll
         !**\obj\**  
-      searchFolder: $(System.DefaultWorkingDirectory)/tests/net481
+      searchFolder: $(Pipeline.Workspace)/net481
       testRunTitle: End-to-end tests - Test
-      runSettingsFile: $(System.DefaultWorkingDirectory)/tests/net481/CI.runsettings
+      runSettingsFile: $(Pipeline.Workspace)/net481/CI.runsettings
       # Handled via SpecFlow+ Runner
       rerunFailedTests: false
       publishRunAttachments: true
