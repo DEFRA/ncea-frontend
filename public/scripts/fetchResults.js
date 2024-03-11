@@ -192,7 +192,13 @@ const getSearchResults = async (path) => {
   document.getElementById(resultsBlockId).innerHTML =
     '<p class="govuk-caption-m govuk-!-font-size-14">Your search request is being served...</p>';
   const { fields, sort, rowsPerPage, filters, page } = getStorageData();
-  const payload = { fields, sort, rowsPerPage, filters, page: page ?? 1 };
+  const payload = {
+    fields,
+    sort,
+    rowsPerPage: parseInt(rowsPerPage),
+    filters,
+    page: page ?? 1,
+  };
   const response = await invokeAjaxCall(path, payload);
   if (response) {
     const searchResultsHtml = await response.text();

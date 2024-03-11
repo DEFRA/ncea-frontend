@@ -1,10 +1,6 @@
-import {
-  FormattedTabOption,
-  FormattedTabOptions,
-  TabOption,
-} from '../interfaces/detailsTab.interface';
 import { ISearchItem } from '../interfaces/searchResponse.interface';
 import { detailsTabOptions } from './constants';
+import { FormattedTabOption, FormattedTabOptions, TabOption } from '../interfaces/detailsTab.interface';
 
 const processDetailsTabData = async (
   docDetails: ISearchItem | Record<string, unknown>,
@@ -12,12 +8,8 @@ const processDetailsTabData = async (
   const processedTabOption: FormattedTabOptions = {};
 
   const addLink = (value: string): string => {
-    const internalDomainRegex = new RegExp(
-      `^https?://${window.location.hostname}`,
-    );
-    const targetAttribute = internalDomainRegex.test(value)
-      ? ''
-      : ' target="_blank"';
+    const internalDomainRegex = new RegExp(`^https?://${window.location.hostname}`);
+    const targetAttribute = internalDomainRegex.test(value) ? '' : ' target="_blank"';
     return `<a class="govuk-link" href="${value}"${targetAttribute}>${value}</a>`;
   };
 
