@@ -3,9 +3,23 @@ import { ISearchItem } from '../../src/interfaces/searchResponse.interface';
 import { formattedDetailsFullResponse } from '../data/documentDetailsResponse';
 
 describe('Process details tab data function', () => {
+  let originalWindow: Window | undefined;
+
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetModules();
+
+    originalWindow = global.window;
+
+    global.window = {
+      location: {
+        hostname: 'seabed.admiralty.co.uk',
+      },
+    } as unknown as Window & typeof globalThis;
+  });
+
+  afterEach(() => {
+    global.window = originalWindow as unknown as Window & typeof globalThis;
   });
 
   it('should process details tab data correctly', async () => {
@@ -58,7 +72,7 @@ describe('Process details tab data function', () => {
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe(
-      `(<a href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
+      `(<a class="govuk-link" href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
     );
   });
 
@@ -79,7 +93,7 @@ describe('Process details tab data function', () => {
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe(
-      `<a href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>`,
+      `<a class="govuk-link" href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>`,
     );
   });
 
@@ -138,7 +152,29 @@ describe('Process details tab data function', () => {
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe(
-      `${docDetails.title} (<a href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
+      `${docDetails.title} (<a class="govuk-link" href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
+    );
+  });
+
+  it('should process the value with the given format when having two columns and link having target', async () => {
+    jest.mock('../../src/utils/constants', () => ({
+      detailsTabOptions: {
+        mock: [{ label: 'Title', column: 'title (resourceLocator)' }],
+      },
+    }));
+    global.window!.location.hostname = 'localhost:4000';
+    const {
+      processDetailsTabData,
+    } = require('../../src/utils/processDetailsTabData');
+    const docDetails: ISearchItem = {
+      ...(formattedDetailsFullResponse.items[0] as ISearchItem),
+    };
+    const processedData: FormattedTabOptions =
+      await processDetailsTabData(docDetails);
+    expect(processedData).toBeDefined();
+    expect(processedData['mock']).toBeDefined();
+    expect(processedData?.['mock']?.[0]?.displayValue).toBe(
+      `${docDetails.title} (<a class="govuk-link" href="${docDetails.resourceLocator}" target="_blank">${docDetails.resourceLocator}</a>)`,
     );
   });
 });
