@@ -16,14 +16,13 @@ const formatDate = (dateString: string): string => {
   const year: number = date.getFullYear();
   let hours: number | string = date.getHours();
   let minutes: number | string = date.getMinutes();
-
-  minutes = minutes < 10 ? '0' + minutes : minutes;
   day = day < 10 ? '0' + day : day;
 
   let formattedDate = `${day} ${month} ${year}`;
 
-  if (hours !== 0 || minutes !== '00') {
+  if (hours !== 0 || minutes !== 0) {
     hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
     formattedDate += ` @${hours}${minutes}`;
   }
 
