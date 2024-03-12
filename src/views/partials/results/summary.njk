@@ -2,6 +2,8 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
 
+{% from 'partials/open_data/macro.njk' import openData %}
+
 {% if hasError %}
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
 {% endif %}
@@ -77,17 +79,11 @@
             <span class='search-result__parameter-value search-result__published-value'>{{item.publishedBy}}</span>
           </div>
         {% endif %}
-        {% if item.temporalExtentDetails.startDate or item.temporalExtentDetails.endDate %}
+        {% if item.studyPeriod %}
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
             <span class='search-result__parameter-value search-result__study-value'>
-              {% if item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
-                {{item.temporalExtentDetails.startDate | date('DD MMM YYYY')}} to {{item.temporalExtentDetails.endDate | date('DD MMM YYYY')}}
-              {% elif item.temporalExtentDetails.startDate and not item.temporalExtentDetails.endDate %}
-                {{item.temporalExtentDetails.startDate | date('DD MMM YYYY')}}
-              {% elif not item.temporalExtentDetails.startDate and item.temporalExtentDetails.endDate %}
-                {{item.temporalExtentDetails.endDate | date('DD MMM YYYY')}}
-              {% endif %}
+              {{item.studyPeriod}}
             </span>
           </div>
         {% endif %}
@@ -95,20 +91,8 @@
           {{item.content}}
         </p>
 
-        {% set openDataAttributes = {} %}
-        {% if item.resourceLocator %}
-          {% set openDataAttributes = openDataAttributes | merge({
-            onclick: "openDataModal('" + item.resourceLocator + "')"
-          }) %}
-        {% else %}
-          {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
-        {% endif %}
-
         <div class='govuk-button-group search-result__button-group'>
-          {{ govukButton({
-            text: 'Open data',
-            attributes: openDataAttributes
-          }) }}
+          {{ openData({ resourceLocator: item.resourceLocator, isDetailsPage: false }) }}
 
           {{ govukButton({
             text: 'More info',
@@ -149,5 +133,5 @@
 {% endif %}
 
 {% if searchResults.total and not hasError %}
-  {%- include 'partials/open_data/template.njk' -%}
+  {%- include 'partials/open_data/modal.njk' -%}
 {% endif %}

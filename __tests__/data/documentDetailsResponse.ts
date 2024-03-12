@@ -1,3 +1,5 @@
+import { ISearchResults } from '../../src/interfaces/searchResponse.interface';
+
 const detailsSuccessAPIResponse = {
   took: 0,
   timed_out: false,
@@ -138,7 +140,7 @@ const detailsEmptyAPIResponse = {
   },
 };
 
-const formattedDetailsResponse = {
+const formattedDetailsResponse: ISearchResults = {
   total: 1,
   items: [
     {
@@ -146,12 +148,8 @@ const formattedDetailsResponse = {
       title: 'Geoserver WFS Fragments Country Boundaries Test Template',
       publishedBy: '',
       content: '',
-      temporalExtentDetails: {
-        startDate: '',
-        endDate: '',
-      },
+      studyPeriod: '',
       resourceLocator: '',
-      abstract: '',
       language: 'ENG',
       keywords: '',
       topic_categories: '',
@@ -649,7 +647,7 @@ const detailsSuccessAPIFullData = {
   },
 };
 
-const formattedDetailsFullResponse = {
+const formattedDetailsFullResponse: ISearchResults = {
   total: 1,
   items: [
     {
@@ -659,13 +657,8 @@ const formattedDetailsFullResponse = {
       publishedBy: 'United Kingdom Hydrographic Office',
       content:
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
-      temporalExtentDetails: {
-        startDate: '2019-05-24T00:00:00',
-        endDate: '2019-07-31T00:00:00',
-      },
+      studyPeriod: '24 May 2019 to 31 Jul 2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
-      abstract:
-        'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
       language: 'ENG',
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',

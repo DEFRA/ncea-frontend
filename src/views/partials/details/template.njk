@@ -1,16 +1,14 @@
 {%- from "govuk/components/tag/macro.njk" import govukTag -%}
 
-{% if params.options and params.docDetails.title %}
+{% if params.options and params.hasData %}
   <div class='tab-content-container'>
     {% for option in params.options %}
       {% if option.label %}
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>{{option.label}}</h2>
-          {% if option
-            .column and params
-            .docDetails[option.column] %}
+          {% if option.displayValue %}
             <span class='tab-content-value'>
-              {{params.docDetails[option.column]}}
+              {{option.displayValue}}
             </span>
           {% else %}
             {{govukTag({
