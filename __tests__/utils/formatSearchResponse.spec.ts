@@ -18,7 +18,7 @@ describe('Format the search response', () => {
               resourceTitleObject: { default: 'Title 1' },
               OrgObject: { default: 'Organization 1' },
               resourceAbstractObject: { default: 'Content 1' },
-              resourceType: 'dataset',
+              resourceType: ['dataset'],
               cl_hierarchyLevel: [
                 {
                   default: 'Dataset'
@@ -72,7 +72,7 @@ describe('Format the search response', () => {
             _source: {
               resourceTitleObject: { default: 'Title 2' },
               OrgObject: { default: 'Organization 2' },
-              resourceType: 'dataset',
+              resourceType: ['dataset'],
               resourceAbstractObject: { default: 'Content 2' },
               cl_hierarchyLevel: [
                 {

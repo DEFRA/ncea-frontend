@@ -36,7 +36,7 @@ const detailsSuccessAPIResponse = {
               link: 'http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode',
             },
           ],
-          resourceType: 'dataset',
+          resourceType: ['dataset'],
           resourceIdentifier: [
             {
               code: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',

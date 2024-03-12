@@ -28,8 +28,8 @@ const formatSearchResponse = async (
       host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace} ${searchItem?._source?.resourceIdentifier?.[0]?.code}`,
       // Keeping this as a placeholder, as the Coupled Resource is not available now
       host_catalogue_entry: '',
-      resource_type_and_hierarchy: searchItem?._source?.resourceType,
-      hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default,
+      resource_type_and_hierarchy: searchItem?._source?.resourceType?.[0]??'',
+      hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default??'',
       resource_locators: `${searchItem?._source?.cl_function?.[0]?.default} from ${searchItem?._source?.link?.[0]?.nameObject?.default} (<a class="govuk-link" href="${searchItem?._source?.link?.[0]?.urlObject?.default}" target="_blank">${searchItem?._source?.link?.[0]?.urlObject?.default}</a>)`,
     };
     if (isDetails) {
