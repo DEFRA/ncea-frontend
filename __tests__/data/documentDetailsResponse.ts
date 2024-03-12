@@ -232,7 +232,7 @@ const detailsSuccessAPIFullData = {
           indexingDate: '2024-02-26T00:00:07Z',
           dateStamp: '2024-01-16T07:10:27.000Z',
           mainLanguage: 'eng',
-          resourceType: 'dataset',
+          resourceType: ['dataset'],
           OrgObject: {
             default: 'United Kingdom Hydrographic Office',
             langeng: 'United Kingdom Hydrographic Office',
