@@ -8,6 +8,12 @@ export interface ISearchItem {
   language?: string;
   keywords?: string;
   topic_categories?: string;
+  ncea_catalogue_number: string;
+  host_catalogue_number: string;
+  host_catalogue_entry: string;
+  resource_type_and_hierarchy: string;
+  hierarchy_level: string;
+  resource_locators: string;
 }
 
 export interface ISearchResults {

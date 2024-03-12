@@ -18,6 +18,12 @@ describe('Format the search response', () => {
               resourceTitleObject: { default: 'Title 1' },
               OrgObject: { default: 'Organization 1' },
               resourceAbstractObject: { default: 'Content 1' },
+              resourceType: 'dataset',
+              cl_hierarchyLevel: [
+                {
+                  default: 'Dataset'
+                }
+              ],
               resourceTemporalExtentDetails: [
                 {
                   start: {
@@ -26,13 +32,39 @@ describe('Format the search response', () => {
                   end: {},
                 },
               ],
+              cl_function:[
+                {
+                   "key":"download",
+                   "default":"Download",
+                   "langeng":"Download",
+                   "link":"http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_OnLineFunctionCode",
+                   "text":"download"
+                }
+             ],
+             link: [
+              {
+                protocol: '',
+                mimeType: '',
+                urlObject: {
+                  default: 'https://seabed.admiralty.co.uk',
+                },
+                nameObject: {
+                  default: 'Seabed Mapping Service',
+                  langeng: 'Seabed Mapping Service',
+                },
+                function: 'download',
+                applicationProfile: '',
+                group: 0,
+              },
+            ],
               resourceIdentifier: [
                 {
-                  code: 'CEFAS268',
-                  codeSpace: 'https://data.cefas.co.uk',
+                  code: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+                  codeSpace: 'https://seabed.admiralty.co.uk',
                   link: '',
                 },
               ],
+              uuid: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
             },
           },
           {
@@ -40,7 +72,38 @@ describe('Format the search response', () => {
             _source: {
               resourceTitleObject: { default: 'Title 2' },
               OrgObject: { default: 'Organization 2' },
+              resourceType: 'dataset',
               resourceAbstractObject: { default: 'Content 2' },
+              cl_hierarchyLevel: [
+                {
+                  default: 'Dataset'
+                }
+              ],
+              cl_function:[
+                {
+                   "key":"download",
+                   "default":"Download",
+                   "langeng":"Download",
+                   "link":"http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_OnLineFunctionCode",
+                   "text":"download"
+                }
+             ],
+             link: [
+              {
+                protocol: '',
+                mimeType: '',
+                urlObject: {
+                  default: 'https://seabed.admiralty.co.uk',
+                },
+                nameObject: {
+                  default: 'Seabed Mapping Service',
+                  langeng: 'Seabed Mapping Service',
+                },
+                function: 'download',
+                applicationProfile: '',
+                group: 0,
+              },
+            ],
               resourceTemporalExtentDetails: [
                 {
                   start: {
@@ -51,6 +114,14 @@ describe('Format the search response', () => {
                   },
                 },
               ],
+              resourceIdentifier: [
+                {
+                  code: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+                  codeSpace: 'https://seabed.admiralty.co.uk',
+                  link: '',
+                },
+              ],
+              uuid: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
             },
           },
         ],
@@ -65,7 +136,13 @@ describe('Format the search response', () => {
           publishedBy: 'Organization 1',
           content: 'Content 1',
           studyPeriod: '04 Jan 1960',
-          resourceLocator: 'https://data.cefas.co.uk',
+          resourceLocator: 'https://seabed.admiralty.co.uk',
+          ncea_catalogue_number: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+          host_catalogue_number: 'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
+          host_catalogue_entry: '',
+          resource_type_and_hierarchy: 'dataset',
+          hierarchy_level: 'Dataset',
+          resource_locators : 'Download from Seabed Mapping Service (<a class=\"govuk-link\" href=\"https://seabed.admiralty.co.uk\" target=\"_blank\">https://seabed.admiralty.co.uk</a>)'
         },
         {
           id: '2',
@@ -73,7 +150,13 @@ describe('Format the search response', () => {
           publishedBy: 'Organization 2',
           content: 'Content 2',
           studyPeriod: '04 Jan 1960 to 12 Jan 2009',
-          resourceLocator: '',
+          resourceLocator: 'https://seabed.admiralty.co.uk',
+          ncea_catalogue_number: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
+          host_catalogue_number: 'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
+          host_catalogue_entry: '',
+          resource_type_and_hierarchy: 'dataset',
+          hierarchy_level: 'Dataset',
+          resource_locators : 'Download from Seabed Mapping Service (<a class=\"govuk-link\" href=\"https://seabed.admiralty.co.uk\" target=\"_blank\">https://seabed.admiralty.co.uk</a>)'
         },
       ],
     };

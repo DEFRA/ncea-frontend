@@ -101,6 +101,7 @@ exports[`Details route template Document details with data Check status code and
           
   
     
+    
 
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
@@ -274,6 +275,79 @@ exports[`Details route template Document details with data Check status code and
     
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="access">
+        
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>NCEA catalogue number</h2>
+          
+            <span class='tab-content-value'>
+              fb8dca0f-7425-4f50-86a1-c4673b1aef88
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Host catalogue number</h2>
+          
+            <span class='tab-content-value'>
+              https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Host catalogue entry</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Resource type and hierarchy</h2>
+          
+            <span class='tab-content-value'>
+              dataset
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Hierarchy level</h2>
+          
+            <span class='tab-content-value'>
+              Dataset
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Resource locators</h2>
+          
+            <span class='tab-content-value'>
+              Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)
+            </span>
+          
+        </div>
+      
+    
+  </div>
+
         
       </div>
     
@@ -558,10 +632,11 @@ exports[`Details route template Document details with partial data Check status 
           
   
     
+    
 
     <h1 class='govuk-heading-m details-title'>Geoserver WFS Fragments Country Boundaries Test Template</h1>
 
-    <div  class="open-data-block--disabled" >
+    <div >
       
 
 
@@ -580,12 +655,10 @@ exports[`Details route template Document details with partial data Check status 
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" onclick="openDataModal(&#39;https://seabed.admiralty.co.uk&#39;)">
   Open data
 </button>
 
-      
-        <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access tab for further details</span>
       
     </div>
 
@@ -738,6 +811,79 @@ exports[`Details route template Document details with partial data Check status 
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="access">
         
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>NCEA catalogue number</h2>
+          
+            <span class='tab-content-value'>
+              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Host catalogue number</h2>
+          
+            <span class='tab-content-value'>
+              https://seabed.admiralty.co.uk 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Host catalogue entry</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Resource type and hierarchy</h2>
+          
+            <span class='tab-content-value'>
+              dataset
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Hierarchy level</h2>
+          
+            <span class='tab-content-value'>
+              Dataset
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Resource locators</h2>
+          
+            <span class='tab-content-value'>
+              Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)
+            </span>
+          
+        </div>
+      
+    
+  </div>
+
+        
       </div>
     
   
@@ -781,7 +927,40 @@ exports[`Details route template Document details with partial data Check status 
 
   
 
+  <div id="modal" class="modal">
+  <div class="modal-content">
+    
+  <div class='data-container'>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
+    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue hosted by: "<span id='resource_locator'></span>"</p>
+    <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
+      
   
+
+  
+    
+  
+
+<button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" onclick="closeDataModal()">
+  Cancel
+</button>
+
+      
+  
+
+  
+    
+  
+
+<a href="#" role="button" draggable="false" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" onclick="closeDataModal()" target="_blank" id="resource-locator-link">
+  Open site
+</a>
+
+    </div>
+  </div>
+
+  </div>
+</div>
 
         </main>
       </div>
