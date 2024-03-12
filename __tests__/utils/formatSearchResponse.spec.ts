@@ -65,6 +65,27 @@ describe('Format the search response', () => {
                 },
               ],
               uuid: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+              mainLanguage:"eng",
+              tag:[
+                {
+                   "default":"Elevation",
+                   "langeng":"Elevation",
+                   "link":"http://vocab.nerc.ac.uk/collection/P22/current/10/",
+                   "key":"http://vocab.nerc.ac.uk/collection/P22/current/10/"
+                },
+                {
+                   "default":"Marine Environmental Data and Information Network",
+                   "langeng":"Marine Environmental Data and Information Network",
+                   "link":"http://vocab.nerc.ac.uk/collection/N01/current/NDGO0001/",
+                   "key":"http://vocab.nerc.ac.uk/collection/N01/current/NDGO0001/"
+                },
+                {
+                   "default":"Bathymetry and Elevation",
+                   "langeng":"Bathymetry and Elevation",
+                   "link":"http://vocab.nerc.ac.uk/collection/P02/current/MBAN/",
+                   "key":"http://vocab.nerc.ac.uk/collection/P02/current/MBAN/"
+                }
+             ],
             },
           },
           {
