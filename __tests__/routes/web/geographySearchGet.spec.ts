@@ -13,6 +13,10 @@ jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
   info: jest.fn(),
 }));
 
+jest.mock('../../../src/utils/keyvault', () => ({
+  getSecret: jest.fn(),
+}));
+
 describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;

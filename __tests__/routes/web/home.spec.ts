@@ -13,11 +13,15 @@ jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
   info: jest.fn()
 }));
 
+jest.mock('../../../src/utils/keyvault', () => ({
+  getSecret: jest.fn(),
+}));
+
 describe('Home Screen', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;
   let document: Document;
-
+  
   beforeAll((done) => {
     initializeServer().then(async (s: Server) => {
       server = s;
