@@ -7943,6 +7943,14 @@
   line-height: 40px;
   width: 630px;
 }
+.details-alt_title {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  width: 630px;
+  margin-bottom: 20px;
+}
 
 .govuk-tabs__list-item .govuk-tabs__tab {
   font-size: 1.1875rem;

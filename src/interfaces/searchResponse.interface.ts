@@ -8,6 +8,7 @@ export interface ISearchItem {
   language?: string;
   keywords?: string;
   topic_categories?: string;
+  alternateTitle?: string;
 }
 
 export interface ISearchResults {

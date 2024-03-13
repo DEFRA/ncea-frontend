@@ -3,6 +3,12 @@
     @include font-style-stack(36px, 40px);
     width: 630px;
   }
+
+  &-alt_title {
+    @include font-style-stack(19px, 25px, 300);
+    width: 630px;
+    margin-bottom: 20px;
+  }
 }
 
 .govuk-tabs__list-item .govuk-tabs__tab {

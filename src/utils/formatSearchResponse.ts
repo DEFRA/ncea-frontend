@@ -54,6 +54,7 @@ const getOtherDetails = (item: ISearchItem, searchItem: Record<string, any>) => 
   item.language = searchItem?._source?.mainLanguage?.toUpperCase() ?? '';
   item.keywords = searchItem?._source?.tag.map((item) => item.default).join(', ') ?? '';
   item.topic_categories = searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '';
+  item.alternateTitle = 'This is an alternate title';
 };
 
 export { formatSearchResponse };
