@@ -119,4 +119,4 @@ stages:
               parameters:
                 envName: test
                 releaseName: ncea-fe-test
-                aksServiceConnection: aksServiceConn-AZR-NCE-SND1
+                armServiceConnection: AZR-NCE-DEV1
