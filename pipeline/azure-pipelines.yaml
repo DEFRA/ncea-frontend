@@ -18,8 +18,10 @@ trigger:
 variables: 
   - template: templates/variables-global.yml
   - name : acrContainerRegistryServiceConnection
-    value: acr-AZR-NCE-SND1
+    value: acr-AZR-NCE-DEV-TEMP
   - name : deployToDev
+    value: true
+  - name : deployToTest
     value: false
 
 stages:
@@ -29,7 +31,7 @@ stages:
   - job: 'Build'
     displayName: 'Build job'
     pool:
-      vmImage: 'ubuntu-latest'
+      name: DEFRA-COMMON-ubuntu2204-SSV3
     variables:
       - template: templates/variables-build.yml      
     steps:
@@ -47,35 +49,35 @@ stages:
     steps:
       - template: steps-build-test-automation-tools.yaml 
 
-- stage: 'sandbox'
-  displayName: 'Deploy to Sandbox'
-  dependsOn: Build
-  condition:  and(succeeded(), eq(variables.isPullRequest, true))  
-  jobs:
-  - deployment: Deploy
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      - template: templates/variables-sandbox.yml
-      - name : aksServiceConnection
-        value: aksServiceConn-AZR-NCE-SND1
-    environment: sandbox 
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-            - template: steps-deploy-helm-charts.yaml
-              parameters:
-                envName: sandbox
-                releaseName: ncea-fe-sandbox
-                aksServiceConnection: aksServiceConn-AZR-NCE-SND1
+# - stage: 'sandbox'
+#   displayName: 'Deploy to Sandbox'
+#   dependsOn: Build
+#   condition:  and(succeeded(), eq(variables.isPullRequest, true))  
+#   jobs:
+#   - deployment: Deploy
+#     pool:
+#       vmImage: 'ubuntu-latest'
+#     variables:
+#       - template: templates/variables-sandbox.yml
+#       - name : aksServiceConnection
+#         value: aksServiceConn-AZR-NCE-SND1
+#     environment: sandbox 
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#             - template: steps-deploy-helm-charts.yaml
+#               parameters:
+#                 envName: sandbox
+#                 releaseName: ncea-fe-sandbox
+#                 aksServiceConnection: aksServiceConn-AZR-NCE-SND1
 
-  - job: RunTests
-    dependsOn: Deploy
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-      - template: steps-run-automated-tests.yaml
+  # - job: RunTests
+  #   dependsOn: Deploy
+  #   pool:
+  #     vmImage: 'windows-latest'
+  #   steps:
+  #     - template: steps-run-automated-tests.yaml
 
 - stage: 'dev'
   displayName: 'Deploy to Dev'
@@ -84,7 +86,7 @@ stages:
   jobs:
   - deployment: Deploy
     pool:
-      vmImage: 'ubuntu-latest'
+      name: DEFRA-COMMON-ubuntu2204-SSV3
     variables:
       - template: templates/variables-dev.yml
     environment: dev 
@@ -96,7 +98,7 @@ stages:
               parameters:
                 envName: dev
                 releaseName: ncea-fe-dev
-                aksServiceConnection: aksServiceConn-AZR-NCE-SND1
+                armServiceConnection: AZR-NCE-DEV1
 
 - stage: 'test'
   displayName: 'Deploy to test'
@@ -105,7 +107,7 @@ stages:
   jobs:
   - deployment: Deploy
     pool:
-      vmImage: 'ubuntu-latest'
+      name: DEFRA-COMMON-ubuntu2204-SSV3
     variables:
       - template: templates/variables-test.yml
     environment: test 
