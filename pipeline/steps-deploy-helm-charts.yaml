@@ -3,7 +3,7 @@ parameters:
     type: string
   - name: releaseName
     type: string
-  - name: aksServiceConnection
+  - name: armServiceConnection
     type: string
 
 steps:
