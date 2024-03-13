@@ -22,6 +22,10 @@ steps:
     overwriteExistingFiles: true
     destinationFolder: '$(Pipeline.Workspace)/chart' 
 
+- task: KubeloginInstaller@0
+  inputs:
+    kubeloginVersion: 'latest'
+
 - task: HelmDeploy@0
   displayName: 'Helm Deploy'
   condition: succeeded()

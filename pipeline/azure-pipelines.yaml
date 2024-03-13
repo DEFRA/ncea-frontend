@@ -103,7 +103,7 @@ stages:
 - stage: 'test'
   displayName: 'Deploy to test'
   dependsOn: dev
-  condition:  succeeded()
+  condition: and(succeeded(), eq(variables.deployToTest, true))
   jobs:
   - deployment: Deploy
     pool:
