@@ -34,7 +34,7 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
   hosts:
-    - host: 
+    - host: dev-ncea-search.azure.defra.cloud
       paths:
         - path: /
           pathType: Prefix
