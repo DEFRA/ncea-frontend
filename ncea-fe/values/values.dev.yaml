@@ -60,8 +60,8 @@ tolerations: []
 affinity: {}
 
 env:
-  PORT: 
-  NODE_ENV: 
-  APPINSIGHTS_SECRET_NAME: "ApplicationInsights--ConnectionString"
+  PORT: 80
+  NODE_ENV: Dev
+  APPINSIGHTS_SECRET_NAME: ApplicationInsights--ConnectionString
   AZURE_KEYVAULT_URL: 
   ELASTICSEARCH_API: 

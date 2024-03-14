@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: nceapocsbox.azurecr.io/defra/ncea-fe
+  repository: devnceinfcr1401.azurecr.io/defra/ncea-fe
   pullPolicy: IfNotPresent
-  tag: "20240225.19_feature-308801-create-deployment-pipeline"
+  tag: 20240225.19_feature-308801-create-deployment-pipeline
 
 imagePullSecrets: []
 nameOverride: ""
@@ -13,7 +13,7 @@ serviceAccount:
   create: false 
   automount: false  
   annotations: {}  
-  name: "serviceaccount-nceafrontend-sbox"
+  name: "saccount-ncea-devnceinfid1401"
 
 podAnnotations: {}
 podLabels: 
@@ -29,13 +29,13 @@ service:
 
 ingress:
   enabled: true
-  className: "webapprouting.kubernetes.azure.com"
+  className: "nginx"
   annotations: {}
   hosts:
-    - host: nceasearchsnd.azure-adventures.co.uk
+    - host: dev-ncea-search.azure.defra.cloud
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls: []
 
 resources: {}
@@ -59,7 +59,7 @@ affinity: {}
 
 env:
   PORT: 80
-  NODE_ENV: "sandbox"
-  APPINSIGHTS_SECRET_NAME: "ApplicationInsights--ConnectionString"
-  AZURE_KEYVAULT_URL: "https://nceapocsbox.vault.azure.net/"
-  ELASTICSEARCH_API: "http://elasticsearch.azure-adventures.co.uk/"
+  NODE_ENV: sandbox
+  APPINSIGHTS_SECRET_NAME: ApplicationInsights--ConnectionString
+  AZURE_KEYVAULT_URL: https://devnceinfkvt1401.vault.azure.net/
+  ELASTICSEARCH_API: http://elasticsearch.geonetwork.svc.cluster.local/
