@@ -29,7 +29,7 @@ service:
 
 ingress:
   enabled: true
-  className: nginx
+  className: "nginx"
   annotations: {}
     # nginx.ingress.kubernetes.io/ssl-redirect: "false"
     # nginx.ingress.kubernetes.io/use-regex: "true"
