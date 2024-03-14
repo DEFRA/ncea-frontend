@@ -29,13 +29,15 @@ service:
 
 ingress:
   enabled: true
-  className: "webapprouting.kubernetes.azure.com"
-  annotations: {}
+  className: nginx
+  annotations: 
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
   hosts:
     - host: 
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls: []
 
 resources: {}
@@ -58,13 +60,7 @@ tolerations: []
 affinity: {}
 
 env:
-  - name: PORT
-    value: 
-  - name: NODE_ENV
-    value: dev
-  - name: APPINSIGHTS_SECRET_NAME
-    value: ApplicationInsights--ConnectionString
-  - name: AZURE_KEYVAULT_URL
-    value: 
-  - name: ELASTICSEARCH_API
-    value: 
+  PORT: 
+  NODE_ENV: 
+  AZURE_KEYVAULT_URL: 
+  ELASTICSEARCH_API: 

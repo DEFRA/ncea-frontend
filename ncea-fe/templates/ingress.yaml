@@ -5,10 +5,11 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "ncea-fe.labels" . | nindent 4 }}  
+    {{- include "ncea-fe.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}  
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   ingressClassName: {{ $.Values.ingress.className }}
   rules:

@@ -29,8 +29,10 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"
-  annotations: {}
+  className: nginx
+  annotations: 
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
   hosts:
     - host: dev-ncea-search.azure.defra.cloud
       paths:
@@ -59,7 +61,6 @@ affinity: {}
 
 env:
   PORT: 80
-  NODE_ENV: sandbox
-  APPINSIGHTS_SECRET_NAME: ApplicationInsights--ConnectionString
+  NODE_ENV: sandbox  
   AZURE_KEYVAULT_URL: https://devnceinfkvt1401.vault.azure.net/
   ELASTICSEARCH_API: http://elasticsearch.geonetwork.svc.cluster.local/
