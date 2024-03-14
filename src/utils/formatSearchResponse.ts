@@ -25,7 +25,7 @@ const formatSearchResponse = async (
       studyPeriod,
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
       ncea_catalogue_number: searchItem?._source?.uuid,
-      host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace} ${searchItem?._source?.resourceIdentifier?.[0]?.code}`,
+      host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`,
       // Keeping this as a placeholder, as the Coupled Resource is not available now
       host_catalogue_entry: '',
       resource_type_and_hierarchy: searchItem?._source?.resourceType?.[0] ?? '',

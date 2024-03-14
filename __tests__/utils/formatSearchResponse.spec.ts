@@ -15,15 +15,7 @@ describe('Format the search response', () => {
           {
             _id: '1',
             _source: {
-              resourceTitleObject: { default: 'Title 1' },
               OrgObject: { default: 'Organization 1' },
-              resourceAbstractObject: { default: 'Content 1' },
-              resourceType: ['dataset'],
-              cl_hierarchyLevel: [
-                {
-                  default: 'Dataset'
-                }
-              ],
               resourceTemporalExtentDetails: [
                 {
                   start: {
@@ -57,15 +49,7 @@ describe('Format the search response', () => {
                 group: 0,
               },
             ],
-              resourceIdentifier: [
-                {
-                  code: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
-                  codeSpace: 'https://seabed.admiralty.co.uk',
-                  link: '',
-                },
-              ],
               uuid: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
-              mainLanguage:"eng",
               tag:[
                 {
                    "default":"Elevation",
@@ -153,16 +137,16 @@ describe('Format the search response', () => {
       items: [
         {
           id: '1',
-          title: 'Title 1',
+          title: '',
           publishedBy: 'Organization 1',
-          content: 'Content 1',
+          content: '',
           studyPeriod: '04 Jan 1960',
-          resourceLocator: 'https://seabed.admiralty.co.uk',
+          resourceLocator: '',
           ncea_catalogue_number: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
-          host_catalogue_number: 'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
+          host_catalogue_number: ' ',
           host_catalogue_entry: '',
-          resource_type_and_hierarchy: 'dataset',
-          hierarchy_level: 'Dataset',
+          resource_type_and_hierarchy: '',
+          hierarchy_level: '',
           resource_locators : 'Download from Seabed Mapping Service (<a class=\"govuk-link\" href=\"https://seabed.admiralty.co.uk\" target=\"_blank\">https://seabed.admiralty.co.uk</a>)'
         },
         {
