@@ -46,10 +46,8 @@ steps:
         ingress.hosts[0].host=$(hostName)
         env.PORT=$(port)
         env.NODE_ENV=$(nodeEnv)
-        env.APPINSIGHTS_SECRET_NAME=$(appinsightsSecretName)
         env.AZURE_KEYVAULT_URL=$(keyVaultUri)
-        env.ELASTICSEARCH_API=$(elasticSearchApi)
-        
+        env.ELASTICSEARCH_API=$(elasticSearchApi)        
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
