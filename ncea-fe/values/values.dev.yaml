@@ -30,9 +30,9 @@ service:
 ingress:
   enabled: true
   className: nginx
-  annotations: 
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
+  annotations: {}
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # nginx.ingress.kubernetes.io/use-regex: "true"
   hosts:
     - host: dev-ncea-search.azure.defra.cloud
       paths:
