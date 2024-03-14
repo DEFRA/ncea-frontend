@@ -153,6 +153,8 @@ const formattedDetailsResponse: ISearchResults = {
       language: 'ENG',
       keywords: '',
       topic_categories: '',
+      // TODO
+      alternateTitle: 'This is an alternate title',
     },
   ],
 };
@@ -663,6 +665,8 @@ const formattedDetailsFullResponse: ISearchResults = {
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
       topic_categories: 'Elevation',
+      // TODO
+      alternateTitle: 'This is an alternate title',
     },
   ],
 };

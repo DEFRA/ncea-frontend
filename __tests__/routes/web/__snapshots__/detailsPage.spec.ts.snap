@@ -104,6 +104,20 @@ exports[`Details route template Document details with data Check status code and
 
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
+    
+      <details class="govuk-details details-alt_title" open>
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      Alternate title (additional business name or alternative language)
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    This is an alternate title
+  </div>
+</details>
+
+    
+
     <div >
       
 
@@ -560,6 +574,20 @@ exports[`Details route template Document details with partial data Check status 
     
 
     <h1 class='govuk-heading-m details-title'>Geoserver WFS Fragments Country Boundaries Test Template</h1>
+
+    
+      <details class="govuk-details details-alt_title" open>
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      Alternate title (additional business name or alternative language)
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    This is an alternate title
+  </div>
+</details>
+
+    
 
     <div  class="open-data-block--disabled" >
       
