@@ -50,3 +50,4 @@ steps:
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
+    arguments: --debug
