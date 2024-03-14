@@ -9,7 +9,7 @@ import { Server } from '@hapi/hapi';
 import { getSearchResults } from '../../../src/services/handlers/searchApi';
 import { initializeServer } from '../../../src/infrastructure/server';
 import supertest from 'supertest';
-import { months, webRoutePaths } from '../../../src/utils/constants';
+import { webRoutePaths } from '../../../src/utils/constants';
 import {
   searchResultsWithData,
   searchResultsWithEmptyData,
@@ -23,6 +23,10 @@ jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
   info: jest.fn(),
 }));
 
+jest.mock('../../../src/utils/keyvault', () => ({
+  getSecret: jest.fn(),
+}));
+
 let serverRequest;
 
 const invokeRoute = async (route, payload) => {
@@ -31,32 +35,6 @@ const invokeRoute = async (route, payload) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(rawHTML, 'text/html');
   return { response, document };
-};
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = months[date.getMonth()];
-  const year = date.getFullYear();
-
-  return `${day} ${month} ${year}`;
-};
-
-const getDateValue = (dateObject) => {
-  if (Object.keys(dateObject).length) {
-    const startDate = dateObject?.startDate;
-    const endDate = dateObject?.endDate;
-    if (startDate && endDate) {
-      return `${formatDate(startDate)} to ${formatDate(endDate)}`;
-    } else if (startDate && !endDate) {
-      return `${formatDate(startDate)}`;
-    } else if (!startDate && endDate) {
-      return `${formatDate(endDate)}`;
-    } else {
-      return '';
-    }
-  }
-  return '';
 };
 
 describe('Results block template', () => {
@@ -110,9 +88,8 @@ describe('Results block template', () => {
         const resultItems = resultItemsBlock.children;
         expect(resultItems.length).toBe(searchResultsWithData.total);
         Array.from(resultItems).forEach((resultItem: any, index) => {
-          const dateValue = getDateValue(
-            searchResultsWithData?.items[index]?.temporalExtentDetails,
-          );
+          const dateValue = searchResultsWithData?.items[index]?.studyPeriod;
+
           expect(
             resultItem
               .querySelector('.search-result__heading')

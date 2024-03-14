@@ -13,11 +13,18 @@ import {
   resourceTypeAPIResponse,
 } from '../../data/resourceTypeResponse';
 import {
+  getDocumentDetails,
   getResourceTypeOptions,
   getSearchResults,
   getSearchResultsCount,
 } from '../../../src/services/handlers/searchApi';
+import {
+  detailsEmptyAPIResponse,
+  detailsSuccessAPIResponse,
+} from '../../data/documentDetailsResponse';
 import { formatAggregationResponse } from '../../../src/utils/formatAggregationResponse';
+import { formatSearchResponse } from '../../../src/utils/formatSearchResponse';
+import { ISearchResults } from '../../../src/interfaces/searchResponse.interface';
 
 jest.mock('../../../src/config/elasticSearchClient', () => ({
   elasticSearchClient: {
@@ -54,7 +61,7 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      const payload: IQuery = buildSearchQuery(searchFieldsObject);
+      const payload: IQuery = buildSearchQuery({ searchFieldsObject });
       await getSearchResults(searchFieldsObject);
       expect(elasticSearchClient.post).toHaveBeenCalledWith(
         elasticSearchAPIPaths.searchPath,
@@ -233,6 +240,38 @@ describe('Search API', () => {
         page: 1,
       });
       expect(result).toEqual(resourceTypeOptions);
+    });
+  });
+
+  describe('Search API - To fetch the document details', () => {
+    it('should return the response from elasticSearchClient.post', async () => {
+      const docId = '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2';
+      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
+        data: detailsSuccessAPIResponse,
+      });
+      const formattedDetailsResponse: ISearchResults =
+        await formatSearchResponse(detailsSuccessAPIResponse, true);
+      const result = await getDocumentDetails(docId);
+      expect(result).toEqual(formattedDetailsResponse?.items?.[0]);
+    });
+
+    it('should return the empty object when no document found from elasticSearchClient.post', async () => {
+      const docId = '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2';
+      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
+        data: detailsEmptyAPIResponse,
+      });
+      const result = await getDocumentDetails(docId);
+      expect(result).toEqual({});
+    });
+
+    it('should handle errors and throw an error message', async () => {
+      const docId = '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2';
+      elasticSearchClient.post = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Mocked error'));
+      await expect(getDocumentDetails(docId)).rejects.toThrow(
+        'Error fetching results: Mocked error',
+      );
     });
   });
 });

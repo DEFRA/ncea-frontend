@@ -1,13 +1,20 @@
 'use strict';
 
+import { FormattedTabOptions } from '../../interfaces/detailsTab.interface';
 import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import Joi from 'joi';
-import { IAggregationOptions, ISearchResults } from '../../interfaces/searchResponse.interface';
+import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { getPaginationItems } from '../../utils/paginationBuilder';
+import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import { formIds, resourceTypeOptions, webRoutePaths } from '../../utils/constants';
-import { getResourceTypeOptions, getSearchResults, getSearchResultsCount } from '../../services/handlers/searchApi';
+import {
+  getDocumentDetails,
+  getResourceTypeOptions,
+  getSearchResults,
+  getSearchResultsCount,
+} from '../../services/handlers/searchApi';
 
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
@@ -81,6 +88,22 @@ const SearchResultsController = {
       return response.view('partials/results/filters', {
         error,
         resourceTypeOptions,
+      });
+    }
+  },
+  renderSearchDetailsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    try {
+      const docId = request.params.id;
+      const docDetails: ISearchItem = await getDocumentDetails(docId);
+      const detailsTabOptions: FormattedTabOptions = await processDetailsTabData(docDetails);
+      return response.view('screens/details/template', {
+        docDetails,
+        detailsTabOptions,
+      });
+    } catch (error) {
+      return response.view('screens/details/template', {
+        error,
+        docDetails: undefined,
       });
     }
   },

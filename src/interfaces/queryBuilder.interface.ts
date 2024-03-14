@@ -116,6 +116,15 @@ interface ISearchPayload {
   page: number;
 }
 
+interface ISearchBuilderPayload {
+  searchFieldsObject?: ISearchPayload;
+  fieldsToSearch?: string[];
+  isCount?: boolean;
+  ignoreAggregation?: boolean;
+  aggregationField?: string;
+  docId?: string;
+}
+
 export {
   IMatchQuery,
   IBoolQuery,
@@ -131,4 +140,5 @@ export {
   ICustomSortScript,
   IAggregateQuery,
   ISearchFilter,
+  ISearchBuilderPayload,
 };

@@ -8,6 +8,8 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
 
+
+
   <div class='govuk-section-break--visible'>
     <h2 class='govuk-heading-m results-stats'>
       0 results found 
@@ -126,6 +128,8 @@ exports[`Results block template Guided search journey Search results with error 
 
 
 
+
+
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
 
 
@@ -140,6 +144,8 @@ exports[`Results block template Guided search journey Search results with error 
 
 exports[`Results block template Quick search journey Search results with data should match the results screen snapshot 1`] = `
 "
+
+
 
 
 
@@ -230,9 +236,7 @@ exports[`Results block template Quick search journey Search results with data sh
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
             <span class='search-result__parameter-value search-result__study-value'>
-              
-                04 Jan 1960
-              
+              04 Jan 1960
             </span>
           </div>
         
@@ -240,18 +244,26 @@ exports[`Results block template Quick search journey Search results with data sh
           Content 1
         </p>
 
-        
-        
-          
-        
-
         <div class='govuk-button-group search-result__button-group'>
           
+
+
+  
+
+
+
+
+  
+
+
+
+  
+
   
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" disabled="true">
   Open data
 </button>
 
@@ -263,9 +275,9 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/1" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
-</button>
+</a>
 
         </div>
       </div>
@@ -282,9 +294,7 @@ exports[`Results block template Quick search journey Search results with data sh
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
             <span class='search-result__parameter-value search-result__study-value'>
-              
-                04 Jan 1960 to 12 Jan 2009
-              
+              04 Jan 1950 to 12 Jan 2009
             </span>
           </div>
         
@@ -292,18 +302,26 @@ exports[`Results block template Quick search journey Search results with data sh
           Content 2
         </p>
 
-        
-        
-          
-        
-
         <div class='govuk-button-group search-result__button-group'>
           
+
+
+  
+
+
+
+
+  
+
+
+
+  
+
   
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" disabled="true">
   Open data
 </button>
 
@@ -315,16 +333,16 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/2" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
-</button>
+</a>
 
         </div>
       </div>
     
   </div>
 
-<nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item">
+  <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item">
             <a class="govuk-link govuk-pagination__link" href="#!" aria-label="Page 1" data-page-id="1">
               1
             </a>
@@ -373,6 +391,8 @@ exports[`Results block template Quick search journey Search results with data sh
 
 exports[`Results block template Quick search journey Search results with empty data should match the results screen snapshot 1`] = `
 "
+
+
 
 
 
@@ -468,6 +488,8 @@ exports[`Results block template Quick search journey Search results with empty d
 
 exports[`Results block template Quick search journey Search results with error should match the results screen snapshot 1`] = `
 "
+
+
 
 
 

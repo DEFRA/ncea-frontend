@@ -13,6 +13,10 @@ jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
   logger: jest.fn()
 }));
 
+jest.mock('../../../src/utils/keyvault', () => ({
+  getSecret: jest.fn(),
+}));
+
 describe('Guided Search - Date Questionnaire Screen', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;
