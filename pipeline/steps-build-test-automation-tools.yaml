@@ -20,8 +20,18 @@ steps:
       configuration: $(buildConfiguration)
       projects: '**/*.sln'
 
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish'
+    inputs:
+      command: 'publish'
+      publishWebProjects: false
+      projects: '**/*.csproj'
+      arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+      zipAfterPublish: false
+      modifyOutputPath: true
+
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
     inputs:
-      targetPath: $(Build.SourcesDirectory)/src/bin/$(buildConfiguration)/net6.0
+      targetPath: $(Build.ArtifactStagingDirectory)/Output
       artifactName: tests
