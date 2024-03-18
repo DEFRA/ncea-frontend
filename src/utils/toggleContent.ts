@@ -3,7 +3,7 @@
 import { maxWords, showLessText, showMoreText } from './constants';
 
 const toggleContent = (content: string, uniqueKey: string): string => {
-  if (content && content.length) {
+  if (content) {
     const words = content.split(/\s+/);
     if (words.length > maxWords) {
       const truncatedContent: string = words.slice(0, maxWords).join(' ');
