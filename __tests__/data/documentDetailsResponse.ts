@@ -37,6 +37,38 @@ const detailsSuccessAPIResponse = {
             },
           ],
           resourceType: ['dataset'],
+          resourceIdentifier: [
+            {
+              code: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+              codeSpace: 'https://seabed.admiralty.co.uk',
+              link: '',
+            },
+          ],
+          cl_function: [
+            {
+              key: 'download',
+              default: 'Download',
+              langeng: 'Download',
+              link: 'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_OnLineFunctionCode',
+              text: 'download',
+            },
+          ],
+          link: [
+            {
+              protocol: '',
+              mimeType: '',
+              urlObject: {
+                default: 'https://seabed.admiralty.co.uk',
+              },
+              nameObject: {
+                default: 'Seabed Mapping Service',
+                langeng: 'Seabed Mapping Service',
+              },
+              function: 'download',
+              applicationProfile: '',
+              group: 0,
+            },
+          ],
           contact: [
             {
               role: '',
@@ -149,11 +181,19 @@ const formattedDetailsResponse: ISearchResults = {
       publishedBy: '',
       content: '',
       studyPeriod: '',
-      resourceLocator: '',
+      resourceLocator: 'https://seabed.admiralty.co.uk',
       language: 'ENG',
       keywords: '',
       topic_categories: '',
       organisationName: '',
+      ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      host_catalogue_number:
+        'https://seabed.admiralty.co.uk 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      host_catalogue_entry: '',
+      resource_type_and_hierarchy: 'dataset',
+      hierarchy_level: 'Dataset',
+      resource_locators:
+        'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
     },
   ],
 };
@@ -665,6 +705,14 @@ const formattedDetailsFullResponse: ISearchResults = {
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
       topic_categories: 'Elevation',
       organisationName: 'United Kingdom Hydrographic Office',
+      ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      host_catalogue_number:
+        'https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      host_catalogue_entry: '',
+      resource_type_and_hierarchy: 'dataset',
+      hierarchy_level: 'Dataset',
+      resource_locators:
+        'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
     },
   ],
 };

@@ -8,7 +8,7 @@
           <h2 class='tab-content-label'>{{option.label}}</h2>
           {% if option.displayValue %}
             <span class='tab-content-value'>
-              {{option.displayValue}}
+              {{option.displayValue | safe}}
             </span>
           {% else %}
             {{govukTag({

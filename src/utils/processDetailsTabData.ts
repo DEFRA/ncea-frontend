@@ -23,7 +23,7 @@ const processDetailsTabData = async (
 
         if (value) {
           const isLink = /^https?:\/\/.*$/.test(value);
-          const formattedValue = isLink ? addLink(value) : value;
+          const formattedValue = isLink && part !== 'host_catalogue_number' ? addLink(value) : value;
 
           if (part.includes('(') && part.includes(')')) {
             displayValue.push(`(${formattedValue})`);

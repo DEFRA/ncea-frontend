@@ -56,9 +56,15 @@ const getStudyPeriod = (startDate: string, endDate: string): string => {
 
 const getOtherDetails = (item: ISearchItem, searchItem: Record<string, any>) => {
   item.language = searchItem?._source?.mainLanguage?.toUpperCase() ?? '';
-  item.keywords = searchItem?._source?.tag.map((item) => item.default).join(', ') ?? '';
+  item.keywords = searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '';
   item.topic_categories = searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '';
-  searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '';
+  item.ncea_catalogue_number = searchItem?._source?.uuid;
+  item.host_catalogue_number = `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`;
+  // Keeping this as a placeholder, as the Coupled Resource is not available now
+  item.host_catalogue_entry = '';
+  item.resource_type_and_hierarchy = searchItem?._source?.resourceType?.[0] ?? '';
+  item.hierarchy_level = searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '';
+  item.resource_locators = `${searchItem?._source?.cl_function?.[0]?.default} from ${searchItem?._source?.link?.[0]?.nameObject?.default} (<a class="govuk-link" href="${searchItem?._source?.link?.[0]?.urlObject?.default}" target="_blank">${searchItem?._source?.link?.[0]?.urlObject?.default}</a>)`;
 };
 
 export { formatSearchResponse };

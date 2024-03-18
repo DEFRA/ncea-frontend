@@ -359,13 +359,6 @@ describe('Details route template', () => {
         expect(titleElement?.tagName.toLowerCase()).toBe('h1');
       });
 
-      it('should render the open data button with disabled state and with out modal', async () => {
-        const buttonElement = document.querySelector('.govuk-button');
-        expect(buttonElement).toBeTruthy();
-        expect(buttonElement.hasAttribute('disabled')).toBeTruthy();
-        expect(document.querySelector('.modal')).toBeFalsy();
-      });
-
       it('should render the open data button parent div with a class', async () => {
         const parentElement =
           document.querySelector('.govuk-button')?.parentElement;
@@ -373,17 +366,15 @@ describe('Details route template', () => {
         expect(parentElement?.tagName?.toLowerCase()).toBe('div');
         expect(
           parentElement?.classList?.contains('open-data-block--disabled'),
-        ).toBeTruthy();
+        ).toBeFalsy();
       });
 
       it('should render the open data text', async () => {
         const openDataTagElement = document.querySelector(
           '.open-data-block--tag',
         );
-        expect(openDataTagElement).toBeTruthy();
-        expect(openDataTagElement?.textContent?.trim()).toBe(
-          'Access to this data resource is by application to the owner - please refer to access tab for further details',
-        );
+        expect(openDataTagElement).toBe(null);
+        expect(openDataTagElement?.textContent?.trim()).toBe(undefined);
       });
     });
 
