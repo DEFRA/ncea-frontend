@@ -15,9 +15,7 @@ describe('Format the search response', () => {
           {
             _id: '1',
             _source: {
-              resourceTitleObject: { default: 'Title 1' },
               OrgObject: { default: 'Organization 1' },
-              resourceAbstractObject: { default: 'Content 1' },
               resourceTemporalExtentDetails: [
                 {
                   start: {
@@ -26,13 +24,52 @@ describe('Format the search response', () => {
                   end: {},
                 },
               ],
-              resourceIdentifier: [
+              cl_function:[
                 {
-                  code: 'CEFAS268',
-                  codeSpace: 'https://data.cefas.co.uk',
-                  link: '',
+                   "key":"download",
+                   "default":"Download",
+                   "langeng":"Download",
+                   "link":"http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_OnLineFunctionCode",
+                   "text":"download"
+                }
+             ],
+             link: [
+              {
+                protocol: '',
+                mimeType: '',
+                urlObject: {
+                  default: 'https://seabed.admiralty.co.uk',
                 },
-              ],
+                nameObject: {
+                  default: 'Seabed Mapping Service',
+                  langeng: 'Seabed Mapping Service',
+                },
+                function: 'download',
+                applicationProfile: '',
+                group: 0,
+              },
+            ],
+              uuid: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+              tag:[
+                {
+                   "default":"Elevation",
+                   "langeng":"Elevation",
+                   "link":"http://vocab.nerc.ac.uk/collection/P22/current/10/",
+                   "key":"http://vocab.nerc.ac.uk/collection/P22/current/10/"
+                },
+                {
+                   "default":"Marine Environmental Data and Information Network",
+                   "langeng":"Marine Environmental Data and Information Network",
+                   "link":"http://vocab.nerc.ac.uk/collection/N01/current/NDGO0001/",
+                   "key":"http://vocab.nerc.ac.uk/collection/N01/current/NDGO0001/"
+                },
+                {
+                   "default":"Bathymetry and Elevation",
+                   "langeng":"Bathymetry and Elevation",
+                   "link":"http://vocab.nerc.ac.uk/collection/P02/current/MBAN/",
+                   "key":"http://vocab.nerc.ac.uk/collection/P02/current/MBAN/"
+                }
+             ],
             },
           },
           {
@@ -40,7 +77,38 @@ describe('Format the search response', () => {
             _source: {
               resourceTitleObject: { default: 'Title 2' },
               OrgObject: { default: 'Organization 2' },
+              resourceType: ['dataset'],
               resourceAbstractObject: { default: 'Content 2' },
+              cl_hierarchyLevel: [
+                {
+                  default: 'Dataset'
+                }
+              ],
+              cl_function:[
+                {
+                   "key":"download",
+                   "default":"Download",
+                   "langeng":"Download",
+                   "link":"http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_OnLineFunctionCode",
+                   "text":"download"
+                }
+             ],
+             link: [
+              {
+                protocol: '',
+                mimeType: '',
+                urlObject: {
+                  default: 'https://seabed.admiralty.co.uk',
+                },
+                nameObject: {
+                  default: 'Seabed Mapping Service',
+                  langeng: 'Seabed Mapping Service',
+                },
+                function: 'download',
+                applicationProfile: '',
+                group: 0,
+              },
+            ],
               resourceTemporalExtentDetails: [
                 {
                   start: {
@@ -51,6 +119,14 @@ describe('Format the search response', () => {
                   },
                 },
               ],
+              resourceIdentifier: [
+                {
+                  code: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+                  codeSpace: 'https://seabed.admiralty.co.uk',
+                  link: '',
+                },
+              ],
+              uuid: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
             },
           },
         ],
@@ -61,11 +137,17 @@ describe('Format the search response', () => {
       items: [
         {
           id: '1',
-          title: 'Title 1',
+          title: '',
           publishedBy: 'Organization 1',
-          content: 'Content 1',
+          content: '',
           studyPeriod: '04 Jan 1960',
-          resourceLocator: 'https://data.cefas.co.uk',
+          resourceLocator: '',
+          ncea_catalogue_number: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+          host_catalogue_number: ' ',
+          host_catalogue_entry: '',
+          resource_type_and_hierarchy: '',
+          hierarchy_level: '',
+          resource_locators : 'Download from Seabed Mapping Service (<a class=\"govuk-link\" href=\"https://seabed.admiralty.co.uk\" target=\"_blank\">https://seabed.admiralty.co.uk</a>)'
         },
         {
           id: '2',
@@ -73,7 +155,13 @@ describe('Format the search response', () => {
           publishedBy: 'Organization 2',
           content: 'Content 2',
           studyPeriod: '04 Jan 1960 to 12 Jan 2009',
-          resourceLocator: '',
+          resourceLocator: 'https://seabed.admiralty.co.uk',
+          ncea_catalogue_number: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
+          host_catalogue_number: 'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
+          host_catalogue_entry: '',
+          resource_type_and_hierarchy: 'dataset',
+          hierarchy_level: 'Dataset',
+          resource_locators : 'Download from Seabed Mapping Service (<a class=\"govuk-link\" href=\"https://seabed.admiralty.co.uk\" target=\"_blank\">https://seabed.admiralty.co.uk</a>)'
         },
       ],
     };

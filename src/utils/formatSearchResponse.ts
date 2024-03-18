@@ -17,7 +17,6 @@ const formatSearchResponse = async (
     const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
     const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
     const studyPeriod = getStudyPeriod(startDate, endDate);
-
     const item: ISearchItem = {
       id: searchItem?._id,
       title: searchItem?._source?.resourceTitleObject?.default ?? '',
@@ -25,6 +24,13 @@ const formatSearchResponse = async (
       content: searchItem?._source?.resourceAbstractObject?.default ?? '',
       studyPeriod,
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+      ncea_catalogue_number: searchItem?._source?.uuid,
+      host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`,
+      // Keeping this as a placeholder, as the Coupled Resource is not available now
+      host_catalogue_entry: '',
+      resource_type_and_hierarchy: searchItem?._source?.resourceType?.[0] ?? '',
+      hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '',
+      resource_locators: `${searchItem?._source?.cl_function?.[0]?.default} from ${searchItem?._source?.link?.[0]?.nameObject?.default} (<a class="govuk-link" href="${searchItem?._source?.link?.[0]?.urlObject?.default}" target="_blank">${searchItem?._source?.link?.[0]?.urlObject?.default}</a>)`,
     };
     if (isDetails) {
       getOtherDetails(item, searchItem);
