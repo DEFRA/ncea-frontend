@@ -65,6 +65,7 @@ const getOtherDetails = (item: ISearchItem, searchItem: Record<string, any>) => 
   item.resource_type_and_hierarchy = searchItem?._source?.resourceType?.[0] ?? '';
   item.hierarchy_level = searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '';
   item.resource_locators = `${searchItem?._source?.cl_function?.[0]?.default} from ${searchItem?._source?.link?.[0]?.nameObject?.default} (<a class="govuk-link" href="${searchItem?._source?.link?.[0]?.urlObject?.default}" target="_blank">${searchItem?._source?.link?.[0]?.urlObject?.default}</a>)`;
+  item.alternateTitle = 'This is an alternate title';
 };
 
 export { formatSearchResponse };

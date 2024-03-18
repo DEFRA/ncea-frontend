@@ -1,5 +1,6 @@
 {% extends 'layout/default.njk' %}
 
+{% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from 'govuk/components/breadcrumbs/macro.njk' import govukBreadcrumbs %}
 {% from 'govuk/components/tabs/macro.njk' import govukTabs %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -43,6 +44,15 @@
     {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
 
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
+
+    {% if docDetails !== undefined and docDetails.alternateTitle %}
+      {{ govukDetails({
+        summaryText: "Alternate title (additional business name or alternative language)",
+        text: docDetails.alternateTitle,
+        open: "true",
+        classes: "details-alt_title"
+      }) }}
+    {% endif %}
 
     <div {% if not docDetails.resourceLocator %} class="open-data-block--disabled" {% endif %}>
       {{ openData({ organisationName: docDetails.organisationName, resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}

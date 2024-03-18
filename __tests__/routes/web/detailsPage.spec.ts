@@ -145,6 +145,27 @@ describe('Details route template', () => {
         expect(titleElement?.tagName.toLowerCase()).toBe('h1');
       });
 
+      // TODO
+      it('should render the alternate title', async () => {
+        const altTitleBlockElement =
+          document.querySelector('.details-alt_title');
+        expect(altTitleBlockElement).toBeDefined();
+        const altTitleBlockHeadingElement = document.querySelector(
+          '.govuk-details__summary-text',
+        );
+        const altTitleBlockValueElement = document.querySelector(
+          '.govuk-details__text',
+        );
+        expect(altTitleBlockHeadingElement?.textContent?.trim()).toBe(
+          'Alternate title (additional business name or alternative language)',
+        );
+        expect(altTitleBlockHeadingElement?.tagName.toLowerCase()).toBe('span');
+        expect(altTitleBlockValueElement?.textContent?.trim()).toBe(
+          detailsFullResponse?.alternateTitle,
+        );
+        expect(altTitleBlockValueElement?.tagName.toLowerCase()).toBe('div');
+      });
+
       it('should render the open data button and modal', async () => {
         const buttonElement = document.querySelector('.govuk-button');
         expect(buttonElement).toBeTruthy();
@@ -357,6 +378,34 @@ describe('Details route template', () => {
           detailsPartialResponse?.title,
         );
         expect(titleElement?.tagName.toLowerCase()).toBe('h1');
+      });
+
+      // TODO
+      it('should render the alternate title', async () => {
+        const altTitleBlockElement =
+          document.querySelector('.details-alt_title');
+        expect(altTitleBlockElement).toBeDefined();
+        const altTitleBlockHeadingElement = document.querySelector(
+          '.govuk-details__summary-text',
+        );
+        const altTitleBlockValueElement = document.querySelector(
+          '.govuk-details__text',
+        );
+        expect(altTitleBlockHeadingElement?.textContent?.trim()).toBe(
+          'Alternate title (additional business name or alternative language)',
+        );
+        expect(altTitleBlockHeadingElement?.tagName.toLowerCase()).toBe('span');
+        expect(altTitleBlockValueElement?.textContent?.trim()).toBe(
+          detailsFullResponse?.alternateTitle,
+        );
+        expect(altTitleBlockValueElement?.tagName.toLowerCase()).toBe('div');
+      });
+
+      it('should render the open data button', async () => {
+        const buttonElement = document.querySelector('.govuk-button');
+        expect(buttonElement).toBeTruthy();
+        expect(buttonElement.hasAttribute('disabled')).toBeFalsy();
+        expect(document.querySelector('.modal')).toBeTruthy();
       });
 
       it('should render the open data button parent div with a class', async () => {

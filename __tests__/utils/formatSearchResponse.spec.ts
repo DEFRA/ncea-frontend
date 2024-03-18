@@ -278,6 +278,8 @@ describe('Format the search response', () => {
             'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
           language: '',
           topic_categories: '',
+          // TODO
+          alternateTitle: 'This is an alternate title',
         },
         {
           id: '2',
@@ -298,6 +300,8 @@ describe('Format the search response', () => {
           keywords: '',
           language: '',
           topic_categories: '',
+          // TODO
+          alternateTitle: 'This is an alternate title',
         },
       ],
     };

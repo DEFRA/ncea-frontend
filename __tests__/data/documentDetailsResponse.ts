@@ -194,6 +194,8 @@ const formattedDetailsResponse: ISearchResults = {
       hierarchy_level: 'Dataset',
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+      // TODO
+      alternateTitle: 'This is an alternate title',
     },
   ],
 };
@@ -713,6 +715,8 @@ const formattedDetailsFullResponse: ISearchResults = {
       hierarchy_level: 'Dataset',
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+      // TODO
+      alternateTitle: 'This is an alternate title',
     },
   ],
 };

@@ -15,6 +15,7 @@ export interface ISearchItem {
   resource_type_and_hierarchy?: string;
   hierarchy_level?: string;
   resource_locators?: string;
+  alternateTitle?: string;
 }
 
 export interface ISearchResults {
