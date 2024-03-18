@@ -17,6 +17,20 @@ describe('Format the search response', () => {
             _source: {
               resourceTitleObject: { default: 'Title 1' },
               OrgObject: { default: 'Organization 1' },
+              contactForResource: [
+                {
+                  organisationObject: {
+                    default: 'United Kingdom Hydrographic Office',
+                  },
+                  role: 'custodian',
+                },
+                {
+                  organisationObject: {
+                    default: 'Geological Survey of Ireland (GSI)',
+                  },
+                  role: 'owner',
+                },
+              ],
               resourceAbstractObject: { default: 'Content 1' },
               resourceTemporalExtentDetails: [
                 {
@@ -39,7 +53,20 @@ describe('Format the search response', () => {
             _id: '2',
             _source: {
               resourceTitleObject: { default: 'Title 2' },
-              OrgObject: { default: 'Organization 2' },
+              contactForResource: [
+                {
+                  organisationObject: {
+                    default: 'United Kingdom Hydrographic Office',
+                  },
+                  role: 'originator',
+                },
+                {
+                  organisationObject: {
+                    default: 'Geological Survey of Ireland (GSI)',
+                  },
+                  role: 'owner',
+                },
+              ],
               resourceAbstractObject: { default: 'Content 2' },
               resourceTemporalExtentDetails: [
                 {
@@ -62,18 +89,20 @@ describe('Format the search response', () => {
         {
           id: '1',
           title: 'Title 1',
-          publishedBy: 'Organization 1',
+          publishedBy: 'Geological Survey of Ireland (GSI)',
           content: 'Content 1',
           studyPeriod: '04 Jan 1960',
           resourceLocator: 'https://data.cefas.co.uk',
+          organisationName: 'United Kingdom Hydrographic Office',
         },
         {
           id: '2',
           title: 'Title 2',
-          publishedBy: 'Organization 2',
+          publishedBy: 'Geological Survey of Ireland (GSI)',
           content: 'Content 2',
           studyPeriod: '04 Jan 1960 to 12 Jan 2009',
           resourceLocator: '',
+          organisationName: 'United Kingdom Hydrographic Office',
         },
       ],
     };
@@ -159,5 +188,82 @@ describe('Format the search response', () => {
     };
     const result = await formatSearchResponse(apiResponse, true);
     expect(result.items?.[0]?.studyPeriod).toBe('31 Jul 2019');
+  });
+
+  it('should return organisation having role custodian', async () => {
+    const apiResponse = {
+      ...detailsSuccessAPIFullData,
+      hits: {
+        ...detailsSuccessAPIFullData.hits,
+        hits: [
+          {
+            ...detailsSuccessAPIFullData.hits.hits?.[0],
+            _source: {
+              ...detailsSuccessAPIFullData.hits.hits?.[0]?._source,
+              contactForResource: [
+                {
+                  organisationObject: {
+                    default: 'United Kingdom Hydrographic Office',
+                  },
+                  role: 'custodian',
+                },
+                {
+                  organisationObject: {
+                    default: 'Maritime and Coastguard Agency',
+                  },
+                  role: 'owner',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    };
+    const result = await formatSearchResponse(apiResponse, true);
+    expect(result.items?.[0]?.organisationName).toBe(
+      'United Kingdom Hydrographic Office',
+    );
+  });
+
+  it('should return organisation having role pointOfContact when custodian is not present', async () => {
+    const apiResponse = {
+      ...detailsSuccessAPIFullData,
+      hits: {
+        ...detailsSuccessAPIFullData.hits,
+        hits: [
+          {
+            ...detailsSuccessAPIFullData.hits.hits?.[0],
+            _source: {
+              ...detailsSuccessAPIFullData.hits.hits?.[0]?._source,
+              contactForResource: [
+                {
+                  organisationObject: {
+                    default: 'United Kingdom Hydrographic Office (originator)',
+                  },
+                  role: 'originator',
+                },
+                {
+                  organisationObject: {
+                    default:
+                      'United Kingdom Hydrographic Office (pointOfContact)',
+                  },
+                  role: 'pointOfContact',
+                },
+                {
+                  organisationObject: {
+                    default: 'Maritime and Coastguard Agency',
+                  },
+                  role: 'owner',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    };
+    const result = await formatSearchResponse(apiResponse, true);
+    expect(result.items?.[0]?.organisationName).toBe(
+      'United Kingdom Hydrographic Office (pointOfContact)',
+    );
   });
 });
