@@ -20,7 +20,7 @@ steps:
         !**\obj\**  
       searchFolder: $(Pipeline.Workspace)
       testRunTitle: End-to-end tests - Test
-      runSettingsFile: $(Pipeline.Workspace)/CI.runsettings
+      runSettingsFile: $(Pipeline.Workspace)/src/CI.runsettings
       # Handled via SpecFlow+ Runner
       rerunFailedTests: false
       publishRunAttachments: true

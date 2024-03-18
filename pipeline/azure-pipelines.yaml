@@ -98,6 +98,13 @@ stages:
                     releaseName: ncea-fe-dev
                     armServiceConnection: AZR-NCE-DEV1
 
+      - job: RunTests
+        dependsOn: Deploy
+        pool:
+          vmImage: 'windows-latest'
+        steps:
+          - template: steps-run-automated-tests.yaml
+
   - stage: 'test'
     displayName: 'Deploy to test'
     dependsOn: dev
