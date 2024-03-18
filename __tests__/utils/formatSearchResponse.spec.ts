@@ -286,6 +286,7 @@ describe('Format the search response', () => {
             additionalInformation: '',
             lineage: '',
             publicationInformation: '',
+            conformity: '',
           },
         },
         {
@@ -315,6 +316,7 @@ describe('Format the search response', () => {
             additionalInformation: '',
             lineage: '',
             publicationInformation: '',
+            conformity: '',
           },
         },
       ],

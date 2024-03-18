@@ -96,6 +96,11 @@ export const detailsTabOptions: TabOptions = {
       key: 'qualityTab',
     },
     {
+      label: 'Conformity',
+      column: 'conformity',
+      key: 'qualityTab',
+    },
+    {
       label: 'Additional information',
       column: 'additionalInformation',
       key: 'qualityTab',

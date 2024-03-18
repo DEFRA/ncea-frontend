@@ -405,6 +405,28 @@ exports[`Details route template Document details with data Check status code and
     
       
         <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Conformity</h2>
+          
+            <span class='tab-content-value'>
+              <table class="details-table">
+                      <thead>
+                        <tr>
+                          <th width="60%">Specification</th>
+                          <th>Degree</th>
+                          <th>Explanation</th>
+                        </tr>
+                      </thead><tbody><tr>
+                      <td>Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</td>
+                      <td>false</td>
+                      <td>inapplicable</td>
+                    </tr></tbody></table>
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
           <h2 class='tab-content-label'>Additional information</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
@@ -987,6 +1009,18 @@ exports[`Details route template Document details with partial data Check status 
       
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Lineage</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Conformity</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
   NOT PROVIDED

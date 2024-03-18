@@ -8020,3 +8020,20 @@
   line-height: 20px;
   color: #1d70b8 !important;
 }
+
+.details-table {
+  border-collapse: collapse;
+}
+.details-table th,
+.details-table td {
+  padding: 8px 0;
+  text-align: left;
+  vertical-align: top;
+}
+.details-table th {
+  padding-top: 0;
+}
+.details-table thead tr,
+.details-table tbody tr {
+  border-bottom: 1px solid #b1b4b6;
+}

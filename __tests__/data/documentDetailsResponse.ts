@@ -202,6 +202,7 @@ const formattedDetailsResponse: ISearchResults = {
         additionalInformation: '',
         lineage: '',
         publicationInformation: '',
+        conformity: '',
       },
     },
   ],
@@ -731,6 +732,18 @@ const formattedDetailsFullResponse: ISearchResults = {
         lineage:
           'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',
         publicationInformation: '23rd Mar 2022 - Last Revision',
+        conformity: `<table class="details-table">
+                      <thead>
+                        <tr>
+                          <th width="60%">Specification</th>
+                          <th>Degree</th>
+                          <th>Explanation</th>
+                        </tr>
+                      </thead><tbody><tr>
+                      <td>Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</td>
+                      <td>false</td>
+                      <td>inapplicable</td>
+                    </tr></tbody></table>`,
       },
     },
   ],

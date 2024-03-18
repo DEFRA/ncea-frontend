@@ -17,12 +17,13 @@ export interface FormattedTabOptions {
 }
 
 export interface GeneralTab {
-  topicCategories?: string;
-  language?: string;
-  keywords?: string;
+  topicCategories: string;
+  language: string;
+  keywords: string;
 }
 export interface QualityTab {
-  publicationInformation?: string;
-  lineage?: string;
-  additionalInformation?: string;
+  publicationInformation: string;
+  lineage: string;
+  conformity: string;
+  additionalInformation: string;
 }
