@@ -26,7 +26,7 @@ const unfreezeScroll = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  function openDataModal(publishedBy, resourceLocator) {
+  function openDataModal(organisationName, resourceLocator) {
     toggleModalContainer();
     freezeScroll();
     const resourcePartyElement = document.getElementById('resource_party');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'resource-locator-link',
     );
     if (resourcePartyElement) {
-      resourcePartyElement.innerHTML = publishedBy;
+      resourcePartyElement.innerHTML = organisationName;
     }
     if (resourceLocatorLink) {
       resourceLocatorLink.href = resourceLocator;

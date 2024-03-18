@@ -4,7 +4,7 @@ describe('Check Organization Details', () => {
   test('should return empty values when data is not an array or empty', () => {
     const testData = [];
     const result = getOrganisationDetails(testData);
-    expect(result).toEqual({ organisationValue: '', emailValue: '' });
+    expect(result).toEqual({ organisationValue: '' });
   });
 
   test('should return organisation details for owner role when isDetails is false', () => {
@@ -12,30 +12,26 @@ describe('Check Organization Details', () => {
       {
         organisationObject: { default: 'Org1' },
         role: 'owner',
-        email: 'owner@example.com',
       },
     ];
     const result = getOrganisationDetails(testData);
-    expect(result).toEqual({ organisationValue: 'Org1', emailValue: '' });
+    expect(result).toEqual({ organisationValue: 'Org1' });
   });
 
-  test('should return organisation and email details based on roles when isDetails is true', () => {
+  test('should return organisation details based on roles when isDetails is true', () => {
     const testData = [
       {
         organisationObject: { default: 'Org1' },
         role: 'custodian',
-        email: 'custodian@example.com',
       },
       {
         organisationObject: { default: 'Org2' },
         role: 'owner',
-        email: 'owner@example.com',
       },
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
       organisationValue: 'Org1',
-      emailValue: 'custodian@example.com',
     });
   });
 
@@ -44,13 +40,11 @@ describe('Check Organization Details', () => {
       {
         organisationObject: { default: 'Org1' },
         role: 'distributor',
-        email: 'distributor@example.com',
       },
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
       organisationValue: 'Org1',
-      emailValue: 'distributor@example.com',
     });
   });
 
@@ -64,13 +58,11 @@ describe('Check Organization Details', () => {
       {
         organisationObject: { default: 'OrgDistributor' },
         role: 'distributor',
-        email: 'distributor@example.com',
       },
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
       organisationValue: 'OrgOriginator',
-      emailValue: 'originator@example.com',
     });
   });
 
@@ -78,27 +70,11 @@ describe('Check Organization Details', () => {
     const testData = [
       {
         role: 'distributor',
-        email: 'distributor@example.com',
       },
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
       organisationValue: '',
-      emailValue: '',
-    });
-  });
-
-  test('should return empty email value when it is not present', () => {
-    const testData = [
-      {
-        organisationObject: { default: 'OrgDistributor' },
-        role: 'distributor',
-      },
-    ];
-    const result = getOrganisationDetails(testData, true);
-    expect(result).toEqual({
-      organisationValue: 'OrgDistributor',
-      emailValue: '',
     });
   });
 });

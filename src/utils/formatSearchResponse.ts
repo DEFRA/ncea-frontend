@@ -29,7 +29,6 @@ const formatSearchResponse = async (
       studyPeriod,
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
       organisationName: organisationDetails.organisationValue,
-      organisationEmail: organisationDetails.emailValue,
     };
     if (isDetails) {
       getOtherDetails(item, searchItem);

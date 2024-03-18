@@ -9,7 +9,6 @@ export interface ISearchItem {
   keywords?: string;
   topic_categories?: string;
   organisationName?: string;
-  organisationEmail?: string;
 }
 
 export interface ISearchResults {
