@@ -1,6 +1,4 @@
 parameters:
-  - name: envName
-    type: string
   - name: releaseName
     type: string
   - name: armServiceConnection
@@ -38,12 +36,14 @@ steps:
     command: 'upgrade'
     chartType: 'FilePath'
     chartPath: '$(Pipeline.Workspace)/ncea-fe-$(Build.BuildNumber).tgz'
-    valueFile: $(Pipeline.Workspace)/chart/ncea-fe/values/values.${{ parameters.envName }}.yaml
+    valueFile: $(Pipeline.Workspace)/chart/ncea-fe/values/values.yaml
     overrideValues: |
         image.repository=$(containerRepositoryFullPath)
         image.tag=$(imageTag)
         serviceAccount.name=$(serviceAccountSearchWebApp)
-        ingress.hosts[0].host=$(hostName)
+        ingress.hosts[0].host=$(hostName)        
+        autoscaling.enabled=$(autoScalingEnabled)
+        autoscaling.maxReplicas=$(autoScalingMaxReplicas)
         env.PORT=$(port)
         env.NODE_ENV=$(nodeEnv)
         env.AZURE_KEYVAULT_URL=$(keyVaultUri)

@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: 
+  repository: $(containerRepositoryFullPath)
   pullPolicy: IfNotPresent
-  tag: 
+  tag: $(imageTag)
 
 imagePullSecrets: []
 nameOverride: ""
@@ -43,9 +43,9 @@ ingress:
 resources: {}
 
 autoscaling:
-  enabled: false
+  enabled: $(autoScalingEnabled)
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: $(autoScalingMaxReplicas)
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
@@ -60,7 +60,7 @@ tolerations: []
 affinity: {}
 
 env:
-  PORT: 
-  NODE_ENV:   
-  AZURE_KEYVAULT_URL: 
-  ELASTICSEARCH_API:  
+  PORT: $(port)
+  NODE_ENV: $(nodeEnd)
+  AZURE_KEYVAULT_URL: $(keyVaultUri)
+  ELASTICSEARCH_API: $(elasticSearchApi)

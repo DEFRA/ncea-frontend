@@ -95,7 +95,6 @@ stages:
               steps:
                 - template: steps-deploy-helm-charts.yaml
                   parameters:
-                    envName: dev
                     releaseName: ncea-fe-dev
                     armServiceConnection: AZR-NCE-DEV1
 
@@ -116,6 +115,5 @@ stages:
               steps:
                 - template: steps-deploy-helm-charts.yaml
                   parameters:
-                    envName: test
                     releaseName: ncea-fe-test
                     armServiceConnection: AZR-NCE-DEV1

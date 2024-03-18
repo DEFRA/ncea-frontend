@@ -2,23 +2,26 @@ steps:
 
   - checkout: ncea-test-automation
 
-  - task: NuGetToolInstaller@1
-    displayName: Install NuGet
-
-  - task: NuGetCommand@2
-    displayName: NuGet restore
+  - task: UseDotNet@2
     inputs:
-      restoreSolution: $(solution)
+      version: '6.x'
 
-  - task: VSBuild@1
-    displayName: Build solution
+  - task: DotNetCoreCLI@2
+    displayName: Restore
     inputs:
-      solution: $(solution)
-      platform: $(buildPlatform)
+      command: restore
+      projects: '**/*.sln'
+      feedsToUse: 'select'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      command: 'build'
       configuration: $(buildConfiguration)
+      projects: '**/*.sln'
 
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
     inputs:
-      targetPath: $(Build.SourcesDirectory)/src/bin/$(buildConfiguration)/net481
+      targetPath: $(Build.SourcesDirectory)/src/bin/$(buildConfiguration)/net6.0
       artifactName: tests
