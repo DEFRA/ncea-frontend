@@ -182,10 +182,14 @@ const formattedDetailsResponse: ISearchResults = {
       content: '',
       studyPeriod: '',
       resourceLocator: 'https://seabed.admiralty.co.uk',
-      language: 'ENG',
-      keywords: '',
-      topic_categories: '',
       organisationName: '',
+      // TODO
+      alternateTitle: 'This is an alternate title',
+      generalTab: {
+        language: 'ENG',
+        keywords: '',
+        topicCategories: '',
+      },
       ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_number:
         'https://seabed.admiralty.co.uk 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
@@ -194,8 +198,11 @@ const formattedDetailsResponse: ISearchResults = {
       hierarchy_level: 'Dataset',
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
-      // TODO
-      alternateTitle: 'This is an alternate title',
+      qualityTab: {
+        additionalInformation: '',
+        lineage: '',
+        publicationInformation: '',
+      },
     },
   ],
 };
@@ -702,11 +709,15 @@ const formattedDetailsFullResponse: ISearchResults = {
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
       studyPeriod: '24 May 2019 to 31 Jul 2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
-      language: 'ENG',
-      keywords:
-        'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
-      topic_categories: 'Elevation',
       organisationName: 'United Kingdom Hydrographic Office',
+      // TODO
+      alternateTitle: 'This is an alternate title',
+      generalTab: {
+        language: 'ENG',
+        keywords:
+          'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
+        topicCategories: 'Elevation',
+      },
       ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_number:
         'https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88',
@@ -715,8 +726,12 @@ const formattedDetailsFullResponse: ISearchResults = {
       hierarchy_level: 'Dataset',
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
-      // TODO
-      alternateTitle: 'This is an alternate title',
+      qualityTab: {
+        additionalInformation: '',
+        lineage:
+          'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',
+        publicationInformation: '23rd Mar 2022 - Last Revision',
+      },
     },
   ],
 };

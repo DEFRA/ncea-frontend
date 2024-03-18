@@ -26,9 +26,11 @@ export const formIds = {
   geographyQuestionnaire: 'coordinate-search',
 };
 
-export const months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
+
+export const showMoreText: string = 'Show more';
+export const showLessText: string = 'Show less';
+export const maxWords: number = 100;
 
 export const detailsTabOptions: TabOptions = {
   general: [
@@ -42,15 +44,18 @@ export const detailsTabOptions: TabOptions = {
     },
     {
       label: 'Topic categories',
-      column: 'topic_categories',
+      column: 'topicCategories',
+      key: 'generalTab',
     },
     {
       label: 'Keywords',
       column: 'keywords',
+      key: 'generalTab',
     },
     {
       label: 'Languages',
       column: 'language',
+      key: 'generalTab',
     },
   ],
   access: [
@@ -77,6 +82,23 @@ export const detailsTabOptions: TabOptions = {
     {
       label: 'Resource locators',
       column: 'resource_locators',
+    },
+  ],
+  quality: [
+    {
+      label: 'Publication information',
+      column: 'publicationInformation',
+      key: 'qualityTab',
+    },
+    {
+      label: 'Lineage',
+      column: 'lineage',
+      key: 'qualityTab',
+    },
+    {
+      label: 'Additional information',
+      column: 'additionalInformation',
+      key: 'qualityTab',
     },
   ],
 };

@@ -8012,3 +8012,11 @@
   color: #d4351c;
   display: block;
 }
+
+.toggle-content__link {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  color: #1d70b8 !important;
+}

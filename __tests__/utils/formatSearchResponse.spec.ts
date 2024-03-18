@@ -267,6 +267,14 @@ describe('Format the search response', () => {
           studyPeriod: '04 Jan 1960',
           resourceLocator: '',
           organisationName: 'United Kingdom Hydrographic Office',
+          // TODO
+          alternateTitle: 'This is an alternate title',
+          generalTab: {
+            keywords:
+              'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
+            language: '',
+            topicCategories: '',
+          },
           ncea_catalogue_number: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
           host_catalogue_number: ' ',
           host_catalogue_entry: '',
@@ -274,12 +282,11 @@ describe('Format the search response', () => {
           hierarchy_level: '',
           resource_locators:
             'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
-          keywords:
-            'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
-          language: '',
-          topic_categories: '',
-          // TODO
-          alternateTitle: 'This is an alternate title',
+          qualityTab: {
+            additionalInformation: '',
+            lineage: '',
+            publicationInformation: '',
+          },
         },
         {
           id: '2',
@@ -289,6 +296,13 @@ describe('Format the search response', () => {
           studyPeriod: '04 Jan 1960 to 12 Jan 2009',
           resourceLocator: 'https://seabed.admiralty.co.uk',
           organisationName: 'United Kingdom Hydrographic Office',
+          // TODO
+          alternateTitle: 'This is an alternate title',
+          generalTab: {
+            keywords: '',
+            language: '',
+            topicCategories: '',
+          },
           ncea_catalogue_number: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
           host_catalogue_number:
             'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
@@ -297,11 +311,11 @@ describe('Format the search response', () => {
           hierarchy_level: 'Dataset',
           resource_locators:
             'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
-          keywords: '',
-          language: '',
-          topic_categories: '',
-          // TODO
-          alternateTitle: 'This is an alternate title',
+          qualityTab: {
+            additionalInformation: '',
+            lineage: '',
+            publicationInformation: '',
+          },
         },
       ],
     };

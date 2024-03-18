@@ -19,7 +19,7 @@ const processDetailsTabData = async (
 
       option.column.split(' ').forEach((part) => {
         const sanitizedPart = part.replace(/[()]/g, '');
-        const value = docDetails[sanitizedPart];
+        const value = option?.key ? docDetails?.[option.key]?.[sanitizedPart] : docDetails[sanitizedPart];
 
         if (value) {
           const isLink = /^https?:\/\/.*$/.test(value);

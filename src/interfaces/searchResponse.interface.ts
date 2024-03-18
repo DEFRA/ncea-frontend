@@ -1,3 +1,5 @@
+import { GeneralTab, QualityTab } from './detailsTab.interface';
+
 export interface ISearchItem {
   id: string;
   title: string;
@@ -5,17 +7,19 @@ export interface ISearchItem {
   content: string;
   studyPeriod: string;
   resourceLocator: string;
-  language?: string;
-  keywords?: string;
-  topic_categories?: string;
   organisationName?: string;
+  alternateTitle?: string;
+
+  generalTab?: GeneralTab;
+
   ncea_catalogue_number?: string;
   host_catalogue_number?: string;
   host_catalogue_entry?: string;
   resource_type_and_hierarchy?: string;
   hierarchy_level?: string;
   resource_locators?: string;
-  alternateTitle?: string;
+
+  qualityTab?: QualityTab;
 }
 
 export interface ISearchResults {

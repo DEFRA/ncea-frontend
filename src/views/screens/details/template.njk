@@ -42,6 +42,7 @@
   {% if docDetails !== undefined and docDetails.title %}
     {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
     {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
+    {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
 
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
 
@@ -127,4 +128,5 @@
 {% block bodyEnd %}
   {{ super() }}
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
 {% endblock %}

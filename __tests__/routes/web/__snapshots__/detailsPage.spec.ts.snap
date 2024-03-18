@@ -102,6 +102,7 @@ exports[`Details route template Document details with data Check status code and
   
     
     
+    
 
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
@@ -377,6 +378,46 @@ exports[`Details route template Document details with data Check status code and
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="quality">
         
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Publication information</h2>
+          
+            <span class='tab-content-value'>
+              23rd Mar 2022 - Last Revision
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Lineage</h2>
+          
+            <span class='tab-content-value'>
+              This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Additional information</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+  </div>
+
+        
       </div>
     
   
@@ -539,6 +580,7 @@ exports[`Details route template Document details with data Check status code and
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script type="module" src="/assets/scripts/details.js"></script>
 
   </body>
 </html>
@@ -645,6 +687,7 @@ exports[`Details route template Document details with partial data Check status 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
+    
     
     
 
@@ -926,6 +969,48 @@ exports[`Details route template Document details with partial data Check status 
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="quality">
         
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Publication information</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Lineage</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Additional information</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+  </div>
+
+        
       </div>
     
   
@@ -1088,6 +1173,7 @@ exports[`Details route template Document details with partial data Check status 
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script type="module" src="/assets/scripts/details.js"></script>
 
   </body>
 </html>

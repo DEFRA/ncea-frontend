@@ -250,7 +250,7 @@ describe('Details route template', () => {
         expect(labelElement?.textContent?.trim()).toBe('Topic categories');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
-          detailsFullResponse?.topic_categories,
+          detailsFullResponse?.generalTab?.topicCategories,
         );
       });
 
@@ -264,7 +264,7 @@ describe('Details route template', () => {
         expect(labelElement?.textContent?.trim()).toBe('Keywords');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
-          detailsFullResponse?.keywords,
+          detailsFullResponse?.generalTab?.keywords,
         );
       });
 
@@ -278,7 +278,7 @@ describe('Details route template', () => {
         expect(labelElement?.textContent?.trim()).toBe('Languages');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
-          detailsFullResponse?.language,
+          detailsFullResponse?.generalTab?.language,
         );
       });
     });
@@ -509,7 +509,7 @@ describe('Details route template', () => {
         expect(labelElement?.textContent?.trim()).toBe('Languages');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
-          detailsFullResponse?.language,
+          detailsFullResponse?.generalTab?.language,
         );
       });
     });

@@ -63,3 +63,8 @@
     display: block;
   }
 }
+
+.toggle-content__link {
+  @include font-style-stack(16px, 20px, 300);
+  color: $govuk-link-colour !important;
+}

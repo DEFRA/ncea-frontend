@@ -24,6 +24,30 @@ describe('Format the given date', () => {
     expect(formatDate('2022-12-01T24:00:00')).toBe('02 Dec 2022');
   });
 
+  it('should format the date with suffix and time correctly', async () => {
+    expect(formatDate('2012-03-29T06:00:00', true, true)).toBe(
+      '29th Mar 2012 @0600',
+    );
+  });
+
+  it('should format the date with suffix and without time correctly', async () => {
+    expect(formatDate('2012-03-29T06:00:00', false, true)).toBe(
+      '29th Mar 2012',
+    );
+    expect(formatDate('2012-03-11T06:00:00', false, true)).toBe(
+      '11th Mar 2012',
+    );
+    expect(formatDate('2012-03-01T06:00:00', false, true)).toBe(
+      '01st Mar 2012',
+    );
+    expect(formatDate('2012-03-02T06:00:00', false, true)).toBe(
+      '02nd Mar 2012',
+    );
+    expect(formatDate('2012-03-03T06:00:00', false, true)).toBe(
+      '03rd Mar 2012',
+    );
+  });
+
   it('should handle invalid date strings', () => {
     expect(formatDate('')).toBe('');
     expect(formatDate('invalid date')).toBe('');
