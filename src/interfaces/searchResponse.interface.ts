@@ -8,6 +8,8 @@ export interface ISearchItem {
   language?: string;
   keywords?: string;
   topic_categories?: string;
+  organisationName?: string;
+  organisationEmail?: string;
 }
 
 export interface ISearchResults {
