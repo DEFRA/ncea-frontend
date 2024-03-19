@@ -54,17 +54,32 @@ const formatSearchResponse = async (
   return finalResponse;
 };
 
-const getOtherDetails = async (searchItem: Record<string, any>): Promise<Record<string, string>> => ({
-  language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
-  keywords: searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '',
-  topic_categories: searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '',
-  ncea_catalogue_number: searchItem?._source?.uuid,
-  host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`,
-  // Keeping this as a placeholder, as the Coupled Resource is not available now
-  host_catalogue_entry: '',
-  resource_type_and_hierarchy: searchItem?._source?.resourceType?.[0] ?? '',
-  hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '',
-  resource_locators: `${searchItem?._source?.cl_function?.[0]?.default} from ${searchItem?._source?.link?.[0]?.nameObject?.default} (<a class="govuk-link" href="${searchItem?._source?.link?.[0]?.urlObject?.default}" target="_blank">${searchItem?._source?.link?.[0]?.urlObject?.default}</a>)`,
-});
+const getOtherDetails = async (searchItem: Record<string, any>): Promise<Record<string, string>> => {
+  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
+  return {
+    language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
+    keywords: searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '',
+    topic_categories: searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '',
+    ncea_catalogue_number: searchItem?._source?.uuid,
+    host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`,
+    // Keeping this as a placeholder, as the Coupled Resource is not available now
+    host_catalogue_entry: '',
+    resource_type_and_hierarchy: searchItem?._source?.resourceType?.[0] ?? '',
+    hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '',
+    resource_locators: `${searchItem?._source?.cl_function?.[0]?.default} from ${searchItem?._source?.link?.[0]?.nameObject?.default} (<a class="govuk-link" href="${searchItem?._source?.link?.[0]?.urlObject?.default}" target="_blank">${searchItem?._source?.link?.[0]?.urlObject?.default}</a>)`,
+    host_service_catalogue_number: searchItem?._source?.sourceCatalogue ?? '',
+    ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
+    metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
+    project_number: '',
+    Metadata_language: searchItem?._source?.mainLanguage ?? '',
+    ncea_catalogue_date: catalogueDate
+      ? catalogueDate.toLocaleDateString('en-US', { day: 'numeric' }) +
+        '-' +
+        catalogueDate.toLocaleDateString('en-US', { month: 'short' }) +
+        '-' +
+        catalogueDate.toLocaleDateString('en-US', { year: 'numeric' })
+      : '',
+  };
+};
 
 export { formatSearchResponse };

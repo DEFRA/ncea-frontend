@@ -278,6 +278,12 @@ describe('Format the search response', () => {
             'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
           language: '',
           topic_categories: '',
+          project_number: "",
+          metadata_standard: "",
+          ncea_catalogue_date: "",
+          host_service_catalogue_number: "",
+          Metadata_language: '',
+          ncea_group_reference: ""
         },
         {
           id: '2',
@@ -298,6 +304,12 @@ describe('Format the search response', () => {
           keywords: '',
           language: '',
           topic_categories: '',
+          project_number: "",
+          metadata_standard: "",
+          ncea_catalogue_date: "",
+          host_service_catalogue_number: "",
+          Metadata_language: '',
+          ncea_group_reference: ""
         },
       ],
     };
