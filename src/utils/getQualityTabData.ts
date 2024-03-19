@@ -48,8 +48,7 @@ const getQualityTabData = (searchItem: Record<string, any>): IQualityItem => ({
   publicationInformation: getPublicationInformation(searchItem?._source?.resourceDate ?? []),
   lineage: getLineage(searchItem?._source?.lineageObject ?? ''),
   conformity: generateConformityData(searchItem?._source?.specificationConformance ?? []),
-  // TODO
-  additionalInformation: '',
+  additionalInformation: searchItem?._source?.supplementalInformationObject?.default ?? '',
 });
 
 export { getQualityTabData };

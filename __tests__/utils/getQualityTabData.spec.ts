@@ -18,6 +18,9 @@ describe('Quality tab fields', () => {
           default:
             'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Scientific Research. The survey has been validated and processed by the UK Hydrographic Office (UKHO).',
         },
+        supplementalInformationObject: {
+          default: 'This is for additional information',
+        },
       },
     };
 
@@ -26,7 +29,7 @@ describe('Quality tab fields', () => {
       publicationInformation: '23rd Mar 2022 - Last Revision',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Scientific Research. The survey has been validated and processed by the UK Hydrographic Office (UKHO).',
-      additionalInformation: '',
+      additionalInformation: 'This is for additional information',
       conformity: '',
     });
   });
@@ -66,6 +69,9 @@ describe('Quality tab fields', () => {
             pass: 'true',
           },
         ],
+        supplementalInformationObject: {
+          default: 'This is for additional information',
+        },
       },
     };
     const conformityHTML = `<table class="details-table">
@@ -84,7 +90,7 @@ describe('Quality tab fields', () => {
     expect(result).toEqual({
       publicationInformation: '',
       lineage: '',
-      additionalInformation: '',
+      additionalInformation: 'This is for additional information',
       conformity: conformityHTML,
     });
   });
