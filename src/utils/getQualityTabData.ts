@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 'use strict';
 
-import { QualityTab } from '../interfaces/detailsTab.interface';
+import { IQualityItem } from '../interfaces/searchResponse.interface';
 import { formatDate } from './formatDate';
 import { toggleContent } from './toggleContent';
 
@@ -44,7 +44,7 @@ const generateConformityData = (data: Record<string, any>[]): string => {
   return '';
 };
 
-const getQualityTabData = (searchItem: Record<string, any>): QualityTab => ({
+const getQualityTabData = (searchItem: Record<string, any>): IQualityItem => ({
   publicationInformation: getPublicationInformation(searchItem?._source?.resourceDate ?? []),
   lineage: getLineage(searchItem?._source?.lineageObject ?? ''),
   conformity: generateConformityData(searchItem?._source?.specificationConformance ?? []),

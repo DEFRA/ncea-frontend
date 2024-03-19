@@ -45,17 +45,14 @@ export const detailsTabOptions: TabOptions = {
     {
       label: 'Topic categories',
       column: 'topicCategories',
-      key: 'generalTab',
     },
     {
       label: 'Keywords',
       column: 'keywords',
-      key: 'generalTab',
     },
     {
       label: 'Languages',
       column: 'language',
-      key: 'generalTab',
     },
   ],
   access: [
@@ -88,22 +85,18 @@ export const detailsTabOptions: TabOptions = {
     {
       label: 'Publication information',
       column: 'publicationInformation',
-      key: 'qualityTab',
     },
     {
       label: 'Lineage',
       column: 'lineage',
-      key: 'qualityTab',
     },
     {
       label: 'Conformity',
       column: 'conformity',
-      key: 'qualityTab',
     },
     {
       label: 'Additional information',
       column: 'additionalInformation',
-      key: 'qualityTab',
     },
   ],
 };

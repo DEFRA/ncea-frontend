@@ -1,6 +1,4 @@
-import { GeneralTab, QualityTab } from './detailsTab.interface';
-
-export interface ISearchItem {
+export interface IBaseItem {
   id: string;
   title: string;
   publishedBy: string;
@@ -8,19 +6,33 @@ export interface ISearchItem {
   studyPeriod: string;
   resourceLocator: string;
   organisationName?: string;
+}
+
+export interface IGeneralItem {
   alternateTitle?: string;
+  topicCategories?: string;
+  language?: string;
+  keywords?: string;
+}
 
-  generalTab?: GeneralTab;
-
+export interface IAccessItem {
   ncea_catalogue_number?: string;
   host_catalogue_number?: string;
   host_catalogue_entry?: string;
   resource_type_and_hierarchy?: string;
   hierarchy_level?: string;
   resource_locators?: string;
-
-  qualityTab?: QualityTab;
 }
+
+export interface IQualityItem {
+  publicationInformation?: string;
+  lineage?: string;
+  conformity?: string;
+  additionalInformation?: string;
+}
+
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem;
+export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {
   total: number;

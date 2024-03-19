@@ -1,6 +1,6 @@
 'use strict';
 
-import { QualityTab } from '../../src/interfaces/detailsTab.interface';
+import { IQualityItem } from '../../src/interfaces/searchResponse.interface';
 import { showLessText, showMoreText } from '../../src/utils/constants';
 import { getQualityTabData } from '../../src/utils/getQualityTabData';
 
@@ -21,7 +21,7 @@ describe('Quality tab fields', () => {
       },
     };
 
-    const result: QualityTab = await getQualityTabData(searchItem);
+    const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
       publicationInformation: '23rd Mar 2022 - Last Revision',
       lineage:
@@ -47,7 +47,7 @@ describe('Quality tab fields', () => {
       },
     };
 
-    const result: QualityTab = await getQualityTabData(searchItem);
+    const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
       publicationInformation: '23rd Mar 2022 - Last Revision',
       lineage: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor enim sit amet diam pharetra, sit amet ultrices elit convallis. Phasellus varius mattis mi, at consequat dolor congue quis. Fusce a odio id nunc viverra sagittis sit amet eget dui. Integer sed aliquet metus. Maecenas a eros vel orci iaculis gravida eget in mi. In non libero eleifend, aliquet ligula a, maximus nisi. Quisque a mauris quis ante faucibus semper vitae in diam. Cras nec ipsum sit amet diam tincidunt malesuada at nec metus.<br>Ut mattis felis sapien, suscipit feugiat quam cursus sit amet. Nam suscipit dapibus pellentesque. Nam sed quam<span id='lineage-content' style='display: none;'> non ipsum ultrices sollicitudin. Aliquam eu porta arcu, id.</span> <a href='javascript:;' class='govuk-link toggle-content__link' onclick=\"toggleContent(this, 'lineage', '${showMoreText}', '${showLessText}')\">${showMoreText}</a>`,
@@ -80,7 +80,7 @@ describe('Quality tab fields', () => {
                       <td>true</td>
                       <td>Conformant to the INSPIRE SDS specifications.</td>
                     </tr></tbody></table>`;
-    const result: QualityTab = await getQualityTabData(searchItem);
+    const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
       publicationInformation: '',
       lineage: '',
@@ -122,7 +122,7 @@ describe('Quality tab fields', () => {
                       <td>true</td>
                       <td>Conformant to the cited specifications.</td>
                     </tr></tbody></table>`;
-    const result: QualityTab = await getQualityTabData(searchItem);
+    const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
       publicationInformation: '',
       lineage: '',
@@ -134,7 +134,7 @@ describe('Quality tab fields', () => {
   it('should have return empty values if there is no data', async () => {
     const searchItem: Record<string, any> = {};
 
-    const result: QualityTab = await getQualityTabData(searchItem);
+    const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
       publicationInformation: '',
       lineage: '',

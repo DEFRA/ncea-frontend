@@ -716,20 +716,8 @@ exports[`Details route template Document details with partial data Check status 
     <h1 class='govuk-heading-m details-title'>Geoserver WFS Fragments Country Boundaries Test Template</h1>
 
     
-      <details class="govuk-details details-alt_title" open>
-  <summary class="govuk-details__summary">
-    <span class="govuk-details__summary-text">
-      Alternate title (additional business name or alternative language)
-    </span>
-  </summary>
-  <div class="govuk-details__text">
-    This is an alternate title
-  </div>
-</details>
 
-    
-
-    <div >
+    <div  class="open-data-block--disabled" >
       
 
 
@@ -748,10 +736,12 @@ exports[`Details route template Document details with partial data Check status 
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" onclick="openDataModal(&#39;&#39;, &#39;https://seabed.admiralty.co.uk&#39;)">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" disabled="true">
   Open data
 </button>
 
+      
+        <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access tab for further details</span>
       
     </div>
 
@@ -923,7 +913,7 @@ exports[`Details route template Document details with partial data Check status 
           <h2 class='tab-content-label'>Host catalogue number</h2>
           
             <span class='tab-content-value'>
-              https://seabed.admiralty.co.uk 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+               3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
             </span>
           
         </div>
@@ -1074,40 +1064,7 @@ exports[`Details route template Document details with partial data Check status 
 
   
 
-  <div id="modal" class="modal">
-  <div class="modal-content">
-    
-  <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
-    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue hosted by:<br/>"<span id='resource_party'></span>"</p>
-    <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
-      
   
-
-  
-    
-  
-
-<button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" onclick="closeDataModal()">
-  Cancel
-</button>
-
-      
-  
-
-  
-    
-  
-
-<a href="#" role="button" draggable="false" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" onclick="closeDataModal()" target="_blank" id="resource-locator-link">
-  Open site
-</a>
-
-    </div>
-  </div>
-
-  </div>
-</div>
 
         </main>
       </div>

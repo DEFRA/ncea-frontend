@@ -1,6 +1,6 @@
 'use strict';
 
-import { GeneralTab } from '../../src/interfaces/detailsTab.interface';
+import { IGeneralItem } from '../../src/interfaces/searchResponse.interface';
 import { getGeneralTabData } from '../../src/utils/getGeneralTabData';
 
 describe('General tab fields', () => {
@@ -27,7 +27,7 @@ describe('General tab fields', () => {
       },
     };
 
-    const result: GeneralTab = await getGeneralTabData(searchItem);
+    const result: IGeneralItem = await getGeneralTabData(searchItem);
     expect(result).toEqual({
       language: 'ENG',
       keywords:
@@ -39,7 +39,7 @@ describe('General tab fields', () => {
   it('should have return empty values if there is no data', async () => {
     const searchItem: Record<string, any> = {};
 
-    const result: GeneralTab = await getGeneralTabData(searchItem);
+    const result: IGeneralItem = await getGeneralTabData(searchItem);
     expect(result).toEqual({
       language: '',
       keywords: '',
