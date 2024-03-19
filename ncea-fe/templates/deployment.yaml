@@ -61,7 +61,7 @@ spec:
           - name: NODE_ENV
             value: "{{ .Values.env.NODE_ENV }}"
           - name: APPINSIGHTS_SECRET_NAME
-            value: "{{ .Values.env.APPINSIGHTS_SECRET_NAME }}"
+            value: "ApplicationInsights--ConnectionString"
           - name: AZURE_KEYVAULT_URL
             value: "{{ .Values.env.AZURE_KEYVAULT_URL }}"
           - name: ELASTICSEARCH_API
