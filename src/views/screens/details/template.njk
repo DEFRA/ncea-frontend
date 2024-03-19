@@ -41,6 +41,7 @@
 {% block content %}
   {% if docDetails !== undefined and docDetails.title %}
     {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
+    {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
 
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
 
@@ -54,7 +55,7 @@
     {% endif %}
 
     <div {% if not docDetails.resourceLocator %} class="open-data-block--disabled" {% endif %}>
-      {{ openData({ resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}
+      {{ openData({ organisationName: docDetails.organisationName, resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}
       {% if not docDetails.resourceLocator %}
         <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access tab for further details</span>
       {% endif %}

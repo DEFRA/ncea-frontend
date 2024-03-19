@@ -26,15 +26,15 @@ const unfreezeScroll = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  function openDataModal(resourceLocator) {
+  function openDataModal(organisationName, resourceLocator) {
     toggleModalContainer();
     freezeScroll();
-    const resourceLocatorElement = document.getElementById('resource_locator');
+    const resourcePartyElement = document.getElementById('resource_party');
     const resourceLocatorLink = document.getElementById(
       'resource-locator-link',
     );
-    if (resourceLocatorElement) {
-      resourceLocatorElement.innerHTML = resourceLocator;
+    if (resourcePartyElement) {
+      resourcePartyElement.innerHTML = organisationName;
     }
     if (resourceLocatorLink) {
       resourceLocatorLink.href = resourceLocator;

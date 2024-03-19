@@ -37,6 +37,38 @@ const detailsSuccessAPIResponse = {
             },
           ],
           resourceType: ['dataset'],
+          resourceIdentifier: [
+            {
+              code: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+              codeSpace: '',
+              link: '',
+            },
+          ],
+          cl_function: [
+            {
+              key: 'download',
+              default: 'Download',
+              langeng: 'Download',
+              link: 'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_OnLineFunctionCode',
+              text: 'download',
+            },
+          ],
+          link: [
+            {
+              protocol: '',
+              mimeType: '',
+              urlObject: {
+                default: 'https://seabed.admiralty.co.uk',
+              },
+              nameObject: {
+                default: 'Seabed Mapping Service',
+                langeng: 'Seabed Mapping Service',
+              },
+              function: 'download',
+              applicationProfile: '',
+              group: 0,
+            },
+          ],
           contact: [
             {
               role: '',
@@ -61,6 +93,11 @@ const detailsSuccessAPIResponse = {
             default: 'Geoserver WFS Fragments Country Boundaries Test Template',
             langeng: 'Geoserver WFS Fragments Country Boundaries Test Template',
           },
+          resourceAltTitleObject: [
+            {
+              default: '',
+            },
+          ],
           resourceAbstractObject: {
             default: '',
             lang: '',
@@ -153,8 +190,15 @@ const formattedDetailsResponse: ISearchResults = {
       language: 'ENG',
       keywords: '',
       topic_categories: '',
-      // TODO
-      alternateTitle: 'This is an alternate title',
+      alternateTitle: '',
+      organisationName: '',
+      ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      host_catalogue_number: ' 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      host_catalogue_entry: '',
+      resource_type_and_hierarchy: 'dataset',
+      hierarchy_level: 'Dataset',
+      resource_locators:
+        'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
     },
   ],
 };
@@ -271,6 +315,11 @@ const detailsSuccessAPIFullData = {
             langeng:
               '20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey',
           },
+          resourceAltTitleObject: [
+            {
+              default: 'This is an alternate title',
+            },
+          ],
           publicationDateForResource: ['2022-03-23T17:26:25.000Z'],
           publicationYearForResource: '2022',
           publicationMonthForResource: '2022-03',
@@ -656,7 +705,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       id: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       title:
         '20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey',
-      publishedBy: 'United Kingdom Hydrographic Office',
+      publishedBy: 'Maritime and Coastguard Agency',
       content:
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
       studyPeriod: '24 May 2019 to 31 Jul 2019',
@@ -665,8 +714,16 @@ const formattedDetailsFullResponse: ISearchResults = {
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
       topic_categories: 'Elevation',
-      // TODO
       alternateTitle: 'This is an alternate title',
+      organisationName: 'United Kingdom Hydrographic Office',
+      ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      host_catalogue_number:
+        'https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      host_catalogue_entry: '',
+      resource_type_and_hierarchy: 'dataset',
+      hierarchy_level: 'Dataset',
+      resource_locators:
+        'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
     },
   ],
 };

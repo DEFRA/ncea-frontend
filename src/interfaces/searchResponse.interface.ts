@@ -9,6 +9,13 @@ export interface ISearchItem {
   keywords?: string;
   topic_categories?: string;
   alternateTitle?: string;
+  organisationName?: string;
+  ncea_catalogue_number?: string;
+  host_catalogue_number?: string;
+  host_catalogue_entry?: string;
+  resource_type_and_hierarchy?: string;
+  hierarchy_level?: string;
+  resource_locators?: string;
 }
 
 export interface ISearchResults {

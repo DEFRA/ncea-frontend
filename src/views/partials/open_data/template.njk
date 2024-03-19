@@ -9,7 +9,7 @@
 {% set openDataAttributes = {} %}
 {% if params.resourceLocator %}
   {% set openDataAttributes = openDataAttributes | merge({
-    onclick: "openDataModal('" + params.resourceLocator + "')"
+    onclick: "openDataModal('" + params.organisationName + "', '" + params.resourceLocator + "')"
   }) %}
 {% else %}
   {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
