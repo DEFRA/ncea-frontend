@@ -8,7 +8,7 @@ const getOrganisationDetails = (
 
     const getOrganisation = (role: string): string => {
       const obj = data.find((item: Record<string, any>) => item.role === role);
-      return obj ? obj?.organisationObject?.default ?? '' : '';
+      return obj?.organisationObject?.default ?? '';
     };
 
     if (isDetails) {
