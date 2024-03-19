@@ -395,10 +395,9 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Host service catalogue number</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              3ce46f92-509c-4529-a062-c8b48788340d
+            </span>
           
         </div>
       
@@ -407,10 +406,9 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>NCEA group reference</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              fb8dca0f-7425-4f50-86a1-c4673b1aef88
+            </span>
           
         </div>
       
@@ -419,10 +417,9 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Metadata standard</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              MEDIN
+            </span>
           
         </div>
       
@@ -443,10 +440,9 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Metadata language</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              eng
+            </span>
           
         </div>
       
@@ -455,10 +451,9 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>NCEA catalogue date</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              16-Jan-2024
+            </span>
           
         </div>
       
@@ -1019,10 +1014,9 @@ exports[`Details route template Document details with partial data Check status 
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Host service catalogue number</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              2fc172f5-4c8e-493b-8277-3492b3ed504c
+            </span>
           
         </div>
       
@@ -1031,10 +1025,9 @@ exports[`Details route template Document details with partial data Check status 
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>NCEA group reference</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+            </span>
           
         </div>
       
@@ -1067,10 +1060,9 @@ exports[`Details route template Document details with partial data Check status 
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Metadata language</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              eng
+            </span>
           
         </div>
       
@@ -1079,10 +1071,9 @@ exports[`Details route template Document details with partial data Check status 
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>NCEA catalogue date</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              26-Jan-2010
+            </span>
           
         </div>
       
