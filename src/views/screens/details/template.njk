@@ -42,7 +42,7 @@
   {% if docDetails !== undefined and docDetails.title %}
     {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
     {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
-
+    {% set governanceHtml = details({options: detailsTabOptions.governance, hasData: docDetails.title}) %}
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
 
     {% if docDetails !== undefined and docDetails.alternateTitle %}

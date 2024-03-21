@@ -188,6 +188,7 @@ const formattedDetailsResponse: ISearchResults = {
       studyPeriod: '',
       resourceLocator: '',
       language: 'ENG',
+      Metadata_language: "eng",
       keywords: '',
       topic_categories: '',
       alternateTitle: '',
@@ -196,7 +197,12 @@ const formattedDetailsResponse: ISearchResults = {
       host_catalogue_number: ' 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'dataset',
+      host_service_catalogue_number: "2fc172f5-4c8e-493b-8277-3492b3ed504c",
       hierarchy_level: 'Dataset',
+      metadata_standard: '',
+      ncea_catalogue_date: "26-Jan-2010",
+      ncea_group_reference: "3c080cb6-2ed9-43e7-9323-9ce42b05b9a2",
+      project_number: "",
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
     },
@@ -706,6 +712,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       title:
         '20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey',
       publishedBy: 'Maritime and Coastguard Agency',
+      Metadata_language: 'eng',
       content:
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
       studyPeriod: '24 May 2019 to 31 Jul 2019',
@@ -722,6 +729,11 @@ const formattedDetailsFullResponse: ISearchResults = {
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'dataset',
       hierarchy_level: 'Dataset',
+      host_service_catalogue_number: "3ce46f92-509c-4529-a062-c8b48788340d",
+      metadata_standard: "MEDIN",
+      ncea_catalogue_date: "16-Jan-2024",
+      ncea_group_reference: "fb8dca0f-7425-4f50-86a1-c4673b1aef88",
+      project_number: "",
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
     },

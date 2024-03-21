@@ -79,4 +79,34 @@ export const detailsTabOptions: TabOptions = {
       column: 'resource_locators',
     },
   ],
+  governance: [
+    {
+      label: 'NCEA catalogue number',
+      column: 'ncea_catalogue_number',
+    },
+    {
+      label: 'Host service catalogue number',
+      column: 'host_service_catalogue_number',
+    },
+    {
+      label: 'NCEA group reference',
+      column: 'ncea_group_reference',
+    },
+    {
+      label: 'Metadata standard',
+      column: 'metadata_standard',
+    },
+    {
+      label: 'Project number',
+      column: 'project_number',
+    },
+    {
+      label: 'Metadata language',
+      column: 'Metadata_language',
+    },
+    {
+      label: 'NCEA catalogue date',
+      column: 'ncea_catalogue_date',
+    },
+  ],
 };
