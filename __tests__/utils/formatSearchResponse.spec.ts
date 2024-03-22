@@ -166,6 +166,11 @@ describe('Format the search response', () => {
                 },
               ],
               uuid: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+              character_encoding: "utf8",
+              data_owner: "owner, Geological Survey of Ireland (GSI) <br>",
+              frequency_of_update: "",
+              license_constraints: "",
+              limitation_on_public_access: "",
               tag: [
                 {
                   default: 'Elevation',
@@ -251,6 +256,11 @@ describe('Format the search response', () => {
                 },
               ],
               uuid: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
+              character_encoding: "utf8",
+              data_owner: "owner, Geological Survey of Ireland (GSI) <br>",
+              frequency_of_update: "",
+              license_constraints: "",
+              limitation_on_public_access: ""
             },
           },
         ],
@@ -285,6 +295,12 @@ describe('Format the search response', () => {
           host_service_catalogue_number: '',
           Metadata_language: '',
           ncea_group_reference: '',
+          available_formats: '',
+          character_encoding: 'utf8',
+          data_owner: "owner, Geological Survey of Ireland (GSI) <br>",
+          frequency_of_update: "",
+          license_constraints: "",
+          limitation_on_public_access: ""
         },
         {
           id: '2',
@@ -312,6 +328,12 @@ describe('Format the search response', () => {
           host_service_catalogue_number: '',
           Metadata_language: '',
           ncea_group_reference: '',
+          available_formats: '',
+          character_encoding: 'utf8',
+          data_owner: "owner, Geological Survey of Ireland (GSI) <br>",
+          frequency_of_update: "",
+          license_constraints: "",
+          limitation_on_public_access: ""
         },
       ],
     };

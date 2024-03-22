@@ -152,6 +152,10 @@ const detailsSuccessAPIResponse = {
           isHarvested: 'false',
           userSavedCount: '0',
           sourceCatalogue: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
+          cl_accessConstraints:[
+         ],
+         licenseObject:[
+        ]
         },
       },
     ],
@@ -205,6 +209,12 @@ const formattedDetailsResponse: ISearchResults = {
       project_number: "",
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+      license_constraints: "",
+      limitation_on_public_access: "",
+      available_formats: "",
+      character_encoding: "utf8",
+      data_owner: "",
+      frequency_of_update: "",
     },
   ],
 };
@@ -736,6 +746,15 @@ const formattedDetailsFullResponse: ISearchResults = {
       project_number: "",
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+      license_constraints: "There are no limitations on public access to spatial data sets and services. <br>",
+      limitation_on_public_access: "Other restrictions <br>otherRestrictions <br>",
+      data_owner: "owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk",
+      frequency_of_update: "Not planned",
+      available_formats: [
+        "Geographic Information System",
+        "Delimited",
+      ],
+      character_encoding: "utf8",
     },
   ],
 };

@@ -4,7 +4,7 @@ describe('Check Organization Details', () => {
   test('should return empty values when data is not an array or empty', () => {
     const testData = [];
     const result = getOrganisationDetails(testData);
-    expect(result).toEqual({ organisationValue: '' });
+    expect(result).toEqual({ organisationValue: '', role: '', email: ''});
   });
 
   test('should return organisation details for owner role when isDetails is false', () => {
@@ -15,7 +15,7 @@ describe('Check Organization Details', () => {
       },
     ];
     const result = getOrganisationDetails(testData);
-    expect(result).toEqual({ organisationValue: 'Org1' });
+    expect(result).toEqual({ organisationValue: 'Org1', role: 'owner', email: '' });
   });
 
   test('should return organisation details based on roles when isDetails is true', () => {
@@ -31,7 +31,8 @@ describe('Check Organization Details', () => {
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
-      organisationValue: 'Org1',
+      organisationValue: 'Org1'
+      , role: 'custodian', email: ''
     });
   });
 
@@ -44,7 +45,8 @@ describe('Check Organization Details', () => {
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
-      organisationValue: 'Org1',
+      organisationValue: 'Org1'
+      , role: 'distributor', email: ''
     });
   });
 
@@ -62,7 +64,8 @@ describe('Check Organization Details', () => {
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
-      organisationValue: 'OrgOriginator',
+      organisationValue: 'OrgOriginator'
+      , role: 'originator', email: 'originator@example.com'
     });
   });
 
@@ -74,7 +77,7 @@ describe('Check Organization Details', () => {
     ];
     const result = getOrganisationDetails(testData, true);
     expect(result).toEqual({
-      organisationValue: '',
+      organisationValue: '',role: '', email: ''
     });
   });
 });

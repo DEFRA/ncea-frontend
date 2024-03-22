@@ -103,6 +103,7 @@ exports[`Details route template Document details with data Check status code and
     
     
     
+    
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
     
@@ -482,6 +483,78 @@ exports[`Details route template Document details with data Check status code and
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="license">
         
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Limitations on public access</h2>
+          
+            <span class='tab-content-value'>
+              Other restrictions <br>otherRestrictions <br>
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>License constraints</h2>
+          
+            <span class='tab-content-value'>
+              There are no limitations on public access to spatial data sets and services. <br>
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Data owner</h2>
+          
+            <span class='tab-content-value'>
+              owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Available formats</h2>
+          
+            <span class='tab-content-value'>
+              Geographic Information System,Delimited
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Frequency of update</h2>
+          
+            <span class='tab-content-value'>
+              Not planned
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Character encoding</h2>
+          
+            <span class='tab-content-value'>
+              utf8
+            </span>
+          
+        </div>
+      
+    
+  </div>
+
+        
       </div>
     
   
@@ -729,6 +802,7 @@ exports[`Details route template Document details with partial data Check status 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
+    
     
     
     
@@ -1105,6 +1179,83 @@ exports[`Details route template Document details with partial data Check status 
     
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="license">
+        
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Limitations on public access</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>License constraints</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Data owner</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Available formats</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Frequency of update</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Character encoding</h2>
+          
+            <span class='tab-content-value'>
+              utf8
+            </span>
+          
+        </div>
+      
+    
+  </div>
+
         
       </div>
     

@@ -45,7 +45,7 @@ const formatSearchResponse = async (
       organisationName: organisationDetails.organisationValue,
     };
     if (isDetails) {
-      const otherDetails: Record<string, string> = await getOtherDetails(searchItem);
+      const otherDetails: Record<string, string> = await getOtherDetails(searchItem, publishedBy);
       item = { ...item, ...otherDetails };
     }
 
@@ -54,8 +54,42 @@ const formatSearchResponse = async (
   return finalResponse;
 };
 
-const getOtherDetails = async (searchItem: Record<string, any>): Promise<Record<string, string>> => {
+const getOtherDetails = async (
+  searchItem: Record<string, any>,
+  publishedBy: Record<string, any>,
+): Promise<Record<string, string>> => {
   const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
+  let limitationPublicAccess = '';
+  let licenseConstraints = '';
+  let dataOwner = '';
+  if (searchItem?._source?.cl_accessConstraints?.[0]?.default) {
+    limitationPublicAccess = `${searchItem?._source?.cl_accessConstraints?.[0]?.default} <br>`;
+  }
+  if (searchItem?._source?.cl_accessConstraints?.[0]?.text) {
+    limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.cl_accessConstraints?.[0]?.text} <br>`;
+  }
+  if (searchItem?._source?.licenseObject?.[0]?.defasult) {
+    limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.licenseObject?.[0]?.default}`;
+  }
+
+  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default) {
+    licenseConstraints = `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default} <br>`;
+  }
+  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text) {
+    licenseConstraints =
+      licenseConstraints + `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text}`;
+  }
+
+  if (publishedBy.role) {
+    dataOwner = `${publishedBy.role}, `;
+  }
+  if (publishedBy.organisationValue) {
+    dataOwner += `${publishedBy.organisationValue} <br>`;
+  }
+  if (publishedBy.email) {
+    dataOwner += `${publishedBy.email}`;
+  }
+
   return {
     alternateTitle: searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
     language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
@@ -80,6 +114,12 @@ const getOtherDetails = async (searchItem: Record<string, any>): Promise<Record<
         '-' +
         catalogueDate.toLocaleDateString('en-US', { year: 'numeric' })
       : '',
+    limitation_on_public_access: limitationPublicAccess,
+    license_constraints: licenseConstraints,
+    data_owner: dataOwner,
+    available_formats: searchItem?._source?.format ?? '',
+    frequency_of_update: searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
+    character_encoding: 'utf8',
   };
 };
 
