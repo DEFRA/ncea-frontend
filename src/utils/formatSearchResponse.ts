@@ -100,19 +100,40 @@ const getPublishedBy = (publishedBy: Record<string, any>): string => {
   return dataOwner;
 };
 
+const getCatalogueDate = (searchItem: Record<string, any>): string => {
+  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
+  return catalogueDate
+    ? catalogueDate.toLocaleDateString('en-US', { day: 'numeric' }) +
+        '-' +
+        catalogueDate.toLocaleDateString('en-US', { month: 'short' }) +
+        '-' +
+        catalogueDate.toLocaleDateString('en-US', { year: 'numeric' })
+    : '';
+};
+
+const getKeywords = (searchItem: Record<string, any>): string => {
+  return searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '';
+};
+
+const getTopicCategories = (searchItem: Record<string, any>): string => {
+  return searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '';
+};
+
+const getHostCatalogueNumber = (searchItem: Record<string, any>): string => {
+  return `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`;
+};
+
 const getOtherDetails = async (
   searchItem: Record<string, any>,
   publishedBy: Record<string, any>,
 ): Promise<Record<string, string>> => {
-  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
-
   return {
     alternateTitle: searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
     language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
-    keywords: searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '',
-    topic_categories: searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '',
+    keywords: getKeywords(searchItem),
+    topic_categories: getTopicCategories(searchItem),
     ncea_catalogue_number: searchItem?._source?.uuid,
-    host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`,
+    host_catalogue_number: getHostCatalogueNumber(searchItem),
     // Keeping this as a placeholder, as the Coupled Resource is not available now
     host_catalogue_entry: '',
     resource_type_and_hierarchy: searchItem?._source?.resourceType?.[0] ?? '',
@@ -123,13 +144,7 @@ const getOtherDetails = async (
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: '',
     Metadata_language: searchItem?._source?.mainLanguage ?? '',
-    ncea_catalogue_date: catalogueDate
-      ? catalogueDate.toLocaleDateString('en-US', { day: 'numeric' }) +
-        '-' +
-        catalogueDate.toLocaleDateString('en-US', { month: 'short' }) +
-        '-' +
-        catalogueDate.toLocaleDateString('en-US', { year: 'numeric' })
-      : '',
+    ncea_catalogue_date: getCatalogueDate(searchItem),
     limitation_on_public_access: getLimitationPublicAccess(searchItem),
     license_constraints: getLicenseConstraints(searchItem),
     data_owner: getPublishedBy(publishedBy),
