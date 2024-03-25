@@ -1,6 +1,6 @@
 import { months } from './constants';
 
-const formatDate = (dateString: string): string => {
+const formatDate = (dateString: string, isFormatting: boolean = false): string => {
   const isValidDate = (dateString: string): boolean => {
     const date = new Date(dateString);
     return !isNaN(date.getTime());
@@ -18,9 +18,9 @@ const formatDate = (dateString: string): string => {
   let minutes: number | string = date.getMinutes();
   day = day < 10 ? '0' + day : day;
 
-  let formattedDate = `${day} ${month} ${year}`;
+  let formattedDate = isFormatting ? `${day}-${month}-${year}` : `${day} ${month} ${year}`;
 
-  if (hours !== 0 || minutes !== 0) {
+  if ((hours !== 0 || minutes !== 0) && !isFormatting) {
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     formattedDate += ` @${hours}${minutes}`;

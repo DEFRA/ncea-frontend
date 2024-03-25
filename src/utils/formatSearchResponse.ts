@@ -100,17 +100,6 @@ const getPublishedBy = (publishedBy: Record<string, any>): string => {
   return dataOwner;
 };
 
-const getCatalogueDate = (searchItem: Record<string, any>): string => {
-  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
-  return catalogueDate
-    ? catalogueDate.toLocaleDateString('en-US', { day: 'numeric' }) +
-        '-' +
-        catalogueDate.toLocaleDateString('en-US', { month: 'short' }) +
-        '-' +
-        catalogueDate.toLocaleDateString('en-US', { year: 'numeric' })
-    : '';
-};
-
 const getKeywords = (searchItem: Record<string, any>): string => {
   return searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '';
 };
@@ -144,7 +133,7 @@ const getOtherDetails = async (
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: '',
     Metadata_language: searchItem?._source?.mainLanguage ?? '',
-    ncea_catalogue_date: getCatalogueDate(searchItem),
+    ncea_catalogue_date: formatDate(searchItem?._source?.dateStamp, true),
     limitation_on_public_access: getLimitationPublicAccess(searchItem),
     license_constraints: getLicenseConstraints(searchItem),
     data_owner: getPublishedBy(publishedBy),
