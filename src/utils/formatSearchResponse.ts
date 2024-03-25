@@ -84,12 +84,7 @@ const getLimitationPublicAccess = (searchItem: Record<string, any>): string => {
   return limitationPublicAccess;
 };
 
-const getOtherDetails = async (
-  searchItem: Record<string, any>,
-  publishedBy: Record<string, any>,
-): Promise<Record<string, string>> => {
-  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
-
+const getPublishedBy = (publishedBy: Record<string, any>): string => {
   let dataOwner = '';
 
   if (publishedBy.role) {
@@ -101,6 +96,15 @@ const getOtherDetails = async (
   if (publishedBy.email) {
     dataOwner += `${publishedBy.email}`;
   }
+
+  return dataOwner;
+};
+
+const getOtherDetails = async (
+  searchItem: Record<string, any>,
+  publishedBy: Record<string, any>,
+): Promise<Record<string, string>> => {
+  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
 
   return {
     alternateTitle: searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
@@ -128,7 +132,7 @@ const getOtherDetails = async (
       : '',
     limitation_on_public_access: getLimitationPublicAccess(searchItem),
     license_constraints: getLicenseConstraints(searchItem),
-    data_owner: dataOwner,
+    data_owner: getPublishedBy(publishedBy),
     available_formats: searchItem?._source?.format ?? '',
     frequency_of_update: searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
     character_encoding: 'utf8',
