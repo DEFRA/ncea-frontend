@@ -24,6 +24,15 @@ export interface IAccessItem {
   resource_locators?: string;
 }
 
+export interface IGovernance {
+  ncea_group_reference?: string;
+  metadata_standard?: string;
+  project_number?: string;
+  Metadata_language?: string;
+  ncea_catalogue_date?: string;
+  host_service_catalogue_number?: string;
+}
+
 export interface IQualityItem {
   publicationInformation?: string;
   lineage?: string;
@@ -31,7 +40,10 @@ export interface IQualityItem {
   additionalInformation?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem;
+export type IOtherSearchItem = IGeneralItem &
+  IAccessItem &
+  IQualityItem &
+  IGovernance;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {
