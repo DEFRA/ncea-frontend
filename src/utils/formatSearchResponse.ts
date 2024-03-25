@@ -54,14 +54,23 @@ const formatSearchResponse = async (
   return finalResponse;
 };
 
-const getOtherDetails = async (
-  searchItem: Record<string, any>,
-  publishedBy: Record<string, any>,
-): Promise<Record<string, string>> => {
-  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
-  let limitationPublicAccess = '';
+const getLicenseConstraints = (searchItem: Record<string, any>): string => {
   let licenseConstraints = '';
-  let dataOwner = '';
+
+  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default) {
+    licenseConstraints = `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default} <br>`;
+  }
+  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text) {
+    licenseConstraints =
+      licenseConstraints + `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text}`;
+  }
+
+  return licenseConstraints;
+};
+
+const getLimitationPublicAccess = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccess = '';
+
   if (searchItem?._source?.cl_accessConstraints?.[0]?.default) {
     limitationPublicAccess = `${searchItem?._source?.cl_accessConstraints?.[0]?.default} <br>`;
   }
@@ -72,13 +81,16 @@ const getOtherDetails = async (
     limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.licenseObject?.[0]?.default}`;
   }
 
-  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default) {
-    licenseConstraints = `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default} <br>`;
-  }
-  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text) {
-    licenseConstraints =
-      licenseConstraints + `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text}`;
-  }
+  return limitationPublicAccess;
+};
+
+const getOtherDetails = async (
+  searchItem: Record<string, any>,
+  publishedBy: Record<string, any>,
+): Promise<Record<string, string>> => {
+  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
+
+  let dataOwner = '';
 
   if (publishedBy.role) {
     dataOwner = `${publishedBy.role}, `;
@@ -114,8 +126,8 @@ const getOtherDetails = async (
         '-' +
         catalogueDate.toLocaleDateString('en-US', { year: 'numeric' })
       : '',
-    limitation_on_public_access: limitationPublicAccess,
-    license_constraints: licenseConstraints,
+    limitation_on_public_access: getLimitationPublicAccess(searchItem),
+    license_constraints: getLicenseConstraints(searchItem),
     data_owner: dataOwner,
     available_formats: searchItem?._source?.format ?? '',
     frequency_of_update: searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
