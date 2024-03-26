@@ -26,9 +26,7 @@ export const formIds = {
   geographyQuestionnaire: 'coordinate-search',
 };
 
-export const resourceTypeOptions: IAggregationOptions = [
-  { value: 'all', text: 'All' },
-];
+export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
 
 export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
@@ -129,6 +127,36 @@ export const detailsTabOptions: TabOptions = {
     {
       label: 'NCEA catalogue date',
       column: 'ncea_catalogue_date',
+    },
+  ],
+  geography: [
+    {
+      label: 'Spatial data service',
+      column: 'spatialDataService',
+    },
+    {
+      label: 'Spatial representation service',
+      column: 'spatialRepresentationService',
+    },
+    {
+      label: 'Spatial referencing system',
+      column: 'spatialReferencingSystem',
+    },
+    {
+      label: 'Geographic locations',
+      column: 'geographicLocations',
+    },
+    {
+      label: 'Geographic boundary',
+      column: '',
+    },
+    {
+      label: 'Vertical extent',
+      column: '',
+    },
+    {
+      label: 'Sampling resolution',
+      column: '',
     },
   ],
 };

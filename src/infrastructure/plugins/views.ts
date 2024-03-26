@@ -47,6 +47,9 @@ const customHapiViews = {
           options.compileOptions.environment.addFilter('merge', (obj1, obj2) => {
             return { ...obj1, ...obj2 };
           });
+          options.compileOptions.environment.addFilter('json_encode', (obj) => {
+            return JSON.stringify(obj);
+          });
 
           return next();
         },
