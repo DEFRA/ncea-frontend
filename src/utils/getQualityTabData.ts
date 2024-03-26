@@ -40,9 +40,9 @@ const generateConformityData = (data: Record<string, any>[]): string => {
     data.forEach((item: Record<string, any>) => {
       if (checkAtLeastOnePropertyValueExists(item)) {
         tableHTML += `<tr>
-                      <td>${item?.title}</td>
-                      <td>${item?.pass}</td>
-                      <td>${item?.explanation}</td>
+                      <td>${item?.title ?? ''}</td>
+                      <td>${item?.pass ?? ''}</td>
+                      <td>${item?.explanation ?? ''}</td>
                     </tr>`;
       }
     });
