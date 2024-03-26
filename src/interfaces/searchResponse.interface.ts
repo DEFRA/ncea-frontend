@@ -40,10 +40,7 @@ export interface IQualityItem {
   additionalInformation?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem &
-  IAccessItem &
-  IQualityItem &
-  IGovernance;
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {

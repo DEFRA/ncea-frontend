@@ -3,11 +3,7 @@ import { formatDate } from './formatDate';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
-import {
-  IOtherSearchItem,
-  ISearchItem,
-  ISearchResults,
-} from '../interfaces/searchResponse.interface';
+import { IOtherSearchItem, ISearchItem, ISearchResults } from '../interfaces/searchResponse.interface';
 
 const getStudyPeriod = (startDate: string, endDate: string): string => {
   const formattedStartDate: string = formatDate(startDate);
@@ -32,22 +28,14 @@ const formatSearchResponse = async (
     total: apiResponse?.hits?.total?.value,
     items: [],
   };
-  const apiSearchItems = apiResponse?.hits?.hits;
 
-  apiSearchItems.forEach(async (searchItem: Record<string, any>) => {
-    const startDate: string =
-      searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ??
-      '';
-    const endDate: string =
-      searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
+  const apiSearchItems = apiResponse?.hits?.hits;
+  const responseItems: Promise<ISearchItem>[] = apiSearchItems.map(async (searchItem: Record<string, any>) => {
+    const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
+    const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
     const studyPeriod = getStudyPeriod(startDate, endDate);
-    const publishedBy = getOrganisationDetails(
-      searchItem?._source?.contactForResource ?? [],
-    );
-    const organisationDetails = getOrganisationDetails(
-      searchItem?._source?.contactForResource ?? [],
-      true,
-    );
+    const publishedBy = getOrganisationDetails(searchItem?._source?.contactForResource ?? []);
+    const organisationDetails = getOrganisationDetails(searchItem?._source?.contactForResource ?? [], true);
 
     let item: ISearchItem = {
       id: searchItem?._id,
@@ -55,30 +43,27 @@ const formatSearchResponse = async (
       publishedBy: publishedBy.organisationValue,
       content: searchItem?._source?.resourceAbstractObject?.default ?? '',
       studyPeriod,
-      resourceLocator:
-        searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+      resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
       organisationName: organisationDetails.organisationValue,
     };
+
     if (isDetails) {
       const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem);
       item = { ...item, ...otherDetails };
     }
 
-    finalResponse.items.push(item);
+    return item;
   });
+
+  finalResponse.items = await Promise.all(responseItems);
   return finalResponse;
 };
 
-const getOtherDetails = async (
-  searchItem: Record<string, any>,
-): Promise<IOtherSearchItem> => {
-  const catalogueDate = searchItem?._source?.dateStamp
-    ? new Date(searchItem?._source?.dateStamp)
-    : '';
+const getOtherDetails = async (searchItem: Record<string, any>): Promise<IOtherSearchItem> => {
+  const catalogueDate = searchItem?._source?.dateStamp ? new Date(searchItem?._source?.dateStamp) : '';
 
   return {
-    alternateTitle:
-      searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
+    alternateTitle: searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
     ...getGeneralTabData(searchItem),
     ncea_catalogue_number: searchItem?._source?.uuid,
     host_catalogue_number: `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''} ${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`,

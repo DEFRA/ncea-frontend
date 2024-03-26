@@ -20,8 +20,15 @@ const getLineage = (data: Record<string, any>): string => {
   return '';
 };
 
+const checkAtLeastOnePropertyValueExists = (sourceObject: Record<string, any>): boolean => {
+  return sourceObject?.title || sourceObject?.pass || sourceObject?.explanation;
+};
+
 const generateConformityData = (data: Record<string, any>[]): string => {
-  if (Array.isArray(data) && data.length > 0) {
+  const shouldDisplayTable: boolean = data.some((item: Record<string, any>) =>
+    checkAtLeastOnePropertyValueExists(item),
+  );
+  if (Array.isArray(data) && data.length > 0 && shouldDisplayTable) {
     let tableHTML = `<table class="details-table">
                       <thead>
                         <tr>
@@ -31,11 +38,13 @@ const generateConformityData = (data: Record<string, any>[]): string => {
                         </tr>
                       </thead><tbody>`;
     data.forEach((item: Record<string, any>) => {
-      tableHTML += `<tr>
+      if (checkAtLeastOnePropertyValueExists(item)) {
+        tableHTML += `<tr>
                       <td>${item?.title}</td>
                       <td>${item?.pass}</td>
                       <td>${item?.explanation}</td>
                     </tr>`;
+      }
     });
     tableHTML += `</tbody></table>`;
 

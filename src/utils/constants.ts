@@ -26,9 +26,7 @@ export const formIds = {
   geographyQuestionnaire: 'coordinate-search',
 };
 
-export const resourceTypeOptions: IAggregationOptions = [
-  { value: 'all', text: 'All' },
-];
+export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
 
 export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
