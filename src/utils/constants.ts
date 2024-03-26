@@ -129,4 +129,30 @@ export const detailsTabOptions: TabOptions = {
       column: 'ncea_catalogue_date',
     },
   ],
+  license: [
+    {
+      label: 'Limitations on public access',
+      column: 'limitation_on_public_access',
+    },
+    {
+      label: 'License constraints',
+      column: 'license_constraints',
+    },
+    {
+      label: 'Data owner',
+      column: 'data_owner',
+    },
+    {
+      label: 'Available formats',
+      column: 'available_formats',
+    },
+    {
+      label: 'Frequency of update',
+      column: 'frequency_of_update',
+    },
+    {
+      label: 'Character encoding',
+      column: 'character_encoding',
+    },
+  ],
 };
