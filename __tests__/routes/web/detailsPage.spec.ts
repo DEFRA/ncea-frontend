@@ -165,14 +165,14 @@ describe('Details route template', () => {
         expect(altTitleBlockValueElement?.tagName.toLowerCase()).toBe('div');
       });
 
-      it('should render the open data button and modal', async () => {
+      it('should render the Go to resource button and modal', async () => {
         const buttonElement = document.querySelector('.govuk-button');
         expect(buttonElement).toBeTruthy();
         expect(buttonElement.hasAttribute('disabled')).toBeFalsy();
         expect(document.querySelector('.modal')).toBeTruthy();
       });
 
-      it('should not render the open data button parent div with a class', async () => {
+      it('should not render the Go to resource button parent div with a class', async () => {
         const parentElement =
           document.querySelector('.govuk-button')?.parentElement;
         expect(parentElement).toBeTruthy();
@@ -182,7 +182,7 @@ describe('Details route template', () => {
         ).toBeFalsy();
       });
 
-      it('should not render the open data text', async () => {
+      it('should not render the Go to resource text', async () => {
         expect(document.querySelector('.open-data-block--tag')).toBeFalsy();
       });
     });
@@ -385,14 +385,14 @@ describe('Details route template', () => {
         expect(altTitleBlockElement).toBeNull();
       });
 
-      it('should render the open data button with disabled state and with out modal', async () => {
+      it('should render the Go to resource button with disabled state and with out modal', async () => {
         const buttonElement = document.querySelector('.govuk-button');
         expect(buttonElement).toBeTruthy();
         expect(buttonElement.hasAttribute('disabled')).toBeTruthy();
         expect(document.querySelector('.modal')).toBeFalsy();
       });
 
-      it('should not render the open data button parent div with a class', async () => {
+      it('should not render the Go to resource button parent div with a class', async () => {
         const parentElement =
           document.querySelector('.govuk-button')?.parentElement;
         expect(parentElement).toBeTruthy();
@@ -402,7 +402,7 @@ describe('Details route template', () => {
         ).toBeTruthy();
       });
 
-      it('should render the open data text', async () => {
+      it('should render the Go to resource text', async () => {
         const openDataTagElement = document.querySelector(
           '.open-data-block--tag',
         );
