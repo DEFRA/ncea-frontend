@@ -6,7 +6,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% from 'partials/details/macro.njk' import details %}
-{% from 'partials/open_data/macro.njk' import openData %}
+{% from 'partials/go_to_resource/macro.njk' import openData %}
 
 {% block beforeContent %}
   {{ super() }}
@@ -123,7 +123,7 @@
   {% endif %}
 
   {% if docDetails.resourceLocator %}
-    {%- include 'partials/open_data/modal.njk' -%}
+    {%- include 'partials/go_to_resource/modal.njk' -%}
   {% endif %}
 {% endblock %}
 
