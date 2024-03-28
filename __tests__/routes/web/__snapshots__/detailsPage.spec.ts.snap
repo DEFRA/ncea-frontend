@@ -142,7 +142,7 @@ exports[`Details route template Document details with data Check status code and
   
 
 <button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" onclick="openDataModal(&#39;United Kingdom Hydrographic Office&#39;, &#39;https://seabed.admiralty.co.uk&#39;)">
-  Open data
+  Go to resource
 </button>
 
       
@@ -897,7 +897,7 @@ exports[`Details route template Document details with partial data Check status 
   
 
 <button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" disabled="true">
-  Open data
+  Go to resource
 </button>
 
       
