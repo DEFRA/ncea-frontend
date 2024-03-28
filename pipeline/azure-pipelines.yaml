@@ -81,7 +81,7 @@ stages:
   - stage: 'dev'
     displayName: 'Deploy to Dev'
     dependsOn: Build
-    condition: and(succeeded(), and(eq(variables.isPullRequest, true), eq(variables.deployToDev, true)))
+    condition: and(succeeded(), and(eq(variables.isMain, true), eq(variables.deployToDev, true)))
     jobs:
       - deployment: Deploy
         pool:
@@ -123,4 +123,4 @@ stages:
                 - template: steps-deploy-helm-charts.yaml
                   parameters:
                     releaseName: ncea-fe-test
-                    armServiceConnection: AZR-NCE-DEV1
+                    armServiceConnection: AZR-NCE-TST
