@@ -45,6 +45,7 @@
     {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
     {% set governanceHtml = details({options: detailsTabOptions.governance, hasData: docDetails.title}) %}
     {% set geographyHtml = details({options: detailsTabOptions.geography, hasData: docDetails.title}) %}
+    {% set licenseHtml = details({options: detailsTabOptions.license, hasData: docDetails.title}) %}
 
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
 
@@ -112,7 +113,7 @@
         label: 'License',
         id: 'license',
         panel: {
-          html: plicenseHtml
+          html: licenseHtml
         }
       }
     ]

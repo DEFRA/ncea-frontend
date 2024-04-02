@@ -14,7 +14,12 @@ const getDaySuffix = (day: number): string => {
   }
 };
 
-const formatDate = (dateString: string, includeTime: boolean = true, includeSuffix: boolean = false): string => {
+const formatDate = (
+  dateString: string,
+  includeTime: boolean = true,
+  includeSuffix: boolean = false,
+  delimiter: string = ' ',
+): string => {
   const isValidDate = (dateString: string): boolean => {
     const date = new Date(dateString);
     return !isNaN(date.getTime());
@@ -39,7 +44,7 @@ const formatDate = (dateString: string, includeTime: boolean = true, includeSuff
     formattedDate += suffix;
   }
 
-  formattedDate += ` ${month} ${year}`;
+  formattedDate += `${delimiter}${month}${delimiter}${year}`;
 
   if (includeTime && (hours !== 0 || minutes !== 0)) {
     hours = hours < 10 ? '0' + hours : hours;

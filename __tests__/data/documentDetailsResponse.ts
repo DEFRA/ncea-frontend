@@ -152,6 +152,8 @@ const detailsSuccessAPIResponse = {
           isHarvested: 'false',
           userSavedCount: '0',
           sourceCatalogue: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
+          cl_accessConstraints: [],
+          licenseObject: [],
         },
       },
     ],
@@ -209,6 +211,12 @@ const formattedDetailsResponse: ISearchResults = {
       ncea_catalogue_date: '26-Jan-2010',
       ncea_group_reference: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       project_number: '',
+      license_constraints: '',
+      limitation_on_public_access: '',
+      available_formats: '',
+      character_encoding: 'utf8',
+      data_owner: '',
+      frequency_of_update: '',
     },
   ],
 };
@@ -756,6 +764,15 @@ const formattedDetailsFullResponse: ISearchResults = {
       ncea_catalogue_date: '16-Jan-2024',
       ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       project_number: '',
+      license_constraints:
+        'There are no limitations on public access to spatial data sets and services. <br>',
+      limitation_on_public_access:
+        'Other restrictions <br>otherRestrictions <br>There are no limitations on public access to spatial data sets and services.',
+      data_owner:
+        'owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk',
+      frequency_of_update: 'Not planned',
+      available_formats: ['Geographic Information System', 'Delimited'],
+      character_encoding: 'utf8',
     },
   ],
 };
