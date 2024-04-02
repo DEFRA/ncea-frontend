@@ -21,8 +21,6 @@ const getSamplingResolution = (distanceObject: { distance?: string }, scale: num
     samplingResolution = `${distanceObject?.distance} m`;
   } else if (scale) {
     samplingResolution = `Scale ${scale}`;
-  } else {
-    samplingResolution = '';
   }
   return samplingResolution;
 };
