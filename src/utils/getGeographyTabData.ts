@@ -1,10 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { IGeographyItem } from '../interfaces/searchResponse.interface';
 
-const getVerticalExtentHtml = (verticalRangeObject: {
-  gte?: number;
-  lte?: number;
-}): string => {
+const getVerticalExtentHtml = (verticalRangeObject: { gte?: number; lte?: number }): string => {
   if (Object.keys(verticalRangeObject).length === 0) {
     return '';
   }
@@ -18,10 +15,7 @@ const getVerticalExtentHtml = (verticalRangeObject: {
   return verticalExtentHtml;
 };
 
-const getSamplingResolution = (
-  distanceObject: { distance?: string },
-  scale: number | null,
-): string => {
+const getSamplingResolution = (distanceObject: { distance?: string }, scale: number | null): string => {
   let samplingResolution: string = '';
   if (Object.keys(distanceObject).length && distanceObject?.distance) {
     samplingResolution = `${distanceObject?.distance} m`;
@@ -58,32 +52,18 @@ const getCoordinates = (coordinatesData: any): string => {
   return '';
 };
 
-const getGeographyTabData = (
-  searchItem: Record<string, any>,
-): IGeographyItem => {
+const getGeographyTabData = (searchItem: Record<string, any>): IGeographyItem => {
   return {
     spatialDataService: searchItem?._source?.OrgServiceType ?? '',
     spatialRepresentationService:
-      searchItem?._source?.cl_spatialRepresentationType
-        ?.map((item) => item.default)
-        .join(', ') ?? '',
-    spatialReferencingSystem:
-      searchItem?._source?.crsDetails?.map((item) => item.code).join(', ') ??
-      '',
+      searchItem?._source?.cl_spatialRepresentationType?.map((item) => item.default).join(', ') ?? '',
+    spatialReferencingSystem: searchItem?._source?.crsDetails?.map((item) => item.code).join(', ') ?? '',
     geographicLocations:
-      searchItem?._source?.OrgGeographicIdentifierTitle?.map(
-        (item) => item?.ciTitle,
-      ).join(', ') ?? '',
+      searchItem?._source?.OrgGeographicIdentifierTitle?.map((item) => item?.ciTitle).join(', ') ?? '',
     geographicBoundary: getCoordinates(searchItem?._source?.geom ?? {}),
-    geographicBoundaryHtml: getGeographicBoundaryHtml(
-      searchItem?._source?.geom ?? {},
-    ),
-    geographicCenter: getGeographicLocation(
-      searchItem?._source?.location ?? '',
-    ),
-    verticalExtent: getVerticalExtentHtml(
-      searchItem?._source?.OrgResourceVerticalRange ?? {},
-    ),
+    geographicBoundaryHtml: getGeographicBoundaryHtml(searchItem?._source?.geom ?? {}),
+    geographicCenter: getGeographicLocation(searchItem?._source?.location ?? ''),
+    verticalExtent: getVerticalExtentHtml(searchItem?._source?.OrgResourceVerticalRange ?? {}),
     samplingResolution: getSamplingResolution(
       searchItem?._source?.OrgResolutionDistance ?? {},
       searchItem?._source?.OrgResolutionScaleDenominator ?? null,
