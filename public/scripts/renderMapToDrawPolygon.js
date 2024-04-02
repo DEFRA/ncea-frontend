@@ -128,12 +128,11 @@ if (document.getElementById('west')) {
   });
 }
 
-function calculatePolygonFromCoordinates(isDetailsScreen = false) {
-  const targetKey = isDetailsScreen ? 'textContent' : 'value';
-  const north = parseFloat(document.getElementById('north')[targetKey]);
-  const south = parseFloat(document.getElementById('south')[targetKey]);
-  const east = parseFloat(document.getElementById('east')[targetKey]);
-  const west = parseFloat(document.getElementById('west')[targetKey]);
+function calculatePolygonFromCoordinates() {
+  const north = parseFloat(document.getElementById('north').value);
+  const south = parseFloat(document.getElementById('south').value);
+  const east = parseFloat(document.getElementById('east').value);
+  const west = parseFloat(document.getElementById('west').value);
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
       [west, south, east, north],
@@ -183,10 +182,6 @@ function drawPolygonFromCoordinates(coordinates) {
         coordinates.map((point) => point[1].toFixed(precision)),
       );
     }
-
-    setTimeout(() => {
-      calculatePolygonFromCoordinates(true);
-    }, timeout);
   }
 }
 
@@ -198,7 +193,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (typeof isDetails !== 'undefined' && isDetails) {
     drawPolygonFromCoordinates(coordinates);
-    map.getView().setCenter(ol.proj.fromLonLat([-11.14563, 49.0466505]));
-    map.getView().setZoom(6);
   }
 });
