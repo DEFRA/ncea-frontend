@@ -22,7 +22,10 @@ exports[`Details route template Document details with data Check status code and
 
 
     
+  
   <link rel="stylesheet" href="/assets/css/application.css">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
 
     
   </head>
@@ -100,6 +103,8 @@ exports[`Details route template Document details with data Check status code and
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
+    
+    
     
     
     
@@ -449,6 +454,93 @@ exports[`Details route template Document details with data Check status code and
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="geography">
         
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial data service</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial representation service</h2>
+          
+            <span class='tab-content-value'>
+              Grid
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial referencing system</h2>
+          
+            <span class='tab-content-value'>
+              WGS 84
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic locations</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic boundary</h2>
+          
+            <span class='tab-content-value'>
+              <p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding longitude: <span id="south" /></p>
+            </span>
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Vertical extent<br /><span>(Meters above sea level)</span></h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Sampling resolution</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+  </div>
+
+        
       </div>
     
   
@@ -759,8 +851,14 @@ exports[`Details route template Document details with data Check status code and
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
+  <script>
+    var isDetails = true;
+    var coordinates = [[-4.8749,55.3271],[-4.6264,55.3271],[-4.6264,55.5736],[-4.8749,55.5736],[-4.8749,55.3271]];
+    var center = "55.45035,-4.75065";
+  </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
 </html>
@@ -789,7 +887,10 @@ exports[`Details route template Document details with partial data Check status 
 
 
     
+  
   <link rel="stylesheet" href="/assets/css/application.css">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
 
     
   </head>
@@ -867,6 +968,8 @@ exports[`Details route template Document details with partial data Check status 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
+    
+    
     
     
     
@@ -1202,6 +1305,96 @@ exports[`Details route template Document details with partial data Check status 
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="geography">
         
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial data service</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial representation service</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial referencing system</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic locations</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic boundary</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Vertical extent<br /><span>(Meters above sea level)</span></h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Sampling resolution</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+    
+  </div>
+
+        
       </div>
     
   
@@ -1485,8 +1678,14 @@ exports[`Details route template Document details with partial data Check status 
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
+  <script>
+    var isDetails = true;
+    var coordinates = ;
+    var center = "";
+  </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
 </html>

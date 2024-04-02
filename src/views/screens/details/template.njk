@@ -8,6 +8,11 @@
 {% from 'partials/details/macro.njk' import details %}
 {% from 'partials/open_data/macro.njk' import openData %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ assetPath }}/css/ol.css">
+{% endblock %}
+
 {% block beforeContent %}
   {{ super() }}
 
@@ -40,6 +45,10 @@
 
 {% block content %}
   {% if docDetails !== undefined and docDetails.title %}
+    {% set myData = {
+      name: 'John',
+      age: 30
+    } %}
     {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
     {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
     {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
@@ -131,8 +140,11 @@
 {% block bodyEnd %}
   {{ super() }}
   <script>
-    var coordinate = {{ docDetails.geographicBoundary | json_encode | safe }};
+    var isDetails = true;
+    var coordinates = {{ docDetails.geographicBoundary | safe }};
+    var center = "{{ docDetails.geographicCenter }}";
   </script>
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
-  <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
+  <script src="{{ assetPath }}/scripts/ol.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/renderMapToDrawPolygon.js"></script>
 {% endblock %}

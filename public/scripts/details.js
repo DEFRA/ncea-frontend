@@ -1,7 +1,6 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(JSON.stringify(window.coordinate));
   function toggleContent(
     showMoreLinkElement,
     uniqueKey,

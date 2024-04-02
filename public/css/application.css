@@ -7979,6 +7979,12 @@
   color: #000;
   margin: 0;
 }
+.tab-content-label span {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
 .tab-content-value {
   font-size: 1rem;
   font-style: normal;
@@ -7986,6 +7992,9 @@
   line-height: 20px;
   color: #0b0c0c;
   text-align: left;
+}
+.tab-content-value p {
+  margin: 0;
 }
 .tab-content-value__not-provided {
   font-size: 1rem;
@@ -7996,6 +8005,7 @@
   width: 130px;
   padding: 5px 1px 5px 5px;
   margin: 0;
+  height: fit-content;
 }
 
 .open-data-block--disabled {

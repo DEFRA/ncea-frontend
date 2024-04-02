@@ -31,6 +31,7 @@ export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: '
 export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
 export const maxWords: number = 100;
+export const geoNetworkIndex: string = 'gn-records/';
 
 export const detailsTabOptions: TabOptions = {
   general: [
@@ -148,15 +149,21 @@ export const detailsTabOptions: TabOptions = {
     },
     {
       label: 'Geographic boundary',
+      column: 'geographicBoundaryHtml',
+    },
+    {
+      label: 'map',
       column: '',
     },
     {
-      label: 'Vertical extent',
-      column: '',
+      label: 'Vertical extent<br /><span>(Meters above sea level)</span>',
+      column: 'verticalExtent',
     },
     {
       label: 'Sampling resolution',
-      column: '',
+      column: 'samplingResolution',
+    },
+  ],
   license: [
     {
       label: 'Limitations on public access',

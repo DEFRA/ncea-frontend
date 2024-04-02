@@ -6,13 +6,14 @@
  */
 
 import { environmentConfig } from './environmentConfig';
+import { geoNetworkIndex } from '../utils/constants';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 /**
  * The Axios client instance for making HTTP requests to the Geo Network API.
  */
 const elasticSearchClient = axios.create({
-  baseURL: environmentConfig.elasticSearchAPI,
+  baseURL: `${environmentConfig.elasticSearchAPI}${geoNetworkIndex}`,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

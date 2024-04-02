@@ -7,13 +7,8 @@ import { toggleContent } from './toggleContent';
 
 const getPublicationInformation = (data: Record<string, any>[]): string => {
   if (Array.isArray(data) && data.length > 0) {
-    const obj = data.find(
-      (item: Record<string, any>) =>
-        item?.type?.toLowerCase() === 'publication',
-    );
-    return obj?.date
-      ? `${formatDate(obj?.date, false, true)} - Last Revision`
-      : '';
+    const obj = data.find((item: Record<string, any>) => item?.type?.toLowerCase() === 'publication');
+    return obj?.date ? `${formatDate(obj?.date, false, true)} - Last Revision` : '';
   }
   return '';
 };
@@ -25,9 +20,7 @@ const getLineage = (data: Record<string, any>): string => {
   return '';
 };
 
-const checkAtLeastOnePropertyValueExists = (
-  sourceObject: Record<string, any>,
-): boolean => {
+const checkAtLeastOnePropertyValueExists = (sourceObject: Record<string, any>): boolean => {
   return sourceObject?.title || sourceObject?.pass || sourceObject?.explanation;
 };
 
@@ -61,15 +54,10 @@ const generateConformityData = (data: Record<string, any>[]): string => {
 };
 
 const getQualityTabData = (searchItem: Record<string, any>): IQualityItem => ({
-  publicationInformation: getPublicationInformation(
-    searchItem?._source?.resourceDate ?? [],
-  ),
+  publicationInformation: getPublicationInformation(searchItem?._source?.resourceDate ?? []),
   lineage: getLineage(searchItem?._source?.lineageObject ?? ''),
-  conformity: generateConformityData(
-    searchItem?._source?.specificationConformance ?? [],
-  ),
-  additionalInformation:
-    searchItem?._source?.supplementalInformationObject?.default ?? '',
+  conformity: generateConformityData(searchItem?._source?.specificationConformance ?? []),
+  additionalInformation: searchItem?._source?.supplementalInformationObject?.default ?? '',
 });
 
 export { getQualityTabData };
