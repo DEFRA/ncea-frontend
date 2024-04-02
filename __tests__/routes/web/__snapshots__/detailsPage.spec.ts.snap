@@ -243,6 +243,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -253,6 +254,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -265,6 +267,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -276,6 +279,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -286,6 +290,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
   </div>
@@ -311,6 +316,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -321,6 +327,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -334,6 +341,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -344,6 +352,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -356,6 +365,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -366,6 +376,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
   </div>
@@ -398,6 +409,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -408,6 +420,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -431,6 +444,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -442,6 +456,7 @@ exports[`Details route template Document details with data Check status code and
 
           
         </div>
+      
       
     
   </div>
@@ -468,6 +483,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -479,6 +495,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -489,6 +506,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -502,6 +520,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -512,6 +531,12 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
+      
+    
+      
+      
+        <div id="coordinate-map" style="height: 335px;"></div>
       
     
       
@@ -525,6 +550,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -536,6 +562,7 @@ exports[`Details route template Document details with data Check status code and
 
           
         </div>
+      
       
     
   </div>
@@ -561,6 +588,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -571,6 +599,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -583,6 +612,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -593,6 +623,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -606,6 +637,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -617,6 +649,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -627,6 +660,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
   </div>
@@ -652,6 +686,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -662,6 +697,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -674,6 +710,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -684,6 +721,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
       
@@ -696,6 +734,7 @@ exports[`Details route template Document details with data Check status code and
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -706,6 +745,7 @@ exports[`Details route template Document details with data Check status code and
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1099,6 +1139,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1110,6 +1151,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
       
@@ -1123,6 +1165,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1135,6 +1178,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1145,6 +1189,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1170,6 +1215,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1180,6 +1226,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
       
@@ -1193,6 +1240,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1203,6 +1251,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
       
@@ -1215,6 +1264,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1225,6 +1275,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1258,6 +1309,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1269,6 +1321,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
       
@@ -1282,6 +1335,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1293,6 +1347,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
   </div>
@@ -1319,6 +1374,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1330,6 +1386,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
       
@@ -1343,6 +1400,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1354,6 +1412,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
       
@@ -1367,6 +1426,12 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
+    
+      
+      
+        <div id="coordinate-map" style="height: 335px;"></div>
+      
     
       
         <div class='tab-content-row'>
@@ -1379,6 +1444,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1390,6 +1456,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
   </div>
@@ -1415,6 +1482,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1426,6 +1494,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1436,6 +1505,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
       
@@ -1449,6 +1519,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1461,6 +1532,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1472,6 +1544,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1482,6 +1555,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1508,6 +1582,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1519,6 +1594,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
       
@@ -1532,6 +1608,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1543,6 +1620,7 @@ exports[`Details route template Document details with partial data Check status 
 
           
         </div>
+      
       
     
       
@@ -1556,6 +1634,7 @@ exports[`Details route template Document details with partial data Check status 
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1566,6 +1645,7 @@ exports[`Details route template Document details with partial data Check status 
             </span>
           
         </div>
+      
       
     
   </div>

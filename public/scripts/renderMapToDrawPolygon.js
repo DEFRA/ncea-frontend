@@ -16,6 +16,8 @@ const map = new ol.Map({
     center: ol.proj.fromLonLat([3.436, 55.3781]),
     zoom: 5,
   }),
+  ...(typeof isDetails !== 'undefined' &&
+    isDetails && { interactions: [], controls: [] }),
 });
 
 const drawStyle = new ol.style.Style({
@@ -52,15 +54,17 @@ const draw = new ol.interaction.Draw({
 });
 map.addInteraction(draw);
 
-const modify = new ol.interaction.Modify({
-  source: vectorSource,
-});
-map.addInteraction(modify);
+if (typeof isDetails === 'undefined') {
+  const modify = new ol.interaction.Modify({
+    source: vectorSource,
+  });
+  map.addInteraction(modify);
 
-const snap = new ol.interaction.Snap({
-  source: vectorSource,
-});
-map.addInteraction(snap);
+  const snap = new ol.interaction.Snap({
+    source: vectorSource,
+  });
+  map.addInteraction(snap);
+}
 
 draw.on('drawstart', () => {
   vectorSource.clear();
@@ -104,7 +108,9 @@ function calculateCoordinates() {
 }
 
 vectorSource.on('change', () => {
-  calculateCoordinates();
+  if (typeof isDetails === 'undefined') {
+    calculateCoordinates();
+  }
 });
 
 if (document.getElementById('north')) {
@@ -186,7 +192,89 @@ function drawPolygonFromCoordinates(coordinates) {
 
     setTimeout(() => {
       calculatePolygonFromCoordinates(true);
+      placeMarkers();
     }, timeout);
+  }
+}
+
+function disableInteractions() {
+  map.getInteractions().forEach((interaction) => {
+    if (
+      interaction instanceof ol.interaction.DoubleClickZoom ||
+      interaction instanceof ol.interaction.MouseWheelZoom ||
+      interaction instanceof ol.interaction.DragPan ||
+      interaction instanceof ol.interaction.Draw ||
+      interaction instanceof ol.interaction.Modify ||
+      interaction instanceof ol.interaction.Snap
+    ) {
+      map.removeInteraction(interaction);
+    }
+  });
+  map.getViewport().addEventListener('mousemove', (event) => {
+    event.preventDefault();
+    return false;
+  });
+  map.getViewport().addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    return false;
+  });
+}
+
+function placeMarkers() {
+  const north = parseFloat(document.getElementById('north').textContent);
+  const south = parseFloat(document.getElementById('south').textContent);
+  const east = parseFloat(document.getElementById('east').textContent);
+  const west = parseFloat(document.getElementById('west').textContent);
+  if (north && south && east && west) {
+    const markerStyle = new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: '/assets/images/marker.png',
+        scale: 1.0,
+      }),
+    });
+    const point1 = {
+      latitude: south + (north - south) / 2,
+      longitude: west + (east - west) / 2,
+    };
+    // console.log(point1);
+    // const point2 = {
+    //   latitude: south - 5.0 + (north + 5.0 - (south - 5.0)) / 2,
+    //   longitude: west - 5.0 + (east + 5.0 - (west - 5.0)) / 2,
+    // };
+    // console.log(point2);
+    // console.log(
+    //   `south: ${JSON.stringify({ first: south, second: south - 5 })}`,
+    // );
+    // console.log(`west: ${JSON.stringify({ first: west, second: west - 5 })}`);
+    // console.log(
+    //   `north: ${JSON.stringify({ first: north, second: north + 5 })}`,
+    // );
+    // console.log(`east: ${JSON.stringify({ first: east, second: east + 5 })}`);
+    // console.log(
+    //   `latitude: ${JSON.stringify({ first: south + (north - south) / 2, second: south - 5.0 + (north + 5.0 - (south - 5.0)) / 2 })}`,
+    // );
+    // const points = [point1, point2];
+    // const marketFeatures = [];
+    // points.forEach((point) => {
+    //   const markerFeature = new ol.Feature({
+    //     geometry: new ol.geom.Point(
+    //       ol.proj.fromLonLat([point.longitude, point.latitude]),
+    //     ),
+    //   });
+    //   markerFeature.setStyle(markerStyle);
+    //   marketFeatures.push(markerFeature);
+    // });
+
+    const markerFeature = new ol.Feature({
+      geometry: new ol.geom.Point(
+        ol.proj.fromLonLat([point1.longitude, point1.latitude]),
+      ),
+    });
+    markerFeature.setStyle(markerStyle);
+    vectorSource.addFeature(markerFeature);
   }
 }
 
@@ -196,9 +284,23 @@ document.addEventListener('DOMContentLoaded', () => {
       calculatePolygonFromCoordinates();
     }, timeout);
   }
-  if (typeof isDetails !== 'undefined' && isDetails) {
+  if (
+    typeof isDetails !== 'undefined' &&
+    isDetails &&
+    typeof center !== 'undefined' &&
+    center
+  ) {
     drawPolygonFromCoordinates(coordinates);
-    map.getView().setCenter(ol.proj.fromLonLat([-11.14563, 49.0466505]));
+    const locationParts = center.split(',');
+    map
+      .getView()
+      .setCenter(
+        ol.proj.fromLonLat([
+          parseFloat(locationParts[1]),
+          parseFloat(locationParts[0]),
+        ]),
+      );
     map.getView().setZoom(6);
+    disableInteractions();
   }
 });
