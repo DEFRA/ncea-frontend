@@ -1,19 +1,19 @@
 steps:
 
-- task: Docker@2
-  displayName: 'Docker Build'
-  condition: succeeded()
-  inputs:
-    command: build
-    containerRegistry: $(acrContainerRegistryServiceConnection)
-    repository: $(acrContainerRepositorySearchWebApp)
-    tags: '$(imageTag)'
-
-- task: Docker@2
-  displayName: 'Docker Push'
-  condition: and(succeeded(), or(eq(variables['isMain'], 'true'), eq(variables['isPullRequest'], 'true')))
-  inputs:
-    command: push
-    containerRegistry: $(acrContainerRegistryServiceConnection)
-    repository: $(acrContainerRepositorySearchWebApp)
-    tags: '$(imageTag)'
+- task: AzureCLI@2
+  displayName: 'Docker Build And Push'
+  inputs:    
+    condition: succeeded()
+    azureSubscription: $(azureServiceConnectionForAcr) 
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      echo "setting Azure Subscription"
+      az account set --subscription $(azureServiceConnectionForAcr)
+      PASSWORD=$(az acr login --name $(acrContainerRegistry) --expose-token --output tsv --query accessToken)
+      echo "Logging into ACR"
+      docker login $(acrContainerRegistry) -u $(acrUser) -p $PASSWORD
+      echo "Building Container"
+      docker build -t '$(acrContainerRegistry)/$(acrContainerRepositorySearchWebApp):$(imageTag)' .
+      echo "Pushing Container"
+      docker push '$(acrContainerRegistry)/$(acrContainerRepositorySearchWebApp):$(imageTag)'

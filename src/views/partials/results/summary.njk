@@ -2,7 +2,7 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
 
-{% from 'partials/open_data/macro.njk' import openData %}
+{% from 'partials/go_to_resource/macro.njk' import openData %}
 
 {% if hasError %}
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
@@ -133,5 +133,5 @@
 {% endif %}
 
 {% if searchResults.total and not hasError %}
-  {%- include 'partials/open_data/modal.njk' -%}
+  {%- include 'partials/go_to_resource/modal.njk' -%}
 {% endif %}

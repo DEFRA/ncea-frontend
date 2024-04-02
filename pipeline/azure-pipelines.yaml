@@ -16,12 +16,12 @@ trigger:
 
 variables:
   - template: templates/variables-global.yml
-  - name: acrContainerRegistryServiceConnection
-    value: acr-AZR-NCE-DEV-TEMP
+  - name: azureServiceConnectionForAcr
+    value: AZR-NCE-DEV1  
   - name: deployToDev
     value: true
   - name: deployToTest
-    value: false
+    value: true
 
 stages:
   - stage: 'Build'
@@ -38,15 +38,15 @@ stages:
           - template: steps-build-and-push-docker-images.yaml
           - template: steps-package-and-push-helm-charts.yaml
 
-      - job: 'BuildTestTools'
-        displayName: 'Build test tools'
-        condition: and(succeeded(), eq(variables.isPullRequest, true))
-        pool:
-          vmImage: 'windows-latest'
-        variables:
-          - template: templates/variables-build.yml
-        steps:
-          - template: steps-build-test-automation-tools.yaml
+      # - job: 'BuildTestTools'
+      #   displayName: 'Build test tools'
+      #   condition: and(succeeded(), eq(variables.isPullRequest, true))
+      #   pool:
+      #     vmImage: 'windows-latest'
+      #   variables:
+      #     - template: templates/variables-build.yml
+      #   steps:
+      #     - template: steps-build-test-automation-tools.yaml
 
   # - stage: 'sandbox'
   #   displayName: 'Deploy to Sandbox'
@@ -81,7 +81,7 @@ stages:
   - stage: 'dev'
     displayName: 'Deploy to Dev'
     dependsOn: Build
-    condition: and(succeeded(), and(eq(variables.isPullRequest, true), eq(variables.deployToDev, true)))
+    condition: and(succeeded(), and(eq(variables.isMain, true), eq(variables.deployToDev, true)))
     jobs:
       - deployment: Deploy
         pool:
@@ -98,12 +98,12 @@ stages:
                     releaseName: ncea-fe-dev
                     armServiceConnection: AZR-NCE-DEV1
 
-      - job: RunTests
-        dependsOn: Deploy
-        pool:
-          vmImage: 'windows-latest'
-        steps:
-          - template: steps-run-automated-tests.yaml
+      # - job: RunTests
+      #   dependsOn: Deploy
+      #   pool:
+      #     vmImage: 'windows-latest'
+      #   steps:
+      #     - template: steps-run-automated-tests.yaml
 
   - stage: 'test'
     displayName: 'Deploy to test'
@@ -123,4 +123,4 @@ stages:
                 - template: steps-deploy-helm-charts.yaml
                   parameters:
                     releaseName: ncea-fe-test
-                    armServiceConnection: AZR-NCE-DEV1
+                    armServiceConnection: AZR-NCE-TST

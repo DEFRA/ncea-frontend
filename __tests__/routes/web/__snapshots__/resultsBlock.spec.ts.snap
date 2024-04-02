@@ -264,7 +264,7 @@ exports[`Results block template Quick search journey Search results with data sh
   
 
 <button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" disabled="true">
-  Open data
+  Go to resource
 </button>
 
 
@@ -322,7 +322,7 @@ exports[`Results block template Quick search journey Search results with data sh
   
 
 <button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" disabled="true">
-  Open data
+  Go to resource
 </button>
 
 
