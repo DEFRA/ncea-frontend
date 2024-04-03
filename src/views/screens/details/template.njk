@@ -45,10 +45,6 @@
 
 {% block content %}
   {% if docDetails !== undefined and docDetails.title %}
-    {% set myData = {
-      name: 'John',
-      age: 30
-    } %}
     {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
     {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
     {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
