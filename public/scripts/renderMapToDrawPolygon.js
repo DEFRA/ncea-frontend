@@ -239,7 +239,8 @@ function placeMarkers() {
       latitude: south + (north - south) / 2,
       longitude: west + (east - west) / 2,
     };
-    // console.log(point1);
+    console.log(`Calculated: ${point1.latitude}, ${point1.longitude}`);
+    console.log(`Center: ${center}`);
     // const point2 = {
     //   latitude: south - 5.0 + (north + 5.0 - (south - 5.0)) / 2,
     //   longitude: west - 5.0 + (east + 5.0 - (west - 5.0)) / 2,
