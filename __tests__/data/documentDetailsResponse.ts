@@ -794,7 +794,7 @@ const formattedDetailsFullResponse: ISearchResults = {
         [-4.8749, 55.3271],
       ]),
       geographicBoundaryHtml:
-        '<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding longitude: <span id="south" /></p>',
+        '<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>',
       geographicCenter: '55.45035,-4.75065',
       verticalExtent: '',
       samplingResolution: '',

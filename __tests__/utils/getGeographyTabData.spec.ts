@@ -71,7 +71,7 @@ describe('Geography tab data', () => {
         [3, 4],
       ]);
       expect(result).toEqual(
-        '<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding longitude: <span id="south" /></p>',
+        '<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>',
       );
     });
 
@@ -184,7 +184,7 @@ describe('Geography tab data', () => {
         geographicLocations: 'Location',
         geographicBoundary: '[[1,2,3,4]]',
         geographicBoundaryHtml:
-          '<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding longitude: <span id="south" /></p>',
+          '<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>',
         geographicCenter: 'Location',
         verticalExtent: '<p>Lowest point: 1m</p><p>Highest point: 10m</p>',
         samplingResolution: '10 m',

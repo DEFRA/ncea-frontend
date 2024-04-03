@@ -109,7 +109,6 @@ exports[`Details route template Document details with data Check status code and
     
     
     
-    
 
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
@@ -508,7 +507,7 @@ exports[`Details route template Document details with data Check status code and
           <h2 class='tab-content-label'>Geographic boundary</h2>
           
             <span class='tab-content-value'>
-              <p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding longitude: <span id="south" /></p>
+              <p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>
             </span>
           
         </div>
@@ -968,7 +967,6 @@ exports[`Details route template Document details with partial data Check status 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
-    
     
     
     

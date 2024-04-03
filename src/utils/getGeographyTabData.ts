@@ -28,7 +28,7 @@ const getSamplingResolution = (distanceObject: { distance?: string }, scale: num
 const getGeographicBoundaryHtml = (coordinates: any): string => {
   const hasCoordinate = getCoordinates(coordinates);
   if (hasCoordinate) {
-    return `<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding longitude: <span id="south" /></p>`;
+    return `<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>`;
   }
   return '';
 };
