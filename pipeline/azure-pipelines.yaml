@@ -38,15 +38,15 @@ stages:
           - template: steps-build-and-push-docker-images.yaml
           - template: steps-package-and-push-helm-charts.yaml
 
-      - job: 'BuildTestTools'
-        displayName: 'Build test tools'
-        condition: and(succeeded(), eq(variables.isPullRequest, true))
-        pool:
-          vmImage: 'windows-latest'
-        variables:
-          - template: templates/variables-build.yml
-        steps:
-          - template: steps-build-test-automation-tools.yaml
+      # - job: 'BuildTestTools'
+      #   displayName: 'Build test tools'
+      #   condition: and(succeeded(), eq(variables.isPullRequest, true))
+      #   pool:
+      #     vmImage: 'windows-latest'
+      #   variables:
+      #     - template: templates/variables-build.yml
+      #   steps:
+      #     - template: steps-build-test-automation-tools.yaml
 
   # - stage: 'sandbox'
   #   displayName: 'Deploy to Sandbox'
@@ -98,12 +98,12 @@ stages:
                     releaseName: ncea-fe-dev
                     armServiceConnection: AZR-NCE-DEV1
 
-      - job: RunTests
-        dependsOn: Deploy
-        pool:
-          vmImage: 'windows-latest'
-        steps:
-          - template: steps-run-automated-tests.yaml
+      # - job: RunTests
+      #   dependsOn: Deploy
+      #   pool:
+      #     vmImage: 'windows-latest'
+      #   steps:
+      #     - template: steps-run-automated-tests.yaml
 
   - stage: 'test'
     displayName: 'Deploy to test'
