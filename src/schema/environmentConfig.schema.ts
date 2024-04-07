@@ -34,4 +34,7 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
     'boolean.base': 'Is Local must be a boolean value',
     'any.only': 'Is Local is not valid',
   }),
+  gtmId: Joi.string().allow('').default('').messages({
+    'string.base': 'GTM ID must be a string',
+  }),
 });

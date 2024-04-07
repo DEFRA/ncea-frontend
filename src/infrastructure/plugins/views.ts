@@ -68,6 +68,7 @@ const customHapiViews = {
         getResultsCount,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
+      gtmId: environmentConfig.gtmId,
     },
   },
 };

@@ -11,6 +11,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.appInsightsSecretName).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
+      expect(value.gtmId).toEqual('');
     });
 
     it('should keep provided values for fields if available', () => {
@@ -27,6 +28,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.appInsightsSecretName).toEqual('');
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
+      expect(value.gtmId).toEqual('');
     });
   });
 
@@ -40,6 +42,7 @@ describe('Environment Configuration Schema', () => {
         appInsightsSecretName: 'secret-name',
         elasticSearchAPI: 'https://example.com/api',
         isLocal: false,
+        gtmId: 'your-key',
       };
 
       const { error, value } = environmentSchema.validate(validConfig);

@@ -20,6 +20,7 @@ const config: EnvironmentConfig = {
   appInsightsSecretName: process.env.APPINSIGHTS_SECRET_NAME,
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
   isLocal: process.env.NODE_ENV === 'local',
+  gtmId: process.env.GTM_ID,
 };
 
 const { error, value } = environmentSchema.validate(config);

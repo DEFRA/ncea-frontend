@@ -62,6 +62,7 @@ describe('Vision Plugin Configuration', () => {
       },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,
+      gtmId: environmentConfig.gtmId,
     });
     expect(mockEnvironment.addFilter).toHaveBeenCalledTimes(2);
   });
