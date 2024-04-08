@@ -852,8 +852,12 @@ exports[`Details route template Document details with data Check status code and
 
   <script>
     var isDetails = true;
-    var coordinates = [[-4.8749,55.3271],[-4.6264,55.3271],[-4.6264,55.5736],[-4.8749,55.5736],[-4.8749,55.3271]];
-    var center = "55.45035,-4.75065";
+    var coordinates = '';
+    var center = '';
+    
+      coordinates = [[-4.8749,55.3271],[-4.6264,55.3271],[-4.6264,55.5736],[-4.8749,55.5736],[-4.8749,55.3271]]
+      center = "55.45035,-4.75065";
+    
   </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -1678,8 +1682,9 @@ exports[`Details route template Document details with partial data Check status 
 
   <script>
     var isDetails = true;
-    var coordinates = ;
-    var center = "";
+    var coordinates = '';
+    var center = '';
+    
   </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>

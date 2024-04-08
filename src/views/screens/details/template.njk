@@ -137,8 +137,12 @@
   {{ super() }}
   <script>
     var isDetails = true;
-    var coordinates = {{ docDetails.geographicBoundary | safe }};
-    var center = "{{ docDetails.geographicCenter }}";
+    var coordinates = '';
+    var center = '';
+    {% if docDetails !== undefined and docDetails.geographicBoundary %}
+      coordinates = {{docDetails.geographicBoundary | safe}}
+      center = "{{ docDetails.geographicCenter }}";
+    {% endif %}
   </script>
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
   <script src="{{ assetPath }}/scripts/ol.js"></script>
