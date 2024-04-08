@@ -43,7 +43,7 @@ const initializeServer = async (): Promise<Server> => {
 
 const startServer = async (): Promise<Server> => {
   await server.start();
-  console.log(`Server running at: http://localhost:${server.info.port}`);
+  console.log(`Server running at: http://${server.info.host}:${server.info.port}`);
   return server;
 };
 
