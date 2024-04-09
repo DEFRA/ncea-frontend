@@ -70,7 +70,7 @@ describe('Server initialization', () => {
     const server = await startServer();
     expect(server.start).toHaveBeenCalled();
     expect(consoleSpy).toHaveBeenCalledWith(
-      `Server running at: http://localhost:${server.info.port}`,
+      `Server running at: http://${server.info.host}:${server.info.port}`,
     );
     consoleSpy.mockRestore();
   });

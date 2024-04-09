@@ -50,7 +50,7 @@ describe('Environment environmentConfig', () => {
       } = require('../../src/config/environmentConfig');
       expect(environmentConfig).toBeDefined();
       expect(typeof environmentConfig).toBe('object');
-      expect(Object.keys(environmentConfig).length).toBe(7);
+      expect(Object.keys(environmentConfig).length).toBe(8);
     });
 
     it('should validate and export the configuration object', () => {
@@ -74,6 +74,7 @@ describe('Environment environmentConfig', () => {
         azureKeyVaultURL: Joi.string().allow('').default(''),
         elasticSearchAPI: Joi.string().allow('').default(''),
         isLocal: Joi.boolean().valid(true, false).default(false),
+        gtmId: Joi.string().allow('').default(''),
       });
 
       const {

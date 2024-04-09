@@ -5,7 +5,7 @@
     {% for option in params.options %}
       {% if option.label and option.label !== 'map' %}
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>{{option.label | safe}}</h2>
+          <h2 class='tab-content-label'>{{ option.label | safe }}</h2>
           {% if option.displayValue %}
             <span class='tab-content-value'>
               {{option.displayValue | safe}}

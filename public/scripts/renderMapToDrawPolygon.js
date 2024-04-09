@@ -164,7 +164,7 @@ function calculatePolygonFromCoordinates(isDetailsScreen = false) {
 }
 
 function drawPolygonFromCoordinates(coordinates) {
-  if (coordinates) {
+  if (Array.isArray(coordinates)) {
     if (document.getElementById('west')) {
       document.getElementById('west').textContent = Math.min.apply(
         null,
