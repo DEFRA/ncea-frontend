@@ -65,16 +65,16 @@ export interface IAccumulatedCoordinatesWithCenter {
 }
 
 export interface IGeographyItem {
-  spatialDataService: string;
-  spatialRepresentationService: string;
-  spatialReferencingSystem: string;
-  geographicLocations: string;
-  geographicBoundary: IAccumulatedCoordinates | string;
-  geographicBoundaryHtml: string;
-  geographicCenter: string;
-  geographicMarkers: string;
-  verticalExtent: string;
-  samplingResolution: string;
+  spatialDataService?: string;
+  spatialRepresentationService?: string;
+  spatialReferencingSystem?: string;
+  geographicLocations?: string;
+  geographicBoundary?: IAccumulatedCoordinates | string;
+  geographicBoundaryHtml?: string;
+  geographicCenter?: string;
+  geographicMarkers?: string;
+  verticalExtent?: string;
+  samplingResolution?: string;
 }
 
 export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & IGeographyItem;

@@ -543,7 +543,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <h2 class='tab-content-label'>Geographic boundary</h2>
           
             <span class='tab-content-value'>
-              <p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>
+              <p>West bounding longitude: <span id="west">-15.320435</span></p><p>East bounding longitude: <span id="east">-6.970825</span></p><p>North bounding latitude: <span id="north">50.180526</span></p><p>South bounding latitude: <span id="south">47.912775</span></p>
             </span>
           
         </div>
@@ -909,11 +909,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <script>
     var isDetails = true;
-    var coordinates = '';
-    var center = '';
+    var markers = '';
+    var center = '0, 0';
     
-      coordinates = [[-4.8749,55.3271],[-4.6264,55.3271],[-4.6264,55.5736],[-4.8749,55.5736],[-4.8749,55.3271]]
-      center = "55.45035,-4.75065";
+      markers = "49.0466505,-11.14563"
+      center = "-11.14563,49.0466505";
     
   </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
@@ -1455,18 +1455,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Geographic boundary</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
+            <span class='tab-content-value'>
+              <p>West bounding longitude: <span id="west"></span></p><p>East bounding longitude: <span id="east"></span></p><p>North bounding latitude: <span id="north"></span></p><p>South bounding latitude: <span id="south"></span></p>
+            </span>
           
         </div>
       
       
     
       
-      
-        <div id="coordinate-map" class="detail-map" style="height: 335px;"></div>
       
     
       
@@ -1796,8 +1793,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <script>
     var isDetails = true;
-    var coordinates = '';
-    var center = '';
+    var markers = '';
+    var center = '0, 0';
+    
+      markers = ""
+      center = "0,0";
     
   </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
