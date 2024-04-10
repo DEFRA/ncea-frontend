@@ -18,7 +18,7 @@
           {% endif %}
         </div>
       {% endif %}
-      {% if option.label and option.label === 'map' %}
+      {% if option.label and option.label === 'map' and option.displayValue %}
         <div id="coordinate-map" class="detail-map" style="height: 335px;"></div>
       {% endif %}
     {% endfor %}
