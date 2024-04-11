@@ -35,7 +35,7 @@
   &__content {
     margin: 0;
     color: $govuk-text-colour;
-    @include font-style-stack(16px, 20px, 300);
+    @include font-style-stack(16px, 20px, 300, normal, true);
 
     &--empty {
       @include font-style-stack(19px, 25px, 300, normal, true);
