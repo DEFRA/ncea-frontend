@@ -46,7 +46,19 @@ export interface IQualityItem {
   additionalInformation?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance;
+export interface IGeographyItem {
+  spatialDataService?: string;
+  spatialRepresentationService?: string;
+  spatialReferencingSystem?: string;
+  geographicLocations?: string;
+  geographicBoundary?: string;
+  geographicBoundaryHtml?: string;
+  geographicCenter?: string;
+  verticalExtent?: string;
+  samplingResolution?: string;
+}
+
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & IGeographyItem;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {

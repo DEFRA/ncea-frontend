@@ -13,8 +13,8 @@ const map = new ol.Map({
     }),
   ],
   view: new ol.View({
-    center: ol.proj.fromLonLat([0, 0]),
-    zoom: 2,
+    center: ol.proj.fromLonLat([3.436, 55.3781]),
+    zoom: 5,
   }),
 });
 
@@ -30,11 +30,11 @@ const drawStyle = new ol.style.Style({
 
 const completedStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
-    color: 'red',
+    color: '#F47738',
     width: 2,
   }),
   fill: new ol.style.Fill({
-    color: 'rgb(255, 0, 0, 0.5)',
+    color: 'rgb(255, 251, 0, 0.2)',
   }),
 });
 
@@ -156,10 +156,42 @@ function calculatePolygonFromCoordinates() {
   }
 }
 
+function drawPolygonFromCoordinates(coordinates) {
+  if (Array.isArray(coordinates)) {
+    if (document.getElementById('west')) {
+      document.getElementById('west').textContent = Math.min.apply(
+        null,
+        coordinates.map((point) => point[0].toFixed(precision)),
+      );
+    }
+    if (document.getElementById('east')) {
+      document.getElementById('east').textContent = Math.max.apply(
+        null,
+        coordinates.map((point) => point[0].toFixed(precision)),
+      );
+    }
+    if (document.getElementById('south')) {
+      document.getElementById('south').textContent = Math.min.apply(
+        null,
+        coordinates.map((point) => point[1].toFixed(precision)),
+      );
+    }
+    if (document.getElementById('north')) {
+      document.getElementById('north').textContent = Math.max.apply(
+        null,
+        coordinates.map((point) => point[1].toFixed(precision)),
+      );
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
     setTimeout(() => {
       calculatePolygonFromCoordinates();
     }, timeout);
+  }
+  if (typeof isDetails !== 'undefined' && isDetails) {
+    drawPolygonFromCoordinates(coordinates);
   }
 });

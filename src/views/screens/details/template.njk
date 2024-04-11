@@ -8,6 +8,11 @@
 {% from 'partials/details/macro.njk' import details %}
 {% from 'partials/go_to_resource/macro.njk' import openData %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ assetPath }}/css/ol.css">
+{% endblock %}
+
 {% block beforeContent %}
   {{ super() }}
 
@@ -44,6 +49,7 @@
     {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
     {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
     {% set governanceHtml = details({options: detailsTabOptions.governance, hasData: docDetails.title}) %}
+    {% set geographyHtml = details({options: detailsTabOptions.geography, hasData: docDetails.title}) %}
     {% set licenseHtml = details({options: detailsTabOptions.license, hasData: docDetails.title}) %}
 
     <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
@@ -129,6 +135,16 @@
 
 {% block bodyEnd %}
   {{ super() }}
+  <script>
+    var isDetails = true;
+    var coordinates = '';
+    var center = '';
+    {% if docDetails !== undefined and docDetails.geographicBoundary %}
+      coordinates = {{docDetails.geographicBoundary | safe}}
+      center = "{{ docDetails.geographicCenter }}";
+    {% endif %}
+  </script>
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
-  <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
+  <script src="{{ assetPath }}/scripts/ol.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/renderMapToDrawPolygon.js"></script>
 {% endblock %}
