@@ -348,4 +348,68 @@ describe('Deals with search results controller', () => {
       });
     });
   });
+  describe('Deals with map results handler', () => {
+    it('should render the no results page for quick search journey', async () => {
+      const request: Request = {
+        payload: { fields: { 'quick-search': { search_term: 'test' } } },
+      } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      (getSearchResults as jest.Mock).mockResolvedValue({
+        total: 0,
+        items: [],
+      });
+      await SearchResultsController.getMapResultsHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'partials/results/map_results',
+        {
+          hasError: false,
+          searchMapResults: {
+            total: 0,
+            items: [],
+          },
+        },
+      );
+    });
+
+    it('should render the no results page for guided search journey', async () => {
+      const request: Request = {
+        payload: {
+          fields: {
+            'date-search': { 'form-date-year': '2022', 'to-date-year': '2023' },
+          },
+        },
+      } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      (getSearchResults as jest.Mock).mockResolvedValue({
+        total: 0,
+        items: [],
+      });
+      await SearchResultsController.getMapResultsHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'partials/results/map_results',
+        {
+          hasError: false,
+          searchMapResults: {
+            total: 0,
+            items: [],
+          },
+        },
+      );
+    });
+
+    it('should show an error when something fails at API layer', async () => {
+      const request: Request = { payload: { fields: {} } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const error = new Error('Mocked error');
+      (getSearchResults as jest.Mock).mockRejectedValue(error);
+      await SearchResultsController.getMapResultsHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'partials/results/map_results',
+        {
+          error,
+          hasError: true,
+        },
+      );
+    });
+  });
 });

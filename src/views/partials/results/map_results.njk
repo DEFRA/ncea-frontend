@@ -1,0 +1,60 @@
+{% extends 'partials/modal/template.njk' %}
+
+{% from 'govuk/components/button/macro.njk' import govukButton %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+{% set extraClass = ' map-modal'%}
+
+{% block beforeModalContent %}
+  <div class="govuk-grid-column-full">
+    <a href="javascript:;" {% if not searchMapResults.total %}disabled="true"{% endif %} onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+      View&nbsp;<span id="map-result-count">{{searchMapResults.total}}</span>&nbsp;results on a map
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+{% endblock %}
+
+{% block modalContent %}
+  <a href="javascript:;" onclick="closeMapModal()" class="defra-exit-control">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+      <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="3" stroke-linecap="square" stroke-linejoin="round"/>
+      <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="3" stroke-linecap="square"/>
+    </svg>
+    &nbsp;
+    Exit map
+  </a>
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+    </div>
+    <div class="govuk-grid-column-one-quarter filter-view-block govuk-!-padding-4">
+      <h2 class='govuk-heading-m'>
+        Key and filters
+      </h2>
+      <div class="govuk-section-break--visible"></div>
+      <div class="defra-bounding-box-block">
+        {{ govukCheckboxes({
+          name: 'bounding-box',
+          formGroup: {
+            classes: 'govuk-!-margin-top-3 govuk-!-margin-bottom-3'
+          },
+          items: [
+            {
+              value: 'on',
+              html: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
+                      <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                      <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                    </svg>
+                    &nbsp;&nbsp;Bounding box',
+              attributes: {'class': 'defra-checkboxes__input'},
+              label: {classes: 'defra-checkboxes__label'}
+            }
+          ]
+        }) }}
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </div>
+  </div>
+{% endblock %}

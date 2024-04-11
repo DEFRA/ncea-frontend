@@ -38,9 +38,15 @@ interface IQueryString {
   };
 }
 
+interface IFieldExist {
+  exists: {
+    field: string;
+  };
+}
+
 interface IBoolQuery {
   bool: {
-    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString)[];
+    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString | IFieldExist)[];
     should?: IMatchQuery[];
     minimum_should_match?: number;
   };
@@ -73,6 +79,7 @@ interface IQuery {
   sort?: ISortQuery[];
   aggs?: IAggregateQuery;
   from?: number;
+  _source?: string[];
 }
 
 interface IGeoCoordinates {
@@ -114,6 +121,8 @@ interface ISearchPayload {
   filters: ISearchFilter;
   rowsPerPage: number;
   page: number;
+  fieldsExist?: string[];
+  requiredFields?: string[];
 }
 
 interface ISearchBuilderPayload {
@@ -141,4 +150,5 @@ export {
   IAggregateQuery,
   ISearchFilter,
   ISearchBuilderPayload,
+  IFieldExist,
 };

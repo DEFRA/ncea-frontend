@@ -10,13 +10,12 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
 
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
-      0 results found 
-    </h2>
+  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+    0 results found 
+  </h2>
 
-    <div class="option-container">
-      
+  <div class='option-container govuk-section-break--visible'>
+    
 
 
 <div class="govuk-form-group option-group">
@@ -43,7 +42,7 @@ exports[`Results block template Guided search journey Search results with empty 
 </div>
 
 
-      
+    
 
 
 <div class="govuk-form-group option-group">
@@ -75,7 +74,6 @@ exports[`Results block template Guided search journey Search results with empty 
   </select>
 </div>
 
-    </div>
   </div>
 
 
@@ -152,13 +150,12 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
-      2 results
-    </h2>
+  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+    2 results
+  </h2>
 
-    <div class="option-container">
-      
+  <div class='option-container govuk-section-break--visible'>
+    
 
 
 <div class="govuk-form-group option-group">
@@ -185,7 +182,7 @@ exports[`Results block template Quick search journey Search results with data sh
 </div>
 
 
-      
+    
 
 
 <div class="govuk-form-group option-group">
@@ -217,7 +214,6 @@ exports[`Results block template Quick search journey Search results with data sh
   </select>
 </div>
 
-    </div>
   </div>
 
 
@@ -353,7 +349,8 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
-<div id="modal" class="modal">
+
+<div id="modal" class="modal resource-modal">
   <div class="modal-content">
     
   <div class='data-container'>
@@ -399,13 +396,12 @@ exports[`Results block template Quick search journey Search results with empty d
 
 
 
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
-      0 results found 
-    </h2>
+  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+    0 results found 
+  </h2>
 
-    <div class="option-container">
-      
+  <div class='option-container govuk-section-break--visible'>
+    
 
 
 <div class="govuk-form-group option-group">
@@ -432,7 +428,7 @@ exports[`Results block template Quick search journey Search results with empty d
 </div>
 
 
-      
+    
 
 
 <div class="govuk-form-group option-group">
@@ -464,7 +460,6 @@ exports[`Results block template Quick search journey Search results with empty d
   </select>
 </div>
 
-    </div>
   </div>
 
 

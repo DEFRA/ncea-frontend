@@ -9,6 +9,7 @@ export const webRoutePaths = {
   getResults: '/search-results',
   getResultsCount: '/results-count',
   getFilters: '/search-filters',
+  getMapResults: '/search-map-results',
 };
 
 export const elasticSearchAPIPaths = {
@@ -32,6 +33,14 @@ export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
 export const maxWords: number = 100;
 export const geoNetworkIndex: string = 'gn-records/';
+export const mapResultMaxCount: number = 15000;
+export const requiredFieldsForMap: string[] = [
+  'resourceTitleObject',
+  'contactForResource',
+  'resourceAbstractObject',
+  'geom',
+  'resourceIdentifier',
+];
 
 export const detailsTabOptions: TabOptions = {
   general: [

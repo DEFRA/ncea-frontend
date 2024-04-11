@@ -3,22 +3,12 @@ import { fireEventAfterStorage, getStorageData } from './customScripts.js';
 const index3 = 3;
 const precision = 6;
 const timeout = 200;
+const intervalTimeout = 50;
 const mapTarget = 'coordinate-map';
-
-const map = new ol.Map({
-  target: mapTarget,
-  layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM(),
-    }),
-  ],
-  view: new ol.View({
-    center: ol.proj.fromLonLat([3.436, 55.3781]),
-    zoom: 5,
-  }),
-  ...(typeof isDetails !== 'undefined' &&
-    isDetails && { interactions: [], controls: [] }),
-});
+let map;
+let initialCenter;
+let initialZoom;
+let viewChanged = false;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -44,7 +34,6 @@ const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
-map.addLayer(vectorLayer);
 
 const draw = new ol.interaction.Draw({
   source: vectorSource,
@@ -52,18 +41,42 @@ const draw = new ol.interaction.Draw({
   geometryFunction: ol.interaction.Draw.createBox(),
   style: drawStyle,
 });
-map.addInteraction(draw);
 
-if (typeof isDetails === 'undefined') {
-  const modify = new ol.interaction.Modify({
-    source: vectorSource,
-  });
-  map.addInteraction(modify);
+const modify = new ol.interaction.Modify({
+  source: vectorSource,
+});
 
-  const snap = new ol.interaction.Snap({
-    source: vectorSource,
+const snap = new ol.interaction.Snap({
+  source: vectorSource,
+});
+
+function initMap() {
+  map = new ol.Map({
+    target: mapTarget,
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM(),
+      }),
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([3.436, 55.3781]),
+      zoom: 5,
+    }),
+    ...(typeof isDetails !== 'undefined' &&
+      isDetails && { interactions: [], controls: [] }),
   });
-  map.addInteraction(snap);
+
+  addMapFeatures();
+}
+
+function addMapFeatures() {
+  map.addLayer(vectorLayer);
+  map.addInteraction(draw);
+
+  if (typeof isDetails === 'undefined') {
+    map.addInteraction(modify);
+    map.addInteraction(snap);
+  }
 }
 
 draw.on('drawstart', () => {
@@ -73,6 +86,12 @@ draw.on('drawstart', () => {
 draw.on('drawend', (event) => {
   const feature = event.feature;
   feature.setStyle(completedStyle);
+});
+
+vectorSource.on('change', () => {
+  if (typeof isDetails === 'undefined') {
+    calculateCoordinates();
+  }
 });
 
 function calculateCoordinates() {
@@ -106,12 +125,6 @@ function calculateCoordinates() {
     }
   }
 }
-
-vectorSource.on('change', () => {
-  if (typeof isDetails === 'undefined') {
-    calculateCoordinates();
-  }
-});
 
 if (document.getElementById('north')) {
   document.getElementById('north').addEventListener('change', () => {
@@ -163,11 +176,12 @@ function calculatePolygonFromCoordinates(isDetailsScreen = false) {
   }
 }
 
-function disableInteractions() {
+function disableInteractions(isMapResultsScreen = false) {
   map.getInteractions().forEach((interaction) => {
     if (
       interaction instanceof ol.interaction.DoubleClickZoom ||
-      interaction instanceof ol.interaction.MouseWheelZoom ||
+      (!isMapResultsScreen &&
+        interaction instanceof ol.interaction.MouseWheelZoom) ||
       interaction instanceof ol.interaction.DragPan ||
       interaction instanceof ol.interaction.Draw ||
       interaction instanceof ol.interaction.Modify ||
@@ -175,14 +189,6 @@ function disableInteractions() {
     ) {
       map.removeInteraction(interaction);
     }
-  });
-  map.getViewport().addEventListener('mousemove', (event) => {
-    event.preventDefault();
-    return false;
-  });
-  map.getViewport().addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    return false;
   });
 }
 
@@ -214,26 +220,93 @@ function placeMarkers() {
   }
 }
 
+function geographyTabListener() {
+  map.updateSize();
+  calculatePolygonFromCoordinates(true);
+  placeMarkers();
+  const locationParts = center.split(',');
+  map.getView().setCenter(ol.proj.fromLonLat(locationParts));
+  map.getView().fit(vectorSource.getExtent(), {
+    padding: [100, 100, 100, 100],
+    duration: 1000,
+  });
+  disableInteractions();
+}
+
+function resetMap() {
+  map.getView().setZoom(initialZoom);
+  map.getView().animate({ center: initialCenter, duration: 1000 });
+  viewChanged = false;
+  const refreshControl = document.querySelector('.defra-refresh-block');
+  refreshControl.style.display = 'none';
+}
+
+function customControls() {
+  const zoomInButton = document.querySelector('.ol-zoom-in');
+  const zoomOutButton = document.querySelector('.ol-zoom-out');
+  zoomInButton.classList.add('defra-zoom-in', 'defra-controls');
+  zoomOutButton.classList.add('defra-zoom-out', 'defra-controls');
+
+  const refreshControlBlock = document.createElement('div');
+  refreshControlBlock.classList.add(
+    'ol-unselectable',
+    'ol-control',
+    'defra-refresh-block',
+  );
+  const refreshControl = document.createElement('button');
+  refreshControl.classList.add('defra-controls', 'defra-refresh-control');
+  refreshControl.addEventListener('click', resetMap);
+  refreshControlBlock.appendChild(refreshControl);
+  map.getViewport().appendChild(refreshControlBlock);
+
+  map.on('moveend', () => {
+    if (!viewChanged) {
+      viewChanged = true;
+    } else {
+      const refreshControl = document.querySelector('.defra-refresh-block');
+      refreshControl.style.display = 'block';
+    }
+  });
+}
+
+function exitMapEventListener() {
+  const exitControl = document.querySelector('.defra-exit-control');
+  if (exitControl) {
+    exitControl.addEventListener('click', resetMap);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
+    initMap();
     if (
       typeof isDetails !== 'undefined' &&
       isDetails &&
       typeof center !== 'undefined' &&
       center
     ) {
+      const geographyTabTag = document.querySelector('a[href="#geography"]');
+      geographyTabTag.addEventListener('click', geographyTabListener);
       setTimeout(() => {
-        calculatePolygonFromCoordinates(true);
-        placeMarkers();
-        const locationParts = center.split(',');
-        map.getView().setCenter(ol.proj.fromLonLat(locationParts));
-        map.getView().setZoom(6);
-        disableInteractions();
+        geographyTabListener();
       }, timeout);
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
       }, timeout);
     }
+  }
+  if (typeof isViewMapResults !== 'undefined' && isViewMapResults) {
+    const checkIsLoaded = setInterval(() => {
+      if (document.getElementById(mapTarget)) {
+        clearInterval(checkIsLoaded);
+        initMap();
+        exitMapEventListener();
+        disableInteractions(true);
+        initialCenter = map.getView().getCenter();
+        initialZoom = map.getView().getZoom();
+        customControls();
+      }
+    }, intervalTimeout);
   }
 });

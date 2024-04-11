@@ -13,6 +13,7 @@ const {
   getFilters,
   getResults,
   getResultsCount,
+  getMapResults,
 } = webRoutePaths;
 
 describe('Vision Plugin Configuration', () => {
@@ -59,6 +60,7 @@ describe('Vision Plugin Configuration', () => {
         getFilters,
         getResults,
         getResultsCount,
+        getMapResults,
       },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,

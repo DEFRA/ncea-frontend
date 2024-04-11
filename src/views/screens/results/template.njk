@@ -4,6 +4,11 @@
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ assetPath }}/css/ol.css">
+{% endblock %}
+
 {% block beforeContent %}
   {{ super() }}
   {{ govukBreadcrumbs({
@@ -33,6 +38,7 @@
   }) }}
 
   {%if searchInputError === undefined %}
+    <div class="govuk-grid-row" id="map-result-block" data-action="{{routes.getMapResults}}" data-fetch-map-results>&nbsp;</div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third" id="filter-block" data-action="{{routes.getFilters}}" data-fetch-filters>&nbsp;</div>
       <div class="govuk-grid-column-two-thirds" id="results-block" data-action="{{routes.getResults}}" data-fetch-results>
@@ -46,4 +52,9 @@
 {% block bodyEnd %}
   {{ super() }}
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
+  <script src="{{ assetPath }}/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="{{ assetPath }}/scripts/renderMapToDrawPolygon.js"></script>
 {% endblock %}

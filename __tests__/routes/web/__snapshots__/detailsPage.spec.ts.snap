@@ -775,7 +775,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   
 
-  <div id="modal" class="modal">
+  
+<div id="modal" class="modal resource-modal">
   <div class="modal-content">
     
   <div class='data-container'>
@@ -910,7 +911,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script>
     var isDetails = true;
     var markers = '';
-    var center = '0, 0';
+    var center = '0,0';
     
       markers = "49.0466505,-11.14563"
       center = "-11.14563,49.0466505";
@@ -1794,7 +1795,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script>
     var isDetails = true;
     var markers = '';
-    var center = '0, 0';
+    var center = '0,0';
     
       markers = ""
       center = "0,0";

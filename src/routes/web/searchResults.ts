@@ -29,6 +29,11 @@ const searchResultsRoutes = [
   },
   {
     method: 'POST',
+    path: webRoutePaths.getMapResults,
+    handler: SearchResultsController.getMapResultsHandler,
+  },
+  {
+    method: 'POST',
     path: webRoutePaths.getResultsCount,
     handler: SearchResultsController.getResultsCountHandler,
   },

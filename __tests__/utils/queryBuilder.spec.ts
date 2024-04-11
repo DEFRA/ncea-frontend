@@ -80,6 +80,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -161,6 +162,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -204,6 +206,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -243,6 +246,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -286,6 +290,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -338,6 +343,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -385,6 +391,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -410,6 +417,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -496,6 +504,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -584,6 +593,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -634,6 +644,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -680,6 +691,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -730,6 +742,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -789,6 +802,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -843,6 +857,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -923,6 +938,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1005,6 +1021,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1049,6 +1066,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1089,6 +1107,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1133,6 +1152,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1186,6 +1206,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1234,6 +1255,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1320,6 +1342,7 @@ describe('Build the search query', () => {
         ],
         size: 50,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1408,6 +1431,7 @@ describe('Build the search query', () => {
         ],
         size: 100,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1496,6 +1520,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1584,6 +1609,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 80,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1632,6 +1658,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1687,6 +1714,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1743,6 +1771,7 @@ describe('Build the search query', () => {
         },
         size: 0,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1783,6 +1812,7 @@ describe('Build the search query', () => {
           },
         },
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1819,6 +1849,7 @@ describe('Build the search query', () => {
             ],
           },
         },
+        _source: [],
       };
 
       expect(result).toEqual(expectedQuery);
@@ -1859,7 +1890,165 @@ describe('Build the search query', () => {
           },
         },
         from: 0,
+        _source: [],
       };
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+    });
+  });
+
+  describe('Search query to check if field exists', () => {
+    it('should build the search query with exists property to check a single field', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+        fieldsExist: ['field1'],
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                exists: { field: 'field1' },
+              },
+            ],
+          },
+        },
+        size: 20,
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(2);
+    });
+
+    it('should build the search query with exists property to check multiple fields', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+        fieldsExist: ['field1', 'field2'],
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                exists: { field: 'field1' },
+              },
+              {
+                exists: { field: 'field2' },
+              },
+            ],
+          },
+        },
+        size: 20,
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(3);
+    });
+  });
+
+  describe('Search query to fetch required fields', () => {
+    it('should build the search query with required fields', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          'quick-search': {
+            search_term: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+        requiredFields: ['field1', 'field2'],
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        size: 20,
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        from: 0,
+        _source: ['field1', 'field2'],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);

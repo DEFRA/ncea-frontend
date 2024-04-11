@@ -12,6 +12,7 @@ const {
   getResults,
   getFilters,
   getResultsCount,
+  getMapResults,
 } = webRoutePaths;
 
 const customHapiViews = {
@@ -66,6 +67,7 @@ const customHapiViews = {
         getFilters,
         getResults,
         getResultsCount,
+        getMapResults,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
       gtmId: environmentConfig.gtmId,

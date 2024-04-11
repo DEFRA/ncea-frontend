@@ -22,7 +22,10 @@ exports[`Results Screen Sanpshot verification & status code should match the res
 
 
     
+  
   <link rel="stylesheet" href="/assets/css/application.css">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
 
     
   </head>
@@ -115,11 +118,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </h1>
     
     <div class="search-block" data-module="search">
-      <form action="/search" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
+      <form action="/search" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
 
         
 
-<div class="govuk-form-group">
+<div class="govuk-form-group govuk-!-margin-bottom-4">
   <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
     Search
   </label>
@@ -142,6 +145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 
   
+    <div class="govuk-grid-row" id="map-result-block" data-action="/search-map-results" data-fetch-map-results>&nbsp;</div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third" id="filter-block" data-action="/search-filters" data-fetch-filters>&nbsp;</div>
       <div class="govuk-grid-column-two-thirds" id="results-block" data-action="/search-results" data-fetch-results>
@@ -249,6 +253,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
 </html>

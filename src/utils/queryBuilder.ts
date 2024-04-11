@@ -3,6 +3,7 @@ import {
   IAggregateQuery,
   IBoolQuery,
   ICustomSortScript,
+  IFieldExist,
   IGeoCoordinates,
   IGeoShapeQuery,
   IMatchQuery,
@@ -129,7 +130,15 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
       must: [],
     },
   };
-  const { fields, sort, rowsPerPage, page, filters: filterOptions } = (searchFieldsObject as ISearchPayload) ?? {};
+  const {
+    fields,
+    sort,
+    rowsPerPage,
+    page,
+    filters: filterOptions,
+    fieldsExist = [],
+    requiredFields = [],
+  } = (searchFieldsObject as ISearchPayload) ?? {};
 
   addKeywordSearchQuery(fields, fieldsToSearch, boolQuery);
   addFilterOptionsQuery(filterOptions, isCount, ignoreAggregation, boolQuery);
@@ -139,6 +148,7 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
 
   const isSort = sort && !isCount;
   const isAggregation = !ignoreAggregation && !isCount && aggregationField;
+  fieldsExist.length > 0 && addFieldExistsQuery(boolQuery, fieldsExist);
 
   const finalQuery: IQuery = {
     query: boolQuery,
@@ -146,12 +156,20 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
     ...(isAggregation && { aggs: {} }),
     ...(!isCount && { size: isAggregation ? 0 : rowsPerPage }),
     ...(page && { from: page === 1 ? 0 : (page - 1) * rowsPerPage }),
+    _source: requiredFields ?? [],
   };
 
   isSort && addSortQuery(finalQuery, sort, isCount);
   isAggregation && addAggregationQuery(finalQuery, ignoreAggregation, isCount, aggregationField);
 
   return finalQuery;
+};
+
+const addFieldExistsQuery = (boolQuery: IBoolQuery, fieldsExist: string[]): void => {
+  fieldsExist.forEach((field: string) => {
+    const fieldExists: IFieldExist = { exists: { field } };
+    boolQuery.bool.must?.push(fieldExists);
+  });
 };
 
 const addKeywordSearchQuery = (fields: ISearchFields, fieldsToSearch: string[], boolQuery: IBoolQuery): void => {

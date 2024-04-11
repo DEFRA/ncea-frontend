@@ -8,7 +8,13 @@ import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
-import { formIds, resourceTypeOptions, webRoutePaths } from '../../utils/constants';
+import {
+  formIds,
+  mapResultMaxCount,
+  requiredFieldsForMap,
+  resourceTypeOptions,
+  webRoutePaths,
+} from '../../utils/constants';
 import {
   getDocumentDetails,
   getResourceTypeOptions,
@@ -61,6 +67,27 @@ const SearchResultsController = {
         error,
         hasError: true,
         isQuickSearchJourney,
+      });
+    }
+  },
+  getMapResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const payload: ISearchPayload = request.payload as ISearchPayload;
+    try {
+      const mapPayload: ISearchPayload = {
+        ...payload,
+        rowsPerPage: mapResultMaxCount,
+        fieldsExist: ['geom'],
+        requiredFields: requiredFieldsForMap,
+      };
+      const searchMapResults: ISearchResults = await getSearchResults(mapPayload);
+      return response.view('partials/results/map_results', {
+        hasError: false,
+        searchMapResults,
+      });
+    } catch (error) {
+      return response.view('partials/results/map_results', {
+        error,
+        hasError: true,
       });
     }
   },
