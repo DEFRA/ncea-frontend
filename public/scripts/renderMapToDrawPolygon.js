@@ -16,6 +16,8 @@ const map = new ol.Map({
     center: ol.proj.fromLonLat([3.436, 55.3781]),
     zoom: 5,
   }),
+  ...(typeof isDetails !== 'undefined' &&
+    isDetails && { interactions: [], controls: [] }),
 });
 
 const drawStyle = new ol.style.Style({
@@ -52,15 +54,17 @@ const draw = new ol.interaction.Draw({
 });
 map.addInteraction(draw);
 
-const modify = new ol.interaction.Modify({
-  source: vectorSource,
-});
-map.addInteraction(modify);
+if (typeof isDetails === 'undefined') {
+  const modify = new ol.interaction.Modify({
+    source: vectorSource,
+  });
+  map.addInteraction(modify);
 
-const snap = new ol.interaction.Snap({
-  source: vectorSource,
-});
-map.addInteraction(snap);
+  const snap = new ol.interaction.Snap({
+    source: vectorSource,
+  });
+  map.addInteraction(snap);
+}
 
 draw.on('drawstart', () => {
   vectorSource.clear();
@@ -104,7 +108,9 @@ function calculateCoordinates() {
 }
 
 vectorSource.on('change', () => {
-  calculateCoordinates();
+  if (typeof isDetails === 'undefined') {
+    calculateCoordinates();
+  }
 });
 
 if (document.getElementById('north')) {
@@ -128,11 +134,12 @@ if (document.getElementById('west')) {
   });
 }
 
-function calculatePolygonFromCoordinates() {
-  const north = parseFloat(document.getElementById('north').value);
-  const south = parseFloat(document.getElementById('south').value);
-  const east = parseFloat(document.getElementById('east').value);
-  const west = parseFloat(document.getElementById('west').value);
+function calculatePolygonFromCoordinates(isDetailsScreen = false) {
+  const targetKey = isDetailsScreen ? 'textContent' : 'value';
+  const north = parseFloat(document.getElementById('north')[targetKey]);
+  const south = parseFloat(document.getElementById('south')[targetKey]);
+  const east = parseFloat(document.getElementById('east')[targetKey]);
+  const west = parseFloat(document.getElementById('west')[targetKey]);
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
       [west, south, east, north],
@@ -156,42 +163,77 @@ function calculatePolygonFromCoordinates() {
   }
 }
 
-function drawPolygonFromCoordinates(coordinates) {
-  if (Array.isArray(coordinates)) {
-    if (document.getElementById('west')) {
-      document.getElementById('west').textContent = Math.min.apply(
-        null,
-        coordinates.map((point) => point[0].toFixed(precision)),
-      );
+function disableInteractions() {
+  map.getInteractions().forEach((interaction) => {
+    if (
+      interaction instanceof ol.interaction.DoubleClickZoom ||
+      interaction instanceof ol.interaction.MouseWheelZoom ||
+      interaction instanceof ol.interaction.DragPan ||
+      interaction instanceof ol.interaction.Draw ||
+      interaction instanceof ol.interaction.Modify ||
+      interaction instanceof ol.interaction.Snap
+    ) {
+      map.removeInteraction(interaction);
     }
-    if (document.getElementById('east')) {
-      document.getElementById('east').textContent = Math.max.apply(
-        null,
-        coordinates.map((point) => point[0].toFixed(precision)),
-      );
-    }
-    if (document.getElementById('south')) {
-      document.getElementById('south').textContent = Math.min.apply(
-        null,
-        coordinates.map((point) => point[1].toFixed(precision)),
-      );
-    }
-    if (document.getElementById('north')) {
-      document.getElementById('north').textContent = Math.max.apply(
-        null,
-        coordinates.map((point) => point[1].toFixed(precision)),
-      );
-    }
+  });
+  map.getViewport().addEventListener('mousemove', (event) => {
+    event.preventDefault();
+    return false;
+  });
+  map.getViewport().addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    return false;
+  });
+}
+
+function placeMarkers() {
+  const markerStyle = new ol.style.Style({
+    image: new ol.style.Icon({
+      anchor: [0.5, 46],
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'pixels',
+      src: '/assets/images/marker.png',
+      scale: 1.0,
+    }),
+  });
+  if (typeof markers !== 'undefined' && markers) {
+    const markersArray = markers.split('_');
+    markersArray.forEach((markerString) => {
+      if (markerString) {
+        const markerParts = markerString.split(',');
+
+        const markerFeature = new ol.Feature({
+          geometry: new ol.geom.Point(
+            ol.proj.fromLonLat([markerParts[1], markerParts[0]]),
+          ),
+        });
+        markerFeature.setStyle(markerStyle);
+        vectorSource.addFeature(markerFeature);
+      }
+    });
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
-    setTimeout(() => {
-      calculatePolygonFromCoordinates();
-    }, timeout);
-  }
-  if (typeof isDetails !== 'undefined' && isDetails) {
-    drawPolygonFromCoordinates(coordinates);
+    if (
+      typeof isDetails !== 'undefined' &&
+      isDetails &&
+      typeof center !== 'undefined' &&
+      center
+    ) {
+      setTimeout(() => {
+        calculatePolygonFromCoordinates(true);
+        placeMarkers();
+        const locationParts = center.split(',');
+        map.getView().setCenter(ol.proj.fromLonLat(locationParts));
+        map.getView().setZoom(6);
+        disableInteractions();
+      }, timeout);
+    } else {
+      setTimeout(() => {
+        calculatePolygonFromCoordinates();
+      }, timeout);
+    }
   }
 });

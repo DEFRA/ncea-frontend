@@ -1,5 +1,11 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import { IGeographyItem } from '../interfaces/searchResponse.interface';
+import {
+  IAccumulatedCoordinates,
+  IAccumulatedCoordinatesWithCenter,
+  ICoordinates,
+  IGeographyItem,
+  IVertex,
+} from '../interfaces/searchResponse.interface';
 
 const getVerticalExtentHtml = (verticalRangeObject: { gte?: number; lte?: number }): string => {
   if (Object.keys(verticalRangeObject).length === 0) {
@@ -25,34 +31,79 @@ const getSamplingResolution = (distanceObject: { distance?: string }, scale: num
   return samplingResolution;
 };
 
-const getGeographicBoundaryHtml = (coordinates: any): string => {
-  const hasCoordinate = getCoordinates(coordinates);
-  if (hasCoordinate) {
-    return `<p>West bounding longitude: <span id="west" /></p><p>East bounding longitude: <span id="east" /></p><p>North bounding latitude: <span id="north" /></p><p>South bounding latitude: <span id="south" /></p>`;
-  }
-  return '';
+const getGeographicBoundaryHtml = (coordinates: IAccumulatedCoordinates): string => {
+  const { north = '', south = '', east = '', west = '' } = coordinates;
+  return `<p>West bounding longitude: <span id="west">${west}</span></p><p>East bounding longitude: <span id="east">${east}</span></p><p>North bounding latitude: <span id="north">${north}</span></p><p>South bounding latitude: <span id="south">${south}</span></p>`;
 };
 
-const getGeographicLocation = (location: string | string[]): string => {
+const getGeographicMarkers = (location: string | string[]): string => {
+  let points: string[] = [];
+  const markers: string[] = [];
   if (Array.isArray(location)) {
-    const filteredArray = location.filter((item) => item !== '');
-    return filteredArray?.[0] ?? '';
+    points = location;
   } else {
-    return location;
+    points = [location];
   }
+  points.forEach((point: string) => {
+    if (point) {
+      markers.push(point);
+    }
+  });
+  return markers.join('_');
 };
 
-const getCoordinates = (coordinatesData: any): string => {
+const getBoundingBox = (polygons: ICoordinates[]): IAccumulatedCoordinates | null => {
+  let minLon = Infinity;
+  let maxLon = -Infinity;
+  let minLat = Infinity;
+  let maxLat = -Infinity;
+  polygons.forEach((polygon: ICoordinates) => {
+    polygon.coordinates.forEach((vertexArray: IVertex[]) => {
+      vertexArray.forEach((vertex: IVertex) => {
+        const [lon, lat] = vertex;
+        if (!isNaN(lon) && !isNaN(lat)) {
+          minLon = Math.min(minLon, lon);
+          maxLon = Math.max(maxLon, lon);
+          minLat = Math.min(minLat, lat);
+          maxLat = Math.max(maxLat, lat);
+        }
+      });
+    });
+  });
+
+  if (isFinite(minLon) && isFinite(maxLon) && isFinite(minLat) && isFinite(maxLat)) {
+    return {
+      north: maxLat,
+      south: minLat,
+      east: maxLon,
+      west: minLon,
+    };
+  }
+  return null;
+};
+
+const getAccumulatedCoordinatesNCenter = (
+  coordinatesData: ICoordinates | ICoordinates[],
+): IAccumulatedCoordinatesWithCenter | null => {
+  let coordinates: IAccumulatedCoordinates | null = null;
   if (Array.isArray(coordinatesData)) {
-    return JSON.stringify(coordinatesData?.[0]?.coordinates?.[0] ?? '');
+    coordinates = getBoundingBox(coordinatesData);
+  } else if (Object.keys(coordinatesData).length) {
+    coordinates = getBoundingBox([coordinatesData as ICoordinates]);
   }
-  if (Object.keys(coordinatesData).length) {
-    return JSON.stringify(coordinatesData?.coordinates?.[0] ?? '');
+  if (coordinates && Object.keys(coordinates).length) {
+    const { north, south, east, west } = coordinates;
+    const latitude = south - 5.0 + (north + 5.0 - (south - 5.0)) / 2;
+    const longitude = west - 5.0 + (east + 5.0 - (west - 5.0)) / 2;
+    return { coordinates, center: `${longitude},${latitude}` };
   }
-  return '';
+  return null;
 };
 
 const getGeographyTabData = (searchItem: Record<string, any>): IGeographyItem => {
+  const coordinatesData: IAccumulatedCoordinatesWithCenter | null = getAccumulatedCoordinatesNCenter(
+    searchItem?._source?.geom ?? {},
+  );
   return {
     spatialDataService: searchItem?._source?.OrgServiceType ?? '',
     spatialRepresentationService:
@@ -60,9 +111,10 @@ const getGeographyTabData = (searchItem: Record<string, any>): IGeographyItem =>
     spatialReferencingSystem: searchItem?._source?.crsDetails?.map((item) => item.code).join(', ') ?? '',
     geographicLocations:
       searchItem?._source?.OrgGeographicIdentifierTitle?.map((item) => item?.ciTitle).join(', ') ?? '',
-    geographicBoundary: getCoordinates(searchItem?._source?.geom ?? {}),
-    geographicBoundaryHtml: getGeographicBoundaryHtml(searchItem?._source?.geom ?? {}),
-    geographicCenter: getGeographicLocation(searchItem?._source?.location ?? ''),
+    geographicBoundary: coordinatesData?.coordinates ?? '',
+    geographicBoundaryHtml: getGeographicBoundaryHtml(coordinatesData?.coordinates ?? ({} as IAccumulatedCoordinates)),
+    geographicCenter: coordinatesData?.center ?? '0,0',
+    geographicMarkers: getGeographicMarkers(searchItem?._source?.location ?? ''),
     verticalExtent: getVerticalExtentHtml(searchItem?._source?.OrgResourceVerticalRange ?? {}),
     samplingResolution: getSamplingResolution(
       searchItem?._source?.OrgResolutionDistance ?? {},
@@ -72,10 +124,10 @@ const getGeographyTabData = (searchItem: Record<string, any>): IGeographyItem =>
 };
 
 export {
+  getAccumulatedCoordinatesNCenter,
   getVerticalExtentHtml,
-  getGeographicLocation,
+  getGeographicMarkers,
   getSamplingResolution,
   getGeographicBoundaryHtml,
-  getCoordinates,
   getGeographyTabData,
 };

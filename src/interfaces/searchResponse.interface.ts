@@ -46,14 +46,33 @@ export interface IQualityItem {
   additionalInformation?: string;
 }
 
+export type IVertex = [number, number];
+
+export interface ICoordinates {
+  coordinates: IVertex[][];
+}
+
+export interface IAccumulatedCoordinates {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+}
+
+export interface IAccumulatedCoordinatesWithCenter {
+  coordinates: IAccumulatedCoordinates;
+  center: string;
+}
+
 export interface IGeographyItem {
   spatialDataService?: string;
   spatialRepresentationService?: string;
   spatialReferencingSystem?: string;
   geographicLocations?: string;
-  geographicBoundary?: string;
+  geographicBoundary?: IAccumulatedCoordinates | string;
   geographicBoundaryHtml?: string;
   geographicCenter?: string;
+  geographicMarkers?: string;
   verticalExtent?: string;
   samplingResolution?: string;
 }

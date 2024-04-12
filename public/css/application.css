@@ -8047,3 +8047,7 @@
 .details-table tbody tr {
   border-bottom: 1px solid #b1b4b6;
 }
+
+.detail-map {
+  border: 2px solid #0b0c0c;
+}

@@ -137,11 +137,11 @@
   {{ super() }}
   <script>
     var isDetails = true;
-    var coordinates = '';
-    var center = '';
-    {% if docDetails !== undefined and docDetails.geographicBoundary %}
-      coordinates = {{docDetails.geographicBoundary | safe}}
-      center = "{{ docDetails.geographicCenter }}";
+    var markers = '';
+    var center = '0, 0';
+    {% if docDetails !== undefined %}
+      markers = "{{docDetails.geographicMarkers | safe}}"
+      center = "{{docDetails.geographicCenter | safe}}";
     {% endif %}
   </script>
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>

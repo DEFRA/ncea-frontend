@@ -152,6 +152,10 @@ export const detailsTabOptions: TabOptions = {
       column: 'geographicBoundaryHtml',
     },
     {
+      label: 'map',
+      column: 'geographicBoundary',
+    },
+    {
       label: 'Vertical extent<br /><span>(Meters above sea level)</span>',
       column: 'verticalExtent',
     },
