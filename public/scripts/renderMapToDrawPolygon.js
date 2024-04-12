@@ -1,14 +1,19 @@
 import { fireEventAfterStorage, getStorageData } from './customScripts.js';
+import { invokeAjaxCall } from './fetchResults.js';
 
 const index3 = 3;
 const precision = 6;
 const timeout = 200;
-const intervalTimeout = 50;
+// const intervalTimeout = 50;
 const mapTarget = 'coordinate-map';
 let map;
 let initialCenter;
 let initialZoom;
 let viewChanged = false;
+const mapResultsButtonId = 'map-result-button';
+const mapResultsCountId = 'map-result-count';
+const actionDataAttribute = 'data-action';
+const boundingBoxCheckbox = document.getElementById('bounding-box');
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -30,9 +35,24 @@ const completedStyle = new ol.style.Style({
   }),
 });
 
+const mapResultsStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
+    color: '#004618',
+    width: 2,
+  }),
+  fill: new ol.style.Fill({
+    color: 'rgb(62, 238, 0, 0.2)',
+  }),
+});
+
 const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
+});
+
+const markerSource = new ol.source.Vector();
+const markerLayer = new ol.layer.Vector({
+  source: markerSource,
 });
 
 const draw = new ol.interaction.Draw({
@@ -71,6 +91,7 @@ function initMap() {
 
 function addMapFeatures() {
   map.addLayer(vectorLayer);
+  map.addLayer(markerLayer);
   map.addInteraction(draw);
 
   if (typeof isDetails === 'undefined') {
@@ -153,13 +174,18 @@ function calculatePolygonFromCoordinates(isDetailsScreen = false) {
   const south = parseFloat(document.getElementById('south')[targetKey]);
   const east = parseFloat(document.getElementById('east')[targetKey]);
   const west = parseFloat(document.getElementById('west')[targetKey]);
+  vectorSource.clear();
+  addPolygon({ north, south, east, west }, completedStyle);
+}
+
+function addPolygon(coordinates, style) {
+  const { north, south, east, west } = coordinates;
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
       [west, south, east, north],
       'EPSG:4326',
       'EPSG:3857',
     );
-    vectorSource.clear();
     const polygonFeature = new ol.Feature({
       geometry: new ol.geom.Polygon([
         [
@@ -171,7 +197,7 @@ function calculatePolygonFromCoordinates(isDetailsScreen = false) {
         ],
       ]),
     });
-    polygonFeature.setStyle(completedStyle);
+    polygonFeature.setStyle(style);
     vectorSource.addFeature(polygonFeature);
   }
 }
@@ -192,38 +218,35 @@ function disableInteractions(isMapResultsScreen = false) {
   });
 }
 
-function placeMarkers() {
+function placeMarkers(markers, iconPath) {
   const markerStyle = new ol.style.Style({
     image: new ol.style.Icon({
       anchor: [0.5, 46],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
-      src: '/assets/images/marker.png',
+      src: iconPath,
       scale: 1.0,
     }),
   });
-  if (typeof markers !== 'undefined' && markers) {
-    const markersArray = markers.split('_');
-    markersArray.forEach((markerString) => {
-      if (markerString) {
-        const markerParts = markerString.split(',');
-
-        const markerFeature = new ol.Feature({
-          geometry: new ol.geom.Point(
-            ol.proj.fromLonLat([markerParts[1], markerParts[0]]),
-          ),
-        });
-        markerFeature.setStyle(markerStyle);
-        vectorSource.addFeature(markerFeature);
-      }
-    });
-  }
+  const markersArray = markers.split('_');
+  markersArray.forEach((markerString) => {
+    if (markerString) {
+      const markerParts = markerString.split(',');
+      const markerFeature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat(markerParts)),
+      });
+      markerFeature.setStyle(markerStyle);
+      markerSource.addFeature(markerFeature);
+    }
+  });
 }
 
 function geographyTabListener() {
   map.updateSize();
   calculatePolygonFromCoordinates(true);
-  placeMarkers();
+  if (typeof markers !== 'undefined' && markers) {
+    placeMarkers(markers, '/assets/images/marker.png');
+  }
   const locationParts = center.split(',');
   map.getView().setCenter(ol.proj.fromLonLat(locationParts));
   map.getView().fit(vectorSource.getExtent(), {
@@ -233,12 +256,20 @@ function geographyTabListener() {
   disableInteractions();
 }
 
+function boundingBoxCheckboxChange(isChecked) {
+  if (boundingBoxCheckbox) {
+    boundingBoxCheckbox.checked = isChecked;
+    boundingBoxCheckbox.dispatchEvent(new Event('change'));
+  }
+}
+
 function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
   const refreshControl = document.querySelector('.defra-refresh-block');
   refreshControl.style.display = 'none';
+  boundingBoxCheckboxChange(true);
 }
 
 function customControls() {
@@ -276,6 +307,79 @@ function exitMapEventListener() {
   }
 }
 
+function drawBoundingBoxWithMarker(records) {
+  map.updateSize();
+  const centerArray = [];
+  records.forEach((record) => {
+    addPolygon(record.geographicBoundary, mapResultsStyle);
+    placeMarkers(
+      record.geographicCenter,
+      '/assets/images/blue-marker-icon.svg',
+    );
+    const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
+    centerArray.push([lon, lat]);
+  });
+  const totalCenters = centerArray.length;
+  if (totalCenters) {
+    const sumCenter = centerArray.reduce(
+      (acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]],
+      [0, 0],
+    );
+    const averageCenter = [
+      sumCenter[0] / totalCenters,
+      sumCenter[1] / totalCenters,
+    ];
+    map.getView().setCenter(averageCenter);
+    map.getView().setZoom(2);
+    // map.getView().fit(vectorSource.getExtent(), { padding: [50, 50, 50, 50] });
+    initialCenter = map.getView().getCenter();
+    initialZoom = map.getView().getZoom();
+  }
+}
+
+const attachBoundingBoxToggleListener = () => {
+  if (boundingBoxCheckbox) {
+    boundingBoxCheckboxChange(true);
+    boundingBoxCheckbox.addEventListener('change', () => {
+      vectorLayer.setVisible(boundingBoxCheckbox.checked ? true : false);
+    });
+  }
+};
+
+const getMapResults = async (path) => {
+  const mapResultsButton = document.getElementById(mapResultsButtonId);
+  const mapResultsCount = document.getElementById(mapResultsCountId);
+  const { fields, sort, filters } = getStorageData();
+  const payload = {
+    fields,
+    sort,
+    rowsPerPage: null,
+    filters,
+    page: null,
+  };
+  const response = await invokeAjaxCall(path, payload);
+  if (response) {
+    if (response.status === 200) {
+      const mapResults = await response.json();
+      mapResultsButton.removeAttribute('disabled');
+      mapResultsCount.textContent = mapResults.total;
+      drawBoundingBoxWithMarker(mapResults.items);
+      attachBoundingBoxToggleListener();
+    } else {
+      mapResultsButton.setAttribute('disabled', true);
+    }
+    return;
+  }
+};
+
+const invokeMapResults = () => {
+  const fetchResults = document.querySelector('[data-fetch-map-results]');
+  if (fetchResults) {
+    const action = fetchResults.getAttribute(actionDataAttribute);
+    getMapResults(action);
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
     initMap();
@@ -290,23 +394,15 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         geographyTabListener();
       }, timeout);
+    } else if (typeof isViewMapResults !== 'undefined' && isViewMapResults) {
+      invokeMapResults();
+      exitMapEventListener();
+      disableInteractions(true);
+      customControls();
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
       }, timeout);
     }
-  }
-  if (typeof isViewMapResults !== 'undefined' && isViewMapResults) {
-    const checkIsLoaded = setInterval(() => {
-      if (document.getElementById(mapTarget)) {
-        clearInterval(checkIsLoaded);
-        initMap();
-        exitMapEventListener();
-        disableInteractions(true);
-        initialCenter = map.getView().getCenter();
-        initialZoom = map.getView().getZoom();
-        customControls();
-      }
-    }, intervalTimeout);
   }
 });

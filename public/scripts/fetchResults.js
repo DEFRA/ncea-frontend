@@ -6,7 +6,6 @@ import {
 
 const guidedSearchFormIds = ['date-search', 'coordinate-search'];
 const resultsBlockId = 'results-block';
-const mapResultsBlockId = 'map-result-block';
 const filterBlockId = 'filter-block';
 const actionDataAttribute = 'data-action';
 
@@ -101,7 +100,6 @@ const attachFilterListener = (isReset = false) => {
     storeStorageData(sessionData);
     hydrateFilterOption();
     invokeSearchResults();
-    invokeMapResults();
   });
 };
 
@@ -295,35 +293,9 @@ const attachClickResultsEvent = (element) => {
   });
 };
 
-const getMapResults = async (path) => {
-  const mapResultsBlock = document.getElementById(mapResultsBlockId);
-  const { fields, sort, filters } = getStorageData();
-  const payload = {
-    fields,
-    sort,
-    rowsPerPage: null,
-    filters,
-    page: null,
-  };
-  const response = await invokeAjaxCall(path, payload);
-  if (response) {
-    const mapResultsHtml = await response.text();
-    mapResultsBlock.innerHTML = mapResultsHtml;
-  }
-};
-
-const invokeMapResults = () => {
-  const fetchResults = document.querySelector('[data-fetch-map-results]');
-  if (fetchResults) {
-    const action = fetchResults.getAttribute(actionDataAttribute);
-    getMapResults(action);
-  }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   invokeSearchResults();
   invokeSearchFilters();
-  invokeMapResults();
   const fetchResultsCount = document.querySelector('[data-fetch-count]');
   if (fetchResultsCount) {
     attachClickResultsEvent(fetchResultsCount);
@@ -352,4 +324,9 @@ const attachClickPaginationEvent = () => {
   }
 };
 
-export { hydrateSortOption, hydratePageResultsOption, invokeSearchResults };
+export {
+  hydrateSortOption,
+  hydratePageResultsOption,
+  invokeSearchResults,
+  invokeAjaxCall,
+};

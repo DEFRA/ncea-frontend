@@ -248,7 +248,6 @@ window.addEventListener('storage', (event) => {
 
     if (updatedData.sort) {
       hydrateSortOption();
-      invokeSearchResults();
     }
   }
 });

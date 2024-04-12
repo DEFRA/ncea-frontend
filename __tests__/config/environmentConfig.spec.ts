@@ -87,7 +87,7 @@ describe('Environment environmentConfig', () => {
       expect(value).toEqual(environmentConfig);
     });
 
-    it('should throw an error uf tge configuration object is invalid', () => {
+    it('should throw an error of the configuration object is invalid', () => {
       process.env.NODE_ENV = 'invalid';
 
       expect(() => {

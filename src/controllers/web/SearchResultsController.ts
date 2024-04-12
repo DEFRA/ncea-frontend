@@ -79,16 +79,10 @@ const SearchResultsController = {
         fieldsExist: ['geom'],
         requiredFields: requiredFieldsForMap,
       };
-      const searchMapResults: ISearchResults = await getSearchResults(mapPayload);
-      return response.view('partials/results/map_results', {
-        hasError: false,
-        searchMapResults,
-      });
+      const searchMapResults: ISearchResults = await getSearchResults(mapPayload, true);
+      return response.response(searchMapResults).header('Content-Type', 'application/json');
     } catch (error) {
-      return response.view('partials/results/map_results', {
-        error,
-        hasError: true,
-      });
+      return response.response({ error: 'An error occurred while processing your request' }).code(500);
     }
   },
   getResultsCountHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {

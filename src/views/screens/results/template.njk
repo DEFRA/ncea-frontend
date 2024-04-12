@@ -38,7 +38,9 @@
   }) }}
 
   {%if searchInputError === undefined %}
-    <div class="govuk-grid-row" id="map-result-block" data-action="{{routes.getMapResults}}" data-fetch-map-results>&nbsp;</div>
+    <div class="govuk-grid-row" id="map-result-block" data-action="{{routes.getMapResults}}" data-fetch-map-results>
+      {%- include 'partials/results/map_results.njk' -%}
+    </div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third" id="filter-block" data-action="{{routes.getFilters}}" data-fetch-filters>&nbsp;</div>
       <div class="govuk-grid-column-two-thirds" id="results-block" data-action="{{routes.getResults}}" data-fetch-results>

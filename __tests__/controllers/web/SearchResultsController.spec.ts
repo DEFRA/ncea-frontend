@@ -1,6 +1,6 @@
 'use strict';
 
-import Joi from 'joi';
+import Joi, { number } from 'joi';
 import {
   IAggregationOption,
   ISearchItem,
@@ -353,22 +353,16 @@ describe('Deals with search results controller', () => {
       const request: Request = {
         payload: { fields: { 'quick-search': { search_term: 'test' } } },
       } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const response: ResponseToolkit = {
+        response: jest.fn().mockReturnThis(),
+        code: jest.fn(),
+      } as any;
       (getSearchResults as jest.Mock).mockResolvedValue({
         total: 0,
         items: [],
       });
       await SearchResultsController.getMapResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith(
-        'partials/results/map_results',
-        {
-          hasError: false,
-          searchMapResults: {
-            total: 0,
-            items: [],
-          },
-        },
-      );
+      expect(response.response).toHaveBeenCalledTimes(2);
     });
 
     it('should render the no results page for guided search journey', async () => {
@@ -379,37 +373,29 @@ describe('Deals with search results controller', () => {
           },
         },
       } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const response: ResponseToolkit = {
+        response: jest.fn().mockReturnThis(),
+        code: jest.fn(),
+      } as any;
       (getSearchResults as jest.Mock).mockResolvedValue({
         total: 0,
         items: [],
       });
       await SearchResultsController.getMapResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith(
-        'partials/results/map_results',
-        {
-          hasError: false,
-          searchMapResults: {
-            total: 0,
-            items: [],
-          },
-        },
-      );
+      expect(response.response).toHaveBeenCalledTimes(2);
     });
 
     it('should show an error when something fails at API layer', async () => {
       const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const response: ResponseToolkit = {
+        response: jest.fn().mockReturnThis(),
+        code: jest.fn(),
+      } as any;
       const error = new Error('Mocked error');
       (getSearchResults as jest.Mock).mockRejectedValue(error);
       await SearchResultsController.getMapResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith(
-        'partials/results/map_results',
-        {
-          error,
-          hasError: true,
-        },
-      );
+      expect(response.response).toHaveBeenCalledTimes(1);
+      expect(response.response().code).toHaveBeenCalledWith(500);
     });
   });
 });

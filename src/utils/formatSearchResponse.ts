@@ -1,10 +1,16 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { formatDate } from './formatDate';
+import { getAccumulatedCoordinatesNCenter } from './getBoundingBoxData';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
-import { IOtherSearchItem, ISearchItem, ISearchResults } from '../interfaces/searchResponse.interface';
+import {
+  IAccumulatedCoordinatesWithCenter,
+  IOtherSearchItem,
+  ISearchItem,
+  ISearchResults,
+} from '../interfaces/searchResponse.interface';
 
 const getStudyPeriod = (startDate: string, endDate: string): string => {
   const formattedStartDate: string = formatDate(startDate);
@@ -24,6 +30,7 @@ const getStudyPeriod = (startDate: string, endDate: string): string => {
 const formatSearchResponse = async (
   apiResponse: Record<string, any>,
   isDetails: boolean = false,
+  isMapResults: boolean = false,
 ): Promise<ISearchResults> => {
   const finalResponse: ISearchResults = {
     total: apiResponse?.hits?.total?.value,
@@ -47,6 +54,17 @@ const formatSearchResponse = async (
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
       organisationName: organisationDetails.organisationValue,
     };
+
+    if (isMapResults) {
+      const coordinatesData: IAccumulatedCoordinatesWithCenter | null = getAccumulatedCoordinatesNCenter(
+        searchItem?._source?.geom ?? {},
+      );
+      item = {
+        ...item,
+        geographicBoundary: coordinatesData?.coordinates,
+        geographicCenter: coordinatesData?.center,
+      };
+    }
 
     if (isDetails) {
       const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem, publishedBy);
