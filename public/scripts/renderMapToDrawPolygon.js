@@ -4,7 +4,6 @@ import { invokeAjaxCall } from './fetchResults.js';
 const index3 = 3;
 const precision = 6;
 const timeout = 200;
-// const intervalTimeout = 50;
 const mapTarget = 'coordinate-map';
 let map;
 let initialCenter;
@@ -14,6 +13,7 @@ const mapResultsButtonId = 'map-result-button';
 const mapResultsCountId = 'map-result-count';
 const actionDataAttribute = 'data-action';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
+let mapResults;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -45,6 +45,16 @@ const mapResultsStyle = new ol.style.Style({
   }),
 });
 
+const mapResultsHighlightStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
+    color: '#FFDD00',
+    width: 2,
+  }),
+  fill: new ol.style.Fill({
+    color: 'rgb(244, 119, 56, 0.20)',
+  }),
+});
+
 const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
@@ -70,6 +80,14 @@ const snap = new ol.interaction.Snap({
   source: vectorSource,
 });
 
+function isMarkerFeature(feature) {
+  return feature?.getGeometry()?.getType() === 'Point';
+}
+
+function isPolygonFeature(feature) {
+  return feature?.getGeometry()?.getType() === 'Polygon';
+}
+
 function initMap() {
   map = new ol.Map({
     target: mapTarget,
@@ -84,6 +102,8 @@ function initMap() {
     }),
     ...(typeof isDetails !== 'undefined' &&
       isDetails && { interactions: [], controls: [] }),
+    ...(typeof isViewMapResults !== 'undefined' &&
+      isViewMapResults && { controls: [] }),
   });
 
   addMapFeatures();
@@ -94,9 +114,81 @@ function addMapFeatures() {
   map.addLayer(markerLayer);
   map.addInteraction(draw);
 
-  if (typeof isDetails === 'undefined') {
+  if (
+    typeof isDetails === 'undefined' &&
+    typeof isViewMapResults === 'undefined'
+  ) {
     map.addInteraction(modify);
     map.addInteraction(snap);
+  }
+
+  if (typeof isViewMapResults !== 'undefined') {
+    mapEventListener();
+  }
+}
+
+function mapEventListener() {
+  map.on('pointermove', (event) => {
+    const pixel = event.pixel;
+    const feature = map.forEachFeatureAtPixel(pixel, (feature) => feature);
+    map.getTargetElement().style.cursor = isMarkerFeature(feature)
+      ? 'pointer'
+      : '';
+  });
+  map.on('click', (event) => {
+    const pixel = event.pixel;
+    const feature = map.forEachFeatureAtPixel(pixel, (feature) => feature);
+    resetFeatureStyle();
+    if (feature && isPolygonFeature(feature)) {
+      const polygonGeometry = feature.getGeometry();
+      markerSource.getFeatures().forEach((marker) => {
+        if (
+          isMarkerFeature(marker) &&
+          polygonGeometry.intersectsCoordinate(
+            marker.getGeometry().getFirstCoordinate(),
+          )
+        ) {
+          const recordId = marker.get('id');
+          const boundingBox = marker.get('boundingBox');
+          marker.setStyle(
+            getMarkerStyle('/assets/images/highlight-blue-marker-icon.png'),
+          );
+          showInformationPopup(recordId, boundingBox);
+        }
+      });
+      return;
+    }
+    if (feature && isMarkerFeature(feature)) {
+      const recordId = feature.get('id');
+      const boundingBox = feature.get('boundingBox');
+      feature.setStyle(
+        getMarkerStyle('/assets/images/highlight-blue-marker-icon.png'),
+      );
+      showInformationPopup(recordId, boundingBox);
+      return;
+    }
+  });
+}
+
+function resetFeatureStyle() {
+  vectorSource.getFeatures().forEach((feature) => {
+    if (isPolygonFeature(feature)) {
+      feature.setStyle(mapResultsStyle);
+    }
+  });
+  markerSource.getFeatures().forEach((marker) => {
+    if (isMarkerFeature(marker)) {
+      marker.setStyle(getMarkerStyle('/assets/images/blue-marker-icon.svg'));
+    }
+  });
+}
+
+function showInformationPopup(recordId, boundingBox) {
+  const record = mapResults.find((record) => record?.id === recordId);
+  if (record) {
+    if (boundingBox) {
+      boundingBox.setStyle(mapResultsHighlightStyle);
+    }
   }
 }
 
@@ -199,6 +291,7 @@ function addPolygon(coordinates, style) {
     });
     polygonFeature.setStyle(style);
     vectorSource.addFeature(polygonFeature);
+    return polygonFeature;
   }
 }
 
@@ -218,8 +311,8 @@ function disableInteractions(isMapResultsScreen = false) {
   });
 }
 
-function placeMarkers(markers, iconPath) {
-  const markerStyle = new ol.style.Style({
+const getMarkerStyle = (iconPath) => {
+  return new ol.style.Style({
     image: new ol.style.Icon({
       anchor: [0.5, 46],
       anchorXUnits: 'fraction',
@@ -228,12 +321,18 @@ function placeMarkers(markers, iconPath) {
       scale: 1.0,
     }),
   });
+};
+
+function placeMarkers(markers, iconPath, recordId = '1', boundingBoxData = '') {
+  const markerStyle = getMarkerStyle(iconPath);
   const markersArray = markers.split('_');
   markersArray.forEach((markerString) => {
     if (markerString) {
       const markerParts = markerString.split(',');
       const markerFeature = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat(markerParts)),
+        id: recordId,
+        boundingBox: boundingBoxData,
       });
       markerFeature.setStyle(markerStyle);
       markerSource.addFeature(markerFeature);
@@ -268,7 +367,9 @@ function resetMap() {
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
   const refreshControl = document.querySelector('.defra-refresh-block');
-  refreshControl.style.display = 'none';
+  if (refreshControl) {
+    refreshControl.style.display = 'none';
+  }
   boundingBoxCheckboxChange(true);
 }
 
@@ -308,13 +409,16 @@ function exitMapEventListener() {
 }
 
 function drawBoundingBoxWithMarker(records) {
+  mapResults = records;
   map.updateSize();
   const centerArray = [];
   records.forEach((record) => {
-    addPolygon(record.geographicBoundary, mapResultsStyle);
+    const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
     placeMarkers(
       record.geographicCenter,
       '/assets/images/blue-marker-icon.svg',
+      record.id,
+      boundingBox,
     );
     const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
     centerArray.push([lon, lat]);
@@ -331,7 +435,6 @@ function drawBoundingBoxWithMarker(records) {
     ];
     map.getView().setCenter(averageCenter);
     map.getView().setZoom(2);
-    // map.getView().fit(vectorSource.getExtent(), { padding: [50, 50, 50, 50] });
     initialCenter = map.getView().getCenter();
     initialZoom = map.getView().getZoom();
   }
@@ -398,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
       invokeMapResults();
       exitMapEventListener();
       disableInteractions(true);
-      customControls();
+      // customControls();
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
