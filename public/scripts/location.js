@@ -3,9 +3,11 @@ import { fireEventAfterStorage, getStorageData } from './customScripts.js';
 const index3 = 3;
 const precision = 6;
 const timeout = 200;
-const intervalTimeout = 50;
 const mapTarget = 'coordinate-map';
-let map;
+const isDetailsScreen = typeof isDetails !== 'undefined' && isDetails;
+const hasCenter = typeof center !== 'undefined' && center;
+const isMapResultsScreen =
+  typeof isViewMapResults !== 'undefined' && isViewMapResults;
 let initialCenter;
 let initialZoom;
 let viewChanged = false;
@@ -19,7 +21,6 @@ const drawStyle = new ol.style.Style({
     color: 'rgb(0, 0, 255, 0.1)',
   }),
 });
-
 const completedStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
     color: '#F47738',
@@ -34,6 +35,10 @@ const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
+const markerSource = new ol.source.Vector();
+const markerLayer = new ol.layer.Vector({
+  source: markerSource,
+});
 
 const draw = new ol.interaction.Draw({
   source: vectorSource,
@@ -41,58 +46,35 @@ const draw = new ol.interaction.Draw({
   geometryFunction: ol.interaction.Draw.createBox(),
   style: drawStyle,
 });
-
-const modify = new ol.interaction.Modify({
-  source: vectorSource,
-});
-
-const snap = new ol.interaction.Snap({
-  source: vectorSource,
-});
-
-function initMap() {
-  map = new ol.Map({
-    target: mapTarget,
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM(),
-      }),
-    ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat([3.436, 55.3781]),
-      zoom: 5,
-    }),
-    ...(typeof isDetails !== 'undefined' &&
-      isDetails && { interactions: [], controls: [] }),
-  });
-
-  addMapFeatures();
-}
-
-function addMapFeatures() {
-  map.addLayer(vectorLayer);
-  map.addInteraction(draw);
-
-  if (typeof isDetails === 'undefined') {
-    map.addInteraction(modify);
-    map.addInteraction(snap);
-  }
-}
-
 draw.on('drawstart', () => {
   vectorSource.clear();
 });
-
 draw.on('drawend', (event) => {
   const feature = event.feature;
   feature.setStyle(completedStyle);
 });
 
-vectorSource.on('change', () => {
-  if (typeof isDetails === 'undefined') {
-    calculateCoordinates();
-  }
+const map = new ol.Map({
+  target: mapTarget,
+  layers: [
+    new ol.layer.Tile({
+      source: new ol.source.OSM(),
+    }),
+  ],
+  view: new ol.View({
+    center: ol.proj.fromLonLat([3.436, 55.3781]),
+    zoom: !isDetailsScreen && !isMapResultsScreen ? 5 : 2,
+    maxZoom: 18,
+    minZoom: 2,
+  }),
+  controls: [],
+  ...(isDetailsScreen && { interactions: [] }),
 });
+map.addLayer(vectorLayer);
+map.addLayer(markerLayer);
+map.addInteraction(draw);
+if (!isDetailsScreen) {
+}
 
 function calculateCoordinates() {
   const extent = vectorSource.getExtent();
@@ -116,15 +98,21 @@ function calculateCoordinates() {
       }
       sessionData.fields[form.id] = {
         ...sessionData.fields[form.id],
-        north: north.toFixed(precision),
-        south: south.toFixed(precision),
-        east: east.toFixed(precision),
-        west: west.toFixed(precision),
+        nth: north.toFixed(precision),
+        sth: south.toFixed(precision),
+        est: east.toFixed(precision),
+        wst: west.toFixed(precision),
       };
       fireEventAfterStorage(sessionData);
     }
   }
 }
+
+vectorSource.on('change', () => {
+  if (!isDetailsScreen) {
+    calculateCoordinates();
+  }
+});
 
 if (document.getElementById('north')) {
   document.getElementById('north').addEventListener('change', () => {
@@ -153,13 +141,18 @@ function calculatePolygonFromCoordinates(isDetailsScreen = false) {
   const south = parseFloat(document.getElementById('south')[targetKey]);
   const east = parseFloat(document.getElementById('east')[targetKey]);
   const west = parseFloat(document.getElementById('west')[targetKey]);
+  vectorSource.clear();
+  addPolygon({ north, south, east, west }, completedStyle);
+}
+
+function addPolygon(coordinates, style) {
+  const { north, south, east, west } = coordinates;
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
       [west, south, east, north],
       'EPSG:4326',
       'EPSG:3857',
     );
-    vectorSource.clear();
     const polygonFeature = new ol.Feature({
       geometry: new ol.geom.Polygon([
         [
@@ -171,7 +164,7 @@ function calculatePolygonFromCoordinates(isDetailsScreen = false) {
         ],
       ]),
     });
-    polygonFeature.setStyle(completedStyle);
+    polygonFeature.setStyle(style);
     vectorSource.addFeature(polygonFeature);
   }
 }
@@ -192,38 +185,41 @@ function disableInteractions(isMapResultsScreen = false) {
   });
 }
 
-function placeMarkers() {
-  const markerStyle = new ol.style.Style({
+const getMarkerStyle = (iconPath) => {
+  return new ol.style.Style({
     image: new ol.style.Icon({
       anchor: [0.5, 46],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
-      src: '/assets/images/marker.png',
+      src: iconPath,
       scale: 1.0,
     }),
   });
-  if (typeof markers !== 'undefined' && markers) {
-    const markersArray = markers.split('_');
-    markersArray.forEach((markerString) => {
-      if (markerString) {
-        const markerParts = markerString.split(',');
+};
 
-        const markerFeature = new ol.Feature({
-          geometry: new ol.geom.Point(
-            ol.proj.fromLonLat([markerParts[1], markerParts[0]]),
-          ),
-        });
-        markerFeature.setStyle(markerStyle);
-        vectorSource.addFeature(markerFeature);
-      }
-    });
-  }
+function placeMarkers(markers, iconPath, recordId = '1', boundingBoxData = '') {
+  const markerStyle = getMarkerStyle(iconPath);
+  const markersArray = markers.split('_');
+  markersArray.forEach((markerString) => {
+    if (markerString) {
+      const markerParts = markerString.split(',');
+      const markerFeature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat(markerParts)),
+        id: recordId,
+        boundingBox: boundingBoxData,
+      });
+      markerFeature.setStyle(markerStyle);
+      markerSource.addFeature(markerFeature);
+    }
+  });
 }
 
 function geographyTabListener() {
   map.updateSize();
   calculatePolygonFromCoordinates(true);
-  placeMarkers();
+  if (typeof markers !== 'undefined' && markers) {
+    placeMarkers(markers, '/assets/images/marker.png');
+  }
   const locationParts = center.split(',');
   map.getView().setCenter(ol.proj.fromLonLat(locationParts));
   map.getView().fit(vectorSource.getExtent(), {
@@ -237,76 +233,71 @@ function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
-  const refreshControl = document.querySelector('.defra-refresh-block');
-  refreshControl.style.display = 'none';
-}
-
-function customControls() {
-  const zoomInButton = document.querySelector('.ol-zoom-in');
-  const zoomOutButton = document.querySelector('.ol-zoom-out');
-  zoomInButton.classList.add('defra-zoom-in', 'defra-controls');
-  zoomOutButton.classList.add('defra-zoom-out', 'defra-controls');
-
-  const refreshControlBlock = document.createElement('div');
-  refreshControlBlock.classList.add(
-    'ol-unselectable',
-    'ol-control',
-    'defra-refresh-block',
-  );
-  const refreshControl = document.createElement('button');
-  refreshControl.classList.add('defra-controls', 'defra-refresh-control');
-  refreshControl.addEventListener('click', resetMap);
-  refreshControlBlock.appendChild(refreshControl);
-  map.getViewport().appendChild(refreshControlBlock);
-
-  map.on('moveend', () => {
-    if (!viewChanged) {
-      viewChanged = true;
-    } else {
-      const refreshControl = document.querySelector('.defra-refresh-block');
-      refreshControl.style.display = 'block';
-    }
-  });
+  const resetControl = document.getElementById('defra-map-reset');
+  if (resetControl) {
+    resetControl.style.display = 'none';
+  }
 }
 
 function exitMapEventListener() {
-  const exitControl = document.querySelector('.defra-exit-control');
+  const exitControl = document.getElementById('defra-map-exit');
   if (exitControl) {
     exitControl.addEventListener('click', resetMap);
   }
 }
 
+function animateZoom(delta) {
+  map.getView().animate({
+    zoom: map.getView().getZoom() + delta,
+    duration: 250,
+    easing: ol.easing.easeOut,
+  });
+}
+
+function customControls() {
+  const zoomInElement = document.getElementById('defra-map-zoom-in');
+  const zoomOutElement = document.getElementById('defra-map-zoom-out');
+  const resetControl = document.getElementById('defra-map-reset');
+  if (zoomInElement) {
+    zoomInElement.addEventListener('click', () => {
+      animateZoom(1);
+    });
+  }
+  if (zoomOutElement) {
+    zoomOutElement.addEventListener('click', () => {
+      animateZoom(-1);
+    });
+  }
+  if (resetControl) {
+    resetControl.addEventListener('click', resetMap);
+    map.on('moveend', () => {
+      if (!viewChanged) {
+        viewChanged = true;
+      } else {
+        resetControl.style.display = 'block';
+      }
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
-    initMap();
-    if (
-      typeof isDetails !== 'undefined' &&
-      isDetails &&
-      typeof center !== 'undefined' &&
-      center
-    ) {
+    if (isDetailsScreen && hasCenter) {
       const geographyTabTag = document.querySelector('a[href="#geography"]');
       geographyTabTag.addEventListener('click', geographyTabListener);
       setTimeout(() => {
         geographyTabListener();
       }, timeout);
+    } else if (isMapResultsScreen) {
+      exitMapEventListener();
+      disableInteractions(true);
+      initialCenter = map.getView().getCenter();
+      initialZoom = map.getView().getZoom();
+      customControls();
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
       }, timeout);
     }
-  }
-  if (typeof isViewMapResults !== 'undefined' && isViewMapResults) {
-    const checkIsLoaded = setInterval(() => {
-      if (document.getElementById(mapTarget)) {
-        clearInterval(checkIsLoaded);
-        initMap();
-        exitMapEventListener();
-        disableInteractions(true);
-        initialCenter = map.getView().getCenter();
-        initialZoom = map.getView().getZoom();
-        customControls();
-      }
-    }, intervalTimeout);
   }
 });

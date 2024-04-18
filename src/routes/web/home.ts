@@ -10,6 +10,11 @@ const homeRoutes = [
     path: webRoutePaths.home,
     handler: HomeController.renderHomeHandler,
   },
+  {
+    method: 'GET',
+    path: `${webRoutePaths.intermediate}/{step}`,
+    handler: HomeController.intermediateHandler,
+  },
 ];
 
 export { homeRoutes };

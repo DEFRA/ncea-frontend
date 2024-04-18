@@ -23,6 +23,9 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
     
   <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
     
   </head>
@@ -36,23 +39,36 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     
 
     
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id= "
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header class="header-container">
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','');</script>
-<!-- End Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
 
-<!--Will be removed once Defra GA accounts been created -->
+    <!--Will be removed once Defra GA accounts been created -->
 
-<!-- Google tag (gtag.js) -->
-
+    <!-- Google tag (gtag.js) -->
+    
 
     <div class="header-div-container header-main">
       <div class="site-width-container">
@@ -106,7 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   <div class="govuk-grid-row">
-    <form method="POST" id="date-search" action="/date-search" data-do-browser-storage>
+    <form method="POST" id="date" action="/date-search" data-do-browser-storage>
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
@@ -141,36 +157,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-date-input__label" for="from-date-day">
+          <label class="govuk-label govuk-date-input__label" for="day">
             Day
           </label>
         
         
-          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="from-date-day" name="from-date-day" type="text" inputmode="numeric">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="day" name="from-date-day" type="text" inputmode="numeric" altName="fdd">
         
         </div>
       </div>
     
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-date-input__label" for="from-date-month">
+          <label class="govuk-label govuk-date-input__label" for="month">
             Month
           </label>
         
         
-          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="from-date-month" name="from-date-month" type="text" inputmode="numeric">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="month" name="from-date-month" type="text" inputmode="numeric" altName="fdm">
         
         </div>
       </div>
     
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-date-input__label" for="from-date-year">
+          <label class="govuk-label govuk-date-input__label" for="year">
             Year
           </label>
         
         
-          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="from-date-year" name="from-date-year" type="text" inputmode="numeric">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="year" name="from-date-year" type="text" inputmode="numeric" altName="fdy">
         
         </div>
       </div>
@@ -211,36 +227,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-date-input__label" for="to-date-day">
+          <label class="govuk-label govuk-date-input__label" for="day">
             Day
           </label>
         
         
-          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="to-date-day" name="to-date-day" type="text" inputmode="numeric">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="day" name="to-date-day" type="text" inputmode="numeric" altName="tdd">
         
         </div>
       </div>
     
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-date-input__label" for="to-date-month">
+          <label class="govuk-label govuk-date-input__label" for="month">
             Month
           </label>
         
         
-          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="to-date-month" name="to-date-month" type="text" inputmode="numeric">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="month" name="to-date-month" type="text" inputmode="numeric" altName="tdm">
         
         </div>
       </div>
     
       <div class="govuk-date-input__item">
         <div class="govuk-form-group">
-          <label class="govuk-label govuk-date-input__label" for="to-date-year">
+          <label class="govuk-label govuk-date-input__label" for="year">
             Year
           </label>
         
         
-          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="to-date-year" name="to-date-year" type="text" inputmode="numeric">
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="year" name="to-date-year" type="text" inputmode="numeric" altName="tdy">
         
         </div>
       </div>
@@ -371,7 +387,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  <script type="module" src="/assets/scripts/fetchResults.js"></script>
+  
 
   </body>
 </html>

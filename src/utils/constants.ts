@@ -6,10 +6,7 @@ export const webRoutePaths = {
   results: '/search',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
-  getResults: '/search-results',
-  getResultsCount: '/results-count',
-  getFilters: '/search-filters',
-  getMapResults: '/search-map-results',
+  intermediate: '/intermediate',
 };
 
 export const elasticSearchAPIPaths = {
@@ -22,9 +19,9 @@ export const formKeys = {
 };
 
 export const formIds = {
-  quickSearch: 'quick-search',
-  dataQuestionnaire: 'date-search',
-  geographyQuestionnaire: 'coordinate-search',
+  quickSearch: 'keyword',
+  dataQuestionnaire: 'date',
+  geographyQuestionnaire: 'extent',
 };
 
 export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
@@ -41,6 +38,33 @@ export const requiredFieldsForMap: string[] = [
   'geom',
   'resourceIdentifier',
 ];
+
+export const guidedSearchSteps = {
+  date: 'date',
+  coordinate: 'extent',
+};
+
+export const queryParamKeys = {
+  quickSearch: 'q',
+  fromDateDay: 'fdd',
+  fromDateMonth: 'fdm',
+  fromDateYear: 'fdy',
+  toDateDay: 'tdd',
+  toDateMonth: 'tdm',
+  toDateYear: 'tdy',
+  coordinates: 'ext',
+  north: 'nth',
+  south: 'sth',
+  east: 'est',
+  west: 'wst',
+  depth: 'dpt',
+  count: 'cnt',
+  page: 'pg',
+  rowsPerPage: 'rpp',
+  sort: 'srt',
+  journey: 'jry',
+  resourceType: 'rty',
+};
 
 export const detailsTabOptions: TabOptions = {
   general: [

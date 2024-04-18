@@ -185,7 +185,7 @@ describe('Geography tab data', () => {
   describe('getGeographicMarkers function', () => {
     it('should return correct marker when location is a string', () => {
       const result = getGeographicMarkers('49.0466505,-11.14563');
-      expect(result).toEqual('49.0466505,-11.14563');
+      expect(result).toEqual('-11.14563,49.0466505');
     });
 
     it('should return correct marker when location is an array of strings', () => {
@@ -193,12 +193,12 @@ describe('Geography tab data', () => {
         '49.0466505,-11.14563',
         '59.0466505,-21.14563',
       ]);
-      expect(result).toEqual('49.0466505,-11.14563_59.0466505,-21.14563');
+      expect(result).toEqual('-11.14563,49.0466505_-21.14563,59.0466505');
     });
 
     it('should return correct marker when location has empty string inside an array', () => {
       const result = getGeographicMarkers(['', '59.0466505,-21.14563']);
-      expect(result).toEqual('59.0466505,-21.14563');
+      expect(result).toEqual('-21.14563,59.0466505');
     });
 
     it('should return an empty string when location is empty', () => {
@@ -246,7 +246,7 @@ describe('Geography tab data', () => {
         },
         geographicBoundaryHtml: `<p>West bounding longitude: <span id="west">-15.320435</span></p><p>East bounding longitude: <span id="east">-6.970825</span></p><p>North bounding latitude: <span id="north">50.180526</span></p><p>South bounding latitude: <span id="south">47.912775</span></p>`,
         geographicCenter: '-11.14563,49.0466505',
-        geographicMarkers: '49.0466505,-11.14563',
+        geographicMarkers: '-11.14563,49.0466505',
         verticalExtent: '<p>Lowest point: 1m</p><p>Highest point: 10m</p>',
         samplingResolution: '10 m',
       });

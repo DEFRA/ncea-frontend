@@ -14,7 +14,6 @@
     {% endif %}
     <div class="search-block" data-module="search">
       <form action="{{params.searchPath}}" id="{{params.formId}}" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-
         {{ govukInput({
           id: 'search_term',
           name: 'search_term',
@@ -34,7 +33,8 @@
           value: params.searchTerm,
           attributes: {
             'aria-controls': 'search-results',
-            'placeholder': 'Search'
+            'placeholder': 'Search',
+            'altName': 'q'
           },
           errorMessage: params.searchInputError,
           formGroup: {

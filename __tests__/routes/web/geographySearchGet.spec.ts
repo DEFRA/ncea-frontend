@@ -176,7 +176,7 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(formElement).toBeTruthy();
         expect(formElement?.tagName.toLowerCase()).toBe('form');
         expect(formElement?.getAttribute('action')).toBe(
-          webRoutePaths.geographySearch,
+          `${webRoutePaths.geographySearch}?`,
         );
       });
     });

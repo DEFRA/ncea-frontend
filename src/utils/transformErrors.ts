@@ -49,12 +49,22 @@ const transformTextInputError = async (
 const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefined => {
   let fromError: string = '';
   const fromItems: GovUKItems[] = [];
+  const altNameMatrix: Record<string, string> = {
+    'from-date-day': 'fdd',
+    'from-date-month': 'fdm',
+    'from-date-year': 'fdy',
+    'to-date-day': 'tdd',
+    'to-date-month': 'tdm',
+    'to-date-year': 'tdy',
+  };
   let toError: string = '';
   const toItems: GovUKItems[] = [];
   Object.keys(error._original).forEach((field) => {
+    console.log(field);
     const item = {
       classes: `${field.includes('-year') ? 'govuk-input--width-4' : 'govuk-input--width-2'}`,
       name: field.toString().replace('from-date-', '').replace('to-date-', ''),
+      attributes: { altName: altNameMatrix[field.toString()] },
       value: error._original[field],
     };
     let errorMessage = '';

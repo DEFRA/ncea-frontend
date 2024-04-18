@@ -14,33 +14,13 @@ const searchResultsRoutes = [
   {
     method: 'POST',
     path: webRoutePaths.results,
-    handler: SearchResultsController.renderSearchResultsHandler,
+    handler: SearchResultsController.quickSearchSubmitHandler,
     options: {
       validate: {
         payload: searchSchema,
         failAction: SearchResultsController.quickSearchFailActionHandler,
       },
     },
-  },
-  {
-    method: 'POST',
-    path: webRoutePaths.getResults,
-    handler: SearchResultsController.getSearchResultsHandler,
-  },
-  {
-    method: 'POST',
-    path: webRoutePaths.getMapResults,
-    handler: SearchResultsController.getMapResultsHandler,
-  },
-  {
-    method: 'POST',
-    path: webRoutePaths.getResultsCount,
-    handler: SearchResultsController.getResultsCountHandler,
-  },
-  {
-    method: 'POST',
-    path: webRoutePaths.getFilters,
-    handler: SearchResultsController.getSearchFiltersHandler,
   },
   {
     method: 'GET',
