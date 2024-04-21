@@ -9,7 +9,8 @@ jest.mock('nunjucks');
 const {
   home: homePage,
   results: searchResults,
-  guidedDateSearch: guidedSearch,
+  guidedClassifierSearch: guidedSearch,
+  guidedDateSearch,
   getFilters,
   getResults,
   getResultsCount,
@@ -59,6 +60,7 @@ describe('Vision Plugin Configuration', () => {
         getFilters,
         getResults,
         getResultsCount,
+        guidedDateSearch,
       },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,

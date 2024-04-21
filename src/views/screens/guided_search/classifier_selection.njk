@@ -1,0 +1,47 @@
+{% extends "layout/default.njk" %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "partials/guided_search_breadcrumb/template.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% set checkboxItems = [] %}
+  {% for item in classifierItems %}
+    {% set _ = checkboxItems.push({value: item.value, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
+  {% endfor %}
+  {% set _ = checkboxItems.push({divider: "or" }) %}
+  {% set _ = checkboxItems.push({value: "all", text: "Select all", behaviour: "exclusive"}) %}
+  <div class="govuk-grid-row">
+    <form method="GET" id="{{formId}}" action="{{guidedClassifierSearchPath}}" data-do-browser-storage>
+      <div class="classifier-search">
+        {{ govukCheckboxes({
+            name: "level1",
+            fieldset: {
+              legend: {
+                text: "Select a natural capital theme",
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: "Select all that apply"
+            },
+            items: checkboxItems
+          }) }}
+        <div class="govuk-button-group">
+          {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary", href: skipPath, attributes: {
+            'data-do-storage-skip': ''
+          } }) }}
+          {{ govukButton({ text: "Next question", attributes: {
+            'data-to-disable': '',
+            'data-next-question': ''
+          } }) }}
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

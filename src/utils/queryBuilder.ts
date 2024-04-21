@@ -1,5 +1,6 @@
 import { generateDateString } from './generateDateString';
 import {
+  IAggregateClassifierQuery,
   IAggregateQuery,
   IBoolQuery,
   ICustomSortScript,
@@ -232,4 +233,36 @@ const addDetailsQuery = (docId: string, boolQuery: IBoolQuery): void => {
   }
 };
 
-export { buildSearchQuery, buildCustomSortScriptForStudyPeriod };
+const classifierAggregationQuery = (
+  filters: Record<string, string | string[]>[],
+  uniqueField: string,
+): IAggregateClassifierQuery => {
+  const mustFilter: Record<string, Record<string, string | string[]>>[] = filters.map((filter) => {
+    return {
+      term: filter,
+    };
+  });
+  const classifierQuery: IAggregateClassifierQuery = {
+    size: 0,
+    aggs: {
+      classifier_level: {
+        filter: {
+          bool: {
+            must: mustFilter,
+          },
+        },
+        aggs: {
+          classifier_values: {
+            terms: {
+              field: uniqueField,
+            },
+          },
+        },
+      },
+    },
+  };
+
+  return classifierQuery;
+};
+
+export { buildSearchQuery, buildCustomSortScriptForStudyPeriod, classifierAggregationQuery };

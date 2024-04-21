@@ -125,6 +125,26 @@ interface ISearchBuilderPayload {
   docId?: string;
 }
 
+interface IAggregateClassifierQuery {
+  size: number;
+  aggs: {
+    classifier_level: {
+      filter: {
+        bool: {
+          must: Record<string, Record<string, string | string[]>>[];
+        };
+      };
+      aggs: {
+        classifier_values: {
+          terms: {
+            field: string;
+          };
+        };
+      };
+    };
+  };
+}
+
 export {
   IMatchQuery,
   IBoolQuery,
@@ -141,4 +161,5 @@ export {
   IAggregateQuery,
   ISearchFilter,
   ISearchBuilderPayload,
+  IAggregateClassifierQuery,
 };

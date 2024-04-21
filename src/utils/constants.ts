@@ -4,6 +4,7 @@ import { TabOptions } from '../interfaces/detailsTab.interface';
 export const webRoutePaths = {
   home: '/',
   results: '/search',
+  guidedClassifierSearch: '/classifier-search',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
   getResults: '/search-results',
@@ -22,6 +23,7 @@ export const formKeys = {
 
 export const formIds = {
   quickSearch: 'quick-search',
+  classifierSearch: 'classifier-search',
   dataQuestionnaire: 'date-search',
   geographyQuestionnaire: 'coordinate-search',
 };
