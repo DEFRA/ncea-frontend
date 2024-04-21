@@ -8,8 +8,7 @@ const ClassifierSearchController = {
   renderClassifierSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch: skipPath } = webRoutePaths;
     const formId: string = formIds.classifierSearch;
-    // const classifierValues = await getClassifierDetails(1);
-    const classifierValues = ['Natural Asset', 'Ecosystem service or benefit', 'Pressure', 'Natural capital valuation'];
+    const classifierValues = await getClassifierDetails(1);
     const classifierItems = classifierValues.map((cv) => {
       return {
         value: cv,
