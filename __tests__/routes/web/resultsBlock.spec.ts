@@ -292,10 +292,10 @@ describe('Results block template', () => {
         ).toEqual('Choose different answers to see results.');
       });
 
-      it('should render two secondary buttons', async () => {
+      it('should render three secondary buttons', async () => {
         expect(
           document.querySelectorAll('.govuk-button--secondary')?.length,
-        ).toBe(2);
+        ).toBe(3);
       });
     });
 

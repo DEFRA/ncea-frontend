@@ -23,6 +23,9 @@ const responseSuccessStatusCode = 200;
 const marketYPoint = 46;
 const highlightedMarkerIcon = '/assets/images/highlight-blue-marker-icon.png';
 const markerIcon = '/assets/images/blue-marker-icon.svg';
+const mapInfoBlock = document.getElementById('map-info');
+const contentMaxChar = 500;
+let selectedRecord = '';
 let mapResults;
 
 const drawStyle = new ol.style.Style({
@@ -135,6 +138,7 @@ function mapEventListener() {
       (featureItem) => featureItem,
     );
     resetFeatureStyle();
+    closeInfoPopup();
     if (feature && isPolygonFeature(feature)) {
       const polygonGeometry = feature.getGeometry();
       markerSource.getFeatures().forEach((marker) => {
@@ -161,7 +165,7 @@ function mapEventListener() {
   });
 }
 
-function resetFeatureStyle() {
+const resetFeatureStyle = () => {
   vectorSource.getFeatures().forEach((feature) => {
     if (isPolygonFeature(feature)) {
       feature.setStyle(mapResultsStyle);
@@ -172,16 +176,60 @@ function resetFeatureStyle() {
       marker.setStyle(getMarkerStyle(markerIcon));
     }
   });
+};
+
+function truncateString(inputString, maxLength) {
+  if (inputString && inputString.length > maxLength) {
+    return `${inputString.slice(0, maxLength)}...`;
+  }
+  return inputString;
 }
 
 function showInformationPopup(recordId, boundingBox) {
-  const record = mapResults.find((item) => item?.id === recordId);
-  if (record) {
+  selectedRecord = mapResults.find((item) => item?.id === recordId);
+  const titleElement = document.getElementById('info-title');
+  const publishedBlock = document.getElementById('info-published-block');
+  const publishedByElement = document.getElementById('info-published-by');
+  const contentElement = document.getElementById('info-content');
+  if (selectedRecord && Object.keys(selectedRecord).length) {
     if (boundingBox) {
       boundingBox.setStyle(mapResultsHighlightStyle);
     }
-    console.log(record);
+    if (mapInfoBlock) {
+      mapInfoBlock.style.display = 'block';
+      titleElement.textContent = selectedRecord.title;
+      if (selectedRecord.publishedBy) {
+        publishedByElement.textContent = selectedRecord.publishedBy;
+        publishedBlock.style.display = 'block';
+      } else {
+        publishedBlock.style.display = 'none';
+      }
+      contentElement.textContent = truncateString(
+        selectedRecord.content,
+        contentMaxChar,
+      );
+    }
   }
+}
+
+function moreInfoNavigation() {
+  if (selectedRecord && Object.keys(selectedRecord).length) {
+    window.location.href = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}`;
+  }
+}
+function closeInfoPopup() {
+  if (mapInfoBlock) {
+    const titleElement = document.getElementById('info-title');
+    const publishedBlock = document.getElementById('info-published-block');
+    const publishedByElement = document.getElementById('info-published-by');
+    const contentElement = document.getElementById('info-content');
+    mapInfoBlock.style.display = 'none';
+    titleElement.textContent = '';
+    publishedBlock.style.display = 'block';
+    publishedByElement.textContent = '';
+    contentElement.textContent = '';
+  }
+  resetFeatureStyle();
 }
 
 function calculateCoordinates() {
@@ -356,6 +404,8 @@ function resetMap() {
   if (resetControl) {
     resetControl.style.display = 'none';
   }
+  resetFeatureStyle();
+  closeInfoPopup();
 }
 
 function exitMapEventListener() {
@@ -460,6 +510,32 @@ function customControls() {
   }
 }
 
+function infoListener() {
+  const closeInfoElement = document.getElementById('map-info-close');
+  if (closeInfoElement) {
+    closeInfoElement.addEventListener('click', closeInfoPopup);
+  }
+  const moreInfoElement = document.getElementById('more-info');
+  if (moreInfoElement) {
+    moreInfoElement.addEventListener('click', moreInfoNavigation);
+  }
+  const goToResourceElement = document.getElementById('go-to-resource');
+  if (goToResourceElement) {
+    if (!selectedRecord.organisationName || !selectedRecord.resourceLocator) {
+      goToResourceElement.setAttribute('disabled', true);
+    } else {
+      goToResourceElement.removeAttribute('disabled');
+    }
+    goToResourceElement.addEventListener('click', () => {
+      window.openDataModal(
+        selectedRecord.organisationName,
+        selectedRecord.resourceLocator,
+        true,
+      );
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
     if (isDetailsScreen && hasCenter) {
@@ -472,6 +548,7 @@ document.addEventListener('DOMContentLoaded', () => {
       invokeMapResults();
       exitMapEventListener();
       disableInteractions();
+      infoListener();
       customControls();
     } else {
       setTimeout(() => {

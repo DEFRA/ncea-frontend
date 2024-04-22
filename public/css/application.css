@@ -8050,6 +8050,47 @@
 .defra-map-zoom-in:hover, .defra-map-zoom-out:hover {
   background-color: #f3f2f1;
 }
+.defra-map-info {
+  position: absolute;
+  background-color: #ffffff;
+  bottom: 15px;
+  left: 15px;
+  border: 2px solid #0b0c0c;
+  padding: 10px;
+  display: none;
+  width: 320px;
+}
+.defra-map-info__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.defra-map-info__title-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.defra-map-info__title-block h2 {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+  width: 295px;
+  word-wrap: break-word;
+}
+.defra-map-info__close {
+  cursor: pointer;
+}
+.defra-map-info__content {
+  margin: 0;
+  color: #0b0c0c;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
 
 @media (min-width: 40.0625em) {
   .defra-map-zoom {
