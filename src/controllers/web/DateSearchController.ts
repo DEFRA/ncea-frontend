@@ -5,7 +5,8 @@ import Joi from 'joi';
 import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { transformErrors } from '../../utils/transformErrors';
-import { formIds, formKeys, webRoutePaths } from '../../utils/constants';
+import { upsertQueryParams } from '../../utils/queryStringHelper';
+import { formIds, formKeys, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const DateSearchController = {
@@ -20,7 +21,7 @@ const DateSearchController = {
       formId,
     });
   },
-  doDateSearchFailActionHandler: (
+  dateSearchFailActionHandler: (
     request: Request,
     response: ResponseToolkit,
     error: Joi.ValidationError,
@@ -52,8 +53,19 @@ const DateSearchController = {
       .code(400)
       .takeover();
   },
-  doDateSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.redirect(webRoutePaths.geographySearch);
+  dateSearchSubmitHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    const payload = request.payload as Record<string, string>;
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.fromDateDay]: payload?.['from-date-day'] ?? '',
+      [queryParamKeys.fromDateMonth]: payload?.['from-date-month'] ?? '',
+      [queryParamKeys.fromDateYear]: payload?.['from-date-year'] ?? '',
+      [queryParamKeys.toDateDay]: payload?.['to-date-day'] ?? '',
+      [queryParamKeys.toDateMonth]: payload?.['to-date-month'] ?? '',
+      [queryParamKeys.toDateYear]: payload?.['to-date-year'] ?? '',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    return response.redirect(`${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`);
   },
 };
 

@@ -5,14 +5,24 @@ const index3 = 3;
 const precision = 6;
 const timeout = 200;
 const mapTarget = 'coordinate-map';
-let map;
+const isDetailsScreen = typeof isDetails !== 'undefined' && isDetails;
+const hasCenter = typeof center !== 'undefined' && center;
+const isMapResultsScreen =
+  typeof isViewMapResults !== 'undefined' && isViewMapResults;
 let initialCenter;
 let initialZoom;
 let viewChanged = false;
+const mapInitialLon = 3.436;
+const mapInitialLat = 55.3781;
 const mapResultsButtonId = 'map-result-button';
 const mapResultsCountId = 'map-result-count';
 const actionDataAttribute = 'data-action';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
+const extentSearchZoomLevel = 5;
+const responseSuccessStatusCode = 200;
+const marketYPoint = 46;
+const highlightedMarkerIcon = '/assets/images/highlight-blue-marker-icon.png';
+const markerIcon = '/assets/images/blue-marker-icon.svg';
 let mapResults;
 
 const drawStyle = new ol.style.Style({
@@ -24,7 +34,6 @@ const drawStyle = new ol.style.Style({
     color: 'rgb(0, 0, 255, 0.1)',
   }),
 });
-
 const completedStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
     color: '#F47738',
@@ -59,7 +68,6 @@ const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
-
 const markerSource = new ol.source.Vector();
 const markerLayer = new ol.layer.Vector({
   source: markerSource,
@@ -71,73 +79,61 @@ const draw = new ol.interaction.Draw({
   geometryFunction: ol.interaction.Draw.createBox(),
   style: drawStyle,
 });
-
-const modify = new ol.interaction.Modify({
-  source: vectorSource,
+draw.on('drawstart', () => {
+  vectorSource.clear();
+});
+draw.on('drawend', (event) => {
+  const feature = event.feature;
+  feature.setStyle(completedStyle);
 });
 
-const snap = new ol.interaction.Snap({
-  source: vectorSource,
-});
+const isMarkerFeature = (feature) =>
+  feature?.getGeometry()?.getType() === 'Point';
 
-function isMarkerFeature(feature) {
-  return feature?.getGeometry()?.getType() === 'Point';
-}
+const isPolygonFeature = (feature) =>
+  feature?.getGeometry()?.getType() === 'Polygon';
 
-function isPolygonFeature(feature) {
-  return feature?.getGeometry()?.getType() === 'Polygon';
-}
-
-function initMap() {
-  map = new ol.Map({
-    target: mapTarget,
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM(),
-      }),
-    ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat([3.436, 55.3781]),
-      zoom: 5,
+const map = new ol.Map({
+  target: mapTarget,
+  layers: [
+    new ol.layer.Tile({
+      source: new ol.source.OSM(),
     }),
-    ...(typeof isDetails !== 'undefined' &&
-      isDetails && { interactions: [], controls: [] }),
-    ...(typeof isViewMapResults !== 'undefined' &&
-      isViewMapResults && { controls: [] }),
-  });
+  ],
+  view: new ol.View({
+    center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
+    zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
+    maxZoom: 18,
+    minZoom: 2,
+  }),
+  controls: [],
+  ...(isDetailsScreen && { interactions: [] }),
+});
+map.addLayer(vectorLayer);
+map.addLayer(markerLayer);
+map.addInteraction(draw);
 
-  addMapFeatures();
-}
-
-function addMapFeatures() {
-  map.addLayer(vectorLayer);
-  map.addLayer(markerLayer);
-  map.addInteraction(draw);
-
-  if (
-    typeof isDetails === 'undefined' &&
-    typeof isViewMapResults === 'undefined'
-  ) {
-    map.addInteraction(modify);
-    map.addInteraction(snap);
-  }
-
-  if (typeof isViewMapResults !== 'undefined') {
-    mapEventListener();
-  }
+if (isMapResultsScreen) {
+  mapEventListener();
 }
 
 function mapEventListener() {
   map.on('pointermove', (event) => {
     const pixel = event.pixel;
-    const feature = map.forEachFeatureAtPixel(pixel, (feature) => feature);
+    const feature = map.forEachFeatureAtPixel(
+      pixel,
+      (featureItem) => featureItem,
+    );
     map.getTargetElement().style.cursor = isMarkerFeature(feature)
       ? 'pointer'
       : '';
   });
   map.on('click', (event) => {
     const pixel = event.pixel;
-    const feature = map.forEachFeatureAtPixel(pixel, (feature) => feature);
+    const feature = map.forEachFeatureAtPixel(
+      pixel,
+      (featureItem) => featureItem,
+    );
     resetFeatureStyle();
     if (feature && isPolygonFeature(feature)) {
       const polygonGeometry = feature.getGeometry();
@@ -150,9 +146,7 @@ function mapEventListener() {
         ) {
           const recordId = marker.get('id');
           const boundingBox = marker.get('boundingBox');
-          marker.setStyle(
-            getMarkerStyle('/assets/images/highlight-blue-marker-icon.png'),
-          );
+          marker.setStyle(getMarkerStyle(highlightedMarkerIcon));
           showInformationPopup(recordId, boundingBox);
         }
       });
@@ -161,11 +155,8 @@ function mapEventListener() {
     if (feature && isMarkerFeature(feature)) {
       const recordId = feature.get('id');
       const boundingBox = feature.get('boundingBox');
-      feature.setStyle(
-        getMarkerStyle('/assets/images/highlight-blue-marker-icon.png'),
-      );
+      feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
       showInformationPopup(recordId, boundingBox);
-      return;
     }
   });
 }
@@ -178,34 +169,20 @@ function resetFeatureStyle() {
   });
   markerSource.getFeatures().forEach((marker) => {
     if (isMarkerFeature(marker)) {
-      marker.setStyle(getMarkerStyle('/assets/images/blue-marker-icon.svg'));
+      marker.setStyle(getMarkerStyle(markerIcon));
     }
   });
 }
 
 function showInformationPopup(recordId, boundingBox) {
-  const record = mapResults.find((record) => record?.id === recordId);
+  const record = mapResults.find((item) => item?.id === recordId);
   if (record) {
     if (boundingBox) {
       boundingBox.setStyle(mapResultsHighlightStyle);
     }
+    console.log(record);
   }
 }
-
-draw.on('drawstart', () => {
-  vectorSource.clear();
-});
-
-draw.on('drawend', (event) => {
-  const feature = event.feature;
-  feature.setStyle(completedStyle);
-});
-
-vectorSource.on('change', () => {
-  if (typeof isDetails === 'undefined') {
-    calculateCoordinates();
-  }
-});
 
 function calculateCoordinates() {
   const extent = vectorSource.getExtent();
@@ -229,15 +206,21 @@ function calculateCoordinates() {
       }
       sessionData.fields[form.id] = {
         ...sessionData.fields[form.id],
-        north: north.toFixed(precision),
-        south: south.toFixed(precision),
-        east: east.toFixed(precision),
-        west: west.toFixed(precision),
+        nth: north.toFixed(precision),
+        sth: south.toFixed(precision),
+        est: east.toFixed(precision),
+        wst: west.toFixed(precision),
       };
       fireEventAfterStorage(sessionData);
     }
   }
 }
+
+vectorSource.on('change', () => {
+  if (!isDetailsScreen) {
+    calculateCoordinates();
+  }
+});
 
 if (document.getElementById('north')) {
   document.getElementById('north').addEventListener('change', () => {
@@ -260,7 +243,7 @@ if (document.getElementById('west')) {
   });
 }
 
-function calculatePolygonFromCoordinates(isDetailsScreen = false) {
+function calculatePolygonFromCoordinates() {
   const targetKey = isDetailsScreen ? 'textContent' : 'value';
   const north = parseFloat(document.getElementById('north')[targetKey]);
   const south = parseFloat(document.getElementById('south')[targetKey]);
@@ -293,19 +276,22 @@ function addPolygon(coordinates, style) {
     vectorSource.addFeature(polygonFeature);
     return polygonFeature;
   }
+  return null;
 }
 
-function disableInteractions(isMapResultsScreen = false) {
+function disableInteractions() {
   map.getInteractions().forEach((interaction) => {
-    if (
+    const isZoomInteractions =
       interaction instanceof ol.interaction.DoubleClickZoom ||
       (!isMapResultsScreen &&
-        interaction instanceof ol.interaction.MouseWheelZoom) ||
+        interaction instanceof ol.interaction.MouseWheelZoom);
+    const isDragDrawModifySnap =
       interaction instanceof ol.interaction.DragPan ||
-      interaction instanceof ol.interaction.Draw ||
+      interaction instanceof ol.interaction.Draw;
+    const isModifySnap =
       interaction instanceof ol.interaction.Modify ||
-      interaction instanceof ol.interaction.Snap
-    ) {
+      interaction instanceof ol.interaction.Snap;
+    if (isZoomInteractions || isDragDrawModifySnap || isModifySnap) {
       map.removeInteraction(interaction);
     }
   });
@@ -314,7 +300,7 @@ function disableInteractions(isMapResultsScreen = false) {
 const getMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
-      anchor: [0.5, 46],
+      anchor: [0.5, marketYPoint],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: iconPath,
@@ -342,7 +328,7 @@ function placeMarkers(markers, iconPath, recordId = '1', boundingBoxData = '') {
 
 function geographyTabListener() {
   map.updateSize();
-  calculatePolygonFromCoordinates(true);
+  calculatePolygonFromCoordinates();
   if (typeof markers !== 'undefined' && markers) {
     placeMarkers(markers, '/assets/images/marker.png');
   }
@@ -366,43 +352,14 @@ function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
-  const refreshControl = document.querySelector('.defra-refresh-block');
-  if (refreshControl) {
-    refreshControl.style.display = 'none';
+  const resetControl = document.getElementById('defra-map-reset');
+  if (resetControl) {
+    resetControl.style.display = 'none';
   }
-  boundingBoxCheckboxChange(true);
-}
-
-function customControls() {
-  const zoomInButton = document.querySelector('.ol-zoom-in');
-  const zoomOutButton = document.querySelector('.ol-zoom-out');
-  zoomInButton.classList.add('defra-zoom-in', 'defra-controls');
-  zoomOutButton.classList.add('defra-zoom-out', 'defra-controls');
-
-  const refreshControlBlock = document.createElement('div');
-  refreshControlBlock.classList.add(
-    'ol-unselectable',
-    'ol-control',
-    'defra-refresh-block',
-  );
-  const refreshControl = document.createElement('button');
-  refreshControl.classList.add('defra-controls', 'defra-refresh-control');
-  refreshControl.addEventListener('click', resetMap);
-  refreshControlBlock.appendChild(refreshControl);
-  map.getViewport().appendChild(refreshControlBlock);
-
-  map.on('moveend', () => {
-    if (!viewChanged) {
-      viewChanged = true;
-    } else {
-      const refreshControl = document.querySelector('.defra-refresh-block');
-      refreshControl.style.display = 'block';
-    }
-  });
 }
 
 function exitMapEventListener() {
-  const exitControl = document.querySelector('.defra-exit-control');
+  const exitControl = document.getElementById('defra-map-exit');
   if (exitControl) {
     exitControl.addEventListener('click', resetMap);
   }
@@ -414,12 +371,7 @@ function drawBoundingBoxWithMarker(records) {
   const centerArray = [];
   records.forEach((record) => {
     const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
-    placeMarkers(
-      record.geographicCenter,
-      '/assets/images/blue-marker-icon.svg',
-      record.id,
-      boundingBox,
-    );
+    placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
     const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
     centerArray.push([lon, lat]);
   });
@@ -444,7 +396,7 @@ const attachBoundingBoxToggleListener = () => {
   if (boundingBoxCheckbox) {
     boundingBoxCheckboxChange(true);
     boundingBoxCheckbox.addEventListener('change', () => {
-      vectorLayer.setVisible(boundingBoxCheckbox.checked ? true : false);
+      vectorLayer.setVisible(boundingBoxCheckbox.checked);
     });
   }
 };
@@ -452,26 +404,17 @@ const attachBoundingBoxToggleListener = () => {
 const getMapResults = async (path) => {
   const mapResultsButton = document.getElementById(mapResultsButtonId);
   const mapResultsCount = document.getElementById(mapResultsCountId);
-  const { fields, sort, filters } = getStorageData();
-  const payload = {
-    fields,
-    sort,
-    rowsPerPage: null,
-    filters,
-    page: null,
-  };
-  const response = await invokeAjaxCall(path, payload);
+  const response = await invokeAjaxCall(path, {}, false, 'GET');
   if (response) {
-    if (response.status === 200) {
-      const mapResults = await response.json();
+    if (response.status === responseSuccessStatusCode) {
+      const mapResultsJson = await response.json();
       mapResultsButton.removeAttribute('disabled');
-      mapResultsCount.textContent = mapResults.total;
-      drawBoundingBoxWithMarker(mapResults.items);
+      mapResultsCount.textContent = mapResultsJson.total;
+      drawBoundingBoxWithMarker(mapResultsJson.items);
       attachBoundingBoxToggleListener();
     } else {
       mapResultsButton.setAttribute('disabled', true);
     }
-    return;
   }
 };
 
@@ -479,29 +422,57 @@ const invokeMapResults = () => {
   const fetchResults = document.querySelector('[data-fetch-map-results]');
   if (fetchResults) {
     const action = fetchResults.getAttribute(actionDataAttribute);
-    getMapResults(action);
+    getMapResults(`${action}${window.location.search}`);
   }
 };
 
+function animateZoom(delta) {
+  map.getView().animate({
+    zoom: map.getView().getZoom() + delta,
+    duration: 250,
+    easing: ol.easing.easeOut,
+  });
+}
+
+function customControls() {
+  const zoomInElement = document.getElementById('defra-map-zoom-in');
+  const zoomOutElement = document.getElementById('defra-map-zoom-out');
+  const resetControl = document.getElementById('defra-map-reset');
+  if (zoomInElement) {
+    zoomInElement.addEventListener('click', () => {
+      animateZoom(1);
+    });
+  }
+  if (zoomOutElement) {
+    zoomOutElement.addEventListener('click', () => {
+      animateZoom(-1);
+    });
+  }
+  if (resetControl) {
+    resetControl.addEventListener('click', resetMap);
+    map.on('moveend', () => {
+      if (!viewChanged) {
+        viewChanged = true;
+      } else {
+        resetControl.style.display = 'block';
+      }
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
-    initMap();
-    if (
-      typeof isDetails !== 'undefined' &&
-      isDetails &&
-      typeof center !== 'undefined' &&
-      center
-    ) {
+    if (isDetailsScreen && hasCenter) {
       const geographyTabTag = document.querySelector('a[href="#geography"]');
       geographyTabTag.addEventListener('click', geographyTabListener);
       setTimeout(() => {
         geographyTabListener();
       }, timeout);
-    } else if (typeof isViewMapResults !== 'undefined' && isViewMapResults) {
+    } else if (isMapResultsScreen) {
       invokeMapResults();
       exitMapEventListener();
-      disableInteractions(true);
-      // customControls();
+      disableInteractions();
+      customControls();
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();

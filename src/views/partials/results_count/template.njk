@@ -1,7 +1,10 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <div class="count-block">
-      <a href="{{params.resultsPath}}" class="govuk-link count-block-link" data-form-id="{{params.formId}}" data-fetch-count data-action="{{params.action}}"></a>
-    </div>
+    {% if count %}
+      <div class="count-block">
+        <a href="{{resultsPath}}" class="govuk-link count-block-link">Click to see {{count}} results from previous selection</a>
+      </div>
+    {% endif %}
+    <div class="govuk-section-break--visible"></div>
   </div>
 </div>

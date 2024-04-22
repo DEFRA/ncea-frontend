@@ -11,9 +11,15 @@ import {
   fromDate,
   toDate,
 } from '../../../src/data/dateQuestionnaireFieldOptions';
-import { formIds, webRoutePaths } from '../../../src/utils/constants';
+import {
+  formIds,
+  guidedSearchSteps,
+  queryParamKeys,
+  webRoutePaths,
+} from '../../../src/utils/constants';
 import Joi from 'joi';
 import { FormFieldError } from '../../../src/interfaces/guidedSearch.interface';
+import { upsertQueryParams } from '../../../src/utils/queryStringHelper';
 
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
@@ -37,13 +43,60 @@ describe('Deals with the Date Search Controller', () => {
     );
   });
 
-  it('should update shared data, consume API and redirect to next route', async () => {
-    const request: Request = {} as any;
+  it('should build the query params and navigate to intermediate route with data', async () => {
+    const dateFormFields = {
+      'from-date-day': '2',
+      'from-date-month': '',
+      'from-date-year': '2000',
+      'to-date-day': '',
+      'to-date-month': '',
+      'to-date-year': '2023',
+    };
+    const request: Request = { payload: { ...dateFormFields } } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
-    await DateSearchController.doDateSearchHandler(request, response);
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.fromDateDay]: dateFormFields['from-date-day'] ?? '',
+      [queryParamKeys.fromDateMonth]: dateFormFields['from-date-month'] ?? '',
+      [queryParamKeys.fromDateYear]: dateFormFields['from-date-year'] ?? '',
+      [queryParamKeys.toDateDay]: dateFormFields['to-date-day'] ?? '',
+      [queryParamKeys.toDateMonth]: dateFormFields['to-date-month'] ?? '',
+      [queryParamKeys.toDateYear]: dateFormFields['to-date-year'] ?? '',
+    };
+    const queryString: string = upsertQueryParams(
+      request.query,
+      queryParamsObject,
+      false,
+    );
+    await DateSearchController.dateSearchSubmitHandler(request, response);
     expect(response.redirect).toHaveBeenCalledWith(
-      webRoutePaths.geographySearch,
+      `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`,
+    );
+  });
+
+  it('should build the query params and navigate to intermediate route without data', async () => {
+    const dateFormFields = {};
+    const request: Request = { payload: { ...dateFormFields } } as any;
+    const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.fromDateDay]: '',
+      [queryParamKeys.fromDateMonth]: '',
+      [queryParamKeys.fromDateYear]: '',
+      [queryParamKeys.toDateDay]: '',
+      [queryParamKeys.toDateMonth]: '',
+      [queryParamKeys.toDateYear]: '',
+    };
+    const queryString: string = upsertQueryParams(
+      request.query,
+      queryParamsObject,
+      false,
+    );
+    await DateSearchController.dateSearchSubmitHandler(request, response);
+    expect(response.redirect).toHaveBeenCalledWith(
+      `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`,
     );
   });
 
@@ -75,7 +128,7 @@ describe('Deals with the Date Search Controller', () => {
       geographySearch: skipPath,
     } = webRoutePaths;
 
-    await DateSearchController.doDateSearchFailActionHandler(
+    await DateSearchController.dateSearchFailActionHandler(
       request,
       response,
       error,

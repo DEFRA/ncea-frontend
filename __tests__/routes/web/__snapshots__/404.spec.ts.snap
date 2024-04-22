@@ -23,6 +23,9 @@ exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snap
 
     
   <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
     
   </head>
@@ -36,23 +39,36 @@ exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snap
     
 
     
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id= "
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header class="header-container">
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','');</script>
-<!-- End Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
 
-<!--Will be removed once Defra GA accounts been created -->
+    <!--Will be removed once Defra GA accounts been created -->
 
-<!-- Google tag (gtag.js) -->
-
+    <!-- Google tag (gtag.js) -->
+    
 
     <div class="header-div-container header-main">
       <div class="site-width-container">
@@ -197,7 +213,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  <script type="module" src="/assets/scripts/fetchResults.js"></script>
+  
 
   </body>
 </html>
