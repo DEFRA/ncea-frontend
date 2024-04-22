@@ -22,7 +22,10 @@ exports[`Details route template Document details with data Check status code and
 
 
     
+  
   <link rel="stylesheet" href="/assets/css/application.css">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
 
     
   </head>
@@ -117,6 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
+    
     
     
     
@@ -255,6 +259,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -265,6 +270,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -277,6 +283,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -288,6 +295,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -298,6 +306,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -323,6 +332,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -333,6 +343,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -346,6 +357,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -356,6 +368,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -368,6 +381,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -378,6 +392,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -410,6 +425,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -420,6 +436,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -443,6 +460,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -455,6 +473,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
   </div>
 
@@ -465,6 +484,105 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="geography">
+        
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial data service</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial representation service</h2>
+          
+            <span class='tab-content-value'>
+              Grid
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial referencing system</h2>
+          
+            <span class='tab-content-value'>
+              WGS 84
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic locations</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic boundary</h2>
+          
+            <span class='tab-content-value'>
+              <p>West bounding longitude: <span id="west">-15.320435</span></p><p>East bounding longitude: <span id="east">-6.970825</span></p><p>North bounding latitude: <span id="north">50.180526</span></p><p>South bounding latitude: <span id="south">47.912775</span></p>
+            </span>
+          
+        </div>
+      
+      
+    
+      
+      
+        <div id="coordinate-map" class="detail-map" style="height: 335px;"></div>
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Vertical extent<br /><span>(Meters above sea level)</span></h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Sampling resolution</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+  </div>
+
         
       </div>
     
@@ -486,6 +604,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -496,6 +615,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -508,6 +628,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -518,6 +639,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -531,6 +653,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -542,6 +665,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -552,6 +676,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -577,6 +702,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -587,6 +713,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -599,6 +726,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -609,6 +737,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -621,6 +750,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -631,6 +761,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -776,8 +907,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
+  <script>
+    var isDetails = true;
+    var markers = '';
+    var center = '0, 0';
+    
+      markers = "49.0466505,-11.14563"
+      center = "-11.14563,49.0466505";
+    
+  </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
 </html>
@@ -806,7 +947,10 @@ exports[`Details route template Document details with partial data Check status 
 
 
     
+  
   <link rel="stylesheet" href="/assets/css/application.css">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
 
     
   </head>
@@ -901,6 +1045,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   
+    
     
     
     
@@ -1030,6 +1175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1041,6 +1187,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
         </div>
+      
       
     
       
@@ -1054,6 +1201,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1066,6 +1214,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1076,6 +1225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1101,6 +1251,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1111,6 +1262,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -1124,6 +1276,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1134,6 +1287,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -1146,6 +1300,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1156,6 +1311,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1189,6 +1345,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1200,6 +1357,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
         </div>
+      
       
     
       
@@ -1213,6 +1371,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1225,6 +1384,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
   </div>
 
@@ -1235,6 +1395,105 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="geography">
+        
+          
+  <div class='tab-content-container'>
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial data service</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial representation service</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Spatial referencing system</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic locations</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Geographic boundary</h2>
+          
+            <span class='tab-content-value'>
+              <p>West bounding longitude: <span id="west"></span></p><p>East bounding longitude: <span id="east"></span></p><p>North bounding latitude: <span id="north"></span></p><p>South bounding latitude: <span id="south"></span></p>
+            </span>
+          
+        </div>
+      
+      
+    
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Vertical extent<br /><span>(Meters above sea level)</span></h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Sampling resolution</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
+          
+        </div>
+      
+      
+    
+  </div>
+
         
       </div>
     
@@ -1256,6 +1515,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1267,6 +1527,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1277,6 +1538,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
       
@@ -1290,6 +1552,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1302,6 +1565,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1313,6 +1577,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1323,6 +1588,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1349,6 +1615,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1360,6 +1627,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
         </div>
+      
       
     
       
@@ -1373,6 +1641,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1384,6 +1653,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
         </div>
+      
       
     
       
@@ -1397,6 +1667,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
         </div>
       
+      
     
       
         <div class='tab-content-row'>
@@ -1407,6 +1678,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </span>
           
         </div>
+      
       
     
   </div>
@@ -1519,8 +1791,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script type="module" src="/assets/scripts/customScripts.js"></script>
   <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
+  <script>
+    var isDetails = true;
+    var markers = '';
+    var center = '0, 0';
+    
+      markers = ""
+      center = "0,0";
+    
+  </script>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script type="module" src="/assets/scripts/renderMapToDrawPolygon.js"></script>
 
   </body>
 </html>

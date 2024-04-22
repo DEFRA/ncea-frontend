@@ -46,7 +46,38 @@ export interface IQualityItem {
   additionalInformation?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance;
+export type IVertex = [number, number];
+
+export interface ICoordinates {
+  coordinates: IVertex[][];
+}
+
+export interface IAccumulatedCoordinates {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+}
+
+export interface IAccumulatedCoordinatesWithCenter {
+  coordinates: IAccumulatedCoordinates;
+  center: string;
+}
+
+export interface IGeographyItem {
+  spatialDataService?: string;
+  spatialRepresentationService?: string;
+  spatialReferencingSystem?: string;
+  geographicLocations?: string;
+  geographicBoundary?: IAccumulatedCoordinates | string;
+  geographicBoundaryHtml?: string;
+  geographicCenter?: string;
+  geographicMarkers?: string;
+  verticalExtent?: string;
+  samplingResolution?: string;
+}
+
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & IGeographyItem;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {

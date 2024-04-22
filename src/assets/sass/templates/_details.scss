@@ -34,6 +34,10 @@
     vertical-align: top;
     color: #000;
     margin: 0;
+
+    span {
+      @include font-style-stack(16px, 20px, 300);
+    }
   }
 
   &-value {
@@ -41,11 +45,16 @@
     color: $govuk-text-colour;
     text-align: left;
 
+    p {
+      margin: 0;
+    }
+
     &__not-provided {
       @include font-style-stack(16px, 16px, 700, normal, false, 1px);
       width: 130px;
       padding: 5px 1px 5px 5px;
       margin: 0;
+      height: fit-content;
     }
   }
 }
@@ -87,4 +96,8 @@
   tbody tr {
     border-bottom: 1px solid $govuk-border-colour;
   }
+}
+
+.detail-map {
+  border: 2px solid $govuk-text-colour;
 }

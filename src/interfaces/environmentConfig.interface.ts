@@ -6,5 +6,5 @@ export interface EnvironmentConfig {
   appInsightsSecretName?: string;
   elasticSearchAPI: string | undefined;
   isLocal?: boolean;
-  gtmId?: string | undefined;
+  gtmId?: string;
 }

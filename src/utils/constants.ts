@@ -31,6 +31,7 @@ export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: '
 export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
 export const maxWords: number = 100;
+export const geoNetworkIndex: string = 'gn-records/';
 
 export const detailsTabOptions: TabOptions = {
   general: [
@@ -127,6 +128,40 @@ export const detailsTabOptions: TabOptions = {
     {
       label: 'NCEA catalogue date',
       column: 'ncea_catalogue_date',
+    },
+  ],
+  geography: [
+    {
+      label: 'Spatial data service',
+      column: 'spatialDataService',
+    },
+    {
+      label: 'Spatial representation service',
+      column: 'spatialRepresentationService',
+    },
+    {
+      label: 'Spatial referencing system',
+      column: 'spatialReferencingSystem',
+    },
+    {
+      label: 'Geographic locations',
+      column: 'geographicLocations',
+    },
+    {
+      label: 'Geographic boundary',
+      column: 'geographicBoundaryHtml',
+    },
+    {
+      label: 'map',
+      column: 'geographicBoundary',
+    },
+    {
+      label: 'Vertical extent<br /><span>(Meters above sea level)</span>',
+      column: 'verticalExtent',
+    },
+    {
+      label: 'Sampling resolution',
+      column: 'samplingResolution',
     },
   ],
   license: [

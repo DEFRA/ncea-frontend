@@ -1,6 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import { formatDate } from './formatDate';
 import { getGeneralTabData } from './getGeneralTabData';
+import { getGeographyTabData } from './getGeographyTabData';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
 import { IOtherSearchItem, ISearchItem, ISearchResults } from '../interfaces/searchResponse.interface';
@@ -136,6 +137,7 @@ const getOtherDetails = async (
     available_formats: searchItem?._source?.format ?? '',
     frequency_of_update: searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
     character_encoding: 'utf8',
+    ...getGeographyTabData(searchItem),
   };
 };
 

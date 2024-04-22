@@ -217,6 +217,17 @@ const formattedDetailsResponse: ISearchResults = {
       character_encoding: 'utf8',
       data_owner: '',
       frequency_of_update: '',
+      spatialDataService: '',
+      spatialRepresentationService: '',
+      spatialReferencingSystem: '',
+      geographicLocations: '',
+      geographicBoundary: '',
+      geographicBoundaryHtml:
+        '<p>West bounding longitude: <span id="west"></span></p><p>East bounding longitude: <span id="east"></span></p><p>North bounding latitude: <span id="north"></span></p><p>South bounding latitude: <span id="south"></span></p>',
+      geographicCenter: '0,0',
+      geographicMarkers: '',
+      verticalExtent: '',
+      samplingResolution: '',
     },
   ],
 };
@@ -597,15 +608,15 @@ const detailsSuccessAPIFullData = {
             type: 'Polygon',
             coordinates: [
               [
-                [-4.8749, 55.3271],
-                [-4.6264, 55.3271],
-                [-4.6264, 55.5736],
-                [-4.8749, 55.5736],
-                [-4.8749, 55.3271],
+                [-15.320435, 47.912775],
+                [-6.970825, 47.912775],
+                [-6.970825, 50.180526],
+                [-15.320435, 50.180526],
+                [-15.320435, 47.912775],
               ],
             ],
           },
-          location: '55.45035,-4.75065',
+          location: '49.0466505,-11.14563',
           resourceTemporalExtentDateRange: [
             {
               gte: '2019-05-24T00:00:00.000Z',
@@ -773,6 +784,22 @@ const formattedDetailsFullResponse: ISearchResults = {
       frequency_of_update: 'Not planned',
       available_formats: ['Geographic Information System', 'Delimited'],
       character_encoding: 'utf8',
+      spatialDataService: '',
+      spatialRepresentationService: 'Grid',
+      spatialReferencingSystem: 'WGS 84',
+      geographicLocations: '',
+      geographicBoundary: {
+        north: 50.180526,
+        south: 47.912775,
+        east: -6.970825,
+        west: -15.320435,
+      },
+      geographicBoundaryHtml:
+        '<p>West bounding longitude: <span id="west">-15.320435</span></p><p>East bounding longitude: <span id="east">-6.970825</span></p><p>North bounding latitude: <span id="north">50.180526</span></p><p>South bounding latitude: <span id="south">47.912775</span></p>',
+      geographicCenter: '-11.14563,49.0466505',
+      geographicMarkers: '49.0466505,-11.14563',
+      verticalExtent: '',
+      samplingResolution: '',
     },
   ],
 };
