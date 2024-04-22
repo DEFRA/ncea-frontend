@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-  {{resultsCount({action: routes.getResultsCount, formId: formId, resultsPath: routes.searchResults})}}
+  {% include "partials/results_count/template.njk" %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
@@ -67,5 +67,5 @@
 {% block bodyEnd %}
   {{ super() }}
   <script src="{{ assetPath }}/scripts/ol.js"></script>
-  <script type="module" src="{{ assetPath }}/scripts/renderMapToDrawPolygon.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
 {% endblock %}

@@ -42,7 +42,7 @@ const getAccumulatedCoordinatesNCenter = (
   if (Array.isArray(coordinatesData)) {
     coordinates = getBoundingBox(coordinatesData);
   } else if (Object.keys(coordinatesData).length) {
-    coordinates = getBoundingBox([coordinatesData as ICoordinates]);
+    coordinates = getBoundingBox([coordinatesData]);
   }
   if (coordinates && Object.keys(coordinates).length) {
     const { north, south, east, west } = coordinates;

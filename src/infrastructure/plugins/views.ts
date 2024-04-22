@@ -5,15 +5,7 @@ import path from 'path';
 import vision from '@hapi/vision';
 import { webRoutePaths } from '../../utils/constants';
 
-const {
-  home: homePage,
-  results: searchResults,
-  guidedDateSearch: guidedSearch,
-  getResults,
-  getFilters,
-  getResultsCount,
-  getMapResults,
-} = webRoutePaths;
+const { home: homePage, results: searchResults, guidedDateSearch: guidedSearch, getMapResults } = webRoutePaths;
 
 const customHapiViews = {
   plugin: vision,
@@ -64,9 +56,6 @@ const customHapiViews = {
         homePage,
         searchResults,
         guidedSearch,
-        getFilters,
-        getResults,
-        getResultsCount,
         getMapResults,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,

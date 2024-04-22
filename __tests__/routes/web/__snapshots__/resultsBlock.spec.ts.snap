@@ -1,7 +1,321 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Results block template Guided search journey Search results with empty data should match the results screen snapshot 1`] = `
-"
+"<!DOCTYPE html>
+<html lang="en" class="govuk-template app-html-class">
+  <head>
+    <meta charset="utf-8">
+    <title>
+  Natural Capital Search Service - GOV.UK
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
+
+    
+  
+      <link rel="icon" sizes="48x48" href="/assets/images/favicon.ico">
+      <link rel="icon" sizes="any" href="/assets/images/favicon.svg" type="image/svg+xml">
+      <link rel="mask-icon" href="/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+      <link rel="apple-touch-icon" href="/assets/images/govuk-icon-180.png">
+      <link rel="manifest" href="/assets/manifest.json">
+    
+
+
+    
+  
+  <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
+
+    
+  </head>
+  <body class="govuk-template__body app-body-class">
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+    
+
+    
+      <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+    
+
+    
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="header-container">
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!--Will be removed once Defra GA accounts been created -->
+
+    <!-- Google tag (gtag.js) -->
+    
+
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
+      </div>
+    </div>
+  </header>
+
+
+    
+  
+      <div class="govuk-width-container">
+        
+  
+  <div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+    </span>
+  </p>
+</div>
+
+
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
+    </li>
+  
+
+  </ol>
+</div>
+
+
+        <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+          
+
+  
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full quick_search-container">
+    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
+      
+        Search
+      
+    </h1>
+    
+    <div class="search-block" data-module="search">
+      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
+        
+
+<div class="govuk-form-group govuk-!-margin-bottom-4">
+  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+    Search
+  </label>
+
+
+  <div class="govuk-input__wrapper">
+    
+    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
+      
+    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
+    
+  </div>
+
+</div>
+
+        <input type="hidden" name="pageName" value="results">
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+    <div class="govuk-grid-row" id="map-result-block" data-action="/search-map-results" data-fetch-map-results>
+  <div class="govuk-grid-column-full">
+    <a href="javascript:;" id="map-result-button" disabled="true" onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+
+<div id="modal" class="modal map-modal">
+  <div class="modal-content">
+    
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+            <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+          <span>Exit map</span>
+        </a>
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
+              <g clip-path="url(#clip0_6756_107692)">
+                <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_107692">
+                  <rect width="37.2" height="37.2" fill="white" transform="translate(0 0.75)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="govuk-visually-hidden">Reset location</span>
+          </button>
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
+                <rect y="0.75" width="60" height="56.4921" fill="none"/>
+                <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
+                <rect x="43" y="26.75" width="4" height="25.4903" transform="rotate(90 43 26.75)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom in</span>
+            </button>
+            <button class="defra-map-zoom-out" id="defra-map-zoom-out" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
+                <rect y="0.25" width="60" height="60" fill="none"/>
+                <rect x="42" y="28.25" width="4" height="24" transform="rotate(90 42 28.25)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-quarter filter-view-block govuk-!-padding-4">
+      <h2 class='govuk-heading-m'>
+        Key and filters
+      </h2>
+      <div class="govuk-section-break--visible"></div>
+      <div class="defra-bounding-box-block">
+        
+
+
+
+<div class="govuk-form-group govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+
+  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+    
+      
+          
+        
+          
+          
+          
+          
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="on" class="defra-checkboxes__input">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
+                              <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                              <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                            </svg>
+                            &nbsp;&nbsp;Bounding box
+      </label>
+            
+          </div>
+          
+        
+      
+    
+  </div>
+
+</div>
+
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </div>
+  </div>
+
+  </div>
+</div></div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+
+
+<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  Filters
+</h2>
+
+
+
+
+<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
+  <label class="govuk-label filter-options-label" for="resourceType">
+    Resource type
+  </label>
+
+
+  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
+  
+    
+      
+      
+      <option value="filter1">Filter1</option>
+    
+  
+    
+      
+      
+      <option value="filter2">Filter2</option>
+    
+  
+  </select>
+</div>
+
+
+
+  
+
+  
+    
+  
+
+<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
+  Filter results
+</button>
+
+
+<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+      <div class="govuk-grid-column-two-thirds">
+        
 
 
 
@@ -107,9 +421,9 @@ exports[`Results block template Guided search journey Search results with empty 
     
   
 
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
   Restart questionnaire search
-</button>
+</a>
 
         </div>
       
@@ -117,11 +431,425 @@ exports[`Results block template Guided search journey Search results with empty 
   </div>
 
 
+
+      </div>
+    </div>
+  
+
+
+        </main>
+      </div>
+    
+
+
+    
+  <footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-width-container">
+    
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          
+            <ul class="govuk-footer__inline-list">
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Help
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Privacy
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Cookies
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Accessibility statement
+                  </a>
+                </li>
+              
+            </ul>
+          
+          
+        
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41"
+        >
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+          />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          
+            All content is available under the
+            <a
+              class="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >Open Government Licence v3.0</a>, except where otherwise stated
+          
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+        >© Crown copyright</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <div id="overlay" class="overlay"></div>
+
+
+    
+  
+  
+  <script type="module" src="/assets/all.js"></script>
+  <script type="module">
+    import {initAll} from '/assets/all.js'
+    initAll()
+  </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  
+
+  <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="/assets/scripts/location.js"></script>
+
+  </body>
+</html>
 "
 `;
 
 exports[`Results block template Guided search journey Search results with error should match the results screen snapshot 1`] = `
-"
+"<!DOCTYPE html>
+<html lang="en" class="govuk-template app-html-class">
+  <head>
+    <meta charset="utf-8">
+    <title>
+  Natural Capital Search Service - GOV.UK
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
+
+    
+  
+      <link rel="icon" sizes="48x48" href="/assets/images/favicon.ico">
+      <link rel="icon" sizes="any" href="/assets/images/favicon.svg" type="image/svg+xml">
+      <link rel="mask-icon" href="/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+      <link rel="apple-touch-icon" href="/assets/images/govuk-icon-180.png">
+      <link rel="manifest" href="/assets/manifest.json">
+    
+
+
+    
+  
+  <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
+
+    
+  </head>
+  <body class="govuk-template__body app-body-class">
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+    
+
+    
+      <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+    
+
+    
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="header-container">
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!--Will be removed once Defra GA accounts been created -->
+
+    <!-- Google tag (gtag.js) -->
+    
+
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
+      </div>
+    </div>
+  </header>
+
+
+    
+  
+      <div class="govuk-width-container">
+        
+  
+  <div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+    </span>
+  </p>
+</div>
+
+
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
+    </li>
+  
+
+  </ol>
+</div>
+
+
+        <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+          
+
+  
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full quick_search-container">
+    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
+      
+        Search
+      
+    </h1>
+    
+    <div class="search-block" data-module="search">
+      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
+        
+
+<div class="govuk-form-group govuk-!-margin-bottom-4">
+  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+    Search
+  </label>
+
+
+  <div class="govuk-input__wrapper">
+    
+    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
+      
+    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
+    
+  </div>
+
+</div>
+
+        <input type="hidden" name="pageName" value="results">
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+    <div class="govuk-grid-row" id="map-result-block" data-action="/search-map-results" data-fetch-map-results>
+  <div class="govuk-grid-column-full">
+    <a href="javascript:;" id="map-result-button" disabled="true" onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+
+<div id="modal" class="modal map-modal">
+  <div class="modal-content">
+    
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+            <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+          <span>Exit map</span>
+        </a>
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
+              <g clip-path="url(#clip0_6756_107692)">
+                <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_107692">
+                  <rect width="37.2" height="37.2" fill="white" transform="translate(0 0.75)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="govuk-visually-hidden">Reset location</span>
+          </button>
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
+                <rect y="0.75" width="60" height="56.4921" fill="none"/>
+                <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
+                <rect x="43" y="26.75" width="4" height="25.4903" transform="rotate(90 43 26.75)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom in</span>
+            </button>
+            <button class="defra-map-zoom-out" id="defra-map-zoom-out" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
+                <rect y="0.25" width="60" height="60" fill="none"/>
+                <rect x="42" y="28.25" width="4" height="24" transform="rotate(90 42 28.25)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-quarter filter-view-block govuk-!-padding-4">
+      <h2 class='govuk-heading-m'>
+        Key and filters
+      </h2>
+      <div class="govuk-section-break--visible"></div>
+      <div class="defra-bounding-box-block">
+        
+
+
+
+<div class="govuk-form-group govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+
+  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+    
+      
+          
+        
+          
+          
+          
+          
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="on" class="defra-checkboxes__input">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
+                              <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                              <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                            </svg>
+                            &nbsp;&nbsp;Bounding box
+      </label>
+            
+          </div>
+          
+        
+      
+    
+  </div>
+
+</div>
+
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </div>
+  </div>
+
+  </div>
+</div></div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+
+
+<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  Filters
+</h2>
+
+
+
+
+<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
+  <label class="govuk-label filter-options-label" for="resourceType">
+    Resource type
+  </label>
+
+
+  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
+  
+  </select>
+</div>
+
+
+
+  
+
+  
+    
+  
+
+<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
+  Filter results
+</button>
+
+
+<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+      <div class="govuk-grid-column-two-thirds">
+        
 
 
 
@@ -137,11 +865,437 @@ exports[`Results block template Guided search journey Search results with error 
 
 
 
+
+      </div>
+    </div>
+  
+
+
+        </main>
+      </div>
+    
+
+
+    
+  <footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-width-container">
+    
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          
+            <ul class="govuk-footer__inline-list">
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Help
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Privacy
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Cookies
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Accessibility statement
+                  </a>
+                </li>
+              
+            </ul>
+          
+          
+        
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41"
+        >
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+          />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          
+            All content is available under the
+            <a
+              class="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >Open Government Licence v3.0</a>, except where otherwise stated
+          
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+        >© Crown copyright</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <div id="overlay" class="overlay"></div>
+
+
+    
+  
+  
+  <script type="module" src="/assets/all.js"></script>
+  <script type="module">
+    import {initAll} from '/assets/all.js'
+    initAll()
+  </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  
+
+  <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="/assets/scripts/location.js"></script>
+
+  </body>
+</html>
 "
 `;
 
 exports[`Results block template Quick search journey Search results with data should match the results screen snapshot 1`] = `
-"
+"<!DOCTYPE html>
+<html lang="en" class="govuk-template app-html-class">
+  <head>
+    <meta charset="utf-8">
+    <title>
+  Natural Capital Search Service - GOV.UK
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
+
+    
+  
+      <link rel="icon" sizes="48x48" href="/assets/images/favicon.ico">
+      <link rel="icon" sizes="any" href="/assets/images/favicon.svg" type="image/svg+xml">
+      <link rel="mask-icon" href="/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+      <link rel="apple-touch-icon" href="/assets/images/govuk-icon-180.png">
+      <link rel="manifest" href="/assets/manifest.json">
+    
+
+
+    
+  
+  <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
+
+    
+  </head>
+  <body class="govuk-template__body app-body-class">
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+    
+
+    
+      <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+    
+
+    
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="header-container">
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!--Will be removed once Defra GA accounts been created -->
+
+    <!-- Google tag (gtag.js) -->
+    
+
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
+      </div>
+    </div>
+  </header>
+
+
+    
+  
+      <div class="govuk-width-container">
+        
+  
+  <div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+    </span>
+  </p>
+</div>
+
+
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
+    </li>
+  
+
+  </ol>
+</div>
+
+
+        <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+          
+
+  
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full quick_search-container">
+    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
+      
+        Search
+      
+    </h1>
+    
+    <div class="search-block" data-module="search">
+      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
+        
+
+<div class="govuk-form-group govuk-!-margin-bottom-4">
+  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+    Search
+  </label>
+
+
+  <div class="govuk-input__wrapper">
+    
+    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
+      
+    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
+    
+  </div>
+
+</div>
+
+        <input type="hidden" name="pageName" value="results">
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+    <div class="govuk-grid-row" id="map-result-block" data-action="/search-map-results" data-fetch-map-results>
+  <div class="govuk-grid-column-full">
+    <a href="javascript:;" id="map-result-button" disabled="true" onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+
+<div id="modal" class="modal map-modal">
+  <div class="modal-content">
+    
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+            <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+          <span>Exit map</span>
+        </a>
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
+              <g clip-path="url(#clip0_6756_107692)">
+                <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_107692">
+                  <rect width="37.2" height="37.2" fill="white" transform="translate(0 0.75)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="govuk-visually-hidden">Reset location</span>
+          </button>
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
+                <rect y="0.75" width="60" height="56.4921" fill="none"/>
+                <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
+                <rect x="43" y="26.75" width="4" height="25.4903" transform="rotate(90 43 26.75)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom in</span>
+            </button>
+            <button class="defra-map-zoom-out" id="defra-map-zoom-out" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
+                <rect y="0.25" width="60" height="60" fill="none"/>
+                <rect x="42" y="28.25" width="4" height="24" transform="rotate(90 42 28.25)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-quarter filter-view-block govuk-!-padding-4">
+      <h2 class='govuk-heading-m'>
+        Key and filters
+      </h2>
+      <div class="govuk-section-break--visible"></div>
+      <div class="defra-bounding-box-block">
+        
+
+
+
+<div class="govuk-form-group govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+
+  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+    
+      
+          
+        
+          
+          
+          
+          
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="on" class="defra-checkboxes__input">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
+                              <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                              <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                            </svg>
+                            &nbsp;&nbsp;Bounding box
+      </label>
+            
+          </div>
+          
+        
+      
+    
+  </div>
+
+</div>
+
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </div>
+  </div>
+
+  </div>
+</div></div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+
+
+<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  Filters
+</h2>
+
+
+
+
+<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
+  <label class="govuk-label filter-options-label" for="resourceType">
+    Resource type
+  </label>
+
+
+  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
+  
+    
+      
+      
+      <option value="filter1">Filter1</option>
+    
+  
+    
+      
+      
+      <option value="filter2">Filter2</option>
+    
+  
+  </select>
+</div>
+
+
+
+  
+
+  
+    
+  
+
+<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
+  Filter results
+</button>
+
+
+<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+      <div class="govuk-grid-column-two-thirds">
+        
 
 
 
@@ -338,8 +1492,8 @@ exports[`Results block template Quick search journey Search results with data sh
     
   </div>
 
-  <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item">
-            <a class="govuk-link govuk-pagination__link" href="#!" aria-label="Page 1" data-page-id="1">
+  <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item govuk-pagination__item--current">
+            <a class="govuk-link govuk-pagination__link" href="#!" aria-label="Page 1" aria-current="page" data-page-id="1">
               1
             </a>
           </li></ul></nav>
@@ -383,11 +1537,437 @@ exports[`Results block template Quick search journey Search results with data sh
   </div>
 
   </div>
-</div>"
+</div>
+      </div>
+    </div>
+  
+
+
+        </main>
+      </div>
+    
+
+
+    
+  <footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-width-container">
+    
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          
+            <ul class="govuk-footer__inline-list">
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Help
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Privacy
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Cookies
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Accessibility statement
+                  </a>
+                </li>
+              
+            </ul>
+          
+          
+        
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41"
+        >
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+          />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          
+            All content is available under the
+            <a
+              class="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >Open Government Licence v3.0</a>, except where otherwise stated
+          
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+        >© Crown copyright</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <div id="overlay" class="overlay"></div>
+
+
+    
+  
+  
+  <script type="module" src="/assets/all.js"></script>
+  <script type="module">
+    import {initAll} from '/assets/all.js'
+    initAll()
+  </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  
+
+  <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="/assets/scripts/location.js"></script>
+
+  </body>
+</html>
+"
 `;
 
 exports[`Results block template Quick search journey Search results with empty data should match the results screen snapshot 1`] = `
-"
+"<!DOCTYPE html>
+<html lang="en" class="govuk-template app-html-class">
+  <head>
+    <meta charset="utf-8">
+    <title>
+  Natural Capital Search Service - GOV.UK
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
+
+    
+  
+      <link rel="icon" sizes="48x48" href="/assets/images/favicon.ico">
+      <link rel="icon" sizes="any" href="/assets/images/favicon.svg" type="image/svg+xml">
+      <link rel="mask-icon" href="/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+      <link rel="apple-touch-icon" href="/assets/images/govuk-icon-180.png">
+      <link rel="manifest" href="/assets/manifest.json">
+    
+
+
+    
+  
+  <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
+
+    
+  </head>
+  <body class="govuk-template__body app-body-class">
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+    
+
+    
+      <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+    
+
+    
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="header-container">
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!--Will be removed once Defra GA accounts been created -->
+
+    <!-- Google tag (gtag.js) -->
+    
+
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
+      </div>
+    </div>
+  </header>
+
+
+    
+  
+      <div class="govuk-width-container">
+        
+  
+  <div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+    </span>
+  </p>
+</div>
+
+
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
+    </li>
+  
+
+  </ol>
+</div>
+
+
+        <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+          
+
+  
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full quick_search-container">
+    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
+      
+        Search
+      
+    </h1>
+    
+    <div class="search-block" data-module="search">
+      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
+        
+
+<div class="govuk-form-group govuk-!-margin-bottom-4">
+  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+    Search
+  </label>
+
+
+  <div class="govuk-input__wrapper">
+    
+    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
+      
+    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
+    
+  </div>
+
+</div>
+
+        <input type="hidden" name="pageName" value="results">
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+    <div class="govuk-grid-row" id="map-result-block" data-action="/search-map-results" data-fetch-map-results>
+  <div class="govuk-grid-column-full">
+    <a href="javascript:;" id="map-result-button" disabled="true" onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+
+<div id="modal" class="modal map-modal">
+  <div class="modal-content">
+    
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+            <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+          <span>Exit map</span>
+        </a>
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
+              <g clip-path="url(#clip0_6756_107692)">
+                <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_107692">
+                  <rect width="37.2" height="37.2" fill="white" transform="translate(0 0.75)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="govuk-visually-hidden">Reset location</span>
+          </button>
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
+                <rect y="0.75" width="60" height="56.4921" fill="none"/>
+                <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
+                <rect x="43" y="26.75" width="4" height="25.4903" transform="rotate(90 43 26.75)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom in</span>
+            </button>
+            <button class="defra-map-zoom-out" id="defra-map-zoom-out" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
+                <rect y="0.25" width="60" height="60" fill="none"/>
+                <rect x="42" y="28.25" width="4" height="24" transform="rotate(90 42 28.25)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-quarter filter-view-block govuk-!-padding-4">
+      <h2 class='govuk-heading-m'>
+        Key and filters
+      </h2>
+      <div class="govuk-section-break--visible"></div>
+      <div class="defra-bounding-box-block">
+        
+
+
+
+<div class="govuk-form-group govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+
+  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+    
+      
+          
+        
+          
+          
+          
+          
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="on" class="defra-checkboxes__input">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
+                              <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                              <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                            </svg>
+                            &nbsp;&nbsp;Bounding box
+      </label>
+            
+          </div>
+          
+        
+      
+    
+  </div>
+
+</div>
+
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </div>
+  </div>
+
+  </div>
+</div></div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+
+
+<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  Filters
+</h2>
+
+
+
+
+<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
+  <label class="govuk-label filter-options-label" for="resourceType">
+    Resource type
+  </label>
+
+
+  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
+  
+    
+      
+      
+      <option value="filter1">Filter1</option>
+    
+  
+    
+      
+      
+      <option value="filter2">Filter2</option>
+    
+  
+  </select>
+</div>
+
+
+
+  
+
+  
+    
+  
+
+<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
+  Filter results
+</button>
+
+
+<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+      <div class="govuk-grid-column-two-thirds">
+        
 
 
 
@@ -478,11 +2058,425 @@ exports[`Results block template Quick search journey Search results with empty d
   </div>
 
 
+
+      </div>
+    </div>
+  
+
+
+        </main>
+      </div>
+    
+
+
+    
+  <footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-width-container">
+    
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          
+            <ul class="govuk-footer__inline-list">
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Help
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Privacy
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Cookies
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Accessibility statement
+                  </a>
+                </li>
+              
+            </ul>
+          
+          
+        
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41"
+        >
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+          />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          
+            All content is available under the
+            <a
+              class="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >Open Government Licence v3.0</a>, except where otherwise stated
+          
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+        >© Crown copyright</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <div id="overlay" class="overlay"></div>
+
+
+    
+  
+  
+  <script type="module" src="/assets/all.js"></script>
+  <script type="module">
+    import {initAll} from '/assets/all.js'
+    initAll()
+  </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  
+
+  <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="/assets/scripts/location.js"></script>
+
+  </body>
+</html>
 "
 `;
 
 exports[`Results block template Quick search journey Search results with error should match the results screen snapshot 1`] = `
-"
+"<!DOCTYPE html>
+<html lang="en" class="govuk-template app-html-class">
+  <head>
+    <meta charset="utf-8">
+    <title>
+  Natural Capital Search Service - GOV.UK
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
+
+    
+  
+      <link rel="icon" sizes="48x48" href="/assets/images/favicon.ico">
+      <link rel="icon" sizes="any" href="/assets/images/favicon.svg" type="image/svg+xml">
+      <link rel="mask-icon" href="/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+      <link rel="apple-touch-icon" href="/assets/images/govuk-icon-180.png">
+      <link rel="manifest" href="/assets/manifest.json">
+    
+
+
+    
+  
+  <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <link rel="stylesheet" href="/assets/css/ol.css">
+
+    
+  </head>
+  <body class="govuk-template__body app-body-class">
+    <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+    
+
+    
+      <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+
+    
+
+    
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="header-container">
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!--Will be removed once Defra GA accounts been created -->
+
+    <!-- Google tag (gtag.js) -->
+    
+
+    <div class="header-div-container header-main">
+      <div class="site-width-container">
+        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
+          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
+            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
+          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
+      </div>
+    </div>
+  </header>
+
+
+    
+  
+      <div class="govuk-width-container">
+        
+  
+  <div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+    </span>
+  </p>
+</div>
+
+
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
+    </li>
+  
+
+  </ol>
+</div>
+
+
+        <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+          
+
+  
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full quick_search-container">
+    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
+      
+        Search
+      
+    </h1>
+    
+    <div class="search-block" data-module="search">
+      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
+        
+
+<div class="govuk-form-group govuk-!-margin-bottom-4">
+  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+    Search
+  </label>
+
+
+  <div class="govuk-input__wrapper">
+    
+    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
+      
+    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
+    
+  </div>
+
+</div>
+
+        <input type="hidden" name="pageName" value="results">
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+    <div class="govuk-grid-row" id="map-result-block" data-action="/search-map-results" data-fetch-map-results>
+  <div class="govuk-grid-column-full">
+    <a href="javascript:;" id="map-result-button" disabled="true" onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+
+<div id="modal" class="modal map-modal">
+  <div class="modal-content">
+    
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+            <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+            <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
+          </svg>
+          <span>Exit map</span>
+        </a>
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
+              <g clip-path="url(#clip0_6756_107692)">
+                <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_107692">
+                  <rect width="37.2" height="37.2" fill="white" transform="translate(0 0.75)"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="govuk-visually-hidden">Reset location</span>
+          </button>
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
+                <rect y="0.75" width="60" height="56.4921" fill="none"/>
+                <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
+                <rect x="43" y="26.75" width="4" height="25.4903" transform="rotate(90 43 26.75)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom in</span>
+            </button>
+            <button class="defra-map-zoom-out" id="defra-map-zoom-out" type="button" aria-controls="viewport">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
+                <rect y="0.25" width="60" height="60" fill="none"/>
+                <rect x="42" y="28.25" width="4" height="24" transform="rotate(90 42 28.25)" fill="black"/>
+              </svg>
+              <span class="govuk-visually-hidden">Zoom out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-quarter filter-view-block govuk-!-padding-4">
+      <h2 class='govuk-heading-m'>
+        Key and filters
+      </h2>
+      <div class="govuk-section-break--visible"></div>
+      <div class="defra-bounding-box-block">
+        
+
+
+
+<div class="govuk-form-group govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+
+  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+    
+      
+          
+        
+          
+          
+          
+          
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="on" class="defra-checkboxes__input">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
+                              <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                              <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
+                            </svg>
+                            &nbsp;&nbsp;Bounding box
+      </label>
+            
+          </div>
+          
+        
+      
+    
+  </div>
+
+</div>
+
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </div>
+  </div>
+
+  </div>
+</div></div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+
+
+<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  Filters
+</h2>
+
+
+
+
+<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
+  <label class="govuk-label filter-options-label" for="resourceType">
+    Resource type
+  </label>
+
+
+  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
+  
+  </select>
+</div>
+
+
+
+  
+
+  
+    
+  
+
+<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
+  Filter results
+</button>
+
+
+<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+      <div class="govuk-grid-column-two-thirds">
+        
 
 
 
@@ -498,5 +2492,117 @@ exports[`Results block template Quick search journey Search results with error s
 
 
 
+
+      </div>
+    </div>
+  
+
+
+        </main>
+      </div>
+    
+
+
+    
+  <footer class="govuk-footer" role="contentinfo">
+  <div class="govuk-width-container">
+    
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          
+            <ul class="govuk-footer__inline-list">
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Help
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Privacy
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Cookies
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Accessibility statement
+                  </a>
+                </li>
+              
+            </ul>
+          
+          
+        
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41"
+        >
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+          />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          
+            All content is available under the
+            <a
+              class="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >Open Government Licence v3.0</a>, except where otherwise stated
+          
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+        >© Crown copyright</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <div id="overlay" class="overlay"></div>
+
+
+    
+  
+  
+  <script type="module" src="/assets/all.js"></script>
+  <script type="module">
+    import {initAll} from '/assets/all.js'
+    initAll()
+  </script>
+  <script>
+    const appInsightsConnString = "";
+  </script>
+  <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
+  <script type="module" src="/assets/scripts/customScripts.js"></script>
+  
+
+  <script type="module" src="/assets/scripts/dataModal.js"></script>
+  <script src="/assets/scripts/ol.js"></script>
+  <script>
+    var isViewMapResults = true;
+  </script>
+  <script type="module" src="/assets/scripts/location.js"></script>
+
+  </body>
+</html>
 "
 `;

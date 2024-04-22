@@ -1,8 +1,11 @@
 'use strict';
 
+import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
+import { getSearchResultsCount } from '../../services/handlers/searchApi';
+import { IGuidedSearchStepsMatrix, IStepRouteMatrix } from '../../interfaces/guidedSearch.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-
-import { formIds } from '../../utils/constants';
+import { formIds, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 /**
  * This code snippet exports a module named HomeController.
@@ -20,6 +23,43 @@ const HomeController = {
       formId,
       searchInputError: undefined,
     });
+  },
+  intermediateHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const stepRouteMatrix: IGuidedSearchStepsMatrix = {
+      [guidedSearchSteps.date]: {
+        self: webRoutePaths.guidedDateSearch,
+        next: webRoutePaths.geographySearch,
+      },
+      [guidedSearchSteps.coordinate]: {
+        self: webRoutePaths.geographySearch,
+      },
+    };
+    const step: string = request.params?.step ?? '';
+    if (step) {
+      const stepMatrix: IStepRouteMatrix = stepRouteMatrix?.[step] ?? {};
+      if (Object.keys(stepMatrix).length) {
+        const queryString: string = readQueryParams(request.query, '', true);
+        const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
+        try {
+          const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
+          if (searchResultsCount.totalResults > 0) {
+            const queryString: string = upsertQueryParams(
+              request.query,
+              {
+                [queryParamKeys.count]: searchResultsCount.totalResults.toString(),
+              },
+              false,
+            );
+            return response.redirect(`${stepMatrix.next}?${queryString}`);
+          } else {
+            return response.redirect(`${webRoutePaths.results}?${queryString}`);
+          }
+        } catch (error) {
+          return response.redirect(`${webRoutePaths.results}?${queryString}`);
+        }
+      }
+    }
+    return response.redirect(webRoutePaths.home);
   },
 };
 
