@@ -9,9 +9,10 @@
 {% endif %}
 
 {% if not hasError %}
-  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
     {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
   </h2>
+  <div class="govuk-section-break--visible"></div>
 
   <div class='option-container govuk-section-break--visible'>
     {{ govukSelect({

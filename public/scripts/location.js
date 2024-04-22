@@ -460,8 +460,12 @@ const getMapResults = async (path) => {
       const mapResultsJson = await response.json();
       mapResultsButton.removeAttribute('disabled');
       mapResultsCount.textContent = mapResultsJson.total;
-      drawBoundingBoxWithMarker(mapResultsJson.items);
-      attachBoundingBoxToggleListener();
+      if (mapResultsJson.total > 0) {
+        drawBoundingBoxWithMarker(mapResultsJson.items);
+        attachBoundingBoxToggleListener();
+      } else {
+        mapResultsButton.setAttribute('disabled', true);
+      }
     } else {
       mapResultsButton.setAttribute('disabled', true);
     }
