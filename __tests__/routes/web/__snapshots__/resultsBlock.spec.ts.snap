@@ -534,7 +534,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -970,7 +969,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -1147,7 +1145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <div class="govuk-grid-row">
       
   <div class="govuk-grid-column-full">
-    <a href="javascript:;"  onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+    <a href="javascript:;"  role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
       View&nbsp;<span id="map-result-count">2</span>&nbsp;results on a map
       <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
@@ -1644,7 +1642,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -2167,7 +2164,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -2603,7 +2599,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
