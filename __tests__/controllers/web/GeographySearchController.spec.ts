@@ -39,7 +39,7 @@ describe('Deals with guided geography search handler', () => {
       true,
     );
     const resultsPath: string = `${results}?${resultPathQueryString}`;
-    const formId: string = formIds.geographyQuestionnaire;
+    const formId: string = formIds.geographyQuestionnaireFID;
 
     await GeographySearchController.renderGeographySearchHandler(
       request,
@@ -142,7 +142,7 @@ describe('Deals with guided geography search handler', () => {
     } = webRoutePaths;
     const queryString: string = readQueryParams(request.query, '');
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
-    const formId: string = formIds.geographyQuestionnaire;
+    const formId: string = formIds.geographyQuestionnaireFID;
     const skipPath: string = `${results}?${queryString}`;
     const resultPathQueryString: string = readQueryParams(
       request.query,

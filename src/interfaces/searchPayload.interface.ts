@@ -16,3 +16,15 @@ export interface IDateObject {
   month?: number;
   day?: number;
 }
+
+export interface IFilterOption {
+  key: string;
+  field: string;
+  format?: string;
+  calendarInterval?: string;
+  order?: string;
+  needCount: boolean;
+  propertyToRead: string;
+}
+
+export interface IFilterOptions extends Array<IFilterOption> {}

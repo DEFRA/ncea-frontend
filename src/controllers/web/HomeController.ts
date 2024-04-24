@@ -18,9 +18,9 @@ import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../
 
 const HomeController = {
   renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const formId: string = formIds.quickSearch;
+    const { quickSearchFID } = formIds;
     return response.view('screens/home/template', {
-      formId,
+      quickSearchFID,
       searchInputError: undefined,
     });
   },

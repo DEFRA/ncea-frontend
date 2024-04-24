@@ -261,6 +261,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
       </div>
       <div class="govuk-section-break--visible"></div>
+      
     </div>
     <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
       <div class="defra-map-info__container">
@@ -316,52 +317,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </div></div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
-
-
-<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
-  Filters
-</h2>
-
-
-
-
-<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
-  <label class="govuk-label filter-options-label" for="resourceType">
-    Resource type
-  </label>
-
-
-  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
-  
-    
-      
-      
-      <option value="filter1">Filter1</option>
-    
-  
-    
-      
-      
-      <option value="filter2">Filter2</option>
-    
-  
-  </select>
-</div>
-
-
-
+        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+          Filters
+        </h2>
+        <div class="govuk-section-break--visible"></div>
+        
+<form action="/filter-results?fdy=2000&amp;tdy=2023&amp;jry=gs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="results-filter" method="post">
   
 
   
-    
-  
-
-<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
-  Filter results
-</button>
-
-
-<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+</form>
+      </div>
       <div class="govuk-grid-column-two-thirds">
         
 
@@ -372,11 +338,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
     0 results found 
   </h2>
+  <div class="govuk-section-break--visible"></div>
 
-  <div class='option-container govuk-section-break--visible'>
+  <form class='option-container govuk-section-break--visible' action="/sort-results?fdy=2000&amp;tdy=2023&amp;jry=gs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="result-sort" method="post">
     
 
 
@@ -391,13 +358,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
       
-      <option value="best_match">Best match</option>
+      <option value="best_match" selected>Best Fit</option>
     
   
     
       
       
-      <option value="recent_study">Most recent study</option>
+      <option value="recent_study">Most Recent</option>
     
   
   </select>
@@ -418,7 +385,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
       
-      <option value="20">20</option>
+      <option value="20" selected>20</option>
     
   
     
@@ -436,7 +403,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </select>
 </div>
 
-  </div>
+  </form>
 
 
 
@@ -588,6 +555,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     var isViewMapResults = true;
   </script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/filters.js"></script>
 
   </body>
 </html>
@@ -855,6 +823,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
       </div>
       <div class="govuk-section-break--visible"></div>
+      
     </div>
     <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
       <div class="defra-map-info__container">
@@ -910,40 +879,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </div></div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
-
-
-<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
-  Filters
-</h2>
-
-
-
-
-<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
-  <label class="govuk-label filter-options-label" for="resourceType">
-    Resource type
-  </label>
-
-
-  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
-  
-  </select>
-</div>
-
-
-
+        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+          Filters
+        </h2>
+        <div class="govuk-section-break--visible"></div>
+        
+<form action="" id="results-filter" method="post">
   
 
   
-    
-  
-
-<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
-  Filter results
-</button>
-
-
-<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+</form>
+      </div>
       <div class="govuk-grid-column-two-thirds">
         
 
@@ -1070,6 +1016,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     var isViewMapResults = true;
   </script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/filters.js"></script>
 
   </body>
 </html>
@@ -1337,6 +1284,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
       </div>
       <div class="govuk-section-break--visible"></div>
+      
     </div>
     <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
       <div class="defra-map-info__container">
@@ -1392,52 +1340,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </div></div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
-
-
-<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
-  Filters
-</h2>
-
-
-
-
-<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
-  <label class="govuk-label filter-options-label" for="resourceType">
-    Resource type
-  </label>
-
-
-  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
-  
-    
-      
-      
-      <option value="filter1">Filter1</option>
-    
-  
-    
-      
-      
-      <option value="filter2">Filter2</option>
-    
-  
-  </select>
-</div>
-
-
-
+        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+          Filters
+        </h2>
+        <div class="govuk-section-break--visible"></div>
+        
+<form action="/filter-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="results-filter" method="post">
   
 
   
-    
-  
-
-<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
-  Filter results
-</button>
-
-
-<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+</form>
+      </div>
       <div class="govuk-grid-column-two-thirds">
         
 
@@ -1448,11 +1361,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
     2 results
   </h2>
+  <div class="govuk-section-break--visible"></div>
 
-  <div class='option-container govuk-section-break--visible'>
+  <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="result-sort" method="post">
     
 
 
@@ -1467,13 +1381,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
       
-      <option value="best_match">Best match</option>
+      <option value="best_match" selected>Best Fit</option>
     
   
     
       
       
-      <option value="recent_study">Most recent study</option>
+      <option value="recent_study">Most Recent</option>
     
   
   </select>
@@ -1494,7 +1408,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
       
-      <option value="20">20</option>
+      <option value="20" selected>20</option>
     
   
     
@@ -1512,7 +1426,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </select>
 </div>
 
-  </div>
+  </form>
 
 
 
@@ -1637,7 +1551,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </div>
 
   <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item govuk-pagination__item--current">
-            <a class="govuk-link govuk-pagination__link" href="#!" aria-label="Page 1" aria-current="page" data-page-id="1">
+            <a class="govuk-link govuk-pagination__link" href="/search?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" aria-label="Page 1" aria-current="page" data-page-id="1">
               1
             </a>
           </li></ul></nav>
@@ -1790,6 +1704,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     var isViewMapResults = true;
   </script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/filters.js"></script>
 
   </body>
 </html>
@@ -2057,6 +1972,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
       </div>
       <div class="govuk-section-break--visible"></div>
+      
     </div>
     <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
       <div class="defra-map-info__container">
@@ -2112,52 +2028,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </div></div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
-
-
-<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
-  Filters
-</h2>
-
-
-
-
-<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
-  <label class="govuk-label filter-options-label" for="resourceType">
-    Resource type
-  </label>
-
-
-  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
-  
-    
-      
-      
-      <option value="filter1">Filter1</option>
-    
-  
-    
-      
-      
-      <option value="filter2">Filter2</option>
-    
-  
-  </select>
-</div>
-
-
-
+        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+          Filters
+        </h2>
+        <div class="govuk-section-break--visible"></div>
+        
+<form action="/filter-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="results-filter" method="post">
   
 
   
-    
-  
-
-<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
-  Filter results
-</button>
-
-
-<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+</form>
+      </div>
       <div class="govuk-grid-column-two-thirds">
         
 
@@ -2168,11 +2049,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
     0 results found 
   </h2>
+  <div class="govuk-section-break--visible"></div>
 
-  <div class='option-container govuk-section-break--visible'>
+  <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="result-sort" method="post">
     
 
 
@@ -2187,13 +2069,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
       
-      <option value="best_match">Best match</option>
+      <option value="best_match" selected>Best Fit</option>
     
   
     
       
       
-      <option value="recent_study">Most recent study</option>
+      <option value="recent_study">Most Recent</option>
     
   
   </select>
@@ -2214,7 +2096,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
       
-      <option value="20">20</option>
+      <option value="20" selected>20</option>
     
   
     
@@ -2232,7 +2114,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </select>
 </div>
 
-  </div>
+  </form>
 
 
 
@@ -2359,6 +2241,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     var isViewMapResults = true;
   </script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/filters.js"></script>
 
   </body>
 </html>
@@ -2626,6 +2509,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
       </div>
       <div class="govuk-section-break--visible"></div>
+      
     </div>
     <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
       <div class="defra-map-info__container">
@@ -2681,40 +2565,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </div></div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
-
-
-<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
-  Filters
-</h2>
-
-
-
-
-<div class="govuk-form-group govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3">
-  <label class="govuk-label filter-options-label" for="resourceType">
-    Resource type
-  </label>
-
-
-  <select class="govuk-select filterOptions" id="resourceType" name="resourceType">
-  
-  </select>
-</div>
-
-
-
+        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+          Filters
+        </h2>
+        <div class="govuk-section-break--visible"></div>
+        
+<form action="" id="results-filter" method="post">
   
 
   
-    
-  
-
-<button type="submit" class="govuk-button filter-button govuk-!-margin-bottom-3" data-module="govuk-button" id="filter_results">
-  Filter results
-</button>
-
-
-<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a></div>
+</form>
+      </div>
       <div class="govuk-grid-column-two-thirds">
         
 
@@ -2841,6 +2702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     var isViewMapResults = true;
   </script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/filters.js"></script>
 
   </body>
 </html>

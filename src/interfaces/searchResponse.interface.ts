@@ -88,6 +88,10 @@ export interface ISearchResults {
 export interface IAggregationOption {
   value: string;
   text: string;
+  selected?: boolean;
+  checked?: boolean;
 }
 
-export interface IAggregationOptions extends Array<IAggregationOption> {}
+export interface IAggregationOptions {
+  [key: string]: IAggregationOption[] | [];
+}

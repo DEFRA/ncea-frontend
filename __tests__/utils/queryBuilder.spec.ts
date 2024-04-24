@@ -3,6 +3,15 @@ import {
   ISearchPayload,
 } from '../../src/interfaces/queryBuilder.interface';
 import {
+  IFilterOption,
+  IFilterOptions,
+} from '../../src/interfaces/searchPayload.interface';
+import {
+  mapResultMaxCount,
+  uniqueResourceTypesKey,
+  uniqueStartYearKey,
+} from '../../src/utils/constants';
+import {
   buildCustomSortScriptForStudyPeriod,
   buildSearchQuery,
 } from '../../src/utils/queryBuilder';
@@ -1725,11 +1734,8 @@ describe('Build the search query', () => {
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(2);
     });
-  });
 
-  describe('Search query for resourceType aggregations', () => {
-    it('should build the search query for resourceType aggregation', () => {
-      const aggregationField = 'resourceType';
+    it('should build the search query when filter resourceType with multiple values', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           keyword: {
@@ -1737,7 +1743,201 @@ describe('Build the search query', () => {
           },
         },
         sort: 'best_match',
-        filters: { resourceType: 'all' },
+        filters: { resourceType: ['dataset', 'series'] },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                bool: {
+                  should: [{ terms: { resourceType: ['dataset', 'series'] } }],
+                  minimum_should_match: 1,
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(2);
+    });
+
+    it('should build the search query when filtering with study period', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: {
+          resourceTemporalExtentDateRange: {
+            date: {
+              fdy: '2017',
+              tdy: '2022',
+            },
+          },
+        },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                range: {
+                  resourceTemporalExtentDateRange: {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(2);
+    });
+
+    it('should build the search query when filtering with both resourceType and study period', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: {
+          resourceType: ['dataset', 'series'],
+          resourceTemporalExtentDateRange: {
+            date: {
+              fdy: '2017',
+              tdy: '2022',
+            },
+          },
+        },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                bool: {
+                  should: [{ terms: { resourceType: ['dataset', 'series'] } }],
+                  minimum_should_match: 1,
+                },
+              },
+              {
+                range: {
+                  resourceTemporalExtentDateRange: {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        size: 20,
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(3);
+    });
+  });
+
+  describe('Search query for resourceType aggregations', () => {
+    it('should build the search query for resourceType aggregation', () => {
+      const filterOptions: IFilterOptions = [
+        {
+          key: uniqueResourceTypesKey,
+          field: 'resourceType',
+          needCount: true,
+          propertyToRead: 'key',
+        },
+      ];
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'dataset' },
         rowsPerPage: 20,
         page: 1,
       };
@@ -1763,9 +1963,10 @@ describe('Build the search query', () => {
           },
         ],
         aggs: {
-          unique_values: {
+          [uniqueResourceTypesKey]: {
             terms: {
-              field: aggregationField,
+              field: 'resourceType',
+              size: mapResultMaxCount,
             },
           },
         },
@@ -1776,7 +1977,79 @@ describe('Build the search query', () => {
 
       const result = buildSearchQuery({
         searchFieldsObject,
-        aggregationField,
+        filterOptions,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+    });
+
+    it('should build the search query for resourceTemporalExtentDetails.start.date aggregation', () => {
+      const filterOption: IFilterOption = {
+        key: uniqueStartYearKey,
+        field: 'resourceTemporalExtentDetails.start.date',
+        format: 'yyyy',
+        calendarInterval: 'year',
+        order: 'asc',
+        needCount: false,
+        propertyToRead: 'key_as_string',
+      };
+      const { key, field, format, calendarInterval, order } = filterOption;
+      const filterOptions: IFilterOptions = [filterOption];
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'dataset' },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        aggs: {
+          [uniqueStartYearKey]: {
+            date_histogram: {
+              field: 'resourceTemporalExtentDetails.start.date',
+              ...(!calendarInterval && { size: mapResultMaxCount }),
+              ...(calendarInterval && {
+                calendar_interval: calendarInterval,
+                min_doc_count: 1,
+              }),
+              ...(format && { format }),
+              ...(order && { order: { _key: order } }),
+            },
+          },
+        },
+        size: 0,
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        filterOptions,
       });
 
       expect(result).toEqual(expectedQuery);

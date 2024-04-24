@@ -29,7 +29,7 @@ describe('Deals with the Date Search Controller', () => {
       guidedDateSearch: guidedDateSearchPath,
       geographySearch: skipPath,
     } = webRoutePaths;
-    const formId: string = formIds.dataQuestionnaire;
+    const formId: string = formIds.dataQuestionnaireFID;
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
@@ -121,7 +121,7 @@ describe('Deals with the Date Search Controller', () => {
     jest
       .spyOn(errorTransformer, 'transformErrors')
       .mockReturnValue(dateQuestionChronologicalError as FormFieldError);
-    const formId: string = formIds.dataQuestionnaire;
+    const formId: string = formIds.dataQuestionnaireFID;
 
     const {
       guidedDateSearch: guidedDateSearchPath,

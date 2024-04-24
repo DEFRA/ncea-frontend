@@ -15,11 +15,12 @@ import {
   readQueryParams,
   upsertQueryParams,
 } from '../../utils/queryStringHelper';
-import { getDocumentDetails, getResourceTypeOptions, getSearchResults } from '../../services/handlers/searchApi';
+import { getDocumentDetails, getFilterOptions, getSearchResults } from '../../services/handlers/searchApi';
+import { processFilterOptions, processSortOptions } from '../../utils/processFilterRSortOptions';
 
 const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const formId: string = formIds.quickSearch;
+    const { quickSearchFID, searchFilterFID } = formIds;
     const journey: string = readQueryParams(request.query, queryParamKeys.journey);
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
     const resourceTypePayload: ISearchPayload = generateCountPayload(request.query);
@@ -27,20 +28,31 @@ const SearchResultsController = {
     const isQuickSearchJourney = journey === 'qs';
     try {
       const searchResults: ISearchResults = await getSearchResults(payload);
-      const resourceTypeOptionsData: IAggregationOptions = await getResourceTypeOptions(resourceTypePayload);
-      const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage);
+      const filterOptions: IAggregationOptions = await getFilterOptions(resourceTypePayload);
+      const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage, request.query);
+      const queryString = readQueryParams(request.query);
+      const filterSubmitPath = `${webRoutePaths.filterResults}?${queryString}`;
+      const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
+      const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
+      const processedSortOptions = await processSortOptions(request.query);
       return response.view('screens/results/template', {
-        formId,
+        quickSearchFID,
+        searchFilterFID,
         searchResults,
         hasError: false,
         isQuickSearchJourney,
         paginationItems,
-        resourceTypeOptions: resourceTypeOptionsData,
+        filterOptions: processedFilterOptions,
+        sortOptions: processedSortOptions,
+        filterSubmitPath,
+        sortSubmitPath,
         dateSearchPath: webRoutePaths.guidedDateSearch,
+        filterInstance: 'search_results',
       });
     } catch (error) {
       return response.view('screens/results/template', {
-        formId,
+        quickSearchFID,
+        searchFilterFID,
         error,
         hasError: true,
         isQuickSearchJourney,
@@ -57,7 +69,7 @@ const SearchResultsController = {
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
   },
   quickSearchFailActionHandler: (request, response, error): Lifecycle.ReturnValue => {
-    const formId: string = formIds.quickSearch;
+    const { quickSearchFID, searchFilterFID } = formIds;
     const searchError: string | undefined = error?.details?.[0]?.message ?? undefined;
     const payload = request.payload as Record<string, string>;
     const searchInputError = searchError
@@ -66,7 +78,8 @@ const SearchResultsController = {
         }
       : (undefined as unknown as Joi.ValidationError);
     const context = {
-      formId,
+      quickSearchFID,
+      searchFilterFID,
       searchInputError,
     };
     const view: string = payload?.pageName === 'home' ? 'screens/home/template' : 'screens/results/template';
@@ -102,6 +115,31 @@ const SearchResultsController = {
         docDetails: undefined,
       });
     }
+  },
+  filterSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const payload = request.payload as Record<string, string>;
+    let resourceTypeValues = '';
+    if (payload?.['resource_type'] && Array.isArray(payload?.['resource_type'])) {
+      resourceTypeValues = payload['resource_type'].join(',');
+    } else if (payload?.['resource_type'] && typeof payload?.['resource_type'] === 'string') {
+      resourceTypeValues = payload?.['resource_type'];
+    }
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.resourceType]: resourceTypeValues,
+      [queryParamKeys.startYear]: payload?.['start_year'] ?? '',
+      [queryParamKeys.toYear]: payload?.['to_year'] ?? '',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    return response.redirect(`${webRoutePaths.results}?${queryString}`);
+  },
+  sortSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const payload = request.payload as Record<string, string>;
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.sort]: payload?.['sort'] ?? '',
+      [queryParamKeys.rowsPerPage]: payload?.['page-results'] ?? '',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    return response.redirect(`${webRoutePaths.results}?${queryString}`);
   },
 };
 

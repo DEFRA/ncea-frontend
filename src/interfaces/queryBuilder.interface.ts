@@ -1,14 +1,21 @@
+import { IFilterOptions } from './searchPayload.interface';
+
 interface IMatchQuery {
-  match: {
+  match?: {
     [key: string]: string;
+  };
+  terms?: {
+    [key: string]: string[];
   };
 }
 
 interface IRangeQuery {
   range: {
     [key: string]: {
-      gte: string;
-      lte: string;
+      gte?: string;
+      lte?: string;
+      format?: string;
+      value?: string;
     };
   };
 }
@@ -65,11 +72,19 @@ interface ISortQuery {
   [key: string]: ISortOrder | ICustomSortScript;
 }
 
+interface IAggregateQueryTerm {
+  field: string;
+  size?: number;
+  format?: string;
+  calendar_interval?: string;
+  order?: { _key: string };
+  min_doc_count?: number;
+}
+
 interface IAggregateQuery {
-  unique_values?: {
-    terms?: {
-      field?: string;
-    };
+  [key: string]: {
+    terms?: IAggregateQueryTerm;
+    date_histogram?: IAggregateQueryTerm;
   };
 }
 
@@ -112,7 +127,7 @@ interface ISearchFields {
 }
 
 interface ISearchFilter {
-  [key: string]: string;
+  [key: string]: string | string[] | ISearchFields;
 }
 
 interface ISearchPayload {
@@ -130,7 +145,7 @@ interface ISearchBuilderPayload {
   fieldsToSearch?: string[];
   isCount?: boolean;
   ignoreAggregation?: boolean;
-  aggregationField?: string;
+  filterOptions?: IFilterOptions;
   docId?: string;
 }
 
@@ -151,4 +166,5 @@ export {
   ISearchFilter,
   ISearchBuilderPayload,
   IFieldExist,
+  IAggregateQueryTerm,
 };

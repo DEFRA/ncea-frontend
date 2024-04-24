@@ -14,57 +14,35 @@
   </h2>
   <div class="govuk-section-break--visible"></div>
 
-  <div class='option-container govuk-section-break--visible'>
+  <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="result-sort" method="post">
     {{ govukSelect({
-        id: "sort",
-        name: "sort",
-        label: {
-          text: "Sort by",
-          classes: "option-label"
-        },
-        classes: "option-block",
-        formGroup: {
-          classes: "option-group"
-        },
-        items: [
-          {
-            value: "best_match",
-            text: "Best match"
-          },
-          {
-            value: "recent_study",
-            text: "Most recent study"
-          }
-        ]
-      }) }}
+      id: "sort",
+      name: "sort",
+      label: {
+        text: "Sort by",
+        classes: "option-label"
+      },
+      classes: "option-block",
+      formGroup: {
+        classes: "option-group"
+      },
+      items: sortOptions.sortOptions
+    }) }}
 
     {{ govukSelect({
-        id: "page-results",
-        name: "page-results",
-        label: {
-          text: "Results per page",
-          classes: "option-label"
-        },
-        classes: "option-items",
-        formGroup: {
-          classes: "option-group"
-        },
-        items: [
-          {
-            value: "20",
-            text: "20"
-          },
-          {
-            value: "50",
-            text: "50"
-          },
-          {
-            value: "100",
-            text: "100"
-          }
-        ]
-      }) }}
-  </div>
+      id: "page-results",
+      name: "page-results",
+      label: {
+        text: "Results per page",
+        classes: "option-label"
+      },
+      classes: "option-items",
+      formGroup: {
+        classes: "option-group"
+      },
+      items: sortOptions.rowsPerPageOptions
+    }) }}
+  </form>
 {% endif %}
 
 {% if not hasError and searchResults.total %}

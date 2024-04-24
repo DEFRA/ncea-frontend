@@ -1,6 +1,6 @@
 import { RequestQuery } from '@hapi/hapi';
-import { queryParamKeys } from './constants';
 import { ISearchFields, ISearchPayload } from '../interfaces/queryBuilder.interface';
+import { dateFilterField, queryParamKeys, resourceTypeFilterField } from './constants';
 
 const setDefaultQueryParams = (searchParams: URLSearchParams): URLSearchParams => {
   const page = searchParams.get(queryParamKeys.page) ?? '1';
@@ -9,8 +9,6 @@ const setDefaultQueryParams = (searchParams: URLSearchParams): URLSearchParams =
   searchParams.set(queryParamKeys.rowsPerPage, rowsPerPage);
   const sort = searchParams.get(queryParamKeys.sort) ?? 'best_match';
   searchParams.set(queryParamKeys.sort, sort);
-  const resourceType = searchParams.get(queryParamKeys.resourceType) ?? 'all';
-  searchParams.set(queryParamKeys.resourceType, resourceType);
   return searchParams;
 };
 
@@ -31,6 +29,9 @@ const upsertQueryParams = (
       const value: string = queryParamsObject[key] ?? '';
       if (value) {
         searchParams.set(key, value);
+      }
+      if (!value && searchParams.has(key)) {
+        searchParams.delete(key);
       }
     });
   }
@@ -90,7 +91,9 @@ const getExtentParams = (searchParams: URLSearchParams): Record<string, string> 
 
 const getFilterParams = (searchParams: URLSearchParams): Record<string, string> => {
   const resourceType = searchParams.get(queryParamKeys.resourceType) ?? '';
-  return { resourceType };
+  const startDate = searchParams.get(queryParamKeys.startYear) ?? '';
+  const endDate = searchParams.get(queryParamKeys.toYear) ?? '';
+  return { resourceType, startDate, endDate };
 };
 
 const generateCountPayload = (requestQuery: RequestQuery): ISearchPayload => {
@@ -127,7 +130,15 @@ const generateQueryBuilderPayload = (requestQuery: RequestQuery): ISearchPayload
     rowsPerPage: parseInt(searchParams.get(queryParamKeys.rowsPerPage) ?? '20'),
     filters: {
       ...(filterParams.resourceType && {
-        resourceType: filterParams.resourceType,
+        [resourceTypeFilterField]: filterParams.resourceType.split(','),
+      }),
+      ...((filterParams.startDate || filterParams.endDate) && {
+        [dateFilterField]: {
+          date: {
+            fdy: filterParams.startDate,
+            tdy: filterParams.endDate,
+          },
+        },
       }),
     },
   };

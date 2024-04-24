@@ -1,4 +1,4 @@
-import { IAggregationOptions } from '../interfaces/searchResponse.interface';
+import { IFilterOptions } from '../interfaces/searchPayload.interface';
 import { TabOptions } from '../interfaces/detailsTab.interface';
 
 export const webRoutePaths = {
@@ -8,6 +8,9 @@ export const webRoutePaths = {
   geographySearch: '/coordinate-search',
   intermediate: '/intermediate',
   getMapResults: '/search-map-results',
+  getMapFilters: '/map-filters',
+  filterResults: '/filter-results',
+  sortResults: '/sort-results',
 };
 
 export const elasticSearchAPIPaths = {
@@ -20,12 +23,11 @@ export const formKeys = {
 };
 
 export const formIds = {
-  quickSearch: 'keyword',
-  dataQuestionnaire: 'date',
-  geographyQuestionnaire: 'extent',
+  quickSearchFID: 'keyword',
+  dataQuestionnaireFID: 'date',
+  geographyQuestionnaireFID: 'extent',
+  searchFilterFID: 'results-filter',
 };
-
-export const resourceTypeOptions: IAggregationOptions = [{ value: 'all', text: 'All' }];
 
 export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
@@ -65,7 +67,43 @@ export const queryParamKeys = {
   sort: 'srt',
   journey: 'jry',
   resourceType: 'rty',
+  startYear: 'sy',
+  toYear: 'ty',
 };
+
+export const uniqueResourceTypesKey: string = 'unique_resource_types';
+export const uniqueStartYearKey: string = 'unique_start_years';
+export const uniqueToYearKey: string = 'unique_to_years';
+
+export const resourceTypeFilterField = 'resourceType';
+export const dateFilterField = 'resourceTemporalExtentDateRange';
+
+export const defaultFilterOptions: IFilterOptions = [
+  {
+    key: uniqueResourceTypesKey,
+    field: 'resourceType',
+    needCount: true,
+    propertyToRead: 'key',
+  },
+  {
+    key: uniqueStartYearKey,
+    field: 'resourceTemporalExtentDetails.start.date',
+    format: 'yyyy',
+    calendarInterval: 'year',
+    order: 'asc',
+    needCount: false,
+    propertyToRead: 'key_as_string',
+  },
+  {
+    key: uniqueToYearKey,
+    field: 'resourceTemporalExtentDetails.end.date',
+    format: 'yyyy',
+    calendarInterval: 'year',
+    order: 'asc',
+    needCount: false,
+    propertyToRead: 'key_as_string',
+  },
+];
 
 export const detailsTabOptions: TabOptions = {
   general: [

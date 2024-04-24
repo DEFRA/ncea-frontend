@@ -33,7 +33,7 @@
   {{ quickSearch({
     isResultPage: true,
     searchPath: routes.searchResults,
-    formId: formId,
+    formId: quickSearchFID,
     searchInputError : searchInputError
   }) }}
 
@@ -65,4 +65,5 @@
     var isViewMapResults = true;
   </script>
   <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/filters.js"></script>
 {% endblock %}

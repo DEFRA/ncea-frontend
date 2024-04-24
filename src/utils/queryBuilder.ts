@@ -1,6 +1,8 @@
 import { generateDateString } from './generateDateString';
+import { mapResultMaxCount } from './constants';
 import {
   IAggregateQuery,
+  IAggregateQueryTerm,
   IBoolQuery,
   ICustomSortScript,
   IFieldExist,
@@ -17,6 +19,7 @@ import {
   IShapeCoordinates,
   ISortQuery,
 } from '../interfaces/queryBuilder.interface';
+import { IFilterOption, IFilterOptions } from '../interfaces/searchPayload.interface';
 
 const buildKeywordSearchQuery = (searchTerm: string): IQueryString => {
   const queryString: IQueryString = {
@@ -28,9 +31,12 @@ const buildKeywordSearchQuery = (searchTerm: string): IQueryString => {
   return queryString;
 };
 
-const buildSearchQueryWithFields = (searchTerm: string, fieldsToSearch: string[]): IBoolQuery => {
+const buildSearchQueryWithFields = (searchTerm: string | string[], fieldsToSearch: string[]): IBoolQuery => {
+  const matchQueryKey = Array.isArray(searchTerm) ? 'terms' : 'match';
   const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
-    match: { [field]: searchTerm },
+    [matchQueryKey]: {
+      [field]: searchTerm,
+    },
   })) as IMatchQuery[];
 
   const matchShould: IBoolQuery = {
@@ -122,7 +128,7 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
     fieldsToSearch = [],
     isCount = false,
     ignoreAggregation = false,
-    aggregationField = '',
+    filterOptions = [],
     docId = '',
   } = searchBuilderPayload;
   const boolQuery: IBoolQuery = {
@@ -135,19 +141,19 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
     sort,
     rowsPerPage,
     page,
-    filters: filterOptions,
+    filters,
     fieldsExist = [],
     requiredFields = [],
   } = (searchFieldsObject as ISearchPayload) ?? {};
 
   addKeywordSearchQuery(fields, fieldsToSearch, boolQuery);
-  addFilterOptionsQuery(filterOptions, isCount, ignoreAggregation, boolQuery);
+  addFilterOptionsQuery(filters, isCount, ignoreAggregation, boolQuery);
   addDateSearchQuery(fields, boolQuery);
   addCoordinateSearchQuery(fields, boolQuery);
   !Object.keys(searchFieldsObject ?? {}).length && docId && addDetailsQuery(docId, boolQuery);
 
   const isSort = sort && !isCount;
-  const isAggregation = !ignoreAggregation && !isCount && aggregationField;
+  const isAggregation = !ignoreAggregation && !isCount && filterOptions.length > 0;
   fieldsExist.length > 0 && addFieldExistsQuery(boolQuery, fieldsExist);
 
   const finalQuery: IQuery = {
@@ -155,12 +161,18 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
     ...(isSort && { sort: [] }),
     ...(isAggregation && { aggs: {} }),
     ...(!isCount && { size: isAggregation ? 0 : rowsPerPage }),
-    ...(page && { from: page === 1 ? 0 : (page - 1) * rowsPerPage }),
+    ...(page &&
+      rowsPerPage !== mapResultMaxCount && {
+        from: page === 1 ? 0 : (page - 1) * rowsPerPage,
+      }),
     ...(!isCount && { _source: requiredFields ?? [] }),
   };
 
   isSort && addSortQuery(finalQuery, sort, isCount);
-  isAggregation && addAggregationQuery(finalQuery, ignoreAggregation, isCount, aggregationField);
+  if (isAggregation) {
+    const aggregateQuery: IAggregateQuery = generateAggregationQuery(filterOptions);
+    finalQuery.aggs = { ...aggregateQuery };
+  }
 
   return finalQuery;
 };
@@ -195,8 +207,14 @@ const addFilterOptionsQuery = (
     const filteredOptions = Object.keys(filterOptions).filter((key) => filterOptions[key] !== 'all') ?? [];
 
     filteredOptions.forEach((key) => {
-      const matchShould: IBoolQuery = buildSearchQueryWithFields(filterOptions[key] as string, [key]);
-      boolQuery.bool.must?.push(matchShould);
+      if (key.includes('resourceType')) {
+        const matchShould: IBoolQuery = buildSearchQueryWithFields(filterOptions[key] as string | string[], [key]);
+        boolQuery.bool.must?.push(matchShould);
+      }
+      if (key.includes('Date')) {
+        const rangeQuery: IRangeQuery = buildDateQuery(filterOptions[key] as ISearchFields);
+        boolQuery.bool.must?.push(rangeQuery);
+      }
     });
   }
 };
@@ -225,22 +243,25 @@ const addSortQuery = (finalQuery: IQuery, sort: string, isCount: boolean): void 
   }
 };
 
-const addAggregationQuery = (
-  finalQuery: IQuery,
-  ignoreAggregation: boolean,
-  isCount: boolean,
-  aggregationField: string,
-): void => {
-  if (!ignoreAggregation && !isCount && aggregationField) {
-    const aggregateQuery: IAggregateQuery = {
-      unique_values: {
-        terms: {
-          field: aggregationField,
-        },
-      },
-    };
-    finalQuery.aggs = aggregateQuery;
-  }
+const generateAggregationQuery = (filteredOptions: IFilterOptions): IAggregateQuery => {
+  const aggregateQuery: IAggregateQuery = Object.fromEntries(
+    filteredOptions.map((filterOption: IFilterOption) => {
+      const { key, field, format, calendarInterval, order } = filterOption;
+      const queryKey: string = calendarInterval ? 'date_histogram' : 'terms';
+      const options: IAggregateQueryTerm = {
+        field,
+        ...(!calendarInterval && { size: mapResultMaxCount }),
+        ...(calendarInterval && {
+          calendar_interval: calendarInterval,
+          min_doc_count: 1,
+        }),
+        ...(format && { format }),
+        ...(order && { order: { _key: order } }),
+      };
+      return [key, { [queryKey]: options }];
+    }),
+  );
+  return aggregateQuery;
 };
 
 const addDetailsQuery = (docId: string, boolQuery: IBoolQuery): void => {

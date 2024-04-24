@@ -66,7 +66,7 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
     it('should redirect to results page', async () => {
       expect(response.redirect).toBe(true);
       expect(response.header.location).toBe(
-        `${webRoutePaths.results}?nth=2&sth=2&est=2&wst=2&pg=1&rpp=20&srt=best_match&rty=all`,
+        `${webRoutePaths.results}?nth=2&sth=2&est=2&wst=2&pg=1&rpp=20&srt=best_match`,
       );
     });
   });
