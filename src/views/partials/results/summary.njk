@@ -14,7 +14,7 @@
   </h2>
   <div class="govuk-section-break--visible"></div>
 
-  <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="result-sort" method="post">
+  <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="sort_results" method="post">
     {{ govukSelect({
       id: "sort",
       name: "sort",
@@ -74,7 +74,7 @@
           {{ govukButton({
             text: 'More info',
             classes: 'govuk-button--secondary',
-            href: routes.searchResults + '/' + item.id
+            href: routes.searchResults + '/' + item.id + '?' + queryString
           }) }}
         </div>
       </div>

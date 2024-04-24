@@ -7,9 +7,10 @@ export const webRoutePaths = {
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
   intermediate: '/intermediate',
-  getMapResults: '/search-map-results',
+  getMapResults: '/map-results',
   getMapFilters: '/map-filters',
-  filterResults: '/filter-results',
+  filterResourceType: '/resource-type-filter',
+  filterStudyPeriod: '/study-period-filter',
   sortResults: '/sort-results',
 };
 
@@ -26,7 +27,6 @@ export const formIds = {
   quickSearchFID: 'keyword',
   dataQuestionnaireFID: 'date',
   geographyQuestionnaireFID: 'extent',
-  searchFilterFID: 'results-filter',
 };
 
 export const showMoreText: string = 'Show more';
@@ -40,6 +40,8 @@ export const requiredFieldsForMap: string[] = [
   'resourceAbstractObject',
   'geom',
   'resourceIdentifier',
+  'resourceType',
+  'resourceTemporalExtentDetails',
 ];
 
 export const guidedSearchSteps = {

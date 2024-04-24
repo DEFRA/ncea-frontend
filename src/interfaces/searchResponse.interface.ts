@@ -4,8 +4,11 @@ export interface IBaseItem {
   publishedBy: string;
   content: string;
   studyPeriod: string;
+  startYear?: string;
+  toYear?: string;
   resourceLocator: string;
   organisationName?: string;
+  resourceType?: string[];
 }
 
 export interface IGeneralItem {

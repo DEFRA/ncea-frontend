@@ -88,7 +88,7 @@
         }) }}
       </div>
       <div class="govuk-section-break--visible"></div>
-      {# {% include 'partials/results/filters.njk' %} #}
+      <div id="map-filter-block" data-action="{{routes.getMapFilters}}" data-fetch-map-filters></div>
     </div>
     <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
       <div class="defra-map-info__container">

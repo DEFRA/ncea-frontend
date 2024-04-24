@@ -14,17 +14,25 @@ const getDaySuffix = (day: number): string => {
   }
 };
 
+const isValidDate = (dateString: string): boolean => {
+  const date = new Date(dateString);
+  return !isNaN(date.getTime());
+};
+
+const getYear = (dateString: string): string => {
+  if (!isValidDate(dateString)) {
+    return '';
+  }
+  const date = new Date(dateString);
+  return `${date.getFullYear()}`;
+};
+
 const formatDate = (
   dateString: string,
   includeTime: boolean = true,
   includeSuffix: boolean = false,
   delimiter: string = ' ',
 ): string => {
-  const isValidDate = (dateString: string): boolean => {
-    const date = new Date(dateString);
-    return !isNaN(date.getTime());
-  };
-
   if (!isValidDate(dateString)) {
     return '';
   }
@@ -55,4 +63,4 @@ const formatDate = (
   return formattedDate;
 };
 
-export { formatDate };
+export { formatDate, getYear };

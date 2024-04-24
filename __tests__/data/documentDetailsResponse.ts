@@ -188,6 +188,8 @@ const formattedDetailsResponse: ISearchResults = {
       publishedBy: '',
       content: '',
       studyPeriod: '',
+      startYear: '',
+      toYear: '',
       resourceLocator: '',
       language: 'ENG',
       Metadata_language: 'eng',
@@ -738,6 +740,8 @@ const formattedDetailsFullResponse: ISearchResults = {
       content:
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
       studyPeriod: '24 May 2019 to 31 Jul 2019',
+      startYear: '2019',
+      toYear: '2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
       language: 'ENG',
       Metadata_language: 'eng',

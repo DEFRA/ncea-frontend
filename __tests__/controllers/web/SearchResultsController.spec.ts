@@ -7,7 +7,7 @@ import {
   ISearchItem,
 } from '../../../src/interfaces/searchResponse.interface';
 import { SearchResultsController } from '../../../src/controllers/web/SearchResultsController';
-import { Request, RequestQuery, ResponseToolkit } from '@hapi/hapi';
+import { Request, ResponseToolkit } from '@hapi/hapi';
 
 import { formattedDetailsResponse } from '../../data/documentDetailsResponse';
 import { processDetailsTabData } from '../../../src/utils/processDetailsTabData';
@@ -39,13 +39,6 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
   getDocumentDetails: jest.fn(),
 }));
 
-const requestQuery: RequestQuery = {
-  q: 'marine',
-  jry: 'qs',
-  pg: '1',
-  rpp: '20',
-  srt: 'best_match',
-};
 describe('Deals with search results controller', () => {
   describe('Deals with search results handler', () => {
     it('should return the results and rendered search items for quick search', async () => {
@@ -55,7 +48,6 @@ describe('Deals with search results controller', () => {
         pg: '1',
         rpp: '20',
         srt: 'best_match',
-        rty: 'all',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -63,7 +55,7 @@ describe('Deals with search results controller', () => {
         total: 0,
         items: [],
       };
-      const { quickSearchFID, searchFilterFID } = formIds;
+      const { quickSearchFID } = formIds;
       (getSearchResults as jest.Mock).mockResolvedValue(searchResults);
       const expectedResourceTypeOptions: IAggregationOptions = {
         resourceType: [
@@ -74,9 +66,10 @@ describe('Deals with search results controller', () => {
       (getFilterOptions as jest.Mock).mockResolvedValue(
         expectedResourceTypeOptions,
       );
-      const paginationItems = getPaginationItems(1, 0, 10, requestQuery);
+      const paginationItems = getPaginationItems(1, 0, 10, queryObject);
       const queryString = readQueryParams(request.query);
-      const filterSubmitPath = `${webRoutePaths.filterResults}?${queryString}`;
+      const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
+      const filterStudyPeriodPath = `${webRoutePaths.filterStudyPeriod}?${queryString}`;
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(
         expectedResourceTypeOptions,
@@ -89,17 +82,18 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
         quickSearchFID,
-        searchFilterFID,
         searchResults,
         hasError: false,
         isQuickSearchJourney: true,
         paginationItems,
         filterOptions: processedFilterOptions,
         sortOptions: processedSortOptions,
-        filterSubmitPath,
+        filterResourceTypePath,
+        filterStudyPeriodPath,
         sortSubmitPath,
         dateSearchPath: webRoutePaths.guidedDateSearch,
         filterInstance: 'search_results',
+        queryString,
       });
     });
 
@@ -111,7 +105,6 @@ describe('Deals with search results controller', () => {
         pg: '1',
         rpp: '20',
         srt: 'best_match',
-        rty: 'all',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -119,7 +112,7 @@ describe('Deals with search results controller', () => {
         total: 0,
         items: [],
       };
-      const { quickSearchFID, searchFilterFID } = formIds;
+      const { quickSearchFID } = formIds;
       (getSearchResults as jest.Mock).mockResolvedValue(searchResults);
       const expectedResourceTypeOptions: IAggregationOptions = {
         resourceType: [
@@ -130,9 +123,10 @@ describe('Deals with search results controller', () => {
       (getFilterOptions as jest.Mock).mockResolvedValue(
         expectedResourceTypeOptions,
       );
-      const paginationItems = getPaginationItems(1, 0, 10, requestQuery);
+      const paginationItems = getPaginationItems(1, 0, 10, queryObject);
       const queryString = readQueryParams(request.query);
-      const filterSubmitPath = `${webRoutePaths.filterResults}?${queryString}`;
+      const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
+      const filterStudyPeriodPath = `${webRoutePaths.filterStudyPeriod}?${queryString}`;
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(
         expectedResourceTypeOptions,
@@ -145,17 +139,18 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
         quickSearchFID,
-        searchFilterFID,
         searchResults,
         hasError: false,
         isQuickSearchJourney: false,
         paginationItems,
         filterOptions: processedFilterOptions,
         sortOptions: processedSortOptions,
-        filterSubmitPath,
+        filterResourceTypePath,
+        filterStudyPeriodPath,
         sortSubmitPath,
         dateSearchPath: webRoutePaths.guidedDateSearch,
         filterInstance: 'search_results',
+        queryString,
       });
     });
 
@@ -167,9 +162,8 @@ describe('Deals with search results controller', () => {
         pg: '1',
         rpp: '20',
         srt: 'best_match',
-        rty: 'all',
       };
-      const { quickSearchFID, searchFilterFID } = formIds;
+      const { quickSearchFID } = formIds;
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       const error = new Error('Mocked error');
@@ -180,7 +174,6 @@ describe('Deals with search results controller', () => {
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
         quickSearchFID,
-        searchFilterFID,
         error,
         hasError: true,
         isQuickSearchJourney: false,
@@ -231,13 +224,12 @@ describe('Deals with search results controller', () => {
     });
 
     it('should render the home page with error messages', async () => {
-      const { quickSearchFID, searchFilterFID } = formIds;
+      const { quickSearchFID } = formIds;
       const searchInputError = {
         text: 'Please enter keywords into the search field.',
       };
       const context = {
         quickSearchFID,
-        searchFilterFID,
         searchInputError,
       };
       expect(response.view).toHaveBeenCalledWith(
@@ -268,13 +260,12 @@ describe('Deals with search results controller', () => {
     });
 
     it('should render the results page with error messages', async () => {
-      const { quickSearchFID, searchFilterFID } = formIds;
+      const { quickSearchFID } = formIds;
       const searchInputError = {
         text: 'Please enter keywords into the search field.',
       };
       const context = {
         quickSearchFID,
-        searchFilterFID,
         searchInputError,
       };
       expect(response.view).toHaveBeenCalledWith(
@@ -305,11 +296,10 @@ describe('Deals with search results controller', () => {
     });
 
     it('should render the home page with error messages', async () => {
-      const { quickSearchFID, searchFilterFID } = formIds;
+      const { quickSearchFID } = formIds;
       const searchInputError = undefined;
       const context = {
         quickSearchFID,
-        searchFilterFID,
         searchInputError,
       };
       expect(response.view).toHaveBeenCalledWith(
@@ -321,10 +311,21 @@ describe('Deals with search results controller', () => {
 
   describe('Deals with document details handler', () => {
     it('should fetch the data and return the view', async () => {
-      const request: Request = { params: { id: '123' } } as any;
+      const queryObject = {
+        q: 'marine',
+        jry: 'qs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+      };
+      const request: Request = {
+        params: { id: '123' },
+        query: { ...queryObject },
+      } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       const expectedResponse: ISearchItem = formattedDetailsResponse
         ?.items?.[0] as ISearchItem;
+      const queryString: string = readQueryParams(request.query);
       (getDocumentDetails as jest.Mock).mockResolvedValue(expectedResponse);
       await SearchResultsController.renderSearchDetailsHandler(
         request,
@@ -333,19 +334,32 @@ describe('Deals with search results controller', () => {
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
         docDetails: expectedResponse,
         detailsTabOptions: await processDetailsTabData(expectedResponse),
+        queryString,
       });
     });
     it('should fetch the data as empty object when the API does not found the document and return the view', async () => {
-      const request: Request = { params: { id: '123' } } as any;
+      const queryObject = {
+        q: 'marine',
+        jry: 'qs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+      };
+      const request: Request = {
+        params: { id: '123' },
+        query: { ...queryObject },
+      } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       (getDocumentDetails as jest.Mock).mockResolvedValue({});
       await SearchResultsController.renderSearchDetailsHandler(
         request,
         response,
       );
+      const queryString: string = readQueryParams(request.query);
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
         docDetails: {},
         detailsTabOptions: await processDetailsTabData({}),
+        queryString,
       });
     });
 
@@ -372,7 +386,6 @@ describe('Deals with search results controller', () => {
         pg: '1',
         rpp: '20',
         srt: 'best_match',
-        rty: 'all',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = {
@@ -395,7 +408,6 @@ describe('Deals with search results controller', () => {
         pg: '1',
         rpp: '20',
         srt: 'best_match',
-        rty: 'all',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = {
@@ -424,28 +436,27 @@ describe('Deals with search results controller', () => {
     });
   });
 
-  describe('Deals with search filter submit handler', () => {
+  describe('Deals with search resource type filter submit handler', () => {
     it('should build the query params and navigate to search page', async () => {
       const request: Request = {
         payload: {
           resource_type: 'dataset',
-          start_year: '2017',
-          to_year: '2022',
         },
       } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
       const queryParamsObject: Record<string, string> = {
         [queryParamKeys.resourceType]: 'dataset',
-        [queryParamKeys.startYear]: '2017',
-        [queryParamKeys.toYear]: '2022',
       };
       const queryString: string = upsertQueryParams(
         request.query,
         queryParamsObject,
         false,
       );
-      await SearchResultsController.filterSearchHandler(request, response);
+      await SearchResultsController.filterResourceTypeHandler(
+        request,
+        response,
+      );
       expect(response.redirect).toHaveBeenCalledWith(
         `${webRoutePaths.results}?${queryString}`,
       );
@@ -455,6 +466,32 @@ describe('Deals with search results controller', () => {
       const request: Request = {
         payload: {
           resource_type: ['dataset', 'series'],
+        },
+      } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.resourceType]: 'dataset,series',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+        false,
+      );
+      await SearchResultsController.filterResourceTypeHandler(
+        request,
+        response,
+      );
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
+    });
+  });
+
+  describe('Deals with search study period filter submit handler', () => {
+    it('should build the query params and navigate to search page', async () => {
+      const request: Request = {
+        payload: {
           start_year: '2017',
           to_year: '2022',
         },
@@ -462,7 +499,6 @@ describe('Deals with search results controller', () => {
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
       const queryParamsObject: Record<string, string> = {
-        [queryParamKeys.resourceType]: 'dataset,series',
         [queryParamKeys.startYear]: '2017',
         [queryParamKeys.toYear]: '2022',
       };
@@ -471,7 +507,7 @@ describe('Deals with search results controller', () => {
         queryParamsObject,
         false,
       );
-      await SearchResultsController.filterSearchHandler(request, response);
+      await SearchResultsController.filterStudyPeriodHandler(request, response);
       expect(response.redirect).toHaveBeenCalledWith(
         `${webRoutePaths.results}?${queryString}`,
       );
@@ -501,6 +537,54 @@ describe('Deals with search results controller', () => {
       expect(response.redirect).toHaveBeenCalledWith(
         `${webRoutePaths.results}?${queryString}`,
       );
+    });
+  });
+
+  describe('Deals with map filters handler', () => {
+    it('should fetch the data and return the view', async () => {
+      const queryObject = {
+        q: 'marine',
+        jry: 'qs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+      };
+      const request: Request = { query: { ...queryObject } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const expectedResourceTypeOptions: IAggregationOptions = {
+        resourceType: [
+          { value: 'filter1', text: 'Filter1' },
+          { value: 'filter2', text: 'Filter2' },
+        ],
+      };
+      (getFilterOptions as jest.Mock).mockResolvedValue(
+        expectedResourceTypeOptions,
+      );
+      const processedFilterOptions = await processFilterOptions(
+        expectedResourceTypeOptions,
+        request.query,
+      );
+      await SearchResultsController.getMapFiltersHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('partials/results/filters', {
+        filterOptions: processedFilterOptions,
+        filterInstance: 'map_results',
+        filterResourceTypePath: '',
+        filterStudyPeriodPath: '',
+      });
+    });
+
+    it('should show an error when something fails at API layer', async () => {
+      const request: Request = { payload: { query: {} } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const error = new Error('Mocked error');
+      (getFilterOptions as jest.Mock).mockRejectedValue(error);
+      await SearchResultsController.getMapFiltersHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('partials/results/filters', {
+        error,
+        filterOptions: undefined,
+        filterResourceTypePath: '',
+        filterStudyPeriodPath: '',
+      });
     });
   });
 });

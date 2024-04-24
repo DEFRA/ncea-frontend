@@ -118,7 +118,7 @@ describe('Details route template', () => {
         expect(anchor?.getAttribute('class')).toEqual(
           'govuk-breadcrumbs__link',
         );
-        expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.results);
+        expect(anchor?.getAttribute('href')).toEqual(`${webRoutePaths.results}?`);
         expect(anchor?.textContent?.trim()).toEqual('Search results');
       });
 
@@ -350,7 +350,7 @@ describe('Details route template', () => {
         expect(anchor?.getAttribute('class')).toEqual(
           'govuk-breadcrumbs__link',
         );
-        expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.results);
+        expect(anchor?.getAttribute('href')).toEqual(`${webRoutePaths.results}?`);
         expect(anchor?.textContent?.trim()).toEqual('Search results');
       });
 

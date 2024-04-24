@@ -1,43 +1,34 @@
 const fromYearId = 'start_year';
 const toYearId = 'to_year';
-const searchResultsFilterFormId = 'results-filter';
-const searchResultSortFormId = 'result-sort';
+const filterSPFormId = 'study_period_filter';
+const filterRTFormId = 'resource_type_filter';
+const searchResultSortFormId = 'sort_results';
 
-const addFilterHeadingClickListeners = () => {
-  const filterHeadingElement = document.querySelectorAll(
-    '.defra-filter-options__heading',
+const addFilterHeadingClickListeners = (instance) => {
+  const filterHeadingElement = document.getElementById(
+    `toggle_resource_type-${instance}`,
   );
-  if (filterHeadingElement.length) {
-    filterHeadingElement.forEach((filterHeading) => {
-      filterHeading.addEventListener('click', function () {
-        const parentNode = filterHeading.parentNode;
-        const openClass = 'defra-filter-options__heading--open';
-        const closedClass = 'defra-filter-options__heading--closed';
-        const parentOpenClass = 'defra-filter-options--open';
-        const parentClosedClass = 'defra-filter-options--closed';
-        if (filterHeading.classList.contains(openClass)) {
-          filterHeading.classList.remove(openClass);
-          filterHeading.classList.add(closedClass);
-          parentNode.classList.remove(parentOpenClass);
-          parentNode.classList.add(parentClosedClass);
-        } else if (filterHeading.classList.contains(closedClass)) {
-          filterHeading.classList.remove(closedClass);
-          filterHeading.classList.add(openClass);
-          parentNode.classList.add(parentOpenClass);
-          parentNode.classList.remove(parentClosedClass);
-        }
-      });
+  if (filterHeadingElement) {
+    filterHeadingElement.addEventListener('click', function () {
+      const parentNode = filterHeadingElement.parentNode;
+      const openClass = 'defra-filter-options__heading--open';
+      const closedClass = 'defra-filter-options__heading--closed';
+      const parentOpenClass = 'defra-filter-options--open';
+      const parentClosedClass = 'defra-filter-options--closed';
+      if (filterHeadingElement.classList.contains(openClass)) {
+        filterHeadingElement.classList.remove(openClass);
+        filterHeadingElement.classList.add(closedClass);
+        parentNode.classList.remove(parentOpenClass);
+        parentNode.classList.add(parentClosedClass);
+      } else if (filterHeadingElement.classList.contains(closedClass)) {
+        filterHeadingElement.classList.remove(closedClass);
+        filterHeadingElement.classList.add(openClass);
+        parentNode.classList.add(parentOpenClass);
+        parentNode.classList.remove(parentClosedClass);
+      }
     });
   }
 };
-
-// const selectToYear = (instance) => {
-//   const toYearElement = document.getElementById(`${instance}-${toYearId}`);
-//   if (toYearElement) {
-//     toYearElement.value =
-//       toYearElement.options[toYearElement.options.length - 1].value;
-//   }
-// };
 
 const submitSearchResultsFilter = (formId) => {
   const formElement = document.getElementById(formId);
@@ -46,50 +37,60 @@ const submitSearchResultsFilter = (formId) => {
   }
 };
 
-const updateFromYear = (event) => {
-  const { id, value } = event.target;
+const updateFromYear = (toYearElement, doSubmit) => {
+  const value = toYearElement.value;
+  const id = toYearElement.getAttribute('id');
   const instance = id.split('-')[0].trim();
   const fromYearElement = document.getElementById(`${instance}-${fromYearId}`);
   if (parseInt(value) < parseInt(fromYearElement.value)) {
     for (let i = 0; i < fromYearElement.options.length; i++) {
       if (parseInt(fromYearElement.options[i].value) <= parseInt(value)) {
         fromYearElement.value = fromYearElement.options[i].value;
-        setTimeout(() => {
-          submitSearchResultsFilter(searchResultsFilterFormId);
-        }, 100);
+        if (doSubmit) {
+          setTimeout(() => {
+            submitSearchResultsFilter(`${filterSPFormId}-${instance}`);
+          }, 100);
+        }
         break;
       }
     }
   } else {
-    submitSearchResultsFilter(searchResultsFilterFormId);
+    doSubmit && submitSearchResultsFilter(`${filterSPFormId}-${instance}`);
   }
 };
 
-const updateToYear = (event) => {
-  const { id, value } = event.target;
+const updateToYear = (startYearElement, doSubmit) => {
+  const value = startYearElement.value;
+  const id = startYearElement.getAttribute('id');
   const instance = id.split('-')[0].trim();
   const toYearElement = document.getElementById(`${instance}-${toYearId}`);
   if (parseInt(value) > parseInt(toYearElement.value)) {
     for (let i = 0; i < toYearElement.options.length; i++) {
       if (parseInt(toYearElement.options[i].value) >= parseInt(value)) {
         toYearElement.value = toYearElement.options[i].value;
-        setTimeout(() => {
-          submitSearchResultsFilter(searchResultsFilterFormId);
-        }, 100);
+        if (doSubmit) {
+          setTimeout(() => {
+            submitSearchResultsFilter(`${filterSPFormId}-${instance}`);
+          }, 100);
+        }
         break;
       }
     }
   } else {
-    submitSearchResultsFilter(searchResultsFilterFormId);
+    doSubmit && submitSearchResultsFilter(`${filterSPFormId}-${instance}`);
   }
 };
 
-const attachStudyPeriodChangeListener = (instance) => {
+const attachStudyPeriodChangeListener = (instance, doSubmit = false) => {
   const fromYearElement = document.getElementById(`${instance}-${fromYearId}`);
   const toYearElement = document.getElementById(`${instance}-${toYearId}`);
   if (fromYearElement && toYearElement) {
-    fromYearElement.addEventListener('change', updateToYear);
-    toYearElement.addEventListener('change', updateFromYear);
+    fromYearElement.addEventListener('change', function () {
+      updateToYear(this, doSubmit);
+    });
+    toYearElement.addEventListener('change', function () {
+      updateFromYear(this, doSubmit);
+    });
   }
 };
 
@@ -100,7 +101,7 @@ const attachSearchResultsFilterCheckboxChangeListener = () => {
   if (searchResultsFilterCheckboxes.length) {
     searchResultsFilterCheckboxes.forEach((checkbox) => {
       checkbox.addEventListener('change', function () {
-        submitSearchResultsFilter(searchResultsFilterFormId);
+        submitSearchResultsFilter(`${filterRTFormId}-${'search_results'}`);
       });
     });
   }
@@ -122,8 +123,10 @@ const attachSearchResultsSortChangeListener = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  addFilterHeadingClickListeners();
-  attachStudyPeriodChangeListener('search_results');
+  addFilterHeadingClickListeners('search_results');
+  attachStudyPeriodChangeListener('search_results', true);
   attachSearchResultsFilterCheckboxChangeListener();
   attachSearchResultsSortChangeListener();
 });
+
+export { addFilterHeadingClickListeners, attachStudyPeriodChangeListener };

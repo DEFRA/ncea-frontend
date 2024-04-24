@@ -1,6 +1,7 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
-<form action="{{filterSubmitPath}}" id="{{searchFilterFID}}" method="post">
-  {% if filterOptions.unique_resource_types and filterOptions.unique_start_years.length > 0 %}
+
+{% if filterOptions.unique_resource_types and filterOptions.unique_start_years.length > 0 %}
+  <form action="{{filterStudyPeriodPath}}" id="study_period_filter-{{filterInstance}}" method="post">
     <section class="defra-filter-section">
       <h2 class='govuk-heading-m filter-heading govuk-!-margin-top-4 govuk-!-margin-bottom-2'>
       Study period
@@ -31,12 +32,14 @@
       </div>
       <div class="govuk-section-break--visible"></div>
     </section>
-  {% endif %}
+  </form>
+{% endif %}
 
-  {% if filterOptions.unique_resource_types and filterOptions.unique_resource_types.length > 0 %}
+{% if filterOptions.unique_resource_types and filterOptions.unique_resource_types.length > 0 %}
+  <form action="{{filterResourceTypePath}}" id="resource_type_filter-{{filterInstance}}" method="post">
     <section>
       <section class="defra-filter-options defra-filter-options--open govuk-!-margin-bottom-6">
-        <section class="defra-filter-options__heading defra-filter-options__heading--open">
+        <section class="defra-filter-options__heading defra-filter-options__heading--open" id="toggle_resource_type-{{filterInstance}}">
           <button type="button" class="defra-filter-options__button defra-filter-options__title">Resource type</button>
           <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="defra-filter-options__icon defra-filter-options__icon--up" aria-hidden="true" focusable="false">
             <path d="m798.16 609.84l-256-256c-16.683-16.683-43.691-16.683-60.331 0l-256 256c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l225.84-225.84 225.84 225.84c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331z"></path>
@@ -66,5 +69,5 @@
       </section>
       <div class="govuk-section-break--visible"></div>
     </section>
-  {% endif %}
-</form>
+  </form>
+{% endif %}

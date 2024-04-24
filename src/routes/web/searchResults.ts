@@ -34,13 +34,23 @@ const searchResultsRoutes = [
   },
   {
     method: 'POST',
-    path: webRoutePaths.filterResults,
-    handler: SearchResultsController.filterSearchHandler,
+    path: webRoutePaths.filterResourceType,
+    handler: SearchResultsController.filterResourceTypeHandler,
+  },
+  {
+    method: 'POST',
+    path: webRoutePaths.filterStudyPeriod,
+    handler: SearchResultsController.filterStudyPeriodHandler,
   },
   {
     method: 'POST',
     path: webRoutePaths.sortResults,
     handler: SearchResultsController.sortSearchHandler,
+  },
+  {
+    method: 'GET',
+    path: webRoutePaths.getMapFilters,
+    handler: SearchResultsController.getMapFiltersHandler,
   },
 ];
 
