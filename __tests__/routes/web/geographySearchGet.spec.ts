@@ -134,14 +134,14 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         );
       });
 
-      it('should render 1 geography-fields__container class and should contain 4 child elements', async () => {
+      it('should render 1 geography-fields__container class and should contain 5 child elements', async () => {
         const geographyContainer = document?.querySelectorAll(
           '.geography-fields__container',
         );
         expect(
           document?.querySelector('.geography-fields__container')
             ?.childElementCount,
-        ).toEqual(4);
+        ).toEqual(5);
         expect(geographyContainer).toBeTruthy();
         expect(geographyContainer.length).toEqual(1);
       });

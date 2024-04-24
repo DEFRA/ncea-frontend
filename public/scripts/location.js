@@ -1,4 +1,8 @@
-import { fireEventAfterStorage, getStorageData } from './customScripts.js';
+import {
+  fireEventAfterStorage,
+  getStorageData,
+  updateSubmitButtonState,
+} from './customScripts.js';
 import { invokeAjaxCall } from './fetchResults.js';
 import {
   addFilterHeadingClickListeners,
@@ -271,6 +275,7 @@ function calculateCoordinates() {
         wst: west.toFixed(precision),
       };
       fireEventAfterStorage(sessionData);
+      toggleClearSelectionBlock();
     }
   }
 }
@@ -280,6 +285,45 @@ vectorSource.on('change', () => {
     calculateCoordinates();
   }
 });
+
+const toggleClearSelectionBlock = () => {
+  const north = document.getElementById('north').value;
+  const south = document.getElementById('south').value;
+  const east = document.getElementById('east').value;
+  const west = document.getElementById('west').value;
+  const clearSelection = document.getElementById('clear-map-selection');
+  if (north && south && east && west) {
+    if (clearSelection) {
+      clearSelection.style.display = 'block';
+    }
+  } else {
+    clearSelection.style.display = 'none';
+  }
+};
+
+const attachClearSelectionListener = () => {
+  const clearSelection = document.getElementById('clear-map-selection');
+  if (clearSelection) {
+    clearSelection.addEventListener('click', function () {
+      vectorSource.clear();
+      const form = document.querySelector('[data-do-browser-storage]');
+      if (form) {
+        console.log(form.id);
+        const sessionData = getStorageData();
+        if (sessionData.fields.hasOwnProperty(form.id)) {
+          delete sessionData.fields[form.id];
+        }
+        fireEventAfterStorage(sessionData);
+        document.getElementById('north').value = '';
+        document.getElementById('south').value = '';
+        document.getElementById('east').value = '';
+        document.getElementById('west').value = '';
+        toggleClearSelectionBlock();
+        updateSubmitButtonState(form);
+      }
+    });
+  }
+};
 
 if (document.getElementById('north')) {
   document.getElementById('north').addEventListener('change', () => {
@@ -309,6 +353,7 @@ function calculatePolygonFromCoordinates() {
   const east = parseFloat(document.getElementById('east')[targetKey]);
   const west = parseFloat(document.getElementById('west')[targetKey]);
   vectorSource.clear();
+  !isDetailsScreen && toggleClearSelectionBlock();
   addPolygon({ north, south, east, west }, completedStyle);
 }
 
@@ -677,6 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
+        attachClearSelectionListener();
       }, timeout);
     }
   }

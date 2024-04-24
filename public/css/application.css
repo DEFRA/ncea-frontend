@@ -7781,6 +7781,27 @@
   justify-content: flex-end;
 }
 
+.defra-map-clear-selection__block {
+  display: none;
+  width: 150px;
+}
+.defra-map-clear-selection__link {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  color: #1d70b8 !important;
+}
+.defra-map-clear-selection__link:hover {
+  color: #003078 !important;
+}
+.defra-map-clear-selection__link:focus {
+  color: #003078 !important;
+}
+
 .search-result__item {
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
   sort: 'best_match',
-  filters: { resourceType: 'all' },
+  filters: {},
   rowsPerPage: '20',
   page: 1,
   stepState: {},
@@ -241,4 +241,4 @@ window.addEventListener('storage', (event) => {
   }
 });
 
-export { getStorageData, fireEventAfterStorage };
+export { getStorageData, fireEventAfterStorage, updateSubmitButtonState };

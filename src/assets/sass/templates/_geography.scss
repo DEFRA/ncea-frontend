@@ -12,3 +12,25 @@
     justify-content: flex-end;
   }
 }
+
+.defra-map-clear-selection {
+  &__block {
+    display: none;
+    width: 150px;
+  }
+
+  &__link {
+    @include font-style-stack(19px, 25px, 300, normal, true);
+    display: flex;
+    align-items: center;
+    color: $govuk-link-colour !important;
+
+    &:hover {
+      color: $govuk-link-hover-colour !important;
+    }
+
+    &:focus {
+      color: $govuk-link-hover-colour !important;
+    }
+  }
+}
