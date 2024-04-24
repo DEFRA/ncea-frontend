@@ -321,9 +321,9 @@ describe('Results Screen', () => {
     });
 
     describe('Hero content elements', () => {
-      it('should render 2 child elements', async () => {
+      it('should render 4 child elements', async () => {
         const bannerContainer = document?.querySelector('.banner-container');
-        expect(bannerContainer?.childElementCount).toEqual(2);
+        expect(bannerContainer?.childElementCount).toEqual(4);
       });
     });
 
@@ -485,46 +485,16 @@ describe('Results Screen', () => {
       });
     });
 
-    describe('YouTube video block classes', () => {
-      it('renders custom video container class', async () => {
-        expect(document.querySelector('.video-container')).toBeTruthy();
-      });
-
-      it('renders custom video frame class', async () => {
-        expect(document.querySelector('.video-container__frame')).toBeTruthy();
+    describe('Educational Copy block classes', () => {
+      it('renders educational copy container class', async () => {
+        expect(document.querySelector('.educational-copy-container')).toBeTruthy();
       });
     });
 
-    describe('YouTube video block elements', () => {
-      it('should render 2 child elements', async () => {
-        const videoContainer = document?.querySelector('.video-container');
-        expect(videoContainer?.childElementCount).toEqual(2);
-      });
-    });
-
-    describe('YouTube video block heading', () => {
-      it('should render the video content heading', async () => {
-        expect(
-          document
-            ?.querySelector('.video-container__heading-m')
-            ?.textContent?.trim(),
-        ).toBe('What is natural capital?');
-      });
-    });
-
-    describe('YouTube video frame options', () => {
-      it('should render youtube video in iframe', async () => {
-        const videoFrame = document?.querySelector('.video-container__frame');
-        expect(videoFrame?.firstElementChild?.tagName.toLowerCase()).toBe(
-          'iframe',
-        );
-      });
-
-      it('should render youtube video url', async () => {
-        const videoFrame = document?.querySelector('.video-container__frame');
-        expect(videoFrame?.firstElementChild?.getAttribute('src')).toBe(
-          'https://www.youtube.com/embed/4wx0rMruSJo?si=h-SD8VoSUSNwqo1S',
-        );
+    describe('Educational Copy block elements', () => {
+      it('should render 8 child elements', async () => {
+        const videoContainer = document?.querySelector('.educational-copy-container');
+        expect(videoContainer?.childElementCount).toEqual(8);
       });
     });
 
