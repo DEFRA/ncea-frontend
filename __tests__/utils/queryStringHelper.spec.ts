@@ -120,14 +120,13 @@ describe('queryStringHelper functions', () => {
 
   describe('getExtentParams', () => {
     test('should return extent parameters from URLSearchParams', () => {
-      const searchParams = new URLSearchParams('nth=1&sth=2&est=3&wst=4&dpt=5');
+      const searchParams = new URLSearchParams('nth=1&sth=2&est=3&wst=4');
       const result = getExtentParams(searchParams);
       expect(result).toEqual({
         nth: '1',
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
       });
     });
 
@@ -139,7 +138,6 @@ describe('queryStringHelper functions', () => {
         sth: '',
         est: '',
         wst: '',
-        dpt: '',
       });
     });
   });
@@ -222,7 +220,6 @@ describe('queryStringHelper functions', () => {
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
       };
       const result = generateQueryBuilderFields(requestQuery);
       expect(result).toEqual({
@@ -232,7 +229,6 @@ describe('queryStringHelper functions', () => {
           sth: '2',
           est: '3',
           wst: '4',
-          dpt: '5',
         },
       });
     });
@@ -250,7 +246,6 @@ describe('queryStringHelper functions', () => {
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
       };
       const result = generateQueryBuilderFields(requestQuery);
       expect(result).toEqual({
@@ -268,7 +263,6 @@ describe('queryStringHelper functions', () => {
           sth: '2',
           est: '3',
           wst: '4',
-          dpt: '5',
         },
       });
     });
@@ -343,7 +337,6 @@ describe('queryStringHelper functions', () => {
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
         srt: 'date',
         pg: '2',
         rpp: '10',
@@ -366,7 +359,6 @@ describe('queryStringHelper functions', () => {
             sth: '2',
             est: '3',
             wst: '4',
-            dpt: '5',
           },
         },
         sort: 'date',

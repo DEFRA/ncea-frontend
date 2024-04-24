@@ -65,7 +65,6 @@ describe('Deals with guided geography search handler', () => {
       south: '51.564868',
       east: '10.884730',
       west: '-1.200230',
-      depth: '',
     };
     const request: Request = { payload: { ...extentFormFields } } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
@@ -75,7 +74,6 @@ describe('Deals with guided geography search handler', () => {
       [queryParamKeys.south]: extentFormFields?.['south'] ?? '',
       [queryParamKeys.east]: extentFormFields?.['east'] ?? '',
       [queryParamKeys.west]: extentFormFields?.['west'] ?? '',
-      [queryParamKeys.depth]: extentFormFields?.['depth'] ?? '',
     };
     const queryString: string = upsertQueryParams(
       request.query,
@@ -98,7 +96,6 @@ describe('Deals with guided geography search handler', () => {
       [queryParamKeys.south]: extentFormFields?.['south'] ?? '',
       [queryParamKeys.east]: extentFormFields?.['east'] ?? '',
       [queryParamKeys.west]: extentFormFields?.['west'] ?? '',
-      [queryParamKeys.depth]: extentFormFields?.['depth'] ?? '',
     };
     const queryString: string = upsertQueryParams(
       request.query,

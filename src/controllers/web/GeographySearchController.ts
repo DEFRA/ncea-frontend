@@ -63,7 +63,6 @@ const GeographySearchController = {
       [queryParamKeys.south]: payload?.['south'] ?? '',
       [queryParamKeys.east]: payload?.['east'] ?? '',
       [queryParamKeys.west]: payload?.['west'] ?? '',
-      [queryParamKeys.depth]: payload?.['depth'] ?? '',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, true);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);

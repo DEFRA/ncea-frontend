@@ -112,13 +112,6 @@ const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => 
       },
     },
   };
-
-  if (geoCoordinates.dpt && geoShapeQuery.geo_shape.geom) {
-    geoShapeQuery.geo_shape.geom.depth = {
-      from: 0,
-      to: parseInt(geoCoordinates.dpt),
-    };
-  }
   return geoShapeQuery;
 };
 

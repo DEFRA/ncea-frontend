@@ -62,7 +62,6 @@ export const queryParamKeys = {
   south: 'sth',
   east: 'est',
   west: 'wst',
-  depth: 'dpt',
   count: 'cnt',
   page: 'pg',
   rowsPerPage: 'rpp',

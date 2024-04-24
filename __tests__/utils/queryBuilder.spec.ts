@@ -39,7 +39,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: '',
@@ -75,10 +74,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -117,7 +112,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: '',
@@ -157,10 +151,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -308,59 +298,6 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with only Geo Coordinates with dpt', () => {
-      const searchFieldsObject: ISearchPayload = {
-        fields: {
-          extent: {
-            nth: '123',
-            sth: '345',
-            est: '678',
-            wst: '901',
-            dpt: '1',
-          },
-        },
-        sort: '',
-        filters: {},
-        rowsPerPage: 20,
-        page: 1,
-      };
-
-      const expectedQuery: IQuery = {
-        query: {
-          bool: {
-            must: [
-              {
-                geo_shape: {
-                  geom: {
-                    shape: {
-                      type: 'envelope',
-                      coordinates: [
-                        [901, 123],
-                        [678, 345],
-                      ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
-                    },
-                    relation: 'intersects',
-                  },
-                },
-              },
-            ],
-          },
-        },
-        size: 20,
-        from: 0,
-        _source: [],
-      };
-
-      const result = buildSearchQuery({ searchFieldsObject });
-
-      expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(1);
-    });
-
     it('should build the search query correctly with only Geo Coordinates with out dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -456,7 +393,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -492,10 +428,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -541,7 +473,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -581,10 +512,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -760,66 +687,6 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with best match sort when only Geo Coordinates with dpt', () => {
-      const searchFieldsObject: ISearchPayload = {
-        fields: {
-          extent: {
-            nth: '123',
-            sth: '345',
-            est: '678',
-            wst: '901',
-            dpt: '1',
-          },
-        },
-        sort: 'best_match',
-        filters: {},
-        rowsPerPage: 20,
-        page: 1,
-      };
-
-      const expectedQuery: IQuery = {
-        query: {
-          bool: {
-            must: [
-              {
-                geo_shape: {
-                  geom: {
-                    shape: {
-                      type: 'envelope',
-                      coordinates: [
-                        [901, 123],
-                        [678, 345],
-                      ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
-                    },
-                    relation: 'intersects',
-                  },
-                },
-              },
-            ],
-          },
-        },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
-          },
-        ],
-        size: 20,
-        from: 0,
-        _source: [],
-      };
-
-      const result = buildSearchQuery({ searchFieldsObject });
-
-      expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(1);
-    });
-
     it('should build the search query correctly with best match sort when only Geo Coordinates with out dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -896,7 +763,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'recent_study',
@@ -932,10 +798,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -975,7 +837,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'recent_study',
@@ -1015,10 +876,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -1170,60 +1027,6 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with most recent study sort when only Geo Coordinates with dpt', () => {
-      const searchFieldsObject: ISearchPayload = {
-        fields: {
-          extent: {
-            nth: '123',
-            sth: '345',
-            est: '678',
-            wst: '901',
-            dpt: '1',
-          },
-        },
-        sort: 'recent_study',
-        filters: {},
-        rowsPerPage: 20,
-        page: 1,
-      };
-
-      const expectedQuery: IQuery = {
-        query: {
-          bool: {
-            must: [
-              {
-                geo_shape: {
-                  geom: {
-                    shape: {
-                      type: 'envelope',
-                      coordinates: [
-                        [901, 123],
-                        [678, 345],
-                      ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
-                    },
-                    relation: 'intersects',
-                  },
-                },
-              },
-            ],
-          },
-        },
-        sort: [recentStudySortScript],
-        size: 20,
-        from: 0,
-        _source: [],
-      };
-
-      const result = buildSearchQuery({ searchFieldsObject });
-
-      expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(1);
-    });
-
     it('should build the search query correctly with most recent study sort when only Geo Coordinates with out dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -1294,7 +1097,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1330,10 +1132,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -1379,7 +1177,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1419,10 +1216,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -1472,7 +1265,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1508,10 +1300,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },
@@ -1557,7 +1345,6 @@ describe('Build the search query', () => {
             sth: '345',
             est: '678',
             wst: '901',
-            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1597,10 +1384,6 @@ describe('Build the search query', () => {
                         [901, 123],
                         [678, 345],
                       ],
-                    },
-                    depth: {
-                      from: 0,
-                      to: 1,
                     },
                     relation: 'intersects',
                   },

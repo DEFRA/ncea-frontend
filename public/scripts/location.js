@@ -408,8 +408,16 @@ function boundingBoxCheckboxChange(isChecked) {
 }
 
 function resetFilterData() {
-  document.getElementById('study_period_filter-map_results').reset();
-  document.getElementById('resource_type_filter-map_results').reset();
+  const studyPeriodForm = document.getElementById(
+    'study_period_filter-map_results',
+  );
+  const resourceTypeForm = document.getElementById(
+    'resource_type_filter-map_results',
+  );
+  if (studyPeriodForm && resourceTypeForm) {
+    studyPeriodForm.reset();
+    resourceTypeForm.reset();
+  }
 }
 
 function resetMap() {
@@ -563,12 +571,14 @@ const getMapFilters = async (path) => {
       addFilterHeadingClickListeners('map_results');
       attachStudyPeriodChangeListener('map_results');
       attachMapResultsFilterCheckboxChangeListener();
-      document
-        .getElementById('map_results-start_year')
-        .addEventListener('change', updateStudyPeriodFilter);
-      document
-        .getElementById('map_results-to_year')
-        .addEventListener('change', updateStudyPeriodFilter);
+      const mapFilterStartYear = document.getElementById(
+        'map_results-start_year',
+      );
+      const mapFilterToYear = document.getElementById('map_results-to_year');
+      if (mapFilterStartYear && mapFilterToYear) {
+        mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
+        mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
+      }
     }
   }
 };

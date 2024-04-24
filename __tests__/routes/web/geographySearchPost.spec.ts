@@ -54,7 +54,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '2',
-        depth: '',
       });
       response = responseObject.response;
     });
@@ -81,7 +80,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '',
-        depth: '',
       });
       document = responseObject.document;
       response = responseObject.response;
@@ -182,25 +180,25 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
           ).toEqual(1);
         });
 
-        it('should render 1 geography-fields__container class and should contain 5 child elements', async () => {
+        it('should render 1 geography-fields__container class and should contain 4 child elements', async () => {
           const geographyContainer = document?.querySelectorAll(
             '.geography-fields__container',
           );
           expect(
             document?.querySelector('.geography-fields__container')
               ?.childElementCount,
-          ).toEqual(5);
+          ).toEqual(4);
           expect(geographyContainer).toBeTruthy();
           expect(geographyContainer.length).toEqual(1);
         });
 
-        it('should render 5 geography-fields__field class', async () => {
+        it('should render 4 geography-fields__field class', async () => {
           expect(
             document.querySelector('.geography-fields__field'),
           ).toBeTruthy();
           expect(
             document.querySelectorAll('.geography-fields__field').length,
-          ).toEqual(5);
+          ).toEqual(4);
         });
       });
 
@@ -318,7 +316,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '',
-        depth: '',
       });
       expect(responseObject.response.statusCode).toEqual(400);
     });
@@ -328,7 +325,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '',
-        depth: '',
       });
       expect(responseObject.response.statusCode).toEqual(400);
     });

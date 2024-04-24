@@ -79,13 +79,11 @@ const getExtentParams = (searchParams: URLSearchParams): Record<string, string> 
   const sth: string = searchParams.get(queryParamKeys.south) ?? '';
   const est: string = searchParams.get(queryParamKeys.east) ?? '';
   const wst: string = searchParams.get(queryParamKeys.west) ?? '';
-  const dpt: string = searchParams.get(queryParamKeys.depth) ?? '';
   return {
     nth,
     sth,
     est,
     wst,
-    dpt,
   };
 };
 
