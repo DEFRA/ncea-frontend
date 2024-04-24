@@ -3,7 +3,12 @@ import { isEmpty } from './isEmpty';
 
 const generateDateString = (dateObject: IDateObject, isToDate = false): string => {
   const currentDate = new Date();
-  const month = !isEmpty(dateObject.month) && !isNaN(dateObject.month!) ? dateObject.month! : isToDate ? 12 : 1;
+  let month: number;
+  if (isToDate && (isEmpty(dateObject.month) || isNaN(dateObject.month!))) {
+    month = 12;
+  } else {
+    month = !isEmpty(dateObject.month) && !isNaN(dateObject.month!) ? dateObject.month! : 1;
+  }
   let day: number;
   if (isToDate && (isEmpty(dateObject.day) || isNaN(dateObject.day!))) {
     if (month === currentDate.getMonth() + 1 && dateObject.year === currentDate.getFullYear()) {

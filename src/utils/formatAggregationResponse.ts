@@ -15,10 +15,14 @@ const formatAggregationResponse = async (
     filterOptions.forEach((filterOption: IFilterOption) => {
       const apiAggValues = apiResponse?.aggregations?.[filterOption.key];
       if (apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues?.buckets.length > 0) {
-        finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => ({
-          value: bucket[filterOption.propertyToRead],
-          text: `${capitalizeWords(bucket[filterOption.propertyToRead])}${filterOption.needCount ? ` (${bucket['doc_count']})` : ''}`,
-        }));
+        finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
+          let text: string = capitalizeWords(bucket[filterOption.propertyToRead]);
+          if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
+          return {
+            value: bucket[filterOption.propertyToRead],
+            text,
+          };
+        });
       } else {
         finalResponse[filterOption.key] = [];
       }
