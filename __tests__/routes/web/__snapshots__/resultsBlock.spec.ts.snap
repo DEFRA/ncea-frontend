@@ -111,9 +111,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -656,9 +654,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -1089,9 +1085,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -1760,9 +1754,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -2280,9 +2272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>

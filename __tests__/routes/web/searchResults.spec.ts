@@ -124,7 +124,7 @@ describe('Results Screen', () => {
     });
 
     describe('Breadcrumb list item options', () => {
-      it('should render home list item as a first child', async () => {
+      it('should render home list item first child as an anchor', async () => {
         const item = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.firstElementChild;
@@ -137,17 +137,12 @@ describe('Results Screen', () => {
         expect(anchor?.textContent?.trim()).toEqual('Home');
       });
 
-      it('should render search results list item as a second child', async () => {
+      it('should not render search results list item second child as an anchor', async () => {
         const item = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.lastElementChild;
-        const anchor = item?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
-        );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual('Search results');
+        expect(item.querySelector('a')).toBeNull();
+        expect(item?.textContent?.trim()).toEqual('Search results');
       });
     });
     describe('Search block classes', () => {

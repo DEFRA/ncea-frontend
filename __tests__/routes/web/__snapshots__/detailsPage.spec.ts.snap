@@ -124,9 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</li>
   
 
   </ol>
@@ -146,7 +144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
     
-      <details class="govuk-details details-alt_title" open>
+      <details class="govuk-details details-alt_title">
   <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">
       Alternate title (additional business name or alternative language)
@@ -1065,9 +1063,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Geoserver WFS Fragments Country Boundaries Test Template</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Geoserver WFS Fragments Country Boundaries Test Template</li>
   
 
   </ol>
