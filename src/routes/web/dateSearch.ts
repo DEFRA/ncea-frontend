@@ -13,11 +13,11 @@ const dateSearchRoutes = [
   {
     method: 'POST',
     path: webRoutePaths.guidedDateSearch,
-    handler: DateSearchController.doDateSearchHandler,
+    handler: DateSearchController.dateSearchSubmitHandler,
     options: {
       validate: {
         payload: dateSchema,
-        failAction: DateSearchController.doDateSearchFailActionHandler,
+        failAction: DateSearchController.dateSearchFailActionHandler,
       },
     },
   },

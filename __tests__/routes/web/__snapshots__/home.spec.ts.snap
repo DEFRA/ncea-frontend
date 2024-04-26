@@ -23,6 +23,9 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
 
     
   <link rel="stylesheet" href="/assets/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
     
   </head>
@@ -36,23 +39,36 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
     
 
     
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id= "
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= "
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header class="header-container">
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','');</script>
-<!-- End Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '');
+    </script>
+    <!-- End Google Tag Manager -->
 
-<!--Will be removed once Defra GA accounts been created -->
+    <!--Will be removed once Defra GA accounts been created -->
 
-<!-- Google tag (gtag.js) -->
-
+    <!-- Google tag (gtag.js) -->
+    
 
 
 
@@ -139,11 +155,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <span class="govuk-caption-m quick_search-container__caption-m">You can search by keyword, theme, title or project code, for example: "hedgehog population Bristol", "Community Supported Fisheries", "AE0101".</span>
     
     <div class="search-block" data-module="search">
-      <form action="/search" id="quick-search" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
+      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
         
 
-<div class="govuk-form-group">
+<div class="govuk-form-group govuk-!-margin-bottom-4">
   <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
     Search
   </label>
@@ -151,7 +166,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div class="govuk-input__wrapper">
     
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search">
+    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
       
     <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
     
@@ -312,7 +327,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  <script type="module" src="/assets/scripts/fetchResults.js"></script>
 
   </body>
 </html>

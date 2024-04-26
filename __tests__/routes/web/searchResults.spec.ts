@@ -20,11 +20,13 @@ jest.mock('../../../src/utils/keyvault', () => ({
 
 let serverRequest;
 
-const invokeRoute = async (route, payload) => {
-  const response = await serverRequest
-    .post(route)
-    .set('referer', 'some_referer')
-    .send(payload);
+const invokeRoute = async (route, payload, method = 'post') => {
+  let response;
+  if (method === 'post') {
+    response = await serverRequest.post(route).send(payload);
+  } else {
+    response = await serverRequest.get(route).query({ ...payload });
+  }
   const rawHTML = response.text;
   const parser = new DOMParser();
   const document = parser.parseFromString(rawHTML, 'text/html');
@@ -65,20 +67,41 @@ describe('Results Screen', () => {
       expect(response.text).toMatchSnapshot();
     });
 
-    it('should route works with status code 200', async () => {
-      expect(response.statusCode).toEqual(200);
+    it('should route works with status code 302', async () => {
+      expect(response.statusCode).toEqual(302);
     });
   });
 
   describe('Quick search POST verification on results page', () => {
     let document;
+    let response;
+    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=best_match&rty=all`;
 
     beforeAll(async () => {
       const responseObject = await invokeRoute(
         webRoutePaths.results,
         successPayload,
       );
-      document = responseObject.document;
+      response = responseObject.response;
+      const redirectedResponseObject = await invokeRoute(
+        response.headers.location,
+        {
+          q: 'test',
+          jry: 'qs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
+        },
+      );
+      document = redirectedResponseObject.document;
+    });
+
+    describe('Check the redirection', () => {
+      it('should redirect to the results get route with query params', async () => {
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe(redirectedRoute);
+      });
     });
 
     describe('Breadcrumb classes', () => {

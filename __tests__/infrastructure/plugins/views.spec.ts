@@ -10,9 +10,6 @@ const {
   home: homePage,
   results: searchResults,
   guidedDateSearch: guidedSearch,
-  getFilters,
-  getResults,
-  getResultsCount,
 } = webRoutePaths;
 
 describe('Vision Plugin Configuration', () => {
@@ -56,9 +53,6 @@ describe('Vision Plugin Configuration', () => {
         homePage,
         searchResults,
         guidedSearch,
-        getFilters,
-        getResults,
-        getResultsCount,
       },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,
