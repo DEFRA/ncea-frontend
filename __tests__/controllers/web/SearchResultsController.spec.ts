@@ -19,6 +19,7 @@ import {
 } from '../../../src/services/handlers/searchApi';
 import {
   formIds,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -81,6 +82,7 @@ describe('Deals with search results controller', () => {
         response,
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
+        pageTitle: pageTitles.results,
         quickSearchFID,
         searchResults,
         hasError: false,
@@ -138,6 +140,7 @@ describe('Deals with search results controller', () => {
         response,
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
+        pageTitle: pageTitles.results,
         quickSearchFID,
         searchResults,
         hasError: false,
@@ -229,6 +232,7 @@ describe('Deals with search results controller', () => {
         text: 'Please enter keywords into the search field.',
       };
       const context = {
+        pageTitle: pageTitles.home,
         quickSearchFID,
         searchInputError,
       };
@@ -265,6 +269,7 @@ describe('Deals with search results controller', () => {
         text: 'Please enter keywords into the search field.',
       };
       const context = {
+        pageTitle: pageTitles.results,
         quickSearchFID,
         searchInputError,
       };
@@ -299,6 +304,7 @@ describe('Deals with search results controller', () => {
       const { quickSearchFID } = formIds;
       const searchInputError = undefined;
       const context = {
+        pageTitle: pageTitles.home,
         quickSearchFID,
         searchInputError,
       };
@@ -332,6 +338,8 @@ describe('Deals with search results controller', () => {
         response,
       );
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
+        pageTitle: pageTitles.generalTab,
+        pageTitles,
         docDetails: expectedResponse,
         detailsTabOptions: await processDetailsTabData(expectedResponse),
         queryString,
@@ -357,6 +365,8 @@ describe('Deals with search results controller', () => {
       );
       const queryString: string = readQueryParams(request.query);
       expect(response.view).toHaveBeenCalledWith('screens/details/template', {
+        pageTitle: pageTitles.generalTab,
+        pageTitles,
         docDetails: {},
         detailsTabOptions: await processDetailsTabData({}),
         queryString,

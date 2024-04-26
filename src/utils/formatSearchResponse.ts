@@ -4,6 +4,7 @@ import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
+import { toggleContent } from './toggleContent';
 import {
   IAccumulatedCoordinatesWithCenter,
   IOtherSearchItem,
@@ -25,6 +26,13 @@ const getStudyPeriod = (startDate: string, endDate: string): string => {
   }
 
   return studyPeriod;
+};
+
+const getAbstractContent = (data: Record<string, any>): string => {
+  if (Object.keys(data).length && data?.default) {
+    return toggleContent(data?.default, 'abstract_content');
+  }
+  return '';
 };
 
 const formatSearchResponse = async (
@@ -49,7 +57,7 @@ const formatSearchResponse = async (
       id: searchItem?._id,
       title: searchItem?._source?.resourceTitleObject?.default ?? '',
       publishedBy: publishedBy.organisationValue,
-      content: searchItem?._source?.resourceAbstractObject?.default ?? '',
+      content: getAbstractContent(searchItem?._source?.resourceAbstractObject ?? ''),
       studyPeriod,
       startYear: getYear(startDate),
       toYear: getYear(endDate),

@@ -14,6 +14,7 @@ import {
 import {
   formIds,
   guidedSearchSteps,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -34,6 +35,7 @@ describe('Deals with the Date Search Controller', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
       {
+        pageTitle: pageTitles.date,
         fromDate,
         toDate,
         guidedDateSearchPath,
@@ -136,6 +138,7 @@ describe('Deals with the Date Search Controller', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
       {
+        pageTitle: pageTitles.date,
         fromDate: dateQuestionnaireGovUKError.fromDate,
         toDate: dateQuestionnaireGovUKError.toDate,
         guidedDateSearchPath,

@@ -4,7 +4,7 @@ import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { IGuidedSearchStepsMatrix, IStepRouteMatrix } from '../../interfaces/guidedSearch.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { formIds, guidedSearchSteps, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 /**
@@ -20,6 +20,7 @@ const HomeController = {
   renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     const { quickSearchFID } = formIds;
     return response.view('screens/home/template', {
+      pageTitle: pageTitles.home,
       quickSearchFID,
       searchInputError: undefined,
     });

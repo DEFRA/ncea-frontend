@@ -96,7 +96,7 @@ describe('Details route template', () => {
     });
 
     describe('Breadcrumb list item options', () => {
-      it('should render home list item as a first child', async () => {
+      it('should render home list item first child as an anchor tag', async () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
@@ -109,7 +109,7 @@ describe('Details route template', () => {
         expect(anchor?.textContent?.trim()).toEqual('Home');
       });
 
-      it('should render search results list item as a second child', async () => {
+      it('should render search results list item second child as an anchor tag', async () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
@@ -118,21 +118,21 @@ describe('Details route template', () => {
         expect(anchor?.getAttribute('class')).toEqual(
           'govuk-breadcrumbs__link',
         );
-        expect(anchor?.getAttribute('href')).toEqual(`${webRoutePaths.results}?`);
+        expect(anchor?.getAttribute('href')).toEqual(
+          `${webRoutePaths.results}?`,
+        );
         expect(anchor?.textContent?.trim()).toEqual('Search results');
       });
 
-      it('should render search results list item as a second child', async () => {
+      it('should not render search results list item third child as an anchor tag', async () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
-        const anchor = breadcrumbItems[2]?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
+        const breadcrumbItem = breadcrumbItems[2];
+        expect(breadcrumbItem.querySelector('a')).toBeNull();
+        expect(breadcrumbItem?.textContent?.trim()).toEqual(
+          detailsFullResponse?.title,
         );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual(detailsFullResponse?.title);
       });
     });
 
@@ -328,7 +328,7 @@ describe('Details route template', () => {
     });
 
     describe('Breadcrumb list item options', () => {
-      it('should render home list item as a first child', async () => {
+      it('should render home list item first child as an anchor tag', async () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
@@ -341,7 +341,7 @@ describe('Details route template', () => {
         expect(anchor?.textContent?.trim()).toEqual('Home');
       });
 
-      it('should render search results list item as a second child', async () => {
+      it('should render search results list item second child as an anchor tag', async () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
@@ -350,21 +350,19 @@ describe('Details route template', () => {
         expect(anchor?.getAttribute('class')).toEqual(
           'govuk-breadcrumbs__link',
         );
-        expect(anchor?.getAttribute('href')).toEqual(`${webRoutePaths.results}?`);
+        expect(anchor?.getAttribute('href')).toEqual(
+          `${webRoutePaths.results}?`,
+        );
         expect(anchor?.textContent?.trim()).toEqual('Search results');
       });
 
-      it('should render search results list item as a second child', async () => {
+      it('should not render search results list item third child as an anchor tag', async () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
-        const anchor = breadcrumbItems[2]?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
-        );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual(
+        const breadcrumbItem = breadcrumbItems[2];
+        expect(breadcrumbItem?.querySelector('a')).toBeNull();
+        expect(breadcrumbItem?.textContent?.trim()).toEqual(
           detailsPartialResponse?.title,
         );
       });

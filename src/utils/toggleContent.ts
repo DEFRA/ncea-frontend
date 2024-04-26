@@ -9,7 +9,7 @@ const toggleContent = (content: string, uniqueKey: string): string => {
       const truncatedContent: string = words.slice(0, maxWords).join(' ');
       const remainingContent: string = words.slice(maxWords).join(' ');
 
-      const fullContent: string = `${truncatedContent}<span id='${uniqueKey}-content' style='display: none;'> ${remainingContent}</span> <a href='javascript:;' class='govuk-link toggle-content__link' onclick="toggleContent(this, '${uniqueKey}', '${showMoreText}', '${showLessText}')">${showMoreText}</a>`;
+      const fullContent: string = `${truncatedContent}<span id='${uniqueKey}-content' style='display: none;'> ${remainingContent}</span> <a href='javascript:void(0);' class='govuk-link toggle-content__link' onclick="toggleContent(this, '${uniqueKey}', '${showMoreText}', '${showLessText}')">${showMoreText}</a>`;
       return fullContent;
     } else {
       return content;

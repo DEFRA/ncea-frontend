@@ -6,7 +6,7 @@ exports[`Details route template Document details with data Check status code and
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  NCEA Catalogue Detail (General)
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -124,9 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</li>
   
 
   </ol>
@@ -146,7 +144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <h1 class='govuk-heading-m details-title'>20190731 - HI1597 - Firth of Clyde - Troon to Turnberry Point - 2m - Bathymetric Survey</h1>
 
     
-      <details class="govuk-details details-alt_title" open>
+      <details class="govuk-details details-alt_title">
   <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">
       Alternate title (additional business name or alternative language)
@@ -195,7 +193,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#general">
+          <a class="govuk-tabs__tab" href="#general" onclick="changeTitle(&quot;NCEA Catalogue Detail (General)&quot;)">
             General
           </a>
         </li>
@@ -204,7 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#access">
+          <a class="govuk-tabs__tab" href="#access" onclick="changeTitle(&quot;NCEA Catalogue Detail (Access)&quot;)">
             Access
           </a>
         </li>
@@ -213,7 +211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital">
+          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail (Natural Capital)&quot;)">
             Natural Capital
           </a>
         </li>
@@ -222,7 +220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#quality">
+          <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail (Quality)&quot;)">
             Quality
           </a>
         </li>
@@ -231,7 +229,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#geography">
+          <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail (Geography)&quot;)">
             Geography
           </a>
         </li>
@@ -240,7 +238,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance">
+          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail (Governance)&quot;)">
             Governance
           </a>
         </li>
@@ -249,7 +247,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#license">
+          <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail (License)&quot;)">
             License
           </a>
         </li>
@@ -936,6 +934,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/details.js"></script>
 
   </body>
 </html>
@@ -948,7 +947,7 @@ exports[`Details route template Document details with partial data Check status 
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  NCEA Catalogue Detail (General)
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -1066,9 +1065,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Geoserver WFS Fragments Country Boundaries Test Template</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Geoserver WFS Fragments Country Boundaries Test Template</li>
   
 
   </ol>
@@ -1127,7 +1124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#general">
+          <a class="govuk-tabs__tab" href="#general" onclick="changeTitle(&quot;NCEA Catalogue Detail (General)&quot;)">
             General
           </a>
         </li>
@@ -1136,7 +1133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#access">
+          <a class="govuk-tabs__tab" href="#access" onclick="changeTitle(&quot;NCEA Catalogue Detail (Access)&quot;)">
             Access
           </a>
         </li>
@@ -1145,7 +1142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital">
+          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail (Natural Capital)&quot;)">
             Natural Capital
           </a>
         </li>
@@ -1154,7 +1151,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#quality">
+          <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail (Quality)&quot;)">
             Quality
           </a>
         </li>
@@ -1163,7 +1160,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#geography">
+          <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail (Geography)&quot;)">
             Geography
           </a>
         </li>
@@ -1172,7 +1169,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance">
+          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail (Governance)&quot;)">
             Governance
           </a>
         </li>
@@ -1181,7 +1178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#license">
+          <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail (License)&quot;)">
             License
           </a>
         </li>
@@ -1836,6 +1833,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
   <script type="module" src="/assets/scripts/location.js"></script>
+  <script type="module" src="/assets/scripts/details.js"></script>
 
   </body>
 </html>

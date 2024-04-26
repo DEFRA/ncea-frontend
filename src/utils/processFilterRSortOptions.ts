@@ -21,7 +21,8 @@ const processFilterOptions = async (
     if (option.value === toYearValue) option.selected = true;
   });
   if (!toYearValue) {
-    const toYearOptionsLastItem: IAggregationOption = toYearOptions[toYear.length - 1] ?? ({} as IAggregationOption);
+    const toYearOptionsLastItem: IAggregationOption =
+      toYearOptions[toYearOptions.length - 1] ?? ({} as IAggregationOption);
     toYearOptionsLastItem.selected = true;
   }
   resourceTypeOptions.forEach((option: IAggregationOption) => {

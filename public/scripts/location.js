@@ -315,7 +315,6 @@ const attachClearSelectionListener = () => {
       vectorSource.clear();
       const form = document.querySelector('[data-do-browser-storage]');
       if (form) {
-        console.log(form.id);
         const sessionData = getStorageData();
         if (sessionData.fields.hasOwnProperty(form.id)) {
           delete sessionData.fields[form.id];

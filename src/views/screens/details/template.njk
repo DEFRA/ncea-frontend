@@ -32,8 +32,7 @@
   {% if docDetails.title %}
     {% set breadcrumbItems = breadcrumbItems.concat([
       {
-        text: docDetails.title,
-        href: '#'
+        text: docDetails.title
       }
     ]) %}
   {% endif %}
@@ -58,14 +57,13 @@
       {{ govukDetails({
         summaryText: "Alternate title (additional business name or alternative language)",
         text: docDetails.alternateTitle,
-        open: "true",
         classes: "details-alt_title"
       }) }}
     {% endif %}
 
-    <div {% if not docDetails.resourceLocator %} class="open-data-block--disabled" {% endif %}>
+    <div {% if not docDetails.resourceLocator or not docDetails.organisationName %} class="open-data-block--disabled" {% endif %}>
       {{ goToResource({ organisationName: docDetails.organisationName, resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}
-      {% if not docDetails.resourceLocator %}
+      {% if not docDetails.resourceLocator or not docDetails.organisationName %}
         <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access tab for further details</span>
       {% endif %}
     </div>
@@ -77,6 +75,9 @@
         id: 'general',
         panel: {
           html: generalHTML
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.generalTab+'")'
         }
       },
       {
@@ -84,6 +85,9 @@
         id: 'access',
         panel: {
           html: accessHtml
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.accessTab+'")'
         }
       },
       {
@@ -91,6 +95,9 @@
         id: 'natural-capital',
         panel: {
           html: naturalCapitalHTML
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.naturalCapitalTab+'")'
         }
       },
       {
@@ -98,6 +105,9 @@
         id: 'quality',
         panel: {
           html: qualityHtml
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.qualityTab+'")'
         }
       },
       {
@@ -105,6 +115,9 @@
         id: 'geography',
         panel: {
           html: geographyHtml
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.geographyTab+'")'
         }
       },
       {
@@ -112,6 +125,9 @@
         id: 'governance',
         panel: {
           html: governanceHtml
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.governanceTab+'")'
         }
       },
       {
@@ -119,6 +135,9 @@
         id: 'license',
         panel: {
           html: licenseHtml
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.licenseTab+'")'
         }
       }
     ]
@@ -147,4 +166,5 @@
   <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
   <script src="{{ assetPath }}/scripts/ol.js"></script>
   <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
 {% endblock %}

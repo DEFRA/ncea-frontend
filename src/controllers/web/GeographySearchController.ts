@@ -5,7 +5,7 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 
 import { geographyQuestionnaireOptions } from '../../data/geographyQuestionnaireOptions';
 import { transformTextInputError } from '../../utils/transformErrors';
-import { formIds, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { formIds, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const GeographySearchController = {
@@ -20,6 +20,7 @@ const GeographySearchController = {
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     return response.view('screens/guided_search/geography_questionnaire', {
+      pageTitle: pageTitles.geography,
       guidedDateSearchPath,
       geographySearchPath,
       formFields,
@@ -45,6 +46,7 @@ const GeographySearchController = {
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
     return response
       .view('screens/guided_search/geography_questionnaire', {
+        pageTitle: pageTitles.geography,
         guidedDateSearchPath,
         geographySearchPath,
         formFields: finalFormFields,

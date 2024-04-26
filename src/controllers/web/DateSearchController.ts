@@ -6,7 +6,7 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 
 import { transformErrors } from '../../utils/transformErrors';
 import { upsertQueryParams } from '../../utils/queryStringHelper';
-import { formIds, formKeys, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { formIds, formKeys, guidedSearchSteps, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 
 const DateSearchController = {
@@ -14,6 +14,7 @@ const DateSearchController = {
     const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
     return response.view('screens/guided_search/date_questionnaire', {
+      pageTitle: pageTitles.date,
       fromDate,
       toDate,
       guidedDateSearchPath,
@@ -44,6 +45,7 @@ const DateSearchController = {
     const formId: string = formIds.dataQuestionnaireFID;
     return response
       .view('screens/guided_search/date_questionnaire', {
+        pageTitle: pageTitles.date,
         fromDate: fromField,
         toDate: toField,
         guidedDateSearchPath,
