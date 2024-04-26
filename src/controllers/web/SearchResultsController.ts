@@ -97,6 +97,7 @@ const SearchResultsController = {
         detailsTabOptions,
       });
     } catch (error) {
+      console.log(error);
       return response.view('screens/details/template', {
         error,
         docDetails: undefined,
