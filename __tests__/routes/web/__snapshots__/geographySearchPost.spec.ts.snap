@@ -389,7 +389,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script src="/assets/scripts/ol.js"></script>
   <script type="module" src="/assets/scripts/location.js"></script>
