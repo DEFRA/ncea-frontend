@@ -72,7 +72,7 @@ describe('Process details tab data function', () => {
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe(
-      `(<a class="govuk-link" href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
+      `(<a class="govuk-link" href="${docDetails.resourceLocator}" target="_blank">${docDetails.resourceLocator}</a>)`,
     );
   });
 
@@ -93,7 +93,7 @@ describe('Process details tab data function', () => {
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe(
-      `<a class="govuk-link" href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>`,
+      `<a class="govuk-link" href="${docDetails.resourceLocator}" target="_blank">${docDetails.resourceLocator}</a>`,
     );
   });
 
@@ -152,7 +152,7 @@ describe('Process details tab data function', () => {
     expect(processedData).toBeDefined();
     expect(processedData['mock']).toBeDefined();
     expect(processedData?.['mock']?.[0]?.displayValue).toBe(
-      `${docDetails.title} (<a class="govuk-link" href="${docDetails.resourceLocator}">${docDetails.resourceLocator}</a>)`,
+      `${docDetails.title} (<a class="govuk-link" href="${docDetails.resourceLocator}" target="_blank">${docDetails.resourceLocator}</a>)`,
     );
   });
 

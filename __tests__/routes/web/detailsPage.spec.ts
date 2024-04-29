@@ -126,13 +126,11 @@ describe('Details route template', () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
-        const anchor = breadcrumbItems[2]?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
+        const breadcrumbItem = breadcrumbItems[2];
+        expect(breadcrumbItem.querySelector('a')).toBeNull();
+        expect(breadcrumbItem?.textContent?.trim()).toEqual(
+          detailsFullResponse?.title,
         );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual(detailsFullResponse?.title);
       });
     });
 
@@ -358,13 +356,9 @@ describe('Details route template', () => {
         const breadcrumbItems = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.children;
-        const anchor = breadcrumbItems[2]?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
-        );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual(
+        const breadcrumbItem = breadcrumbItems[2];
+        expect(breadcrumbItem.querySelector('a')).toBeNull();
+        expect(breadcrumbItem?.textContent?.trim()).toEqual(
           detailsPartialResponse?.title,
         );
       });
