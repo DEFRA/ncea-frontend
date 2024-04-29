@@ -1,5 +1,6 @@
 {% extends "govuk/template.njk" %}
 
+{% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 
 {% set htmlClasses = "app-html-class" %}
@@ -66,14 +67,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 </script> #}
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="{{ assetPath }}/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">{{serviceName}}</span></div>
-      </div>
-    </div>
+
+{{ govukHeader({
+  homepageUrl: "https://www.gov.uk/",
+  serviceName: serviceName,
+  serviceUrl: routes.homePage
+}) }}
   </header>
 {% endblock %}
 
