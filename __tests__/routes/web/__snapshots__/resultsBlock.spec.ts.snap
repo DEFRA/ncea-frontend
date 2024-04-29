@@ -73,14 +73,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <!-- Google tag (gtag.js) -->
     
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
-      </div>
+
+
+
+
+
+<header class="govuk-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
+        
+<svg
+  focusable="false"
+  role="img"
+  class="govuk-header__logotype"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 152 30"
+  height="30"
+  width="152"
+  aria-label="GOV.UK"
+>
+  <title>GOV.UK</title>
+  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+</svg>
+
+        
+      </a>
     </div>
+    
+    <div class="govuk-header__content">
+    
+    
+      <a href="/" class="govuk-header__link govuk-header__service-name">
+        Natural Capital Search Service
+      </a>
+    
+    
+    
+    </div>
+    
+  </div>
+</header>
+
   </header>
 
 
@@ -111,9 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -138,7 +170,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         
 
 <div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+  <label class="govuk-label search-block__label" for="search_term">
     Search
   </label>
 
@@ -162,7 +194,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:;" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
@@ -173,19 +205,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
-  <div class='govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left'>
-    <div class='govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block'>
-      <div id='coordinate-map' style='height: 100%; width: 100%;'></div>
-      <div class='defra-map-controls'>
-        <a href="javascript:;" onclick="closeMapModal()" class='defra-map__exit' id="defra-map-exit">
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
             <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
             <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
           </svg>
           <span>Exit map</span>
         </a>
-        <div class='defra-map-controls__bottom'>
-          <button class='defra-map-reset' id='defra-map-reset' aria-controls="viewport">
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
               <g clip-path="url(#clip0_6756_107692)">
                 <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
@@ -196,10 +228,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </clipPath>
               </defs>
             </svg>
-            <span class='govuk-visually-hidden'>Reset location</span>
+            <span class="govuk-visually-hidden">Reset location</span>
           </button>
-          <div class='defra-map-zoom ol-unselectable'>
-            <button class='defra-map-zoom-in' id='defra-map-zoom-in' type="button" aria-controls="viewport">
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
                 <rect y="0.75" width="60" height="56.4921" fill="none"/>
                 <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
@@ -546,7 +578,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -634,14 +665,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <!-- Google tag (gtag.js) -->
     
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
-      </div>
+
+
+
+
+
+<header class="govuk-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
+        
+<svg
+  focusable="false"
+  role="img"
+  class="govuk-header__logotype"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 152 30"
+  height="30"
+  width="152"
+  aria-label="GOV.UK"
+>
+  <title>GOV.UK</title>
+  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+</svg>
+
+        
+      </a>
     </div>
+    
+    <div class="govuk-header__content">
+    
+    
+      <a href="/" class="govuk-header__link govuk-header__service-name">
+        Natural Capital Search Service
+      </a>
+    
+    
+    
+    </div>
+    
+  </div>
+</header>
+
   </header>
 
 
@@ -672,9 +737,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -699,7 +762,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         
 
 <div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+  <label class="govuk-label search-block__label" for="search_term">
     Search
   </label>
 
@@ -723,7 +786,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:;" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
@@ -734,19 +797,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
-  <div class='govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left'>
-    <div class='govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block'>
-      <div id='coordinate-map' style='height: 100%; width: 100%;'></div>
-      <div class='defra-map-controls'>
-        <a href="javascript:;" onclick="closeMapModal()" class='defra-map__exit' id="defra-map-exit">
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
             <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
             <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
           </svg>
           <span>Exit map</span>
         </a>
-        <div class='defra-map-controls__bottom'>
-          <button class='defra-map-reset' id='defra-map-reset' aria-controls="viewport">
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
               <g clip-path="url(#clip0_6756_107692)">
                 <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
@@ -757,10 +820,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </clipPath>
               </defs>
             </svg>
-            <span class='govuk-visually-hidden'>Reset location</span>
+            <span class="govuk-visually-hidden">Reset location</span>
           </button>
-          <div class='defra-map-zoom ol-unselectable'>
-            <button class='defra-map-zoom-in' id='defra-map-zoom-in' type="button" aria-controls="viewport">
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
                 <rect y="0.75" width="60" height="56.4921" fill="none"/>
                 <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
@@ -1006,7 +1069,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -1094,14 +1156,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <!-- Google tag (gtag.js) -->
     
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
-      </div>
+
+
+
+
+
+<header class="govuk-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
+        
+<svg
+  focusable="false"
+  role="img"
+  class="govuk-header__logotype"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 152 30"
+  height="30"
+  width="152"
+  aria-label="GOV.UK"
+>
+  <title>GOV.UK</title>
+  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+</svg>
+
+        
+      </a>
     </div>
+    
+    <div class="govuk-header__content">
+    
+    
+      <a href="/" class="govuk-header__link govuk-header__service-name">
+        Natural Capital Search Service
+      </a>
+    
+    
+    
+    </div>
+    
+  </div>
+</header>
+
   </header>
 
 
@@ -1132,9 +1228,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -1159,7 +1253,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         
 
 <div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+  <label class="govuk-label search-block__label" for="search_term">
     Search
   </label>
 
@@ -1183,7 +1277,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:;" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
@@ -1194,19 +1288,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
-  <div class='govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left'>
-    <div class='govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block'>
-      <div id='coordinate-map' style='height: 100%; width: 100%;'></div>
-      <div class='defra-map-controls'>
-        <a href="javascript:;" onclick="closeMapModal()" class='defra-map__exit' id="defra-map-exit">
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
             <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
             <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
           </svg>
           <span>Exit map</span>
         </a>
-        <div class='defra-map-controls__bottom'>
-          <button class='defra-map-reset' id='defra-map-reset' aria-controls="viewport">
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
               <g clip-path="url(#clip0_6756_107692)">
                 <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
@@ -1217,10 +1311,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </clipPath>
               </defs>
             </svg>
-            <span class='govuk-visually-hidden'>Reset location</span>
+            <span class="govuk-visually-hidden">Reset location</span>
           </button>
-          <div class='defra-map-zoom ol-unselectable'>
-            <button class='defra-map-zoom-in' id='defra-map-zoom-in' type="button" aria-controls="viewport">
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
                 <rect y="0.75" width="60" height="56.4921" fill="none"/>
                 <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
@@ -1693,7 +1787,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -1781,14 +1874,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <!-- Google tag (gtag.js) -->
     
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
-      </div>
+
+
+
+
+
+<header class="govuk-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
+        
+<svg
+  focusable="false"
+  role="img"
+  class="govuk-header__logotype"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 152 30"
+  height="30"
+  width="152"
+  aria-label="GOV.UK"
+>
+  <title>GOV.UK</title>
+  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+</svg>
+
+        
+      </a>
     </div>
+    
+    <div class="govuk-header__content">
+    
+    
+      <a href="/" class="govuk-header__link govuk-header__service-name">
+        Natural Capital Search Service
+      </a>
+    
+    
+    
+    </div>
+    
+  </div>
+</header>
+
   </header>
 
 
@@ -1819,9 +1946,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -1846,7 +1971,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         
 
 <div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+  <label class="govuk-label search-block__label" for="search_term">
     Search
   </label>
 
@@ -1870,7 +1995,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:;" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
@@ -1881,19 +2006,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
-  <div class='govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left'>
-    <div class='govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block'>
-      <div id='coordinate-map' style='height: 100%; width: 100%;'></div>
-      <div class='defra-map-controls'>
-        <a href="javascript:;" onclick="closeMapModal()" class='defra-map__exit' id="defra-map-exit">
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
             <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
             <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
           </svg>
           <span>Exit map</span>
         </a>
-        <div class='defra-map-controls__bottom'>
-          <button class='defra-map-reset' id='defra-map-reset' aria-controls="viewport">
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
               <g clip-path="url(#clip0_6756_107692)">
                 <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
@@ -1904,10 +2029,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </clipPath>
               </defs>
             </svg>
-            <span class='govuk-visually-hidden'>Reset location</span>
+            <span class="govuk-visually-hidden">Reset location</span>
           </button>
-          <div class='defra-map-zoom ol-unselectable'>
-            <button class='defra-map-zoom-in' id='defra-map-zoom-in' type="button" aria-controls="viewport">
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
                 <rect y="0.75" width="60" height="56.4921" fill="none"/>
                 <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
@@ -2229,7 +2354,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>
@@ -2317,14 +2441,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <!-- Google tag (gtag.js) -->
     
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">Natural Capital Search Service</span></div>
-      </div>
+
+
+
+
+
+<header class="govuk-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
+        
+<svg
+  focusable="false"
+  role="img"
+  class="govuk-header__logotype"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 152 30"
+  height="30"
+  width="152"
+  aria-label="GOV.UK"
+>
+  <title>GOV.UK</title>
+  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+</svg>
+
+        
+      </a>
     </div>
+    
+    <div class="govuk-header__content">
+    
+    
+      <a href="/" class="govuk-header__link govuk-header__service-name">
+        Natural Capital Search Service
+      </a>
+    
+    
+    
+    </div>
+    
+  </div>
+</header>
+
   </header>
 
 
@@ -2355,9 +2513,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Search results</a>
-    </li>
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
   
 
   </ol>
@@ -2382,7 +2538,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         
 
 <div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+  <label class="govuk-label search-block__label" for="search_term">
     Search
   </label>
 
@@ -2406,7 +2562,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:;" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
@@ -2417,19 +2573,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
-  <div class='govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left'>
-    <div class='govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block'>
-      <div id='coordinate-map' style='height: 100%; width: 100%;'></div>
-      <div class='defra-map-controls'>
-        <a href="javascript:;" onclick="closeMapModal()" class='defra-map__exit' id="defra-map-exit">
+  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
+    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
+      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
+      <div class="defra-map-controls">
+        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
             <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
             <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
           </svg>
           <span>Exit map</span>
         </a>
-        <div class='defra-map-controls__bottom'>
-          <button class='defra-map-reset' id='defra-map-reset' aria-controls="viewport">
+        <div class="defra-map-controls__bottom">
+          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
               <g clip-path="url(#clip0_6756_107692)">
                 <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
@@ -2440,10 +2596,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </clipPath>
               </defs>
             </svg>
-            <span class='govuk-visually-hidden'>Reset location</span>
+            <span class="govuk-visually-hidden">Reset location</span>
           </button>
-          <div class='defra-map-zoom ol-unselectable'>
-            <button class='defra-map-zoom-in' id='defra-map-zoom-in' type="button" aria-controls="viewport">
+          <div class="defra-map-zoom ol-unselectable">
+            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
                 <rect y="0.75" width="60" height="56.4921" fill="none"/>
                 <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
@@ -2689,7 +2845,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
-  
 
   <script type="module" src="/assets/scripts/dataModal.js"></script>
   <script src="/assets/scripts/ol.js"></script>

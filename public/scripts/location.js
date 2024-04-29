@@ -315,7 +315,6 @@ const attachClearSelectionListener = () => {
       vectorSource.clear();
       const form = document.querySelector('[data-do-browser-storage]');
       if (form) {
-        console.log(form.id);
         const sessionData = getStorageData();
         if (sessionData.fields.hasOwnProperty(form.id)) {
           delete sessionData.fields[form.id];
@@ -504,7 +503,7 @@ function getFilterRecordIds() {
         (!startYear || record.startYear >= startYear) &&
         (!toYear || record.toYear >= toYear) &&
         (!resourceType.length ||
-          record.resourceType.some((type) => resourceType.includes(type))),
+          record?.resourceType?.some((type) => resourceType.includes(type))),
     )
     .map((record) => record.id);
   return filteredIds;
@@ -586,7 +585,6 @@ const updateStudyPeriodFilter = () => {
     vectorSource.clear();
     markerSource.clear();
     drawBoundingBoxWithMarker(false);
-    console.log(appliedFilterOptions);
   }, 100);
 };
 
