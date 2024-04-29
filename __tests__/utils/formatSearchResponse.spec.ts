@@ -532,4 +532,12 @@ describe('Format the search response', () => {
       'United Kingdom Hydrographic Office (pointOfContact)',
     );
   });
+
+  it('should have the geo coordinates for map results', async () => {
+    const apiResponse = detailsSuccessAPIFullData;
+    const result = await formatSearchResponse(apiResponse, false, true);
+    expect(result.items?.[0]?.geographicBoundary).toBeDefined();
+    expect(result.items?.[0]?.geographicCenter).toBeDefined();
+    expect(result.items?.[0]?.geographicCenter).toBe('-11.14563,49.0466505');
+  });
 });

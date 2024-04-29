@@ -7467,6 +7467,7 @@
 .search-block__form {
   position: relative;
   width: 630px;
+  margin-bottom: 20px;
 }
 @media screen and (max-width: 799px) {
   .search-block__form {
@@ -7528,7 +7529,6 @@
 }
 
 .count-block {
-  border-bottom: 2px solid #b1b4b6;
   padding-bottom: 30px;
 }
 .count-block-link {
@@ -7556,16 +7556,29 @@
 }
 
 .modal {
+  display: none;
+  position: fixed;
+  overflow: auto;
+  z-index: 1000;
+}
+
+.resource-modal {
+  z-index: 1002;
   background-color: #505a5f;
   padding: 40px 20px;
-  overflow: auto;
-  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
   width: 600px;
-  display: none;
+}
+
+.map-modal {
+  background-color: #ffffff;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 #overlay.active,
@@ -7595,7 +7608,7 @@
 }
 
 .banner-container {
-  padding-top: 30px;
+  padding-top: 14px;
   padding-bottom: 30px;
 }
 .banner-container__heading-xl {
@@ -7613,11 +7626,17 @@
   line-height: 30px;
   color: #ffffff;
 }
+.banner-container__ncea-logo {
+  height: 88px;
+  gap: 0px;
+  opacity: 0px;
+  margin-left: -16px;
+}
 
-.video-container {
+.educational-copy-container {
   margin-bottom: 40px;
 }
-.video-container__heading-m {
+.educational-copy-container__heading-m {
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
@@ -7628,105 +7647,12 @@
   margin: 0px;
   border-top: 1.5px solid #b1b4b6;
 }
-.video-container__frame {
-  position: relative;
-  padding-bottom: 33%;
-  padding-top: 35px;
-  height: 0;
-  overflow: hidden;
-}
-.video-container__frame iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-@media screen and (max-width: 799px) {
-  .video-container__frame iframe {
-    width: 100%;
-    height: 100%;
-  }
-}
 
 @media only screen and (min-width: 769px) {
   .header-container {
     display: block;
   }
 }
-.header-container .header-main {
-  color: #0b0c0c;
-  padding: 0.5rem 0px;
-  border-bottom: 6px solid #008938;
-  background: #ffffff !important;
-}
-
-.header-div-container {
-  width: 100%;
-}
-
-.header-container .header-main .site-width-container {
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-}
-
-@media only screen and (min-width: 1020px) {
-  .header-div-container .site-width-container {
-    width: 100%;
-    margin: 0px auto;
-    max-width: 960px;
-    padding: 0px;
-  }
-}
-.header-div-container .site-width-container {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  padding: 0px 16px;
-}
-
-.header-logo-container {
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-}
-
-.header-logo-container .defra-logo {
-  padding-left: 2px;
-  border-left: 2px solid #00703c;
-}
-
-.header-logo-container a, .header-logo-container a:visited, .header-logo-container a:link {
-  margin-left: 0.5rem;
-  color: #0b0c0c;
-  text-decoration: none;
-}
-
-.header-logo-link {
-  font-family: GDS Transport, Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media only screen and (min-width: 641px) {
-  .logo-link {
-    font-size: 19px;
-  }
-}
-.logo-link {
-  color: #008938;
-  font-size: 16px;
-}
-
-.header-logo-container .defra-logo-text {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
-.header-logo-container .govuk-header__service-name {
-  font-size: 18px;
-  margin-bottom: 0px;
-  padding-left: 6em;
-}
-
 @media (min-width: 40.0625em) {
   .govuk-header__link--service-name, .govuk-header__service-name {
     font-size: 24px;
@@ -7744,6 +7670,7 @@
   font-size: 18px;
   font-size: 1.125rem;
   line-height: 1.1111111111;
+  margin-top: 1%;
 }
 
 .govuk-tag.govuk-phase-banner__content__tag {
@@ -7833,6 +7760,7 @@
   display: grid;
   grid-template-columns: 0.9fr 1.4fr;
   gap: 10px;
+  margin-top: 15px;
 }
 .option-group {
   margin-bottom: 20px;
@@ -7860,10 +7788,6 @@
   line-height: 25px;
   min-width: auto;
   width: 80px;
-}
-
-#results-block {
-  margin-top: 50px;
 }
 
 .data-container {
@@ -7934,6 +7858,157 @@
 
 .govuk-pagination__item--current:hover {
   background-color: #00703c;
+}
+
+.govuk-button--map {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  height: 45px;
+  display: inline-flex;
+  min-height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-view-block {
+  width: 75%;
+  height: 100vh;
+}
+
+.filter-view-block {
+  width: 25%;
+}
+
+.defra-map-controls {
+  position: absolute;
+  width: 75%;
+  z-index: 1;
+  overflow: hidden;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  pointer-events: none;
+  right: 0px;
+}
+.defra-map-controls__bottom {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  right: 10px;
+  pointer-events: none;
+}
+.defra-map-controls__bottom * {
+  pointer-events: auto;
+}
+.defra-map__exit {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 32px;
+  float: left;
+  position: relative;
+  margin: 10px 0px 0px 10px;
+  border: 0;
+  padding: 10px;
+  width: 40px;
+  cursor: pointer;
+  background-color: #ffffff;
+  text-decoration: none;
+  color: #0b0c0c;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.defra-map__exit svg {
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+}
+.defra-map__exit span {
+  vertical-align: top;
+}
+.defra-map-reset {
+  float: right;
+  position: relative;
+  border: 0;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #0b0c0c;
+  display: none;
+}
+.defra-map-reset:hover {
+  background-color: #f3f2f1;
+}
+.defra-map-zoom {
+  display: none;
+}
+.defra-map-zoom-in, .defra-map-zoom-out {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 0;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #0b0c0c;
+}
+.defra-map-zoom-in:hover, .defra-map-zoom-out:hover {
+  background-color: #f3f2f1;
+}
+
+@media (min-width: 40.0625em) {
+  .defra-map-zoom {
+    display: block;
+    float: right;
+    clear: right;
+    width: 50px;
+    height: auto;
+    margin-top: 15px;
+  }
+}
+@media (min-width: 52.1875em) {
+  .defra-map__exit {
+    width: auto;
+    padding-right: 11px;
+  }
+}
+.govuk-checkboxes__input {
+  width: 26px;
+  height: 26px;
+  margin-left: 2px;
+  margin-top: 5px;
+}
+
+.defra-checkboxes {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+.defra-checkboxes__label {
+  display: flex;
+  align-items: center;
+}
+.defra-checkboxes__label::before {
+  top: 5px;
+  width: 28px;
+  height: 28px;
+}
+.defra-checkboxes__label::after {
+  top: 12px;
+  left: 7px;
+  width: 19px;
+  border-width: 0 0 4px 4px;
+  height: 10px;
 }
 
 .details-title {

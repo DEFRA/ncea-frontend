@@ -20,11 +20,13 @@ jest.mock('../../../src/utils/keyvault', () => ({
 
 let serverRequest;
 
-const invokeRoute = async (route, payload) => {
-  const response = await serverRequest
-    .post(route)
-    .set('referer', 'some_referer')
-    .send(payload);
+const invokeRoute = async (route, payload, method = 'post') => {
+  let response;
+  if (method === 'post') {
+    response = await serverRequest.post(route).send(payload);
+  } else {
+    response = await serverRequest.get(route).query({ ...payload });
+  }
   const rawHTML = response.text;
   const parser = new DOMParser();
   const document = parser.parseFromString(rawHTML, 'text/html');
@@ -65,20 +67,41 @@ describe('Results Screen', () => {
       expect(response.text).toMatchSnapshot();
     });
 
-    it('should route works with status code 200', async () => {
-      expect(response.statusCode).toEqual(200);
+    it('should route works with status code 302', async () => {
+      expect(response.statusCode).toEqual(302);
     });
   });
 
   describe('Quick search POST verification on results page', () => {
     let document;
+    let response;
+    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=best_match&rty=all`;
 
     beforeAll(async () => {
       const responseObject = await invokeRoute(
         webRoutePaths.results,
         successPayload,
       );
-      document = responseObject.document;
+      response = responseObject.response;
+      const redirectedResponseObject = await invokeRoute(
+        response.headers.location,
+        {
+          q: 'test',
+          jry: 'qs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
+        },
+      );
+      document = redirectedResponseObject.document;
+    });
+
+    describe('Check the redirection', () => {
+      it('should redirect to the results get route with query params', async () => {
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe(redirectedRoute);
+      });
     });
 
     describe('Breadcrumb classes', () => {
@@ -101,7 +124,7 @@ describe('Results Screen', () => {
     });
 
     describe('Breadcrumb list item options', () => {
-      it('should render home list item as a first child', async () => {
+      it('should render home list item first child as an anchor', async () => {
         const item = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.firstElementChild;
@@ -114,17 +137,12 @@ describe('Results Screen', () => {
         expect(anchor?.textContent?.trim()).toEqual('Home');
       });
 
-      it('should render search results list item as a second child', async () => {
+      it('should not render search results list item second child as an anchor', async () => {
         const item = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.lastElementChild;
-        const anchor = item?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
-        );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual('Search results');
+        expect(item.querySelector('a')).toBeNull();
+        expect(item?.textContent?.trim()).toEqual('Search results');
       });
     });
     describe('Search block classes', () => {
@@ -321,9 +339,9 @@ describe('Results Screen', () => {
     });
 
     describe('Hero content elements', () => {
-      it('should render 2 child elements', async () => {
+      it('should render 4 child elements', async () => {
         const bannerContainer = document?.querySelector('.banner-container');
-        expect(bannerContainer?.childElementCount).toEqual(2);
+        expect(bannerContainer?.childElementCount).toEqual(4);
       });
     });
 
@@ -485,46 +503,16 @@ describe('Results Screen', () => {
       });
     });
 
-    describe('YouTube video block classes', () => {
-      it('renders custom video container class', async () => {
-        expect(document.querySelector('.video-container')).toBeTruthy();
-      });
-
-      it('renders custom video frame class', async () => {
-        expect(document.querySelector('.video-container__frame')).toBeTruthy();
+    describe('Educational Copy block classes', () => {
+      it('renders educational copy container class', async () => {
+        expect(document.querySelector('.educational-copy-container')).toBeTruthy();
       });
     });
 
-    describe('YouTube video block elements', () => {
-      it('should render 2 child elements', async () => {
-        const videoContainer = document?.querySelector('.video-container');
-        expect(videoContainer?.childElementCount).toEqual(2);
-      });
-    });
-
-    describe('YouTube video block heading', () => {
-      it('should render the video content heading', async () => {
-        expect(
-          document
-            ?.querySelector('.video-container__heading-m')
-            ?.textContent?.trim(),
-        ).toBe('What is natural capital?');
-      });
-    });
-
-    describe('YouTube video frame options', () => {
-      it('should render youtube video in iframe', async () => {
-        const videoFrame = document?.querySelector('.video-container__frame');
-        expect(videoFrame?.firstElementChild?.tagName.toLowerCase()).toBe(
-          'iframe',
-        );
-      });
-
-      it('should render youtube video url', async () => {
-        const videoFrame = document?.querySelector('.video-container__frame');
-        expect(videoFrame?.firstElementChild?.getAttribute('src')).toBe(
-          'https://www.youtube.com/embed/4wx0rMruSJo?si=h-SD8VoSUSNwqo1S',
-        );
+    describe('Educational Copy block elements', () => {
+      it('should render 8 child elements', async () => {
+        const videoContainer = document?.querySelector('.educational-copy-container');
+        expect(videoContainer?.childElementCount).toEqual(8);
       });
     });
 

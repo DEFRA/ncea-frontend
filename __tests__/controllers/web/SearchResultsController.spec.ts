@@ -17,7 +17,13 @@ import {
   getSearchResultsCount,
   getResourceTypeOptions,
 } from '../../../src/services/handlers/searchApi';
-import { formIds, webRoutePaths } from '../../../src/utils/constants';
+import {
+  formIds,
+  queryParamKeys,
+  webRoutePaths,
+} from '../../../src/utils/constants';
+import { getPaginationItems } from '../../../src/utils/paginationBuilder';
+import { upsertQueryParams } from '../../../src/utils/queryStringHelper';
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
@@ -28,96 +34,108 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
 
 describe('Deals with search results controller', () => {
   describe('Deals with search results handler', () => {
-    it('should return the rendered view with context', async () => {
-      const request: Request = { headers: { referer: 'some_referer' } } as any;
+    it('should return the results and rendered search items for quick search', async () => {
+      const queryObject = {
+        q: 'marine',
+        jry: 'qs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+        rty: 'all',
+      };
+      const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
-
+      const searchResults = {
+        total: 0,
+        items: [],
+      };
       const formId: string = formIds.quickSearch;
+      (getSearchResults as jest.Mock).mockResolvedValue(searchResults);
+      const expectedResourceTypeOptions: IAggregationOption[] = [
+        { value: 'filter1', text: 'Filter1' },
+        { value: 'filter2', text: 'Filter2' },
+      ];
+      (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+        expectedResourceTypeOptions,
+      );
+      const paginationItems = getPaginationItems(1, 0, 10);
       await SearchResultsController.renderSearchResultsHandler(
         request,
         response,
       );
       expect(response.view).toHaveBeenCalledWith('screens/results/template', {
         formId,
+        searchResults,
+        hasError: false,
+        isQuickSearchJourney: true,
+        paginationItems,
+        resourceTypeOptions: expectedResourceTypeOptions,
+        dateSearchPath: webRoutePaths.guidedDateSearch,
       });
     });
 
-    it('should redirect to home if we access the search page directly', async () => {
-      const request: Request = {} as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
-
+    it('should return the results and rendered search items for guided search', async () => {
+      const queryObject = {
+        fdy: '2000',
+        tdy: '2023',
+        jry: 'gs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+        rty: 'all',
+      };
+      const request: Request = { query: { ...queryObject } } as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      const searchResults = {
+        total: 0,
+        items: [],
+      };
+      const formId: string = formIds.quickSearch;
+      (getSearchResults as jest.Mock).mockResolvedValue(searchResults);
+      const expectedResourceTypeOptions: IAggregationOption[] = [
+        { value: 'filter1', text: 'Filter1' },
+        { value: 'filter2', text: 'Filter2' },
+      ];
+      (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+        expectedResourceTypeOptions,
+      );
+      const paginationItems = getPaginationItems(1, 0, 10);
       await SearchResultsController.renderSearchResultsHandler(
         request,
         response,
       );
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.home);
-    });
-
-    it('should fetch the data and return the view', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-      await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
+      expect(response.view).toHaveBeenCalledWith('screens/results/template', {
+        formId,
+        searchResults,
         hasError: false,
         isQuickSearchJourney: false,
-        searchResults: undefined,
-        paginationItems: {},
-      });
-    });
-
-    it('should render the no results page for quick search journey', async () => {
-      const request: Request = {
-        payload: { fields: { 'quick-search': { search_term: 'test' } } },
-      } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-      (getSearchResults as jest.Mock).mockResolvedValue({
-        total: 0,
-        items: [],
-      });
-      await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
-        hasError: false,
-        isQuickSearchJourney: true,
-        searchResults: {
-          total: 0,
-          items: [],
-        },
-        paginationItems: {},
-      });
-    });
-
-    it('should render the no results page for guided search journey', async () => {
-      const request: Request = {
-        payload: {
-          fields: {
-            'date-search': { 'form-date-year': '2022', 'to-date-year': '2023' },
-          },
-        },
-      } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-      (getSearchResults as jest.Mock).mockResolvedValue({
-        total: 0,
-        items: [],
-      });
-      await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
-        hasError: false,
-        isQuickSearchJourney: false,
-        searchResults: {
-          total: 0,
-          items: [],
-        },
-        paginationItems: {},
+        paginationItems,
+        resourceTypeOptions: expectedResourceTypeOptions,
+        dateSearchPath: webRoutePaths.guidedDateSearch,
       });
     });
 
     it('should show an error when something fails at API layer', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
+      const queryObject = {
+        fdy: '2000',
+        tdy: '2023',
+        jry: 'gs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+        rty: 'all',
+      };
+      const formId: string = formIds.quickSearch;
+      const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       const error = new Error('Mocked error');
       (getSearchResults as jest.Mock).mockRejectedValue(error);
-      await SearchResultsController.getSearchResultsHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('partials/results/summary', {
+      await SearchResultsController.renderSearchResultsHandler(
+        request,
+        response,
+      );
+      expect(response.view).toHaveBeenCalledWith('screens/results/template', {
+        formId,
         error,
         hasError: true,
         isQuickSearchJourney: false,
@@ -125,40 +143,25 @@ describe('Deals with search results controller', () => {
     });
   });
 
-  describe('Deals with search results count handler', () => {
-    it('should fetch the total results count', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = {
-        response: jest.fn().mockReturnThis(),
+  describe('Deals with quick search submit handler', () => {
+    it('should build the query params and navigate to results page', async () => {
+      const request: Request = {
+        payload: { search_term: 'search term' },
       } as any;
-      (getSearchResultsCount as jest.Mock).mockResolvedValue({
-        totalResults: 10,
-      });
-      await SearchResultsController.getResultsCountHandler(request, response);
-      expect(response.response).toHaveBeenCalledTimes(1);
-    });
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
-    it('should redirect to search page when result count is 0', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = {
-        redirect: jest.fn(),
-      } as any;
-      (getSearchResultsCount as jest.Mock).mockResolvedValue({
-        totalResults: 0,
-      });
-      await SearchResultsController.getResultsCountHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
-    });
-
-    it('should redirect to search page when error occurs', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = {
-        redirect: jest.fn(),
-      } as any;
-      const error = new Error('Mocked error');
-      (getSearchResultsCount as jest.Mock).mockRejectedValue(error);
-      await SearchResultsController.getResultsCountHandler(request, response);
-      expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.results);
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.quickSearch]: 'search term',
+        [queryParamKeys.journey]: 'qs',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+      );
+      await SearchResultsController.quickSearchSubmitHandler(request, response);
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
     });
   });
 
@@ -268,41 +271,6 @@ describe('Deals with search results controller', () => {
     });
   });
 
-  describe('Deals with search filters handler', () => {
-    it('should fetch the data and return the view', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-      const expectedResourceTypeOptions: IAggregationOption[] = [
-        { value: 'filter1', text: 'Filter1' },
-        { value: 'filter2', text: 'Filter2' },
-      ];
-      (getResourceTypeOptions as jest.Mock).mockResolvedValue(
-        expectedResourceTypeOptions,
-      );
-      await SearchResultsController.getSearchFiltersHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('partials/results/filters', {
-        resourceTypeOptions: expectedResourceTypeOptions,
-      });
-    });
-
-    it('should show an error when something fails at API layer', async () => {
-      const request: Request = { payload: { fields: {} } } as any;
-      const response: ResponseToolkit = { view: jest.fn() } as any;
-      const error = new Error('Mocked error');
-      (getResourceTypeOptions as jest.Mock).mockRejectedValue(error);
-      await SearchResultsController.getSearchFiltersHandler(request, response);
-      expect(response.view).toHaveBeenCalledWith('partials/results/filters', {
-        error,
-        resourceTypeOptions: [
-          {
-            value: 'all',
-            text: 'All',
-          },
-        ],
-      });
-    });
-  });
-
   describe('Deals with document details handler', () => {
     it('should fetch the data and return the view', async () => {
       const request: Request = { params: { id: '123' } } as any;
@@ -346,6 +314,65 @@ describe('Deals with search results controller', () => {
         error,
         docDetails: undefined,
       });
+    });
+  });
+  describe('Deals with map results handler', () => {
+    it('should render the no results page for quick search journey', async () => {
+      const queryObject = {
+        q: 'marine',
+        jry: 'qs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+        rty: 'all',
+      };
+      const request: Request = { query: { ...queryObject } } as any;
+      const response: ResponseToolkit = {
+        response: jest.fn().mockReturnThis(),
+        code: jest.fn(),
+      } as any;
+      (getSearchResults as jest.Mock).mockResolvedValue({
+        total: 0,
+        items: [],
+      });
+      await SearchResultsController.getMapResultsHandler(request, response);
+      expect(response.response).toHaveBeenCalledTimes(2);
+    });
+
+    it('should render the no results page for guided search journey', async () => {
+      const queryObject = {
+        fdy: '2022',
+        tdy: '2023',
+        jry: 'gs',
+        pg: '1',
+        rpp: '20',
+        srt: 'best_match',
+        rty: 'all',
+      };
+      const request: Request = { query: { ...queryObject } } as any;
+      const response: ResponseToolkit = {
+        response: jest.fn().mockReturnThis(),
+        code: jest.fn(),
+      } as any;
+      (getSearchResults as jest.Mock).mockResolvedValue({
+        total: 0,
+        items: [],
+      });
+      await SearchResultsController.getMapResultsHandler(request, response);
+      expect(response.response).toHaveBeenCalledTimes(2);
+    });
+
+    it('should show an error when something fails at API layer', async () => {
+      const request: Request = { query: {} } as any;
+      const response: ResponseToolkit = {
+        response: jest.fn().mockReturnThis(),
+        code: jest.fn(),
+      } as any;
+      const error = new Error('Mocked error');
+      (getSearchResults as jest.Mock).mockRejectedValue(error);
+      await SearchResultsController.getMapResultsHandler(request, response);
+      expect(response.response).toHaveBeenCalledTimes(1);
+      expect(response.response().code).toHaveBeenCalledWith(500);
     });
   });
 });

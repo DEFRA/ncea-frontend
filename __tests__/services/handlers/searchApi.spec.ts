@@ -52,8 +52,8 @@ describe('Search API', () => {
     it('should call elasticSearchClient.post with correct arguments', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -72,8 +72,8 @@ describe('Search API', () => {
     it('should return the response from elasticSearchClient.post', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -88,8 +88,8 @@ describe('Search API', () => {
     it('should handle errors and throw an error message', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -121,8 +121,8 @@ describe('Search API', () => {
     it('should call elasticSearchClient.post with correct arguments', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -140,8 +140,8 @@ describe('Search API', () => {
     it('should return the total results count', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -170,8 +170,8 @@ describe('Search API', () => {
     it('should handle errors and throw an error message', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -192,8 +192,8 @@ describe('Search API', () => {
     it('should return the response from elasticSearchClient.post', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -214,8 +214,8 @@ describe('Search API', () => {
     it('should handle errors and throw an error message', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',

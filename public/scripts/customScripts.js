@@ -1,7 +1,5 @@
 'use strict';
 
-import { hydrateSortOption, invokeSearchResults } from './fetchResults.js';
-
 // Initialize form object
 const defaultSessionData = JSON.stringify({
   version: '',
@@ -60,10 +58,10 @@ const getStorageData = () => {
 // Populate input fields with values from session data
 const hydrateFormFromStorage = (form) => {
   const sessionData = getStorageData();
-  Object.keys(sessionData.fields[form.id] ?? {}).forEach((fieldName) => {
-    const input = form.querySelector(`input[name="${fieldName}"]`);
+  Object.keys(sessionData.fields[form.id] ?? {}).forEach((fieldAltName) => {
+    const input = form.querySelector(`input[altName="${fieldAltName}"]`);
     if (input) {
-      input.value = sessionData.fields[form.id][fieldName];
+      input.value = sessionData.fields[form.id][fieldAltName];
     }
   });
 };
@@ -91,16 +89,13 @@ const attachEventListeners = (form) => {
   form.querySelectorAll('input').forEach((input) => {
     input.addEventListener('input', () => {
       const sessionData = getStorageData();
-      const fieldName = input.getAttribute('name');
+      const fieldAltName = input.getAttribute('altName');
       const value = input.value;
-
       if (!sessionData.fields.hasOwnProperty(form.id)) {
         sessionData.fields[form.id] = {};
       }
-      sessionData.fields[form.id][fieldName] = value;
-
+      sessionData.fields[form.id][fieldAltName] = value;
       storeStorageData(sessionData);
-
       updateSubmitButtonState(form);
     });
   });
@@ -125,7 +120,7 @@ const previousQuestion = () => {
     previousQuestionElements.forEach((element) => {
       element.addEventListener('click', () => {
         const { previousStep } = getStorageData();
-        window.location.pathname = previousStep;
+        window.location.href = previousStep;
       });
     });
   }
@@ -143,7 +138,7 @@ const skipStorage = () => {
             delete sessionData.fields[associatedForm.id];
           }
           sessionData.stepState[associatedForm.id] = 'skipped';
-          sessionData.previousStep = window.location.pathname;
+          sessionData.previousStep = `${window.location.pathname}${window.location.search}`;
           storeStorageData(sessionData);
         }
       });
@@ -162,7 +157,7 @@ const nextQuestion = () => {
         if (associatedForm) {
           const sessionData = getStorageData();
           sessionData.stepState[associatedForm.id] = 'submitted';
-          sessionData.previousStep = window.location.pathname;
+          sessionData.previousStep = `${window.location.pathname}${window.location.search}`;
           storeStorageData(sessionData);
         }
       });
@@ -177,7 +172,7 @@ const handleSearchJourney = (event) => {
   const quickSearchJourney = event.target.getAttribute('data-do-quick-search');
   let sessionData = getStorageData();
   let updateSession = false;
-  const formKey = 'quick-search';
+  const formKey = 'keyword';
   if (quickSearchJourney === 'true') {
     if (hasGuidedSearchProperties(sessionData.fields, formKey)) {
       sessionData = {
@@ -209,9 +204,7 @@ if (typeof Storage !== 'undefined') {
       forms.forEach((form) => {
         if (form instanceof HTMLFormElement) {
           hydrateFormFromStorage(form);
-
           updateSubmitButtonState(form);
-
           attachEventListeners(form);
         }
       });
@@ -245,20 +238,7 @@ window.addEventListener('storage', (event) => {
         updateSubmitButtonState(form);
       }
     });
-
-    if (updatedData.sort) {
-      hydrateSortOption();
-      invokeSearchResults();
-    }
   }
 });
 
-export {
-  hydrateFormFromStorage,
-  updateSubmitButtonState,
-  storeStorageData,
-  getStorageData,
-  fireEventAfterStorage,
-  resetStorage,
-  previousQuestion,
-};
+export { getStorageData, fireEventAfterStorage };
