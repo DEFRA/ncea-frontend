@@ -12,10 +12,21 @@ const isMapResultsScreen =
 let initialCenter;
 let initialZoom;
 let viewChanged = false;
+const mapInitialLon = 3.436;
+const mapInitialLat = 55.3781;
 const mapResultsButtonId = 'map-result-button';
 const mapResultsCountId = 'map-result-count';
 const actionDataAttribute = 'data-action';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
+const extentSearchZoomLevel = 5;
+const responseSuccessStatusCode = 200;
+const marketYPoint = 46;
+const highlightedMarkerIcon = '/assets/images/highlight-blue-marker-icon.png';
+const markerIcon = '/assets/images/blue-marker-icon.svg';
+const mapInfoBlock = document.getElementById('map-info');
+const contentMaxChar = 500;
+let selectedRecord = '';
+let mapResults;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -46,6 +57,16 @@ const mapResultsStyle = new ol.style.Style({
   }),
 });
 
+const mapResultsHighlightStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
+    color: '#FFDD00',
+    width: 2,
+  }),
+  fill: new ol.style.Fill({
+    color: 'rgb(244, 119, 56, 0.20)',
+  }),
+});
+
 const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
@@ -69,6 +90,12 @@ draw.on('drawend', (event) => {
   feature.setStyle(completedStyle);
 });
 
+const isMarkerFeature = (feature) =>
+  feature?.getGeometry()?.getType() === 'Point';
+
+const isPolygonFeature = (feature) =>
+  feature?.getGeometry()?.getType() === 'Polygon';
+
 const map = new ol.Map({
   target: mapTarget,
   layers: [
@@ -77,8 +104,8 @@ const map = new ol.Map({
     }),
   ],
   view: new ol.View({
-    center: ol.proj.fromLonLat([3.436, 55.3781]),
-    zoom: !isDetailsScreen && !isMapResultsScreen ? 5 : 2,
+    center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
+    zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
     maxZoom: 18,
     minZoom: 2,
   }),
@@ -88,7 +115,121 @@ const map = new ol.Map({
 map.addLayer(vectorLayer);
 map.addLayer(markerLayer);
 map.addInteraction(draw);
-if (!isDetailsScreen) {
+
+if (isMapResultsScreen) {
+  mapEventListener();
+}
+
+function mapEventListener() {
+  map.on('pointermove', (event) => {
+    const pixel = event.pixel;
+    const feature = map.forEachFeatureAtPixel(
+      pixel,
+      (featureItem) => featureItem,
+    );
+    map.getTargetElement().style.cursor = isMarkerFeature(feature)
+      ? 'pointer'
+      : '';
+  });
+  map.on('click', (event) => {
+    const pixel = event.pixel;
+    const feature = map.forEachFeatureAtPixel(
+      pixel,
+      (featureItem) => featureItem,
+    );
+    resetFeatureStyle();
+    closeInfoPopup();
+    if (feature && isPolygonFeature(feature)) {
+      const polygonGeometry = feature.getGeometry();
+      markerSource.getFeatures().forEach((marker) => {
+        if (
+          isMarkerFeature(marker) &&
+          polygonGeometry.intersectsCoordinate(
+            marker.getGeometry().getFirstCoordinate(),
+          )
+        ) {
+          const recordId = marker.get('id');
+          const boundingBox = marker.get('boundingBox');
+          marker.setStyle(getMarkerStyle(highlightedMarkerIcon));
+          showInformationPopup(recordId, boundingBox);
+        }
+      });
+      return;
+    }
+    if (feature && isMarkerFeature(feature)) {
+      const recordId = feature.get('id');
+      const boundingBox = feature.get('boundingBox');
+      feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+      showInformationPopup(recordId, boundingBox);
+    }
+  });
+}
+
+const resetFeatureStyle = () => {
+  vectorSource.getFeatures().forEach((feature) => {
+    if (isPolygonFeature(feature)) {
+      feature.setStyle(mapResultsStyle);
+    }
+  });
+  markerSource.getFeatures().forEach((marker) => {
+    if (isMarkerFeature(marker)) {
+      marker.setStyle(getMarkerStyle(markerIcon));
+    }
+  });
+};
+
+function truncateString(inputString, maxLength) {
+  if (inputString && inputString.length > maxLength) {
+    return `${inputString.slice(0, maxLength)}...`;
+  }
+  return inputString;
+}
+
+function showInformationPopup(recordId, boundingBox) {
+  selectedRecord = mapResults.find((item) => item?.id === recordId);
+  const titleElement = document.getElementById('info-title');
+  const publishedBlock = document.getElementById('info-published-block');
+  const publishedByElement = document.getElementById('info-published-by');
+  const contentElement = document.getElementById('info-content');
+  if (selectedRecord && Object.keys(selectedRecord).length) {
+    if (boundingBox) {
+      boundingBox.setStyle(mapResultsHighlightStyle);
+    }
+    if (mapInfoBlock) {
+      mapInfoBlock.style.display = 'block';
+      titleElement.textContent = selectedRecord.title;
+      if (selectedRecord.publishedBy) {
+        publishedByElement.textContent = selectedRecord.publishedBy;
+        publishedBlock.style.display = 'block';
+      } else {
+        publishedBlock.style.display = 'none';
+      }
+      contentElement.textContent = truncateString(
+        selectedRecord.content,
+        contentMaxChar,
+      );
+    }
+  }
+}
+
+function moreInfoNavigation() {
+  if (selectedRecord && Object.keys(selectedRecord).length) {
+    window.location.href = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}`;
+  }
+}
+function closeInfoPopup() {
+  if (mapInfoBlock) {
+    const titleElement = document.getElementById('info-title');
+    const publishedBlock = document.getElementById('info-published-block');
+    const publishedByElement = document.getElementById('info-published-by');
+    const contentElement = document.getElementById('info-content');
+    mapInfoBlock.style.display = 'none';
+    titleElement.textContent = '';
+    publishedBlock.style.display = 'block';
+    publishedByElement.textContent = '';
+    contentElement.textContent = '';
+  }
+  resetFeatureStyle();
 }
 
 function calculateCoordinates() {
@@ -150,7 +291,7 @@ if (document.getElementById('west')) {
   });
 }
 
-function calculatePolygonFromCoordinates(isDetailsScreen = false) {
+function calculatePolygonFromCoordinates() {
   const targetKey = isDetailsScreen ? 'textContent' : 'value';
   const north = parseFloat(document.getElementById('north')[targetKey]);
   const south = parseFloat(document.getElementById('south')[targetKey]);
@@ -181,20 +322,24 @@ function addPolygon(coordinates, style) {
     });
     polygonFeature.setStyle(style);
     vectorSource.addFeature(polygonFeature);
+    return polygonFeature;
   }
+  return null;
 }
 
-function disableInteractions(isMapResultsScreen = false) {
+function disableInteractions() {
   map.getInteractions().forEach((interaction) => {
-    if (
+    const isZoomInteractions =
       interaction instanceof ol.interaction.DoubleClickZoom ||
       (!isMapResultsScreen &&
-        interaction instanceof ol.interaction.MouseWheelZoom) ||
+        interaction instanceof ol.interaction.MouseWheelZoom);
+    const isDragDrawModifySnap =
       interaction instanceof ol.interaction.DragPan ||
-      interaction instanceof ol.interaction.Draw ||
+      interaction instanceof ol.interaction.Draw;
+    const isModifySnap =
       interaction instanceof ol.interaction.Modify ||
-      interaction instanceof ol.interaction.Snap
-    ) {
+      interaction instanceof ol.interaction.Snap;
+    if (isZoomInteractions || isDragDrawModifySnap || isModifySnap) {
       map.removeInteraction(interaction);
     }
   });
@@ -203,7 +348,7 @@ function disableInteractions(isMapResultsScreen = false) {
 const getMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
-      anchor: [0.5, 46],
+      anchor: [0.5, marketYPoint],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: iconPath,
@@ -231,7 +376,7 @@ function placeMarkers(markers, iconPath, recordId = '1', boundingBoxData = '') {
 
 function geographyTabListener() {
   map.updateSize();
-  calculatePolygonFromCoordinates(true);
+  calculatePolygonFromCoordinates();
   if (typeof markers !== 'undefined' && markers) {
     placeMarkers(markers, '/assets/images/marker.png');
   }
@@ -259,6 +404,8 @@ function resetMap() {
   if (resetControl) {
     resetControl.style.display = 'none';
   }
+  resetFeatureStyle();
+  closeInfoPopup();
 }
 
 function exitMapEventListener() {
@@ -269,14 +416,12 @@ function exitMapEventListener() {
 }
 
 function drawBoundingBoxWithMarker(records) {
+  mapResults = records;
   map.updateSize();
   const centerArray = [];
   records.forEach((record) => {
-    addPolygon(record.geographicBoundary, mapResultsStyle);
-    placeMarkers(
-      record.geographicCenter,
-      '/assets/images/blue-marker-icon.svg',
-    );
+    const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
+    placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
     const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
     centerArray.push([lon, lat]);
   });
@@ -292,7 +437,6 @@ function drawBoundingBoxWithMarker(records) {
     ];
     map.getView().setCenter(averageCenter);
     map.getView().setZoom(2);
-    // map.getView().fit(vectorSource.getExtent(), { padding: [50, 50, 50, 50] });
     initialCenter = map.getView().getCenter();
     initialZoom = map.getView().getZoom();
   }
@@ -302,7 +446,7 @@ const attachBoundingBoxToggleListener = () => {
   if (boundingBoxCheckbox) {
     boundingBoxCheckboxChange(true);
     boundingBoxCheckbox.addEventListener('change', () => {
-      vectorLayer.setVisible(boundingBoxCheckbox.checked ? true : false);
+      vectorLayer.setVisible(boundingBoxCheckbox.checked);
     });
   }
 };
@@ -312,16 +456,15 @@ const getMapResults = async (path) => {
   const mapResultsCount = document.getElementById(mapResultsCountId);
   const response = await invokeAjaxCall(path, {}, false, 'GET');
   if (response) {
-    if (response.status === 200) {
-      const mapResults = await response.json();
+    if (response.status === responseSuccessStatusCode) {
+      const mapResultsJson = await response.json();
       mapResultsButton.removeAttribute('disabled');
-      mapResultsCount.textContent = mapResults.total;
-      drawBoundingBoxWithMarker(mapResults.items);
+      mapResultsCount.textContent = mapResultsJson.total;
+      drawBoundingBoxWithMarker(mapResultsJson.items);
       attachBoundingBoxToggleListener();
     } else {
       mapResultsButton.setAttribute('disabled', true);
     }
-    return;
   }
 };
 
@@ -367,6 +510,32 @@ function customControls() {
   }
 }
 
+function infoListener() {
+  const closeInfoElement = document.getElementById('map-info-close');
+  if (closeInfoElement) {
+    closeInfoElement.addEventListener('click', closeInfoPopup);
+  }
+  const moreInfoElement = document.getElementById('more-info');
+  if (moreInfoElement) {
+    moreInfoElement.addEventListener('click', moreInfoNavigation);
+  }
+  const goToResourceElement = document.getElementById('go-to-resource');
+  if (goToResourceElement) {
+    if (!selectedRecord.organisationName || !selectedRecord.resourceLocator) {
+      goToResourceElement.setAttribute('disabled', true);
+    } else {
+      goToResourceElement.removeAttribute('disabled');
+    }
+    goToResourceElement.addEventListener('click', () => {
+      window.openDataModal(
+        selectedRecord.organisationName,
+        selectedRecord.resourceLocator,
+        true,
+      );
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
     if (isDetailsScreen && hasCenter) {
@@ -378,7 +547,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (isMapResultsScreen) {
       invokeMapResults();
       exitMapEventListener();
-      disableInteractions(true);
+      disableInteractions();
+      infoListener();
       customControls();
     } else {
       setTimeout(() => {

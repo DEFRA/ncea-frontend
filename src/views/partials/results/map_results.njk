@@ -89,5 +89,33 @@
       </div>
       <div class="govuk-section-break--visible"></div>
     </div>
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+      <div class="defra-map-info__container">
+        <div class=" defra-map-info__title-block">
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <span class="defra-map-info__close" id="map-info-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <g clip-path="url(#clip0_6756_108066)">
+                <path d="M19 6.66L17.59 5.25L12 10.84L6.41 5.25L5 6.66L10.59 12.25L5 17.84L6.41 19.25L12 13.66L17.59 19.25L19 17.84L13.41 12.25L19 6.66Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_108066">
+                  <rect width="24" height="24" fill="white" transform="translate(0 0.25)"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+        </div>
+        <div id="info-published-block">
+          <span class='search-result__parameter-label search-result__published-label'>Published by</span>
+          <span class='search-result__parameter-value search-result__published-value' id="info-published-by"></span>
+        </div>
+        <div class='defra-map-info__content' id="info-content"></div>
+        <div>
+          {{ govukButton({ text: 'Go to resource', classes: 'govuk-!-margin-bottom-0 govuk-!-margin-right-1', attributes: {id: 'go-to-resource'} }) }}
+          {{ govukButton({ text: 'More info', classes: 'govuk-button--secondary govuk-!-margin-bottom-0', attributes: {id: 'more-info'} }) }}
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}
