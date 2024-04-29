@@ -159,7 +159,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         
 
 <div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" aria-hidden="true" for="search_term">
+  <label class="govuk-label search-block__label" for="search_term">
     Search
   </label>
 
