@@ -8,7 +8,10 @@ import { buildSearchQuery, classifierAggregationQuery } from '../../utils/queryB
 import { elasticSearchAPIPaths, resourceTypeOptions } from '../../utils/constants';
 import { formatAggregationResponse, formatClassifierResponse } from '../../utils/formatAggregationResponse';
 
-const getSearchResults = async (searchFieldsObject: ISearchPayload): Promise<ISearchResults> => {
+const getSearchResults = async (
+  searchFieldsObject: ISearchPayload,
+  isMapResults: boolean = false,
+): Promise<ISearchResults> => {
   try {
     if (Object.keys(searchFieldsObject.fields).length) {
       const searchBuilderPayload: ISearchBuilderPayload = {
@@ -17,7 +20,7 @@ const getSearchResults = async (searchFieldsObject: ISearchPayload): Promise<ISe
       };
       const payload = buildSearchQuery(searchBuilderPayload);
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: ISearchResults = await formatSearchResponse(response.data);
+      const finalResponse: ISearchResults = await formatSearchResponse(response.data, false, isMapResults);
       return finalResponse;
     } else {
       return Promise.resolve({ total: 0, items: [] });

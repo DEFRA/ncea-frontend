@@ -3,7 +3,6 @@ import {
   ICoordinates,
 } from '../../src/interfaces/searchResponse.interface';
 import {
-  getAccumulatedCoordinatesNCenter,
   getGeographicBoundaryHtml,
   getGeographicMarkers,
   getGeographyTabData,
@@ -91,101 +90,10 @@ describe('Geography tab data', () => {
     });
   });
 
-  describe('getAccumulatedCoordinatesNCenter function', () => {
-    it('should return correct coordinates when coordinates array is provided', () => {
-      const result = getAccumulatedCoordinatesNCenter([
-        {
-          coordinates: [
-            [
-              [-15.320435, 47.912775],
-              [-6.970825, 47.912775],
-              [-6.970825, 50.180526],
-              [-15.320435, 50.180526],
-              [-15.320435, 47.912775],
-            ],
-          ],
-        },
-      ]);
-      expect(result).toEqual({
-        coordinates: {
-          north: 50.180526,
-          south: 47.912775,
-          east: -6.970825,
-          west: -15.320435,
-        },
-        center: '-11.14563,49.0466505',
-      });
-    });
-
-    it('should return correct coordinates when coordinates object is provided', () => {
-      const result = getAccumulatedCoordinatesNCenter({
-        coordinates: [
-          [
-            [-15.320435, 47.912775],
-            [-6.970825, 47.912775],
-            [-6.970825, 50.180526],
-            [-15.320435, 50.180526],
-            [-15.320435, 47.912775],
-          ],
-        ],
-      });
-      expect(result).toEqual({
-        coordinates: {
-          north: 50.180526,
-          south: 47.912775,
-          east: -6.970825,
-          west: -15.320435,
-        },
-        center: '-11.14563,49.0466505',
-      });
-    });
-
-    it('should return correct coordinates with multiple polygons are provided', () => {
-      const result = getAccumulatedCoordinatesNCenter([
-        {
-          coordinates: [
-            [
-              [-15.320435, 47.912775],
-              [-6.970825, 47.912775],
-              [-6.970825, 50.180526],
-              [-15.320435, 50.180526],
-              [-15.320435, 47.912775],
-            ],
-          ],
-        },
-        {
-          coordinates: [
-            [
-              [-7.963867, 50.555712],
-              [-6.127928, 50.555712],
-              [-6.127928, 51.245488],
-              [-7.963867, 51.245488],
-              [-7.963867, 50.555712],
-            ],
-          ],
-        },
-      ]);
-      expect(result).toEqual({
-        coordinates: {
-          north: 51.245488,
-          south: 47.912775,
-          east: -6.127928,
-          west: -15.320435,
-        },
-        center: '-10.7241815,49.5791315',
-      });
-    });
-
-    it('should return an empty string when coordinates are not provided', () => {
-      const result = getAccumulatedCoordinatesNCenter({} as ICoordinates);
-      expect(result).toBeNull();
-    });
-  });
-
   describe('getGeographicMarkers function', () => {
     it('should return correct marker when location is a string', () => {
       const result = getGeographicMarkers('49.0466505,-11.14563');
-      expect(result).toEqual('49.0466505,-11.14563');
+      expect(result).toEqual('-11.14563,49.0466505');
     });
 
     it('should return correct marker when location is an array of strings', () => {
@@ -193,12 +101,12 @@ describe('Geography tab data', () => {
         '49.0466505,-11.14563',
         '59.0466505,-21.14563',
       ]);
-      expect(result).toEqual('49.0466505,-11.14563_59.0466505,-21.14563');
+      expect(result).toEqual('-11.14563,49.0466505_-21.14563,59.0466505');
     });
 
     it('should return correct marker when location has empty string inside an array', () => {
       const result = getGeographicMarkers(['', '59.0466505,-21.14563']);
-      expect(result).toEqual('59.0466505,-21.14563');
+      expect(result).toEqual('-21.14563,59.0466505');
     });
 
     it('should return an empty string when location is empty', () => {
@@ -246,7 +154,7 @@ describe('Geography tab data', () => {
         },
         geographicBoundaryHtml: `<p>West bounding longitude: <span id="west">-15.320435</span></p><p>East bounding longitude: <span id="east">-6.970825</span></p><p>North bounding latitude: <span id="north">50.180526</span></p><p>South bounding latitude: <span id="south">47.912775</span></p>`,
         geographicCenter: '-11.14563,49.0466505',
-        geographicMarkers: '49.0466505,-11.14563',
+        geographicMarkers: '-11.14563,49.0466505',
         verticalExtent: '<p>Lowest point: 1m</p><p>Highest point: 10m</p>',
         samplingResolution: '10 m',
       });

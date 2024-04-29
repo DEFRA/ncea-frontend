@@ -38,9 +38,15 @@ interface IQueryString {
   };
 }
 
+interface IFieldExist {
+  exists: {
+    field: string;
+  };
+}
+
 interface IBoolQuery {
   bool: {
-    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString)[];
+    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString | IFieldExist)[];
     should?: IMatchQuery[];
     minimum_should_match?: number;
   };
@@ -73,34 +79,35 @@ interface IQuery {
   sort?: ISortQuery[];
   aggs?: IAggregateQuery;
   from?: number;
+  _source?: string[];
 }
 
 interface IGeoCoordinates {
-  north: string;
-  south: string;
-  east: string;
-  west: string;
-  depth?: string;
+  nth: string;
+  sth: string;
+  est: string;
+  wst: string;
+  dpt?: string;
 }
 
 interface ISearchFields {
-  'quick-search'?: {
-    search_term?: string;
+  keyword?: {
+    q?: string;
   };
-  'date-search'?: {
-    'from-date-year'?: string;
-    'from-date-day'?: string;
-    'from-date-month'?: string;
-    'to-date-year'?: string;
-    'to-date-day'?: string;
-    'to-date-month'?: string;
+  date?: {
+    fdy?: string;
+    fdd?: string;
+    fdm?: string;
+    tdy?: string;
+    tdm?: string;
+    tdd?: string;
   };
-  'coordinate-search'?: {
-    depth?: string;
-    north?: string;
-    south?: string;
-    east?: string;
-    west?: string;
+  extent?: {
+    dpt?: string;
+    nth?: string;
+    sth?: string;
+    est?: string;
+    wst?: string;
   };
 }
 
@@ -113,7 +120,9 @@ interface ISearchPayload {
   sort: string;
   filters: ISearchFilter;
   rowsPerPage: number;
-  page: number;
+  page: number | null;
+  fieldsExist?: string[];
+  requiredFields?: string[];
 }
 
 interface ISearchBuilderPayload {
@@ -162,4 +171,5 @@ export {
   ISearchFilter,
   ISearchBuilderPayload,
   IAggregateClassifierQuery,
+  IFieldExist,
 };

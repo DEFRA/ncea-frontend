@@ -4,6 +4,7 @@ import {
   IAggregateQuery,
   IBoolQuery,
   ICustomSortScript,
+  IFieldExist,
   IGeoCoordinates,
   IGeoShapeQuery,
   IMatchQuery,
@@ -44,15 +45,15 @@ const buildSearchQueryWithFields = (searchTerm: string, fieldsToSearch: string[]
 
 const buildDateQuery = (fields: ISearchFields): IRangeQuery => {
   const startDate: string = generateDateString({
-    year: parseInt(fields['date-search'] ? (fields['date-search']['from-date-year'] as string) : ''),
-    month: parseInt(fields['date-search'] ? (fields['date-search']['from-date-month'] as string) : ''),
-    day: parseInt(fields['date-search'] ? (fields['date-search']['from-date-day'] as string) : ''),
+    year: parseInt(fields.date ? (fields.date?.fdy as string) : ''),
+    month: parseInt(fields.date ? (fields.date?.fdm as string) : ''),
+    day: parseInt(fields.date ? (fields.date?.fdd as string) : ''),
   });
   const endDate: string = generateDateString(
     {
-      year: parseInt(fields['date-search'] ? (fields['date-search']['to-date-year'] as string) : ''),
-      month: parseInt(fields['date-search'] ? (fields['date-search']['to-date-month'] as string) : ''),
-      day: parseInt(fields['date-search'] ? (fields['date-search']['to-date-day'] as string) : ''),
+      year: parseInt(fields.date ? (fields.date?.tdy as string) : ''),
+      month: parseInt(fields.date ? (fields.date?.tdm as string) : ''),
+      day: parseInt(fields.date ? (fields.date?.tdd as string) : ''),
     },
     true,
   );
@@ -93,8 +94,8 @@ const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => 
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
-      [parseFloat(geoCoordinates.west), parseFloat(geoCoordinates.north)],
-      [parseFloat(geoCoordinates.east), parseFloat(geoCoordinates.south)],
+      [parseFloat(geoCoordinates.wst), parseFloat(geoCoordinates.nth)],
+      [parseFloat(geoCoordinates.est), parseFloat(geoCoordinates.sth)],
     ],
   };
 
@@ -107,10 +108,10 @@ const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => 
     },
   };
 
-  if (geoCoordinates.depth && geoShapeQuery.geo_shape.geom) {
+  if (geoCoordinates.dpt && geoShapeQuery.geo_shape.geom) {
     geoShapeQuery.geo_shape.geom.depth = {
       from: 0,
-      to: parseInt(geoCoordinates.depth),
+      to: parseInt(geoCoordinates.dpt),
     };
   }
   return geoShapeQuery;
@@ -130,7 +131,15 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
       must: [],
     },
   };
-  const { fields, sort, rowsPerPage, page, filters: filterOptions } = (searchFieldsObject as ISearchPayload) ?? {};
+  const {
+    fields,
+    sort,
+    rowsPerPage,
+    page,
+    filters: filterOptions,
+    fieldsExist = [],
+    requiredFields = [],
+  } = (searchFieldsObject as ISearchPayload) ?? {};
 
   addKeywordSearchQuery(fields, fieldsToSearch, boolQuery);
   addFilterOptionsQuery(filterOptions, isCount, ignoreAggregation, boolQuery);
@@ -140,6 +149,7 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
 
   const isSort = sort && !isCount;
   const isAggregation = !ignoreAggregation && !isCount && aggregationField;
+  fieldsExist.length > 0 && addFieldExistsQuery(boolQuery, fieldsExist);
 
   const finalQuery: IQuery = {
     query: boolQuery,
@@ -147,6 +157,7 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
     ...(isAggregation && { aggs: {} }),
     ...(!isCount && { size: isAggregation ? 0 : rowsPerPage }),
     ...(page && { from: page === 1 ? 0 : (page - 1) * rowsPerPage }),
+    ...(!isCount && { _source: requiredFields ?? [] }),
   };
 
   isSort && addSortQuery(finalQuery, sort, isCount);
@@ -155,9 +166,16 @@ const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery =
   return finalQuery;
 };
 
+const addFieldExistsQuery = (boolQuery: IBoolQuery, fieldsExist: string[]): void => {
+  fieldsExist.forEach((field: string) => {
+    const fieldExists: IFieldExist = { exists: { field } };
+    boolQuery.bool.must?.push(fieldExists);
+  });
+};
+
 const addKeywordSearchQuery = (fields: ISearchFields, fieldsToSearch: string[], boolQuery: IBoolQuery): void => {
-  if (fields?.['quick-search']) {
-    const searchTerm: string = fields?.['quick-search']?.search_term as string;
+  if (fields?.keyword) {
+    const searchTerm: string = fields?.keyword?.q as string;
     let queryString: IQueryString | IBoolQuery;
     if (fieldsToSearch.length) {
       queryString = buildSearchQueryWithFields(searchTerm, fieldsToSearch);
@@ -185,16 +203,16 @@ const addFilterOptionsQuery = (
 };
 
 const addDateSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
-  if (fields?.['date-search']?.['from-date-year'] && fields?.['date-search']['to-date-year']) {
+  if (fields?.date?.fdy && fields?.date?.tdy) {
     const rangeQuery: IRangeQuery = buildDateQuery(fields);
     boolQuery.bool.must?.push(rangeQuery);
   }
 };
 
 const addCoordinateSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
-  const geoCoordinates: IGeoCoordinates = fields?.['coordinate-search'] as IGeoCoordinates;
+  const geoCoordinates: IGeoCoordinates = fields?.extent as IGeoCoordinates;
 
-  if (geoCoordinates?.north && geoCoordinates?.south && geoCoordinates?.east && geoCoordinates?.west) {
+  if (geoCoordinates?.nth && geoCoordinates?.sth && geoCoordinates?.est && geoCoordinates?.wst) {
     const geoShapeQuery: IGeoShapeQuery = buildGeoShapeQuery(geoCoordinates);
     boolQuery.bool.must?.push(geoShapeQuery);
   }

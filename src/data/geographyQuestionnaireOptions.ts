@@ -14,6 +14,9 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
       classes: 'govuk-!-margin-0',
     },
     type: 'text',
+    attributes: {
+      altName: 'nth',
+    },
   },
   south: {
     id: 'south',
@@ -28,6 +31,9 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
       classes: 'govuk-!-margin-0',
     },
     type: 'text',
+    attributes: {
+      altName: 'sth',
+    },
   },
   east: {
     id: 'east',
@@ -42,6 +48,9 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
       classes: 'govuk-!-margin-0',
     },
     type: 'text',
+    attributes: {
+      altName: 'est',
+    },
   },
   west: {
     id: 'west',
@@ -56,6 +65,9 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
       classes: 'govuk-!-margin-0',
     },
     type: 'text',
+    attributes: {
+      altName: 'wst',
+    },
   },
   depth: {
     id: 'depth',
@@ -70,6 +82,9 @@ const geographyQuestionnaireOptions: IFormFieldOptions = {
       classes: 'govuk-!-margin-0',
     },
     type: 'text',
+    attributes: {
+      altName: 'dpt',
+    },
   },
 };
 

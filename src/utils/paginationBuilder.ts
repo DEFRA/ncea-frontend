@@ -34,7 +34,7 @@ const generatePaginationNumbers = (currentPage, totalPages, maxPagesDisplayed) =
   return pages;
 };
 
-export const getPaginationItems = (currentPage: number, totalItems: number, itemsPerPage: number) => {
+export const getPaginationItems = (currentPage: number | null, totalItems: number, itemsPerPage: number) => {
   const maxPagesDisplayed = 5;
   const paginationItems = {};
   if (totalItems === 0) {
@@ -43,7 +43,7 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
   const totalPaginationPages = Math.ceil(totalItems / itemsPerPage);
   const paginationNumbers = generatePaginationNumbers(currentPage, totalPaginationPages, maxPagesDisplayed);
   // Previous page button
-  if (currentPage > 1) {
+  if (currentPage && currentPage > 1) {
     paginationItems['previous'] = {
       href: '#!',
       attributes: {
@@ -66,7 +66,7 @@ export const getPaginationItems = (currentPage: number, totalItems: number, item
   });
 
   // Next page button
-  if (currentPage < totalPaginationPages) {
+  if (currentPage && currentPage < totalPaginationPages) {
     paginationItems['next'] = {
       href: '#!',
       attributes: {

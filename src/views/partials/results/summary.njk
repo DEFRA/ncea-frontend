@@ -2,20 +2,19 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
 
-{% from 'partials/go_to_resource/macro.njk' import openData %}
+{% from 'partials/go_to_resource/macro.njk' import goToResource %}
 
 {% if hasError %}
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
 {% endif %}
 
 {% if not hasError %}
-  <div class='govuk-section-break--visible'>
-    <h2 class='govuk-heading-m results-stats'>
-      {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
-    </h2>
+  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+    {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
+  </h2>
 
-    <div class="option-container">
-      {{ govukSelect({
+  <div class='option-container govuk-section-break--visible'>
+    {{ govukSelect({
         id: "sort",
         name: "sort",
         label: {
@@ -38,7 +37,7 @@
         ]
       }) }}
 
-      {{ govukSelect({
+    {{ govukSelect({
         id: "page-results",
         name: "page-results",
         label: {
@@ -64,7 +63,6 @@
           }
         ]
       }) }}
-    </div>
   </div>
 {% endif %}
 
@@ -92,7 +90,7 @@
         </p>
 
         <div class='govuk-button-group search-result__button-group'>
-          {{ openData({ organisationName: item.organisationName, resourceLocator: item.resourceLocator, isDetailsPage: false }) }}
+          {{ goToResource({ organisationName: item.organisationName, resourceLocator: item.resourceLocator, isDetailsPage: false }) }}
 
           {{ govukButton({
             text: 'More info',
