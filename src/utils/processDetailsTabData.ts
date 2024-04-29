@@ -8,9 +8,7 @@ const processDetailsTabData = async (
   const processedTabOption: FormattedTabOptions = {};
 
   const addLink = (value: string): string => {
-    const internalDomainRegex = new RegExp(`^https?://${window.location.hostname}`);
-    const targetAttribute = internalDomainRegex.test(value) ? '' : ' target="_blank"';
-    return `<a class="govuk-link" href="${value}"${targetAttribute}>${value}</a>`;
+    return `<a class="govuk-link" href="${value}" target="_blank">${value}</a>`;
   };
 
   const processTabOption = (tabOptions: TabOption[]): FormattedTabOption[] => {

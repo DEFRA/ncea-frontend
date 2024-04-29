@@ -56,13 +56,13 @@ const formatSearchResponse = async (
     };
 
     if (isMapResults) {
-      const coordinatesData: IAccumulatedCoordinatesWithCenter | null = getAccumulatedCoordinatesNCenter(
-        searchItem?._source?.geom ?? {},
-      );
+      const coordinatesData: IAccumulatedCoordinatesWithCenter = getAccumulatedCoordinatesNCenter(
+        searchItem._source.geom,
+      ) as IAccumulatedCoordinatesWithCenter;
       item = {
         ...item,
-        geographicBoundary: coordinatesData?.coordinates,
-        geographicCenter: coordinatesData?.center,
+        geographicBoundary: coordinatesData.coordinates,
+        geographicCenter: coordinatesData.center,
       };
     }
 
