@@ -284,6 +284,7 @@
     &__content {
       margin: 0;
       color: $govuk-text-colour;
+      word-wrap: break-word;
       @include font-style-stack(16px, 20px, 300, normal, true);
     }
   }

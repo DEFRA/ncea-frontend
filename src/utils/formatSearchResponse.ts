@@ -65,6 +65,7 @@ const formatSearchResponse = async (
         ...item,
         geographicBoundary: coordinatesData.coordinates,
         geographicCenter: coordinatesData.center,
+        resourceType: searchItem?._source?.resourceType ?? [],
       };
     }
 
