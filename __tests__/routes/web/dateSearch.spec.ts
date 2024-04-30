@@ -10,7 +10,7 @@ import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
-  logger: jest.fn()
+  logger: jest.fn(),
 }));
 
 jest.mock('../../../src/utils/keyvault', () => ({
@@ -69,7 +69,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
     describe('Breadcrumb list items', () => {
       it('should render 2 list items', async () => {
         const breadcrumbList = document?.querySelector(
-          '.govuk-breadcrumbs__list'
+          '.govuk-breadcrumbs__list',
         );
         expect(breadcrumbList?.childElementCount).toEqual(2);
       });
@@ -77,27 +77,24 @@ describe('Guided Search - Date Questionnaire Screen', () => {
 
     describe('Breadcrumb list item options', () => {
       it('should render home list item as a first child', async () => {
-        const item = document.querySelector('.govuk-breadcrumbs__list')
-          ?.firstElementChild;
+        const item = document.querySelector(
+          '.govuk-breadcrumbs__list',
+        )?.firstElementChild;
         const anchor = item?.firstElementChild;
         expect(anchor?.tagName.toLowerCase()).toBe('a');
         expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link'
+          'govuk-breadcrumbs__link',
         );
         expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.home);
         expect(anchor?.textContent?.trim()).toEqual('Home');
       });
 
       it('should render search results list item as a second child', async () => {
-        const item = document.querySelector('.govuk-breadcrumbs__list')
-          ?.lastElementChild;
-        const anchor = item?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link'
-        );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual('Questionnaire search');
+        const item = document.querySelector(
+          '.govuk-breadcrumbs__list',
+        )?.lastElementChild;
+        expect(item?.querySelector('a')).toBeNull();
+        expect(item?.textContent?.trim()).toEqual('Questionnaire search');
       });
     });
   });
@@ -106,7 +103,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
     describe('Date Questionnaire block classes', () => {
       it('renders govuk-grid-column-two-thirds class', async () => {
         expect(
-          document.querySelector('.govuk-grid-column-two-thirds')
+          document.querySelector('.govuk-grid-column-two-thirds'),
         ).toBeTruthy();
       });
     });
@@ -116,17 +113,17 @@ describe('Guided Search - Date Questionnaire Screen', () => {
         expect(
           document
             ?.querySelectorAll('.govuk-heading-m')?.[0]
-            ?.textContent?.trim()
+            ?.textContent?.trim(),
         ).toBe('When was the data or information collected?');
         expect(
           document
             ?.querySelectorAll('.govuk-heading-m')?.[1]
-            ?.textContent?.trim()
+            ?.textContent?.trim(),
         ).toBe('From');
         expect(
           document
             ?.querySelectorAll('.govuk-heading-m')?.[2]
-            ?.textContent?.trim()
+            ?.textContent?.trim(),
         ).toBe('To');
       });
     });
@@ -141,38 +138,38 @@ describe('Guided Search - Date Questionnaire Screen', () => {
 
     describe('date questionnaire input field', () => {
       it('should renders with from date day id', () => {
-        const inputElement = document?.querySelector('#from-date-day');
+        const inputElement = document?.querySelector('#day');
         expect(inputElement).toBeTruthy();
       });
 
       it('should renders with from date month id', () => {
-        const inputElement = document?.querySelector('#from-date-month');
+        const inputElement = document?.querySelector('#month');
         expect(inputElement).toBeTruthy();
       });
 
       it('should renders with from date year id', () => {
-        const inputElement = document?.querySelector('#from-date-year');
+        const inputElement = document?.querySelector('#year');
         expect(inputElement).toBeTruthy();
       });
 
       it('should renders with to date day id', () => {
-        const inputElement = document?.querySelector('#to-date-day');
+        const inputElement = document?.querySelector('#day');
         expect(inputElement).toBeTruthy();
       });
 
       it('should renders with to date month id', () => {
-        const inputElement = document?.querySelector('#to-date-month');
+        const inputElement = document?.querySelector('#month');
         expect(inputElement).toBeTruthy();
       });
 
       it('should renders with to date year id', () => {
-        const inputElement = document?.querySelector('#to-date-year');
+        const inputElement = document?.querySelector('#year');
         expect(inputElement).toBeTruthy();
       });
 
       it('should renders a button', () => {
         const buttonElement = document?.querySelector(
-          'button[data-module="govuk-button"]'
+          'button[data-module="govuk-button"]',
         );
         expect(buttonElement).toBeTruthy();
       });

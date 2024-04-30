@@ -14,23 +14,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with date range and when fields are not provided', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: '',
@@ -80,6 +80,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -91,23 +92,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with both search term and date range', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: '',
@@ -161,6 +162,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -175,8 +177,8 @@ describe('Build the search query', () => {
     it('should build the search query correctly with only search term', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -204,6 +206,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -218,8 +221,8 @@ describe('Build the search query', () => {
     it('should build the search query correctly with only search term without fields', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: '',
@@ -243,6 +246,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -254,13 +258,13 @@ describe('Build the search query', () => {
     it('should build the search query correctly with only date range', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
         },
         sort: '',
@@ -286,6 +290,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -294,15 +299,15 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with only Geo Coordinates with depth', () => {
+    it('should build the search query correctly with only Geo Coordinates with dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: '',
@@ -338,6 +343,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -346,14 +352,14 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with only Geo Coordinates with out depth', () => {
+    it('should build the search query correctly with only Geo Coordinates with out dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
           },
         },
         sort: '',
@@ -385,6 +391,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -410,6 +417,7 @@ describe('Build the search query', () => {
         },
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -423,23 +431,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with best match sort when date range and when fields are not provided', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -496,6 +504,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -507,23 +516,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with best match sort when both search term and date range', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -584,6 +593,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -598,8 +608,8 @@ describe('Build the search query', () => {
     it('should build the search query correctly with best match sort when only search term', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -634,6 +644,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -648,8 +659,8 @@ describe('Build the search query', () => {
     it('should build the search query correctly with best match sort when only search term without fields', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -680,6 +691,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -691,13 +703,13 @@ describe('Build the search query', () => {
     it('should build the search query correctly with best match sort when only date range', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
         },
         sort: 'best_match',
@@ -730,6 +742,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -738,15 +751,15 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with best match sort when only Geo Coordinates with depth', () => {
+    it('should build the search query correctly with best match sort when only Geo Coordinates with dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -789,6 +802,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -797,14 +811,14 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with best match sort when only Geo Coordinates with out depth', () => {
+    it('should build the search query correctly with best match sort when only Geo Coordinates with out dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
           },
         },
         sort: 'best_match',
@@ -843,6 +857,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -856,23 +871,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with most recent study sort when date range and when fields are not provided', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'recent_study',
@@ -923,6 +938,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -934,23 +950,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with most recent study sort when both search term and date range', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'recent_study',
@@ -1005,6 +1021,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1019,8 +1036,8 @@ describe('Build the search query', () => {
     it('should build the search query correctly with most recent study sort when only search term', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'recent_study',
@@ -1049,6 +1066,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1063,8 +1081,8 @@ describe('Build the search query', () => {
     it('should build the search query correctly with most recent study sort when only search term without fields', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'recent_study',
@@ -1089,6 +1107,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1100,13 +1119,13 @@ describe('Build the search query', () => {
     it('should build the search query correctly with most recent study sort when only date range', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
         },
         sort: 'recent_study',
@@ -1133,6 +1152,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1141,15 +1161,15 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with most recent study sort when only Geo Coordinates with depth', () => {
+    it('should build the search query correctly with most recent study sort when only Geo Coordinates with dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'recent_study',
@@ -1186,6 +1206,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1194,14 +1215,14 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query correctly with most recent study sort when only Geo Coordinates with out depth', () => {
+    it('should build the search query correctly with most recent study sort when only Geo Coordinates with out dpt', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
           },
         },
         sort: 'recent_study',
@@ -1234,6 +1255,7 @@ describe('Build the search query', () => {
         sort: [recentStudySortScript],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1247,23 +1269,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with results per page as 50', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1320,6 +1342,7 @@ describe('Build the search query', () => {
         ],
         size: 50,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1331,23 +1354,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with results per page as 100', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1408,6 +1431,7 @@ describe('Build the search query', () => {
         ],
         size: 100,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1423,23 +1447,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with pagination for page 1', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1496,6 +1520,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1507,23 +1532,23 @@ describe('Build the search query', () => {
     it('should build the search query correctly with pagination for page 5', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
-          'date-search': {
-            'from-date-year': '2022',
-            'from-date-day': '01',
-            'from-date-month': '01',
-            'to-date-year': '2022',
-            'to-date-day': '31',
-            'to-date-month': '12',
+          date: {
+            fdy: '2022',
+            fdd: '01',
+            fdm: '01',
+            tdy: '2022',
+            tdd: '31',
+            tdm: '12',
           },
-          'coordinate-search': {
-            north: '123',
-            south: '345',
-            east: '678',
-            west: '901',
-            depth: '1',
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+            dpt: '1',
           },
         },
         sort: 'best_match',
@@ -1584,6 +1609,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 80,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1600,8 +1626,8 @@ describe('Build the search query', () => {
     it('should build the search query when filter resourceType is all', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -1632,6 +1658,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({ searchFieldsObject });
@@ -1649,8 +1676,8 @@ describe('Build the search query', () => {
     it('should build the search query when filter resourceType as dataset', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -1687,6 +1714,7 @@ describe('Build the search query', () => {
         ],
         size: 20,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1704,8 +1732,8 @@ describe('Build the search query', () => {
       const aggregationField = 'resourceType';
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -1743,6 +1771,7 @@ describe('Build the search query', () => {
         },
         size: 0,
         from: 0,
+        _source: [],
       };
 
       const result = buildSearchQuery({
@@ -1759,8 +1788,8 @@ describe('Build the search query', () => {
     it('should build the search query to get only count of documents', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -1819,6 +1848,7 @@ describe('Build the search query', () => {
             ],
           },
         },
+        _source: [],
       };
 
       expect(result).toEqual(expectedQuery);
@@ -1828,8 +1858,8 @@ describe('Build the search query', () => {
     it('should not consider docId when fields are present', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
-          'quick-search': {
-            search_term: 'example',
+          keyword: {
+            q: 'example',
           },
         },
         sort: 'best_match',
@@ -1860,6 +1890,163 @@ describe('Build the search query', () => {
         },
         from: 0,
       };
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(1);
+    });
+  });
+
+  describe('Search query to check if field exists', () => {
+    it('should build the search query with exists property to check a single field', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+        fieldsExist: ['field1'],
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                exists: { field: 'field1' },
+              },
+            ],
+          },
+        },
+        size: 20,
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(2);
+    });
+
+    it('should build the search query with exists property to check multiple fields', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+        fieldsExist: ['field1', 'field2'],
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                exists: { field: 'field1' },
+              },
+              {
+                exists: { field: 'field2' },
+              },
+            ],
+          },
+        },
+        size: 20,
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        from: 0,
+        _source: [],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool.must).toHaveLength(3);
+    });
+  });
+
+  describe('Search query to fetch required fields', () => {
+    it('should build the search query with required fields', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: { resourceType: 'all' },
+        rowsPerPage: 20,
+        page: 1,
+        requiredFields: ['field1', 'field2'],
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+            ],
+          },
+        },
+        size: 20,
+        sort: [
+          {
+            _score: {
+              order: 'desc',
+            },
+          },
+        ],
+        from: 0,
+        _source: ['field1', 'field2'],
+      };
+
+      const result = buildSearchQuery({
+        searchFieldsObject,
+        ignoreAggregation: true,
+      });
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool.must).toHaveLength(1);

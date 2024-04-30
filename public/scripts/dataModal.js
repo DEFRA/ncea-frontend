@@ -1,12 +1,15 @@
 'use strict';
 
 let scrollPositionY = 0;
+const overlayContainer = document.getElementById('overlay');
 
-const toggleModalContainer = () => {
-  const overlayContainer = document.getElementById('overlay');
-  const modalContainer = document.getElementById('modal');
-  overlayContainer.classList.toggle('active');
+const toggleModalContainer = (modalClass) => {
+  const modalContainer = document.querySelector(`.${modalClass}`);
   modalContainer.classList.toggle('active');
+};
+
+const toggleOverlayContainer = () => {
+  overlayContainer.classList.toggle('active');
 };
 
 const freezeScroll = () => {
@@ -26,13 +29,17 @@ const unfreezeScroll = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  function openDataModal(organisationName, resourceLocator) {
-    toggleModalContainer();
+  function openDataModal(organisationName, resourceLocator, isOnMap = false) {
+    toggleModalContainer('resource-modal');
+    toggleOverlayContainer();
     freezeScroll();
     const resourcePartyElement = document.getElementById('resource_party');
     const resourceLocatorLink = document.getElementById(
       'resource-locator-link',
     );
+    if (isOnMap) {
+      overlayContainer.style.zIndex = 1001;
+    }
     if (resourcePartyElement) {
       resourcePartyElement.innerHTML = organisationName;
     }
@@ -42,10 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeDataModal() {
-    toggleModalContainer();
+    toggleModalContainer('resource-modal');
+    toggleOverlayContainer();
+    unfreezeScroll();
+    overlayContainer.style.zIndex = 999;
+  }
+
+  function openMapModal() {
+    toggleModalContainer('map-modal');
+    freezeScroll();
+  }
+
+  function closeMapModal() {
+    toggleModalContainer('map-modal');
     unfreezeScroll();
   }
 
   window.openDataModal = openDataModal;
   window.closeDataModal = closeDataModal;
+  window.openMapModal = openMapModal;
+  window.closeMapModal = closeMapModal;
 });

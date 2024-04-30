@@ -4,12 +4,16 @@
 
 'use strict';
 
+import { IAggregationOption } from '../../../src/interfaces/searchResponse.interface';
 import { Server } from '@hapi/hapi';
 
-import { getSearchResults } from '../../../src/services/handlers/searchApi';
 import { initializeServer } from '../../../src/infrastructure/server';
 import supertest from 'supertest';
 import { webRoutePaths } from '../../../src/utils/constants';
+import {
+  getResourceTypeOptions,
+  getSearchResults,
+} from '../../../src/services/handlers/searchApi';
 import {
   searchResultsWithData,
   searchResultsWithEmptyData,
@@ -17,6 +21,7 @@ import {
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
+  getResourceTypeOptions: jest.fn(),
 }));
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
@@ -29,8 +34,8 @@ jest.mock('../../../src/utils/keyvault', () => ({
 
 let serverRequest;
 
-const invokeRoute = async (route, payload) => {
-  const response = await serverRequest.post(route).send(payload);
+const invokeRoute = async (route, query) => {
+  const response = await serverRequest.get(route).query({ ...query });
   const rawHTML = response.text;
   const parser = new DOMParser();
   const document = parser.parseFromString(rawHTML, 'text/html');
@@ -60,8 +65,20 @@ describe('Results block template', () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
           searchResultsWithData,
         );
-        const responseObject = await invokeRoute(webRoutePaths.getResults, {
-          fields: { 'quick-search': { search_term: 'test' } },
+        const expectedResourceTypeOptions: IAggregationOption[] = [
+          { value: 'filter1', text: 'Filter1' },
+          { value: 'filter2', text: 'Filter2' },
+        ];
+        (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+          expectedResourceTypeOptions,
+        );
+        const responseObject = await invokeRoute(webRoutePaths.results, {
+          q: 'marine',
+          jry: 'qs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
         });
         response = responseObject.response;
         document = responseObject.document;
@@ -130,8 +147,20 @@ describe('Results block template', () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
           searchResultsWithEmptyData,
         );
-        const responseObject = await invokeRoute(webRoutePaths.getResults, {
-          fields: { 'quick-search': { search_term: 'test' } },
+        const expectedResourceTypeOptions: IAggregationOption[] = [
+          { value: 'filter1', text: 'Filter1' },
+          { value: 'filter2', text: 'Filter2' },
+        ];
+        (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+          expectedResourceTypeOptions,
+        );
+        const responseObject = await invokeRoute(webRoutePaths.results, {
+          q: 'marine',
+          jry: 'qs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
         });
         response = responseObject.response;
         document = responseObject.document;
@@ -176,8 +205,13 @@ describe('Results block template', () => {
         (getSearchResults as jest.Mock).mockRejectedValue(
           new Error('mocked error'),
         );
-        const responseObject = await invokeRoute(webRoutePaths.getResults, {
-          fields: { 'quick-search': { search_term: 'test' } },
+        const responseObject = await invokeRoute(webRoutePaths.results, {
+          q: 'marine',
+          jry: 'qs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
         });
         response = responseObject.response;
         document = responseObject.document;
@@ -208,10 +242,21 @@ describe('Results block template', () => {
         (getSearchResults as jest.Mock).mockResolvedValue(
           searchResultsWithEmptyData,
         );
-        const responseObject = await invokeRoute(webRoutePaths.getResults, {
-          fields: {
-            'date-search': { 'from-date-year': '2022', 'to-date-year': '2022' },
-          },
+        const expectedResourceTypeOptions: IAggregationOption[] = [
+          { value: 'filter1', text: 'Filter1' },
+          { value: 'filter2', text: 'Filter2' },
+        ];
+        (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+          expectedResourceTypeOptions,
+        );
+        const responseObject = await invokeRoute(webRoutePaths.results, {
+          fdy: '2000',
+          tdy: '2023',
+          jry: 'gs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
         });
         response = responseObject.response;
         document = responseObject.document;
@@ -247,10 +292,10 @@ describe('Results block template', () => {
         ).toEqual('Choose different answers to see results.');
       });
 
-      it('should render two secondary buttons', async () => {
+      it('should render three secondary buttons', async () => {
         expect(
           document.querySelectorAll('.govuk-button--secondary')?.length,
-        ).toBe(2);
+        ).toBe(3);
       });
     });
 
@@ -262,10 +307,14 @@ describe('Results block template', () => {
         (getSearchResults as jest.Mock).mockRejectedValue(
           new Error('mocked error'),
         );
-        const responseObject = await invokeRoute(webRoutePaths.getResults, {
-          fields: {
-            'date-search': { 'from-date-year': '2022', 'to-date-year': '2022' },
-          },
+        const responseObject = await invokeRoute(webRoutePaths.results, {
+          fdy: '2000',
+          tdy: '2023',
+          jry: 'gs',
+          pg: '1',
+          rpp: '20',
+          srt: 'best_match',
+          rty: 'all',
         });
         response = responseObject.response;
         document = responseObject.document;

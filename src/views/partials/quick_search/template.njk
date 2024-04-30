@@ -13,17 +13,13 @@
       <span class="govuk-caption-m quick_search-container__caption-m">You can search by keyword, theme, title or project code, for example: "hedgehog population Bristol", "Community Supported Fisheries", "AE0101".</span>
     {% endif %}
     <div class="search-block" data-module="search">
-      <form action="{{params.searchPath}}" id="{{params.formId}}" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-bottom-6 govuk-!-margin-top-4">
-
+      <form action="{{params.searchPath}}" id="{{params.formId}}" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
         {{ govukInput({
           id: 'search_term',
           name: 'search_term',
           label: {
             text: 'Search',
-            classes: 'search-block__label',
-            attributes: {
-              'aria-hidden': true
-            }
+            classes: 'search-block__label'
           },
           suffix: {
             html: '<button type="submit" class="search-block__button" data-do-quick-search="true">Search</button>'
@@ -34,9 +30,13 @@
           value: params.searchTerm,
           attributes: {
             'aria-controls': 'search-results',
-            'placeholder': 'Search'
+            'placeholder': 'Search',
+            'altName': 'q'
           },
-          errorMessage: params.searchInputError
+          errorMessage: params.searchInputError,
+          formGroup: {
+            classes: 'govuk-!-margin-bottom-4'
+          }
         }) }}
         <input type="hidden" name="pageName" value="{% if not params.isResultPage %}home{% else %}results{% endif %}">
       </form>

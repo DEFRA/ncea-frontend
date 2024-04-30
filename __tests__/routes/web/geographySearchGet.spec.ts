@@ -93,13 +93,8 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         const item = document.querySelector(
           '.govuk-breadcrumbs__list',
         )?.lastElementChild;
-        const anchor = item?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
-        );
-        expect(anchor?.getAttribute('href')).toEqual('#');
-        expect(anchor?.textContent?.trim()).toEqual('Questionnaire search');
+        expect(item?.querySelector('a')).toBeNull();
+        expect(item?.textContent?.trim()).toEqual('Questionnaire search');
       });
     });
   });
@@ -176,7 +171,7 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(formElement).toBeTruthy();
         expect(formElement?.tagName.toLowerCase()).toBe('form');
         expect(formElement?.getAttribute('action')).toBe(
-          webRoutePaths.geographySearch,
+          `${webRoutePaths.geographySearch}?`,
         );
       });
     });

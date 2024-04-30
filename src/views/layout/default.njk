@@ -1,5 +1,6 @@
 {% extends "govuk/template.njk" %}
 
+{% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 
 {% set htmlClasses = "app-html-class" %}
@@ -16,26 +17,42 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ assetPath }}/css/application.css">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 {% endblock %}
 
 {% block header %}
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id= {{gtmId}}"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id= {{gtmId}}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header class="header-container">
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','{{gtmId}}');</script>
-<!-- End Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f
+          .parentNode
+          .insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '{{gtmId}}');
+    </script>
+    <!-- End Google Tag Manager -->
 
-<!--Will be removed once Defra GA accounts been created -->
+    <!--Will be removed once Defra GA accounts been created -->
 
-<!-- Google tag (gtag.js) -->
-{# <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FDPPSVB0H"></script>
+    <!-- Google tag (gtag.js) -->
+    {# <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FDPPSVB0H"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -50,14 +67,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </script> #}
 
-    <div class="header-div-container header-main">
-      <div class="site-width-container">
-        <div class="header-logo-container"><img alt="Department for Environment Food &amp; Rural Affairs Logo" src="{{ assetPath }}/images/defra_logo.svg" width="52" height="42" decoding="async" data-nimg="1" class="defra-logo" loading="lazy" style="color:transparent">
-          <a target="_blank" class="header-logo-link logo-link" href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs">
-            <span class="defra-logo-text">Department for Environment <br> Food &amp; Rural Affairs</span></a>
-          <span class="govuk-header__service-name">{{serviceName}}</span></div>
-      </div>
-    </div>
+    {{ govukHeader({
+  homepageUrl: "https://www.gov.uk/",
+  serviceName: serviceName,
+  serviceUrl: routes.homePage
+}) }}
   </header>
 {% endblock %}
 
@@ -114,5 +128,4 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
   <script type="text/javascript" src="{{ assetPath }}/scripts/appinsights.js"></script>
   <script type="module" src="{{ assetPath }}/scripts/customScripts.js"></script>
-  <script type="module" src="{{ assetPath }}/scripts/fetchResults.js"></script>
 {% endblock %}
