@@ -6,6 +6,8 @@ const capitalizeWords = (string: string): string => {
   return string.replace(/\b\w/g, (match) => match.toUpperCase());
 };
 
+const addSpaces = (string: string): string => string.split(/(?=[A-Z])/).join(' ');
+
 const generateRange = (start, end): IAggregationOption[] => {
   return Array.from({ length: end - start + 1 }, (_, index) => ({
     value: String(start + index),
@@ -25,7 +27,8 @@ const formatAggregationResponse = async (
       const { isTerm, isDate } = filterOption;
       if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues?.buckets.length > 0) {
         finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
-          let text: string = capitalizeWords(bucket[filterOption.propertyToRead]);
+          const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
+          let text: string = capitalizeWords(wordsWithSpace);
           if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
           return {
             value: bucket[filterOption.propertyToRead],
