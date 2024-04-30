@@ -508,7 +508,6 @@ const updateStudyPeriodFilter = () => {
     vectorSource.clear();
     markerSource.clear();
     drawBoundingBoxWithMarker(false);
-    console.log(appliedFilterOptions);
   }, 100);
 };
 
