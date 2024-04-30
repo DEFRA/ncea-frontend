@@ -50,23 +50,17 @@ const buildSearchQueryWithFields = (searchTerm: string | string[], fieldsToSearc
 const buildDateQuery = (fields: ISearchFields, isToDate: boolean = false): IRangeQuery => {
   const key: string = isToDate ? 'resourceTemporalExtentDetails.end.date' : 'resourceTemporalExtentDetails.start.date';
   const operatorKey: string = isToDate ? 'lte' : 'gte';
-  let dateValue: string;
-  if (isToDate) {
-    dateValue = generateDateString(
-      {
-        year: parseInt(fields.date ? (fields.date?.tdy as string) : ''),
-        month: parseInt(fields.date ? (fields.date?.tdm as string) : ''),
-        day: parseInt(fields.date ? (fields.date?.tdd as string) : ''),
-      },
-      true,
-    );
-  } else {
-    dateValue = generateDateString({
-      year: parseInt(fields.date ? (fields.date?.fdy as string) : ''),
-      month: parseInt(fields.date ? (fields.date?.fdm as string) : ''),
-      day: parseInt(fields.date ? (fields.date?.fdd as string) : ''),
-    });
-  }
+  const yearKey = isToDate ? 'tdy' : 'fdy';
+  const monthKey = isToDate ? 'tdm' : 'fdm';
+  const dateKey = isToDate ? 'tdd' : 'fdd';
+  const dateValue: string = generateDateString(
+    {
+      year: parseInt(fields.date ? (fields.date?.[yearKey] as string) : ''),
+      month: parseInt(fields.date ? (fields.date?.[monthKey] as string) : ''),
+      day: parseInt(fields.date ? (fields.date?.[dateKey] as string) : ''),
+    },
+    isToDate,
+  );
 
   const rangeQuery: IRangeQuery = {
     range: {
