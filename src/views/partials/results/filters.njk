@@ -1,6 +1,6 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 
-{% if filterOptions.unique_resource_types and filterOptions.unique_start_years.length > 0 %}
+{% if filterOptions.start_year_range and filterOptions.start_year_range.length > 0 and filterOptions.to_year_range and filterOptions.to_year_range.length > 0 %}
   <form action="{{filterStudyPeriodPath}}" id="study_period_filter-{{filterInstance}}" method="post">
     <section class="defra-filter-section">
       <h2 class='govuk-heading-m filter-heading govuk-!-margin-top-4 govuk-!-margin-bottom-2'>
@@ -15,7 +15,7 @@
               text: "From year",
               classes: 'govuk-!-margin-bottom-2'
             },
-            items: filterOptions.unique_start_years
+            items: filterOptions.start_year_range
           }) }}
         </div>
         <div class="govuk-grid-column-one-half">
@@ -26,7 +26,7 @@
               text: "To year",
               classes: 'govuk-!-margin-bottom-2'
             },
-            items: filterOptions.unique_to_years
+            items: filterOptions.to_year_range
           }) }}
         </div>
       </div>

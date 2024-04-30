@@ -43,7 +43,7 @@ const updateFromYear = (toYearElement, doSubmit) => {
   const instance = id.split('-')[0].trim();
   const fromYearElement = document.getElementById(`${instance}-${fromYearId}`);
   if (parseInt(value) < parseInt(fromYearElement.value)) {
-    for (let i = 0; i < fromYearElement.options.length; i++) {
+    for (let i = fromYearElement.options.length - 1; i >= 0; i--) {
       if (parseInt(fromYearElement.options[i].value) <= parseInt(value)) {
         fromYearElement.value = fromYearElement.options[i].value;
         if (doSubmit) {

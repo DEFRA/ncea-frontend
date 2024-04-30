@@ -6,7 +6,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  NCEA Search Service Home
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -70,8 +70,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <!-- Google tag (gtag.js) -->
     
 
-
-
+    
 
 
 

@@ -4,6 +4,7 @@ import { Request, ResponseToolkit } from '@hapi/hapi';
 import {
   formIds,
   guidedSearchSteps,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -30,6 +31,7 @@ describe('Deals with Home Controller', () => {
       await HomeController.renderHomeHandler(request, response);
       const { quickSearchFID } = formIds;
       expect(response.view).toHaveBeenCalledWith('screens/home/template', {
+        pageTitle: pageTitles.home,
         quickSearchFID,
         searchInputError: undefined,
       });
