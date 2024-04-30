@@ -56,7 +56,7 @@
     display: grid;
     grid-template-columns: 0.9fr 1.4fr;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   &-group {
@@ -284,6 +284,7 @@
     &__content {
       margin: 0;
       color: $govuk-text-colour;
+      word-wrap: break-word;
       @include font-style-stack(16px, 20px, 300, normal, true);
     }
   }

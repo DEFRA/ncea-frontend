@@ -1,17 +1,15 @@
 import { IAggregationOptions } from '../../src/interfaces/searchResponse.interface';
-import {
-  IFilterOption,
-  IFilterOptions,
-} from '../../src/interfaces/searchPayload.interface';
+import { IFilterOptions } from '../../src/interfaces/searchPayload.interface';
 import {
   formatAggregationResponse,
   capitalizeWords,
 } from '../../src/utils/formatAggregationResponse';
 import {
   defaultFilterOptions,
+  startYearRangeKey,
+  toYearRangeKey,
   uniqueResourceTypesKey,
-  uniqueStartYearKey,
-  uniqueToYearKey,
+  yearRange,
 } from '../../src/utils/constants';
 
 describe('formatAggregationResponse', () => {
@@ -27,8 +25,8 @@ describe('formatAggregationResponse', () => {
     };
     const filterOptions: IFilterOptions = defaultFilterOptions;
     const filterOptionsResponse: IAggregationOptions = {
-      [uniqueStartYearKey]: [],
-      [uniqueToYearKey]: [],
+      [startYearRangeKey]: [],
+      [toYearRangeKey]: [],
       [uniqueResourceTypesKey]: [],
     };
     const result = await formatAggregationResponse(apiResponse, filterOptions);
@@ -59,15 +57,17 @@ describe('formatAggregationResponse', () => {
         field: 'resourceType',
         needCount: true,
         propertyToRead: 'key',
+        hasBucket: true,
+        isTerm: true,
       },
       {
         key: 'brand',
         field: 'resourceTemporalExtentDateRange',
-        format: 'yyyy',
-        calendarInterval: 'year',
         order: 'asc',
         needCount: false,
         propertyToRead: 'key_as_string',
+        hasBucket: true,
+        isTerm: true,
       },
     ];
 
@@ -82,6 +82,78 @@ describe('formatAggregationResponse', () => {
         { value: 'samsung', text: 'Samsung' },
         { value: 'apple', text: 'Apple' },
       ],
+    };
+
+    expect(result).toEqual(expectedResponse);
+  });
+
+  it('should return year range for date filter option', async () => {
+    const apiResponse = {
+      aggregations: {
+        'min-year_range': {
+          value: 2022.0,
+        },
+        'max-year_range': {
+          value: 2023.0,
+        },
+      },
+    };
+
+    const filterOptions: IFilterOptions = [
+      {
+        key: 'year_range',
+        field: '',
+        needCount: false,
+        propertyToRead: 'value',
+        hasBucket: false,
+        isDate: true,
+      },
+    ];
+
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+
+    const expectedResponse: IAggregationOptions = {
+      [startYearRangeKey]: [
+        { value: '2022', text: '2022' },
+        { value: '2023', text: '2023' },
+      ],
+      [toYearRangeKey]: [
+        { value: '2022', text: '2022' },
+        { value: '2023', text: '2023' },
+      ],
+    };
+
+    expect(result).toEqual(expectedResponse);
+  });
+
+  it('should return empty year range for date filter option when it is null', async () => {
+    const apiResponse = {
+      aggregations: {
+        'max-year_range': {
+          value: null,
+        },
+        'min-year_range': {
+          value: '2023',
+        },
+      },
+    };
+
+    const filterOptions: IFilterOptions = [
+      {
+        key: 'year_range',
+        field: '',
+        needCount: false,
+        propertyToRead: 'value',
+        hasBucket: false,
+        isDate: true,
+      },
+    ];
+
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+
+    const expectedResponse: IAggregationOptions = {
+      [startYearRangeKey]: [],
+      [toYearRangeKey]: [],
     };
 
     expect(result).toEqual(expectedResponse);
@@ -115,6 +187,8 @@ describe('formatAggregationResponse', () => {
         propertyToRead: 'invalidProperty',
         needCount: true,
         field: '',
+        hasBucket: true,
+        isTerm: true,
       },
     ];
 
