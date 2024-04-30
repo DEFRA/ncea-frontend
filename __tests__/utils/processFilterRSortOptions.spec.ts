@@ -7,16 +7,16 @@ import { IAggregationOptions } from '../../src/interfaces/searchResponse.interfa
 import {
   queryParamKeys,
   uniqueResourceTypesKey,
-  uniqueStartYearKey,
-  uniqueToYearKey,
+  startYearRangeKey,
+  toYearRangeKey,
 } from '../../src/utils/constants';
 
 describe('processFilterRSortOptions', () => {
   describe('processFilterOptions', () => {
     test('should return default aggregation options when no query params provided', async () => {
       const filterOptions: IAggregationOptions = {
-        [uniqueStartYearKey]: [],
-        [uniqueToYearKey]: [],
+        [startYearRangeKey]: [],
+        [toYearRangeKey]: [],
         [uniqueResourceTypesKey]: [],
       };
       const requestQuery: RequestQuery = {};
@@ -28,8 +28,8 @@ describe('processFilterRSortOptions', () => {
 
     test('should correctly process query params and update aggregation options', async () => {
       const filterOptions: IAggregationOptions = {
-        [uniqueStartYearKey]: [{ value: '2020', text: '2020', selected: true }],
-        [uniqueToYearKey]: [{ value: '2022', text: '2022', selected: true }],
+        [startYearRangeKey]: [{ value: '2020', text: '2020', selected: true }],
+        [toYearRangeKey]: [{ value: '2022', text: '2022', selected: true }],
         [uniqueResourceTypesKey]: [
           { value: 'type1', text: 'type1', checked: true },
         ],
@@ -42,8 +42,8 @@ describe('processFilterRSortOptions', () => {
 
       const result = await processFilterOptions(filterOptions, requestQuery);
 
-      expect(result?.[uniqueStartYearKey]?.[0]?.selected ?? '').toBe(true);
-      expect(result?.[uniqueToYearKey]?.[0]?.selected ?? '').toBe(true);
+      expect(result?.[startYearRangeKey]?.[0]?.selected ?? '').toBe(true);
+      expect(result?.[toYearRangeKey]?.[0]?.selected ?? '').toBe(true);
       expect(result?.[uniqueResourceTypesKey]?.[0]?.checked ?? '').toBe(true);
     });
   });

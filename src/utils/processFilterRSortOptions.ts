@@ -1,7 +1,7 @@
 import { RequestQuery } from '@hapi/hapi';
 import { readQueryParams } from './queryStringHelper';
 import { IAggregationOption, IAggregationOptions } from '../interfaces/searchResponse.interface';
-import { queryParamKeys, uniqueResourceTypesKey, uniqueStartYearKey, uniqueToYearKey } from './constants';
+import { queryParamKeys, startYearRangeKey, toYearRangeKey, uniqueResourceTypesKey } from './constants';
 
 const processFilterOptions = async (
   filterOptions: IAggregationOptions,
@@ -11,26 +11,37 @@ const processFilterOptions = async (
   const startYearValue = readQueryParams(requestQuery, startYear);
   const toYearValue = readQueryParams(requestQuery, toYear);
   const resourceTypeValue = readQueryParams(requestQuery, resourceType).split(',');
-  const startYearOptions: IAggregationOption[] = filterOptions[uniqueStartYearKey] ?? [];
-  const toYearOptions: IAggregationOption[] = filterOptions[uniqueToYearKey] ?? [];
+
+  const startYearOptions: IAggregationOption[] = filterOptions[startYearRangeKey] ?? [];
+  const toYearOptions: IAggregationOption[] = filterOptions[toYearRangeKey] ?? [];
+
   const resourceTypeOptions: IAggregationOption[] = filterOptions[uniqueResourceTypesKey] ?? [];
+
   startYearOptions.forEach((option: IAggregationOption) => {
     if (option.value === startYearValue) option.selected = true;
   });
+  if (!startYearValue) {
+    const startYearOptionsFirstItem: IAggregationOption = startYearOptions?.[0] ?? ({} as IAggregationOption);
+    startYearOptionsFirstItem.selected = true;
+  }
+
   toYearOptions.forEach((option: IAggregationOption) => {
     if (option.value === toYearValue) option.selected = true;
   });
   if (!toYearValue) {
-    const toYearOptionsLastItem: IAggregationOption = toYearOptions[toYear.length - 1] ?? ({} as IAggregationOption);
+    const toYearOptionsLastItem: IAggregationOption =
+      toYearOptions[toYearOptions.length - 1] ?? ({} as IAggregationOption);
     toYearOptionsLastItem.selected = true;
   }
+
   resourceTypeOptions.forEach((option: IAggregationOption) => {
     if (resourceTypeValue.includes(option.value)) option.checked = true;
   });
+
   return {
     [uniqueResourceTypesKey]: [...resourceTypeOptions],
-    [uniqueStartYearKey]: [...startYearOptions],
-    [uniqueToYearKey]: [...toYearOptions],
+    [startYearRangeKey]: [...startYearOptions],
+    [toYearRangeKey]: [...toYearOptions],
   };
 };
 

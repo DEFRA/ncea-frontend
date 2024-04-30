@@ -73,8 +73,9 @@ export const queryParamKeys = {
 };
 
 export const uniqueResourceTypesKey: string = 'unique_resource_types';
-export const uniqueStartYearKey: string = 'unique_start_years';
-export const uniqueToYearKey: string = 'unique_to_years';
+export const startYearRangeKey: string = 'start_year_range';
+export const toYearRangeKey: string = 'to_year_range';
+export const yearRange: string = 'year_range';
 
 export const resourceTypeFilterField = 'resourceType';
 export const dateFilterField = 'resourceTemporalExtentDateRange';
@@ -85,24 +86,16 @@ export const defaultFilterOptions: IFilterOptions = [
     field: 'resourceType',
     needCount: true,
     propertyToRead: 'key',
+    hasBucket: true,
+    isTerm: true,
   },
   {
-    key: uniqueStartYearKey,
-    field: 'resourceTemporalExtentDetails.start.date',
-    format: 'yyyy',
-    calendarInterval: 'year',
-    order: 'asc',
+    key: yearRange,
+    field: ['max_resourceTemporalExtentDetails.end.date', 'min_resourceTemporalExtentDetails.start.date'],
     needCount: false,
-    propertyToRead: 'key_as_string',
-  },
-  {
-    key: uniqueToYearKey,
-    field: 'resourceTemporalExtentDetails.end.date',
-    format: 'yyyy',
-    calendarInterval: 'year',
-    order: 'asc',
-    needCount: false,
-    propertyToRead: 'key_as_string',
+    propertyToRead: 'value',
+    hasBucket: false,
+    isDate: true,
   },
 ];
 

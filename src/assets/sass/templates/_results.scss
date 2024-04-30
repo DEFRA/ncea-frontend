@@ -56,7 +56,7 @@
     display: grid;
     grid-template-columns: 0.9fr 1.4fr;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   &-group {
@@ -149,18 +149,18 @@
 }
 
 .map-view-block {
-  width: 80%;
+  width: 75%;
   height: 100vh;
 }
 
 .filter-view-block {
-  width: 20%;
+  width: 25%;
 }
 
 .defra-map {
   &-controls {
     position: absolute;
-    width: 80%;
+    width: 75%;
     z-index: 1;
     overflow: hidden;
     top: 0px;
@@ -284,6 +284,7 @@
     &__content {
       margin: 0;
       color: $govuk-text-colour;
+      word-wrap: break-word;
       @include font-style-stack(16px, 20px, 300, normal, true);
     }
   }

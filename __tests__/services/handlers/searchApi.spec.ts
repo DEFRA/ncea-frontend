@@ -6,9 +6,10 @@ import {
 } from '../../../src/interfaces/queryBuilder.interface';
 import {
   elasticSearchAPIPaths,
+  startYearRangeKey,
+  toYearRangeKey,
   uniqueResourceTypesKey,
-  uniqueStartYearKey,
-  uniqueToYearKey,
+  yearRange,
 } from '../../../src/utils/constants';
 import {
   formattedResourceTypeResponse,
@@ -245,8 +246,7 @@ describe('Search API', () => {
         page: 1,
       });
       const filterOptionsResponse: IAggregationOptions = {
-        [uniqueStartYearKey]: [],
-        [uniqueToYearKey]: [],
+        [yearRange]: [],
         [uniqueResourceTypesKey]: [],
       };
       expect(result).toEqual(filterOptionsResponse);

@@ -32,8 +32,7 @@
   {% if docDetails.title %}
     {% set breadcrumbItems = breadcrumbItems.concat([
       {
-        text: docDetails.title,
-        href: '#'
+        text: docDetails.title
       }
     ]) %}
   {% endif %}
@@ -58,7 +57,6 @@
       {{ govukDetails({
         summaryText: "Alternate title (additional business name or alternative language)",
         text: docDetails.alternateTitle,
-        open: "true",
         classes: "details-alt_title"
       }) }}
     {% endif %}
