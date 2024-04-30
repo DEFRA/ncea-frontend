@@ -72,19 +72,23 @@ interface ISortQuery {
   [key: string]: ISortOrder | ICustomSortScript;
 }
 
-interface IAggregateQueryTerm {
+type IAggregationType = 'terms' | 'max' | 'min';
+
+interface IAggregationQueryTerm {
   field: string;
   size?: number;
-  format?: string;
-  calendar_interval?: string;
   order?: { _key: string };
-  min_doc_count?: number;
 }
 
-interface IAggregateQuery {
+interface IAggregationDateScript {
+  script: { source: string };
+}
+
+type IAggregationData = IAggregationQueryTerm | IAggregationDateScript;
+
+interface IAggregationQuery {
   [key: string]: {
-    terms?: IAggregateQueryTerm;
-    date_histogram?: IAggregateQueryTerm;
+    [key in IAggregationType]?: IAggregationData;
   };
 }
 
@@ -92,7 +96,7 @@ interface IQuery {
   size?: number;
   query: IBoolQuery;
   sort?: ISortQuery[];
-  aggs?: IAggregateQuery;
+  aggs?: IAggregationQuery;
   from?: number;
   _source?: string[];
 }
@@ -162,9 +166,12 @@ export {
   IQueryString,
   ISortQuery,
   ICustomSortScript,
-  IAggregateQuery,
+  IAggregationQuery,
   ISearchFilter,
   ISearchBuilderPayload,
   IFieldExist,
-  IAggregateQueryTerm,
+  IAggregationQueryTerm,
+  IAggregationDateScript,
+  IAggregationData,
+  IAggregationType,
 };

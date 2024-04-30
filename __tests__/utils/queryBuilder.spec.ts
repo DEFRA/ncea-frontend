@@ -9,7 +9,8 @@ import {
 import {
   mapResultMaxCount,
   uniqueResourceTypesKey,
-  uniqueStartYearKey,
+  startYearRangeKey,
+  yearRange,
 } from '../../src/utils/constants';
 import {
   buildCustomSortScriptForStudyPeriod,
@@ -60,8 +61,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -95,7 +104,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with both search term and date range', () => {
@@ -142,8 +151,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -180,7 +197,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with only search term', () => {
@@ -288,8 +305,16 @@ describe('Build the search query', () => {
             must: [
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -305,7 +330,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(1);
+      expect(result.query.bool.must).toHaveLength(2);
     });
 
     it('should build the search query correctly with only Geo Coordinates with dpt', () => {
@@ -477,8 +502,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -519,7 +552,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with best match sort when both search term and date range', () => {
@@ -566,8 +599,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -611,7 +652,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with best match sort when only search term', () => {
@@ -733,8 +774,16 @@ describe('Build the search query', () => {
             must: [
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -757,7 +806,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(1);
+      expect(result.query.bool.must).toHaveLength(2);
     });
 
     it('should build the search query correctly with best match sort when only Geo Coordinates with dpt', () => {
@@ -917,8 +966,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -953,7 +1010,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with most recent study sort when both search term and date range', () => {
@@ -1000,8 +1057,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1039,7 +1104,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with most recent study sort when only search term', () => {
@@ -1149,8 +1214,16 @@ describe('Build the search query', () => {
             must: [
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1167,7 +1240,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(1);
+      expect(result.query.bool.must).toHaveLength(2);
     });
 
     it('should build the search query correctly with most recent study sort when only Geo Coordinates with dpt', () => {
@@ -1315,8 +1388,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1357,7 +1438,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with results per page as 100', () => {
@@ -1404,8 +1485,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1449,7 +1538,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
   });
   describe('Search query with pagination', () => {
@@ -1493,8 +1582,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1535,7 +1632,7 @@ describe('Build the search query', () => {
       const result = buildSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
 
     it('should build the search query correctly with pagination for page 5', () => {
@@ -1582,8 +1679,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2022-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1627,7 +1732,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
   });
 
@@ -1820,8 +1925,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2017-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1847,7 +1960,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(2);
+      expect(result.query.bool.must).toHaveLength(3);
     });
 
     it('should build the search query when filtering with both resourceType and study period', () => {
@@ -1889,8 +2002,16 @@ describe('Build the search query', () => {
               },
               {
                 range: {
-                  resourceTemporalExtentDateRange: {
+                  'resourceTemporalExtentDetails.start.date': {
                     gte: '2017-01-01',
+                    format: 'yyyy-MM-dd',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    format: 'yyyy-MM-dd',
                     lte: '2022-12-31',
                   },
                 },
@@ -1916,7 +2037,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool.must).toHaveLength(3);
+      expect(result.query.bool.must).toHaveLength(4);
     });
   });
 
@@ -1928,6 +2049,7 @@ describe('Build the search query', () => {
           field: 'resourceType',
           needCount: true,
           propertyToRead: 'key',
+          isTerm: true,
         },
       ];
       const searchFieldsObject: ISearchPayload = {
@@ -1984,17 +2106,18 @@ describe('Build the search query', () => {
       expect(result.query.bool.must).toHaveLength(1);
     });
 
-    it('should build the search query for resourceTemporalExtentDetails.start.date aggregation', () => {
+    it('should build the search query for year range aggregation', () => {
       const filterOption: IFilterOption = {
-        key: uniqueStartYearKey,
-        field: 'resourceTemporalExtentDetails.start.date',
-        format: 'yyyy',
-        calendarInterval: 'year',
-        order: 'asc',
+        key: yearRange,
+        field: [
+          'max_resourceTemporalExtentDetails.end.date',
+          'min_resourceTemporalExtentDetails.start.date',
+        ],
         needCount: false,
-        propertyToRead: 'key_as_string',
+        propertyToRead: 'value',
+        hasBucket: false,
+        isDate: true,
       };
-      const { key, field, format, calendarInterval, order } = filterOption;
       const filterOptions: IFilterOptions = [filterOption];
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -2029,16 +2152,18 @@ describe('Build the search query', () => {
           },
         ],
         aggs: {
-          [uniqueStartYearKey]: {
-            date_histogram: {
-              field: 'resourceTemporalExtentDetails.start.date',
-              ...(!calendarInterval && { size: mapResultMaxCount }),
-              ...(calendarInterval && {
-                calendar_interval: calendarInterval,
-                min_doc_count: 1,
-              }),
-              ...(format && { format }),
-              ...(order && { order: { _key: order } }),
+          'min-year_range': {
+            min: {
+              script: {
+                source: `if (doc['resourceTemporalExtentDetails.start.date'].size() > 0) { doc['resourceTemporalExtentDetails.start.date'].value.year } else { null }`,
+              },
+            },
+          },
+          'max-year_range': {
+            max: {
+              script: {
+                source: `if (doc['resourceTemporalExtentDetails.end.date'].size() > 0) { doc['resourceTemporalExtentDetails.end.date'].value.year } else { null }`,
+              },
             },
           },
         },

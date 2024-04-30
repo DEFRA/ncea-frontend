@@ -19,12 +19,13 @@ export interface IDateObject {
 
 export interface IFilterOption {
   key: string;
-  field: string;
-  format?: string;
-  calendarInterval?: string;
+  field: string | string[];
   order?: string;
   needCount: boolean;
   propertyToRead: string;
+  isTerm?: boolean;
+  isDate?: boolean;
+  hasBucket?: boolean;
 }
 
 export interface IFilterOptions extends Array<IFilterOption> {}
