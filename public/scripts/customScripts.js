@@ -13,6 +13,7 @@ const defaultSessionData = JSON.stringify({
 });
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;
+const todayCheckbox = document.getElementById('today-date');
 
 // Store the data to storage
 const storeStorageData = (newSessionData) => {
@@ -59,9 +60,17 @@ const getStorageData = () => {
 const hydrateFormFromStorage = (form) => {
   const sessionData = getStorageData();
   Object.keys(sessionData.fields[form.id] ?? {}).forEach((fieldAltName) => {
-    const input = form.querySelector(`input[altName="${fieldAltName}"]`);
+    const input = form.querySelector(
+      `input[type="text"][altName="${fieldAltName}"]`,
+    );
     if (input) {
       input.value = sessionData.fields[form.id][fieldAltName];
+    }
+    const checkbox = form.querySelector(
+      `input[type="checkbox"][altName="${fieldAltName}"]`,
+    );
+    if (checkbox) {
+      checkbox.checked = sessionData.fields[form.id][fieldAltName] === 'true';
     }
   });
 };
@@ -73,7 +82,7 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  return !Object.values(form).some((value) => value.trim() !== '');
+  return !Object.values(form).some((value) => value?.trim() !== '');
 };
 
 // Function to update submit button state
@@ -197,6 +206,71 @@ const handleSearchJourney = (event) => {
   }
 };
 
+const hydrateTodayDate = (checked) => {
+  let sessionData = getStorageData();
+  if (!sessionData.fields.hasOwnProperty('date')) {
+    sessionData.fields['date'] = {};
+  }
+  if (checked) {
+    const currentDate = new Date();
+    const date = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    sessionData.fields['date'] = {
+      ...sessionData.fields['date'],
+      ...{
+        tdcheck: 'true',
+        tdd: date.toString(),
+        tdm: month.toString(),
+        tdy: year.toString(),
+      },
+    };
+  } else {
+    sessionData.fields['date'] = {
+      ...sessionData.fields['date'],
+      ...{
+        tdcheck: '',
+        tdd: '',
+        tdm: '',
+        tdy: '',
+      },
+    };
+  }
+  storeStorageData(sessionData);
+  const dateForm = document.getElementById('date');
+  hydrateFormFromStorage(dateForm);
+  updateSubmitButtonState(dateForm);
+};
+
+const attachTodayDateEventListener = () => {
+  if (todayCheckbox) {
+    todayCheckbox.addEventListener('change', function (event) {
+      const { checked } = event.target;
+      hydrateTodayDate(checked);
+    });
+  }
+};
+
+const todayCheckboxStatus = () => {
+  if (todayCheckbox && todayCheckbox.checked) {
+    let sessionData = getStorageData();
+    if (sessionData.fields.hasOwnProperty('date')) {
+      const { tdd, tmd, tdy } = sessionData.fields['date'];
+      const currentDate = new Date();
+      const date = currentDate.getDate();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      if (
+        parseInt(tdd) !== date &&
+        parseInt(month) !== tmd &&
+        parseInt(year) !== tdy
+      ) {
+        hydrateTodayDate(true);
+      }
+    }
+  }
+};
+
 if (typeof Storage !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('[data-do-browser-storage]');
@@ -214,6 +288,8 @@ if (typeof Storage !== 'undefined') {
     skipStorage();
     nextQuestion();
     previousQuestion();
+    attachTodayDateEventListener();
+    todayCheckboxStatus();
 
     const searchJourneyElement = document.querySelectorAll(
       '[data-do-quick-search]',
@@ -236,6 +312,7 @@ window.addEventListener('storage', (event) => {
       if (form) {
         hydrateFormFromStorage(form);
         updateSubmitButtonState(form);
+        todayCheckboxStatus();
       }
     });
   }

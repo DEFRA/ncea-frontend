@@ -308,8 +308,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           
           
           <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="" class="defra-checkboxes__input">
-            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+            <input class="govuk-checkboxes__input" id="today-date" name="today-date" type="checkbox" value="" class="defra-checkboxes__input" altName="tdcheck">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="today-date">
         Today&#39;s date
       </label>
             

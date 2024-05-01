@@ -21,14 +21,14 @@
         {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
 
         {{ govukCheckboxes({
-            name: 'bounding-box',
+            name: 'today-date',
             formGroup: {
               classes: 'govuk-!-margin-top-3 govuk-!-margin-bottom-3'
             },
             items: [
               {
                 text: "Today's date",
-                attributes: {'class': 'defra-checkboxes__input'},
+                attributes: {'class': 'defra-checkboxes__input', 'altName': 'tdcheck'},
                 label: {classes: 'defra-checkboxes__label'}
               }
             ]
