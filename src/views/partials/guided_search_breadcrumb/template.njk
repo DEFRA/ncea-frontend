@@ -1,16 +1,6 @@
-{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
-{{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: routes.homePage,
-        attributes: {
-          'data-do-storage-reset': ''
-        }
-      },
-      {
-        text: "Questionnaire search"
-      }
-    ]
-  }) }}
+{{ govukBackLink({
+  text: "Back",
+  href: backLinkPath
+}) }}

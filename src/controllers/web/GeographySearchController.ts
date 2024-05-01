@@ -28,6 +28,7 @@ const GeographySearchController = {
       skipPath,
       count,
       resultsPath,
+      backLinkPath: guidedDateSearchPath,
     });
   },
   doGeographySearchFailActionHandler: async (
@@ -54,6 +55,7 @@ const GeographySearchController = {
         skipPath,
         count,
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       })
       .code(400)
       .takeover();

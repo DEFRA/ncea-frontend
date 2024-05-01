@@ -121,10 +121,6 @@ const map = new ol.Map({
   view: new ol.View({
     center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
     zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
-<<<<<<< HEAD
-    maxZoom: 18,
-=======
->>>>>>> features/367808-populate-the-page-tile-dynamically
     minZoom: 2,
   }),
   controls: [],
