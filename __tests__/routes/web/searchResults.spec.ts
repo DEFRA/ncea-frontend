@@ -393,7 +393,7 @@ describe('Results Screen', () => {
           document
             ?.querySelector('.quick_search-container__heading-m')
             ?.textContent?.trim(),
-        ).toBe('Quick Search');
+        ).toBe('Quick search');
       });
 
       it('should not render the custom large class for heading', async () => {
