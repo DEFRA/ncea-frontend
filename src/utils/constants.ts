@@ -262,7 +262,7 @@ export const pageTitles = {
   home: 'NCEA Search Service Home',
   date: 'NCEA Guided Search (Study Period)',
   geography: 'NCEA Guided Search (Geographic Data)',
-  results: 'NCEA Search results summary',
+  results: 'NCEA Search Results Summary',
   generalTab: 'NCEA Catalogue Detail (General)',
   accessTab: 'NCEA Catalogue Detail (Access)',
   naturalCapitalTab: 'NCEA Catalogue Detail (Natural Capital)',

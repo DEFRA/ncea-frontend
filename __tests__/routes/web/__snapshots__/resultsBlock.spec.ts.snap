@@ -6,7 +6,7 @@ exports[`Results block template Guided search journey Search results with empty 
   <head>
     <meta charset="utf-8">
     <title>
-  NCEA Search results summary
+  NCEA Search Results Summary
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -1089,7 +1089,7 @@ exports[`Results block template Quick search journey Search results with data sh
   <head>
     <meta charset="utf-8">
     <title>
-  NCEA Search results summary
+  NCEA Search Results Summary
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -1807,7 +1807,7 @@ exports[`Results block template Quick search journey Search results with empty d
   <head>
     <meta charset="utf-8">
     <title>
-  NCEA Search results summary
+  NCEA Search Results Summary
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
