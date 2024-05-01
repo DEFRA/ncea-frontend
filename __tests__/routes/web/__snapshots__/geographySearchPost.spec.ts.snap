@@ -136,21 +136,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
   
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-
-  
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Questionnaire search</li>
-  
-
-  </ol>
-</div>
+<a href="/date-search" class="govuk-back-link">Back</a>
 
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">

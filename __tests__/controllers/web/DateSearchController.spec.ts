@@ -29,6 +29,7 @@ describe('Deals with the Date Search Controller', () => {
     const {
       guidedDateSearch: guidedDateSearchPath,
       geographySearch: skipPath,
+      home,
     } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
     await DateSearchController.renderGuidedSearchHandler(request, response);
@@ -41,6 +42,8 @@ describe('Deals with the Date Search Controller', () => {
         guidedDateSearchPath,
         skipPath,
         formId,
+        count: '',
+        backLinkPath: home,
       },
     );
   });
@@ -128,6 +131,7 @@ describe('Deals with the Date Search Controller', () => {
     const {
       guidedDateSearch: guidedDateSearchPath,
       geographySearch: skipPath,
+      home,
     } = webRoutePaths;
 
     await DateSearchController.dateSearchFailActionHandler(
@@ -144,6 +148,8 @@ describe('Deals with the Date Search Controller', () => {
         guidedDateSearchPath,
         skipPath,
         formId,
+        count: '',
+        backLinkPath: home,
       },
     );
   });

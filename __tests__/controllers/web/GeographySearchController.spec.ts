@@ -57,6 +57,7 @@ describe('Deals with guided geography search handler', () => {
         skipPath,
         count: '20',
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       },
     );
   });
@@ -166,6 +167,7 @@ describe('Deals with guided geography search handler', () => {
         skipPath,
         count: '20',
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       },
     );
   });

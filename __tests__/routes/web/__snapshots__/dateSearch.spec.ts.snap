@@ -133,28 +133,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
   
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-
-  
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Questionnaire search</li>
-  
-
-  </ol>
-</div>
+<a href="/" class="govuk-back-link">Back</a>
 
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
   <div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    <div class="govuk-section-break--visible"></div>
+  </div>
+</div>
+  <div class="govuk-grid-row">
     <form method="POST" id="date" action="/date-search" data-do-browser-storage>
-      <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-column-full govuk-!-padding-top-6">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
@@ -298,27 +290,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 </div>
 
-        <div class="govuk-button-group">
+
+        
+
+
+
+<div class="govuk-form-group govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+
+  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+    
+      
           
+        
+          
+          
+          
+          
+          
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="bounding-box" name="bounding-box" type="checkbox" value="" class="defra-checkboxes__input">
+            <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="bounding-box">
+        Today&#39;s date
+      </label>
+            
+          </div>
+          
+        
+      
+    
+  </div>
+
+</div>
+
+
+        <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
+          <div class="govuk-grid-column-one-half geography-buttons__left">
+            
   
 
   
     
   
 
-<a href="/coordinate-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-skip="">
+<a href="/" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">
+  Previous question
+</a>
+
+          </div>
+          <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
+            
+  
+
+  
+    
+  
+
+<a href="/coordinate-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
   Skip question
 </a>
 
-          
+            
+  
+
   
     
   
 
-<button type="submit" class="govuk-button" data-module="govuk-button" data-to-disable="" data-next-question="">
-  Next question
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-to-disable="" data-next-question="">
+  Next results
 </button>
 
+          </div>
         </div>
       </div>
     </form>
