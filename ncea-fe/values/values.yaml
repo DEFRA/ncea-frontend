@@ -40,7 +40,14 @@ ingress:
           pathType: Prefix
   tls: []
 
-resources: {}
+#resources: {}
+resources:
+  requests:
+    memory: "35Mi"
+    cpu: "10m"
+  limits:
+    memory: "75Mi"
+    cpu: "25m"
 
 autoscaling:
   enabled: $(autoScalingEnabled)
