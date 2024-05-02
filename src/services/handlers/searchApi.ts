@@ -1,12 +1,13 @@
-import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
-import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
-
+import { IFilterOptions } from '@/src/interfaces/searchPayload.interface';
 import { elasticSearchClient } from '../../config/elasticSearchClient';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 
+import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { buildSearchQuery, classifierAggregationQuery } from '../../utils/queryBuilder';
-import { elasticSearchAPIPaths, resourceTypeOptions } from '../../utils/constants';
+import { defaultFilterOptions, elasticSearchAPIPaths } from '../../utils/constants';
 import { formatAggregationResponse, formatClassifierResponse } from '../../utils/formatAggregationResponse';
+
+import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
 
 const getSearchResults = async (
   searchFieldsObject: ISearchPayload,
@@ -52,21 +53,27 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
   }
 };
 
-const getResourceTypeOptions = async (searchFieldsObject: ISearchPayload): Promise<IAggregationOptions> => {
+const getFilterOptions = async (
+  searchFieldsObject: ISearchPayload,
+  filterOptions: IFilterOptions = defaultFilterOptions,
+): Promise<IAggregationOptions> => {
   try {
-    if (Object.keys(searchFieldsObject.fields).length) {
+    if (Object.keys(searchFieldsObject.fields).length && filterOptions.length > 0) {
       const searchBuilderPayload: ISearchBuilderPayload = {
         searchFieldsObject,
-        aggregationField: 'resourceType',
+        filterOptions,
       };
       const payload = buildSearchQuery(searchBuilderPayload);
       const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: IAggregationOptions = await formatAggregationResponse(response.data);
+      const finalResponse: IAggregationOptions = await formatAggregationResponse(response.data, filterOptions);
       return finalResponse;
     } else {
-      return Promise.resolve(resourceTypeOptions);
+      const fallbackResolve: IAggregationOptions = filterOptions.reduce((acc, curr) => {
+        acc[curr.key] = [];
+        return acc;
+      }, {});
+      return Promise.resolve(fallbackResolve);
     }
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (error: any) {
     throw new Error(`Error fetching results: ${error.message}`);
   }
@@ -142,4 +149,4 @@ const getClassifierDetails = async (level: number, level1?: string[], level2?: s
   }
 };
 
-export { getDocumentDetails, getResourceTypeOptions, getSearchResultsCount, getSearchResults, getClassifierDetails };
+export { getDocumentDetails, getFilterOptions, getSearchResultsCount, getSearchResults, getClassifierDetails };

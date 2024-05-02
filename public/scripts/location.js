@@ -1,5 +1,13 @@
-import { fireEventAfterStorage, getStorageData } from './customScripts.js';
+import {
+  fireEventAfterStorage,
+  getStorageData,
+  updateSubmitButtonState,
+} from './customScripts.js';
 import { invokeAjaxCall } from './fetchResults.js';
+import {
+  addFilterHeadingClickListeners,
+  attachStudyPeriodChangeListener,
+} from './filters.js';
 
 const index3 = 3;
 const precision = 6;
@@ -17,6 +25,7 @@ const mapInitialLat = 55.3781;
 const mapResultsButtonId = 'map-result-button';
 const mapResultsCountId = 'map-result-count';
 const actionDataAttribute = 'data-action';
+const filterBlockId = 'map-filter-block';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
 const extentSearchZoomLevel = 5;
 const responseSuccessStatusCode = 200;
@@ -27,6 +36,12 @@ const mapInfoBlock = document.getElementById('map-info');
 const contentMaxChar = 500;
 let selectedRecord = '';
 let mapResults;
+const defaultFilterOptions = {
+  startYear: '',
+  toYear: '',
+  resourceType: [],
+};
+const appliedFilterOptions = { ...defaultFilterOptions };
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -106,7 +121,6 @@ const map = new ol.Map({
   view: new ol.View({
     center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
     zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
-    maxZoom: 18,
     minZoom: 2,
   }),
   controls: [],
@@ -139,23 +153,6 @@ function mapEventListener() {
     );
     resetFeatureStyle();
     closeInfoPopup();
-    if (feature && isPolygonFeature(feature)) {
-      const polygonGeometry = feature.getGeometry();
-      markerSource.getFeatures().forEach((marker) => {
-        if (
-          isMarkerFeature(marker) &&
-          polygonGeometry.intersectsCoordinate(
-            marker.getGeometry().getFirstCoordinate(),
-          )
-        ) {
-          const recordId = marker.get('id');
-          const boundingBox = marker.get('boundingBox');
-          marker.setStyle(getMarkerStyle(highlightedMarkerIcon));
-          showInformationPopup(recordId, boundingBox);
-        }
-      });
-      return;
-    }
     if (feature && isMarkerFeature(feature)) {
       const recordId = feature.get('id');
       const boundingBox = feature.get('boundingBox');
@@ -214,7 +211,7 @@ function showInformationPopup(recordId, boundingBox) {
 
 function moreInfoNavigation() {
   if (selectedRecord && Object.keys(selectedRecord).length) {
-    window.location.href = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}`;
+    window.location.href = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}${window.location.search}`;
   }
 }
 function closeInfoPopup() {
@@ -260,6 +257,7 @@ function calculateCoordinates() {
         wst: west.toFixed(precision),
       };
       fireEventAfterStorage(sessionData);
+      toggleClearSelectionBlock();
     }
   }
 }
@@ -269,6 +267,52 @@ vectorSource.on('change', () => {
     calculateCoordinates();
   }
 });
+
+const toggleClearSelectionBlock = () => {
+  const north = document.getElementById('north');
+  const south = document.getElementById('south');
+  const east = document.getElementById('east');
+  const west = document.getElementById('west');
+  const clearSelection = document.getElementById('clear-map-selection');
+  if (
+    north &&
+    north.value &&
+    south &&
+    south.value &&
+    east &&
+    east.value &&
+    west &&
+    west.value
+  ) {
+    if (clearSelection) clearSelection.style.display = 'block';
+  } else {
+    if (clearSelection) clearSelection.style.display = 'none';
+  }
+};
+
+const attachClearSelectionListener = () => {
+  const clearSelection = document.getElementById('clear-map-selection');
+  if (clearSelection) {
+    clearSelection.addEventListener('click', function () {
+      vectorSource.clear();
+      const form = document.querySelector('[data-do-browser-storage]');
+      if (form) {
+        console.log(form.id);
+        const sessionData = getStorageData();
+        if (sessionData.fields.hasOwnProperty(form.id)) {
+          delete sessionData.fields[form.id];
+        }
+        fireEventAfterStorage(sessionData);
+        document.getElementById('north').value = '';
+        document.getElementById('south').value = '';
+        document.getElementById('east').value = '';
+        document.getElementById('west').value = '';
+        toggleClearSelectionBlock();
+        updateSubmitButtonState(form);
+      }
+    });
+  }
+};
 
 if (document.getElementById('north')) {
   document.getElementById('north').addEventListener('change', () => {
@@ -298,6 +342,7 @@ function calculatePolygonFromCoordinates() {
   const east = parseFloat(document.getElementById('east')[targetKey]);
   const west = parseFloat(document.getElementById('west')[targetKey]);
   vectorSource.clear();
+  !isDetailsScreen && toggleClearSelectionBlock();
   addPolygon({ north, south, east, west }, completedStyle);
 }
 
@@ -396,6 +441,19 @@ function boundingBoxCheckboxChange(isChecked) {
   }
 }
 
+function resetFilterData() {
+  const studyPeriodForm = document.getElementById(
+    'study_period_filter-map_results',
+  );
+  const resourceTypeForm = document.getElementById(
+    'resource_type_filter-map_results',
+  );
+  if (studyPeriodForm && resourceTypeForm) {
+    studyPeriodForm.reset();
+    resourceTypeForm.reset();
+  }
+}
+
 function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
@@ -408,15 +466,37 @@ function resetMap() {
   closeInfoPopup();
 }
 
+function exitMap() {
+  resetMap();
+  resetFilterData();
+}
+
 function exitMapEventListener() {
   const exitControl = document.getElementById('defra-map-exit');
   if (exitControl) {
-    exitControl.addEventListener('click', resetMap);
+    exitControl.addEventListener('click', exitMap);
   }
 }
 
-function drawBoundingBoxWithMarker(records) {
-  mapResults = records;
+function getFilterRecordIds() {
+  const { startYear, toYear, resourceType } = appliedFilterOptions;
+  const filteredIds = mapResults
+    .filter(
+      (record) =>
+        (!startYear || record.startYear >= startYear) &&
+        (!toYear || record.toYear >= toYear) &&
+        (!resourceType.length ||
+          record?.resourceType?.some((type) => resourceType.includes(type))),
+    )
+    .map((record) => record.id);
+  return filteredIds;
+}
+
+function drawBoundingBoxWithMarker(doRecenter = true) {
+  const filteredIds = getFilterRecordIds();
+  const records = mapResults.filter((record) =>
+    filteredIds.includes(record.id),
+  );
   map.updateSize();
   const centerArray = [];
   records.forEach((record) => {
@@ -425,20 +505,22 @@ function drawBoundingBoxWithMarker(records) {
     const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
     centerArray.push([lon, lat]);
   });
-  const totalCenters = centerArray.length;
-  if (totalCenters) {
-    const sumCenter = centerArray.reduce(
-      (acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]],
-      [0, 0],
-    );
-    const averageCenter = [
-      sumCenter[0] / totalCenters,
-      sumCenter[1] / totalCenters,
-    ];
-    map.getView().setCenter(averageCenter);
-    map.getView().setZoom(2);
-    initialCenter = map.getView().getCenter();
-    initialZoom = map.getView().getZoom();
+  if (doRecenter) {
+    const totalCenters = centerArray.length;
+    if (totalCenters) {
+      const sumCenter = centerArray.reduce(
+        (acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]],
+        [0, 0],
+      );
+      const averageCenter = [
+        sumCenter[0] / totalCenters,
+        sumCenter[1] / totalCenters,
+      ];
+      map.getView().setCenter(averageCenter);
+      map.getView().setZoom(2);
+      initialCenter = map.getView().getCenter();
+      initialZoom = map.getView().getZoom();
+    }
   }
 }
 
@@ -451,6 +533,44 @@ const attachBoundingBoxToggleListener = () => {
   }
 };
 
+const attachMapResultsFilterCheckboxChangeListener = () => {
+  const mapResultsFilterCheckboxes = document.querySelectorAll(
+    '[data-instance="map_results"]',
+  );
+  if (mapResultsFilterCheckboxes.length) {
+    mapResultsFilterCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener('change', function (event) {
+        const { value, checked } = event.target;
+        const index = appliedFilterOptions.resourceType.indexOf(value);
+        if (checked && index === -1) {
+          appliedFilterOptions.resourceType.push(value);
+        } else {
+          if (index !== -1) {
+            appliedFilterOptions.resourceType.splice(index, 1);
+          }
+        }
+        vectorSource.clear();
+        markerSource.clear();
+        drawBoundingBoxWithMarker(false);
+      });
+    });
+  }
+};
+
+const updateStudyPeriodFilter = () => {
+  setTimeout(() => {
+    appliedFilterOptions.startYear = document.getElementById(
+      'map_results-start_year',
+    ).value;
+    appliedFilterOptions.toYear = document.getElementById(
+      'map_results-to_year',
+    ).value;
+    vectorSource.clear();
+    markerSource.clear();
+    drawBoundingBoxWithMarker(false);
+  }, 100);
+};
+
 const getMapResults = async (path) => {
   const mapResultsButton = document.getElementById(mapResultsButtonId);
   const mapResultsCount = document.getElementById(mapResultsCountId);
@@ -460,10 +580,38 @@ const getMapResults = async (path) => {
       const mapResultsJson = await response.json();
       mapResultsButton.removeAttribute('disabled');
       mapResultsCount.textContent = mapResultsJson.total;
-      drawBoundingBoxWithMarker(mapResultsJson.items);
-      attachBoundingBoxToggleListener();
+      if (mapResultsJson.total > 0) {
+        mapResults = mapResultsJson.items;
+        setTimeout(() => {
+          drawBoundingBoxWithMarker();
+        }, 100);
+        attachBoundingBoxToggleListener();
+      } else {
+        mapResultsButton.setAttribute('disabled', true);
+      }
     } else {
       mapResultsButton.setAttribute('disabled', true);
+    }
+  }
+};
+
+const getMapFilters = async (path) => {
+  const response = await invokeAjaxCall(path, {}, false, 'GET');
+  if (response) {
+    if (response.status === responseSuccessStatusCode) {
+      const mapFiltersHtml = await response.text();
+      document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
+      addFilterHeadingClickListeners('map_results');
+      attachStudyPeriodChangeListener('map_results');
+      attachMapResultsFilterCheckboxChangeListener();
+      const mapFilterStartYear = document.getElementById(
+        'map_results-start_year',
+      );
+      const mapFilterToYear = document.getElementById('map_results-to_year');
+      if (mapFilterStartYear && mapFilterToYear) {
+        mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
+        mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
+      }
     }
   }
 };
@@ -473,6 +621,14 @@ const invokeMapResults = () => {
   if (fetchResults) {
     const action = fetchResults.getAttribute(actionDataAttribute);
     getMapResults(`${action}${window.location.search}`);
+  }
+};
+
+const invokeMapFilters = () => {
+  const fetchFilters = document.querySelector('[data-fetch-map-filters]');
+  if (fetchFilters) {
+    const action = fetchFilters.getAttribute(actionDataAttribute);
+    getMapFilters(`${action}${window.location.search}`);
   }
 };
 
@@ -546,6 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, timeout);
     } else if (isMapResultsScreen) {
       invokeMapResults();
+      invokeMapFilters();
       exitMapEventListener();
       disableInteractions();
       infoListener();
@@ -553,6 +710,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
+        attachClearSelectionListener();
       }, timeout);
     }
   }

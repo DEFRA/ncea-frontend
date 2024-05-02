@@ -11,7 +11,7 @@ import { initializeServer } from '../../../src/infrastructure/server';
 import supertest from 'supertest';
 import { webRoutePaths } from '../../../src/utils/constants';
 import {
-  getResourceTypeOptions,
+  getFilterOptions,
   getSearchResults,
 } from '../../../src/services/handlers/searchApi';
 import {
@@ -21,7 +21,7 @@ import {
 
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResults: jest.fn(),
-  getResourceTypeOptions: jest.fn(),
+  getFilterOptions: jest.fn(),
 }));
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
@@ -69,7 +69,7 @@ describe('Results block template', () => {
           { value: 'filter1', text: 'Filter1' },
           { value: 'filter2', text: 'Filter2' },
         ];
-        (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+        (getFilterOptions as jest.Mock).mockResolvedValue(
           expectedResourceTypeOptions,
         );
         const responseObject = await invokeRoute(webRoutePaths.results, {
@@ -151,7 +151,7 @@ describe('Results block template', () => {
           { value: 'filter1', text: 'Filter1' },
           { value: 'filter2', text: 'Filter2' },
         ];
-        (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+        (getFilterOptions as jest.Mock).mockResolvedValue(
           expectedResourceTypeOptions,
         );
         const responseObject = await invokeRoute(webRoutePaths.results, {
@@ -246,7 +246,7 @@ describe('Results block template', () => {
           { value: 'filter1', text: 'Filter1' },
           { value: 'filter2', text: 'Filter2' },
         ];
-        (getResourceTypeOptions as jest.Mock).mockResolvedValue(
+        (getFilterOptions as jest.Mock).mockResolvedValue(
           expectedResourceTypeOptions,
         );
         const responseObject = await invokeRoute(webRoutePaths.results, {

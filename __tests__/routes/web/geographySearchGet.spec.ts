@@ -141,11 +141,11 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(geographyContainer.length).toEqual(1);
       });
 
-      it('should render 5 geography-fields__field class', async () => {
+      it('should render 4 geography-fields__field class', async () => {
         expect(document.querySelector('.geography-fields__field')).toBeTruthy();
         expect(
           document.querySelectorAll('.geography-fields__field').length,
-        ).toEqual(5);
+        ).toEqual(4);
       });
     });
 

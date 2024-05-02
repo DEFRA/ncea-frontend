@@ -1,5 +1,4 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import { formatDate } from './formatDate';
 import { getAccumulatedCoordinatesNCenter } from './getBoundingBoxData';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
@@ -11,6 +10,7 @@ import {
   ISearchItem,
   ISearchResults,
 } from '../interfaces/searchResponse.interface';
+import { formatDate, getYear } from './formatDate';
 
 const getStudyPeriod = (startDate: string, endDate: string): string => {
   const formattedStartDate: string = formatDate(startDate);
@@ -51,6 +51,8 @@ const formatSearchResponse = async (
       publishedBy: publishedBy.organisationValue,
       content: searchItem?._source?.resourceAbstractObject?.default ?? '',
       studyPeriod,
+      startYear: getYear(startDate),
+      toYear: getYear(endDate),
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
       organisationName: organisationDetails.organisationValue,
     };
@@ -63,6 +65,7 @@ const formatSearchResponse = async (
         ...item,
         geographicBoundary: coordinatesData.coordinates,
         geographicCenter: coordinatesData.center,
+        resourceType: searchItem?._source?.resourceType ?? [],
       };
     }
 

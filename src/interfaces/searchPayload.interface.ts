@@ -16,3 +16,16 @@ export interface IDateObject {
   month?: number;
   day?: number;
 }
+
+export interface IFilterOption {
+  key: string;
+  field: string | string[];
+  order?: string;
+  needCount: boolean;
+  propertyToRead: string;
+  isTerm?: boolean;
+  isDate?: boolean;
+  hasBucket?: boolean;
+}
+
+export interface IFilterOptions extends Array<IFilterOption> {}

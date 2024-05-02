@@ -1,14 +1,21 @@
+import { IFilterOptions } from './searchPayload.interface';
+
 interface IMatchQuery {
-  match: {
+  match?: {
     [key: string]: string;
+  };
+  terms?: {
+    [key: string]: string[];
   };
 }
 
 interface IRangeQuery {
   range: {
     [key: string]: {
-      gte: string;
-      lte: string;
+      gte?: string;
+      lte?: string;
+      format?: string;
+      value?: string;
     };
   };
 }
@@ -22,10 +29,6 @@ interface IGeoShapeQuery {
   geo_shape: {
     [key: string]: {
       shape: IShapeCoordinates;
-      depth?: {
-        from: number;
-        to: number;
-      };
       relation: string;
     };
   };
@@ -65,11 +68,23 @@ interface ISortQuery {
   [key: string]: ISortOrder | ICustomSortScript;
 }
 
-interface IAggregateQuery {
-  unique_values?: {
-    terms?: {
-      field?: string;
-    };
+type IAggregationType = 'terms' | 'max' | 'min';
+
+interface IAggregationQueryTerm {
+  field: string;
+  size?: number;
+  order?: { _key: string };
+}
+
+interface IAggregationDateScript {
+  script: { source: string };
+}
+
+type IAggregationData = IAggregationQueryTerm | IAggregationDateScript;
+
+interface IAggregationQuery {
+  [key: string]: {
+    [key in IAggregationType]?: IAggregationData;
   };
 }
 
@@ -77,7 +92,7 @@ interface IQuery {
   size?: number;
   query: IBoolQuery;
   sort?: ISortQuery[];
-  aggs?: IAggregateQuery;
+  aggs?: IAggregationQuery;
   from?: number;
   _source?: string[];
 }
@@ -87,7 +102,6 @@ interface IGeoCoordinates {
   sth: string;
   est: string;
   wst: string;
-  dpt?: string;
 }
 
 interface ISearchFields {
@@ -103,7 +117,6 @@ interface ISearchFields {
     tdd?: string;
   };
   extent?: {
-    dpt?: string;
     nth?: string;
     sth?: string;
     est?: string;
@@ -112,7 +125,7 @@ interface ISearchFields {
 }
 
 interface ISearchFilter {
-  [key: string]: string;
+  [key: string]: string | string[] | ISearchFields;
 }
 
 interface ISearchPayload {
@@ -130,7 +143,7 @@ interface ISearchBuilderPayload {
   fieldsToSearch?: string[];
   isCount?: boolean;
   ignoreAggregation?: boolean;
-  aggregationField?: string;
+  filterOptions?: IFilterOptions;
   docId?: string;
 }
 
@@ -167,9 +180,13 @@ export {
   IQueryString,
   ISortQuery,
   ICustomSortScript,
-  IAggregateQuery,
+  IAggregationQuery,
   ISearchFilter,
   ISearchBuilderPayload,
   IAggregateClassifierQuery,
   IFieldExist,
+  IAggregationQueryTerm,
+  IAggregationDateScript,
+  IAggregationData,
+  IAggregationType,
 };

@@ -7767,6 +7767,27 @@
   justify-content: flex-end;
 }
 
+.defra-map-clear-selection__block {
+  display: none;
+  width: 150px;
+}
+.defra-map-clear-selection__link {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  color: #1d70b8 !important;
+}
+.defra-map-clear-selection__link:hover {
+  color: #003078 !important;
+}
+.defra-map-clear-selection__link:focus {
+  color: #003078 !important;
+}
+
 .search-result__item {
   display: flex;
   flex-direction: column;
@@ -8074,6 +8095,7 @@
 .defra-map-info__content {
   margin: 0;
   color: #0b0c0c;
+  word-wrap: break-word;
   font-family: "GDS Transport", arial, sans-serif;
   font-size: 1rem;
   font-style: normal;
@@ -8125,6 +8147,103 @@
   width: 19px;
   border-width: 0 0 4px 4px;
   height: 10px;
+}
+
+.defra-filter-section select {
+  max-width: 120px;
+  min-width: 95px;
+}
+
+.defra-filter-options {
+  position: relative;
+}
+.defra-filter-options__heading {
+  position: relative;
+  padding: 10px 8px 5px 32px;
+  margin: 0;
+  cursor: pointer;
+}
+.defra-filter-options__title {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  cursor: pointer;
+  color: #1d70b8;
+}
+.defra-filter-options__button {
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 0;
+}
+.defra-filter-options__button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+.defra-filter-options__button:focus {
+  outline: none;
+  text-decoration: none;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.defra-filter-options__button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+  -webkit-text-decoration-skip: none;
+}
+.defra-filter-options__icon {
+  display: none;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 30px;
+  height: 40px;
+  fill: #0b0c0c;
+}
+.defra-filter-options__container {
+  position: relative;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+.defra-filter-options__container::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+.defra-filter-options__container::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.87);
+}
+.defra-filter-options__container--inner {
+  padding: 5px 5px 0;
+}
+
+.defra-filter-options__heading--closed .defra-filter-options__icon--down,
+.defra-filter-options__heading--open .defra-filter-options__icon--up {
+  display: block;
+}
+
+.defra-filter-options--closed .defra-filter-options__container {
+  display: none;
+}
+
+.defra-filter-options--open .defra-filter-options__container {
+  display: block;
 }
 
 .details-title {

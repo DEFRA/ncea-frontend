@@ -12,7 +12,7 @@ const GeographySearchController = {
   renderGeographySearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const formFields = { ...geographyQuestionnaireOptions };
     const { geographySearch, guidedDateSearch: guidedDateSearchPath, results } = webRoutePaths;
-    const formId: string = formIds.geographyQuestionnaire;
+    const formId: string = formIds.geographyQuestionnaireFID;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const queryString: string = readQueryParams(request.query, '');
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
@@ -37,7 +37,7 @@ const GeographySearchController = {
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const finalFormFields = await transformTextInputError({ ...geographyQuestionnaireOptions }, error);
     const { geographySearch, guidedDateSearch: guidedDateSearchPath, results } = webRoutePaths;
-    const formId: string = formIds.geographyQuestionnaire;
+    const formId: string = formIds.geographyQuestionnaireFID;
     const queryString: string = readQueryParams(request.query, '');
     const skipPath: string = `${results}?${queryString}`;
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
@@ -63,7 +63,6 @@ const GeographySearchController = {
       [queryParamKeys.south]: payload?.['south'] ?? '',
       [queryParamKeys.east]: payload?.['east'] ?? '',
       [queryParamKeys.west]: payload?.['west'] ?? '',
-      [queryParamKeys.depth]: payload?.['depth'] ?? '',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, true);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);

@@ -152,7 +152,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
   
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/search">Search results</a>
+      <a class="govuk-breadcrumbs__link" href="/search?">Search results</a>
     </li>
   
 
@@ -1124,7 +1124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
   
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/search">Search results</a>
+      <a class="govuk-breadcrumbs__link" href="/search?">Search results</a>
     </li>
   
 

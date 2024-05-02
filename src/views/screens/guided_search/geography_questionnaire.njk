@@ -43,7 +43,21 @@
           <div class="geography-fields__field">{{ govukInput(formFields.south) }}</div>
           <div class="geography-fields__field">{{ govukInput(formFields.east) }}</div>
           <div class="geography-fields__field">{{ govukInput(formFields.west) }}</div>
-          <div class="geography-fields__field">{{ govukInput(formFields.depth) }}</div>
+          <div class="govuk-!-margin-top-2 govuk-!-margin-bottom-3 defra-map-clear-selection__block" id="clear-map-selection">
+            <a href="javascript:void(0);" class="govuk-link defra-map-clear-selection__link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" class="govuk-!-margin-right-1" viewBox="0 0 16 17" fill="none">
+                <g clip-path="url(#clip0_7099_112575)">
+                  <path d="M12.6673 5.02594L11.7273 4.08594L8.00065 7.8126L4.27398 4.08594L3.33398 5.02594L7.06065 8.7526L3.33398 12.4793L4.27398 13.4193L8.00065 9.6926L11.7273 13.4193L12.6673 12.4793L8.94065 8.7526L12.6673 5.02594Z" fill="#1D70B8"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_7099_112575">
+                    <rect width="16" height="16" fill="white" transform="translate(0 0.75)"/>
+                  </clipPath>
+                </defs>
+              </svg>
+              <span>Clear selection</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

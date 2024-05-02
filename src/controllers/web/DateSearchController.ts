@@ -12,7 +12,7 @@ import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 const DateSearchController = {
   renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
-    const formId: string = formIds.dataQuestionnaire;
+    const formId: string = formIds.dataQuestionnaireFID;
     return response.view('screens/guided_search/date_questionnaire', {
       fromDate,
       toDate,
@@ -41,7 +41,7 @@ const DateSearchController = {
       ...(toError && { errorMessage: { text: toError } }),
       items: toItems,
     };
-    const formId: string = formIds.dataQuestionnaire;
+    const formId: string = formIds.dataQuestionnaireFID;
     return response
       .view('screens/guided_search/date_questionnaire', {
         fromDate: fromField,

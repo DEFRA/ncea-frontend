@@ -54,7 +54,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '2',
-        depth: '',
       });
       response = responseObject.response;
     });
@@ -66,7 +65,7 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
     it('should redirect to results page', async () => {
       expect(response.redirect).toBe(true);
       expect(response.header.location).toBe(
-        `${webRoutePaths.results}?nth=2&sth=2&est=2&wst=2&pg=1&rpp=20&srt=best_match&rty=all`,
+        `${webRoutePaths.results}?nth=2&sth=2&est=2&wst=2&pg=1&rpp=20&srt=best_match`,
       );
     });
   });
@@ -81,7 +80,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '',
-        depth: '',
       });
       document = responseObject.document;
       response = responseObject.response;
@@ -189,13 +187,13 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
           expect(geographyContainer.length).toEqual(1);
         });
 
-        it('should render 5 geography-fields__field class', async () => {
+        it('should render 4 geography-fields__field class', async () => {
           expect(
             document.querySelector('.geography-fields__field'),
           ).toBeTruthy();
           expect(
             document.querySelectorAll('.geography-fields__field').length,
-          ).toEqual(5);
+          ).toEqual(4);
         });
       });
 
@@ -313,7 +311,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '',
-        depth: '',
       });
       expect(responseObject.response.statusCode).toEqual(400);
     });
@@ -323,7 +320,6 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         south: '2',
         east: '2',
         west: '',
-        depth: '',
       });
       expect(responseObject.response.statusCode).toEqual(400);
     });

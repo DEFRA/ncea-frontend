@@ -32,7 +32,7 @@
   {{ quickSearch({
     isResultPage: true,
     searchPath: routes.searchResults,
-    formId: formId,
+    formId: quickSearchFID,
     searchInputError : searchInputError
   }) }}
 
@@ -41,7 +41,13 @@
       {%- include 'partials/results/map_results.njk' -%}
     </div>
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">{% include 'partials/results/filters.njk' %}</div>
+      <div class="govuk-grid-column-one-third">
+        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+          Filters
+        </h2>
+        <div class="govuk-section-break--visible"></div>
+        {% include 'partials/results/filters.njk' %}
+      </div>
       <div class="govuk-grid-column-two-thirds">
         {% include 'partials/results/summary.njk' %}
       </div>
@@ -58,4 +64,5 @@
     var isViewMapResults = true;
   </script>
   <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/filters.js"></script>
 {% endblock %}

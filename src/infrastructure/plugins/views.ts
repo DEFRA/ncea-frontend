@@ -11,6 +11,9 @@ const {
   guidedClassifierSearch: guidedSearch,
   guidedDateSearch,
   getMapResults,
+  getMapFilters,
+  filterResourceType,
+  filterStudyPeriod,
 } = webRoutePaths;
 
 const customHapiViews = {
@@ -64,6 +67,9 @@ const customHapiViews = {
         guidedSearch,
         guidedDateSearch,
         getMapResults,
+        getMapFilters,
+        filterResourceType,
+        filterStudyPeriod,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
       gtmId: environmentConfig.gtmId,

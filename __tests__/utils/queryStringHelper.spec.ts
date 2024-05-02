@@ -30,28 +30,33 @@ describe('queryStringHelper functions', () => {
       const requestQuery = { q: 'query' };
       const queryParamsObject = { jry: 'qs' };
       const result = upsertQueryParams(requestQuery, queryParamsObject);
-      expect(result).toBe('q=query&jry=qs&pg=1&rpp=20&srt=best_match&rty=all');
+      expect(result).toBe('q=query&jry=qs&pg=1&rpp=20&srt=best_match');
     });
 
     test('should update existing query parameters', () => {
       const requestQuery = { jry: 'qs', q: 'oldQuery' };
       const queryParamsObject = { q: 'newQuery' };
       const result = upsertQueryParams(requestQuery, queryParamsObject);
-      expect(result).toBe(
-        'jry=qs&q=newQuery&pg=1&rpp=20&srt=best_match&rty=all',
-      );
+      expect(result).toBe('jry=qs&q=newQuery&pg=1&rpp=20&srt=best_match');
     });
 
     test('should include default parameters if specified', () => {
       const requestQuery = { q: 'oldQuery' };
       const queryParamsObject = {};
       const result = upsertQueryParams(requestQuery, queryParamsObject, true);
-      expect(result).toBe('q=oldQuery&pg=1&rpp=20&srt=best_match&rty=all');
+      expect(result).toBe('q=oldQuery&pg=1&rpp=20&srt=best_match');
     });
 
     test('should not include default parameters if not specified', () => {
       const requestQuery = { q: 'oldQuery' };
       const queryParamsObject = {};
+      const result = upsertQueryParams(requestQuery, queryParamsObject, false);
+      expect(result).toBe('q=oldQuery');
+    });
+
+    test('should remove the key if the value is empty', () => {
+      const requestQuery = { q: 'oldQuery', t: '123' };
+      const queryParamsObject = { t: '' };
       const result = upsertQueryParams(requestQuery, queryParamsObject, false);
       expect(result).toBe('q=oldQuery');
     });
@@ -73,7 +78,7 @@ describe('queryStringHelper functions', () => {
     test('should include default parameters if specified', () => {
       const requestQuery = { q: 'query' };
       const result = readQueryParams(requestQuery, '', true);
-      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match&rty=all');
+      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match');
     });
 
     test('should not include default parameters if not specified', () => {
@@ -115,14 +120,13 @@ describe('queryStringHelper functions', () => {
 
   describe('getExtentParams', () => {
     test('should return extent parameters from URLSearchParams', () => {
-      const searchParams = new URLSearchParams('nth=1&sth=2&est=3&wst=4&dpt=5');
+      const searchParams = new URLSearchParams('nth=1&sth=2&est=3&wst=4');
       const result = getExtentParams(searchParams);
       expect(result).toEqual({
         nth: '1',
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
       });
     });
 
@@ -134,7 +138,6 @@ describe('queryStringHelper functions', () => {
         sth: '',
         est: '',
         wst: '',
-        dpt: '',
       });
     });
   });
@@ -144,6 +147,8 @@ describe('queryStringHelper functions', () => {
       const searchParams = new URLSearchParams('rty=test');
       const result = getFilterParams(searchParams);
       expect(result).toEqual({
+        endDate: '',
+        startDate: '',
         resourceType: 'test',
       });
     });
@@ -153,6 +158,8 @@ describe('queryStringHelper functions', () => {
       const result = getFilterParams(searchParams);
       expect(result).toEqual({
         resourceType: '',
+        endDate: '',
+        startDate: '',
       });
     });
   });
@@ -213,7 +220,6 @@ describe('queryStringHelper functions', () => {
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
       };
       const result = generateQueryBuilderFields(requestQuery);
       expect(result).toEqual({
@@ -223,7 +229,6 @@ describe('queryStringHelper functions', () => {
           sth: '2',
           est: '3',
           wst: '4',
-          dpt: '5',
         },
       });
     });
@@ -241,7 +246,6 @@ describe('queryStringHelper functions', () => {
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
       };
       const result = generateQueryBuilderFields(requestQuery);
       expect(result).toEqual({
@@ -259,7 +263,6 @@ describe('queryStringHelper functions', () => {
           sth: '2',
           est: '3',
           wst: '4',
-          dpt: '5',
         },
       });
     });
@@ -282,9 +285,7 @@ describe('queryStringHelper functions', () => {
         sort: 'best_match',
         page: 1,
         rowsPerPage: 20,
-        filters: {
-          resourceType: 'all',
-        },
+        filters: {},
       });
     });
 
@@ -303,9 +304,7 @@ describe('queryStringHelper functions', () => {
         sort: 'date',
         page: 2,
         rowsPerPage: 10,
-        filters: {
-          resourceType: 'all',
-        },
+        filters: {},
       });
     });
 
@@ -320,7 +319,7 @@ describe('queryStringHelper functions', () => {
         page: 1,
         rowsPerPage: 20,
         filters: {
-          resourceType: 'article',
+          resourceType: ['article'],
         },
       });
     });
@@ -338,7 +337,6 @@ describe('queryStringHelper functions', () => {
         sth: '2',
         est: '3',
         wst: '4',
-        dpt: '5',
         srt: 'date',
         pg: '2',
         rpp: '10',
@@ -361,14 +359,13 @@ describe('queryStringHelper functions', () => {
             sth: '2',
             est: '3',
             wst: '4',
-            dpt: '5',
           },
         },
         sort: 'date',
         page: 2,
         rowsPerPage: 10,
         filters: {
-          resourceType: 'article',
+          resourceType: ['article'],
         },
       });
     });
