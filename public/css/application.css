@@ -8176,7 +8176,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 40px;
-  width: 630px;
 }
 .details-alt_title {
   font-size: 1.1875rem;
@@ -8201,7 +8200,7 @@
 }
 .tab-content-row {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
 }
 .tab-content-label {
   font-size: 1rem;
@@ -8285,4 +8284,10 @@
 
 .detail-map {
   border: 2px solid #0b0c0c;
+}
+
+@media (min-width: 768px) {
+  .tab-content-row {
+    grid-template-columns: auto 1fr;
+  }
 }
