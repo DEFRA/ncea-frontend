@@ -257,3 +257,17 @@ export const detailsTabOptions: TabOptions = {
     },
   ],
 };
+
+export const pageTitles = {
+  home: 'NCEA Search Service Home',
+  date: 'NCEA Guided Search (Study Period)',
+  geography: 'NCEA Guided Search (Geographic Data)',
+  results: 'NCEA Search Results Summary',
+  generalTab: 'NCEA Catalogue Detail (General)',
+  accessTab: 'NCEA Catalogue Detail (Access)',
+  naturalCapitalTab: 'NCEA Catalogue Detail (Natural Capital)',
+  qualityTab: 'NCEA Catalogue Detail (Quality)',
+  geographyTab: 'NCEA Catalogue Detail (Geography)',
+  governanceTab: 'NCEA Catalogue Detail (Governance)',
+  licenseTab: 'NCEA Catalogue Detail (License)',
+};
