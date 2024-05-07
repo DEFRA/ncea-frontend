@@ -65,7 +65,7 @@
           </div>
         {% endif %}
         <p class='search-result__content'>
-          {{item.content}}
+          {{item.content | safe}}
         </p>
 
         <div class='govuk-button-group search-result__button-group'>

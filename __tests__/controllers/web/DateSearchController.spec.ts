@@ -14,6 +14,7 @@ import {
 import {
   formIds,
   guidedSearchSteps,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -28,17 +29,21 @@ describe('Deals with the Date Search Controller', () => {
     const {
       guidedDateSearch: guidedDateSearchPath,
       geographySearch: skipPath,
+      home,
     } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
       {
+        pageTitle: pageTitles.date,
         fromDate,
         toDate,
         guidedDateSearchPath,
         skipPath,
         formId,
+        count: '',
+        backLinkPath: home,
       },
     );
   });
@@ -126,6 +131,7 @@ describe('Deals with the Date Search Controller', () => {
     const {
       guidedDateSearch: guidedDateSearchPath,
       geographySearch: skipPath,
+      home,
     } = webRoutePaths;
 
     await DateSearchController.dateSearchFailActionHandler(
@@ -136,11 +142,14 @@ describe('Deals with the Date Search Controller', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
       {
+        pageTitle: pageTitles.date,
         fromDate: dateQuestionnaireGovUKError.fromDate,
         toDate: dateQuestionnaireGovUKError.toDate,
         guidedDateSearchPath,
         skipPath,
         formId,
+        count: '',
+        backLinkPath: home,
       },
     );
   });

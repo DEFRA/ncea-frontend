@@ -4,6 +4,7 @@ import * as errorTransformer from '../../../src/utils/transformErrors';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import {
   formIds,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -48,6 +49,7 @@ describe('Deals with guided geography search handler', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/geography_questionnaire',
       {
+        pageTitle: pageTitles.geography,
         guidedDateSearchPath,
         geographySearchPath,
         formFields,
@@ -55,6 +57,7 @@ describe('Deals with guided geography search handler', () => {
         skipPath,
         count: '20',
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       },
     );
   });
@@ -156,6 +159,7 @@ describe('Deals with guided geography search handler', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/geography_questionnaire',
       {
+        pageTitle: pageTitles.geography,
         guidedDateSearchPath,
         geographySearchPath,
         formFields: geographyFormOptionWithDepthError,
@@ -163,6 +167,7 @@ describe('Deals with guided geography search handler', () => {
         skipPath,
         count: '20',
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       },
     );
   });

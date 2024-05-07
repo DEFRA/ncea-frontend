@@ -2,6 +2,7 @@
 
 {% from "partials/data_questionnaire/macro.njk" import dateQuestionnaire %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 
 {% block beforeContent %}
   {{ super() }}
@@ -9,22 +10,42 @@
 {% endblock %}
 
 {% block content %}
+  {% include "partials/results_count/template.njk" %}
   <div class="govuk-grid-row">
     <form method="POST" id="{{formId}}" action="{{guidedDateSearchPath}}" data-do-browser-storage>
-      <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-column-full govuk-!-padding-top-6">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
         </h1>
         {{ dateQuestionnaire({ fieldLabel: 'From', fieldOptions: fromDate }) }}
         {{ dateQuestionnaire( {fieldLabel: 'To', fieldOptions: toDate }) }}
-        <div class="govuk-button-group">
-          {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary", href: skipPath, attributes: {
-            'data-do-storage-skip': ''
-          } }) }}
-          {{ govukButton({ text: "Next question", attributes: {
-            'data-to-disable': '',
-            'data-next-question': ''
-          } }) }}
+
+        {{ govukCheckboxes({
+            name: 'today-date',
+            formGroup: {
+              classes: 'govuk-!-margin-top-3 govuk-!-margin-bottom-3'
+            },
+            items: [
+              {
+                text: "Today's date",
+                attributes: {'class': 'defra-checkboxes__input', 'altName': 'tdcheck'},
+                label: {classes: 'defra-checkboxes__label'}
+              }
+            ]
+        }) }}
+
+        <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
+          <div class="govuk-grid-column-one-half geography-buttons__left">
+            &nbsp;
+          </div>
+          <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
+            {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
+              'data-do-storage-skip': ''
+            } }) }}
+            {{ govukButton({ text: "Next question", classes: "govuk-!-margin-bottom-0 govuk-!-margin-right-0", attributes: {
+              'data-to-disable': '', 'data-next-question': ''
+            } }) }}
+          </div>
         </div>
       </div>
     </form>

@@ -5,20 +5,24 @@ import Joi from 'joi';
 import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { transformErrors } from '../../utils/transformErrors';
-import { upsertQueryParams } from '../../utils/queryStringHelper';
-import { formIds, formKeys, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { formIds, formKeys, guidedSearchSteps, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
+import { readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const DateSearchController = {
   renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath, home } = webRoutePaths;
+    const count: string = readQueryParams(request.query, queryParamKeys.count);
     const formId: string = formIds.dataQuestionnaireFID;
     return response.view('screens/guided_search/date_questionnaire', {
+      pageTitle: pageTitles.date,
       fromDate,
       toDate,
       guidedDateSearchPath,
       skipPath,
       formId,
+      count,
+      backLinkPath: home,
     });
   },
   dateSearchFailActionHandler: (
@@ -26,7 +30,8 @@ const DateSearchController = {
     response: ResponseToolkit,
     error: Joi.ValidationError,
   ): Lifecycle.ReturnValue => {
-    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath, home } = webRoutePaths;
+    const count: string = readQueryParams(request.query, queryParamKeys.count);
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
       formKeys.dateQuestionnaire,
@@ -44,11 +49,14 @@ const DateSearchController = {
     const formId: string = formIds.dataQuestionnaireFID;
     return response
       .view('screens/guided_search/date_questionnaire', {
+        pageTitle: pageTitles.date,
         fromDate: fromField,
         toDate: toField,
         guidedDateSearchPath,
         skipPath,
         formId,
+        count,
+        backLinkPath: home,
       })
       .code(400)
       .takeover();

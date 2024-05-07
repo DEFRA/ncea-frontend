@@ -6,7 +6,7 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  NCEA Guided Search (Geographic Data)
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -136,21 +136,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
   
 
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-
-  
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Questionnaire search</li>
-  
-
-  </ol>
-</div>
+<a href="/date-search" class="govuk-back-link">Back</a>
 
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
@@ -287,7 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </a>
 
       </div>
-      <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
+      <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
         
   
 
@@ -306,7 +292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-to-disable="" data-next-question="">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-right-0" data-module="govuk-button" data-to-disable="" data-next-question="">
   Show results
 </button>
 

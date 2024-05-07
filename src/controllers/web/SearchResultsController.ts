@@ -8,7 +8,14 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
-import { formIds, mapResultMaxCount, queryParamKeys, requiredFieldsForMap, webRoutePaths } from '../../utils/constants';
+import {
+  formIds,
+  mapResultMaxCount,
+  pageTitles,
+  queryParamKeys,
+  requiredFieldsForMap,
+  webRoutePaths,
+} from '../../utils/constants';
 import {
   generateCountPayload,
   generateQueryBuilderPayload,
@@ -37,6 +44,7 @@ const SearchResultsController = {
       const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
       const processedSortOptions = await processSortOptions(request.query);
       return response.view('screens/results/template', {
+        pageTitle: pageTitles.results,
         quickSearchFID,
         searchResults,
         hasError: false,
@@ -79,6 +87,7 @@ const SearchResultsController = {
         }
       : (undefined as unknown as Joi.ValidationError);
     const context = {
+      pageTitle: payload?.pageName === 'home' ? pageTitles.home : pageTitles.results,
       quickSearchFID,
       searchInputError,
     };
@@ -133,9 +142,11 @@ const SearchResultsController = {
       const queryString: string = readQueryParams(request.query);
       const detailsTabOptions: FormattedTabOptions = await processDetailsTabData(docDetails);
       return response.view('screens/details/template', {
+        pageTitle: pageTitles.generalTab,
         docDetails,
         detailsTabOptions,
         queryString,
+        pageTitles,
       });
     } catch (error) {
       return response.view('screens/details/template', {
