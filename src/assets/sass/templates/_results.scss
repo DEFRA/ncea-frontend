@@ -234,7 +234,6 @@
     &-out {
       display: flex;
       align-items: center;
-      position: relative;
       border: 0;
       height: 50px;
       width: 50px;
@@ -245,6 +244,10 @@
 
       &:hover {
         background-color: govuk-colour("light-grey");
+      }
+
+      &:focus-visible {
+        outline-offset: -2px;
       }
     }
   }
@@ -291,13 +294,16 @@
 }
 
 @media (min-width: 40.0625em) {
+  .defra-map-reset {
+    margin-bottom: 10px;
+  }
+
   .defra-map-zoom {
     display: block;
     float: right;
     clear: right;
     width: 50px;
     height: auto;
-    margin-top: 15px;
   }
 }
 
