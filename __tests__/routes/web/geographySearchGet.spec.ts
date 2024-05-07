@@ -55,46 +55,29 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
     });
   });
 
-  describe('Geography Questionnaire > Breadcrumb block', () => {
-    describe('Breadcrumb classes', () => {
-      it('renders the container class', async () => {
-        expect(document.querySelector('.govuk-breadcrumbs')).toBeTruthy();
-      });
-
-      it('renders the breadcrumb list class', async () => {
-        expect(document.querySelector('.govuk-breadcrumbs__list')).toBeTruthy();
+  describe('Geography Questionnaire > Back link block', () => {
+    describe('Back link classes', () => {
+      it('renders the back-link class', async () => {
+        expect(document.querySelector('.govuk-back-link')).toBeTruthy();
       });
     });
 
-    describe('Breadcrumb list items', () => {
-      it('should render 2 list item', async () => {
-        const breadcrumbList = document?.querySelector(
-          '.govuk-breadcrumbs__list',
+    describe('Back link items', () => {
+      it('should render 1 item', async () => {
+        expect(document.querySelectorAll('.govuk-back-link')?.length).toEqual(
+          1,
         );
-        expect(breadcrumbList?.childElementCount).toEqual(2);
       });
     });
 
-    describe('Breadcrumb list item options', () => {
-      it('should render home list item as a first child', async () => {
-        const item = document.querySelector(
-          '.govuk-breadcrumbs__list',
-        )?.firstElementChild;
-        const anchor = item?.firstElementChild;
+    describe('Back link  item options', () => {
+      it('should render back link to date search page', async () => {
+        const anchor = document.querySelector('.govuk-back-link');
         expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
+        expect(anchor?.getAttribute('href')).toEqual(
+          webRoutePaths.guidedDateSearch,
         );
-        expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.home);
-        expect(anchor?.textContent?.trim()).toEqual('Home');
-      });
-
-      it('should render search results list item as a second child', async () => {
-        const item = document.querySelector(
-          '.govuk-breadcrumbs__list',
-        )?.lastElementChild;
-        expect(item?.querySelector('a')).toBeNull();
-        expect(item?.textContent?.trim()).toEqual('Questionnaire search');
+        expect(anchor?.textContent?.trim()).toEqual('Back');
       });
     });
   });
@@ -141,11 +124,11 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(geographyContainer.length).toEqual(1);
       });
 
-      it('should render 5 geography-fields__field class', async () => {
+      it('should render 4 geography-fields__field class', async () => {
         expect(document.querySelector('.geography-fields__field')).toBeTruthy();
         expect(
           document.querySelectorAll('.geography-fields__field').length,
-        ).toEqual(5);
+        ).toEqual(4);
       });
     });
 

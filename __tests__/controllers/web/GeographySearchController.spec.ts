@@ -4,6 +4,7 @@ import * as errorTransformer from '../../../src/utils/transformErrors';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import {
   formIds,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -39,7 +40,7 @@ describe('Deals with guided geography search handler', () => {
       true,
     );
     const resultsPath: string = `${results}?${resultPathQueryString}`;
-    const formId: string = formIds.geographyQuestionnaire;
+    const formId: string = formIds.geographyQuestionnaireFID;
 
     await GeographySearchController.renderGeographySearchHandler(
       request,
@@ -48,6 +49,7 @@ describe('Deals with guided geography search handler', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/geography_questionnaire',
       {
+        pageTitle: pageTitles.geography,
         guidedDateSearchPath,
         geographySearchPath,
         formFields,
@@ -55,6 +57,7 @@ describe('Deals with guided geography search handler', () => {
         skipPath,
         count: '20',
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       },
     );
   });
@@ -65,7 +68,6 @@ describe('Deals with guided geography search handler', () => {
       south: '51.564868',
       east: '10.884730',
       west: '-1.200230',
-      depth: '',
     };
     const request: Request = { payload: { ...extentFormFields } } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
@@ -75,7 +77,6 @@ describe('Deals with guided geography search handler', () => {
       [queryParamKeys.south]: extentFormFields?.['south'] ?? '',
       [queryParamKeys.east]: extentFormFields?.['east'] ?? '',
       [queryParamKeys.west]: extentFormFields?.['west'] ?? '',
-      [queryParamKeys.depth]: extentFormFields?.['depth'] ?? '',
     };
     const queryString: string = upsertQueryParams(
       request.query,
@@ -98,7 +99,6 @@ describe('Deals with guided geography search handler', () => {
       [queryParamKeys.south]: extentFormFields?.['south'] ?? '',
       [queryParamKeys.east]: extentFormFields?.['east'] ?? '',
       [queryParamKeys.west]: extentFormFields?.['west'] ?? '',
-      [queryParamKeys.depth]: extentFormFields?.['depth'] ?? '',
     };
     const queryString: string = upsertQueryParams(
       request.query,
@@ -142,7 +142,7 @@ describe('Deals with guided geography search handler', () => {
     } = webRoutePaths;
     const queryString: string = readQueryParams(request.query, '');
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
-    const formId: string = formIds.geographyQuestionnaire;
+    const formId: string = formIds.geographyQuestionnaireFID;
     const skipPath: string = `${results}?${queryString}`;
     const resultPathQueryString: string = readQueryParams(
       request.query,
@@ -159,6 +159,7 @@ describe('Deals with guided geography search handler', () => {
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/geography_questionnaire',
       {
+        pageTitle: pageTitles.geography,
         guidedDateSearchPath,
         geographySearchPath,
         formFields: geographyFormOptionWithDepthError,
@@ -166,6 +167,7 @@ describe('Deals with guided geography search handler', () => {
         skipPath,
         count: '20',
         resultsPath,
+        backLinkPath: guidedDateSearchPath,
       },
     );
   });

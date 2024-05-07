@@ -4,8 +4,11 @@ export interface IBaseItem {
   publishedBy: string;
   content: string;
   studyPeriod: string;
+  startYear?: string;
+  toYear?: string;
   resourceLocator: string;
   organisationName?: string;
+  resourceType?: string[];
 }
 
 export interface IGeneralItem {
@@ -88,6 +91,10 @@ export interface ISearchResults {
 export interface IAggregationOption {
   value: string;
   text: string;
+  selected?: boolean;
+  checked?: boolean;
 }
 
-export interface IAggregationOptions extends Array<IAggregationOption> {}
+export interface IAggregationOptions {
+  [key: string]: IAggregationOption[] | [];
+}

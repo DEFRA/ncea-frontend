@@ -6,10 +6,10 @@
 {% set extraClass = ' map-modal'%}
 
 {% block beforeModalContent %}
-  <div class="govuk-grid-column-full">
-    <a href="javascript:;" id="map-result-button" disabled="true" onclick="openMapModal()" role="button" draggable="false" class="govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button">
+  <div class='govuk-grid-column-full'>
+    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
         <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
       </svg>
     </a>
@@ -17,19 +17,19 @@
 {% endblock %}
 
 {% block modalContent %}
-  <div class="govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left">
-    <div class="govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block">
-      <div id="coordinate-map" style="height: 100%; width: 100%;"></div>
-      <div class="defra-map-controls">
-        <a href="javascript:;" onclick="closeMapModal()" class="defra-map__exit" id="defra-map-exit">
+  <div class='govuk-grid-row govuk-!-margin-0 govuk-!-text-align-left'>
+    <div class='govuk-grid-column-three-quarters govuk-!-margin-0 govuk-!-padding-0 map-view-block'>
+      <div id='coordinate-map' style='height: 100%; width: 100%;'></div>
+      <div class='defra-map-controls'>
+        <a href="javascript:;" onclick="closeMapModal()" class='defra-map__exit' id="defra-map-exit">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
             <path d="M24.4846 12.25L4.49219 12.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
             <path d="M14.4889 2.25L3.24316 12.25L14.4889 22.25" stroke="#0B0C0C" stroke-width="2" stroke-linecap="square"/>
           </svg>
           <span>Exit map</span>
         </a>
-        <div class="defra-map-controls__bottom">
-          <button class="defra-map-reset" id="defra-map-reset" aria-controls="viewport">
+        <div class='defra-map-controls__bottom'>
+          <button class='defra-map-reset' id='defra-map-reset' aria-controls="viewport">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
               <g clip-path="url(#clip0_6756_107692)">
                 <path d="M27.3568 10.5917C25.1093 8.34422 22.0248 6.94922 18.5993 6.94922C11.7483 6.94922 6.21484 12.4982 6.21484 19.3492C6.21484 26.2002 11.7483 31.7492 18.5993 31.7492C24.3808 31.7492 29.2013 27.7967 30.5808 22.4492H27.3568C26.0858 26.0607 22.6448 28.6492 18.5993 28.6492C13.4688 28.6492 9.29934 24.4797 9.29934 19.3492C9.29934 14.2187 13.4688 10.0492 18.5993 10.0492C21.1723 10.0492 23.4663 11.1187 25.1403 12.8082L20.1493 17.7992H30.9993V6.94922L27.3568 10.5917Z" fill="#1B1E1C"/>
@@ -40,18 +40,18 @@
                 </clipPath>
               </defs>
             </svg>
-            <span class="govuk-visually-hidden">Reset location</span>
+            <span class='govuk-visually-hidden'>Reset location</span>
           </button>
-          <div class="defra-map-zoom ol-unselectable">
-            <button class="defra-map-zoom-in" id="defra-map-zoom-in" type="button" aria-controls="viewport">
+          <div class='defra-map-zoom ol-unselectable'>
+            <button class='defra-map-zoom-in' id='defra-map-zoom-in' type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
                 <rect y="0.75" width="60" height="56.4921" fill="none"/>
                 <rect x="28" y="16.75" width="4.24838" height="24" fill="black"/>
                 <rect x="43" y="26.75" width="4" height="25.4903" transform="rotate(90 43 26.75)" fill="black"/>
               </svg>
-              <span class="govuk-visually-hidden">Zoom in</span>
+              <span class='govuk-visually-hidden'>Zoom in</span>
             </button>
-            <button class="defra-map-zoom-out" id="defra-map-zoom-out" type="button" aria-controls="viewport">
+            <button class='defra-map-zoom-out' id='defra-map-zoom-out' type="button" aria-controls="viewport">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
                 <rect y="0.25" width="60" height="60" fill="none"/>
                 <rect x="42" y="28.25" width="4" height="24" transform="rotate(90 42 28.25)" fill="black"/>
@@ -88,6 +88,35 @@
         }) }}
       </div>
       <div class="govuk-section-break--visible"></div>
+      <div id="map-filter-block" data-action="{{routes.getMapFilters}}" data-fetch-map-filters></div>
+    </div>
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+      <div class="defra-map-info__container">
+        <div class=" defra-map-info__title-block">
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <span class="defra-map-info__close" id="map-info-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <g clip-path="url(#clip0_6756_108066)">
+                <path d="M19 6.66L17.59 5.25L12 10.84L6.41 5.25L5 6.66L10.59 12.25L5 17.84L6.41 19.25L12 13.66L17.59 19.25L19 17.84L13.41 12.25L19 6.66Z" fill="#1B1E1C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_6756_108066">
+                  <rect width="24" height="24" fill="white" transform="translate(0 0.25)"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+        </div>
+        <div id="info-published-block">
+          <span class='search-result__parameter-label search-result__published-label'>Published by</span>
+          <span class='search-result__parameter-value search-result__published-value' id="info-published-by"></span>
+        </div>
+        <div class='defra-map-info__content' id="info-content"></div>
+        <div>
+          {{ govukButton({ text: 'Go to resource', classes: 'govuk-!-margin-bottom-0 govuk-!-margin-right-1', attributes: {id: 'go-to-resource'} }) }}
+          {{ govukButton({ text: 'More info', classes: 'govuk-button--secondary govuk-!-margin-bottom-0', attributes: {id: 'more-info'} }) }}
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

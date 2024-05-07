@@ -26,7 +26,7 @@ describe('Generate Date string', () => {
   describe('If the requested date string is for the TO Date', () => {
     it('should generate a date string with default month and day', () => {
       const dateObject = { year: 2023 };
-      expect(generateDateString(dateObject, true)).toBe('2023-01-31');
+      expect(generateDateString(dateObject, true)).toBe('2023-12-31');
     });
 
     it('should generate a date string with provided month and day', () => {
@@ -36,7 +36,7 @@ describe('Generate Date string', () => {
 
     it('should generate a date string with default month and provided day', () => {
       const dateObject = { year: 2023, day: 10 };
-      expect(generateDateString(dateObject, true)).toBe('2023-01-10');
+      expect(generateDateString(dateObject, true)).toBe('2023-12-10');
     });
 
     it('should generate a date string with default day and provided month', () => {

@@ -1,3 +1,7 @@
+import { RequestQuery } from '@hapi/hapi';
+import { upsertQueryParams } from './queryStringHelper';
+import { queryParamKeys, webRoutePaths } from './constants';
+
 const generatePaginationNumbers = (currentPage, totalPages, maxPagesDisplayed) => {
   const pages: (number | string)[] = [];
 
@@ -34,7 +38,12 @@ const generatePaginationNumbers = (currentPage, totalPages, maxPagesDisplayed) =
   return pages;
 };
 
-export const getPaginationItems = (currentPage: number | null, totalItems: number, itemsPerPage: number) => {
+export const getPaginationItems = (
+  currentPage: number | null,
+  totalItems: number,
+  itemsPerPage: number,
+  requestQuery: RequestQuery,
+) => {
   const maxPagesDisplayed = 5;
   const paginationItems = {};
   if (totalItems === 0) {
@@ -44,8 +53,12 @@ export const getPaginationItems = (currentPage: number | null, totalItems: numbe
   const paginationNumbers = generatePaginationNumbers(currentPage, totalPaginationPages, maxPagesDisplayed);
   // Previous page button
   if (currentPage && currentPage > 1) {
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.page]: `${currentPage - 1}`,
+    };
+    const queryString: string = upsertQueryParams(requestQuery, queryParamsObject, false);
     paginationItems['previous'] = {
-      href: '#!',
+      href: `${webRoutePaths.results}?${queryString}`,
       attributes: {
         'data-page-id': `${currentPage - 1}`,
       },
@@ -56,10 +69,14 @@ export const getPaginationItems = (currentPage: number | null, totalItems: numbe
     if (page === '...') {
       return { ellipsis: true };
     } else {
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.page]: `${page}`,
+      };
+      const queryString: string = upsertQueryParams(requestQuery, queryParamsObject, false);
       return {
         number: page,
         current: page === currentPage,
-        href: '#!',
+        href: `${webRoutePaths.results}?${queryString}`,
         attributes: { 'data-page-id': page },
       };
     }
@@ -67,8 +84,12 @@ export const getPaginationItems = (currentPage: number | null, totalItems: numbe
 
   // Next page button
   if (currentPage && currentPage < totalPaginationPages) {
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.page]: `${currentPage + 1}`,
+    };
+    const queryString: string = upsertQueryParams(requestQuery, queryParamsObject, false);
     paginationItems['next'] = {
-      href: '#!',
+      href: `${webRoutePaths.results}?${queryString}`,
       attributes: {
         'data-page-id': `${currentPage + 1}`,
       },

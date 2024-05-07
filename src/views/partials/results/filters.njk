@@ -1,28 +1,73 @@
-{% from 'govuk/components/select/macro.njk' import govukSelect %}
-{% from 'govuk/components/button/macro.njk' import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
-<h2 class='govuk-heading-m filter-heading govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
-  Filters
-</h2>
+{% if filterOptions.start_year_range and filterOptions.start_year_range.length > 0 and filterOptions.to_year_range and filterOptions.to_year_range.length > 0 %}
+  <form action="{{filterStudyPeriodPath}}" id="study_period_filter-{{filterInstance}}" method="post">
+    <section class="defra-filter-section">
+      <h2 class='govuk-heading-m filter-heading govuk-!-margin-top-4 govuk-!-margin-bottom-2'>
+      Study period
+    </h2>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          {{ govukSelect({
+            id: filterInstance+'-start_year',
+            name: "start_year",
+            label: {
+              text: "From year",
+              classes: 'govuk-!-margin-bottom-2'
+            },
+            items: filterOptions.start_year_range
+          }) }}
+        </div>
+        <div class="govuk-grid-column-one-half">
+          {{ govukSelect({
+            id: filterInstance+'-to_year',
+            name: "to_year",
+            label: {
+              text: "To year",
+              classes: 'govuk-!-margin-bottom-2'
+            },
+            items: filterOptions.to_year_range
+          }) }}
+        </div>
+      </div>
+      <div class="govuk-section-break--visible"></div>
+    </section>
+  </form>
+{% endif %}
 
-{{ govukSelect({
-  id: 'resourceType',
-  name: 'resourceType',
-  label: {
-    text: 'Resource type',
-    classes: 'filter-options-label'
-  },
-  items: resourceTypeOptions,
-  formGroup: {
-    classes: 'govuk-section-break--visible govuk-!-padding-bottom-4 govuk-!-margin-bottom-3'
-  },
-  classes: 'filterOptions'
-}) }}
-
-{{ govukButton({
-  text: 'Filter results',
-  id: 'filter_results',
-  classes: 'filter-button govuk-!-margin-bottom-3'
-}) }}
-
-<a href='javascript:void(0)' id='reset_filter' class='govuk-link filter-reset'>Reset filters</a>
+{% if filterOptions.unique_resource_types and filterOptions.unique_resource_types.length > 0 %}
+  <form action="{{filterResourceTypePath}}" id="resource_type_filter-{{filterInstance}}" method="post">
+    <section>
+      <section class="defra-filter-options defra-filter-options--open govuk-!-margin-bottom-6">
+        <section class="defra-filter-options__heading defra-filter-options__heading--open" id="toggle_resource_type-{{filterInstance}}">
+          <button type="button" class="defra-filter-options__button defra-filter-options__title">Resource type</button>
+          <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="defra-filter-options__icon defra-filter-options__icon--up" aria-hidden="true" focusable="false">
+            <path d="m798.16 609.84l-256-256c-16.683-16.683-43.691-16.683-60.331 0l-256 256c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l225.84-225.84 225.84 225.84c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331z"></path>
+          </svg>
+          <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="defra-filter-options__icon defra-filter-options__icon--down" aria-hidden="true" focusable="false">
+            <path d="m225.84 414.16l256 256c16.683 16.683 43.691 16.683 60.331 0l256-256c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-225.84 225.84-225.84-225.84c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
+          </svg>
+        </section>
+        <section class="defra-filter-options__container">
+          <section class="defra-filter-options__container--inner">
+            <div class="govuk-form-group govuk-!-margin-bottom-0">
+              <fieldset class="govuk-fieldset" aria-describedby="resource-type-filter">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                  {% for item in filterOptions.unique_resource_types %}
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input defra-checkboxes__input" id="{{filterInstance+'-resource_type-'+item.value}}" name="resource_type" type="checkbox" value="{{item.value}}" {% if item.checked %} checked {% endif %} data-instance="{{filterInstance}}">
+                      <label class="govuk-label govuk-checkboxes__label defra-checkboxes__label" for="{{filterInstance+'-resource_type-'+item.value}}">
+                        {{item.text}}
+                      </label>
+                    </div>
+                  {% endfor %}
+                </div>
+              </fieldset>
+            </div>
+          </section>
+        </section>
+      </section>
+      <div class="govuk-section-break--visible"></div>
+    </section>
+  </form>
+{% endif %}

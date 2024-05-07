@@ -4,6 +4,7 @@ import { Request, ResponseToolkit } from '@hapi/hapi';
 import {
   formIds,
   guidedSearchSteps,
+  pageTitles,
   queryParamKeys,
   webRoutePaths,
 } from '../../../src/utils/constants';
@@ -28,9 +29,10 @@ describe('Deals with Home Controller', () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
       await HomeController.renderHomeHandler(request, response);
-      const formId: string = formIds.quickSearch;
+      const { quickSearchFID } = formIds;
       expect(response.view).toHaveBeenCalledWith('screens/home/template', {
-        formId,
+        pageTitle: pageTitles.home,
+        quickSearchFID,
         searchInputError: undefined,
       });
     });

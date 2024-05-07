@@ -1,5 +1,13 @@
-import { fireEventAfterStorage, getStorageData } from './customScripts.js';
+import {
+  fireEventAfterStorage,
+  getStorageData,
+  updateSubmitButtonState,
+} from './customScripts.js';
 import { invokeAjaxCall } from './fetchResults.js';
+import {
+  addFilterHeadingClickListeners,
+  attachStudyPeriodChangeListener,
+} from './filters.js';
 
 const index3 = 3;
 const precision = 6;
@@ -12,10 +20,28 @@ const isMapResultsScreen =
 let initialCenter;
 let initialZoom;
 let viewChanged = false;
+const mapInitialLon = 3.436;
+const mapInitialLat = 55.3781;
 const mapResultsButtonId = 'map-result-button';
 const mapResultsCountId = 'map-result-count';
 const actionDataAttribute = 'data-action';
+const filterBlockId = 'map-filter-block';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
+const extentSearchZoomLevel = 5;
+const responseSuccessStatusCode = 200;
+const marketYPoint = 46;
+const highlightedMarkerIcon = '/assets/images/highlight-blue-marker-icon.png';
+const markerIcon = '/assets/images/blue-marker-icon.svg';
+const mapInfoBlock = document.getElementById('map-info');
+const contentMaxChar = 500;
+let selectedRecord = '';
+let mapResults;
+const defaultFilterOptions = {
+  startYear: '',
+  toYear: '',
+  resourceType: [],
+};
+const appliedFilterOptions = { ...defaultFilterOptions };
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -46,6 +72,16 @@ const mapResultsStyle = new ol.style.Style({
   }),
 });
 
+const mapResultsHighlightStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
+    color: '#FFDD00',
+    width: 2,
+  }),
+  fill: new ol.style.Fill({
+    color: 'rgb(244, 119, 56, 0.20)',
+  }),
+});
+
 const vectorSource = new ol.source.Vector();
 const vectorLayer = new ol.layer.Vector({
   source: vectorSource,
@@ -69,6 +105,12 @@ draw.on('drawend', (event) => {
   feature.setStyle(completedStyle);
 });
 
+const isMarkerFeature = (feature) =>
+  feature?.getGeometry()?.getType() === 'Point';
+
+const isPolygonFeature = (feature) =>
+  feature?.getGeometry()?.getType() === 'Polygon';
+
 const map = new ol.Map({
   target: mapTarget,
   layers: [
@@ -77,9 +119,8 @@ const map = new ol.Map({
     }),
   ],
   view: new ol.View({
-    center: ol.proj.fromLonLat([3.436, 55.3781]),
-    zoom: !isDetailsScreen && !isMapResultsScreen ? 5 : 2,
-    maxZoom: 18,
+    center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
+    zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
     minZoom: 2,
   }),
   controls: [],
@@ -88,7 +129,104 @@ const map = new ol.Map({
 map.addLayer(vectorLayer);
 map.addLayer(markerLayer);
 map.addInteraction(draw);
-if (!isDetailsScreen) {
+
+if (isMapResultsScreen) {
+  mapEventListener();
+}
+
+function mapEventListener() {
+  map.on('pointermove', (event) => {
+    const pixel = event.pixel;
+    const feature = map.forEachFeatureAtPixel(
+      pixel,
+      (featureItem) => featureItem,
+    );
+    map.getTargetElement().style.cursor = isMarkerFeature(feature)
+      ? 'pointer'
+      : '';
+  });
+  map.on('click', (event) => {
+    const pixel = event.pixel;
+    const feature = map.forEachFeatureAtPixel(
+      pixel,
+      (featureItem) => featureItem,
+    );
+    resetFeatureStyle();
+    closeInfoPopup();
+    if (feature && isMarkerFeature(feature)) {
+      const recordId = feature.get('id');
+      const boundingBox = feature.get('boundingBox');
+      feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+      showInformationPopup(recordId, boundingBox);
+    }
+  });
+}
+
+const resetFeatureStyle = () => {
+  vectorSource.getFeatures().forEach((feature) => {
+    if (isPolygonFeature(feature)) {
+      feature.setStyle(mapResultsStyle);
+    }
+  });
+  markerSource.getFeatures().forEach((marker) => {
+    if (isMarkerFeature(marker)) {
+      marker.setStyle(getMarkerStyle(markerIcon));
+    }
+  });
+};
+
+function truncateString(inputString, maxLength) {
+  if (inputString && inputString.length > maxLength) {
+    return `${inputString.slice(0, maxLength)}...`;
+  }
+  return inputString;
+}
+
+function showInformationPopup(recordId, boundingBox) {
+  selectedRecord = mapResults.find((item) => item?.id === recordId);
+  const titleElement = document.getElementById('info-title');
+  const publishedBlock = document.getElementById('info-published-block');
+  const publishedByElement = document.getElementById('info-published-by');
+  const contentElement = document.getElementById('info-content');
+  if (selectedRecord && Object.keys(selectedRecord).length) {
+    if (boundingBox) {
+      boundingBox.setStyle(mapResultsHighlightStyle);
+    }
+    if (mapInfoBlock) {
+      mapInfoBlock.style.display = 'block';
+      titleElement.textContent = selectedRecord.title;
+      if (selectedRecord.publishedBy) {
+        publishedByElement.textContent = selectedRecord.publishedBy;
+        publishedBlock.style.display = 'block';
+      } else {
+        publishedBlock.style.display = 'none';
+      }
+      contentElement.textContent = truncateString(
+        selectedRecord.content,
+        contentMaxChar,
+      );
+    }
+  }
+}
+
+function moreInfoNavigation() {
+  if (selectedRecord && Object.keys(selectedRecord).length) {
+    window.location.href = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}${window.location.search}`;
+  }
+}
+function closeInfoPopup() {
+  if (mapInfoBlock) {
+    const titleElement = document.getElementById('info-title');
+    const publishedBlock = document.getElementById('info-published-block');
+    const publishedByElement = document.getElementById('info-published-by');
+    const contentElement = document.getElementById('info-content');
+    mapInfoBlock.style.display = 'none';
+    titleElement.textContent = '';
+    publishedBlock.style.display = 'block';
+    publishedByElement.textContent = '';
+    contentElement.textContent = '';
+  }
+  resetFeatureStyle();
 }
 
 function calculateCoordinates() {
@@ -119,6 +257,7 @@ function calculateCoordinates() {
         wst: west.toFixed(precision),
       };
       fireEventAfterStorage(sessionData);
+      toggleClearSelectionBlock();
     }
   }
 }
@@ -128,6 +267,51 @@ vectorSource.on('change', () => {
     calculateCoordinates();
   }
 });
+
+const toggleClearSelectionBlock = () => {
+  const north = document.getElementById('north');
+  const south = document.getElementById('south');
+  const east = document.getElementById('east');
+  const west = document.getElementById('west');
+  const clearSelection = document.getElementById('clear-map-selection');
+  if (
+    north &&
+    north.value &&
+    south &&
+    south.value &&
+    east &&
+    east.value &&
+    west &&
+    west.value
+  ) {
+    if (clearSelection) clearSelection.style.display = 'block';
+  } else {
+    if (clearSelection) clearSelection.style.display = 'none';
+  }
+};
+
+const attachClearSelectionListener = () => {
+  const clearSelection = document.getElementById('clear-map-selection');
+  if (clearSelection) {
+    clearSelection.addEventListener('click', function () {
+      vectorSource.clear();
+      const form = document.querySelector('[data-do-browser-storage]');
+      if (form) {
+        const sessionData = getStorageData();
+        if (sessionData.fields.hasOwnProperty(form.id)) {
+          delete sessionData.fields[form.id];
+        }
+        fireEventAfterStorage(sessionData);
+        document.getElementById('north').value = '';
+        document.getElementById('south').value = '';
+        document.getElementById('east').value = '';
+        document.getElementById('west').value = '';
+        toggleClearSelectionBlock();
+        updateSubmitButtonState(form);
+      }
+    });
+  }
+};
 
 if (document.getElementById('north')) {
   document.getElementById('north').addEventListener('change', () => {
@@ -150,13 +334,14 @@ if (document.getElementById('west')) {
   });
 }
 
-function calculatePolygonFromCoordinates(isDetailsScreen = false) {
+function calculatePolygonFromCoordinates() {
   const targetKey = isDetailsScreen ? 'textContent' : 'value';
   const north = parseFloat(document.getElementById('north')[targetKey]);
   const south = parseFloat(document.getElementById('south')[targetKey]);
   const east = parseFloat(document.getElementById('east')[targetKey]);
   const west = parseFloat(document.getElementById('west')[targetKey]);
   vectorSource.clear();
+  !isDetailsScreen && toggleClearSelectionBlock();
   addPolygon({ north, south, east, west }, completedStyle);
 }
 
@@ -181,20 +366,24 @@ function addPolygon(coordinates, style) {
     });
     polygonFeature.setStyle(style);
     vectorSource.addFeature(polygonFeature);
+    return polygonFeature;
   }
+  return null;
 }
 
-function disableInteractions(isMapResultsScreen = false) {
+function disableInteractions() {
   map.getInteractions().forEach((interaction) => {
-    if (
+    const isZoomInteractions =
       interaction instanceof ol.interaction.DoubleClickZoom ||
       (!isMapResultsScreen &&
-        interaction instanceof ol.interaction.MouseWheelZoom) ||
+        interaction instanceof ol.interaction.MouseWheelZoom);
+    const isDragDrawModifySnap =
       interaction instanceof ol.interaction.DragPan ||
-      interaction instanceof ol.interaction.Draw ||
+      interaction instanceof ol.interaction.Draw;
+    const isModifySnap =
       interaction instanceof ol.interaction.Modify ||
-      interaction instanceof ol.interaction.Snap
-    ) {
+      interaction instanceof ol.interaction.Snap;
+    if (isZoomInteractions || isDragDrawModifySnap || isModifySnap) {
       map.removeInteraction(interaction);
     }
   });
@@ -203,7 +392,7 @@ function disableInteractions(isMapResultsScreen = false) {
 const getMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
-      anchor: [0.5, 46],
+      anchor: [0.5, marketYPoint],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: iconPath,
@@ -231,7 +420,7 @@ function placeMarkers(markers, iconPath, recordId = '1', boundingBoxData = '') {
 
 function geographyTabListener() {
   map.updateSize();
-  calculatePolygonFromCoordinates(true);
+  calculatePolygonFromCoordinates();
   if (typeof markers !== 'undefined' && markers) {
     placeMarkers(markers, '/assets/images/marker.png');
   }
@@ -251,6 +440,19 @@ function boundingBoxCheckboxChange(isChecked) {
   }
 }
 
+function resetFilterData() {
+  const studyPeriodForm = document.getElementById(
+    'study_period_filter-map_results',
+  );
+  const resourceTypeForm = document.getElementById(
+    'resource_type_filter-map_results',
+  );
+  if (studyPeriodForm && resourceTypeForm) {
+    studyPeriodForm.reset();
+    resourceTypeForm.reset();
+  }
+}
+
 function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
@@ -259,42 +461,65 @@ function resetMap() {
   if (resetControl) {
     resetControl.style.display = 'none';
   }
+  resetFeatureStyle();
+  closeInfoPopup();
+}
+
+function exitMap() {
+  resetMap();
+  resetFilterData();
 }
 
 function exitMapEventListener() {
   const exitControl = document.getElementById('defra-map-exit');
   if (exitControl) {
-    exitControl.addEventListener('click', resetMap);
+    exitControl.addEventListener('click', exitMap);
   }
 }
 
-function drawBoundingBoxWithMarker(records) {
+function getFilterRecordIds() {
+  const { startYear, toYear, resourceType } = appliedFilterOptions;
+  const filteredIds = mapResults
+    .filter(
+      (record) =>
+        (!startYear || record.startYear >= startYear) &&
+        (!toYear || record.toYear >= toYear) &&
+        (!resourceType.length ||
+          record?.resourceType?.some((type) => resourceType.includes(type))),
+    )
+    .map((record) => record.id);
+  return filteredIds;
+}
+
+function drawBoundingBoxWithMarker(doRecenter = true) {
+  const filteredIds = getFilterRecordIds();
+  const records = mapResults.filter((record) =>
+    filteredIds.includes(record.id),
+  );
   map.updateSize();
   const centerArray = [];
   records.forEach((record) => {
-    addPolygon(record.geographicBoundary, mapResultsStyle);
-    placeMarkers(
-      record.geographicCenter,
-      '/assets/images/blue-marker-icon.svg',
-    );
+    const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
+    placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
     const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
     centerArray.push([lon, lat]);
   });
-  const totalCenters = centerArray.length;
-  if (totalCenters) {
-    const sumCenter = centerArray.reduce(
-      (acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]],
-      [0, 0],
-    );
-    const averageCenter = [
-      sumCenter[0] / totalCenters,
-      sumCenter[1] / totalCenters,
-    ];
-    map.getView().setCenter(averageCenter);
-    map.getView().setZoom(2);
-    // map.getView().fit(vectorSource.getExtent(), { padding: [50, 50, 50, 50] });
-    initialCenter = map.getView().getCenter();
-    initialZoom = map.getView().getZoom();
+  if (doRecenter) {
+    const totalCenters = centerArray.length;
+    if (totalCenters) {
+      const sumCenter = centerArray.reduce(
+        (acc, cur) => [acc[0] + cur[0], acc[1] + cur[1]],
+        [0, 0],
+      );
+      const averageCenter = [
+        sumCenter[0] / totalCenters,
+        sumCenter[1] / totalCenters,
+      ];
+      map.getView().setCenter(averageCenter);
+      map.getView().setZoom(2);
+      initialCenter = map.getView().getCenter();
+      initialZoom = map.getView().getZoom();
+    }
   }
 }
 
@@ -302,9 +527,47 @@ const attachBoundingBoxToggleListener = () => {
   if (boundingBoxCheckbox) {
     boundingBoxCheckboxChange(true);
     boundingBoxCheckbox.addEventListener('change', () => {
-      vectorLayer.setVisible(boundingBoxCheckbox.checked ? true : false);
+      vectorLayer.setVisible(boundingBoxCheckbox.checked);
     });
   }
+};
+
+const attachMapResultsFilterCheckboxChangeListener = () => {
+  const mapResultsFilterCheckboxes = document.querySelectorAll(
+    '[data-instance="map_results"]',
+  );
+  if (mapResultsFilterCheckboxes.length) {
+    mapResultsFilterCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener('change', function (event) {
+        const { value, checked } = event.target;
+        const index = appliedFilterOptions.resourceType.indexOf(value);
+        if (checked && index === -1) {
+          appliedFilterOptions.resourceType.push(value);
+        } else {
+          if (index !== -1) {
+            appliedFilterOptions.resourceType.splice(index, 1);
+          }
+        }
+        vectorSource.clear();
+        markerSource.clear();
+        drawBoundingBoxWithMarker(false);
+      });
+    });
+  }
+};
+
+const updateStudyPeriodFilter = () => {
+  setTimeout(() => {
+    appliedFilterOptions.startYear = document.getElementById(
+      'map_results-start_year',
+    ).value;
+    appliedFilterOptions.toYear = document.getElementById(
+      'map_results-to_year',
+    ).value;
+    vectorSource.clear();
+    markerSource.clear();
+    drawBoundingBoxWithMarker(false);
+  }, 100);
 };
 
 const getMapResults = async (path) => {
@@ -312,16 +575,43 @@ const getMapResults = async (path) => {
   const mapResultsCount = document.getElementById(mapResultsCountId);
   const response = await invokeAjaxCall(path, {}, false, 'GET');
   if (response) {
-    if (response.status === 200) {
-      const mapResults = await response.json();
+    if (response.status === responseSuccessStatusCode) {
+      const mapResultsJson = await response.json();
       mapResultsButton.removeAttribute('disabled');
-      mapResultsCount.textContent = mapResults.total;
-      drawBoundingBoxWithMarker(mapResults.items);
-      attachBoundingBoxToggleListener();
+      mapResultsCount.textContent = mapResultsJson.total;
+      if (mapResultsJson.total > 0) {
+        mapResults = mapResultsJson.items;
+        setTimeout(() => {
+          drawBoundingBoxWithMarker();
+        }, 100);
+        attachBoundingBoxToggleListener();
+      } else {
+        mapResultsButton.setAttribute('disabled', true);
+      }
     } else {
       mapResultsButton.setAttribute('disabled', true);
     }
-    return;
+  }
+};
+
+const getMapFilters = async (path) => {
+  const response = await invokeAjaxCall(path, {}, false, 'GET');
+  if (response) {
+    if (response.status === responseSuccessStatusCode) {
+      const mapFiltersHtml = await response.text();
+      document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
+      addFilterHeadingClickListeners('map_results');
+      attachStudyPeriodChangeListener('map_results');
+      attachMapResultsFilterCheckboxChangeListener();
+      const mapFilterStartYear = document.getElementById(
+        'map_results-start_year',
+      );
+      const mapFilterToYear = document.getElementById('map_results-to_year');
+      if (mapFilterStartYear && mapFilterToYear) {
+        mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
+        mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
+      }
+    }
   }
 };
 
@@ -330,6 +620,14 @@ const invokeMapResults = () => {
   if (fetchResults) {
     const action = fetchResults.getAttribute(actionDataAttribute);
     getMapResults(`${action}${window.location.search}`);
+  }
+};
+
+const invokeMapFilters = () => {
+  const fetchFilters = document.querySelector('[data-fetch-map-filters]');
+  if (fetchFilters) {
+    const action = fetchFilters.getAttribute(actionDataAttribute);
+    getMapFilters(`${action}${window.location.search}`);
   }
 };
 
@@ -367,6 +665,32 @@ function customControls() {
   }
 }
 
+function infoListener() {
+  const closeInfoElement = document.getElementById('map-info-close');
+  if (closeInfoElement) {
+    closeInfoElement.addEventListener('click', closeInfoPopup);
+  }
+  const moreInfoElement = document.getElementById('more-info');
+  if (moreInfoElement) {
+    moreInfoElement.addEventListener('click', moreInfoNavigation);
+  }
+  const goToResourceElement = document.getElementById('go-to-resource');
+  if (goToResourceElement) {
+    if (!selectedRecord.organisationName || !selectedRecord.resourceLocator) {
+      goToResourceElement.setAttribute('disabled', true);
+    } else {
+      goToResourceElement.removeAttribute('disabled');
+    }
+    goToResourceElement.addEventListener('click', () => {
+      window.openDataModal(
+        selectedRecord.organisationName,
+        selectedRecord.resourceLocator,
+        true,
+      );
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
     if (isDetailsScreen && hasCenter) {
@@ -377,12 +701,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }, timeout);
     } else if (isMapResultsScreen) {
       invokeMapResults();
+      invokeMapFilters();
       exitMapEventListener();
-      disableInteractions(true);
+      disableInteractions();
+      infoListener();
       customControls();
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();
+        attachClearSelectionListener();
       }, timeout);
     }
   }

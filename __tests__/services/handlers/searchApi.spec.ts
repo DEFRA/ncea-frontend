@@ -6,7 +6,10 @@ import {
 } from '../../../src/interfaces/queryBuilder.interface';
 import {
   elasticSearchAPIPaths,
-  resourceTypeOptions,
+  startYearRangeKey,
+  toYearRangeKey,
+  uniqueResourceTypesKey,
+  yearRange,
 } from '../../../src/utils/constants';
 import {
   formattedResourceTypeResponse,
@@ -14,7 +17,7 @@ import {
 } from '../../data/resourceTypeResponse';
 import {
   getDocumentDetails,
-  getResourceTypeOptions,
+  getFilterOptions,
   getSearchResults,
   getSearchResultsCount,
 } from '../../../src/services/handlers/searchApi';
@@ -24,7 +27,10 @@ import {
 } from '../../data/documentDetailsResponse';
 import { formatAggregationResponse } from '../../../src/utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../../src/utils/formatSearchResponse';
-import { ISearchResults } from '../../../src/interfaces/searchResponse.interface';
+import {
+  IAggregationOptions,
+  ISearchResults,
+} from '../../../src/interfaces/searchResponse.interface';
 
 jest.mock('../../../src/config/elasticSearchClient', () => ({
   elasticSearchClient: {
@@ -207,7 +213,7 @@ describe('Search API', () => {
       (formatAggregationResponse as jest.Mock).mockResolvedValueOnce(
         formattedResourceTypeResponse,
       );
-      const result = await getResourceTypeOptions(searchFieldsObject);
+      const result = await getFilterOptions(searchFieldsObject);
       expect(result).toEqual(formattedResourceTypeResponse);
     });
 
@@ -226,20 +232,24 @@ describe('Search API', () => {
       elasticSearchClient.post = jest
         .fn()
         .mockRejectedValueOnce(new Error('Mocked error'));
-      await expect(getResourceTypeOptions(searchFieldsObject)).rejects.toThrow(
+      await expect(getFilterOptions(searchFieldsObject)).rejects.toThrow(
         'Error fetching results: Mocked error',
       );
     });
 
     it('should return the default response when no fields data is present', async () => {
-      const result = await getResourceTypeOptions({
+      const result = await getFilterOptions({
         fields: {},
         sort: '',
         rowsPerPage: 20,
         filters: {},
         page: 1,
       });
-      expect(result).toEqual(resourceTypeOptions);
+      const filterOptionsResponse: IAggregationOptions = {
+        [yearRange]: [],
+        [uniqueResourceTypesKey]: [],
+      };
+      expect(result).toEqual(filterOptionsResponse);
     });
   });
 

@@ -1,9 +1,19 @@
 import { IDateObject } from '../interfaces/searchPayload.interface';
 import { isEmpty } from './isEmpty';
 
-const generateDateString = (dateObject: IDateObject, isToDate = false): string => {
+const getMonth = (dateObject: IDateObject, isToDate: boolean): number => {
+  let month: number;
+  if (isToDate && (isEmpty(dateObject.month) || isNaN(dateObject.month!))) {
+    month = 12;
+  } else {
+    month = !isEmpty(dateObject.month) && !isNaN(dateObject.month!) ? dateObject.month! : 1;
+  }
+  return month;
+};
+
+const generateDateString = (dateObject: IDateObject, isToDate: boolean = false): string => {
   const currentDate = new Date();
-  const month = !isEmpty(dateObject.month) && !isNaN(dateObject.month!) ? dateObject.month! : 1;
+  const month = getMonth(dateObject, isToDate);
   let day: number;
   if (isToDate && (isEmpty(dateObject.day) || isNaN(dateObject.day!))) {
     if (month === currentDate.getMonth() + 1 && dateObject.year === currentDate.getFullYear()) {

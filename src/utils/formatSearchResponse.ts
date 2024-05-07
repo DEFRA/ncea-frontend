@@ -1,16 +1,17 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import { formatDate } from './formatDate';
 import { getAccumulatedCoordinatesNCenter } from './getBoundingBoxData';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
+import { toggleContent } from './toggleContent';
 import {
   IAccumulatedCoordinatesWithCenter,
   IOtherSearchItem,
   ISearchItem,
   ISearchResults,
 } from '../interfaces/searchResponse.interface';
+import { formatDate, getYear } from './formatDate';
 
 const getStudyPeriod = (startDate: string, endDate: string): string => {
   const formattedStartDate: string = formatDate(startDate);
@@ -25,6 +26,13 @@ const getStudyPeriod = (startDate: string, endDate: string): string => {
   }
 
   return studyPeriod;
+};
+
+const getAbstractContent = (data: Record<string, any>): string => {
+  if (Object.keys(data).length && data?.default) {
+    return toggleContent(data?.default, 'abstract_content');
+  }
+  return '';
 };
 
 const formatSearchResponse = async (
@@ -49,8 +57,10 @@ const formatSearchResponse = async (
       id: searchItem?._id,
       title: searchItem?._source?.resourceTitleObject?.default ?? '',
       publishedBy: publishedBy.organisationValue,
-      content: searchItem?._source?.resourceAbstractObject?.default ?? '',
+      content: getAbstractContent(searchItem?._source?.resourceAbstractObject ?? ''),
       studyPeriod,
+      startYear: getYear(startDate),
+      toYear: getYear(endDate),
       resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
       organisationName: organisationDetails.organisationValue,
     };
@@ -63,6 +73,7 @@ const formatSearchResponse = async (
         ...item,
         geographicBoundary: coordinatesData.coordinates,
         geographicCenter: coordinatesData.center,
+        resourceType: searchItem?._source?.resourceType ?? [],
       };
     }
 

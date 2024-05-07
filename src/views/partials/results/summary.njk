@@ -9,61 +9,40 @@
 {% endif %}
 
 {% if not hasError %}
-  <h2 class='govuk-heading-m results-stats govuk-section-break--visible govuk-!-padding-bottom-2 govuk-!-margin-bottom-2'>
+  <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
     {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
   </h2>
+  <div class="govuk-section-break--visible"></div>
 
-  <div class='option-container govuk-section-break--visible'>
+  <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="sort_results" method="post">
     {{ govukSelect({
-        id: "sort",
-        name: "sort",
-        label: {
-          text: "Sort by",
-          classes: "option-label"
-        },
-        classes: "option-block",
-        formGroup: {
-          classes: "option-group"
-        },
-        items: [
-          {
-            value: "best_match",
-            text: "Best match"
-          },
-          {
-            value: "recent_study",
-            text: "Most recent study"
-          }
-        ]
-      }) }}
+      id: "sort",
+      name: "sort",
+      label: {
+        text: "Sort by",
+        classes: "option-label"
+      },
+      classes: "option-block",
+      formGroup: {
+        classes: "option-group"
+      },
+      items: sortOptions.sortOptions
+    }) }}
 
     {{ govukSelect({
-        id: "page-results",
-        name: "page-results",
-        label: {
-          text: "Results per page",
-          classes: "option-label"
-        },
-        classes: "option-items",
-        formGroup: {
-          classes: "option-group"
-        },
-        items: [
-          {
-            value: "20",
-            text: "20"
-          },
-          {
-            value: "50",
-            text: "50"
-          },
-          {
-            value: "100",
-            text: "100"
-          }
-        ]
-      }) }}
-  </div>
+      id: "page-results",
+      name: "page-results",
+      label: {
+        text: "Results per page",
+        classes: "option-label"
+      },
+      classes: "option-items",
+      formGroup: {
+        classes: "option-group"
+      },
+      items: sortOptions.rowsPerPageOptions
+    }) }}
+  </form>
 {% endif %}
 
 {% if not hasError and searchResults.total %}
@@ -86,7 +65,7 @@
           </div>
         {% endif %}
         <p class='search-result__content'>
-          {{item.content}}
+          {{item.content | safe}}
         </p>
 
         <div class='govuk-button-group search-result__button-group'>
@@ -95,7 +74,7 @@
           {{ govukButton({
             text: 'More info',
             classes: 'govuk-button--secondary',
-            href: routes.searchResults + '/' + item.id
+            href: routes.searchResults + '/' + item.id + '?' + queryString
           }) }}
         </div>
       </div>

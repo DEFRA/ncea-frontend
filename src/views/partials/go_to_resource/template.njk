@@ -7,7 +7,7 @@
 {% endif %}
 
 {% set openDataAttributes = {} %}
-{% if params.resourceLocator and params.organisationName%}
+{% if params.resourceLocator and params.organisationName %}
   {% set openDataAttributes = openDataAttributes | merge({
     onclick: "openDataModal('" + params.organisationName + "', '" + params.resourceLocator + "')"
   }) %}

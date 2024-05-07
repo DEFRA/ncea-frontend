@@ -75,7 +75,7 @@ describe('Results Screen', () => {
   describe('Quick search POST verification on results page', () => {
     let document;
     let response;
-    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=best_match&rty=all`;
+    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=best_match`;
 
     beforeAll(async () => {
       const responseObject = await invokeRoute(
@@ -505,13 +505,17 @@ describe('Results Screen', () => {
 
     describe('Educational Copy block classes', () => {
       it('renders educational copy container class', async () => {
-        expect(document.querySelector('.educational-copy-container')).toBeTruthy();
+        expect(
+          document.querySelector('.educational-copy-container'),
+        ).toBeTruthy();
       });
     });
 
     describe('Educational Copy block elements', () => {
       it('should render 8 child elements', async () => {
-        const videoContainer = document?.querySelector('.educational-copy-container');
+        const videoContainer = document?.querySelector(
+          '.educational-copy-container',
+        );
         expect(videoContainer?.childElementCount).toEqual(8);
       });
     });
