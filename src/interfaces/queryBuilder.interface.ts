@@ -122,6 +122,10 @@ interface ISearchFields {
     est?: string;
     wst?: string;
   };
+  classify?: {
+    level: string,
+    parent?: string
+  }
 }
 
 interface ISearchFilter {
