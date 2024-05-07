@@ -273,7 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </a>
 
       </div>
-      <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
+      <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
         
   
 
@@ -292,7 +292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" data-to-disable="" data-next-question="">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-right-0" data-module="govuk-button" data-to-disable="" data-next-question="">
   Show results
 </button>
 
