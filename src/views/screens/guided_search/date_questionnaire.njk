@@ -38,11 +38,11 @@
           <div class="govuk-grid-column-one-half geography-buttons__left">
             {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: backLinkPath }) }}
           </div>
-          <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 govuk-!-padding-right-0 geography-buttons__right">
+          <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
             {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
               'data-do-storage-skip': ''
             } }) }}
-            {{ govukButton({ text: "Next results", classes: "govuk-!-margin-bottom-0", attributes: {
+            {{ govukButton({ text: "Next results", classes: "govuk-!-margin-bottom-0 govuk-!-margin-right-0 ", attributes: {
               'data-to-disable': '', 'data-next-question': ''
             } }) }}
           </div>
