@@ -12,7 +12,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     {% include "partials/results_count/template.njk" %}
-    <form method="GET" id="{{formId}}" action="{{guidedClassifierSearchPath}}" data-do-browser-storage>
+    <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
       <input type="hidden" name="level" value="{{nextLevel}}" />
       <div class="govuk-grid-column-two-thirds">
         {% for classify in classifierItems %}
