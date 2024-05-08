@@ -393,7 +393,7 @@ describe('Results Screen', () => {
           document
             ?.querySelector('.quick_search-container__heading-m')
             ?.textContent?.trim(),
-        ).toBe('Quick Search');
+        ).toBe('Quick search');
       });
 
       it('should not render the custom large class for heading', async () => {
@@ -512,11 +512,11 @@ describe('Results Screen', () => {
     });
 
     describe('Educational Copy block elements', () => {
-      it('should render 8 child elements', async () => {
+      it('should render 9 child elements', async () => {
         const videoContainer = document?.querySelector(
           '.educational-copy-container',
         );
-        expect(videoContainer?.childElementCount).toEqual(8);
+        expect(videoContainer?.childElementCount).toEqual(9);
       });
     });
 

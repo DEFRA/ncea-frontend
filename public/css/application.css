@@ -7630,7 +7630,6 @@
   height: 88px;
   gap: 0px;
   opacity: 0px;
-  margin-left: -16px;
 }
 
 .educational-copy-container {
@@ -7953,7 +7952,6 @@
 .defra-map-zoom-in, .defra-map-zoom-out {
   display: flex;
   align-items: center;
-  position: relative;
   border: 0;
   height: 50px;
   width: 50px;
@@ -7964,6 +7962,9 @@
 }
 .defra-map-zoom-in:hover, .defra-map-zoom-out:hover {
   background-color: #f3f2f1;
+}
+.defra-map-zoom-in:focus-visible, .defra-map-zoom-out:focus-visible {
+  outline-offset: -2px;
 }
 .defra-map-info {
   position: absolute;
@@ -8009,13 +8010,15 @@
 }
 
 @media (min-width: 40.0625em) {
+  .defra-map-reset {
+    margin-bottom: 10px;
+  }
   .defra-map-zoom {
     display: block;
     float: right;
     clear: right;
     width: 50px;
     height: auto;
-    margin-top: 15px;
   }
 }
 @media (min-width: 52.1875em) {
