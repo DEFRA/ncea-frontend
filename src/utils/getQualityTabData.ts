@@ -8,7 +8,7 @@ import { toggleContent } from './toggleContent';
 const getPublicationInformation = (data: Record<string, any>[]): string => {
   if (Array.isArray(data) && data.length > 0) {
     const obj = data.find((item: Record<string, any>) => item?.type?.toLowerCase() === 'publication');
-    return obj?.date ? `${formatDate(obj?.date, false, true)} - Last Revision` : '';
+    return obj?.date ? `${formatDate(obj?.date, false, false)} - Last Revision` : '';
   }
   return '';
 };

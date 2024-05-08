@@ -91,7 +91,7 @@ describe('Format the search response', () => {
           title: 'Title 1',
           publishedBy: 'Geological Survey of Ireland (GSI)',
           content: 'Content 1',
-          studyPeriod: '04 Jan 1960',
+          studyPeriod: '4 January 1960 to 4 January 1960',
           resourceLocator: 'https://data.cefas.co.uk',
           organisationName: 'United Kingdom Hydrographic Office',
           startYear: '1960',
@@ -102,7 +102,7 @@ describe('Format the search response', () => {
           title: 'Title 2',
           publishedBy: 'Geological Survey of Ireland (GSI)',
           content: 'Content 2',
-          studyPeriod: '04 Jan 1960 to 12 Jan 2009',
+          studyPeriod: '4 January 1960 to 12 January 2009',
           resourceLocator: '',
           organisationName: 'United Kingdom Hydrographic Office',
           startYear: '1960',
@@ -283,7 +283,7 @@ describe('Format the search response', () => {
           title: 'Title 1',
           publishedBy: 'Geological Survey of Ireland (GSI)',
           content: 'Content 1',
-          studyPeriod: '04 Jan 1960',
+          studyPeriod: '4 January 1960 to 4 January 1960',
           startYear: '1960',
           toYear: '',
           resourceLocator: '',
@@ -333,7 +333,7 @@ describe('Format the search response', () => {
           title: 'Title 2',
           publishedBy: 'Geological Survey of Ireland (GSI)',
           content: 'Content 2',
-          studyPeriod: '04 Jan 1960 to 12 Jan 2009',
+          studyPeriod: '4 January 1960 to 12 January 2009',
           startYear: '1960',
           toYear: '2009',
           resourceLocator: 'https://seabed.admiralty.co.uk',
@@ -461,7 +461,7 @@ describe('Format the search response', () => {
       },
     };
     const result = await formatSearchResponse(apiResponse, true);
-    expect(result.items?.[0]?.studyPeriod).toBe('31 Jul 2019');
+    expect(result.items?.[0]?.studyPeriod).toBe('31 July 2019 to 31 July 2019');
   });
 
   it('should return organisation having role custodian', async () => {

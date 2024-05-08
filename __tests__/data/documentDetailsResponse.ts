@@ -210,7 +210,7 @@ const formattedDetailsResponse: ISearchResults = {
       publicationInformation: '',
       conformity: '',
       metadata_standard: '',
-      ncea_catalogue_date: '26-Jan-2010',
+      ncea_catalogue_date: '26-January-2010',
       ncea_group_reference: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       project_number: '',
       license_constraints: '',
@@ -739,7 +739,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       publishedBy: 'Maritime and Coastguard Agency',
       content:
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
-      studyPeriod: '24 May 2019 to 31 Jul 2019',
+      studyPeriod: '24 May 2019 to 31 July 2019',
       startYear: '2019',
       toYear: '2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
@@ -761,7 +761,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       additionalInformation: '',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',
-      publicationInformation: '23rd Mar 2022 - Last Revision',
+      publicationInformation: '23 March 2022 - Last Revision',
       conformity: `<table class="details-table">
                       <thead>
                         <tr>
@@ -776,7 +776,7 @@ const formattedDetailsFullResponse: ISearchResults = {
                     </tr></tbody></table>`,
       host_service_catalogue_number: '3ce46f92-509c-4529-a062-c8b48788340d',
       metadata_standard: 'MEDIN',
-      ncea_catalogue_date: '16-Jan-2024',
+      ncea_catalogue_date: '16-January-2024',
       ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       project_number: '',
       license_constraints:

@@ -20,9 +20,9 @@ const getStudyPeriod = (startDate: string, endDate: string): string => {
   if (formattedStartDate && formattedEndDate) {
     studyPeriod = `${formattedStartDate} to ${formattedEndDate}`;
   } else if (formattedStartDate && !formattedEndDate) {
-    studyPeriod = formattedStartDate;
+    studyPeriod = `${formattedStartDate} to ${formattedStartDate}`;
   } else if (!formattedStartDate && formattedEndDate) {
-    studyPeriod = formattedEndDate;
+    studyPeriod = `${formattedEndDate} to ${formattedEndDate}`;
   }
 
   return studyPeriod;

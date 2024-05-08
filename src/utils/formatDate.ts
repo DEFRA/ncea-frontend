@@ -38,12 +38,11 @@ const formatDate = (
   }
 
   const date = new Date(dateString);
-  let day: number | string = date.getDate();
-  const month: string = date.toLocaleString('en-GB', { month: 'short' });
+  const day: number | string = date.getDate();
+  const month: string = date.toLocaleString('en-GB', { month: 'long' });
   const year: number = date.getFullYear();
-  let hours: number | string = date.getHours();
-  let minutes: number | string = date.getMinutes();
-  day = day < 10 ? '0' + day : day;
+  const hours: number | string = date.getHours();
+  const minutes: number | string = date.getMinutes();
 
   let formattedDate = `${day}`;
 
@@ -55,9 +54,9 @@ const formatDate = (
   formattedDate += `${delimiter}${month}${delimiter}${year}`;
 
   if (includeTime && (hours !== 0 || minutes !== 0)) {
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    formattedDate += ` @${hours}${minutes}`;
+    formattedDate += ` at ${hours}`;
+    formattedDate += minutes > 0 ? `:${minutes}` : '';
+    formattedDate += hours >= 12 ? 'pm' : 'am';
   }
 
   return formattedDate;
