@@ -33,7 +33,7 @@ export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
 export const maxWords: number = 100;
 export const geoNetworkIndex: string = 'gn-records/';
-export const mapResultMaxCount: number = 15000;
+export const mapResultMaxCount: number = 10000;
 export const requiredFieldsForMap: string[] = [
   'resourceTitleObject',
   'contactForResource',
@@ -91,7 +91,10 @@ export const defaultFilterOptions: IFilterOptions = [
   },
   {
     key: yearRange,
-    field: ['max_resourceTemporalExtentDetails.end.date', 'min_resourceTemporalExtentDetails.start.date'],
+    field: [
+      'max_resourceTemporalExtentDetails.end.date',
+      'min_resourceTemporalExtentDetails.start.date',
+    ],
     needCount: false,
     propertyToRead: 'value',
     hasBucket: false,

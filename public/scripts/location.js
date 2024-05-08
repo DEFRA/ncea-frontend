@@ -519,7 +519,7 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
         sumCenter[0] / totalCenters,
         sumCenter[1] / totalCenters,
       ];
-      map.getView().setCenter(averageCenter);
+      map.getView().setCenter(ol.proj.fromLonLat(averageCenter));
       map.getView().setZoom(2);
       initialCenter = map.getView().getCenter();
       initialZoom = map.getView().getZoom();

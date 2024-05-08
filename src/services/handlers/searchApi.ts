@@ -3,9 +3,19 @@ import { buildSearchQuery } from '../../utils/queryBuilder';
 import { elasticSearchClient } from '../../config/elasticSearchClient';
 import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
-import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
-import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
-import { defaultFilterOptions, elasticSearchAPIPaths } from '../../utils/constants';
+import {
+  IAggregationOptions,
+  ISearchItem,
+  ISearchResults,
+} from '../../interfaces/searchResponse.interface';
+import {
+  ISearchBuilderPayload,
+  ISearchPayload,
+} from '../../interfaces/queryBuilder.interface';
+import {
+  defaultFilterOptions,
+  elasticSearchAPIPaths,
+} from '../../utils/constants';
 
 const getSearchResults = async (
   searchFieldsObject: ISearchPayload,
@@ -18,8 +28,16 @@ const getSearchResults = async (
         ignoreAggregation: true,
       };
       const payload = buildSearchQuery(searchBuilderPayload);
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: ISearchResults = await formatSearchResponse(response.data, false, isMapResults);
+      console.log(JSON.stringify(payload));
+      const response = await elasticSearchClient.post(
+        elasticSearchAPIPaths.searchPath,
+        payload,
+      );
+      const finalResponse: ISearchResults = await formatSearchResponse(
+        response.data,
+        false,
+        isMapResults,
+      );
       return finalResponse;
     } else {
       return Promise.resolve({ total: 0, items: [] });
@@ -30,7 +48,9 @@ const getSearchResults = async (
   }
 };
 
-const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promise<{ totalResults: number }> => {
+const getSearchResultsCount = async (
+  searchFieldsObject: ISearchPayload,
+): Promise<{ totalResults: number }> => {
   try {
     const searchBuilderPayload: ISearchBuilderPayload = {
       searchFieldsObject,
@@ -39,7 +59,10 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
     };
     const payload = buildSearchQuery(searchBuilderPayload);
     if (payload.query.bool.must?.length) {
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
+      const response = await elasticSearchClient.post(
+        elasticSearchAPIPaths.countPath,
+        payload,
+      );
       const data = await response.data;
       return { totalResults: data?.count ?? 0 };
     } else {
@@ -56,20 +79,30 @@ const getFilterOptions = async (
   filterOptions: IFilterOptions = defaultFilterOptions,
 ): Promise<IAggregationOptions> => {
   try {
-    if (Object.keys(searchFieldsObject.fields).length && filterOptions.length > 0) {
+    if (
+      Object.keys(searchFieldsObject.fields).length &&
+      filterOptions.length > 0
+    ) {
       const searchBuilderPayload: ISearchBuilderPayload = {
         searchFieldsObject,
         filterOptions,
       };
       const payload = buildSearchQuery(searchBuilderPayload);
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: IAggregationOptions = await formatAggregationResponse(response.data, filterOptions);
+      const response = await elasticSearchClient.post(
+        elasticSearchAPIPaths.searchPath,
+        payload,
+      );
+      const finalResponse: IAggregationOptions =
+        await formatAggregationResponse(response.data, filterOptions);
       return finalResponse;
     } else {
-      const fallbackResolve: IAggregationOptions = filterOptions.reduce((acc, curr) => {
-        acc[curr.key] = [];
-        return acc;
-      }, {});
+      const fallbackResolve: IAggregationOptions = filterOptions.reduce(
+        (acc, curr) => {
+          acc[curr.key] = [];
+          return acc;
+        },
+        {},
+      );
       return Promise.resolve(fallbackResolve);
     }
   } catch (error: any) {
@@ -80,10 +113,16 @@ const getFilterOptions = async (
 const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
   try {
     const payload = buildSearchQuery({ docId });
-    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
+    const response = await elasticSearchClient.post(
+      elasticSearchAPIPaths.searchPath,
+      payload,
+    );
     const responseData = response?.data;
     if (responseData?.hits?.total?.value) {
-      const finalResponse: ISearchResults = await formatSearchResponse(responseData, true);
+      const finalResponse: ISearchResults = await formatSearchResponse(
+        responseData,
+        true,
+      );
       return finalResponse?.items?.[0] as ISearchItem;
     } else {
       return Promise.resolve({} as ISearchItem);
@@ -94,4 +133,9 @@ const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
   }
 };
 
-export { getDocumentDetails, getFilterOptions, getSearchResultsCount, getSearchResults };
+export {
+  getDocumentDetails,
+  getFilterOptions,
+  getSearchResultsCount,
+  getSearchResults,
+};

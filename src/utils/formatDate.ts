@@ -24,7 +24,7 @@ const getYear = (dateString: string): string => {
     return '';
   }
   const date = new Date(dateString);
-  return `${date.getFullYear()}`;
+  return `${date.getUTCFullYear()}`;
 };
 
 const formatDate = (
@@ -37,12 +37,27 @@ const formatDate = (
     return '';
   }
 
+  const monthNames: string[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
   const date = new Date(dateString);
-  const day: number | string = date.getDate();
-  const month: string = date.toLocaleString('en-GB', { month: 'long' });
-  const year: number = date.getFullYear();
-  const hours: number | string = date.getHours();
-  const minutes: number | string = date.getMinutes();
+  const day: number | string = date.getUTCDate();
+  const month: string = monthNames[date.getUTCMonth()]!;
+  const year: number = date.getUTCFullYear();
+  let hours: number | string = date.getUTCHours();
+  let minutes: number | string = date.getUTCMinutes();
 
   let formattedDate = `${day}`;
 
@@ -54,9 +69,13 @@ const formatDate = (
   formattedDate += `${delimiter}${month}${delimiter}${year}`;
 
   if (includeTime && (hours !== 0 || minutes !== 0)) {
+    const meridian: string = hours >= 12 ? 'pm' : 'am';
+    hours = hours < 10 ? '0' + hours : hours;
     formattedDate += ` at ${hours}`;
-    formattedDate += minutes > 0 ? `:${minutes}` : '';
-    formattedDate += hours >= 12 ? 'pm' : 'am';
+    if (minutes > 0) {
+      formattedDate += minutes < 10 ? '0' + minutes : minutes;
+    }
+    formattedDate += meridian;
   }
 
   return formattedDate;

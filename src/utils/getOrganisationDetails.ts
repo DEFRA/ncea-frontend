@@ -4,10 +4,19 @@ const getOrganisationDetails = (
   isDetails: boolean = false,
 ): { organisationValue: string; role: string; email: string } => {
   if (Array.isArray(data) && data.length > 0) {
-    const rolesOrder: string[] = ['custodian', 'pointOfContact', 'originator', 'distributor', 'owner'];
+    const rolesOrder: string[] = [
+      'owner',
+      'pointOfContact',
+      'custodian',
+      'distributor',
+      'originator',
+      'metadataProvider',
+    ];
 
     const getOrganisation = (role: string): any | string => {
-      const orgValue = data.find((item: Record<string, any>) => item.role === role);
+      const orgValue = data.find(
+        (item: Record<string, any>) => item.role === role,
+      );
       if (orgValue) {
         return {
           organisationValue: orgValue?.organisationObject?.default ?? '',

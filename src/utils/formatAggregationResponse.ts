@@ -1,12 +1,19 @@
-import { IAggregationOption, IAggregationOptions } from '../interfaces/searchResponse.interface';
-import { IFilterOption, IFilterOptions } from '../interfaces/searchPayload.interface';
+import {
+  IAggregationOption,
+  IAggregationOptions,
+} from '../interfaces/searchResponse.interface';
+import {
+  IFilterOption,
+  IFilterOptions,
+} from '../interfaces/searchPayload.interface';
 import { startYearRangeKey, toYearRangeKey } from './constants';
 
 const capitalizeWords = (string: string): string => {
   return string.replace(/\b\w/g, (match) => match.toUpperCase());
 };
 
-const addSpaces = (string: string): string => string.split(/(?=[A-Z])/).join(' ');
+const addSpaces = (string: string): string =>
+  string.split(/(?=[A-Z])/).join(' ');
 
 const generateRange = (start, end): IAggregationOption[] => {
   return Array.from({ length: end - start + 1 }, (_, index) => ({
@@ -25,23 +32,37 @@ const formatAggregationResponse = async (
     filterOptions.forEach((filterOption: IFilterOption) => {
       const apiAggValues = apiResponse?.aggregations?.[filterOption.key];
       const { isTerm, isDate } = filterOption;
-      if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues?.buckets.length > 0) {
-        finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
-          const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
-          let text: string = capitalizeWords(wordsWithSpace);
-          if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
-          return {
-            value: bucket[filterOption.propertyToRead],
-            text,
-          };
-        });
+      if (
+        isTerm &&
+        apiAggValues &&
+        Array.isArray(apiAggValues.buckets) &&
+        apiAggValues?.buckets.length > 0
+      ) {
+        finalResponse[filterOption.key] = apiAggValues?.buckets.map(
+          (bucket) => {
+            const wordsWithSpace = addSpaces(
+              bucket[filterOption.propertyToRead],
+            );
+            let text: string = capitalizeWords(wordsWithSpace);
+            if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
+            return {
+              value: bucket[filterOption.propertyToRead],
+              text,
+            };
+          },
+        );
       } else if (isDate) {
-        const maxYearValue: number = apiResponse?.aggregations?.[`max-${filterOption.key}`]?.value ?? null;
-        const minYearValue: number = apiResponse?.aggregations?.[`min-${filterOption.key}`]?.value ?? null;
+        const maxYearValue: number =
+          apiResponse?.aggregations?.[`max-${filterOption.key}`]?.value ?? null;
+        const minYearValue: number =
+          apiResponse?.aggregations?.[`min-${filterOption.key}`]?.value ?? null;
         if (maxYearValue && minYearValue) {
           const maxYear: number = Math.floor(maxYearValue);
           const minYear: number = Math.floor(minYearValue);
-          const yearRange: IAggregationOption[] = generateRange(minYear, maxYear);
+          const yearRange: IAggregationOption[] = generateRange(
+            minYear,
+            maxYear,
+          );
           finalResponse[startYearRangeKey] = yearRange.map((year) => ({
             ...year,
           }));
@@ -62,4 +83,4 @@ const formatAggregationResponse = async (
   }
 };
 
-export { capitalizeWords, formatAggregationResponse };
+export { capitalizeWords, formatAggregationResponse, generateRange };

@@ -1,4 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+import { generateRange } from './formatAggregationResponse';
 import { getAccumulatedCoordinatesNCenter } from './getBoundingBoxData';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
@@ -44,46 +45,80 @@ const formatSearchResponse = async (
     total: apiResponse?.hits?.total?.value,
     items: [],
   };
+  let minStartYear: string = '';
+  let maxToYear: string = '';
 
   const apiSearchItems = apiResponse?.hits?.hits;
-  const responseItems: Promise<ISearchItem>[] = apiSearchItems.map(async (searchItem: Record<string, any>) => {
-    const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
-    const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
-    const studyPeriod = getStudyPeriod(startDate, endDate);
-    const publishedBy = getOrganisationDetails(searchItem?._source?.contactForResource ?? []);
-    const organisationDetails = getOrganisationDetails(searchItem?._source?.contactForResource ?? [], true);
+  const responseItems: Promise<ISearchItem>[] = apiSearchItems.map(
+    async (searchItem: Record<string, any>) => {
+      const startDate: string =
+        searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ??
+        '';
+      const endDate: string =
+        searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ??
+        '';
+      const studyPeriod = getStudyPeriod(startDate, endDate);
+      const publishedBy = getOrganisationDetails(
+        searchItem?._source?.contactForResource ?? [],
+        true,
+      );
+      const organisationDetails = getOrganisationDetails(
+        searchItem?._source?.contactForResource ?? [],
+        true,
+      );
+      const startYear: string = getYear(startDate);
+      const toYear: string = getYear(endDate);
 
-    let item: ISearchItem = {
-      id: searchItem?._id,
-      title: searchItem?._source?.resourceTitleObject?.default ?? '',
-      publishedBy: publishedBy.organisationValue,
-      content: getAbstractContent(searchItem?._source?.resourceAbstractObject ?? ''),
-      studyPeriod,
-      startYear: getYear(startDate),
-      toYear: getYear(endDate),
-      resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
-      organisationName: organisationDetails.organisationValue,
-    };
+      if (
+        minStartYear === '' ||
+        (startYear !== '' && startYear < minStartYear)
+      ) {
+        minStartYear = startYear;
+      }
 
-    if (isMapResults) {
-      const coordinatesData: IAccumulatedCoordinatesWithCenter = getAccumulatedCoordinatesNCenter(
-        searchItem._source.geom,
-      ) as IAccumulatedCoordinatesWithCenter;
-      item = {
-        ...item,
-        geographicBoundary: coordinatesData.coordinates,
-        geographicCenter: coordinatesData.center,
-        resourceType: searchItem?._source?.resourceType ?? [],
+      if (maxToYear === '' || (toYear !== '' && toYear > maxToYear)) {
+        maxToYear = toYear;
+      }
+
+      let item: ISearchItem = {
+        id: searchItem?._id,
+        title: searchItem?._source?.resourceTitleObject?.default ?? '',
+        publishedBy: publishedBy.organisationValue,
+        content: getAbstractContent(
+          searchItem?._source?.resourceAbstractObject ?? '',
+        ),
+        studyPeriod,
+        startYear,
+        toYear,
+        resourceLocator:
+          searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+        organisationName: organisationDetails.organisationValue,
       };
-    }
 
-    if (isDetails) {
-      const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem, publishedBy);
-      item = { ...item, ...otherDetails };
-    }
+      if (isMapResults) {
+        const coordinatesData: IAccumulatedCoordinatesWithCenter =
+          getAccumulatedCoordinatesNCenter(
+            searchItem._source.geom,
+          ) as IAccumulatedCoordinatesWithCenter;
+        item = {
+          ...item,
+          geographicBoundary: coordinatesData.coordinates,
+          geographicCenter: coordinatesData.center,
+          resourceType: searchItem?._source?.resourceType ?? [],
+        };
+      }
 
-    return item;
-  });
+      if (isDetails) {
+        const otherDetails: IOtherSearchItem = await getOtherDetails(
+          searchItem,
+          publishedBy,
+        );
+        item = { ...item, ...otherDetails };
+      }
+
+      return item;
+    },
+  );
 
   finalResponse.items = await Promise.all(responseItems);
   return finalResponse;
@@ -92,12 +127,17 @@ const formatSearchResponse = async (
 const getLicenseConstraints = (searchItem: Record<string, any>): string => {
   let licenseConstraints = '';
 
-  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default) {
+  if (
+    searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default
+  ) {
     licenseConstraints = `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default} <br>`;
   }
-  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text) {
+  if (
+    searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text
+  ) {
     licenseConstraints =
-      licenseConstraints + `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text}`;
+      licenseConstraints +
+      `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text}`;
   }
 
   return licenseConstraints;
@@ -110,10 +150,14 @@ const getLimitationPublicAccess = (searchItem: Record<string, any>): string => {
     limitationPublicAccess = `${searchItem?._source?.cl_accessConstraints?.[0]?.default} <br>`;
   }
   if (searchItem?._source?.cl_accessConstraints?.[0]?.text) {
-    limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.cl_accessConstraints?.[0]?.text} <br>`;
+    limitationPublicAccess =
+      limitationPublicAccess +
+      `${searchItem?._source?.cl_accessConstraints?.[0]?.text} <br>`;
   }
   if (searchItem?._source?.licenseObject?.[0]?.default) {
-    limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.licenseObject?.[0]?.default}`;
+    limitationPublicAccess =
+      limitationPublicAccess +
+      `${searchItem?._source?.licenseObject?.[0]?.default}`;
   }
 
   return limitationPublicAccess;
@@ -144,7 +188,8 @@ const getOtherDetails = async (
   publishedBy: Record<string, any>,
 ): Promise<IOtherSearchItem> => {
   return {
-    alternateTitle: searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
+    alternateTitle:
+      searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
     ...getGeneralTabData(searchItem),
     ncea_catalogue_number: searchItem?._source?.uuid,
     host_catalogue_number: getHostCatalogueNumber(searchItem),
@@ -159,12 +204,18 @@ const getOtherDetails = async (
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: '',
     Metadata_language: searchItem?._source?.mainLanguage ?? '',
-    ncea_catalogue_date: formatDate(searchItem?._source?.dateStamp, false, false, '-'),
+    ncea_catalogue_date: formatDate(
+      searchItem?._source?.dateStamp,
+      false,
+      false,
+      '-',
+    ),
     limitation_on_public_access: getLimitationPublicAccess(searchItem),
     license_constraints: getLicenseConstraints(searchItem),
     data_owner: getPublishedBy(publishedBy),
     available_formats: searchItem?._source?.format ?? '',
-    frequency_of_update: searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
+    frequency_of_update:
+      searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
     character_encoding: 'utf8',
     ...getGeographyTabData(searchItem),
   };
