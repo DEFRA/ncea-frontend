@@ -73,7 +73,7 @@ export const queryParamKeys = {
   startYear: 'sy',
   toYear: 'ty',
   level: 'level',
-  parent: 'parent'
+  parent: 'parent',
 };
 
 export const uniqueResourceTypesKey: string = 'unique_resource_types';

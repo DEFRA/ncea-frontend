@@ -123,9 +123,9 @@ interface ISearchFields {
     wst?: string;
   };
   classify?: {
-    level: string,
-    parent?: string
-  }
+    level: string;
+    parent?: string;
+  };
 }
 
 interface ISearchFilter {

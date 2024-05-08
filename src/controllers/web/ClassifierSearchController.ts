@@ -14,8 +14,8 @@ const ClassifierSearchController = {
     const level: string = readQueryParams(request.query, 'level');
     const parent: string = readQueryParams(request.query, 'parent');
     const classifierItems = await getClassifierThemes(level, parent);
-    const nextLevel:string = (+level+1).toString();
-    const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);        
+    const nextLevel: string = (+level + 1).toString();
+    const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
     const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
 
     return response.view('screens/guided_search/classifier_selection.njk', {
@@ -24,7 +24,7 @@ const ClassifierSearchController = {
       skipPath,
       formId,
       classifierItems,
-      count: searchResultsCount.totalResults.toString()
+      count: searchResultsCount.totalResults.toString(),
     });
   },
 };

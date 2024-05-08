@@ -62,9 +62,9 @@ const getClassifierParams = (searchParams: URLSearchParams): Record<string, stri
   const parent: string = searchParams.get(queryParamKeys.parent) ?? '';
   return {
     level,
-    parent
-  }
-}
+    parent,
+  };
+};
 
 const getDateParams = (searchParams: URLSearchParams): Record<string, string> => {
   const fdd: string = searchParams.get(queryParamKeys.fromDateDay) ?? '';
@@ -125,7 +125,7 @@ const generateQueryBuilderFields = (requestQuery: RequestQuery): ISearchFields =
     ...(((extentParams.nth && extentParams.sth && extentParams.est && extentParams.wst) || extentParams.dpt) && {
       extent: extentParams,
     }),
-    ...(classifierParams.level && classifierParams.parent && {classify: classifierParams})
+    ...(classifierParams.level && classifierParams.parent && { classify: classifierParams }),
   };
 };
 
@@ -164,5 +164,5 @@ export {
   getExtentParams,
   getFilterParams,
   generateQueryBuilderFields,
-  getClassifierParams
+  getClassifierParams,
 };

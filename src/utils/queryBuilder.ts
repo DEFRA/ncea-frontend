@@ -216,10 +216,9 @@ const addFilterOptionsQuery = (
 };
 
 const addClassifierSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
-  if(fields?.classify?.level && fields?.classify?.parent) {
-    
+  if (fields?.classify?.level && fields?.classify?.parent) {
   }
-}
+};
 
 const addDateSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
   if (fields?.date?.fdy && fields?.date?.tdy) {
