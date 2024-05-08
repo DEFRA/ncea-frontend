@@ -43,6 +43,8 @@ const defaultFilterOptions = {
 };
 const appliedFilterOptions = { ...defaultFilterOptions };
 const markerOverlays = [];
+const defaultMapProjection = 'EPSG:3857';
+const extentTransformProjection = 'EPSG:4326';
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -123,7 +125,7 @@ const map = new ol.Map({
     center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
     zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
     minZoom: 2,
-    extent: ol.proj.get('EPSG:3857').getExtent(),
+    extent: ol.proj.get(defaultMapProjection).getExtent(),
   }),
   controls: [],
   ...(isDetailsScreen && { interactions: [] }),
@@ -241,8 +243,8 @@ function calculateCoordinates() {
   ) {
     const [west, south, east, north] = ol.proj.transformExtent(
       extent,
-      'EPSG:3857',
-      'EPSG:4326',
+      defaultMapProjection,
+      extentTransformProjection,
     );
 
     const form = document.querySelector('[data-do-browser-storage]');
@@ -352,8 +354,8 @@ function addPolygon(coordinates, style) {
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
       [west, south, east, north],
-      'EPSG:4326',
-      'EPSG:3857',
+      extentTransformProjection,
+      defaultMapProjection,
     );
     const polygonFeature = new ol.Feature({
       geometry: new ol.geom.Polygon([

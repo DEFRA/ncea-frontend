@@ -30,7 +30,7 @@ describe('Quick search schema', () => {
       const { error } = searchSchema.validate(invalidData);
       expect(error).toBeDefined();
       expect(error?.details[0]?.message).toContain(
-        '"Search Text" length must be at least 4 characters long',
+        'Search text length must be at least 4 characters long',
       );
     });
 
