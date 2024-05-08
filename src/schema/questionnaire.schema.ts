@@ -3,6 +3,7 @@ import Joi from 'joi';
 const thisYear = new Date().getFullYear();
 
 export const dateSchema = Joi.object({
+  'today-date': Joi.boolean().optional().falsy(''),
   'from-date-day': Joi.number().allow('').min(1).max(31).optional().label('Day'),
   'from-date-month': Joi.number().allow('').min(1).max(12).optional().label('Month'),
   'from-date-year': Joi.number().required().max(thisYear).messages({
