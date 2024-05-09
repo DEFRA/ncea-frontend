@@ -1,0 +1,4 @@
+{{- include "adp-helm-library.cluster-ip-service" (list . "ncea-frontend-4.cluster-ip-service") -}}
+{{- define "ncea-frontend-4.cluster-ip-service" -}}
+{{- end -}}
+

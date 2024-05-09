@@ -1,0 +1,8 @@
+{{- include "adp-helm-library.deployment" (list . "ncea-frontend-4.deployment") -}}
+{{- define "ncea-frontend-4.deployment" -}}
+spec:
+  template:
+    spec:
+      containers:
+      - {{ include "adp-helm-library.container" (list . "ncea-frontend-4.container") }}
+{{- end -}}

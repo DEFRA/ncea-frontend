@@ -1,0 +1,3 @@
+{{- include "adp-helm-library.azure-ingress" (list . "ncea-frontend-4.ingress") -}}
+{{- define "ncea-frontend-4.ingress" -}}
+{{- end -}}
