@@ -1,0 +1,4 @@
+- key: NODE_ENV
+  value: "dev"
+- key: PORT
+  value: "80"
