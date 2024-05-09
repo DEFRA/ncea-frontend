@@ -35,13 +35,15 @@
                 {
                     "id": "lvl2-001",
                     "title": "Terrestrial and freshwater habitats",
-                    "parent": "lvl1-001",
+                    "parentId": "lvl1-001",
+                    "parent": "Natural asset",
                     "description": "Habitats found on land and in freshwater.  This includes mountains, moorlands and heath, grasslands, farmland, woodlands, urban, linear features, and various freshwater bodies, e.g. rivers, lakes, small streams. "
                 },
                 {
                     "id": "lvl2-002",
                     "title": "Coastal and estuarine habitats",
-                    "parent": "lvl1-001",
+                    "parentId": "lvl1-001",
+                    "parent": "Natural asset",
                     "description": "Habitats located at the interface of land and sea, including beaches, salt marshes, estuaries, and rocky shores. These environments are shaped by the dynamic interactions between terrestrial and marine influences, such as tides. "
                 }
             ]
@@ -54,13 +56,15 @@
                 {
                     "id": "lvl3-002",
                     "title": "Coastal shingle",
-                    "parent": "lvl2-002",
+                    "parentId": "lvl2-002",
+                    "parent": "Coastal and estuarine habitats",
                     "description": "Beaches of the oceans, of their connected seas and of their associated coastal lagoons, covered by pebbles, or sometimes boulders, usually formed by wave action."   
                 },
                 {
                     "id": "lvl3-003",
                     "title": "Rock cliffs, ledges and shores including the supralittoral",
-                    "parent": "lvl2-002",
+                    "parentId": "lvl2-002",
+                    "parent": "Coastal and estuarine habitats",
                     "description": "Sea-cliffs, or parts of sea-cliffs, and rocky shores colonized by disjunct assemblages of salt-tolerant crevice plants (chasmophytes) or by more or less closed salt-tolerant grasslands with associated terrestrial invertebrate and vertebrate faunal communities."   
                 }
             ]
@@ -73,7 +77,8 @@
                 {
                     "id": "lvl3-001",
                     "title": "Broadleaved, mixed and yew woodland ",
-                    "parent": "lvl2-001",
+                    "parentId": "lvl2-001",
+                    "parent": "Terrestrial and freshwater habitats",
                     "description": "Covers all broadleaved, yew, and mixed broadleaved and coniferous stands which have more than 20% cover of broadleaved and yew trees. It includes patches of scrub where the woody element creates a canopy of more than 30% and the scrub area is above 0.25ha, recently felled broadleaved woodland, and integral features of woodland such as glades (clearings) and rides (pathways). "   
                 }
             ]

@@ -49,10 +49,16 @@ interface IFieldExist {
 
 interface IBoolQuery {
   bool: {
-    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString | IFieldExist)[];
+    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString | IFieldExist | IFilterQuery)[];
     should?: IMatchQuery[];
     minimum_should_match?: number;
   };
+}
+
+interface IFilterQuery {
+  term: {
+    [key: string]: string | string[]
+  }
 }
 
 interface ISortOrder {
@@ -193,4 +199,5 @@ export {
   IAggregationDateScript,
   IAggregationData,
   IAggregationType,
+  IFilterQuery
 };

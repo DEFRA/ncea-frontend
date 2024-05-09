@@ -18,7 +18,7 @@ export const getClassifierThemes = async (level: string, parents: string = ''): 
         '&' +
         parents
           .split(',')
-          .map((parentId) => `classifiers[0].parent=${parentId}`)
+          .map((parentTitle) => `classifiers[0].parent=${parentTitle}`)
           .join('&');
     }
     const response: AxiosResponse = await axios.get(url);
@@ -28,7 +28,7 @@ export const getClassifierThemes = async (level: string, parents: string = ''): 
         sectionTitle: classifier.sectionTitle,
         sectionIntro: classifier.sectionIntro,
         classifiers,
-        selectAll: classifiers.map((classify) => classify.id).join(','),
+        selectAll: classifiers.map((classify) => classify.title).join(','),
       };
     });
     return classifierResponse;

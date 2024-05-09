@@ -17,7 +17,7 @@ const ClassifierSearchController = {
     const nextLevel: string = (+level + 1).toString();
     const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
     const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
-
+    //hidden fields for selected level1, 2, 3 classifier categories
     return response.view('screens/guided_search/classifier_selection.njk', {
       guidedClassifierSearchPath,
       nextLevel,
@@ -25,6 +25,7 @@ const ClassifierSearchController = {
       formId,
       classifierItems,
       count: searchResultsCount.totalResults.toString(),
+      backLinkPath: 'javascript:history.back()'
     });
   },
 };

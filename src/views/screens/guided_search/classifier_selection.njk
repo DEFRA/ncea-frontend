@@ -3,10 +3,26 @@
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "partials/results_count/macro.njk" import resultsCount %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 
 {% block beforeContent %}
   {{ super() }}
+  {% if nextLevel > 2 %}
   {% include "partials/guided_search_breadcrumb/template.njk" %}
+  {% else %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: routes.homePage
+      },
+      {
+        text: "Questionnaire search"
+      }
+    ]
+  }) }}
+  {% endif %}
+  
 {% endblock %}
 
 {% block content %}
@@ -14,11 +30,11 @@
     {% include "partials/results_count/template.njk" %}
     <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
       <input type="hidden" name="level" value="{{nextLevel}}" />
-      <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-column-full govuk-!-padding-top-6">
         {% for classify in classifierItems %}
           {% set checkboxItems = [] %}
           {% for item in classify.classifiers %}
-            {% set _ = checkboxItems.push({value: item.id, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
+            {% set _ = checkboxItems.push({value: item.value, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
           {% endfor %}
           {% set _ = checkboxItems.push({divider: "or" }) %}
           {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %}
@@ -48,12 +64,14 @@
               items: checkboxItems
             }) }}
         {% endfor %}
-        <div class="govuk-button-group">
+        <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
           {% if nextLevel > 2 %}
             <div class="govuk-grid-column-one-half geography-buttons__left">
               {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: 'javascript:history.back()' }) }}
             </div>  
+            <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
           {% endif %}
+          <div class="govuk-button-group">          
           {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary", href: skipPath, attributes: {
             'data-do-storage-skip': ''
           } }) }}
@@ -61,6 +79,10 @@
             'data-to-disable': '',
             'data-next-question': ''
           } }) }}
+          {% if nextLevel > 2 %}
+          </div>
+          {% endif %} 
+          </div>
         </div>
       </div>
     </form>
