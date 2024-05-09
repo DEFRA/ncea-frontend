@@ -6,7 +6,7 @@ module.exports = {
   },
   rootDir: '../../',
   testRegex: './__tests__/.*\\.(test|spec)?\\.(ts|js)$',
-  coverageDirectory: 'coverage',
+  coverageDirectory: 'test-output',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transformIgnorePatterns: ['/node_modules/(?!svgo)'],
   roots: ['<rootDir>/__tests__', '<rootDir>/src'],

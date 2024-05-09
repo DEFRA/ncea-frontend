@@ -20,6 +20,7 @@
     "format:all": "prettier --config tools/.prettierrc.json --ignore-path .gitignore --write \"./src/**/*.+(js|ts|jsx|tsx)\"",
     "format:check": "prettier --config tools/.prettierrc.json --ignore-path .gitignore --check \"./src/**/*.+(js|ts|jsx|tsx)\"",
     "test": "jest --config tools/jest/jest.config.js --coverage -u",
+    "test:unit": "jest --config tools/jest/jest.config.js --coverage -u",
     "test:dev": "jest --watchAll --config tools/jest/jest.config.js -u",
     "prepare": "husky"
   },
@@ -87,8 +88,8 @@
     "winston-daily-rotate-file": "5.0.0"
   },
   "jestSonar": {
-    "reportPath": "reports",
-    "reportFile": "test-report.xml",
+    "reportPath": "test-output",
+    "reportFile": "junit.xml",
     "indent": 4
   }
 }
