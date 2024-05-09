@@ -18,6 +18,7 @@ import {
   ISearchPayload,
   IShapeCoordinates,
   ISortQuery,
+  IFilterQuery
 } from '../interfaces/queryBuilder.interface';
 import { IFilterOption, IFilterOptions } from '../interfaces/searchPayload.interface';
 
@@ -73,6 +74,10 @@ const buildDateQuery = (fields: ISearchFields, isToDate: boolean = false): IRang
   };
   return rangeQuery;
 };
+
+const buildClassifierFitlerQuery= (fields: ISearchFields): IFilterQuery => {
+  
+}
 
 const buildCustomSortScriptForStudyPeriod = (): ISortQuery => {
   const customScript: ICustomSortScript = {
@@ -217,6 +222,8 @@ const addFilterOptionsQuery = (
 
 const addClassifierSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
   if (fields?.classify?.level && fields?.classify?.parent) {
+    const classifierFilterQuery: IFilterQuery = buildClassifierFitlerQuery(fields)
+    boolQuery.bool.must?.push(classifierFilterQuery);
   }
 };
 
