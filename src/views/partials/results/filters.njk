@@ -51,8 +51,8 @@
         <section class="defra-filter-options__container">
           <section class="defra-filter-options__container--inner">
             <div class="govuk-form-group govuk-!-margin-bottom-0">
-              <fieldset class="govuk-fieldset" aria-describedby="resource-type-filter">
-                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <fieldset class="govuk-fieldset" aria-describedby="{{filterInstance+'-resource-type-filter'}}">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes" id="{{filterInstance+'-resource-type-filter'}}">
                   {% for item in filterOptions.unique_resource_types %}
                     <div class="govuk-checkboxes__item">
                       <input class="govuk-checkboxes__input defra-checkboxes__input" id="{{filterInstance+'-resource_type-'+item.value}}" name="resource_type" type="checkbox" value="{{item.value}}" {% if item.checked %} checked {% endif %} data-instance="{{filterInstance}}">

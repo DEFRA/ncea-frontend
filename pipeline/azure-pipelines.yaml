@@ -13,11 +13,12 @@ trigger:
       - main
       - feature/*
       - features/*
+      - bugfix/*
 
 variables:
   - template: templates/variables-global.yml
   - name: azureServiceConnectionForAcr
-    value: AZR-NCE-DEV1  
+    value: AZR-NCE-DEV1
   - name: deployToDev
     value: true
   - name: deployToTest
