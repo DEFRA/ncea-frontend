@@ -42,6 +42,9 @@ const defaultFilterOptions = {
   resourceType: [],
 };
 const appliedFilterOptions = { ...defaultFilterOptions };
+const markerOverlays = [];
+const defaultMapProjection = 'EPSG:3857';
+const extentTransformProjection = 'EPSG:4326';
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -122,6 +125,7 @@ const map = new ol.Map({
     center: ol.proj.fromLonLat([mapInitialLon, mapInitialLat]),
     zoom: !isDetailsScreen && !isMapResultsScreen ? extentSearchZoomLevel : 2,
     minZoom: 2,
+    extent: ol.proj.get(defaultMapProjection).getExtent(),
   }),
   controls: [],
   ...(isDetailsScreen && { interactions: [] }),
@@ -239,8 +243,8 @@ function calculateCoordinates() {
   ) {
     const [west, south, east, north] = ol.proj.transformExtent(
       extent,
-      'EPSG:3857',
-      'EPSG:4326',
+      defaultMapProjection,
+      extentTransformProjection,
     );
 
     const form = document.querySelector('[data-do-browser-storage]');
@@ -350,8 +354,8 @@ function addPolygon(coordinates, style) {
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
       [west, south, east, north],
-      'EPSG:4326',
-      'EPSG:3857',
+      extentTransformProjection,
+      defaultMapProjection,
     );
     const polygonFeature = new ol.Feature({
       geometry: new ol.geom.Polygon([
@@ -639,6 +643,79 @@ function animateZoom(delta) {
   });
 }
 
+function createTooltipOverlay(index) {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'marker-tooltip';
+  tooltip.innerHTML = (index + 1).toString();
+  tooltip.style.position = 'absolute';
+  tooltip.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+  tooltip.style.padding = '4px 8px';
+  tooltip.style.borderRadius = '2px';
+  tooltip.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+  tooltip.style.pointerEvents = 'none';
+  tooltip.style.border = '2px solid #000';
+  tooltip.style.fontWeight = 'bold';
+  tooltip.style.fontFamily = "'GDS Transport', arial, sans-serif";
+
+  const markerOverlay = new ol.Overlay({
+    element: tooltip,
+    positioning: 'top-center',
+    offset: [-14, -80],
+    stopEvent: false,
+  });
+
+  map.addOverlay(markerOverlay);
+  markerOverlays.push(markerOverlay);
+}
+
+function keydownHandler(event) {
+  const key = event.key;
+  if (key >= 1 && key <= 9) {
+    const markerIndex = parseInt(key) - 1;
+    const visibleMarkers = markerLayer
+      .getSource()
+      .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+    if (markerIndex < visibleMarkers.length) {
+      const markerOverlay = markerOverlays[markerIndex];
+      if (markerOverlay) {
+        const marker = visibleMarkers[markerIndex];
+        const coord = marker.getGeometry().getCoordinates();
+        const pixel = map.getPixelFromCoordinate(coord);
+        resetFeatureStyle();
+        closeInfoPopup();
+        map.forEachFeatureAtPixel(pixel, function (feature) {
+          if (feature === marker && isMarkerFeature(feature)) {
+            const recordId = feature.get('id');
+            const boundingBox = feature.get('boundingBox');
+            feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+            showInformationPopup(recordId, boundingBox);
+          }
+        });
+      }
+    }
+  }
+}
+
+function checkNUpdateMarkerTooltip() {
+  const visibleMarkers = markerLayer
+    .getSource()
+    .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+  markerOverlays.forEach((overlay) => map.removeOverlay(overlay));
+  markerOverlays.length = 0;
+  document.removeEventListener('keydown', keydownHandler);
+  resetFeatureStyle();
+  closeInfoPopup();
+
+  if (visibleMarkers.length <= 9) {
+    visibleMarkers.forEach((marker, index) => {
+      createTooltipOverlay(index);
+      const coord = marker.getGeometry().getCoordinates();
+      markerOverlays[index].setPosition(coord);
+    });
+    document.addEventListener('keydown', keydownHandler);
+  }
+}
+
 function customControls() {
   const zoomInElement = document.getElementById('defra-map-zoom-in');
   const zoomOutElement = document.getElementById('defra-map-zoom-out');
@@ -661,6 +738,7 @@ function customControls() {
       } else {
         resetControl.style.display = 'block';
       }
+      checkNUpdateMarkerTooltip();
     });
   }
 }
@@ -691,6 +769,38 @@ function infoListener() {
   }
 }
 
+function handleKeyboardArrowEvent(event) {
+  const view = map.getView();
+  const delta = view.getResolution() * 100;
+
+  switch (event.keyCode) {
+    case 37: // Left arrow key
+      view.animate({
+        center: [view.getCenter()[0] - delta, view.getCenter()[1]],
+        duration: 100,
+      });
+      break;
+    case 38: // Up arrow key
+      view.animate({
+        center: [view.getCenter()[0], view.getCenter()[1] + delta],
+        duration: 100,
+      });
+      break;
+    case 39: // Right arrow key
+      view.animate({
+        center: [view.getCenter()[0] + delta, view.getCenter()[1]],
+        duration: 100,
+      });
+      break;
+    case 40: // Down arrow key
+      view.animate({
+        center: [view.getCenter()[0], view.getCenter()[1] - delta],
+        duration: 100,
+      });
+      break;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById(mapTarget)) {
     if (isDetailsScreen && hasCenter) {
@@ -706,6 +816,8 @@ document.addEventListener('DOMContentLoaded', () => {
       disableInteractions();
       infoListener();
       customControls();
+      checkNUpdateMarkerTooltip();
+      document.addEventListener('keydown', handleKeyboardArrowEvent);
     } else {
       setTimeout(() => {
         calculatePolygonFromCoordinates();

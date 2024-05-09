@@ -10,7 +10,7 @@ import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
-  info: jest.fn()
+  info: jest.fn(),
 }));
 
 jest.mock('../../../src/utils/keyvault', () => ({
@@ -21,7 +21,7 @@ describe('Home Screen', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;
   let document: Document;
-  
+
   beforeAll((done) => {
     initializeServer().then(async (s: Server) => {
       server = s;
@@ -123,7 +123,7 @@ describe('Home Screen', () => {
           document
             ?.querySelector('.quick_search-container__heading-m')
             ?.textContent?.trim(),
-        ).toBe('Quick Search');
+        ).toBe('Quick search');
       });
 
       it('should not render the custom large class for heading', async () => {
@@ -237,14 +237,18 @@ describe('Home Screen', () => {
   describe('Home > Educational Copy block', () => {
     describe('Educational Copy block classes', () => {
       it('renders custom Educational Copy container class', async () => {
-        expect(document.querySelector('.educational-copy-container')).toBeTruthy();
+        expect(
+          document.querySelector('.educational-copy-container'),
+        ).toBeTruthy();
       });
     });
 
     describe('Educational Copy block elements', () => {
-      it('should render 8 child elements', async () => {
-        const videoContainer = document?.querySelector('.educational-copy-container');
-        expect(videoContainer?.childElementCount).toEqual(8);
+      it('should render 9 child elements', async () => {
+        const videoContainer = document?.querySelector(
+          '.educational-copy-container',
+        );
+        expect(videoContainer?.childElementCount).toEqual(9);
       });
     });
   });
