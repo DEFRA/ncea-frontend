@@ -7,3 +7,7 @@
   value: "dev"
 - key: PORT
   value: "80"
+- AZURE_KEYVAULT_URL:
+  value: "https://sndadpinfvt3401.vault.azure.net/"
+- APPINSIGHTS_SECRET_NAME:
+  value: "ncea-frontend-APPINSIGHTS-CONNECTIONSTRING"
