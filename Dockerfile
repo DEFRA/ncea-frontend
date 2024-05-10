@@ -16,11 +16,11 @@ COPY . .
 RUN npm run build
 
 
-# FROM node:lts-alpine
+FROM node:lts-alpine
 
 # Change the working directory on the Docker image to /app
-
-#WORKDIR /app
+RUN chmod -R 766 /app
+WORKDIR /app
 
 # Copy only the 'build' folder from the builder stage
 COPY --from=builder /app/build ./build
