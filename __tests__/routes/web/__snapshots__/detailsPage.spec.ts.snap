@@ -6,7 +6,7 @@ exports[`Details route template Document details with data Check status code and
   <head>
     <meta charset="utf-8">
     <title>
-  NCEA Catalogue Detail (General)
+  NCEA Catalogue Detail - General
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -226,7 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#general" onclick="changeTitle(&quot;NCEA Catalogue Detail (General)&quot;)">
+          <a class="govuk-tabs__tab" href="#general" onclick="changeTitle(&quot;NCEA Catalogue Detail - General&quot;)">
             General
           </a>
         </li>
@@ -235,7 +235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#access" onclick="changeTitle(&quot;NCEA Catalogue Detail (Access)&quot;)">
+          <a class="govuk-tabs__tab" href="#access" onclick="changeTitle(&quot;NCEA Catalogue Detail - Access&quot;)">
             Access
           </a>
         </li>
@@ -244,7 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail (Natural Capital)&quot;)">
+          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail - Natural Capital&quot;)">
             Natural Capital
           </a>
         </li>
@@ -253,7 +253,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail (Quality)&quot;)">
+          <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail - Quality&quot;)">
             Quality
           </a>
         </li>
@@ -262,7 +262,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail (Geography)&quot;)">
+          <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail - Geography&quot;)">
             Geography
           </a>
         </li>
@@ -271,7 +271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail (Governance)&quot;)">
+          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
             Governance
           </a>
         </li>
@@ -280,7 +280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail (License)&quot;)">
+          <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail - License&quot;)">
             License
           </a>
         </li>
@@ -980,7 +980,7 @@ exports[`Details route template Document details with partial data Check status 
   <head>
     <meta charset="utf-8">
     <title>
-  NCEA Catalogue Detail (General)
+  NCEA Catalogue Detail - General
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -1190,7 +1190,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#general" onclick="changeTitle(&quot;NCEA Catalogue Detail (General)&quot;)">
+          <a class="govuk-tabs__tab" href="#general" onclick="changeTitle(&quot;NCEA Catalogue Detail - General&quot;)">
             General
           </a>
         </li>
@@ -1199,7 +1199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#access" onclick="changeTitle(&quot;NCEA Catalogue Detail (Access)&quot;)">
+          <a class="govuk-tabs__tab" href="#access" onclick="changeTitle(&quot;NCEA Catalogue Detail - Access&quot;)">
             Access
           </a>
         </li>
@@ -1208,7 +1208,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail (Natural Capital)&quot;)">
+          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail - Natural Capital&quot;)">
             Natural Capital
           </a>
         </li>
@@ -1217,7 +1217,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail (Quality)&quot;)">
+          <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail - Quality&quot;)">
             Quality
           </a>
         </li>
@@ -1226,7 +1226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail (Geography)&quot;)">
+          <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail - Geography&quot;)">
             Geography
           </a>
         </li>
@@ -1235,7 +1235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail (Governance)&quot;)">
+          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
             Governance
           </a>
         </li>
@@ -1244,7 +1244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail (License)&quot;)">
+          <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail - License&quot;)">
             License
           </a>
         </li>
