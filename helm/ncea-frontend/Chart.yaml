@@ -1,6 +1,6 @@
 apiVersion: v2
 description: A Helm Chart to deploy the ncea-frontend-4 application to Kubernetes
-name: ncea-frontend-4
+name: ncea-frontend
 # this version is automatically updated in the build pipeline
 version: 1.0.0
 dependencies:
