@@ -43,13 +43,14 @@ extends:
   parameters:
     projectName: "ncea-frontend"
     serviceName: "ncea-frontend"
+    teamName: "ncea-search"
     deployFromFeature: ${{ parameters.deployFromFeature }}
     deployConfigOnly: ${{ parameters.deployConfigOnly }}
     appBuildConfig:
       appFrameworkType: "nodejs"
       projectPath: "./package.json"
       manifestPath: "./package.json"
-      imageRepoName: "ncea-fe"
+      imageRepoName: "ncea-frontend"
     appTestConfig:
       testFilePath: "./docker-compose.test.yaml"
     appDeployConfig:
