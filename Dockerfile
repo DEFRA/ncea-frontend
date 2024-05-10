@@ -2,6 +2,7 @@ FROM node:lts-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
+RUN chmod -R 766 /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -19,7 +20,7 @@ RUN npm run build
 FROM node:lts-alpine
 
 # Change the working directory on the Docker image to /app
-RUN chmod -R 766 /app
+
 WORKDIR /app
 
 # Copy only the 'build' folder from the builder stage
