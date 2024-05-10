@@ -1,9 +1,9 @@
 - key: APPINSIGHTS_CONNECTIONSTRING
   value: "{{servicename}}-APPINSIGHTS-CONNECTIONSTRING"
   type: "keyvault"
-- key: elasticSearchApi
+- key: ELASTICSEARCH_API
   value: "http://elasticsearch.geonetwork.svc.cluster.local:9200/"
-- key: nodeEnv
+- key: NODE_ENV
   value: "dev"
-- key: port
+- key: PORT
   value: "80"
