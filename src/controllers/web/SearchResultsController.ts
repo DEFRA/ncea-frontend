@@ -165,6 +165,7 @@ const SearchResultsController = {
     }
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.resourceType]: resourceTypeValues,
+      [queryParamKeys.page]: '1',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
@@ -174,6 +175,7 @@ const SearchResultsController = {
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.startYear]: payload?.['start_year'] ?? '',
       [queryParamKeys.toYear]: payload?.['to_year'] ?? '',
+      [queryParamKeys.page]: '1',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
@@ -183,6 +185,7 @@ const SearchResultsController = {
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.sort]: payload?.['sort'] ?? '',
       [queryParamKeys.rowsPerPage]: payload?.['page-results'] ?? '',
+      [queryParamKeys.page]: '1',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);

@@ -103,8 +103,16 @@
 }
 
 .filter {
+  &-study-period-group {
+    display: flex;
+  }
+
   &-heading {
     @include font-style-stack(24px, 30px);
+  }
+
+  &-study-period-heading {
+    @include font-style-stack(19px, 25px, 700);
   }
 
   &-options-label {

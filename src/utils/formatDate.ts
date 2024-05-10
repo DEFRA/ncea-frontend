@@ -57,7 +57,7 @@ const formatDate = (
   const month: string = monthNames[date.getUTCMonth()]!;
   const year: number = date.getUTCFullYear();
   let hours: number | string = date.getUTCHours();
-  let minutes: number | string = date.getUTCMinutes();
+  const minutes: number | string = date.getUTCMinutes();
 
   let formattedDate = `${day}`;
 
@@ -73,7 +73,7 @@ const formatDate = (
     hours = hours < 10 ? '0' + hours : hours;
     formattedDate += ` at ${hours}`;
     if (minutes > 0) {
-      formattedDate += minutes < 10 ? '0' + minutes : minutes;
+      formattedDate += minutes < 10 ? ':0' + minutes : `:${minutes}`;
     }
     formattedDate += meridian;
   }

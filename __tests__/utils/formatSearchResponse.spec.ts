@@ -31,6 +31,12 @@ describe('Format the search response', () => {
                   role: 'owner',
                 },
               ],
+              ownerOrgForResourceObject: {
+                default: 'Geological Survey of Ireland (GSI)',
+              },
+              custodianOrgForResourceObject: {
+                default: 'United Kingdom Hydrographic Office',
+              },
               resourceAbstractObject: { default: 'Content 1' },
               resourceTemporalExtentDetails: [
                 {
@@ -67,6 +73,12 @@ describe('Format the search response', () => {
                   role: 'owner',
                 },
               ],
+              ownerOrgForResourceObject: {
+                default: 'Geological Survey of Ireland (GSI)',
+              },
+              originatorOrgForResourceObject: {
+                default: 'United Kingdom Hydrographic Office',
+              },
               resourceAbstractObject: { default: 'Content 2' },
               resourceTemporalExtentDetails: [
                 {
@@ -137,6 +149,12 @@ describe('Format the search response', () => {
                   role: 'owner',
                 },
               ],
+              ownerOrgForResourceObject: {
+                default: 'Geological Survey of Ireland (GSI)',
+              },
+              custodianOrgForResourceObject: {
+                default: 'United Kingdom Hydrographic Office',
+              },
               resourceAbstractObject: { default: 'Content 1' },
               resourceTemporalExtentDetails: [
                 {
@@ -212,6 +230,12 @@ describe('Format the search response', () => {
                   role: 'owner',
                 },
               ],
+              ownerOrgForResourceObject: {
+                default: 'Geological Survey of Ireland (GSI)',
+              },
+              originatorOrgForResourceObject: {
+                default: 'United Kingdom Hydrographic Office',
+              },
               resourceType: ['dataset'],
               resourceAbstractObject: { default: 'Content 2' },
               cl_hierarchyLevel: [
@@ -294,7 +318,7 @@ describe('Format the search response', () => {
           language: '',
           topicCategories: '',
           ncea_catalogue_number: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
-          host_catalogue_number: ' ',
+          host_catalogue_number: '',
           host_catalogue_entry: '',
           resource_type_and_hierarchy: '',
           hierarchy_level: '',
@@ -344,9 +368,9 @@ describe('Format the search response', () => {
           topicCategories: '',
           ncea_catalogue_number: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
           host_catalogue_number:
-            'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
+            'https://seabed.admiralty.co.ukaf7cd14f-6c20-445f-abd0-7c41385ba999',
           host_catalogue_entry: '',
-          resource_type_and_hierarchy: 'dataset',
+          resource_type_and_hierarchy: 'Dataset',
           hierarchy_level: 'Dataset',
           resource_locators:
             'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
@@ -451,7 +475,7 @@ describe('Format the search response', () => {
               resourceTemporalExtentDetails: [
                 {
                   end: {
-                    date: '2019-07-31T00:00:00',
+                    date: '2019-07-31',
                   },
                 },
               ],
@@ -530,6 +554,9 @@ describe('Format the search response', () => {
                   role: 'owner',
                 },
               ],
+              pointOfContactOrgForResourceObject: {
+                default: 'United Kingdom Hydrographic Office (pointOfContact)',
+              },
             },
           },
         ],

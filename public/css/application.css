@@ -7834,11 +7834,20 @@
   justify-content: center;
 }
 
+.filter-study-period-group {
+  display: flex;
+}
 .filter-heading {
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: 30px;
+}
+.filter-study-period-heading {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
 }
 .filter-options-label {
   font-size: 1.1875rem;

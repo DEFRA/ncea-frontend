@@ -198,9 +198,9 @@ const formattedDetailsResponse: ISearchResults = {
       alternateTitle: '',
       organisationName: '',
       ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
-      host_catalogue_number: ' 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      host_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_entry: '',
-      resource_type_and_hierarchy: 'dataset',
+      resource_type_and_hierarchy: 'Dataset',
       host_service_catalogue_number: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
       hierarchy_level: 'Dataset',
       resource_locators:
@@ -628,10 +628,10 @@ const detailsSuccessAPIFullData = {
           resourceTemporalExtentDetails: [
             {
               start: {
-                date: '2019-05-24T00:00:00',
+                date: '2019-05-24',
               },
               end: {
-                date: '2019-07-31T00:00:00',
+                date: '2019-07-31',
               },
             },
           ],
@@ -752,9 +752,9 @@ const formattedDetailsFullResponse: ISearchResults = {
       organisationName: 'United Kingdom Hydrographic Office',
       ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_number:
-        'https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+        'https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_entry: '',
-      resource_type_and_hierarchy: 'dataset',
+      resource_type_and_hierarchy: 'Dataset',
       hierarchy_level: 'Dataset',
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
@@ -786,7 +786,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       data_owner:
         'owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk',
       frequency_of_update: 'Not planned',
-      available_formats: ['Geographic Information System', 'Delimited'],
+      available_formats: '',
       character_encoding: 'utf8',
       spatialDataService: '',
       spatialRepresentationService: 'Grid',

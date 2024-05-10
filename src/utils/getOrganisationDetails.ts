@@ -1,26 +1,26 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 const getOrganisationDetails = (
-  data: Record<string, any>[],
+  source: Record<string, any>,
   isDetails: boolean = false,
 ): { organisationValue: string; role: string; email: string } => {
+  const data: Record<string, any>[] = source?.contactForResource ?? [];
   if (Array.isArray(data) && data.length > 0) {
     const rolesOrder: string[] = [
-      'owner',
       'pointOfContact',
       'custodian',
       'distributor',
       'originator',
       'metadataProvider',
+      'owner',
     ];
 
     const getOrganisation = (role: string): any | string => {
-      const orgValue = data.find(
-        (item: Record<string, any>) => item.role === role,
-      );
+      const orgValue = data.find((item: Record<string, any>) => item.role === role);
       if (orgValue) {
+        const orgObject = `${orgValue.role}OrgForResourceObject`;
         return {
-          organisationValue: orgValue?.organisationObject?.default ?? '',
-          role: orgValue?.role ?? '',
+          organisationValue: source?.[orgObject]?.default ?? '',
+          role: orgValue.role,
           email: orgValue?.email ?? '',
         };
       } else {

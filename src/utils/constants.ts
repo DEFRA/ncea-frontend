@@ -91,10 +91,7 @@ export const defaultFilterOptions: IFilterOptions = [
   },
   {
     key: yearRange,
-    field: [
-      'max_resourceTemporalExtentDetails.end.date',
-      'min_resourceTemporalExtentDetails.start.date',
-    ],
+    field: ['max_resourceTemporalExtentDetails.end.date', 'min_resourceTemporalExtentDetails.start.date'],
     needCount: false,
     propertyToRead: 'value',
     hasBucket: false,

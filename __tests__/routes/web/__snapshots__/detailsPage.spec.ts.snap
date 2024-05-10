@@ -386,7 +386,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Host catalogue number</h2>
           
             <span class='tab-content-value'>
-              https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88
+              https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88
             </span>
           
         </div>
@@ -411,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Resource type and hierarchy</h2>
           
             <span class='tab-content-value'>
-              dataset
+              Dataset
             </span>
           
         </div>
@@ -779,9 +779,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Available formats</h2>
           
-            <span class='tab-content-value'>
-              Geographic Information System,Delimited
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  NOT PROVIDED
+</strong>
+
           
         </div>
       
@@ -1353,7 +1354,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Host catalogue number</h2>
           
             <span class='tab-content-value'>
-               3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
             </span>
           
         </div>
@@ -1378,7 +1379,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Resource type and hierarchy</h2>
           
             <span class='tab-content-value'>
-              dataset
+              Dataset
             </span>
           
         </div>

@@ -2,12 +2,16 @@ import { formatDate } from '../../src/utils/formatDate';
 
 describe('Format the given date', () => {
   it('should format date without time correctly', () => {
-    expect(formatDate('2012-03-29T00:00:00')).toBe('29 March 2012');
+    expect(formatDate('2012-03-29T00:00:00.000Z')).toBe('29 March 2012');
   });
 
   it('should format date with time correctly', () => {
-    expect(formatDate('2012-03-29T06:00:00')).toBe('29 March 2012 at 6am');
-    expect(formatDate('2012-03-29T14:30:00')).toBe('29 March 2012 at 14:30pm');
+    expect(formatDate('2012-03-29T06:00:00.000Z')).toBe(
+      '29 March 2012 at 06am',
+    );
+    expect(formatDate('2012-03-29T14:30:00.000Z')).toBe(
+      '29 March 2012 at 14:30pm',
+    );
   });
 
   it('should format the partial date', () => {
@@ -16,8 +20,8 @@ describe('Format the given date', () => {
   });
 
   it('should format the date properly though day is not correct', async () => {
-    expect(formatDate('2022-02-31T00:00:00')).toBe('3 March 2022');
-    expect(formatDate('2022-04-31T00:00:00')).toBe('1 May 2022');
+    expect(formatDate('2022-02-31T00:00:00.000Z')).toBe('3 March 2022');
+    expect(formatDate('2022-04-31T00:00:00.000Z')).toBe('1 May 2022');
   });
 
   it('should format the next date if the hour is 24', async () => {
@@ -25,8 +29,8 @@ describe('Format the given date', () => {
   });
 
   it('should format the date with suffix and time correctly', async () => {
-    expect(formatDate('2012-03-29T06:00:00', true, true)).toBe(
-      '29th March 2012 at 6am',
+    expect(formatDate('2012-03-29T06:00:00.000Z', true, true)).toBe(
+      '29th March 2012 at 06am',
     );
   });
 
@@ -51,6 +55,6 @@ describe('Format the given date', () => {
   it('should handle invalid date strings', () => {
     expect(formatDate('')).toBe('');
     expect(formatDate('invalid date')).toBe('');
-    expect(formatDate('2022-13-01T00:00:00')).toBe('');
+    expect(formatDate('2022-13-01T00:00:00.000Z')).toBe('');
   });
 });
