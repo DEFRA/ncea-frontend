@@ -7648,6 +7648,10 @@
   border-top: 1.5px solid #b1b4b6;
 }
 
+.help-link {
+  color: #1D70B8 !important;
+}
+
 .ncea-static-page__heading-m {
   font-size: 3rem;
   font-style: normal;
