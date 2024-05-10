@@ -62,6 +62,11 @@ const HomeController = {
     }
     return response.redirect(webRoutePaths.home);
   },
+  accessibilityHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/accessibility', {
+      pageTitle: pageTitles.accessibility,
+    });
+  },
 };
 
 export { HomeController };

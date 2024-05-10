@@ -7647,6 +7647,36 @@
   border-top: 1.5px solid #b1b4b6;
 }
 
+.ncea-static-page__heading-m {
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 50px;
+  color: #0b0c0c;
+}
+.ncea-static-page__heading-s {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  color: #0b0c0c;
+}
+.ncea-static-page__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(auto, max-content);
+  row-gap: 20px;
+}
+.ncea-static-page__content-item {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  color: #0b0c0c;
+  margin: 0;
+}
+
 @media only screen and (min-width: 769px) {
   .header-container {
     display: block;

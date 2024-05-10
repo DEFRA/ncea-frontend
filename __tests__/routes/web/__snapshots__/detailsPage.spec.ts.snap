@@ -206,11 +206,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
+
+  
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" onclick="openDataModal(&#39;United Kingdom Hydrographic Office&#39;, &#39;https://seabed.admiralty.co.uk&#39;)">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-4  govuk-button--start" data-module="govuk-button" onclick="openDataModal(&#39;United Kingdom Hydrographic Office&#39;, &#39;https://seabed.admiralty.co.uk&#39;)">
   Go to resource
+  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
+  </svg>
 </button>
 
       
@@ -894,8 +899,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               
@@ -1168,11 +1179,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
 
   
+
+  
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-4  govuk-button--start" data-module="govuk-button" disabled="true">
   Go to resource
+  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
+  </svg>
 </button>
 
       
@@ -1825,8 +1841,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               

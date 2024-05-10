@@ -12,6 +12,7 @@ export const webRoutePaths = {
   filterResourceType: '/resource-type-filter',
   filterStudyPeriod: '/study-period-filter',
   sortResults: '/sort-results',
+  accessibilityStatement: '/accessibility-statement',
 };
 
 export const elasticSearchAPIPaths = {
@@ -261,7 +262,7 @@ export const detailsTabOptions: TabOptions = {
 export const pageTitles = {
   home: 'NCEA Search Service Home',
   date: 'NCEA Guided Search - Study Period',
-  geography: 'NCEA Guided Search -Geographic Data',
+  geography: 'NCEA Guided Search - Geographic Data',
   results: 'NCEA Search Results Summary',
   generalTab: 'NCEA Catalogue Detail - General',
   accessTab: 'NCEA Catalogue Detail - Access',
@@ -270,4 +271,5 @@ export const pageTitles = {
   geographyTab: 'NCEA Catalogue Detail - Geography',
   governanceTab: 'NCEA Catalogue Detail - Governance',
   licenseTab: 'NCEA Catalogue Detail - License',
+  accessibility: 'Accessibility statement',
 };
