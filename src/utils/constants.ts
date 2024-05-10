@@ -12,6 +12,7 @@ export const webRoutePaths = {
   filterResourceType: '/resource-type-filter',
   filterStudyPeriod: '/study-period-filter',
   sortResults: '/sort-results',
+  help: '/help',
 };
 
 export const elasticSearchAPIPaths = {

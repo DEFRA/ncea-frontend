@@ -7617,7 +7617,7 @@
   font-weight: 700;
   line-height: 40px;
   color: #ffffff;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 .banner-container__caption-l {
   font-size: 1.1875rem;
@@ -7630,6 +7630,7 @@
   height: 88px;
   gap: 0px;
   opacity: 0px;
+  margin-bottom: 14px;
 }
 
 .educational-copy-container {
@@ -7645,6 +7646,14 @@
   padding-bottom: 30px;
   margin: 0px;
   border-top: 1.5px solid #b1b4b6;
+}
+
+.help-link:link {
+  color: #4c2c92 !important;
+}
+
+.help-link:visited {
+  color: #4c2c92 !important;
 }
 
 @media only screen and (min-width: 769px) {

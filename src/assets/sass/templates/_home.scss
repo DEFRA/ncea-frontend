@@ -13,7 +13,7 @@
   &__heading-xl {
     @include font-style-stack(36px, 40px);
     color: govuk-colour('white');
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   &__caption-l {
@@ -25,6 +25,7 @@
     height: 88px;
     gap: 0px;
     opacity: 0px;
+    margin-bottom: 14px;
   }
 }
 
@@ -39,4 +40,11 @@
     margin: 0px;
     border-top: 1.5px solid $govuk-border-colour;
   }
+}
+
+.help-link:link {
+  color: #4c2c92 !important;
+}
+.help-link:visited {
+  color: #4c2c92 !important;
 }
