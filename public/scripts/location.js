@@ -18,7 +18,7 @@ const hasCenter = typeof center !== 'undefined' && center;
 const isMapResultsScreen =
   typeof isViewMapResults !== 'undefined' && isViewMapResults;
 let initialCenter;
-let initialZoom;
+const initialZoom = 2;
 let viewChanged = false;
 const mapInitialLon = 3.436;
 const mapInitialLat = 55.3781;
@@ -226,7 +226,7 @@ function closeInfoPopup() {
     const publishedByElement = document.getElementById('info-published-by');
     const contentElement = document.getElementById('info-content');
     mapInfoBlock.style.display = 'none';
-    titleElement.textContent = '';
+    titleElement.textContent = 'test';
     publishedBlock.style.display = 'block';
     publishedByElement.textContent = '';
     contentElement.textContent = '';
@@ -507,8 +507,14 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
   records.forEach((record) => {
     const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
     placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
-    const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
-    centerArray.push([lon, lat]);
+
+    const markersArray = record.geographicCenter.split('_');
+    markersArray.forEach((markerString) => {
+      if (markerString) {
+        const [lon, lat] = markerString.split(',').map(parseFloat);
+        centerArray.push([lon, lat]);
+      }
+    });
   });
   if (doRecenter) {
     const totalCenters = centerArray.length;
@@ -522,9 +528,7 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
         sumCenter[1] / totalCenters,
       ];
       map.getView().setCenter(ol.proj.fromLonLat(averageCenter));
-      map.getView().setZoom(2);
-      initialCenter = map.getView().getCenter();
-      initialZoom = map.getView().getZoom();
+      map.getView().setZoom(initialZoom);
     }
   }
 }
