@@ -6,7 +6,7 @@
 - key: NODE_ENV
   value: "dev"
 - key: PORT
-  value: "80"
+  value: "3000"
 - key: AZURE_KEYVAULT_URL
   value: "https://sndadpinfvt3401.vault.azure.net/"
 - key: APPINSIGHTS_SECRET_NAME
