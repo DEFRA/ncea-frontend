@@ -14,6 +14,7 @@ const {
   filterResourceType,
   filterStudyPeriod,
   help,
+  accessibilityStatement,
 } = webRoutePaths;
 
 const customHapiViews = {
@@ -70,6 +71,7 @@ const customHapiViews = {
         filterResourceType,
         filterStudyPeriod,
         help,
+        accessibilityStatement,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
       gtmId: environmentConfig.gtmId,

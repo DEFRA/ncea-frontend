@@ -13,6 +13,7 @@ export const webRoutePaths = {
   filterStudyPeriod: '/study-period-filter',
   sortResults: '/sort-results',
   help: '/help',
+  accessibilityStatement: '/accessibility-statement',
 };
 
 export const elasticSearchAPIPaths = {
@@ -34,7 +35,7 @@ export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
 export const maxWords: number = 100;
 export const geoNetworkIndex: string = 'gn-records/';
-export const mapResultMaxCount: number = 15000;
+export const mapResultMaxCount: number = 10000;
 export const requiredFieldsForMap: string[] = [
   'resourceTitleObject',
   'contactForResource',
@@ -261,14 +262,15 @@ export const detailsTabOptions: TabOptions = {
 
 export const pageTitles = {
   home: 'NCEA Search Service Home',
-  date: 'NCEA Guided Search (Study Period)',
-  geography: 'NCEA Guided Search (Geographic Data)',
+  date: 'NCEA Guided Search - Study Period',
+  geography: 'NCEA Guided Search - Geographic Data',
   results: 'NCEA Search Results Summary',
-  generalTab: 'NCEA Catalogue Detail (General)',
-  accessTab: 'NCEA Catalogue Detail (Access)',
-  naturalCapitalTab: 'NCEA Catalogue Detail (Natural Capital)',
-  qualityTab: 'NCEA Catalogue Detail (Quality)',
-  geographyTab: 'NCEA Catalogue Detail (Geography)',
-  governanceTab: 'NCEA Catalogue Detail (Governance)',
-  licenseTab: 'NCEA Catalogue Detail (License)',
+  generalTab: 'NCEA Catalogue Detail - General',
+  accessTab: 'NCEA Catalogue Detail - Access',
+  naturalCapitalTab: 'NCEA Catalogue Detail - Natural Capital',
+  qualityTab: 'NCEA Catalogue Detail - Quality',
+  geographyTab: 'NCEA Catalogue Detail - Geography',
+  governanceTab: 'NCEA Catalogue Detail - Governance',
+  licenseTab: 'NCEA Catalogue Detail - License',
+  accessibility: 'Accessibility statement',
 };

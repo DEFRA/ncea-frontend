@@ -62,4 +62,4 @@ const formatAggregationResponse = async (
   }
 };
 
-export { capitalizeWords, formatAggregationResponse };
+export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange };

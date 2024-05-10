@@ -65,6 +65,11 @@ const HomeController = {
   helpHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     return response.view('screens/home/help', {
       pageTitle: pageTitles.home,
+    });    
+  },
+  accessibilityHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/accessibility', {
+      pageTitle: pageTitles.accessibility,
     });
   },
 };

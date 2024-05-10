@@ -18,7 +18,7 @@ const hasCenter = typeof center !== 'undefined' && center;
 const isMapResultsScreen =
   typeof isViewMapResults !== 'undefined' && isViewMapResults;
 let initialCenter;
-let initialZoom;
+const initialZoom = 2;
 let viewChanged = false;
 const mapInitialLon = 3.436;
 const mapInitialLat = 55.3781;
@@ -45,6 +45,7 @@ const appliedFilterOptions = { ...defaultFilterOptions };
 const markerOverlays = [];
 const defaultMapProjection = 'EPSG:3857';
 const extentTransformProjection = 'EPSG:4326';
+let firstMove = true;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -71,7 +72,7 @@ const mapResultsStyle = new ol.style.Style({
     width: 2,
   }),
   fill: new ol.style.Fill({
-    color: 'rgb(62, 238, 0, 0.2)',
+    color: 'rgb(62, 238, 0, 0.15)',
   }),
 });
 
@@ -225,7 +226,7 @@ function closeInfoPopup() {
     const publishedByElement = document.getElementById('info-published-by');
     const contentElement = document.getElementById('info-content');
     mapInfoBlock.style.display = 'none';
-    titleElement.textContent = '';
+    titleElement.textContent = 'test';
     publishedBlock.style.display = 'block';
     publishedByElement.textContent = '';
     contentElement.textContent = '';
@@ -467,6 +468,7 @@ function resetMap() {
   }
   resetFeatureStyle();
   closeInfoPopup();
+  fitMapToExtent();
 }
 
 function exitMap() {
@@ -505,8 +507,14 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
   records.forEach((record) => {
     const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
     placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
-    const [lon, lat] = record.geographicCenter.split(',').map(parseFloat);
-    centerArray.push([lon, lat]);
+
+    const markersArray = record.geographicCenter.split('_');
+    markersArray.forEach((markerString) => {
+      if (markerString) {
+        const [lon, lat] = markerString.split(',').map(parseFloat);
+        centerArray.push([lon, lat]);
+      }
+    });
   });
   if (doRecenter) {
     const totalCenters = centerArray.length;
@@ -519,17 +527,16 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
         sumCenter[0] / totalCenters,
         sumCenter[1] / totalCenters,
       ];
-      map.getView().setCenter(averageCenter);
-      map.getView().setZoom(2);
-      initialCenter = map.getView().getCenter();
-      initialZoom = map.getView().getZoom();
+      map.getView().setCenter(ol.proj.fromLonLat(averageCenter));
+      map.getView().setZoom(initialZoom);
     }
   }
 }
 
 const attachBoundingBoxToggleListener = () => {
   if (boundingBoxCheckbox) {
-    boundingBoxCheckboxChange(true);
+    boundingBoxCheckboxChange(false);
+    vectorLayer.setVisible(false);
     boundingBoxCheckbox.addEventListener('change', () => {
       vectorLayer.setVisible(boundingBoxCheckbox.checked);
     });
@@ -716,6 +723,29 @@ function checkNUpdateMarkerTooltip() {
   }
 }
 
+function fitMapToExtent() {
+  const resetControl = document.getElementById('defra-map-reset');
+  const padding = 50;
+  const visibleMarkers = markerLayer.getSource().getFeatures();
+  const extent = ol.extent.createEmpty();
+  if (visibleMarkers.length > 0) {
+    visibleMarkers.forEach((marker) => {
+      ol.extent.extend(extent, marker.getGeometry().getExtent());
+    });
+  }
+  if (!ol.extent.isEmpty(extent)) {
+    map.getView().fit(extent, {
+      padding: [padding, padding, padding, padding],
+      duration: 1000,
+    });
+  }
+  initialCenter = map.getView().getCenter();
+  if (resetControl) {
+    viewChanged = false;
+    resetControl.style.display = 'none';
+  }
+}
+
 function customControls() {
   const zoomInElement = document.getElementById('defra-map-zoom-in');
   const zoomOutElement = document.getElementById('defra-map-zoom-out');
@@ -733,10 +763,15 @@ function customControls() {
   if (resetControl) {
     resetControl.addEventListener('click', resetMap);
     map.on('moveend', () => {
-      if (!viewChanged) {
-        viewChanged = true;
+      if (firstMove) {
+        fitMapToExtent();
+        firstMove = false;
       } else {
-        resetControl.style.display = 'block';
+        if (!viewChanged) {
+          viewChanged = true;
+        } else {
+          resetControl.style.display = 'block';
+        }
       }
       checkNUpdateMarkerTooltip();
     });
