@@ -1,5 +1,5 @@
 apiVersion: v2
-name: ncea-frontend-4-infra
+name: ncea-frontend-infra
 description: An ASO Helm chart to deploy the ADP Frontend Template Infrastructure
 version: 0.0.1
 dependencies:
