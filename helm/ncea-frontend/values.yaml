@@ -9,7 +9,8 @@ labels:
   component: web
 
 # Here you can define your Priority classes, min/max replicables etc. Empty block does the HELM Library defaults.
-deployment: {}
+deployment:
+  runAsNonRoot: false
 
 # These may be changed. See here: https://github.com/DEFRA/adp-helm-library?tab=readme-ov-file#container-template
 container:
