@@ -272,5 +272,6 @@ export const pageTitles = {
   geographyTab: 'NCEA Catalogue Detail - Geography',
   governanceTab: 'NCEA Catalogue Detail - Governance',
   licenseTab: 'NCEA Catalogue Detail - License',
+  help: 'Help',
   accessibility: 'Accessibility statement',
 };

@@ -135,4 +135,14 @@ describe('Deals with Home Controller', () => {
       });
     });
   });
+  describe('Deals with the helpHandler', () => {
+    it('should call the help view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.helpHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('screens/home/help', {
+        pageTitle: pageTitles.help,
+      });
+    });
+  });
 });
