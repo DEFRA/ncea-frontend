@@ -17,8 +17,7 @@ COPY --chown=node:node package*.json ./
 RUN npm install
 COPY --chown=node:node . .
 RUN npm run build
-RUN mkdir /app/log_files
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "npm", "run", "start" ]
 
 # Production
 FROM defradigital/node:${PARENT_VERSION} AS production
@@ -27,9 +26,21 @@ LABEL uk.gov.defra.adp.parent-image=defradigital/node:${PARENT_VERSION}
 
 ARG PORT
 ENV PORT ${PORT}
-EXPOSE ${PORT}
 
-COPY --from=development /home/node/app/ ./app/
-COPY --from=development /home/node/package*.json ./
-RUN npm ci
+
+WORKDIR /app
+
+# Copy only the 'build' folder from the development stage
+COPY --from=development /app/build ./build
+
+# Copy the 'node_modules' folder from the development stage
+COPY --from=development /app/node_modules ./node_modules
+
+# Copy the 'public' folder from the development stage
+COPY --from=development /app/public ./public
+
+# Create the 'log_files' folder
+RUN mkdir /app/log_files
+
+EXPOSE ${PORT}
 CMD [ "node", "build/index.js" ]
