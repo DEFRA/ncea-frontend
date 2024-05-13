@@ -1,42 +1,35 @@
-FROM node:lts-alpine AS builder
+ARG PARENT_VERSION=2.1.2-node18.11.0
+ARG PORT=3000
+ARG PORT_DEBUG=9229
 
-# Set the working directory inside the container
+# Development
+FROM defradigital/node-development:${PARENT_VERSION} AS development
+ARG PARENT_VERSION
+LABEL uk.gov.defra.adp.parent-image=defradigital/node-development:${PARENT_VERSION}
+
+ARG PORT
+ARG PORT_DEBUG
+ENV PORT ${PORT}
+EXPOSE ${PORT} ${PORT_DEBUG}
+
 WORKDIR /app
-RUN chmod -R 766 /app
-
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install dependencies
+COPY --chown=node:node package*.json ./
 RUN npm install
-
-# Copy the entire source code into the container
-COPY . .
-
-# Build the application
+COPY --chown=node:node . .
 RUN npm run build
-
-
-FROM node:lts-alpine
-
-# Change the working directory on the Docker image to /app
-
-WORKDIR /app
-
-# Copy only the 'build' folder from the builder stage
-COPY --from=builder /app/build ./build
-
-# Copy the 'node_modules' folder from the builder stage
-COPY --from=builder /app/node_modules ./node_modules
-
-# Copy the 'public' folder from the builder stage
-COPY --from=builder /app/public ./public
-
-# Create the 'log_files' folder
 RUN mkdir /app/log_files
+CMD [ "npm", "run", "start:dev" ]
 
-# Expose application port
-EXPOSE 3000
+# Production
+FROM defradigital/node:${PARENT_VERSION} AS production
+ARG PARENT_VERSION
+LABEL uk.gov.defra.adp.parent-image=defradigital/node:${PARENT_VERSION}
 
-# Start the application
-CMD ["node", "build/index.js"]
+ARG PORT
+ENV PORT ${PORT}
+EXPOSE ${PORT}
+
+COPY --from=development /home/node/app/ ./app/
+COPY --from=development /home/node/package*.json ./
+RUN npm ci
+CMD [ "node", "build/index.js" ]
