@@ -1,7 +1,6 @@
 .details {
   &-title {
     @include font-style-stack(36px, 40px);
-    width: 630px;
   }
 
   &-alt_title {
@@ -24,7 +23,7 @@
 
   &-row {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr;
   }
 
   &-label {
@@ -100,4 +99,10 @@
 
 .detail-map {
   border: 2px solid $govuk-text-colour;
+}
+
+@media (min-width: 768px) {
+  .tab-content-row {
+    grid-template-columns: auto 1fr;
+  }
 }

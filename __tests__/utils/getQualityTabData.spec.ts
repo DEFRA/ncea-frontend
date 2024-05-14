@@ -26,7 +26,7 @@ describe('Quality tab fields', () => {
 
     const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
-      publicationInformation: '23rd Mar 2022 - Last Revision',
+      publicationInformation: '23 March 2022 - Last Revision',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Scientific Research. The survey has been validated and processed by the UK Hydrographic Office (UKHO).',
       additionalInformation: 'This is for additional information',
@@ -52,7 +52,7 @@ describe('Quality tab fields', () => {
 
     const result: IQualityItem = await getQualityTabData(searchItem);
     expect(result).toEqual({
-      publicationInformation: '23rd Mar 2022 - Last Revision',
+      publicationInformation: '23 March 2022 - Last Revision',
       lineage: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor enim sit amet diam pharetra, sit amet ultrices elit convallis. Phasellus varius mattis mi, at consequat dolor congue quis. Fusce a odio id nunc viverra sagittis sit amet eget dui. Integer sed aliquet metus. Maecenas a eros vel orci iaculis gravida eget in mi. In non libero eleifend, aliquet ligula a, maximus nisi. Quisque a mauris quis ante faucibus semper vitae in diam. Cras nec ipsum sit amet diam tincidunt malesuada at nec metus.<br>Ut mattis felis sapien, suscipit feugiat quam cursus sit amet. Nam suscipit dapibus pellentesque. Nam sed quam<span id='lineage-content' style='display: none;'> non ipsum ultrices sollicitudin. Aliquam eu porta arcu, id.</span> <a href='javascript:void(0);' class='govuk-link toggle-content__link' onclick=\"toggleContent(this, 'lineage', '${showMoreText}', '${showLessText}')\">${showMoreText}</a>`,
       additionalInformation: '',
       conformity: '',

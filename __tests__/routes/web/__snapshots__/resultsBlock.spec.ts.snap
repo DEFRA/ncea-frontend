@@ -294,10 +294,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
-    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" tabindex="-1">
       <div class="defra-map-info__container">
         <div class=" defra-map-info__title-block">
-          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title">test</h2>
           <span class="defra-map-info__close" id="map-info-close">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
               <g clip-path="url(#clip0_6756_108066)">
@@ -356,7 +356,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-
+  
       </div>
       <div class="govuk-grid-column-two-thirds">
         
@@ -499,7 +499,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
@@ -517,8 +517,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               
@@ -886,10 +892,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
-    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" tabindex="-1">
       <div class="defra-map-info__container">
         <div class=" defra-map-info__title-block">
-          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title">test</h2>
           <span class="defra-map-info__close" id="map-info-close">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
               <g clip-path="url(#clip0_6756_108066)">
@@ -948,7 +954,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-
+  
       </div>
       <div class="govuk-grid-column-two-thirds">
         
@@ -990,7 +996,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
@@ -1008,8 +1014,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               
@@ -1377,10 +1389,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
-    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" tabindex="-1">
       <div class="defra-map-info__container">
         <div class=" defra-map-info__title-block">
-          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title">test</h2>
           <span class="defra-map-info__close" id="map-info-close">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
               <g clip-path="url(#clip0_6756_108066)">
@@ -1439,7 +1451,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-
+  
       </div>
       <div class="govuk-grid-column-two-thirds">
         
@@ -1708,7 +1720,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
@@ -1726,8 +1738,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               
@@ -2095,10 +2113,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
-    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" tabindex="-1">
       <div class="defra-map-info__container">
         <div class=" defra-map-info__title-block">
-          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title">test</h2>
           <span class="defra-map-info__close" id="map-info-close">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
               <g clip-path="url(#clip0_6756_108066)">
@@ -2157,7 +2175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-
+  
       </div>
       <div class="govuk-grid-column-two-thirds">
         
@@ -2275,7 +2293,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
@@ -2293,8 +2311,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               
@@ -2662,10 +2686,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
-    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" aria-labelledby="infoLabel" aria-describedby="infoDescription" tabindex="-1">
+    <div class="defra-map-info" id="map-info" role="dialog" open="true" aria-modal="true" tabindex="-1">
       <div class="defra-map-info__container">
         <div class=" defra-map-info__title-block">
-          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title"></h2>
+          <h2 class='govuk-heading-m govuk-!-margin-0' id="info-title">test</h2>
           <span class="defra-map-info__close" id="map-info-close">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
               <g clip-path="url(#clip0_6756_108066)">
@@ -2724,7 +2748,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 
 
-
+  
       </div>
       <div class="govuk-grid-column-two-thirds">
         
@@ -2766,7 +2790,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
@@ -2784,8 +2808,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/accessibility-statement">
                     Accessibility statement
+                  </a>
+                </li>
+              
+                <li class="govuk-footer__inline-list-item">
+                  <a class="govuk-footer__link" href="#">
+                    Terms and conditions
                   </a>
                 </li>
               
