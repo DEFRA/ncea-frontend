@@ -39,7 +39,6 @@ COPY --from=development /home/node/public ./public
 
 # Create the 'log_files' folder
 RUN mkdir /home/node/log_files
-
+RUN chown -R node /home/node
 EXPOSE ${PORT}
 CMD [ "node", "build/index.js" ]
-# CMD ["sleep", "infinity"]
