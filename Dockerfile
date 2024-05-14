@@ -12,7 +12,6 @@ ARG PORT_DEBUG
 ENV PORT ${PORT}
 EXPOSE ${PORT} ${PORT_DEBUG}
 
-WORKDIR /app
 COPY --chown=node:node package*.json ./
 RUN npm install
 COPY --chown=node:node . .
@@ -28,19 +27,18 @@ ARG PORT
 ENV PORT ${PORT}
 
 
-WORKDIR /app
 
 # Copy only the 'build' folder from the development stage
-COPY --from=development /app/build ./build
+COPY --from=development /home/node/build ./build
 
 # Copy the 'node_modules' folder from the development stage
-COPY --from=development /app/node_modules ./node_modules
+COPY --from=development /home/node/node_modules ./node_modules
 
 # Copy the 'public' folder from the development stage
-COPY --from=development /app/public ./public
+COPY --from=development /home/node/public ./public
 
 # Create the 'log_files' folder
-RUN mkdir /app/log_files
+RUN mkdir /home/node/log_files
 
 EXPOSE ${PORT}
 CMD [ "node", "build/index.js" ]
