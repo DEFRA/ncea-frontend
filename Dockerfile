@@ -41,5 +41,5 @@ COPY --from=development /home/node/public ./public
 RUN mkdir /home/node/log_files
 RUN chown -R node /home/node/log_files
 EXPOSE ${PORT}
-# CMD [ "node", "build/index.js" ]
-CMD ["sleep", "infinity"]
+CMD [ "node", "build/index.js" ]
+# CMD ["sleep", "infinity"]
