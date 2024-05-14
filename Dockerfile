@@ -42,3 +42,4 @@ RUN mkdir /home/node/log_files
 
 EXPOSE ${PORT}
 CMD [ "node", "build/index.js" ]
+# CMD ["sleep", "infinity"]
