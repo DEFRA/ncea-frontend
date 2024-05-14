@@ -7652,6 +7652,10 @@
   color: #1D70B8 !important;
 }
 
+.ncea-static-page-line-item {
+  margin-bottom: 0px;
+}
+
 .ncea-static-page__heading-m {
   font-size: 3rem;
   font-style: normal;

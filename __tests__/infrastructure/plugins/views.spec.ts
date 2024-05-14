@@ -16,6 +16,7 @@ const {
   filterStudyPeriod,
   accessibilityStatement,
   help,
+  privacyPolicy,
 } = webRoutePaths;
 
 describe('Vision Plugin Configuration', () => {
@@ -65,6 +66,7 @@ describe('Vision Plugin Configuration', () => {
         filterStudyPeriod,
         accessibilityStatement,
         help,
+        privacyPolicy,
       },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,
