@@ -84,9 +84,9 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
 
   describe('Geography Questionnaire > Coordinate questionnaire form', () => {
     describe('Coordinate questionnaire block classes', () => {
-      it('renders 4 govuk-grid-row class', async () => {
+      it('renders 9 govuk-grid-row class', async () => {
         expect(document.querySelector('.govuk-grid-row')).toBeTruthy();
-        expect(document.querySelectorAll('.govuk-grid-row').length).toEqual(6);
+        expect(document.querySelectorAll('.govuk-grid-row').length).toEqual(9);
       });
 
       it('renders 2 govuk-grid-column-full class', async () => {
@@ -141,7 +141,9 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
 
       it('should render the block medium heading', async () => {
         expect(
-          document?.querySelector('.govuk-heading-m')?.textContent?.trim(),
+          document
+            ?.querySelector('.coordinate-sub-heading')
+            ?.textContent?.trim(),
         ).toBe('Draw area on map');
       });
     });
@@ -183,9 +185,7 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
 
     describe('Coordinate questionnaire buttons', () => {
       it('should renders 3 buttons', () => {
-        const buttons = document?.querySelectorAll(
-          'button[data-module="govuk-button"], a[data-module="govuk-button"]',
-        );
+        const buttons = document?.querySelectorAll('.coordinate-buttons');
         expect(buttons).toBeTruthy();
         expect(buttons.length).toBe(3);
       });

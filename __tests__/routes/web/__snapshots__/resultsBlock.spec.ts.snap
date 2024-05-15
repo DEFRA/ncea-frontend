@@ -35,6 +35,100 @@ exports[`Results block template Guided search journey Search results with empty 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
+    <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link" href="#">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -633,6 +727,100 @@ exports[`Results block template Guided search journey Search results with error 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
+    <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link" href="#">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -1130,6 +1318,100 @@ exports[`Results block template Quick search journey Search results with data sh
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
+    <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link" href="#">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -1573,7 +1855,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0 go-to-resource" data-module="govuk-button" disabled="true">
   Go to resource
 </button>
 
@@ -1631,7 +1913,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0 go-to-resource" data-module="govuk-button" disabled="true">
   Go to resource
 </button>
 
@@ -1854,6 +2136,100 @@ exports[`Results block template Quick search journey Search results with empty d
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
+    <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link" href="#">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -2427,6 +2803,100 @@ exports[`Results block template Quick search journey Search results with error s
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
+    <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link" href="#">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>

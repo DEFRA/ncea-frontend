@@ -524,7 +524,7 @@ describe('Results Screen', () => {
       it('should render the questionnaire search container heading', async () => {
         expect(
           document
-            ?.querySelectorAll('.govuk-heading-m')?.[1]
+            ?.querySelectorAll('.govuk-heading-m')?.[2]
             ?.textContent?.trim(),
         ).toBe('Questionnaire search');
       });

@@ -35,6 +35,100 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
+    <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link" href="#">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -150,7 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
-      <h1 class="govuk-heading-m">Draw area on map</h1>
+      <h1 class="govuk-heading-m coordinate-sub-heading">Draw area on map</h1>
       <span class="govuk-caption-m">Click and drag to draw a boundary box. This will auto-populate the geographical coordinate box.</span>
     </div>
   </div>
@@ -268,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">
+<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons" data-module="govuk-button">
   Previous question
 </a>
 
@@ -281,7 +375,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<a href="/search?" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
+<a href="/search?" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons" data-module="govuk-button" data-do-storage-skip="">
   Skip question
 </a>
 
@@ -292,7 +386,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-right-0" data-module="govuk-button" data-to-disable="" data-next-question="">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-right-0 coordinate-buttons" data-module="govuk-button" data-to-disable="" data-next-question="">
   Show results
 </button>
 
