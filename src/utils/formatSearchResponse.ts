@@ -37,6 +37,13 @@ const getAbstractContent = (data: Record<string, any>, id: string): string => {
   return '';
 };
 
+const getResourceLocatorURL = (data: string | string[]): string => {
+  if (Array.isArray(data) && data.length) {
+    return data[0] as string;
+  }
+  return data as string;
+};
+
 const formatSearchResponse = async (
   apiResponse: Record<string, any>,
   isDetails: boolean = false,
@@ -75,7 +82,7 @@ const formatSearchResponse = async (
       studyPeriod,
       startYear,
       toYear,
-      resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+      resourceLocator: getResourceLocatorURL(searchItem?._source?.linkUrl ?? ''),
       organisationName: organisationDetails.organisationValue,
     };
 
