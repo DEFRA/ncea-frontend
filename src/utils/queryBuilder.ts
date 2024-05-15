@@ -180,7 +180,7 @@ const _generateDateRangeQuery = (searchBuilderPayload: ISearchBuilderPayload, qu
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
   const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
-  if (studyPeriodFilter?.fdy && studyPeriodFilter?.fdy) {
+  if (studyPeriodFilter?.fdy && studyPeriodFilter?.tdy) {
     const newFields: IDateValues = {
       fdy: studyPeriodFilter?.fdy,
       tdy: studyPeriodFilter?.tdy,
