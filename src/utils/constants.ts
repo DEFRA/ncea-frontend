@@ -15,6 +15,7 @@ export const webRoutePaths = {
   help: '/help',
   accessibilityStatement: '/accessibility-statement',
   termsAndConditions: '/terms-conditions',
+  privacyPolicy: '/privacy-policy',
 };
 
 export const elasticSearchAPIPaths = {
@@ -276,4 +277,5 @@ export const pageTitles = {
   help: 'Help',
   accessibility: 'Accessibility statement',
   termsAndConditions: 'Terms and conditions',
+  privacyPolicy: 'Privacy policy',
 };

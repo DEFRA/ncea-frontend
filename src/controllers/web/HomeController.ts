@@ -77,6 +77,11 @@ const HomeController = {
       pageTitle: pageTitles.termsAndConditions,
     });
   },
+  privacyPolicyHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/privacy_policy', {
+      pageTitle: pageTitles.privacyPolicy,
+    });
+  },
 };
 
 export { HomeController };

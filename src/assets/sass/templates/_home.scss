@@ -46,6 +46,10 @@
   color: #1D70B8 !important;
 }
 
+.ncea-static-page-line-item{
+  margin-bottom: 0px;
+}
+
 .ncea-static-page {
   &__heading-m {
     @include font-style-stack(48px, 50px, 700);

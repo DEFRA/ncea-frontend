@@ -16,6 +16,7 @@ const {
   help,
   accessibilityStatement,
   termsAndConditions,
+  privacyPolicy,
 } = webRoutePaths;
 
 const customHapiViews = {
@@ -74,6 +75,7 @@ const customHapiViews = {
         help,
         accessibilityStatement,
         termsAndConditions,
+        privacyPolicy,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
       gtmId: environmentConfig.gtmId,
