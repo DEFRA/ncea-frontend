@@ -6,6 +6,7 @@ import {
   IGeoCoordinates,
   IGeoShapeBlock,
   IMustBlock,
+  IOtherQueryProperties,
   IQuery,
   IQueryStringBlock,
   IRangeBlock,
@@ -124,25 +125,32 @@ const _generateSortBlock = (sort: string): ISortBlock => {
   return sortBlock;
 };
 
+const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPayload): IOtherQueryProperties => {
+  const { searchFieldsObject, isCount = false, isAggregation = false, docId = '' } = searchBuilderPayload;
+  const { sort, rowsPerPage, page, requiredFields = [] } = (searchFieldsObject as ISearchPayload) ?? {};
+
+  const isSort: boolean = sort !== '' && !isCount && docId === '' && !isAggregation;
+  const sortBlock: ISortBlock[] = isSort ? [_generateSortBlock(sort)] : [];
+
+  return {
+    ...(isSort && { sort: sortBlock }),
+    ...(docId === '' && { size: isCount || isAggregation ? 0 : rowsPerPage }),
+    ...(!isCount &&
+      !isAggregation &&
+      docId === '' &&
+      page &&
+      rowsPerPage !== mapResultMaxCount && {
+        from: page === 1 ? 0 : (page - 1) * rowsPerPage,
+      }),
+    ...(!isCount && docId === '' && !isAggregation && { _source: requiredFields ?? [] }),
+  };
+};
+
 const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
-  const {
-    searchFieldsObject,
-    fieldsToSearch = [],
-    isCount = false,
-    isAggregation = false,
-    docId = '',
-  } = searchBuilderPayload;
-  const {
-    fields,
-    sort,
-    rowsPerPage,
-    page,
-    fieldsExist = [],
-    requiredFields = [],
-  } = (searchFieldsObject as ISearchPayload) ?? {};
+  const { searchFieldsObject, fieldsToSearch = [], docId = '' } = searchBuilderPayload;
+  const { fields, fieldsExist = [] } = (searchFieldsObject as ISearchPayload) ?? {};
 
   const searchTerm: string = fields?.keyword?.q as string;
-  const isSort: boolean = sort !== '' && !isCount && docId === '' && !isAggregation;
 
   const mustBlock: IMustBlock = docId ? [_generateQueryStringBlock(docId, ['_id'])] : [];
   if (searchTerm && docId === '') mustBlock.push(_generateQueryStringBlock(searchTerm, fieldsToSearch));
@@ -156,8 +164,6 @@ const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => 
   const { nth = '', sth = '', est = '', wst = '' } = geoCoordinates ?? {};
   const filterBlock: IFilterBlock = nth && sth && est && wst ? [_generateGeoShapeBlock(geoCoordinates)] : [];
 
-  const sortBlock: ISortBlock[] = isSort ? [_generateSortBlock(sort)] : [];
-
   return {
     query: {
       bool: {
@@ -165,16 +171,7 @@ const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => 
         ...(filterBlock.length && { filter: filterBlock }),
       },
     },
-    ...(isSort && { sort: sortBlock }),
-    ...(docId === '' && { size: isCount || isAggregation ? 0 : rowsPerPage }),
-    ...(!isCount &&
-      !isAggregation &&
-      docId === '' &&
-      page &&
-      rowsPerPage !== mapResultMaxCount && {
-        from: page === 1 ? 0 : (page - 1) * rowsPerPage,
-      }),
-    ...(!isCount && docId === '' && !isAggregation && { _source: requiredFields ?? [] }),
+    ..._generateOtherQueryProperties(searchBuilderPayload),
   };
 };
 

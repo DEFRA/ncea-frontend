@@ -68,19 +68,24 @@ interface ISortBlock {
 type IMustBlock = (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[];
 type IFilterBlock = (IRangeBlock | IGeoShapeBlock)[];
 
-interface IQuery {
+interface IQueryBlock {
   query: {
     bool?: {
       must?: IMustBlock;
       filter?: IFilterBlock;
     };
   };
+}
+
+interface IOtherQueryProperties {
   aggs?: IAggregationBlock;
   sort?: ISortBlock[];
   size?: number;
   from?: number;
   _source?: string[];
 }
+
+type IQuery = IQueryBlock & IOtherQueryProperties;
 
 interface IGeoCoordinates {
   nth?: string;
@@ -148,4 +153,6 @@ export {
   IShapeCoordinates,
   ISortBlock,
   ITermsBlock,
+  IQueryBlock,
+  IOtherQueryProperties,
 };
