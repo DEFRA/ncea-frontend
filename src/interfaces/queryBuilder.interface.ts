@@ -65,11 +65,14 @@ interface ISortBlock {
   [key: string]: ISortOrder | ICustomSortScript;
 }
 
+type IMustBlock = (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[];
+type IFilterBlock = (IRangeBlock | IGeoShapeBlock)[];
+
 interface IQuery {
   query: {
     bool?: {
-      must?: (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[];
-      filter?: (IRangeBlock | IGeoShapeBlock)[];
+      must?: IMustBlock;
+      filter?: IFilterBlock;
     };
   };
   aggs?: IAggregationBlock;
@@ -131,8 +134,10 @@ export {
   ICustomSortScript,
   IDateValues,
   IFieldExistsBlock,
+  IFilterBlock,
   IGeoCoordinates,
   IGeoShapeBlock,
+  IMustBlock,
   IRangeBlock,
   IQuery,
   IQueryStringBlock,

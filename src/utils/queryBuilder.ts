@@ -2,8 +2,10 @@ import { generateDateString } from './generateDateString';
 import {
   ICustomSortScript,
   IFieldExistsBlock,
+  IFilterBlock,
   IGeoCoordinates,
   IGeoShapeBlock,
+  IMustBlock,
   IQuery,
   IQueryStringBlock,
   IRangeBlock,
@@ -138,26 +140,24 @@ const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => 
     fieldsExist = [],
     requiredFields = [],
   } = (searchFieldsObject as ISearchPayload) ?? {};
+
   const searchTerm: string = fields?.keyword?.q as string;
-  const isSort: boolean = sort != '' && !isCount && docId === '' && !isAggregation;
-  const mustBlock: (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[] = [];
-  const sortBlock: ISortBlock[] = [];
-  const filterBlock: (IRangeBlock | IGeoShapeBlock)[] = [];
-  const geoCoordinates: IGeoCoordinates = fields?.extent as IGeoCoordinates;
-  const { nth = '', sth = '', est = '', wst = '' } = geoCoordinates ?? {};
-  if (docId) mustBlock.push(_generateQueryStringBlock(docId, ['_id']));
+  const isSort: boolean = sort !== '' && !isCount && docId === '' && !isAggregation;
+
+  const mustBlock: IMustBlock = docId ? [_generateQueryStringBlock(docId, ['_id'])] : [];
   if (searchTerm && docId === '') mustBlock.push(_generateQueryStringBlock(searchTerm, fieldsToSearch));
-  if (fieldsExist.length > 0 && docId === '')
+  if (fieldsExist.length > 0 && docId === '') {
     fieldsExist.forEach((field: string) => {
       mustBlock.push(_generateFieldExistsBlock(field));
     });
+  }
 
-  if (nth && sth && est && wst) {
-    filterBlock.push(_generateGeoShapeBlock(geoCoordinates));
-  }
-  if (isSort) {
-    sortBlock.push(_generateSortBlock(sort));
-  }
+  const geoCoordinates: IGeoCoordinates = fields?.extent as IGeoCoordinates;
+  const { nth = '', sth = '', est = '', wst = '' } = geoCoordinates ?? {};
+  const filterBlock: IFilterBlock = nth && sth && est && wst ? [_generateGeoShapeBlock(geoCoordinates)] : [];
+
+  const sortBlock: ISortBlock[] = isSort ? [_generateSortBlock(sort)] : [];
+
   return {
     query: {
       bool: {
@@ -183,8 +183,8 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuer
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
   if (docId === '') {
-    const filterBlock: (IRangeBlock | IGeoShapeBlock)[] = queryPayload.query?.bool?.filter ?? [];
-    const mustBlock: (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[] = queryPayload.query?.bool?.must ?? [];
+    const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
+    const mustBlock: IMustBlock = queryPayload.query?.bool?.must ?? [];
     if (filters?.[studyPeriodFilterField]) {
       const newFields: ISearchFields = {
         date: {
@@ -213,7 +213,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
   if (docId === '') {
-    const mustBlock: (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[] = queryPayload.query?.bool?.must ?? [];
+    const mustBlock: IMustBlock = queryPayload.query?.bool?.must ?? [];
     if (filters?.[resourceTypeFilterField]) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
       queryPayload.query.bool = {
@@ -242,7 +242,7 @@ const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPa
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
   if (docId === '') {
-    const filterBlock: (IRangeBlock | IGeoShapeBlock)[] = queryPayload.query?.bool?.filter ?? [];
+    const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
     if (filters?.[studyPeriodFilterField]) {
       const fields: ISearchFields = {
         date: {
