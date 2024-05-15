@@ -1855,6 +1855,7 @@ describe('Build the search query', () => {
       const expectedQuery: IQuery = {
         query: {
           bool: {
+            filter: [],
             must: [
               {
                 query_string: {
@@ -1885,6 +1886,203 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query.bool?.must).toHaveLength(1);
+    });
+
+    it('should build the search query for resourceType aggregation with date range', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          unique_resource_types: {
+            terms: {
+              field: 'resourceType',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(2);
+    });
+
+    it('should build the search query for resourceType aggregation with geography coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          unique_resource_types: {
+            terms: {
+              field: 'resourceType',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(1);
+    });
+
+    it('should build the search query for resourceType aggregation with both date range & geography coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          unique_resource_types: {
+            terms: {
+              field: 'resourceType',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query for resourceType aggregation with study period filter', () => {
@@ -1959,6 +2157,150 @@ describe('Build the search query', () => {
       expect(result.query.bool?.filter).toHaveLength(2);
     });
 
+    it('should build the search query for resourceType aggregation with study period filter ignore date range', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2022',
+            tdy: '2023',
+          },
+        },
+        sort: 'best_match',
+        filters: {
+          [studyPeriodFilterField]: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+        },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          unique_resource_types: {
+            terms: {
+              field: 'resourceType',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(2);
+    });
+
+    it('should build the search query for resourceType aggregation with study period filter with coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: {
+          [studyPeriodFilterField]: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+        },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          unique_resource_types: {
+            terms: {
+              field: 'resourceType',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(3);
+    });
+
     it('should build the search query for study period aggregation', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -1975,6 +2317,7 @@ describe('Build the search query', () => {
       const expectedQuery: IQuery = {
         query: {
           bool: {
+            filter: [],
             must: [
               {
                 query_string: {
@@ -2012,6 +2355,224 @@ describe('Build the search query', () => {
       expect(result.query.bool?.must).toHaveLength(1);
     });
 
+    it('should build the search query for study period aggregation with date range', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+            must: [],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query.bool?.must).toHaveLength(0);
+    });
+
+    it('should build the search query for study period aggregation with geography coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+            ],
+            must: [],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(1);
+      expect(result.query.bool?.must).toHaveLength(0);
+    });
+
+    it('should build the search query for study period aggregation with both date range and geography coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+            must: [],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query.bool?.must).toHaveLength(0);
+    });
+
     it('should build the search query for study period aggregation with resourceType filter', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -2028,6 +2589,308 @@ describe('Build the search query', () => {
       const expectedQuery: IQuery = {
         query: {
           bool: {
+            filter: [],
+            must: [
+              {
+                query_string: {
+                  query: 'example',
+                  default_operator: 'AND',
+                },
+              },
+              {
+                terms: {
+                  resourceType: ['dataset', 'series'],
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.must).toHaveLength(2);
+    });
+
+    it('should build the search query for study period aggregation with resourceType filter and date range', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+        },
+        sort: 'best_match',
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+            must: [
+              {
+                terms: {
+                  resourceType: ['dataset', 'series'],
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query.bool?.filter).toHaveLength(2);
+    });
+
+    it('should build the search query for study period aggregation with resourceType filter and coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+            ],
+            must: [
+              {
+                terms: {
+                  resourceType: ['dataset', 'series'],
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query.bool?.filter).toHaveLength(1);
+    });
+
+    it('should build the search query for study period aggregation with resourceType filter, date range and coordinates', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+          extent: {
+            nth: '123',
+            sth: '345',
+            est: '678',
+            wst: '901',
+          },
+        },
+        sort: 'best_match',
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [
+              {
+                geo_shape: {
+                  geom: {
+                    shape: {
+                      type: 'envelope',
+                      coordinates: [
+                        [901, 123],
+                        [678, 345],
+                      ],
+                    },
+                    relation: 'intersects',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.start.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+              {
+                range: {
+                  'resourceTemporalExtentDetails.end.date': {
+                    gte: '2017-01-01',
+                    lte: '2022-12-31',
+                  },
+                },
+              },
+            ],
+            must: [
+              {
+                terms: {
+                  resourceType: ['dataset', 'series'],
+                },
+              },
+            ],
+          },
+        },
+        aggs: {
+          min_year: {
+            min: {
+              field: 'resourceTemporalExtentDetails.start.date',
+            },
+          },
+          max_year: {
+            max: {
+              field: 'resourceTemporalExtentDetails.end.date',
+            },
+          },
+        },
+        size: 0,
+      };
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: true },
+      );
+
+      expect(result).toEqual(expectedQuery);
+      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query.bool?.filter).toHaveLength(3);
+    });
+
+    it('should build the search query for study period aggregation with resourceType filter ignoring study period filter', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          keyword: {
+            q: 'example',
+          },
+        },
+        sort: 'best_match',
+        filters: {
+          [resourceTypeFilterField]: ['dataset', 'series'],
+          [studyPeriodFilterField]: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+        },
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const expectedQuery: IQuery = {
+        query: {
+          bool: {
+            filter: [],
             must: [
               {
                 query_string: {
@@ -2099,7 +2962,6 @@ describe('Build the search query', () => {
             ],
           },
         },
-        size: 0,
       };
 
       const result = generateSearchQuery({
@@ -2154,7 +3016,6 @@ describe('Build the search query', () => {
             must: [],
           },
         },
-        size: 0,
       };
 
       const result = generateSearchQuery({

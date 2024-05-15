@@ -134,7 +134,7 @@ const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPaylo
 
   return {
     ...(isSort && { sort: sortBlock }),
-    ...(docId === '' && { size: isCount || isAggregation ? 0 : rowsPerPage }),
+    ...(!isCount && docId === '' && { size: isAggregation ? 0 : rowsPerPage }),
     ...(!isCount &&
       !isAggregation &&
       docId === '' &&
@@ -175,23 +175,30 @@ const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => 
   };
 };
 
+const _generateDateRangeQuery = (searchBuilderPayload: ISearchBuilderPayload, queryPayload: IQuery): IFilterBlock => {
+  const { searchFieldsObject } = searchBuilderPayload;
+  const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
+  const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
+  const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
+  if (studyPeriodFilter?.fdy && studyPeriodFilter?.fdy) {
+    const newFields: IDateValues = {
+      fdy: studyPeriodFilter?.fdy,
+      tdy: studyPeriodFilter?.tdy,
+    };
+    filterBlock.push(..._generateRangeBlock(newFields));
+  } else if (fields?.date?.fdy && fields?.date?.tdy) {
+    filterBlock.push(..._generateRangeBlock(fields.date));
+  }
+  return filterBlock;
+};
+
 const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
   const queryPayload: IQuery = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
-  const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
+  const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
   if (docId === '') {
-    const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
+    const filterBlock: IFilterBlock = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
     const mustBlock: IMustBlock = queryPayload.query?.bool?.must ?? [];
-    const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
-    if (studyPeriodFilter?.fdy && studyPeriodFilter?.fdy) {
-      const newFields: IDateValues = {
-        fdy: studyPeriodFilter?.fdy,
-        tdy: studyPeriodFilter?.tdy,
-      };
-      filterBlock.push(..._generateRangeBlock(newFields));
-    } else if (fields?.date?.fdy && fields?.date?.tdy) {
-      filterBlock.push(..._generateRangeBlock(fields.date));
-    }
 
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
     if (resourceTypeFilters.length > 0) {
@@ -208,17 +215,22 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuer
 const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
   const queryPayload: IQuery = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
-  const { filters } = searchFieldsObject as ISearchPayload;
+  const { fields, filters } = searchFieldsObject as ISearchPayload;
   if (docId === '') {
     const mustBlock: IMustBlock = queryPayload.query?.bool?.must ?? [];
+    const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
+    if (fields?.date?.fdy && fields?.date?.tdy) {
+      filterBlock.push(..._generateRangeBlock(fields.date));
+    }
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
-      queryPayload.query.bool = {
-        ...queryPayload.query.bool,
-        must: [...mustBlock],
-      };
     }
+    queryPayload.query.bool = {
+      ...queryPayload.query.bool,
+      filter: [...filterBlock],
+      must: [...mustBlock],
+    };
   }
   queryPayload.aggs = {
     min_year: {
@@ -237,22 +249,13 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
 
 const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
   const queryPayload: IQuery = _generateQuery(searchBuilderPayload);
-  const { searchFieldsObject, docId = '' } = searchBuilderPayload;
-  const { filters } = searchFieldsObject as ISearchPayload;
+  const { docId = '' } = searchBuilderPayload;
   if (docId === '') {
-    const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
-    const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
-    if (studyPeriodFilter?.fdy && studyPeriodFilter?.tdy) {
-      const fields: IDateValues = {
-        fdy: studyPeriodFilter?.fdy,
-        tdy: studyPeriodFilter?.tdy,
-      };
-      filterBlock.push(..._generateRangeBlock(fields));
-      queryPayload.query.bool = {
-        ...queryPayload.query.bool,
-        filter: [...filterBlock],
-      };
-    }
+    const filterBlock: IFilterBlock = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    queryPayload.query.bool = {
+      ...queryPayload.query.bool,
+      filter: [...filterBlock],
+    };
   }
   queryPayload.aggs = {
     unique_resource_types: {
