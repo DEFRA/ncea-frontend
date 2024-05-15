@@ -41,11 +41,12 @@ const defaultFilterOptions = {
   toYear: '',
   resourceType: [],
 };
-const appliedFilterOptions = { ...defaultFilterOptions };
+let appliedFilterOptions = { ...defaultFilterOptions };
 const markerOverlays = [];
 const defaultMapProjection = 'EPSG:3857';
 const extentTransformProjection = 'EPSG:4326';
 let firstMove = true;
+let resetData = false;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -462,6 +463,7 @@ function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
+  firstMove = true;
   const resetControl = document.getElementById('defra-map-reset');
   if (resetControl) {
     resetControl.style.display = 'none';
@@ -474,6 +476,12 @@ function resetMap() {
 function exitMap() {
   resetMap();
   resetFilterData();
+  if (resetData) {
+    appliedFilterOptions = { ...defaultFilterOptions };
+    invokeMapResults(true, true);
+    invokeMapFilters(true);
+    resetData = false;
+  }
 }
 
 function exitMapEventListener() {
@@ -497,14 +505,16 @@ function getFilterRecordIds() {
   return filteredIds;
 }
 
-function drawBoundingBoxWithMarker(doRecenter = true) {
+function drawBoundingBoxWithMarker(doRecenter = true, fitToMapExtentFlag) {
   const filteredIds = getFilterRecordIds();
   const records = mapResults.filter((record) =>
     filteredIds.includes(record.id),
   );
+  vectorSource.clear();
+  markerSource.clear();
   map.updateSize();
   const centerArray = [];
-  records.forEach((record) => {
+  mapResults.forEach((record) => {
     const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
     placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
 
@@ -531,6 +541,7 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
       map.getView().setZoom(initialZoom);
     }
   }
+  fitToMapExtentFlag && fitMapToExtent();
 }
 
 const attachBoundingBoxToggleListener = () => {
@@ -559,9 +570,9 @@ const attachMapResultsFilterCheckboxChangeListener = () => {
             appliedFilterOptions.resourceType.splice(index, 1);
           }
         }
-        vectorSource.clear();
-        markerSource.clear();
-        drawBoundingBoxWithMarker(false);
+        resetData = true;
+        invokeMapResults(true);
+        invokeMapFilters();
       });
     });
   }
@@ -575,13 +586,13 @@ const updateStudyPeriodFilter = () => {
     appliedFilterOptions.toYear = document.getElementById(
       'map_results-to_year',
     ).value;
-    vectorSource.clear();
-    markerSource.clear();
-    drawBoundingBoxWithMarker(false);
+    resetData = true;
+    invokeMapResults(true);
+    invokeMapFilters();
   }, 100);
 };
 
-const getMapResults = async (path) => {
+const getMapResults = async (path, fitToMapExtentFlag) => {
   const mapResultsButton = document.getElementById(mapResultsButtonId);
   const mapResultsCount = document.getElementById(mapResultsCountId);
   const response = await invokeAjaxCall(path, {}, false, 'GET');
@@ -593,7 +604,7 @@ const getMapResults = async (path) => {
       if (mapResultsJson.total > 0) {
         mapResults = mapResultsJson.items;
         setTimeout(() => {
-          drawBoundingBoxWithMarker();
+          drawBoundingBoxWithMarker(true, fitToMapExtentFlag);
         }, 100);
         attachBoundingBoxToggleListener();
       } else {
@@ -626,19 +637,39 @@ const getMapFilters = async (path) => {
   }
 };
 
-const invokeMapResults = () => {
+const getPathWithQueryParams = (basePath, needOriginalQueryParams) => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const { startYear, toYear, resourceType } = appliedFilterOptions;
+  if (startYear && toYear && !needOriginalQueryParams) {
+    queryParams.set('sy', startYear);
+    queryParams.set('ty', toYear);
+  }
+  if (resourceType.length > 0 && !needOriginalQueryParams) {
+    queryParams.set('rty', resourceType.join(','));
+  }
+  const queryString = queryParams.size > 0 ? `?${queryParams.toString()}` : '';
+  return `${basePath}${queryString}`;
+};
+
+const invokeMapResults = (
+  fitToMapExtentFlag = false,
+  needOriginalQueryParams = false,
+) => {
   const fetchResults = document.querySelector('[data-fetch-map-results]');
   if (fetchResults) {
     const action = fetchResults.getAttribute(actionDataAttribute);
-    getMapResults(`${action}${window.location.search}`);
+    getMapResults(
+      getPathWithQueryParams(action, needOriginalQueryParams),
+      fitToMapExtentFlag,
+    );
   }
 };
 
-const invokeMapFilters = () => {
+const invokeMapFilters = (needOriginalQueryParams = false) => {
   const fetchFilters = document.querySelector('[data-fetch-map-filters]');
   if (fetchFilters) {
     const action = fetchFilters.getAttribute(actionDataAttribute);
-    getMapFilters(`${action}${window.location.search}`);
+    getMapFilters(getPathWithQueryParams(action, needOriginalQueryParams));
   }
 };
 
