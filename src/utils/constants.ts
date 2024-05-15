@@ -12,7 +12,9 @@ export const webRoutePaths = {
   filterResourceType: '/resource-type-filter',
   filterStudyPeriod: '/study-period-filter',
   sortResults: '/sort-results',
+  help: '/help',
   accessibilityStatement: '/accessibility-statement',
+  privacyPolicy: '/privacy-policy',
 };
 
 export const elasticSearchAPIPaths = {
@@ -270,5 +272,7 @@ export const pageTitles = {
   geographyTab: 'NCEA Catalogue Detail - Geography',
   governanceTab: 'NCEA Catalogue Detail - Governance',
   licenseTab: 'NCEA Catalogue Detail - License',
+  help: 'Help',
   accessibility: 'Accessibility statement',
+  privacypolicy: 'Privacy policy',
 };

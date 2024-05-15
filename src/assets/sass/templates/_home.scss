@@ -25,6 +25,7 @@
     height: 88px;
     gap: 0px;
     opacity: 0px;
+    margin-bottom: 14px;
   }
 }
 
@@ -39,6 +40,14 @@
     margin: 0px;
     border-top: 1.5px solid $govuk-border-colour;
   }
+}
+
+.help-link{
+  color: #1D70B8 !important;
+}
+
+.ncea-static-page-line-item{
+  margin-bottom: 0px;
 }
 
 .ncea-static-page {

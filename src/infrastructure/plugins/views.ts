@@ -13,7 +13,9 @@ const {
   getMapFilters,
   filterResourceType,
   filterStudyPeriod,
+  help,
   accessibilityStatement,
+  privacyPolicy,
 } = webRoutePaths;
 
 const customHapiViews = {
@@ -69,7 +71,9 @@ const customHapiViews = {
         getMapFilters,
         filterResourceType,
         filterStudyPeriod,
+        help,
         accessibilityStatement,
+        privacyPolicy,
       },
       appInsightsConnectionString: environmentConfig.appInsightsConnectionString,
       gtmId: environmentConfig.gtmId,

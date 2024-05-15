@@ -7630,6 +7630,7 @@
   height: 88px;
   gap: 0px;
   opacity: 0px;
+  margin-bottom: 14px;
 }
 
 .educational-copy-container {
@@ -7645,6 +7646,14 @@
   padding-bottom: 30px;
   margin: 0px;
   border-top: 1.5px solid #b1b4b6;
+}
+
+.help-link {
+  color: #1D70B8 !important;
+}
+
+.ncea-static-page-line-item {
+  margin-bottom: 0px;
 }
 
 .ncea-static-page__heading-m {

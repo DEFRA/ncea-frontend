@@ -881,13 +881,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/privacy-policy">
                     Privacy
                   </a>
                 </li>
@@ -1823,13 +1823,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
             <ul class="govuk-footer__inline-list">
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/help">
                     Help
                   </a>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/privacy-policy">
                     Privacy
                   </a>
                 </li>
