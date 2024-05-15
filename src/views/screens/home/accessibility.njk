@@ -1,0 +1,51 @@
+{% extends "layout/default.njk" %}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: routes.homePage,
+        attributes: {
+          'data-do-storage-reset': ''
+        }
+      },
+      {
+        text: "Accessibility statement"
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <article class="govuk-grid-row" role="article">
+    <article class="govuk-grid-column-full ncea-static-page">
+      <h1 class="govuk-heading-m ncea-static-page__heading-m">Accessibility statement</h1>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">This accessibility statement applies to the Natural Capital Search Service.</p>
+        <p class="ncea-static-page__content-item">This service is run by the NCEA programme, on behalf of the Department for Environment, Food and Rural Affairs (Defra).</p>
+        <p class="ncea-static-page__content-item">We want as many people as possible to be able to use this website. It has been designed using GDS components and patterns, which are accessible. We've also made the website text as simple as possible to understand.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">What we're doing to improve accessibility</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">This service is currently in private beta. It does not yet fully meet <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" class="govuk-link" target="_blank">Web Content Accessibility Guidelines</a> version 2.2 AA standard.</p>
+        <p class="ncea-static-page__content-item">An accessibility audit will take place during private beta. After the audit, we will work alongside other government departments and agencies to fix content which fails to meet the Web Content Accessibility Guidelines version 2.2 AA standard.</p>
+        <p class="ncea-static-page__content-item">An updated accessibility statement will be published after this date.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Feedback and contact information</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">
+          If you would like to give feedback or report accessibility problems with this service, email us at <a class="govuk-link" href="mailto:NCEAemail@email.com">NCEAemail@email.com.</a>
+        </p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Preparation of this accessibility statement</h2>
+      <section class="ncea-static-page__content govuk-!-margin-bottom-8">
+        <p class="ncea-static-page__content-item">This statement was prepared on 26 April 2024.</p>
+        <p class="ncea-static-page__content-item">Last updated 29 April 2024.</p>
+      </section>
+    </article>
+  </article>
+{% endblock %}

@@ -15,6 +15,11 @@ const homeRoutes = [
     path: `${webRoutePaths.intermediate}/{step}`,
     handler: HomeController.intermediateHandler,
   },
+  {
+    method: 'GET',
+    path: webRoutePaths.accessibilityStatement,
+    handler: HomeController.accessibilityHandler,
+  },
 ];
 
 export { homeRoutes };

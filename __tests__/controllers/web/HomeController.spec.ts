@@ -125,4 +125,14 @@ describe('Deals with Home Controller', () => {
       );
     });
   });
+  describe('Deals with the accessibilityHandler', () => {
+    it('should call the accessibility view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.accessibilityHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('screens/home/accessibility', {
+        pageTitle: pageTitles.accessibility,
+      });
+    });
+  });
 });

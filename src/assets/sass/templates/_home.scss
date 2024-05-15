@@ -12,16 +12,16 @@
 
   &__heading-xl {
     @include font-style-stack(36px, 40px);
-    color: govuk-colour('white');
+    color: govuk-colour("white");
     margin-bottom: 20px;
   }
 
   &__caption-l {
     @include font-style-stack(19px, 30px, 300);
-    color: govuk-colour('white');
+    color: govuk-colour("white");
   }
 
-  &__ncea-logo{
+  &__ncea-logo {
     height: 88px;
     gap: 0px;
     opacity: 0px;
@@ -38,5 +38,29 @@
     padding-bottom: 30px;
     margin: 0px;
     border-top: 1.5px solid $govuk-border-colour;
+  }
+}
+
+.ncea-static-page {
+  &__heading-m {
+    @include font-style-stack(48px, 50px, 700);
+    color: $govuk-text-colour;
+  }
+  &__heading-s {
+    @include font-style-stack(24px, 30px, 700);
+    color: $govuk-text-colour;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(auto, max-content);
+    row-gap: 20px;
+
+    &-item {
+      @include font-style-stack(19px, 25px, 300, normal, true);
+      color: $govuk-text-colour;
+      margin: 0;
+    }
   }
 }

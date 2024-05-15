@@ -2,7 +2,6 @@
 
 import Joi from 'joi';
 import {
-  IAggregationOption,
   IAggregationOptions,
   ISearchItem,
 } from '../../../src/interfaces/searchResponse.interface';
@@ -457,6 +456,7 @@ describe('Deals with search results controller', () => {
 
       const queryParamsObject: Record<string, string> = {
         [queryParamKeys.resourceType]: 'dataset',
+        [queryParamKeys.page]: '1',
       };
       const queryString: string = upsertQueryParams(
         request.query,
@@ -482,6 +482,7 @@ describe('Deals with search results controller', () => {
 
       const queryParamsObject: Record<string, string> = {
         [queryParamKeys.resourceType]: 'dataset,series',
+        [queryParamKeys.page]: '1',
       };
       const queryString: string = upsertQueryParams(
         request.query,
@@ -511,6 +512,7 @@ describe('Deals with search results controller', () => {
       const queryParamsObject: Record<string, string> = {
         [queryParamKeys.startYear]: '2017',
         [queryParamKeys.toYear]: '2022',
+        [queryParamKeys.page]: '1',
       };
       const queryString: string = upsertQueryParams(
         request.query,
@@ -537,6 +539,7 @@ describe('Deals with search results controller', () => {
       const queryParamsObject: Record<string, string> = {
         [queryParamKeys.sort]: 'best_match',
         [queryParamKeys.rowsPerPage]: '20',
+        [queryParamKeys.page]: '1',
       };
       const queryString: string = upsertQueryParams(
         request.query,

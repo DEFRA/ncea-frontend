@@ -8,7 +8,7 @@ import { toggleContent } from './toggleContent';
 const getPublicationInformation = (data: Record<string, any>[]): string => {
   if (Array.isArray(data) && data.length > 0) {
     const obj = data.find((item: Record<string, any>) => item?.type?.toLowerCase() === 'publication');
-    return obj?.date ? `${formatDate(obj?.date, false, true)} - Last Revision` : '';
+    return obj?.date ? `${formatDate(obj?.date, false, false)} - Last Revision` : '';
   }
   return '';
 };
@@ -33,7 +33,7 @@ const generateConformityData = (data: Record<string, any>[]): string => {
                       <thead>
                         <tr>
                           <th width="60%">Specification</th>
-                          <th>Degree</th>
+                          <th width="10%">Degree</th>
                           <th>Explanation</th>
                         </tr>
                       </thead><tbody>`;

@@ -29,6 +29,7 @@ describe('General tab fields', () => {
 
     const result: IGeneralItem = await getGeneralTabData(searchItem);
     expect(result).toEqual({
+      alternateTitle: '',
       language: 'ENG',
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
@@ -41,6 +42,7 @@ describe('General tab fields', () => {
 
     const result: IGeneralItem = await getGeneralTabData(searchItem);
     expect(result).toEqual({
+      alternateTitle: '',
       language: '',
       keywords: '',
       topicCategories: '',

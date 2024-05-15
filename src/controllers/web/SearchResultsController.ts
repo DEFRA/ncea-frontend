@@ -14,14 +14,12 @@ import {
   pageTitles,
   queryParamKeys,
   requiredFieldsForMap,
+  startYearRangeKey,
+  toYearRangeKey,
+  uniqueResourceTypesKey,
   webRoutePaths,
 } from '../../utils/constants';
-import {
-  generateCountPayload,
-  generateQueryBuilderPayload,
-  readQueryParams,
-  upsertQueryParams,
-} from '../../utils/queryStringHelper';
+import { generateQueryBuilderPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 import { getDocumentDetails, getFilterOptions, getSearchResults } from '../../services/handlers/searchApi';
 import { processFilterOptions, processSortOptions } from '../../utils/processFilterRSortOptions';
 
@@ -30,12 +28,17 @@ const SearchResultsController = {
     const { quickSearchFID } = formIds;
     const journey: string = readQueryParams(request.query, queryParamKeys.journey);
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
-    const filterPayload: ISearchPayload = generateCountPayload(request.query);
     const { rowsPerPage, page } = payload;
     const isQuickSearchJourney = journey === 'qs';
     try {
       const searchResults: ISearchResults = await getSearchResults(payload);
-      const filterOptions: IAggregationOptions = await getFilterOptions(filterPayload);
+      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(payload, { isStudyPeriod: true });
+      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(payload, { isStudyPeriod: false });
+      const filterOptions: IAggregationOptions = {
+        [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
+        [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
+        [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
+      };
       const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage, request.query);
       const queryString = readQueryParams(request.query);
       const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
@@ -110,7 +113,7 @@ const SearchResultsController = {
     }
   },
   getMapFiltersHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const filterPayload: ISearchPayload = generateCountPayload(request.query);
+    const filterPayload: ISearchPayload = generateQueryBuilderPayload(request.query);
     try {
       const mapPayload: ISearchPayload = {
         ...filterPayload,
@@ -118,7 +121,15 @@ const SearchResultsController = {
         fieldsExist: ['geom'],
         requiredFields: requiredFieldsForMap,
       };
-      const filterOptions: IAggregationOptions = await getFilterOptions(mapPayload);
+      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(mapPayload, { isStudyPeriod: true });
+      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(mapPayload, {
+        isStudyPeriod: false,
+      });
+      const filterOptions: IAggregationOptions = {
+        [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
+        [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
+        [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
+      };
       const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
       return response.view('partials/results/filters', {
         filterOptions: processedFilterOptions,
@@ -165,6 +176,7 @@ const SearchResultsController = {
     }
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.resourceType]: resourceTypeValues,
+      [queryParamKeys.page]: '1',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
@@ -174,6 +186,7 @@ const SearchResultsController = {
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.startYear]: payload?.['start_year'] ?? '',
       [queryParamKeys.toYear]: payload?.['to_year'] ?? '',
+      [queryParamKeys.page]: '1',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
@@ -183,6 +196,7 @@ const SearchResultsController = {
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.sort]: payload?.['sort'] ?? '',
       [queryParamKeys.rowsPerPage]: payload?.['page-results'] ?? '',
+      [queryParamKeys.page]: '1',
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
