@@ -72,6 +72,11 @@ const HomeController = {
       pageTitle: pageTitles.accessibility,
     });
   },
+  termsConditionsHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/terms_conditions', {
+      pageTitle: pageTitles.termsAndConditions,
+    });
+  },
 };
 
 export { HomeController };

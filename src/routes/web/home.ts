@@ -25,6 +25,11 @@ const homeRoutes = [
     path: webRoutePaths.accessibilityStatement,
     handler: HomeController.accessibilityHandler,
   },
+  {
+    method: 'GET',
+    path: webRoutePaths.termsAndConditions,
+    handler: HomeController.termsConditionsHandler,
+  },
 ];
 
 export { homeRoutes };
