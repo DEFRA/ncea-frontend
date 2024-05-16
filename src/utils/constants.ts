@@ -14,6 +14,8 @@ export const webRoutePaths = {
   sortResults: '/sort-results',
   help: '/help',
   accessibilityStatement: '/accessibility-statement',
+  termsAndConditions: '/terms-conditions',
+  privacyPolicy: '/privacy-policy',
 };
 
 export const elasticSearchAPIPaths = {
@@ -274,4 +276,6 @@ export const pageTitles = {
   licenseTab: 'NCEA Catalogue Detail - License',
   help: 'Help',
   accessibility: 'Accessibility statement',
+  termsAndConditions: 'Terms and conditions',
+  privacyPolicy: 'Privacy policy',
 };

@@ -1,0 +1,152 @@
+{% extends "layout/default.njk" %}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: routes.homePage,
+        attributes: {
+          'data-do-storage-reset': ''
+        }
+      },
+      {
+        text: "Terms and conditions"
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <article class="govuk-grid-row" role="article">
+    <article class="govuk-grid-column-full ncea-static-page">
+      <h1 class="govuk-heading-m ncea-static-page__heading-m">Terms and conditions</h1>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">This page and any pages it links to explains this site's terms of use. You must agree to these to use this site.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Who we are</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">Natural Capital Search Service is managed by the NCEA programme on behalf of Defra.<br/>Defra will be referred to as 'we' from now on.</p>
+        <p class="ncea-static-page__content-item">This service is currently in private beta. The terms and conditions will be updated once the service is in public beta.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Using Natural Capital Search Service</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">You agree to use this site only for lawful purposes. You must also use it in a way that does not infringe the rights of, or restrict or inhibit the use and enjoyment of, this site by anyone else.</p>
+        <p class="ncea-static-page__content-item">We update this site all the time. We can change or remove content at any time without notice.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Linking from Natural Capital Search Service</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">Our service may link to websites that are managed by other government departments and agencies, service providers or other organisations. We do not have any control over the content on these websites.</p>
+        <p class="ncea-static-page__content-item">We're not responsible for:</p>
+        <ul>
+          <li class="ncea-static-page__content-item">the protection of any information you give to these websites</li>
+          <li class="ncea-static-page__content-item">any loss or damage that may come from your use of these websites, or any other websites they link to</li>
+        </ul>
+        <p class="ncea-static-page__content-item">You agree to release us from any claims or disputes that may come from using these websites.</p>
+        <p class="ncea-static-page__content-item">You should read all terms and conditions, privacy policies and end user licences that relate to these websites before you use them.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Using GOV.UK content</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">Most content on GOV.UK is subject to <a href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/" class="govuk-link help-link" target="_blank">Crown copyright protection</a> and is published under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/open-government-licence.htm" class="govuk-link help-link" target="_blank">Open Government Licence</a>(OGL).</p>
+        <p class="ncea-static-page__content-item">
+          Some content is exempt from the OGL - check the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/open-government-licence.htm" class="govuk-link help-link" target="_blank">list of exemptions.</a>
+        </p>
+        <p class="ncea-static-page__content-item">Departmental logos and crests are also exempt from the OGL, except when they form an integral part of a document or dataset.</p>
+        <p class="ncea-static-page__content-item">If any content is not subject to Crown copyright protection or published under the OGL, we'll usually credit the author or copyright holder.</p>
+        <p class="ncea-static-page__content-item">You can reproduce content published on GOV.UK under the OGL as long as you follow the licence's conditions. <a href="https://www.gov.uk/contact/govuk" class="govuk-link help-link" target="_blank">Contact us</a> if you want to reproduce a piece of content but are not sure if it's covered by Crown copyright or the OGL.</p>
+        <p class="ncea-static-page__content-item">We make most of the content on GOV.UK available through feeds for other websites and applications to use. The websites and applications that use our feeds are not our products, and they might use versions of our content that have been edited and stored for later use ('cached').</p>
+        <p class="ncea-static-page__content-item">We do not give any guarantees, conditions or warranties about the accuracy or completeness of any content used by these products. We're not liable for any loss or damage that may come from your use of these products.</p>
+        <p class="ncea-static-page__content-item">The most up to date version of our content will always be on GOV.UK.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Disclaimer</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">While we make every effort to keep our content up to date, we do not provide any guarantees, conditions or warranties that the information will be:</p>
+        <ul>
+          <li class="ncea-static-page__content-item">current</li>
+          <li class="ncea-static-page__content-item">secure</li>
+          <li class="ncea-static-page__content-item">accurate</li>
+          <li class="ncea-static-page__content-item">complete</li>
+          <li class="ncea-static-page__content-item">free from bugs or viruses</li>
+        </ul>
+        <p class="ncea-static-page__content-item">We do not publish advice. You should get professional or specialist advice before doing anything on the basis of the content.</p>
+        <p class="ncea-static-page__content-item">We're not liable for any loss or damage that may come from using our service. This includes:</p>
+        <ul>
+          <li class="ncea-static-page__content-item">any direct, indirect or consequential losses</li>
+          <li class="ncea-static-page__content-item">any loss or damage caused by civil wrongs ('tort', including negligence), breach of contract or otherwise</li>
+          <li class="ncea-static-page__content-item">the use of GOV.UK and any websites that are linked to or from it</li>
+          <li class="ncea-static-page__content-item">the inability to use GOV.UK and any websites that are linked to or from it</li>
+        </ul>
+        <p class="ncea-static-page__content-item">This applies if the loss or damage was foreseeable, arose in the normal course of things or you advised us that it might happen.</p>
+        <p class="ncea-static-page__content-item">This includes (but is not limited to) the loss of your:</p>
+        <ul>
+          <li class="ncea-static-page__content-item">income or revenue</li>
+          <li class="ncea-static-page__content-item">salary, benefits or other payments</li>
+          <li class="ncea-static-page__content-item">business</li>
+          <li class="ncea-static-page__content-item">profits or contracts</li>
+          <li class="ncea-static-page__content-item">opportunity</li>
+          <li class="ncea-static-page__content-item">anticipated savings</li>
+          <li class="ncea-static-page__content-item">data</li>
+          <li class="ncea-static-page__content-item">goodwill or reputation</li>
+          <li class="ncea-static-page__content-item">tangible property</li>
+          <li class="ncea-static-page__content-item">intangible property, including loss, corruption or damage to data or any computer system</li>
+          <li class="ncea-static-page__content-item">wasted management or office time</li>
+        </ul>
+        <p class="ncea-static-page__content-item">We may still be liable for:</p>
+        <ul>
+          <li class="ncea-static-page__content-item">death or personal injury arising from our negligence</li>
+          <li class="ncea-static-page__content-item">fraudulent misrepresentation</li>
+          <li class="ncea-static-page__content-item">any other liability which cannot be excluded or limited under applicable law</li>
+        </ul>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Requests to remove content</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">You can ask for content to be removed. We'll remove content:</p>
+        <ul>
+          <li class="ncea-static-page__content-item">in order to comply with data protection legislation covering the rights and freedoms of individuals</li>
+          <li class="ncea-static-page__content-item">if it breaches copyright laws, contains sensitive personal data or material that may be considered obscene or defamatory</li>
+        </ul>
+        <p class="ncea-static-page__content-item">
+          <a href="https://www.gov.uk/contact/govuk" class="govuk-link help-link" target="_blank">Contact us</a> to ask for content to be removed. You'll need to send us the web address (URL) of the content and explain why you think it should be removed. We'll reply to let you know whether we'll remove it.</p>
+        <p class="ncea-static-page__content-item">We remove content at our discretion in discussion with the department or agency responsible for it. You can still request information under the <a href="https://www.gov.uk/make-a-freedom-of-information-request" class="govuk-link help-link" target="_blank">Freedom of Information Act</a> and the <a href="https://www.gov.uk/data-protection" class="govuk-link help-link" target="_blank">Data Protection Act.</a>
+        </p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Information about you and your visits to our pages</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">We collect information about you in accordance with our <a href="https://www.gov.uk/help/privacy-notice" class="govuk-link help-link" target="_blank">privacy policy</a> and our <a href="https://www.gov.uk/help/cookies" class="govuk-link help-link" target="_blank">cookie policy.</a> By using GOV.UK, you agree to us collecting this information and confirm that any data you provide is accurate.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Virus protection</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">We make every effort to check and test GOV.UK for viruses at every stage of production. You must make sure that the way you use GOV.UK does not expose you to the risk of viruses, malicious computer code or other forms of interference which can damage your computer system.</p>
+        <p class="ncea-static-page__content-item">We're not responsible for any loss, disruption or damage to your data or computer system that might happen when you use GOV.UK.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Viruses, hacking and other offences</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">When using GOV.UK, you must not introduce viruses, trojans, worms, logic bombs or any other material that's malicious or technologically harmful.</p>
+        <p class="ncea-static-page__content-item">You must not try to gain unauthorised access to GOV.UK, the server on which it's stored or any server, computer or database connected to it.</p>
+        <p class="ncea-static-page__content-item">You must not attack GOV.UK in any way. This includes denial-of-service attacks.</p>
+        <p class="ncea-static-page__content-item">We'll report any attacks or attempts to gain unauthorised access to GOV.UK to the relevant law enforcement authorities and share information about you with them.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Governing law</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">These terms and conditions are governed by and construed in accordance with the laws of England and Wales.</p>
+        <p class="ncea-static-page__content-item">Any dispute you have which relates to these terms and conditions, or your use of GOV.UK (whether it be contractual or non-contractual), will be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">General</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">There may be legal notices elsewhere on GOV.UK that relate to how you use the site.</p>
+        <p class="ncea-static-page__content-item">We're not liable if we fail to comply with these terms and conditions because of circumstances beyond our reasonable control.</p>
+        <p class="ncea-static-page__content-item">We might decide not to exercise or enforce any right available to us under these terms and conditions. We can always decide to exercise or enforce that right at a later date.</p>
+        <p class="ncea-static-page__content-item">Doing this once will not mean we automatically waive the right on any other occasion.</p>
+        <p class="ncea-static-page__content-item">If any of these terms and conditions are held to be invalid, unenforceable or illegal for any reason, the remaining terms and conditions will still apply.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Changes to these terms and conditions</h2>
+      <section class="ncea-static-page__content govuk-!-margin-bottom-8">
+        <p class="ncea-static-page__content-item">Please check these terms and conditions regularly. We can update them at any time without notice.</p>
+        <p class="ncea-static-page__content-item">You'll agree to any changes if you continue to use GOV.UK after the terms and conditions have been updated.</p>
+      </section>
+    </article>
+  </article>
+{% endblock %}
