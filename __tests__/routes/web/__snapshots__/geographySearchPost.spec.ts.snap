@@ -35,8 +35,8 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service">
-    <div class="govuk-cookie-banner__message govuk-width-container">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+    <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
@@ -55,20 +55,20 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
       <div class="govuk-button-group">
         
           
-            <button type="button" class="govuk-button" data-module="govuk-button">
+            <button type="button" class="govuk-button" data-module="govuk-button" id="accept_button">
               Accept analytics cookies
             </button>
           
         
           
-            <button type="button" class="govuk-button" data-module="govuk-button">
+            <button type="button" class="govuk-button" data-module="govuk-button" id="reject_button">
               Reject analytics cookies
             </button>
           
         
           
             
-              <a class="govuk-link" href="#">View cookies</a>
+              <a class="govuk-link help-link" href="#">View cookies</a>
             
           
         
@@ -76,14 +76,14 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
       
     </div>
   
-    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="accept_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -92,7 +92,7 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
       <div class="govuk-button-group">
         
           
-            <button type="button" class="govuk-button" data-module="govuk-button">
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
               Hide cookie message
             </button>
           
@@ -101,14 +101,14 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
       
     </div>
   
-    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="reject_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -117,7 +117,7 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
       <div class="govuk-button-group">
         
           
-            <button type="button" class="govuk-button" data-module="govuk-button">
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
               Hide cookie message
             </button>
           
@@ -222,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -503,6 +503,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
+  <script type="module" src="/assets/scripts/cookieScript.js"></script>
 
   <script src="/assets/scripts/ol.js"></script>
   <script type="module" src="/assets/scripts/location.js"></script>

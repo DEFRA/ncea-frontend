@@ -29,11 +29,11 @@
 {% endset %}
 
 {% set acceptHtml %}
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
 {% endset %}
 
 {% set rejectHtml %}
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
 {% endset %}
 
 {% block header %}
@@ -97,59 +97,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 {% block beforeContent %}
   {{ govukPhaseBanner({
-    tag: {
-      text: "Beta"
-    },
-    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+    tag: { text: "Beta" },
+    html: 'This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
   }) }}
 {% endblock %}
 
 {% block bodyStart %}
   {{ govukCookieBanner({
-  ariaLabel: "Cookies on Natural Capital Search Service",
-  messages: [
-    {
-      headingText: "Cookies on Natural Capital Search Service",
-      html: cookieHtml,
-      actions: [
-        {
-          text: "Accept analytics cookies",
-          type: "button"
-        },
-        {
-          text: "Reject analytics cookies",
-          type: "button"
-        },
-        {
-          text: "View cookies",
-          href: "#"
-        }
-      ]
-    },
-    {
-      html: acceptHtml,
-      role: "alert",
-      hidden: true,
-      actions: [
-        {
-          text: "Hide cookie message",
-          type: "button"
-        }
-      ]
-    },
-    {
-      html: rejectHtml,
-      role: "alert",
-      hidden: true,
-      actions: [
-        {
-          text: "Hide cookie message",
-          type: "button"
-        }
-      ]
-    }
-  ]
-}) }}
+    ariaLabel: "Cookies on Natural Capital Search Service",
+    attributes: { id: "cookie_banner" },
+    messages: [
+      {
+        headingText: "Cookies on Natural Capital Search Service",
+        html: cookieHtml,
+        hidden: true,
+        actions: [
+          {
+            text: "Accept analytics cookies",
+            type: "button",
+            attributes: { id: "accept_button" }
+          },
+          {
+            text: "Reject analytics cookies",
+            type: "button",
+            attributes: { id: "reject_button" }
+          },
+          {
+            text: "View cookies",
+            href: "#",
+            classes: "help-link"
+          }
+        ],
+        attributes: { id: "cookie_block" }
+      },
+      {
+        html: acceptHtml,
+        role: "alert",
+        hidden: true,
+        actions: [
+          {
+            text: "Hide cookie message",
+            type: "button",
+            classes: "hide_button"
+          }
+        ],
+        attributes: { id: "accept_block" }
+      },
+      {
+        html: rejectHtml,
+        role: "alert",
+        hidden: true,
+        actions: [
+          {
+            text: "Hide cookie message",
+            type: "button",
+            classes: "hide_button"
+          }
+        ],
+        attributes: { id: "reject_block" }
+      }
+    ]
+  }) }}
 {% endblock %}
 
 {% block footer %}
@@ -194,4 +202,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </script>
   <script type="text/javascript" src="{{ assetPath }}/scripts/appinsights.js"></script>
   <script type="module" src="{{ assetPath }}/scripts/customScripts.js"></script>
+  <script type="module" src="{{ assetPath }}/scripts/cookieScript.js"></script>
 {% endblock %}
