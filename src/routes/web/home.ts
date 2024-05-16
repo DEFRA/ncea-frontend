@@ -27,6 +27,11 @@ const homeRoutes = [
   },
   {
     method: 'GET',
+    path: webRoutePaths.termsAndConditions,
+    handler: HomeController.termsConditionsHandler,
+  },
+  {
+    method: 'GET',
     path: webRoutePaths.privacyPolicy,
     handler: HomeController.privacyPolicyHandler,
   },
