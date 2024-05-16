@@ -7630,6 +7630,7 @@
   height: 88px;
   gap: 0px;
   opacity: 0px;
+  margin-bottom: 14px;
 }
 
 .educational-copy-container {
@@ -7645,6 +7646,44 @@
   padding-bottom: 30px;
   margin: 0px;
   border-top: 1.5px solid #b1b4b6;
+}
+
+.help-link {
+  color: #1D70B8 !important;
+}
+
+.ncea-static-page-line-item {
+  margin-bottom: 0px;
+}
+
+.ncea-static-page__heading-m {
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 50px;
+  color: #0b0c0c;
+}
+.ncea-static-page__heading-s {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  color: #0b0c0c;
+}
+.ncea-static-page__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(auto, max-content);
+  row-gap: 20px;
+}
+.ncea-static-page__content-item {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+  color: #0b0c0c;
+  margin: 0;
 }
 
 @media only screen and (min-width: 769px) {
@@ -7834,11 +7873,20 @@
   justify-content: center;
 }
 
+.filter-study-period-group {
+  display: flex;
+}
 .filter-heading {
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: 30px;
+}
+.filter-study-period-heading {
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
 }
 .filter-options-label {
   font-size: 1.1875rem;
@@ -8176,7 +8224,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 40px;
-  width: 630px;
 }
 .details-alt_title {
   font-size: 1.1875rem;
@@ -8201,7 +8248,7 @@
 }
 .tab-content-row {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
 }
 .tab-content-label {
   font-size: 1rem;
@@ -8285,4 +8332,10 @@
 
 .detail-map {
   border: 2px solid #0b0c0c;
+}
+
+@media (min-width: 768px) {
+  .tab-content-row {
+    grid-template-columns: auto 1fr;
+  }
 }

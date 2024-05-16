@@ -125,4 +125,50 @@ describe('Deals with Home Controller', () => {
       );
     });
   });
+  describe('Deals with the accessibilityHandler', () => {
+    it('should call the accessibility view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.accessibilityHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('screens/home/accessibility', {
+        pageTitle: pageTitles.accessibility,
+      });
+    });
+  });
+  describe('Deals with the helpHandler', () => {
+    it('should call the help view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.helpHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('screens/home/help', {
+        pageTitle: pageTitles.help,
+      });
+    });
+  });
+  describe('Deals with the termsConditionsHandler', () => {
+    it('should call the accessibility view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.termsConditionsHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'screens/home/terms_conditions',
+        {
+          pageTitle: pageTitles.termsAndConditions,
+        },
+      );
+    });
+  });
+  describe('Deals with the privacyPolicyHandler', () => {
+    it('should call the privacy policy view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.privacyPolicyHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith(
+        'screens/home/privacy_policy',
+        {
+          pageTitle: pageTitles.privacyPolicy,
+        },
+      );
+    });
+  });
 });

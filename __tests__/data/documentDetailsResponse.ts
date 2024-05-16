@@ -198,9 +198,9 @@ const formattedDetailsResponse: ISearchResults = {
       alternateTitle: '',
       organisationName: '',
       ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
-      host_catalogue_number: ' 3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      host_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_entry: '',
-      resource_type_and_hierarchy: 'dataset',
+      resource_type_and_hierarchy: 'Dataset',
       host_service_catalogue_number: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
       hierarchy_level: 'Dataset',
       resource_locators:
@@ -210,7 +210,7 @@ const formattedDetailsResponse: ISearchResults = {
       publicationInformation: '',
       conformity: '',
       metadata_standard: '',
-      ncea_catalogue_date: '26-Jan-2010',
+      ncea_catalogue_date: '26-January-2010',
       ncea_group_reference: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       project_number: '',
       license_constraints: '',
@@ -628,10 +628,10 @@ const detailsSuccessAPIFullData = {
           resourceTemporalExtentDetails: [
             {
               start: {
-                date: '2019-05-24T00:00:00',
+                date: '2019-05-24',
               },
               end: {
-                date: '2019-07-31T00:00:00',
+                date: '2019-07-31',
               },
             },
           ],
@@ -739,7 +739,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       publishedBy: 'Maritime and Coastguard Agency',
       content:
         'This processed bathymetric data set has been derived from an Echosounder - multibeam survey. The source data was collected, validated and processed for the purpose of Safety Of Life At Sea (SOLAS). The data set must not be used for navigation or to create products that could be used for navigation.',
-      studyPeriod: '24 May 2019 to 31 Jul 2019',
+      studyPeriod: '24 May 2019 to 31 July 2019',
       startYear: '2019',
       toYear: '2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
@@ -752,16 +752,16 @@ const formattedDetailsFullResponse: ISearchResults = {
       organisationName: 'United Kingdom Hydrographic Office',
       ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_number:
-        'https://seabed.admiralty.co.uk fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+        'https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_entry: '',
-      resource_type_and_hierarchy: 'dataset',
+      resource_type_and_hierarchy: 'Dataset',
       hierarchy_level: 'Dataset',
       resource_locators:
         'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
       additionalInformation: '',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',
-      publicationInformation: '23rd Mar 2022 - Last Revision',
+      publicationInformation: '23 March 2022 - Last Revision',
       conformity: `<table class="details-table">
                       <thead>
                         <tr>
@@ -776,7 +776,7 @@ const formattedDetailsFullResponse: ISearchResults = {
                     </tr></tbody></table>`,
       host_service_catalogue_number: '3ce46f92-509c-4529-a062-c8b48788340d',
       metadata_standard: 'MEDIN',
-      ncea_catalogue_date: '16-Jan-2024',
+      ncea_catalogue_date: '16-January-2024',
       ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       project_number: '',
       license_constraints:
@@ -786,7 +786,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       data_owner:
         'owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk',
       frequency_of_update: 'Not planned',
-      available_formats: ['Geographic Information System', 'Delimited'],
+      available_formats: '',
       character_encoding: 'utf8',
       spatialDataService: '',
       spatialRepresentationService: 'Grid',

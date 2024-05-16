@@ -34,6 +34,9 @@ export interface IGovernance {
   Metadata_language?: string;
   ncea_catalogue_date?: string;
   host_service_catalogue_number?: string;
+}
+
+export interface ILicense {
   limitation_on_public_access?: string;
   license_constraints?: string;
   data_owner?: string;
@@ -80,7 +83,7 @@ export interface IGeographyItem {
   samplingResolution?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & IGeographyItem;
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & ILicense & IGeographyItem;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {

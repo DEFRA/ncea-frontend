@@ -62,6 +62,26 @@ const HomeController = {
     }
     return response.redirect(webRoutePaths.home);
   },
+  helpHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/help', {
+      pageTitle: pageTitles.help,
+    });
+  },
+  accessibilityHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/accessibility', {
+      pageTitle: pageTitles.accessibility,
+    });
+  },
+  termsConditionsHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/terms_conditions', {
+      pageTitle: pageTitles.termsAndConditions,
+    });
+  },
+  privacyPolicyHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/privacy_policy', {
+      pageTitle: pageTitles.privacyPolicy,
+    });
+  },
 };
 
 export { HomeController };

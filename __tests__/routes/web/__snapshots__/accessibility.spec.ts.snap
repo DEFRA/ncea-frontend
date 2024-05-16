@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home Screen Home > Sanpshot verification should match the home screen snapshot 1`] = `
+exports[`Accessibility Screen Accessibility > Sanpshot verification should match the accessibility screen snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang="en" class="govuk-template app-html-class">
   <head>
     <meta charset="utf-8">
     <title>
-  NCEA Search Service Home
+  Accessibility statement
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -118,6 +118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
       <div class="govuk-width-container">
         
+  
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
@@ -130,106 +131,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </div>
 
 
+  <div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+
+  
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
+    </li>
+  
+
+  
+    <li class="govuk-breadcrumbs__list-item" aria-current="page">Accessibility statement</li>
+  
+
+  </ol>
+</div>
+
+
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-  <header class="full-width-banner" role="banner">
-    <div class="banner-container">
-      <img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/NCEA-logo-landscape.png" class="banner-container__ncea-logo">
-      <h1 class="govuk-heading-xl banner-container__heading-xl">Natural Capital Search Service</h1>
-      <span class="govuk-caption-l banner-container__caption-l">Use this service to search for data and information about the environment and ecosystems in  the UK.</span>
-      <span class="govuk-caption-l banner-container__caption-l">This service supports the use of natural capital approaches to gathering evidence and making decisions.</span>
-    </div>
-  </header>
-
-  
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m">
-      
-        Quick search
-      
-    </h1>
-    
-      <span class="govuk-caption-m quick_search-container__caption-m">You can search by keyword, theme, title or project code, for example: "hedgehog population Bristol", "Community Supported Fisheries", "AE0101".</span>
-    
-    <div class="search-block" data-module="search">
-      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-        
-
-<div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" for="search_term">
-    Search
-  </label>
-
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="home">
-      </form>
-    </div>
-  </div>
-</div>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h2 class="govuk-heading-m">
-        Questionnaire search
-      </h2>
-      <p class="govuk-body">
-        A set of questions to narrow down your search for data and information.
-      </p>
-    </div>
-  </div>
-
-  
-  
-
-  
-    
-  
-
-<a href="/classifier-search" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button" data-do-quick-search="false" id="guided-search">
-  Start
-  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
-  </svg>
-</a>
-
-
   <article class="govuk-grid-row" role="article">
-    <div class="govuk-grid-column-full educational-copy-container">
-      <h1 class="govuk-heading-m govuk-\\!-static-margin-0 educational-copy-container__heading-m">What the NCEA is</h1>
-      <p class="govuk-body">
-        The Department for Environment, Food and Rural Affairs’ (Defra) <a href="https://www.gov.uk/government/publications/natural-capital-and-ecosystem-assessment-programme" target="_blank">Natural Capital and Ecosystem Assessment (NCEA)</a> programme is delivering a nationwide survey of England’s land, coast, and sea by mapping the location, extent and condition of our ecosystems and the benefits they provide. Through comprehensive monitoring, innovative measurement and the development of tools and guidance, NCEA is providing insights on how and why our environment is changing and the impact of this, so that we can make informed decisions to better protect and manage our natural capital for people and the planet. 
-      </p>
-      <h1 class="govuk-heading-m govuk-\\!-static-margin-0 educational-copy-container__heading-m">What natural capital is</h1>
-      <ul>
-        <li class="govuk-body">Natural capital is the living and non-living parts of our natural environment that hold value for people, providing us with environmental, economic, societal and cultural benefits.</li>
-        <li class="govuk-body">It is nature’s stock of living and non-living resources – including ecosystems, species, freshwater, land, soils, minerals, air, and ocean – that provide flows of environmental (ecosystem) services.</li>
-        <li class="govuk-body">Ecosystem services provide benefits for people and are necessary for our survival and well-being.</li>
-      </ul>
-      <h1 class="govuk-heading-m govuk-\\!-static-margin-0 educational-copy-container__heading-m">What natural capital approaches are</h1>
-      <ul>
-        <li class="govuk-body">Taking a natural capital approach is all about incorporating the wider benefits of the environment into decision making.</li>
-        <li class="govuk-body">Natural capital evidence and approaches help us to account for and articulate the different ways our natural assets hold value for people (be that cultural, social, economic or environmental value) and provide a framework for incorporating this into decision making.</li>
-        <li class="govuk-body">This reduces the risk of undervaluing our natural environment and helps to inform how we can better manage, protect, and enhance our natural assets and the services they provide.</li>
-      </ul>
-      <h1 class="govuk-heading-m govuk-\\!-static-margin-0 educational-copy-container__heading-m">What data sources we use</h1>
-      <p class="govuk-body">You can use this search service to find and access data from several sources, including:</p>
-      <ul>
-        <li class="govuk-body"><a href="https://medin.org.uk/" target="_blank">Marine Environmental Data & Information Network (MEDIN)</a></li>
-        <li class="govuk-body"><a href="https://jncc.gov.uk/" target="_blank">Joint Nature Conservation Committee (JNCC)</a></li>
-      </ul>
-    </div>
+    <article class="govuk-grid-column-full ncea-static-page">
+      <h1 class="govuk-heading-m ncea-static-page__heading-m">Accessibility statement</h1>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">This accessibility statement applies to the Natural Capital Search Service.</p>
+        <p class="ncea-static-page__content-item">This service is run by the NCEA programme, on behalf of the Department for Environment, Food and Rural Affairs (Defra).</p>
+        <p class="ncea-static-page__content-item">We want as many people as possible to be able to use this website. It has been designed using GDS components and patterns, which are accessible. We've also made the website text as simple as possible to understand.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">What we're doing to improve accessibility</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">This service is currently in private beta. It does not yet fully meet <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" class="govuk-link help-link" target="_blank">Web Content Accessibility Guidelines</a> version 2.2 AA standard.</p>
+        <p class="ncea-static-page__content-item">An accessibility audit will take place during private beta. After the audit, we will work alongside other government departments and agencies to fix content which fails to meet the Web Content Accessibility Guidelines version 2.2 AA standard.</p>
+        <p class="ncea-static-page__content-item">An updated accessibility statement will be published after this date.</p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Feedback and contact information</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">
+          If you would like to give feedback or report accessibility problems with this service, email us at <a class="govuk-link help-link" href="mailto:NCEAemail@email.com">NCEAemail@email.com.</a>
+        </p>
+      </section>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Preparation of this accessibility statement</h2>
+      <section class="ncea-static-page__content govuk-!-margin-bottom-8">
+        <p class="ncea-static-page__content-item">This statement was prepared on 26 April 2024.</p>
+        <p class="ncea-static-page__content-item">Last updated 29 April 2024.</p>
+      </section>
+    </article>
   </article>
 
         </main>

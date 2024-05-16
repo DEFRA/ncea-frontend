@@ -4,6 +4,7 @@
 import { IGeneralItem } from '../interfaces/searchResponse.interface';
 
 const getGeneralTabData = (searchItem: Record<string, any>): IGeneralItem => ({
+  alternateTitle: searchItem?._source?.resourceAltTitleObject?.[0]?.default ?? '',
   language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
   keywords: searchItem?._source?.tag?.map((item) => item.default).join(', ') ?? '',
   topicCategories: searchItem?._source?.cl_topic?.map((item) => item.default).join(', ') ?? '',

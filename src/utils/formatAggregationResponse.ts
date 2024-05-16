@@ -78,4 +78,4 @@ const formatClassifierResponse = async (apiResponse: Record<string, any>): Promi
   }
 };
 
-export { capitalizeWords, formatAggregationResponse, formatClassifierResponse };
+export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange, formatClassifierResponse };

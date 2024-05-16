@@ -1,7 +1,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% if params.isDetailsPage %}
-  {% set buttonClasses = 'govuk-!-margin-bottom-4' %}
+  {% set buttonClasses = 'govuk-!-margin-bottom-4 ' %}
 {% else %}
   {% set buttonClasses = 'govuk-!-margin-bottom-0' %}
 {% endif %}
@@ -15,4 +15,4 @@
   {% set openDataAttributes = openDataAttributes | merge({disabled: "true"}) %}
 {% endif %}
 
-{{ govukButton({ text: 'Go to resource', attributes: openDataAttributes, classes: buttonClasses }) }}
+{{ govukButton({ text: 'Go to resource', attributes: openDataAttributes, classes: buttonClasses, isStartButton: params.isDetailsPage }) }}
