@@ -29,11 +29,11 @@
 {% endset %}
 
 {% set acceptHtml %}
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="{{routes.cookiePolicy}}">change your cookie settings</a> at any time.</p>
 {% endset %}
 
 {% set rejectHtml %}
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="{{routes.cookiePolicy}}">change your cookie settings</a> at any time.</p>
 {% endset %}
 
 {% block header %}
@@ -82,10 +82,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </script> #}
 
     {{ govukHeader({
-  homepageUrl: "https://www.gov.uk/",
-  serviceName: serviceName,
-  serviceUrl: routes.homePage
-}) }}
+      homepageUrl: "https://www.gov.uk/",
+      serviceName: serviceName,
+      serviceUrl: routes.homePage
+    }) }}
   </header>
 {% endblock %}
 
@@ -104,11 +104,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
 {% block bodyStart %}
   {{ govukCookieBanner({
-    ariaLabel: "Cookies on Natural Capital Search Service",
+    ariaLabel: "Cookies on "+serviceName,
     attributes: { id: "cookie_banner" },
     messages: [
       {
-        headingText: "Cookies on Natural Capital Search Service",
+        headingText: "Cookies on "+serviceName,
         html: cookieHtml,
         hidden: true,
         actions: [
@@ -124,7 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           },
           {
             text: "View cookies",
-            href: "#",
+            href: routes.cookiePolicy,
             classes: "help-link"
           }
         ],
@@ -173,7 +173,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           text: "Privacy"
         },
         {
-          href: "#",
+          href: routes.cookiePolicy,
           text: "Cookies"
         },
         {

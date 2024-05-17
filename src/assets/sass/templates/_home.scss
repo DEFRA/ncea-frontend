@@ -42,12 +42,16 @@
   }
 }
 
-.help-link{
-  color: #1D70B8 !important;
+.help-link {
+  color: #1d70b8 !important;
 }
 
-.ncea-static-page-line-item{
+.ncea-static-page-line-item {
   margin-bottom: 0px;
+}
+
+.hide {
+  display: none;
 }
 
 .ncea-static-page {
@@ -70,6 +74,32 @@
       @include font-style-stack(19px, 25px, 300, normal, true);
       color: $govuk-text-colour;
       margin: 0;
+    }
+  }
+
+  &__table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+
+    thead tr,
+    tbody tr,
+    thead {
+      border-bottom: 1px solid $govuk-border-colour;
+    }
+
+    th {
+      @include font-style-stack(19px, 25px, 700, normal, true);
+    }
+
+    td {
+      @include font-style-stack(19px, 25px, 300, normal, true);
+    }
+
+    th,
+    td {
+      vertical-align: top;
+      padding: 10px 20px 10px 0;
     }
   }
 }

@@ -46,6 +46,14 @@ const markerOverlays = [];
 const defaultMapProjection = 'EPSG:3857';
 const extentTransformProjection = 'EPSG:4326';
 let firstMove = true;
+const resetControl = document.getElementById('defra-map-reset');
+const markerOverlayOffsetX = -14;
+const markerOverlayOffsetY = -80;
+const maxMarkerAllowed = 9;
+const leftArrowKey = 37;
+const upArrowKey = 38;
+const rightArrowKey = 39;
+const downArrowKey = 40;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -274,24 +282,15 @@ vectorSource.on('change', () => {
 });
 
 const toggleClearSelectionBlock = () => {
-  const north = document.getElementById('north');
-  const south = document.getElementById('south');
-  const east = document.getElementById('east');
-  const west = document.getElementById('west');
+  const north = document.getElementById('north')?.value;
+  const south = document.getElementById('south')?.value;
+  const east = document.getElementById('east')?.value;
+  const west = document.getElementById('west')?.value;
   const clearSelection = document.getElementById('clear-map-selection');
-  if (
-    north &&
-    north.value &&
-    south &&
-    south.value &&
-    east &&
-    east.value &&
-    west &&
-    west.value
-  ) {
-    if (clearSelection) clearSelection.style.display = 'block';
+  if (north && south && east && west && clearSelection) {
+    clearSelection.style.display = 'block';
   } else {
-    if (clearSelection) clearSelection.style.display = 'none';
+    clearSelection.style.display = 'none';
   }
 };
 
@@ -462,7 +461,6 @@ function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
-  const resetControl = document.getElementById('defra-map-reset');
   if (resetControl) {
     resetControl.style.display = 'none';
   }
@@ -555,9 +553,7 @@ const attachMapResultsFilterCheckboxChangeListener = () => {
         if (checked && index === -1) {
           appliedFilterOptions.resourceType.push(value);
         } else {
-          if (index !== -1) {
-            appliedFilterOptions.resourceType.splice(index, 1);
-          }
+          appliedFilterOptions.resourceType.splice(index, 1);
         }
         vectorSource.clear();
         markerSource.clear();
@@ -607,21 +603,19 @@ const getMapResults = async (path) => {
 
 const getMapFilters = async (path) => {
   const response = await invokeAjaxCall(path, {}, false, 'GET');
-  if (response) {
-    if (response.status === responseSuccessStatusCode) {
-      const mapFiltersHtml = await response.text();
-      document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
-      addFilterHeadingClickListeners('map_results');
-      attachStudyPeriodChangeListener('map_results');
-      attachMapResultsFilterCheckboxChangeListener();
-      const mapFilterStartYear = document.getElementById(
-        'map_results-start_year',
-      );
-      const mapFilterToYear = document.getElementById('map_results-to_year');
-      if (mapFilterStartYear && mapFilterToYear) {
-        mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
-        mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
-      }
+  if (response && response?.status === responseSuccessStatusCode) {
+    const mapFiltersHtml = await response.text();
+    document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
+    addFilterHeadingClickListeners('map_results');
+    attachStudyPeriodChangeListener('map_results');
+    attachMapResultsFilterCheckboxChangeListener();
+    const mapFilterStartYear = document.getElementById(
+      'map_results-start_year',
+    );
+    const mapFilterToYear = document.getElementById('map_results-to_year');
+    if (mapFilterStartYear && mapFilterToYear) {
+      mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
+      mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
     }
   }
 };
@@ -667,7 +661,7 @@ function createTooltipOverlay(index) {
   const markerOverlay = new ol.Overlay({
     element: tooltip,
     positioning: 'top-center',
-    offset: [-14, -80],
+    offset: [markerOverlayOffsetX, markerOverlayOffsetY],
     stopEvent: false,
   });
 
@@ -677,7 +671,7 @@ function createTooltipOverlay(index) {
 
 function keydownHandler(event) {
   const key = event.key;
-  if (key >= 1 && key <= 9) {
+  if (key >= 1 && key <= maxMarkerAllowed) {
     const markerIndex = parseInt(key) - 1;
     const visibleMarkers = markerLayer
       .getSource()
@@ -713,7 +707,7 @@ function checkNUpdateMarkerTooltip() {
   resetFeatureStyle();
   closeInfoPopup();
 
-  if (visibleMarkers.length <= 9) {
+  if (visibleMarkers.length <= maxMarkerAllowed) {
     visibleMarkers.forEach((marker, index) => {
       createTooltipOverlay(index);
       const coord = marker.getGeometry().getCoordinates();
@@ -724,7 +718,6 @@ function checkNUpdateMarkerTooltip() {
 }
 
 function fitMapToExtent() {
-  const resetControl = document.getElementById('defra-map-reset');
   const padding = 50;
   const visibleMarkers = markerLayer.getSource().getFeatures();
   const extent = ol.extent.createEmpty();
@@ -749,7 +742,6 @@ function fitMapToExtent() {
 function customControls() {
   const zoomInElement = document.getElementById('defra-map-zoom-in');
   const zoomOutElement = document.getElementById('defra-map-zoom-out');
-  const resetControl = document.getElementById('defra-map-reset');
   if (zoomInElement) {
     zoomInElement.addEventListener('click', () => {
       animateZoom(1);
@@ -809,29 +801,31 @@ function handleKeyboardArrowEvent(event) {
   const delta = view.getResolution() * 100;
 
   switch (event.keyCode) {
-    case 37: // Left arrow key
+    case leftArrowKey: // Left arrow key
       view.animate({
         center: [view.getCenter()[0] - delta, view.getCenter()[1]],
         duration: 100,
       });
       break;
-    case 38: // Up arrow key
+    case upArrowKey: // Up arrow key
       view.animate({
         center: [view.getCenter()[0], view.getCenter()[1] + delta],
         duration: 100,
       });
       break;
-    case 39: // Right arrow key
+    case rightArrowKey: // Right arrow key
       view.animate({
         center: [view.getCenter()[0] + delta, view.getCenter()[1]],
         duration: 100,
       });
       break;
-    case 40: // Down arrow key
+    case downArrowKey: // Down arrow key
       view.animate({
         center: [view.getCenter()[0], view.getCenter()[1] - delta],
         duration: 100,
       });
+      break;
+    default:
       break;
   }
 }

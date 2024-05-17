@@ -18,6 +18,7 @@ const {
   help,
   termsAndConditions,
   privacyPolicy,
+  cookiePolicy,
 } = webRoutePaths;
 
 describe('Vision Plugin Configuration', () => {
@@ -69,6 +70,7 @@ describe('Vision Plugin Configuration', () => {
         help,
         termsAndConditions,
         privacyPolicy,
+        cookiePolicy,
       },
       appInsightsConnectionString:
         environmentConfig.appInsightsConnectionString,

@@ -7649,11 +7649,15 @@
 }
 
 .help-link {
-  color: #1D70B8 !important;
+  color: #1d70b8 !important;
 }
 
 .ncea-static-page-line-item {
   margin-bottom: 0px;
+}
+
+.hide {
+  display: none;
 }
 
 .ncea-static-page__heading-m {
@@ -7684,6 +7688,35 @@
   line-height: 25px;
   color: #0b0c0c;
   margin: 0;
+}
+.ncea-static-page__table {
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+.ncea-static-page__table thead tr,
+.ncea-static-page__table tbody tr,
+.ncea-static-page__table thead {
+  border-bottom: 1px solid #b1b4b6;
+}
+.ncea-static-page__table th {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+}
+.ncea-static-page__table td {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+}
+.ncea-static-page__table th,
+.ncea-static-page__table td {
+  vertical-align: top;
+  padding: 10px 20px 10px 0;
 }
 
 @media only screen and (min-width: 769px) {

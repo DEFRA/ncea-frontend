@@ -171,4 +171,14 @@ describe('Deals with Home Controller', () => {
       );
     });
   });
+  describe('Deals with the cookiePolicyHandler', () => {
+    it('should call the accessibility view with context', async () => {
+      const request: Request = {} as any;
+      const response: ResponseToolkit = { view: jest.fn() } as any;
+      await HomeController.cookiePolicyHandler(request, response);
+      expect(response.view).toHaveBeenCalledWith('screens/home/cookie_policy', {
+        pageTitle: pageTitles.cookiePolicy,
+      });
+    });
+  });
 });

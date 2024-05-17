@@ -1,7 +1,6 @@
 const cookieAcceptanceLabel = 'ncea-cookie-acceptance-level';
 const defaultCookieAcceptanceData = 'false';
 const cookiePolicyDisplayLabel = 'ncea-cookie-banner-dismissed';
-const defaultCookieDisplayData = 'true';
 const expiryDays = 365;
 const cookieBanner = document.getElementById('cookie_banner');
 const cookieBlock = document.getElementById('cookie_block');
@@ -10,6 +9,10 @@ const acceptButton = document.getElementById('accept_button');
 const rejectBlock = document.getElementById('reject_block');
 const rejectButton = document.getElementById('reject_button');
 const hideButtons = document.querySelectorAll('.hide_button');
+const saveCookieButton = document.getElementById('ncea_save_cookies');
+const yesNEOption = document.getElementById('ne_cookie_preference-yes');
+const noNEOption = document.getElementById('ne_cookie_preference-no');
+const cookieAlert = document.getElementById('ncea_cookie_alert');
 
 const setCookie = (name, value, days) => {
   if (value) {
@@ -26,11 +29,14 @@ const setCookie = (name, value, days) => {
 const getCookie = (name) => {
   const nameEx = `${name}=`;
   const cookies = document.cookie.split(';');
-  for (var cookie of cookies) {
-    cookie = cookie.trim();
-    if (cookie.indexOf(nameEx) === 0) {
-      var cookieValue = cookie.substring(nameEx.length, cookie.length);
-      var expiration = cookie
+  for (const cookie of cookies) {
+    const trimmedCookie = cookie.trim();
+    if (trimmedCookie.indexOf(nameEx) === 0) {
+      const cookieValue = trimmedCookie.substring(
+        nameEx.length,
+        trimmedCookie.length,
+      );
+      const expiration = trimmedCookie
         .split(';')
         .find((item) => item.trim().startsWith('expires='));
       if (!expiration || new Date(expiration.split('=')[1]) > new Date()) {
@@ -45,48 +51,68 @@ const getCookie = (name) => {
   return null;
 };
 
-const hideAllCookieSections = () => {};
+const hideCookieHandler = () => {
+  if (cookieBanner) {
+    cookieBanner.setAttribute('hidden', '');
+  }
+  if (cookieBlock) {
+    cookieBlock.setAttribute('hidden', '');
+  }
+  if (acceptBlock) {
+    acceptBlock.setAttribute('hidden', '');
+  }
+  if (rejectBlock) {
+    rejectBlock.setAttribute('hidden', '');
+  }
+};
 
 const showCookieSection = () => {
   setCookie(cookieAcceptanceLabel, defaultCookieAcceptanceData, expiryDays);
-  if (cookieBanner) cookieBanner.removeAttribute('hidden');
-  if (cookieBlock) cookieBlock.removeAttribute('hidden');
+  if (cookieBanner) {
+    cookieBanner.removeAttribute('hidden');
+  }
+  if (cookieBlock) {
+    cookieBlock.removeAttribute('hidden');
+  }
 };
 
 const checkCookieAcceptance = () => {
   const isCookieAlreadySaved = getCookie(cookiePolicyDisplayLabel);
   if (isCookieAlreadySaved === 'true') {
-    hideAllCookieSections();
+    hideCookieHandler();
   } else {
     showCookieSection();
   }
 };
 
-const acceptCookieHandler = (formSubmission = true) => {
-  setCookie(cookiePolicyDisplayLabel, defaultCookieDisplayData, expiryDays);
-  setCookie(cookieAcceptanceLabel, true, expiryDays);
-  if (formSubmission) {
-    if (cookieBlock) cookieBlock.setAttribute('hidden', '');
-    if (acceptBlock) acceptBlock.removeAttribute('hidden');
-    if (rejectBlock) rejectBlock.setAttribute('hidden', '');
+const acceptCookieHandler = () => {
+  setCookie(cookiePolicyDisplayLabel, 'true', expiryDays);
+  setCookie(cookieAcceptanceLabel, 'true', expiryDays);
+  if (cookieBlock) {
+    cookieBlock.setAttribute('hidden', '');
   }
+  if (acceptBlock) {
+    acceptBlock.removeAttribute('hidden');
+  }
+  if (rejectBlock) {
+    rejectBlock.setAttribute('hidden', '');
+  }
+  loadCookiePreferences();
 };
 
-const rejectCookieHandler = (formSubmission = true) => {
-  setCookie(cookiePolicyDisplayLabel, defaultCookieDisplayData, expiryDays);
-  setCookie(cookieAcceptanceLabel, false, expiryDays);
-  if (formSubmission) {
-    if (cookieBlock) cookieBlock.setAttribute('hidden', '');
-    if (acceptBlock) acceptBlock.setAttribute('hidden', '');
-    if (rejectBlock) rejectBlock.removeAttribute('hidden');
+const rejectCookieHandler = () => {
+  setCookie(cookiePolicyDisplayLabel, 'true', expiryDays);
+  setCookie(cookieAcceptanceLabel, 'false', expiryDays);
+  if (cookieBlock) {
+    cookieBlock.setAttribute('hidden', '');
   }
-};
-
-const hideCookieHandler = () => {
-  if (cookieBanner) cookieBanner.setAttribute('hidden', '');
-  if (cookieBlock) cookieBlock.setAttribute('hidden', '');
-  if (acceptBlock) acceptBlock.setAttribute('hidden', '');
-  if (rejectBlock) rejectBlock.setAttribute('hidden', '');
+  if (acceptBlock) {
+    acceptBlock.setAttribute('hidden', '');
+  }
+  if (rejectBlock) {
+    rejectBlock.removeAttribute('hidden');
+  }
+  loadCookiePreferences();
 };
 
 const attachAcceptCookieListener = () => {
@@ -109,9 +135,48 @@ const attachRejectCookieListener = () => {
   }
 };
 
+const loadCookiePreferences = () => {
+  const isNECookieAccepted = getCookie(cookieAcceptanceLabel);
+  if ((isNECookieAccepted || isNECookieAccepted === 'true') && yesNEOption) {
+    yesNEOption.checked = true;
+    noNEOption.checked = false;
+  }
+  if (isNECookieAccepted === 'false' && noNEOption) {
+    yesNEOption.checked = false;
+    noNEOption.checked = true;
+  }
+};
+
+const showCookieAlert = () => {
+  if (cookieAlert) {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    cookieAlert.classList.remove('hide');
+  }
+};
+
+const saveCookieHandler = () => {
+  if (yesNEOption && noNEOption) {
+    yesNEOption.checked && acceptCookieHandler();
+    noNEOption.checked && rejectCookieHandler();
+  }
+  showCookieAlert();
+};
+
+const attachSaveCookieListener = () => {
+  if (saveCookieButton) {
+    saveCookieButton.addEventListener('click', saveCookieHandler);
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   checkCookieAcceptance();
   attachAcceptCookieListener();
   attachHideCookieListener();
   attachRejectCookieListener();
+  loadCookiePreferences();
+  attachSaveCookieListener();
 });

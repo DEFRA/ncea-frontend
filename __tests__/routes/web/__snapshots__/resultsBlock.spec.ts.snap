@@ -68,7 +68,7 @@ exports[`Results block template Guided search journey Search results with empty 
         
           
             
-              <a class="govuk-link help-link" href="#">View cookies</a>
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
             
           
         
@@ -83,7 +83,7 @@ exports[`Results block template Guided search journey Search results with empty 
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -108,7 +108,7 @@ exports[`Results block template Guided search journey Search results with empty 
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -605,7 +605,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>
@@ -761,7 +761,7 @@ exports[`Results block template Guided search journey Search results with error 
         
           
             
-              <a class="govuk-link help-link" href="#">View cookies</a>
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
             
           
         
@@ -776,7 +776,7 @@ exports[`Results block template Guided search journey Search results with error 
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -801,7 +801,7 @@ exports[`Results block template Guided search journey Search results with error 
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -1197,7 +1197,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>
@@ -1353,7 +1353,7 @@ exports[`Results block template Quick search journey Search results with data sh
         
           
             
-              <a class="govuk-link help-link" href="#">View cookies</a>
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
             
           
         
@@ -1368,7 +1368,7 @@ exports[`Results block template Quick search journey Search results with data sh
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -1393,7 +1393,7 @@ exports[`Results block template Quick search journey Search results with data sh
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -2016,7 +2016,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>
@@ -2172,7 +2172,7 @@ exports[`Results block template Quick search journey Search results with empty d
         
           
             
-              <a class="govuk-link help-link" href="#">View cookies</a>
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
             
           
         
@@ -2187,7 +2187,7 @@ exports[`Results block template Quick search journey Search results with empty d
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -2212,7 +2212,7 @@ exports[`Results block template Quick search journey Search results with empty d
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -2684,7 +2684,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>
@@ -2840,7 +2840,7 @@ exports[`Results block template Quick search journey Search results with error s
         
           
             
-              <a class="govuk-link help-link" href="#">View cookies</a>
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
             
           
         
@@ -2855,7 +2855,7 @@ exports[`Results block template Quick search journey Search results with error s
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -2880,7 +2880,7 @@ exports[`Results block template Quick search journey Search results with error s
         
 
         <div class="govuk-cookie-banner__content">
-<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="#">change your cookie settings</a> at any time.</p>
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
 </div>
       </div>
     </div>
@@ -3276,7 +3276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>
