@@ -505,7 +505,7 @@ function getFilterRecordIds() {
   return filteredIds;
 }
 
-function drawBoundingBoxWithMarker(doRecenter = true, fitToMapExtentFlag) {
+function drawBoundingBoxWithMarker(fitToMapExtentFlag, doRecenter = true) {
   const filteredIds = getFilterRecordIds();
   const records = mapResults.filter((record) =>
     filteredIds.includes(record.id),
@@ -604,7 +604,7 @@ const getMapResults = async (path, fitToMapExtentFlag) => {
       if (mapResultsJson.total > 0) {
         mapResults = mapResultsJson.items;
         setTimeout(() => {
-          drawBoundingBoxWithMarker(true, fitToMapExtentFlag);
+          drawBoundingBoxWithMarker(fitToMapExtentFlag, true);
         }, 100);
         attachBoundingBoxToggleListener();
       } else {
