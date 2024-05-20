@@ -160,7 +160,6 @@ describe('Accessibility Screen', () => {
       const items = content?.querySelectorAll(
         'p.ncea-static-page__content-item',
       );
-      console.log(items?.[0]?.textContent);
       expect(items?.[0]?.textContent?.trim()).toEqual(
         'This service is currently in private beta. It does not yet fully meet Web Content Accessibility Guidelines version 2.2 AA standard.',
       );

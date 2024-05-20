@@ -766,7 +766,7 @@ const formattedDetailsFullResponse: ISearchResults = {
                       <thead>
                         <tr>
                           <th width="60%">Specification</th>
-                          <th>Degree</th>
+                          <th width="10%">Degree</th>
                           <th>Explanation</th>
                         </tr>
                       </thead><tbody><tr>

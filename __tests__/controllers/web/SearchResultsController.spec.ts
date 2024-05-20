@@ -2,7 +2,6 @@
 
 import Joi from 'joi';
 import {
-  IAggregationOption,
   IAggregationOptions,
   ISearchItem,
 } from '../../../src/interfaces/searchResponse.interface';
