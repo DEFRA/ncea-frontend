@@ -283,15 +283,17 @@ vectorSource.on('change', () => {
 });
 
 const toggleClearSelectionBlock = () => {
-  const north = document.getElementById('north')?.value;
-  const south = document.getElementById('south')?.value;
-  const east = document.getElementById('east')?.value;
-  const west = document.getElementById('west')?.value;
   const clearSelection = document.getElementById('clear-map-selection');
-  if (north && south && east && west && clearSelection) {
-    clearSelection.style.display = 'block';
-  } else {
-    clearSelection.style.display = 'none';
+  if (clearSelection) {
+    const north = document.getElementById('north')?.value;
+    const south = document.getElementById('south')?.value;
+    const east = document.getElementById('east')?.value;
+    const west = document.getElementById('west')?.value;
+    if (north && south && east && west) {
+      clearSelection.style.display = 'block';
+    } else {
+      clearSelection.style.display = 'none';
+    }
   }
 };
 
