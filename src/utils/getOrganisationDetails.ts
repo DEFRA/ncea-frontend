@@ -1,8 +1,7 @@
+import { IOrganisationDetails } from '../interfaces/searchResponse.interface';
+
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-const getOrganisationDetails = (
-  source: Record<string, any>,
-  isDetails: boolean = false,
-): { organisationValue: string; role: string; email: string } => {
+const getOrganisationDetails = (source: Record<string, any>, isDetails: boolean = false): IOrganisationDetails => {
   const data: Record<string, any>[] = source?.contactForResource ?? [];
   if (Array.isArray(data) && data.length > 0) {
     const rolesOrder: string[] = [
@@ -14,7 +13,7 @@ const getOrganisationDetails = (
       'owner',
     ];
 
-    const getOrganisation = (role: string): any | string => {
+    const getOrganisation = (role: string): IOrganisationDetails => {
       const orgValue = data.find((item: Record<string, any>) => item.role === role);
       if (orgValue) {
         const orgObject = `${orgValue.role}OrgForResourceObject`;
@@ -34,7 +33,7 @@ const getOrganisationDetails = (
 
     if (isDetails) {
       for (const role of rolesOrder) {
-        const orgValue: any | string = getOrganisation(role);
+        const orgValue: IOrganisationDetails = getOrganisation(role);
         if (orgValue?.organisationValue !== '') {
           return orgValue;
         }

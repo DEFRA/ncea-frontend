@@ -101,3 +101,9 @@ export interface IAggregationOption {
 export interface IAggregationOptions {
   [key: string]: IAggregationOption[] | [];
 }
+
+export interface IOrganisationDetails {
+  organisationValue: string;
+  role: string;
+  email: string;
+}
