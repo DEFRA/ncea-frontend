@@ -1,4 +1,4 @@
-import { buildSearchQuery } from '../../../src/utils/queryBuilder';
+import { generateSearchQuery } from '../../../src/utils/queryBuilder';
 import { elasticSearchClient } from '../../../src/config/elasticSearchClient';
 import {
   IQuery,
@@ -6,8 +6,7 @@ import {
 } from '../../../src/interfaces/queryBuilder.interface';
 import {
   elasticSearchAPIPaths,
-  startYearRangeKey,
-  toYearRangeKey,
+  resourceTypeFilterField,
   uniqueResourceTypesKey,
   yearRange,
 } from '../../../src/utils/constants';
@@ -67,7 +66,7 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      const payload: IQuery = buildSearchQuery({ searchFieldsObject });
+      const payload: IQuery = generateSearchQuery({ searchFieldsObject });
       await getSearchResults(searchFieldsObject);
       expect(elasticSearchClient.post).toHaveBeenCalledWith(
         elasticSearchAPIPaths.searchPath,
@@ -203,7 +202,7 @@ describe('Search API', () => {
           },
         },
         sort: 'best_match',
-        filters: { resourceType: 'dataset' },
+        filters: { [resourceTypeFilterField]: ['dataset'] },
         rowsPerPage: 20,
         page: 1,
       };
@@ -213,7 +212,9 @@ describe('Search API', () => {
       (formatAggregationResponse as jest.Mock).mockResolvedValueOnce(
         formattedResourceTypeResponse,
       );
-      const result = await getFilterOptions(searchFieldsObject);
+      const result = await getFilterOptions(searchFieldsObject, {
+        isStudyPeriod: false,
+      });
       expect(result).toEqual(formattedResourceTypeResponse);
     });
 
@@ -232,19 +233,26 @@ describe('Search API', () => {
       elasticSearchClient.post = jest
         .fn()
         .mockRejectedValueOnce(new Error('Mocked error'));
-      await expect(getFilterOptions(searchFieldsObject)).rejects.toThrow(
-        'Error fetching results: Mocked error',
-      );
+      await expect(
+        getFilterOptions(searchFieldsObject, {
+          isStudyPeriod: false,
+        }),
+      ).rejects.toThrow('Error fetching results: Mocked error');
     });
 
     it('should return the default response when no fields data is present', async () => {
-      const result = await getFilterOptions({
-        fields: {},
-        sort: '',
-        rowsPerPage: 20,
-        filters: {},
-        page: 1,
-      });
+      const result = await getFilterOptions(
+        {
+          fields: {},
+          sort: '',
+          rowsPerPage: 20,
+          filters: {},
+          page: 1,
+        },
+        {
+          isStudyPeriod: false,
+        },
+      );
       const filterOptionsResponse: IAggregationOptions = {
         [yearRange]: [],
         [uniqueResourceTypesKey]: [],

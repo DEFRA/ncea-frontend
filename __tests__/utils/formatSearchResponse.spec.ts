@@ -53,6 +53,7 @@ describe('Format the search response', () => {
                   link: '',
                 },
               ],
+              linkUrl: 'https://data.cefas.co.uk',
             },
           },
           {
@@ -294,6 +295,7 @@ describe('Format the search response', () => {
               frequency_of_update: '',
               license_constraints: '',
               limitation_on_public_access: '',
+              linkUrl: ['https://seabed.admiralty.co.uk'],
             },
           },
         ],

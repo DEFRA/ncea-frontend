@@ -13,6 +13,51 @@ const saveCookieButton = document.getElementById('ncea_save_cookies');
 const yesNEOption = document.getElementById('ne_cookie_preference-yes');
 const noNEOption = document.getElementById('ne_cookie_preference-no');
 const cookieAlert = document.getElementById('ncea_cookie_alert');
+const gtmId = gtmIdValue ?? '';
+
+const addGtmScript = (gtmId) => {
+  if (gtmId) {
+    // Add Google Tag Manager script
+    const script = document.createElement('script');
+    script.id = 'gtm-script';
+    script.innerHTML = `
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', '${gtmId}');
+    `;
+    document.body.appendChild(script);
+
+    // Add Google Tag Manager noscript iframe
+    const noscript = document.createElement('noscript');
+    noscript.id = 'gtm-noscript';
+    noscript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+    document.body.appendChild(noscript);
+  }
+};
+
+const removeGtmScript = (gtmId) => {
+  const script = document.getElementById('gtm-script');
+  if (script) {
+    script.parentNode.removeChild(script);
+  }
+  const noscript = document.getElementById('gtm-noscript');
+  if (noscript) {
+    noscript.parentNode.removeChild(noscript);
+  }
+  const scripts = document.querySelectorAll(
+    `script[src*="googletagmanager.com/gtm.js?id=${gtmId}"]`,
+  );
+  scripts.forEach((script) => {
+    script.parentNode.removeChild(script);
+  });
+};
 
 const setCookie = (name, value, days) => {
   if (value) {
@@ -137,7 +182,12 @@ const attachRejectCookieListener = () => {
 
 const loadCookiePreferences = () => {
   const isNECookieAccepted = getCookie(cookieAcceptanceLabel);
-  if ((isNECookieAccepted || isNECookieAccepted === 'true') && yesNEOption) {
+  if (isNECookieAccepted && isNECookieAccepted === 'true') {
+    addGtmScript(gtmId);
+  } else {
+    removeGtmScript(gtmId);
+  }
+  if (isNECookieAccepted && isNECookieAccepted === 'true' && yesNEOption) {
     yesNEOption.checked = true;
     noNEOption.checked = false;
   }

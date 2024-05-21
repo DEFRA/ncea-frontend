@@ -1,6 +1,6 @@
 import { RequestQuery } from '@hapi/hapi';
 import { ISearchFields, ISearchPayload } from '../interfaces/queryBuilder.interface';
-import { dateFilterField, queryParamKeys, resourceTypeFilterField } from './constants';
+import { queryParamKeys, resourceTypeFilterField, studyPeriodFilterField } from './constants';
 
 const setDefaultQueryParams = (searchParams: URLSearchParams): URLSearchParams => {
   const page = searchParams.get(queryParamKeys.page) ?? '1';
@@ -112,9 +112,12 @@ const generateQueryBuilderFields = (requestQuery: RequestQuery): ISearchFields =
   return {
     ...(keywordTerm && { keyword: { q: keywordTerm } }),
     ...(dateParams.fdy && dateParams.tdy && { date: dateParams }),
-    ...(((extentParams.nth && extentParams.sth && extentParams.est && extentParams.wst) || extentParams.dpt) && {
-      extent: extentParams,
-    }),
+    ...(extentParams.nth &&
+      extentParams.sth &&
+      extentParams.est &&
+      extentParams.wst && {
+        extent: extentParams,
+      }),
   };
 };
 
@@ -131,11 +134,9 @@ const generateQueryBuilderPayload = (requestQuery: RequestQuery): ISearchPayload
         [resourceTypeFilterField]: filterParams.resourceType.split(','),
       }),
       ...((filterParams.startDate || filterParams.endDate) && {
-        [dateFilterField]: {
-          date: {
-            fdy: filterParams.startDate,
-            tdy: filterParams.endDate,
-          },
+        [studyPeriodFilterField]: {
+          fdy: filterParams.startDate,
+          tdy: filterParams.endDate,
         },
       }),
     },
