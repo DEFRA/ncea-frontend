@@ -137,7 +137,7 @@ exports[`Details route template Document details with data Check status code and
 
     
   <script>
-    var gtmIdValue = ""
+    var gtmIdValue = "G-0FDPPSVB0H"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1196,7 +1196,7 @@ exports[`Details route template Document details with partial data Check status 
 
     
   <script>
-    var gtmIdValue = ""
+    var gtmIdValue = "G-0FDPPSVB0H"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">

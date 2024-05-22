@@ -134,7 +134,7 @@ exports[`404 Screen 404 > Sanpshot verification should match the 404 screen snap
 
     
   <script>
-    var gtmIdValue = ""
+    var gtmIdValue = "G-0FDPPSVB0H"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
