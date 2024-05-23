@@ -16,6 +16,7 @@ export const webRoutePaths = {
   accessibilityStatement: '/accessibility-statement',
   termsAndConditions: '/terms-conditions',
   privacyPolicy: '/privacy-policy',
+  cookiePolicy: '/cookie-policy',
 };
 
 export const elasticSearchAPIPaths = {
@@ -46,6 +47,7 @@ export const requiredFieldsForMap: string[] = [
   'resourceIdentifier',
   'resourceType',
   'resourceTemporalExtentDetails',
+  'ownerOrgForResourceObject',
 ];
 
 export const guidedSearchSteps = {
@@ -79,15 +81,14 @@ export const queryParamKeys = {
 export const uniqueResourceTypesKey: string = 'unique_resource_types';
 export const startYearRangeKey: string = 'start_year_range';
 export const toYearRangeKey: string = 'to_year_range';
-export const yearRange: string = 'year_range';
+export const yearRange: string = 'year';
 
-export const resourceTypeFilterField = 'resourceType';
-export const dateFilterField = 'resourceTemporalExtentDateRange';
+export const resourceTypeFilterField = 'resourceTypeFilter';
+export const studyPeriodFilterField = 'studyPeriodFilter';
 
 export const defaultFilterOptions: IFilterOptions = [
   {
     key: uniqueResourceTypesKey,
-    field: 'resourceType',
     needCount: true,
     propertyToRead: 'key',
     hasBucket: true,
@@ -95,9 +96,8 @@ export const defaultFilterOptions: IFilterOptions = [
   },
   {
     key: yearRange,
-    field: ['max_resourceTemporalExtentDetails.end.date', 'min_resourceTemporalExtentDetails.start.date'],
     needCount: false,
-    propertyToRead: 'value',
+    propertyToRead: 'value_as_string',
     hasBucket: false,
     isDate: true,
   },
@@ -278,4 +278,5 @@ export const pageTitles = {
   accessibility: 'Accessibility statement',
   termsAndConditions: 'Terms and conditions',
   privacyPolicy: 'Privacy policy',
+  cookiePolicy: 'Cookies',
 };

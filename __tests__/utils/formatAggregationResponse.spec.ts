@@ -54,7 +54,6 @@ describe('formatAggregationResponse', () => {
     const filterOptions: IFilterOptions = [
       {
         key: 'category',
-        field: 'resourceType',
         needCount: true,
         propertyToRead: 'key',
         hasBucket: true,
@@ -62,7 +61,6 @@ describe('formatAggregationResponse', () => {
       },
       {
         key: 'brand',
-        field: 'resourceTemporalExtentDateRange',
         order: 'asc',
         needCount: false,
         propertyToRead: 'key_as_string',
@@ -90,21 +88,20 @@ describe('formatAggregationResponse', () => {
   it('should return year range for date filter option', async () => {
     const apiResponse = {
       aggregations: {
-        'min-year_range': {
-          value: 2022.0,
+        min_year: {
+          value_as_string: '2022-01-01',
         },
-        'max-year_range': {
-          value: 2023.0,
+        max_year: {
+          value_as_string: '2023-01-01',
         },
       },
     };
 
     const filterOptions: IFilterOptions = [
       {
-        key: 'year_range',
-        field: '',
+        key: 'year',
         needCount: false,
-        propertyToRead: 'value',
+        propertyToRead: 'value_as_string',
         hasBucket: false,
         isDate: true,
       },
@@ -129,21 +126,20 @@ describe('formatAggregationResponse', () => {
   it('should return empty year range for date filter option when it is null', async () => {
     const apiResponse = {
       aggregations: {
-        'max-year_range': {
+        max_year: {
           value: null,
         },
-        'min-year_range': {
-          value: '2023',
+        min_year: {
+          value_as_string: '2023-01-01',
         },
       },
     };
 
     const filterOptions: IFilterOptions = [
       {
-        key: 'year_range',
-        field: '',
+        key: 'year',
         needCount: false,
-        propertyToRead: 'value',
+        propertyToRead: 'value_as_string',
         hasBucket: false,
         isDate: true,
       },
@@ -167,12 +163,22 @@ describe('formatAggregationResponse', () => {
     };
 
     const filterOptions: IFilterOptions = [
-      { key: 'category', propertyToRead: 'key', needCount: true, field: '' },
+      {
+        key: 'category',
+        needCount: true,
+        propertyToRead: 'key',
+        hasBucket: true,
+        isTerm: true,
+      },
     ];
 
     const result = await formatAggregationResponse(apiResponse, filterOptions);
 
-    const expectedResponse: IAggregationOptions = { category: [] };
+    const expectedResponse: IAggregationOptions = {
+      [startYearRangeKey]: [],
+      [toYearRangeKey]: [],
+      [uniqueResourceTypesKey]: [],
+    };
 
     expect(result).toEqual(expectedResponse);
   });
@@ -186,7 +192,6 @@ describe('formatAggregationResponse', () => {
         key: 'category',
         propertyToRead: 'invalidProperty',
         needCount: true,
-        field: '',
         hasBucket: true,
         isTerm: true,
       },

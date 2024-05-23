@@ -20,7 +20,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
-      <h1 class="govuk-heading-m">Draw area on map</h1>
+      <h1 class="govuk-heading-m coordinate-sub-heading">Draw area on map</h1>
       <span class="govuk-caption-m">Click and drag to draw a boundary box. This will auto-populate the geographical coordinate box.</span>
     </div>
   </div>
@@ -63,13 +63,13 @@
     </div>
     <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
       <div class="govuk-grid-column-one-half geography-buttons__left">
-        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: guidedDateSearchPath }) }}
+        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons", href: guidedDateSearchPath }) }}
       </div>
       <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
-        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
+        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons", href: skipPath, attributes: {
             'data-do-storage-skip': ''
           } }) }}
-        {{ govukButton({ text: "Show results", classes: "govuk-!-margin-bottom-0 govuk-!-margin-right-0", attributes: {
+        {{ govukButton({ text: "Show results", classes: "govuk-!-margin-bottom-0 govuk-!-margin-right-0 coordinate-buttons", attributes: {
             'data-to-disable': '',
             'data-next-question': ''
           } }) }}

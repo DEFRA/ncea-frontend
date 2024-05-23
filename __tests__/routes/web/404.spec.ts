@@ -9,7 +9,7 @@ import { Server, ServerInjectResponse } from '@hapi/hapi';
 import { initializeServer } from '../../../src/infrastructure/server';
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
-  logger: jest.fn()
+  logger: jest.fn(),
 }));
 
 jest.mock('../../../src/utils/keyvault', () => ({
@@ -58,8 +58,8 @@ describe('404 Screen', () => {
     it('should render the 404 content heading', async () => {
       expect(
         document
-          ?.querySelector('.govuk-heading-m')
-          ?.textContent?.trim()
+          ?.querySelectorAll('.govuk-heading-m')?.[1]
+          ?.textContent?.trim(),
       ).toBe('Error 404 page not found');
     });
   });

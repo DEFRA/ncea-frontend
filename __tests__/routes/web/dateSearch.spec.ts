@@ -91,17 +91,17 @@ describe('Guided Search - Date Questionnaire Screen', () => {
       it('should render the search container heading', async () => {
         expect(
           document
-            ?.querySelectorAll('.govuk-heading-m')?.[0]
+            ?.querySelectorAll('.govuk-heading-m')?.[1]
             ?.textContent?.trim(),
         ).toBe('When was the data or information collected?');
         expect(
           document
-            ?.querySelectorAll('.govuk-heading-m')?.[1]
+            ?.querySelectorAll('.govuk-heading-m')?.[2]
             ?.textContent?.trim(),
         ).toBe('From');
         expect(
           document
-            ?.querySelectorAll('.govuk-heading-m')?.[2]
+            ?.querySelectorAll('.govuk-heading-m')?.[3]
             ?.textContent?.trim(),
         ).toBe('To');
       });
@@ -109,7 +109,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
 
     describe('Date questionnaire form', () => {
       it('should render the form', async () => {
-        const rowElements = document?.querySelectorAll('.govuk-grid-row');
+        const rowElements = document?.querySelectorAll('.date-search-form');
         if (rowElements.length > 1) {
           const formElement = rowElements[1]?.firstElementChild;
           expect(formElement?.tagName.toLowerCase()).toBe('form');

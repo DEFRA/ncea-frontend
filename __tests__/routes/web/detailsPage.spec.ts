@@ -384,7 +384,7 @@ describe('Details route template', () => {
       });
 
       it('should render the Go to resource button with disabled state and with out modal', async () => {
-        const buttonElement = document.querySelector('.govuk-button');
+        const buttonElement = document.querySelector('.go-to-resource');
         expect(buttonElement).toBeTruthy();
         expect(buttonElement.hasAttribute('disabled')).toBeTruthy();
         expect(document.querySelector('.modal')).toBeFalsy();
@@ -392,7 +392,7 @@ describe('Details route template', () => {
 
       it('should not render the Go to resource button parent div with a class', async () => {
         const parentElement =
-          document.querySelector('.govuk-button')?.parentElement;
+          document.querySelector('.go-to-resource')?.parentElement;
         expect(parentElement).toBeTruthy();
         expect(parentElement?.tagName?.toLowerCase()).toBe('div');
         expect(

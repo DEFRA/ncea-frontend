@@ -319,7 +319,7 @@ describe('queryStringHelper functions', () => {
         page: 1,
         rowsPerPage: 20,
         filters: {
-          resourceType: ['article'],
+          resourceTypeFilter: ['article'],
         },
       });
     });
@@ -365,7 +365,7 @@ describe('queryStringHelper functions', () => {
         page: 2,
         rowsPerPage: 10,
         filters: {
-          resourceType: ['article'],
+          resourceTypeFilter: ['article'],
         },
       });
     });

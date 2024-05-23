@@ -30,11 +30,18 @@ const getStudyPeriod = (startDate: string, endDate: string): string => {
   return studyPeriod;
 };
 
-const getAbstractContent = (data: Record<string, any>): string => {
+const getAbstractContent = (data: Record<string, any>, id: string): string => {
   if (Object.keys(data).length && data?.default) {
-    return toggleContent(data?.default, 'abstract_content');
+    return toggleContent(data?.default, `abstract_content-${id}`);
   }
   return '';
+};
+
+const getResourceLocatorURL = (data: string | string[]): string => {
+  if (Array.isArray(data) && data.length) {
+    return data[0] as string;
+  }
+  return data as string;
 };
 
 const formatSearchResponse = async (
@@ -71,11 +78,11 @@ const formatSearchResponse = async (
       id: searchItem?._id,
       title: searchItem?._source?.resourceTitleObject?.default ?? '',
       publishedBy: publishedBy.organisationValue,
-      content: getAbstractContent(searchItem?._source?.resourceAbstractObject ?? ''),
+      content: getAbstractContent(searchItem?._source?.resourceAbstractObject ?? '', searchItem?._id),
       studyPeriod,
       startYear,
       toYear,
-      resourceLocator: searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? '',
+      resourceLocator: getResourceLocatorURL(searchItem?._source?.linkUrl ?? ''),
       organisationName: organisationDetails.organisationValue,
     };
 
@@ -107,6 +114,8 @@ const getOtherDetails = async (
   searchItem: Record<string, any>,
   publishedBy: Record<string, any>,
 ): Promise<IOtherSearchItem> => {
+  const projectId: string =
+    searchItem?._source?.OrgNceaIdentifiers?.projectId ?? searchItem?._source?.OrgNceaIdentifiers?.projectNumber;
   return {
     ...getGeneralTabData(searchItem),
     ...getAccessTabData(searchItem),
@@ -114,7 +123,7 @@ const getOtherDetails = async (
     host_service_catalogue_number: searchItem?._source?.sourceCatalogue ?? '',
     ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
-    project_number: '',
+    project_number: projectId ?? '',
     Metadata_language: searchItem?._source?.mainLanguage ?? '',
     ncea_catalogue_date: formatDate(searchItem?._source?.dateStamp, false, false, '-'),
     ...getLicenseTabData(searchItem, publishedBy),

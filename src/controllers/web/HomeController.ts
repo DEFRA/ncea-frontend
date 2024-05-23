@@ -82,6 +82,11 @@ const HomeController = {
       pageTitle: pageTitles.privacyPolicy,
     });
   },
+  cookiePolicyHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+    return response.view('screens/home/cookie_policy', {
+      pageTitle: pageTitles.cookiePolicy,
+    });
+  },
 };
 
 export { HomeController };
