@@ -3,7 +3,7 @@ kind: Component
 metadata:
   name: "ncea-frontend"
   description: |
-    some description
+    ncea-frontend
   annotations:
     github.com/project-slug: DEFRA/ncea-frontend
     dev.azure.com/project: DEFRA-NCEA
