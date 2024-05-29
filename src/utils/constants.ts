@@ -37,7 +37,7 @@ export const formIds = {
 export const showMoreText: string = 'Show more';
 export const showLessText: string = 'Show less';
 export const maxWords: number = 100;
-export const geoNetworkIndex: string = 'gn-records/';
+export const geoNetworkIndex: string = 'gn-records';
 export const mapResultMaxCount: number = 10000;
 export const requiredFieldsForMap: string[] = [
   'resourceTitleObject',

@@ -1,7 +1,5 @@
-import {
-  IQuery,
-  ISearchPayload,
-} from '../../src/interfaces/queryBuilder.interface';
+import { estypes } from '@elastic/elasticsearch';
+import { ISearchPayload } from '../../src/interfaces/queryBuilder.interface';
 import {
   resourceTypeFilterField,
   studyPeriodFilterField,
@@ -43,7 +41,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -96,8 +94,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result?.query?.bool?.must).toHaveLength(1);
+      expect(result?.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with both search term and date range', () => {
@@ -127,7 +125,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -184,8 +182,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with only search term', () => {
@@ -201,7 +199,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -227,7 +225,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query correctly with only search term without fields', () => {
@@ -243,7 +241,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -265,7 +263,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query correctly with only date range', () => {
@@ -286,7 +284,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -318,7 +316,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with only Geo Coordinates with out dpt', () => {
@@ -337,7 +335,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -367,7 +365,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should handle missing search fields', () => {
@@ -393,8 +391,8 @@ describe('Build the search query', () => {
 
       const result = generateSearchQuery({ searchFieldsObject });
 
-      expect(result.query.bool?.must).toEqual([]);
-      expect(result.query.bool?.filter).toEqual([]);
+      expect(result.query?.bool?.must).toEqual([]);
+      expect(result.query?.bool?.filter).toEqual([]);
       expect(result).toEqual(expectedQuery);
     });
   });
@@ -427,7 +425,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -472,13 +470,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -487,8 +483,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with best match sort when both search term and date range', () => {
@@ -518,7 +514,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -564,13 +560,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -582,8 +576,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with best match sort when only search term', () => {
@@ -599,7 +593,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -614,13 +608,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -632,7 +624,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query correctly with best match sort when only search term without fields', () => {
@@ -648,7 +640,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -662,13 +654,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -677,7 +667,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query correctly with best match sort when only date range', () => {
@@ -698,7 +688,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -722,13 +712,11 @@ describe('Build the search query', () => {
             must: [],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -737,7 +725,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with best match sort when only Geo Coordinates with out dpt', () => {
@@ -756,7 +744,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -778,13 +766,11 @@ describe('Build the search query', () => {
             must: [],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -793,7 +779,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
   });
 
@@ -825,7 +811,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -870,7 +856,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [recentStudySortScript],
+        sort: recentStudySortScript,
         size: 20,
         from: 0,
         _source: [],
@@ -879,8 +865,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with most recent study sort when both search term and date range', () => {
@@ -910,7 +896,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -956,7 +942,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [recentStudySortScript],
+        sort: recentStudySortScript,
         size: 20,
         from: 0,
         _source: [],
@@ -968,8 +954,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with most recent study sort when only search term', () => {
@@ -985,7 +971,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -1000,7 +986,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [recentStudySortScript],
+        sort: recentStudySortScript,
         size: 20,
         from: 0,
         _source: [],
@@ -1012,7 +998,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query correctly with most recent study sort when only search term without fields', () => {
@@ -1028,7 +1014,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -1042,7 +1028,7 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [recentStudySortScript],
+        sort: recentStudySortScript,
         size: 20,
         from: 0,
         _source: [],
@@ -1051,7 +1037,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query correctly with most recent study sort when only date range', () => {
@@ -1072,7 +1058,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -1096,7 +1082,7 @@ describe('Build the search query', () => {
             must: [],
           },
         },
-        sort: [recentStudySortScript],
+        sort: recentStudySortScript,
         size: 20,
         from: 0,
         _source: [],
@@ -1105,8 +1091,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(0);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(0);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with most recent study sort when only Geo Coordinates with out dpt', () => {
@@ -1125,7 +1111,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -1147,7 +1133,7 @@ describe('Build the search query', () => {
             must: [],
           },
         },
-        sort: [recentStudySortScript],
+        sort: recentStudySortScript,
         size: 20,
         from: 0,
         _source: [],
@@ -1156,8 +1142,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(1);
-      expect(result.query.bool?.must).toHaveLength(0);
+      expect(result.query?.bool?.filter).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(0);
     });
   });
 
@@ -1189,7 +1175,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -1234,13 +1220,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 50,
         from: 0,
         _source: [],
@@ -1249,8 +1233,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with results per page as 100', () => {
@@ -1280,7 +1264,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -1326,13 +1310,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 100,
         from: 0,
         _source: [],
@@ -1344,8 +1326,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
   });
   describe('Search query with pagination', () => {
@@ -1376,7 +1358,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -1421,13 +1403,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -1436,8 +1416,8 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query correctly with pagination for page 5', () => {
@@ -1467,7 +1447,7 @@ describe('Build the search query', () => {
         filters: {},
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -1513,13 +1493,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 80,
         _source: [],
@@ -1531,8 +1509,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
   });
 
@@ -1550,7 +1528,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -1569,13 +1547,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -1584,7 +1560,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
     });
 
     it('should build the search query when filter resourceType as dataset', () => {
@@ -1600,7 +1576,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -1619,13 +1595,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -1636,7 +1610,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
     });
 
     it('should build the search query when filter resourceType with multiple values', () => {
@@ -1652,7 +1626,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -1671,13 +1645,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -1688,7 +1660,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
     });
 
     it('should build the search query when filtering with study period', () => {
@@ -1709,7 +1681,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -1740,13 +1712,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -1757,8 +1727,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query when filtering with both resourceType and study period', () => {
@@ -1780,7 +1750,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -1816,13 +1786,11 @@ describe('Build the search query', () => {
             ],
           },
         },
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         size: 20,
         from: 0,
         _source: [],
@@ -1833,8 +1801,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
   });
 
@@ -1852,7 +1820,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -1885,7 +1853,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query for resourceType aggregation with date range', () => {
@@ -1902,7 +1870,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -1944,7 +1912,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for resourceType aggregation with geography coordinates', () => {
@@ -1963,7 +1931,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2003,7 +1971,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query for resourceType aggregation with both date range & geography coordinates', () => {
@@ -2026,7 +1994,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2082,7 +2050,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query for resourceType aggregation with study period filter', () => {
@@ -2103,7 +2071,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -2153,8 +2121,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for resourceType aggregation with study period filter ignore date range', () => {
@@ -2176,7 +2144,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2218,7 +2186,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for resourceType aggregation with study period filter with coordinates', () => {
@@ -2242,7 +2210,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2298,7 +2266,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query for study period aggregation', () => {
@@ -2314,7 +2282,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -2352,7 +2320,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
 
     it('should build the search query for study period aggregation with date range', () => {
@@ -2369,7 +2337,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2417,8 +2385,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(2);
-      expect(result.query.bool?.must).toHaveLength(0);
+      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(0);
     });
 
     it('should build the search query for study period aggregation with geography coordinates', () => {
@@ -2437,7 +2405,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2483,8 +2451,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(1);
-      expect(result.query.bool?.must).toHaveLength(0);
+      expect(result.query?.bool?.filter).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(0);
     });
 
     it('should build the search query for study period aggregation with both date range and geography coordinates', () => {
@@ -2507,7 +2475,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2569,8 +2537,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(3);
-      expect(result.query.bool?.must).toHaveLength(0);
+      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(0);
     });
 
     it('should build the search query for study period aggregation with resourceType filter', () => {
@@ -2586,7 +2554,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -2629,7 +2597,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
     });
 
     it('should build the search query for study period aggregation with resourceType filter and date range', () => {
@@ -2646,7 +2614,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2700,8 +2668,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for study period aggregation with resourceType filter and coordinates', () => {
@@ -2720,7 +2688,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2772,8 +2740,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query for study period aggregation with resourceType filter, date range and coordinates', () => {
@@ -2796,7 +2764,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -2864,8 +2832,8 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(3);
     });
 
     it('should build the search query for study period aggregation with resourceType filter ignoring study period filter', () => {
@@ -2887,7 +2855,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -2930,7 +2898,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
     });
   });
 
@@ -2948,7 +2916,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -2970,8 +2938,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
-      expect(result.query.bool?.filter).toHaveLength(0);
+      expect(result.query?.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.filter).toHaveLength(0);
     });
 
     it('should build the search query to get only count of documents with study period', () => {
@@ -2992,7 +2960,7 @@ describe('Build the search query', () => {
         page: 1,
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [
@@ -3024,8 +2992,8 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.filter).toHaveLength(2);
-      expect(result.query.bool?.must).toHaveLength(0);
+      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(0);
     });
   });
 
@@ -3033,7 +3001,7 @@ describe('Build the search query', () => {
     it('should build query with docId to fetch single document details', async () => {
       const result = generateSearchQuery({ docId: '12313-123232-1231231' });
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             must: [
@@ -3050,7 +3018,7 @@ describe('Build the search query', () => {
       };
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
   });
 
@@ -3069,7 +3037,7 @@ describe('Build the search query', () => {
         fieldsExist: ['field1'],
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -3087,13 +3055,11 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         from: 0,
         _source: [],
       };
@@ -3103,7 +3069,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(2);
+      expect(result.query?.bool?.must).toHaveLength(2);
     });
 
     it('should build the search query with exists property to check multiple fields', () => {
@@ -3120,7 +3086,7 @@ describe('Build the search query', () => {
         fieldsExist: ['field1', 'field2'],
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -3141,13 +3107,11 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         from: 0,
         _source: [],
       };
@@ -3157,7 +3121,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(3);
+      expect(result.query?.bool?.must).toHaveLength(3);
     });
   });
 
@@ -3176,7 +3140,7 @@ describe('Build the search query', () => {
         requiredFields: ['field1', 'field2'],
       };
 
-      const expectedQuery: IQuery = {
+      const expectedQuery: estypes.SearchRequest = {
         query: {
           bool: {
             filter: [],
@@ -3191,13 +3155,11 @@ describe('Build the search query', () => {
           },
         },
         size: 20,
-        sort: [
-          {
-            _score: {
-              order: 'desc',
-            },
+        sort: {
+          _score: {
+            order: 'desc',
           },
-        ],
+        },
         from: 0,
         _source: ['field1', 'field2'],
       };
@@ -3207,7 +3169,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query.bool?.must).toHaveLength(1);
+      expect(result.query?.bool?.must).toHaveLength(1);
     });
   });
 });

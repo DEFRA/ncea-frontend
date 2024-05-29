@@ -16,6 +16,12 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/config/elasticSearchClient', () => ({
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
+}));
+
 describe('404 Screen', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;

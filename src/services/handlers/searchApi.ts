@@ -1,10 +1,11 @@
 import { IFilterFlags } from '@/src/interfaces/searchPayload.interface';
-import { elasticSearchClient } from '../../config/elasticSearchClient';
+import { defaultFilterOptions } from '../../utils/constants';
+import { estypes } from '@elastic/elasticsearch';
 import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
+import { performQuery } from '../../config/elasticSearchClient';
 import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
-import { defaultFilterOptions, elasticSearchAPIPaths } from '../../utils/constants';
 import { generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
 
 const getSearchResults = async (
@@ -17,8 +18,8 @@ const getSearchResults = async (
         searchFieldsObject,
       };
       const payload = generateSearchQuery(searchBuilderPayload);
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: ISearchResults = await formatSearchResponse(response.data, false, isMapResults);
+      const response = await performQuery<estypes.SearchResponse>(payload);
+      const finalResponse: ISearchResults = await formatSearchResponse(response, false, isMapResults);
       return finalResponse;
     } else {
       return Promise.resolve({ total: 0, items: [] });
@@ -37,9 +38,8 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
     };
     const payload = generateSearchQuery(searchBuilderPayload);
     if (Object.keys(searchFieldsObject.fields).length) {
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
-      const data = await response.data;
-      return { totalResults: data?.count ?? 0 };
+      const response = await performQuery<estypes.CountResponse>(payload, true);
+      return { totalResults: response?.count ?? 0 };
     } else {
       return Promise.resolve({ totalResults: 0 });
     }
@@ -63,8 +63,8 @@ const getFilterOptions = async (
       const payload = generateFilterQuery(searchBuilderPayload, {
         isStudyPeriod,
       });
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: IAggregationOptions = await formatAggregationResponse(response.data, defaultFilterOptions);
+      const response = await performQuery<estypes.SearchResponse>(payload);
+      const finalResponse: IAggregationOptions = await formatAggregationResponse(response, defaultFilterOptions);
       return finalResponse;
     } else {
       const fallbackResolve: IAggregationOptions = defaultFilterOptions.reduce((acc, curr) => {
@@ -81,9 +81,9 @@ const getFilterOptions = async (
 const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
   try {
     const payload = generateSearchQuery({ docId });
-    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-    const responseData = response?.data;
-    if (responseData?.hits?.total?.value) {
+    const response = await performQuery<estypes.SearchResponse>(payload);
+    const responseData = response;
+    if (responseData?.hits?.total?.valueOf) {
       const finalResponse: ISearchResults = await formatSearchResponse(responseData, true);
       return finalResponse?.items?.[0] as ISearchItem;
     } else {

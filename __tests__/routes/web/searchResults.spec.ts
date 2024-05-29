@@ -18,6 +18,12 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/config/elasticSearchClient', () => ({
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
+}));
+
 let serverRequest;
 
 const invokeRoute = async (route, payload, method = 'post') => {
