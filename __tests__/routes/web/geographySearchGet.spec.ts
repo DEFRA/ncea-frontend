@@ -17,6 +17,12 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/config/elasticSearchClient', () => ({
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
+}));
+
 describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;

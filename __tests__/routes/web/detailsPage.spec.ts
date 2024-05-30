@@ -27,6 +27,12 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/config/elasticSearchClient', () => ({
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
+}));
+
 let serverRequest;
 const detailsFullResponse = formattedDetailsFullResponse?.items?.[0];
 const detailsPartialResponse = formattedDetailsResponse?.items?.[0];

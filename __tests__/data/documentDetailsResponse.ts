@@ -171,7 +171,7 @@ const detailsEmptyAPIResponse = {
   },
   hits: {
     total: {
-      value: 0,
+      valueOf: 0,
       relation: 'eq',
     },
     max_score: null,

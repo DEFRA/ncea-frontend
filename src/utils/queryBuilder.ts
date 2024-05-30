@@ -1,25 +1,19 @@
+import { estypes } from '@elastic/elasticsearch';
 import { generateDateString } from './generateDateString';
 import {
-  ICustomSortScript,
   IDateValues,
-  IFieldExistsBlock,
-  IFilterBlock,
   IGeoCoordinates,
   IGeoShapeBlock,
-  IMustBlock,
-  IOtherQueryProperties,
-  IQuery,
-  IQueryStringBlock,
-  IRangeBlock,
   ISearchBuilderPayload,
   ISearchPayload,
   IShapeCoordinates,
-  ISortBlock,
-  ITermsBlock,
 } from '../interfaces/queryBuilder.interface';
 import { mapResultMaxCount, resourceTypeFilterField, studyPeriodFilterField } from './constants';
 
-const _generateQueryStringBlock = (searchTerm: string, fieldsToSearch: string[] = []): IQueryStringBlock => {
+const _generateQueryStringBlock = (
+  searchTerm: string,
+  fieldsToSearch: string[] = [],
+): estypes.QueryDslQueryContainer => {
   return {
     query_string: {
       query: searchTerm,
@@ -29,7 +23,7 @@ const _generateQueryStringBlock = (searchTerm: string, fieldsToSearch: string[] 
   };
 };
 
-const _generateTermsBlock = (field: string, values: string[]): ITermsBlock => {
+const _generateTermsBlock = (field: string, values: string[]): estypes.QueryDslQueryContainer => {
   return {
     terms: {
       [field]: values,
@@ -37,13 +31,13 @@ const _generateTermsBlock = (field: string, values: string[]): ITermsBlock => {
   };
 };
 
-const _generateFieldExistsBlock = (field: string): IFieldExistsBlock => {
+const _generateFieldExistsBlock = (field: string): estypes.QueryDslQueryContainer => {
   return {
     exists: { field },
   };
 };
 
-const _generateRangeBlock = (fields: IDateValues): IRangeBlock[] => {
+const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContainer[] => {
   const startDateValue: string = generateDateString({
     year: parseInt(fields.fdy!),
     month: parseInt(fields.fdm ?? ''),
@@ -58,7 +52,7 @@ const _generateRangeBlock = (fields: IDateValues): IRangeBlock[] => {
     true,
   );
 
-  const rangeBlock: IRangeBlock[] = [
+  const rangeBlock: estypes.QueryDslQueryContainer[] = [
     {
       range: {
         'resourceTemporalExtentDetails.start.date': {
@@ -79,7 +73,7 @@ const _generateRangeBlock = (fields: IDateValues): IRangeBlock[] => {
   return rangeBlock;
 };
 
-const _generateGeoShapeBlock = (geoCoordinates: IGeoCoordinates): IGeoShapeBlock => {
+const _generateGeoShapeBlock = (geoCoordinates: IGeoCoordinates): estypes.QueryDslQueryContainer => {
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
@@ -96,11 +90,11 @@ const _generateGeoShapeBlock = (geoCoordinates: IGeoCoordinates): IGeoShapeBlock
       },
     },
   };
-  return geoShapeBlock;
+  return geoShapeBlock as estypes.QueryDslQueryContainer;
 };
 
-const buildCustomSortScriptForStudyPeriod = (): ISortBlock => {
-  const customScript: ICustomSortScript = {
+const buildCustomSortScriptForStudyPeriod = (): estypes.Sort => {
+  const customScript: estypes.ScriptSort = {
     type: 'number',
     script: {
       source:
@@ -108,29 +102,30 @@ const buildCustomSortScriptForStudyPeriod = (): ISortBlock => {
     },
     order: 'desc',
   };
-  const sortBlock: ISortBlock = {
+  const sortBlock: estypes.SortOptions = {
     _script: customScript,
   };
   return sortBlock;
 };
 
-const _buildBestScoreSort = (): ISortBlock => ({
+const _buildBestScoreSort = (): estypes.Sort => ({
   _score: {
     order: 'desc',
   },
 });
 
-const _generateSortBlock = (sort: string): ISortBlock => {
-  const sortBlock: ISortBlock = sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : _buildBestScoreSort();
+const _generateSortBlock = (sort: string): estypes.Sort => {
+  const sortBlock: estypes.Sort =
+    sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : _buildBestScoreSort();
   return sortBlock;
 };
 
-const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPayload): IOtherQueryProperties => {
+const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
   const { searchFieldsObject, isCount = false, isAggregation = false, docId = '' } = searchBuilderPayload;
   const { sort, rowsPerPage, page, requiredFields = [] } = (searchFieldsObject as ISearchPayload) ?? {};
 
   const isSort: boolean = sort !== '' && !isCount && docId === '' && !isAggregation;
-  const sortBlock: ISortBlock[] = isSort ? [_generateSortBlock(sort)] : [];
+  const sortBlock: estypes.Sort = isSort ? _generateSortBlock(sort) : '';
 
   return {
     ...(isSort && { sort: sortBlock }),
@@ -143,16 +138,16 @@ const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPaylo
         from: page === 1 ? 0 : (page - 1) * rowsPerPage,
       }),
     ...(!isCount && docId === '' && !isAggregation && { _source: requiredFields }),
-  };
+  } as estypes.SearchRequest;
 };
 
-const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
+const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
   const { searchFieldsObject, fieldsToSearch = [], docId = '' } = searchBuilderPayload;
   const { fields, fieldsExist = [] } = (searchFieldsObject as ISearchPayload) ?? {};
 
   const searchTerm: string = fields?.keyword?.q as string;
 
-  const mustBlock: IMustBlock = docId ? [_generateQueryStringBlock(docId, ['_id'])] : [];
+  const mustBlock: estypes.QueryDslQueryContainer[] = docId ? [_generateQueryStringBlock(docId, ['_id'])] : [];
   if (searchTerm && docId === '') mustBlock.push(_generateQueryStringBlock(searchTerm, fieldsToSearch));
   if (fieldsExist.length > 0 && docId === '') {
     fieldsExist.forEach((field: string) => {
@@ -162,7 +157,8 @@ const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => 
 
   const geoCoordinates: IGeoCoordinates = fields?.extent as IGeoCoordinates;
   const { nth = '', sth = '', est = '', wst = '' } = geoCoordinates ?? {};
-  const filterBlock: IFilterBlock = nth && sth && est && wst ? [_generateGeoShapeBlock(geoCoordinates)] : [];
+  const filterBlock: estypes.QueryDslQueryContainer[] =
+    nth && sth && est && wst ? [_generateGeoShapeBlock(geoCoordinates)] : [];
 
   return {
     query: {
@@ -175,10 +171,14 @@ const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => 
   };
 };
 
-const _generateDateRangeQuery = (searchBuilderPayload: ISearchBuilderPayload, queryPayload: IQuery): IFilterBlock => {
+const _generateDateRangeQuery = (
+  searchBuilderPayload: ISearchBuilderPayload,
+  queryPayload: estypes.SearchRequest,
+): estypes.QueryDslQueryContainer[] => {
   const { searchFieldsObject } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
-  const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
+  const filterBlock: estypes.QueryDslQueryContainer[] =
+    (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
   if (studyPeriodFilter?.fdy && studyPeriodFilter?.tdy) {
     const newFields: IDateValues = {
@@ -192,33 +192,38 @@ const _generateDateRangeQuery = (searchBuilderPayload: ISearchBuilderPayload, qu
   return filterBlock;
 };
 
-const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
-  const queryPayload: IQuery = _generateQuery(searchBuilderPayload);
+const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
   if (docId === '') {
-    const filterBlock: IFilterBlock = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
-    const mustBlock: IMustBlock = queryPayload.query?.bool?.must ?? [];
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    const mustBlock: estypes.QueryDslQueryContainer[] =
+      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
 
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
-    queryPayload.query.bool = {
-      must: [...mustBlock],
-      filter: [...filterBlock],
-    };
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        must: [...mustBlock],
+        filter: [...filterBlock],
+      };
+    }
   }
   return queryPayload;
 };
 
-const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
-  const queryPayload: IQuery = _generateQuery(searchBuilderPayload);
+const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { fields, filters } = searchFieldsObject as ISearchPayload;
   if (docId === '') {
-    const mustBlock: IMustBlock = queryPayload.query?.bool?.must ?? [];
-    const filterBlock: IFilterBlock = queryPayload.query?.bool?.filter ?? [];
+    const mustBlock: estypes.QueryDslQueryContainer[] =
+      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
+    const filterBlock: estypes.QueryDslQueryContainer[] =
+      (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
     if (fields?.date?.fdy && fields?.date?.tdy) {
       filterBlock.push(..._generateRangeBlock(fields.date));
@@ -226,11 +231,13 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
-    queryPayload.query.bool = {
-      ...queryPayload.query.bool,
-      filter: [...filterBlock],
-      must: [...mustBlock],
-    };
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        ...queryPayload.query.bool,
+        filter: [...filterBlock],
+        must: [...mustBlock],
+      };
+    }
   }
   queryPayload.aggs = {
     min_year: {
@@ -247,15 +254,17 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   return queryPayload;
 };
 
-const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
-  const queryPayload: IQuery = _generateQuery(searchBuilderPayload);
+const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { docId = '' } = searchBuilderPayload;
   if (docId === '') {
-    const filterBlock: IFilterBlock = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
-    queryPayload.query.bool = {
-      ...queryPayload.query.bool,
-      filter: [...filterBlock],
-    };
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        ...queryPayload.query.bool,
+        filter: [...filterBlock],
+      };
+    }
   }
   queryPayload.aggs = {
     unique_resource_types: {
@@ -267,7 +276,10 @@ const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPa
   return queryPayload;
 };
 
-const generateFilterQuery = (searchBuilderPayload: ISearchBuilderPayload, { isStudyPeriod = false }): IQuery => {
+const generateFilterQuery = (
+  searchBuilderPayload: ISearchBuilderPayload,
+  { isStudyPeriod = false },
+): estypes.SearchRequest => {
   return isStudyPeriod
     ? _generateStudyPeriodFilterQuery(searchBuilderPayload)
     : _generateResourceTypeFilterQuery(searchBuilderPayload);
