@@ -31,9 +31,17 @@ const SearchResultsController = {
     const { rowsPerPage, page } = payload;
     const isQuickSearchJourney = journey === 'qs';
     try {
-      const searchResults: ISearchResults = await getSearchResults(payload);
-      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(payload, { isStudyPeriod: true });
-      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(payload, { isStudyPeriod: false });
+      const searchResults: ISearchResults = await getSearchResults(payload, false, isQuickSearchJourney);
+      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(
+        payload,
+        { isStudyPeriod: true },
+        isQuickSearchJourney,
+      );
+      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(
+        payload,
+        { isStudyPeriod: false },
+        isQuickSearchJourney,
+      );
       const filterOptions: IAggregationOptions = {
         [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
         [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
@@ -98,7 +106,9 @@ const SearchResultsController = {
     return response.view(view, context).code(400).takeover();
   },
   getMapResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const journey: string = readQueryParams(request.query, queryParamKeys.journey);
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
+    const isQuickSearchJourney = journey === 'qs';
     try {
       const mapPayload: ISearchPayload = {
         ...payload,
@@ -106,7 +116,7 @@ const SearchResultsController = {
         fieldsExist: ['geom'],
         requiredFields: requiredFieldsForMap,
       };
-      const searchMapResults: ISearchResults = await getSearchResults(mapPayload, true);
+      const searchMapResults: ISearchResults = await getSearchResults(mapPayload, true, isQuickSearchJourney);
       return response.response(searchMapResults).header('Content-Type', 'application/json');
     } catch (error) {
       return response.response({ error: 'An error occurred while processing your request' }).code(500);
@@ -114,6 +124,8 @@ const SearchResultsController = {
   },
   getMapFiltersHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const filterPayload: ISearchPayload = generateQueryBuilderPayload(request.query);
+    const journey: string = readQueryParams(request.query, queryParamKeys.journey);
+    const isQuickSearchJourney = journey === 'qs';
     try {
       const mapPayload: ISearchPayload = {
         ...filterPayload,
@@ -121,10 +133,18 @@ const SearchResultsController = {
         fieldsExist: ['geom'],
         requiredFields: requiredFieldsForMap,
       };
-      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(mapPayload, { isStudyPeriod: true });
-      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(mapPayload, {
-        isStudyPeriod: false,
-      });
+      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(
+        mapPayload,
+        { isStudyPeriod: true },
+        isQuickSearchJourney,
+      );
+      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(
+        mapPayload,
+        {
+          isStudyPeriod: false,
+        },
+        isQuickSearchJourney,
+      );
       const filterOptions: IAggregationOptions = {
         [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
         [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],

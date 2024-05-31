@@ -50,6 +50,17 @@ export const requiredFieldsForMap: string[] = [
   'ownerOrgForResourceObject',
 ];
 
+export const quickSearchTargetFields: string[] = [
+  'resourceTitleObject.default',
+  'resourceAltTitleObject.default',
+  'resourceAbstractObject.default',
+  'lineageObject.default',
+  'tag.default',
+  'cl_topic.default',
+  'resourceType',
+  'supplementalInformationObject',
+];
+
 export const guidedSearchSteps = {
   date: 'date',
   coordinate: 'extent',
