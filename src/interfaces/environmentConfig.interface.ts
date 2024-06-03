@@ -7,4 +7,6 @@ export interface EnvironmentConfig {
   elasticSearchAPI: string | undefined;
   isLocal?: boolean;
   gtmId?: string;
+  elasticSearchUsername?: string;
+  elasticSearchPassword?: string;
 }

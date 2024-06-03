@@ -17,8 +17,8 @@ const _generateQueryStringBlock = (
   return {
     query_string: {
       query: searchTerm,
+      default_operator: 'OR',
       ...(fieldsToSearch.length > 0 && { fields: fieldsToSearch }),
-      default_operator: 'AND',
     },
   };
 };

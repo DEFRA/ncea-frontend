@@ -12,6 +12,8 @@ describe('Environment Configuration Schema', () => {
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
       expect(value.gtmId).toEqual('');
+      expect(value.elasticSearchUsername).toEqual('');
+      expect(value.elasticSearchPassword).toEqual('');
     });
 
     it('should keep provided values for fields if available', () => {
@@ -29,6 +31,8 @@ describe('Environment Configuration Schema', () => {
       expect(value.elasticSearchAPI).toEqual('');
       expect(value.isLocal).toEqual(false);
       expect(value.gtmId).toEqual('');
+      expect(value.elasticSearchUsername).toEqual('');
+      expect(value.elasticSearchPassword).toEqual('');
     });
   });
 
@@ -43,6 +47,8 @@ describe('Environment Configuration Schema', () => {
         elasticSearchAPI: 'https://example.com/api',
         isLocal: false,
         gtmId: 'your-key',
+        elasticSearchUsername: 'es-username',
+        elasticSearchPassword: 'es-password',
       };
 
       const { error, value } = environmentSchema.validate(validConfig);

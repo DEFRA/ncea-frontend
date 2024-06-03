@@ -48,7 +48,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -132,7 +132,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -207,7 +207,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -249,7 +249,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -432,7 +432,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -521,7 +521,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -601,7 +601,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -648,7 +648,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -818,7 +818,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -903,7 +903,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -979,7 +979,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -1022,7 +1022,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -1182,7 +1182,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -1271,7 +1271,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -1365,7 +1365,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -1454,7 +1454,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -1536,7 +1536,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -1584,7 +1584,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -1634,7 +1634,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -1688,7 +1688,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -1757,7 +1757,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -1828,7 +1828,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -2078,7 +2078,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -2290,7 +2290,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -2562,7 +2562,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -2863,7 +2863,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -2924,7 +2924,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
@@ -3008,7 +3008,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: '12313-123232-1231231',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                   fields: ['_id'],
                 },
               },
@@ -3045,7 +3045,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -3094,7 +3094,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
               {
@@ -3148,7 +3148,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'AND',
+                  default_operator: 'OR',
                 },
               },
             ],
