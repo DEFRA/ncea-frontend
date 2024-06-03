@@ -1,0 +1,13 @@
+- key: APPINSIGHTS_CONNECTIONSTRING
+  value: "{{servicename}}-APPINSIGHTS-CONNECTIONSTRING"
+  type: "keyvault"
+- key: ELASTICSEARCH_API
+  value: "http://elasticsearch.geonetwork.svc.cluster.local:9200/"
+- key: NODE_ENV
+  value: "dev"
+- key: PORT
+  value: "3000"
+- key: AZURE_KEYVAULT_URL
+  value: "https://sndadpinfvt4401.vault.azure.net/"
+- key: APPINSIGHTS_SECRET_NAME
+  value: "ncea-frontend-APPINSIGHTS-CONNECTIONSTRING"

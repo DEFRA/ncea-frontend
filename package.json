@@ -1,6 +1,6 @@
 {
   "name": "natural-capital-and-ecosystem-assessment",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "src/index.ts",
   "moduleDirectories": [
