@@ -590,15 +590,15 @@ describe('Format the search response', () => {
       jest.clearAllMocks();
     });
     test('returns empty string when dateRanges is empty', () => {
-      expect(getStudyPeriodDetails([], true)).toBe('');
-      expect(getStudyPeriodDetails([], false)).toBe('');
+      expect(getStudyPeriodDetails(true, [])).toBe('');
+      expect(getStudyPeriodDetails(false, [])).toBe('');
     });
     test('returns formatted string for single date range when isDetails is false', () => {
       const dateRanges: IDateRange[] = [
         { start: { date: '2022-01-01' }, end: { date: '2022-01-31' } },
         { start: { date: '2022-02-01' }, end: { date: '2022-02-28' } },
       ];
-      expect(getStudyPeriodDetails(dateRanges, false)).toBe(
+      expect(getStudyPeriodDetails(false, dateRanges)).toBe(
         '1 January 2022 to 31 January 2022',
       );
     });
@@ -607,7 +607,7 @@ describe('Format the search response', () => {
         { start: { date: '2022-01-01' }, end: { date: '2022-01-31' } },
         { start: { date: '2022-02-01' }, end: { date: '2022-02-28' } },
       ];
-      expect(getStudyPeriodDetails(dateRanges, true)).toBe(
+      expect(getStudyPeriodDetails(true, dateRanges)).toBe(
         '1 January 2022 to 31 January 2022\n1 February 2022 to 28 February 2022',
       );
     });
@@ -615,7 +615,7 @@ describe('Format the search response', () => {
       const dateRanges: IDateRange[] = [
         { start: { date: '' }, end: { date: '2022-01-31' } },
       ];
-      expect(getStudyPeriodDetails(dateRanges, true)).toBe(
+      expect(getStudyPeriodDetails(true, dateRanges)).toBe(
         '31 January 2022 to 31 January 2022',
       );
     });
@@ -623,7 +623,7 @@ describe('Format the search response', () => {
       const dateRanges: IDateRange[] = [
         { start: { date: '2022-01-01' }, end: { date: '' } },
       ];
-      expect(getStudyPeriodDetails(dateRanges, true)).toBe(
+      expect(getStudyPeriodDetails(true, dateRanges)).toBe(
         '1 January 2022 to 1 January 2022',
       );
     });
@@ -631,11 +631,11 @@ describe('Format the search response', () => {
       const dateRanges: IDateRange[] = [
         { start: { date: '' }, end: { date: '' } },
       ];
-      expect(getStudyPeriodDetails(dateRanges, true)).toBe('');
+      expect(getStudyPeriodDetails(true, dateRanges)).toBe('');
     });
     test('handles undefined date ranges', () => {
-      expect(getStudyPeriodDetails(undefined, true)).toBe('');
-      expect(getStudyPeriodDetails(undefined, false)).toBe('');
+      expect(getStudyPeriodDetails(true, undefined)).toBe('');
+      expect(getStudyPeriodDetails(false, undefined)).toBe('');
     });
   });
 });

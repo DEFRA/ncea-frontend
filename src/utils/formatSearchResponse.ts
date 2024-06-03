@@ -30,7 +30,7 @@ const getResourceLocatorURL = (data: string | string[]): string => {
   return data as string;
 };
 
-export const getStudyPeriodDetails = (dateRanges: IDateRange[] = [], isDetails: boolean): string => {
+export const getStudyPeriodDetails = (isDetails: boolean, dateRanges: IDateRange[] = []): string => {
   const studyPeriodString = (startDate: string, endDate: string): string => {
     if (!startDate && !endDate) return '';
     if (!startDate) return `${endDate} to ${endDate}`;
@@ -43,7 +43,7 @@ export const getStudyPeriodDetails = (dateRanges: IDateRange[] = [], isDetails: 
   const resultString: string[] = [];
   for (const dateRange of dateRanges) {
     const startDate: string = dateRange?.start?.date ? formatDate(dateRange.start.date) : '';
-    const endDate: string = dateRange?.end?.date ? formatDate(dateRange.end.date!) : '';
+    const endDate: string = dateRange?.end?.date ? formatDate(dateRange.end.date) : '';
     const dateString = studyPeriodString(startDate, endDate);
     resultString.push(dateString);
 
@@ -71,7 +71,7 @@ const formatSearchResponse = async (
   const responseItems: Promise<ISearchItem>[] = apiSearchItems.map(async (searchItem: Record<string, any>) => {
     const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
     const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
-    const studyPeriod = getStudyPeriodDetails(searchItem?._source?.resourceTemporalExtentDetails ?? [], isDetails);
+    const studyPeriod = getStudyPeriodDetails(isDetails, searchItem?._source?.resourceTemporalExtentDetails ?? []);
     const publishedBy = getOrganisationDetails(searchItem?._source, false);
     const organisationDetails = getOrganisationDetails(searchItem?._source, true);
     const startYear: string = getYear(startDate);
