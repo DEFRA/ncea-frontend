@@ -8,7 +8,7 @@
     </h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
-          <div class="filter-study-period-group govuk-section-break--visible">
+          <div class="filter-study-period-group">
             {{ govukSelect({
             id: filterInstance+'-start_year',
             name: "start_year",
@@ -18,7 +18,7 @@
             },
             items: filterOptions.start_year_range,
             formGroup: {
-              classes: 'govuk-!-margin-right-4 govuk-!-margin-bottom-4'
+              classes: 'govuk-!-margin-right-4 govuk-!-margin-bottom-3'
             }
           }) }}
             {{ govukSelect({
@@ -30,10 +30,16 @@
             },
             items: filterOptions.to_year_range,
             formGroup: {
-              classes: 'govuk-!-margin-bottom-4'
+              classes: 'govuk-!-margin-bottom-3'
             }
           }) }}
           </div>
+          {% if filterInstance === 'search_results' and hasStudyPeriodFilterApplied %}
+            <a href="{{resetStudyPeriodLink}}" class="govuk-link defra-reset-study-period--link">
+              Reset study period
+            </a>
+          {% endif %}
+          <div class="govuk-!-margin-top-4 govuk-section-break--visible"></div>
         </div>
       </section>
     </form>
