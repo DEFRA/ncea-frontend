@@ -332,7 +332,7 @@ describe('Format the search response', () => {
           resource_type_and_hierarchy: '',
           hierarchy_level: '',
           resource_locators:
-            'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+            '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
           additionalInformation: '',
           lineage: '',
           publicationInformation: '',
@@ -382,7 +382,7 @@ describe('Format the search response', () => {
           resource_type_and_hierarchy: 'Dataset',
           hierarchy_level: 'Dataset',
           resource_locators:
-            'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+            '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
           additionalInformation: '',
           lineage: '',
           publicationInformation: '',

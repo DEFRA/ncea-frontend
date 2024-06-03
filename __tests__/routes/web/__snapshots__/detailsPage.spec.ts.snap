@@ -514,7 +514,7 @@ exports[`Details route template Document details with data Check status code and
           <h2 class='tab-content-label'>Resource locators</h2>
           
             <span class='tab-content-value'>
-              Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)
+              <p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>
             </span>
           
         </div>
@@ -1567,7 +1567,7 @@ exports[`Details route template Document details with partial data Check status 
           <h2 class='tab-content-label'>Resource locators</h2>
           
             <span class='tab-content-value'>
-              Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)
+              <p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>
             </span>
           
         </div>

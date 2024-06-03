@@ -58,7 +58,7 @@ export const quickSearchTargetFields: string[] = [
   'tag.default',
   'cl_topic.default',
   'resourceType',
-  'supplementalInformationObject',
+  'supplementalInformationObject.default',
 ];
 
 export const guidedSearchSteps = {
