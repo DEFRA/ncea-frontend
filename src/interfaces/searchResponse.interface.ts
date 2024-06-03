@@ -107,3 +107,8 @@ export interface IOrganisationDetails {
   role: string;
   email: string;
 }
+
+export interface IDateRange {
+  start?: { date?: string };
+  end?: { date?: string };
+}

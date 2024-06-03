@@ -1,5 +1,12 @@
-import { ISearchResults } from '../../src/interfaces/searchResponse.interface';
-import { formatSearchResponse } from '../../src/utils/formatSearchResponse';
+import {
+  IDateRange,
+  ISearchResults,
+} from '../../src/interfaces/searchResponse.interface';
+import { formatDate } from '../../src/utils/formatDate';
+import {
+  formatSearchResponse,
+  getStudyPeriodDetails,
+} from '../../src/utils/formatSearchResponse';
 import {
   detailsSuccessAPIFullData,
   detailsSuccessAPIResponse,
@@ -576,5 +583,59 @@ describe('Format the search response', () => {
     expect(result.items?.[0]?.geographicBoundary).toBeDefined();
     expect(result.items?.[0]?.geographicCenter).toBeDefined();
     expect(result.items?.[0]?.geographicCenter).toBe('-11.14563,49.0466505');
+  });
+
+  describe('getStudyPeriodDetails', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+    test('returns empty string when dateRanges is empty', () => {
+      expect(getStudyPeriodDetails([], true)).toBe('');
+      expect(getStudyPeriodDetails([], false)).toBe('');
+    });
+    test('returns formatted string for single date range when isDetails is false', () => {
+      const dateRanges: IDateRange[] = [
+        { start: { date: '2022-01-01' }, end: { date: '2022-01-31' } },
+        { start: { date: '2022-02-01' }, end: { date: '2022-02-28' } },
+      ];
+      expect(getStudyPeriodDetails(dateRanges, false)).toBe(
+        '1 January 2022 to 31 January 2022',
+      );
+    });
+    test('returns formatted strings for all date ranges when isDetails is true', () => {
+      const dateRanges: IDateRange[] = [
+        { start: { date: '2022-01-01' }, end: { date: '2022-01-31' } },
+        { start: { date: '2022-02-01' }, end: { date: '2022-02-28' } },
+      ];
+      expect(getStudyPeriodDetails(dateRanges, true)).toBe(
+        '1 January 2022 to 31 January 2022\n1 February 2022 to 28 February 2022',
+      );
+    });
+    test('handles missing start date', () => {
+      const dateRanges: IDateRange[] = [
+        { start: { date: '' }, end: { date: '2022-01-31' } },
+      ];
+      expect(getStudyPeriodDetails(dateRanges, true)).toBe(
+        '31 January 2022 to 31 January 2022',
+      );
+    });
+    test('handles missing end date', () => {
+      const dateRanges: IDateRange[] = [
+        { start: { date: '2022-01-01' }, end: { date: '' } },
+      ];
+      expect(getStudyPeriodDetails(dateRanges, true)).toBe(
+        '1 January 2022 to 1 January 2022',
+      );
+    });
+    test('handles missing both start and end date', () => {
+      const dateRanges: IDateRange[] = [
+        { start: { date: '' }, end: { date: '' } },
+      ];
+      expect(getStudyPeriodDetails(dateRanges, true)).toBe('');
+    });
+    test('handles undefined date ranges', () => {
+      expect(getStudyPeriodDetails(undefined, true)).toBe('');
+      expect(getStudyPeriodDetails(undefined, false)).toBe('');
+    });
   });
 });
