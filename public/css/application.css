@@ -8257,6 +8257,21 @@
   display: block;
 }
 
+.defra-reset-study-period--link {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  color: #1d70b8 !important;
+}
+.defra-reset-study-period--link:hover {
+  color: #003078 !important;
+}
+.defra-reset-study-period--link:focus {
+  color: #003078 !important;
+}
+
 .details-title {
   font-size: 2.25rem;
   font-style: normal;

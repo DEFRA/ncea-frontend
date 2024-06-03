@@ -42,6 +42,26 @@ const upsertQueryParams = (
   return searchParams.toString();
 };
 
+const deleteQueryParams = (
+  requestQuery: RequestQuery,
+  queryParams: string[],
+  includeDefaultParams: boolean = true,
+): string => {
+  let searchParams: URLSearchParams = getQueryStringParams(requestQuery);
+  if (Array.isArray(queryParams)) {
+    queryParams.forEach((key: string) => {
+      if (searchParams.has(key)) {
+        searchParams.delete(key);
+      }
+    });
+  }
+  if (includeDefaultParams) {
+    searchParams = setDefaultQueryParams(searchParams);
+  }
+
+  return searchParams.toString();
+};
+
 const readQueryParams = (
   requestQuery: RequestQuery,
   key: string = '',
@@ -154,4 +174,5 @@ export {
   getExtentParams,
   getFilterParams,
   generateQueryBuilderFields,
+  deleteQueryParams,
 };

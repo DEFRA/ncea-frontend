@@ -9,6 +9,12 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import {
+  deleteQueryParams,
+  generateQueryBuilderPayload,
+  readQueryParams,
+  upsertQueryParams,
+} from '../../utils/queryStringHelper';
+import {
   formIds,
   mapResultMaxCount,
   pageTitles,
@@ -19,7 +25,6 @@ import {
   uniqueResourceTypesKey,
   webRoutePaths,
 } from '../../utils/constants';
-import { generateQueryBuilderPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 import { getDocumentDetails, getFilterOptions, getSearchResults } from '../../services/handlers/searchApi';
 import { processFilterOptions, processSortOptions } from '../../utils/processFilterRSortOptions';
 
@@ -27,6 +32,9 @@ const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const { quickSearchFID } = formIds;
     const journey: string = readQueryParams(request.query, queryParamKeys.journey);
+    const studyPeriodFromYear: string = readQueryParams(request.query, queryParamKeys.startYear);
+    const studyPeriodToYear: string = readQueryParams(request.query, queryParamKeys.toYear);
+    const hasStudyPeriodFilterApplied: boolean = !!studyPeriodFromYear.length && !!studyPeriodToYear.length;
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
     const { rowsPerPage, page } = payload;
     const isQuickSearchJourney = journey === 'qs';
@@ -46,6 +54,11 @@ const SearchResultsController = {
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
       const processedSortOptions = await processSortOptions(request.query);
+      const resetStudyPeriodQueryString: string = deleteQueryParams(request.query, [
+        queryParamKeys.startYear,
+        queryParamKeys.toYear,
+      ]);
+      const resetStudyPeriodLink: string = `${webRoutePaths.results}?${resetStudyPeriodQueryString}`;
       return response.view('screens/results/template', {
         pageTitle: pageTitles.results,
         quickSearchFID,
@@ -61,6 +74,8 @@ const SearchResultsController = {
         dateSearchPath: webRoutePaths.guidedDateSearch,
         filterInstance: 'search_results',
         queryString,
+        hasStudyPeriodFilterApplied,
+        resetStudyPeriodLink,
       });
     } catch (error) {
       return response.view('screens/results/template', {
