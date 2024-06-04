@@ -204,7 +204,7 @@ const formattedDetailsResponse: ISearchResults = {
       host_service_catalogue_number: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
       hierarchy_level: 'Dataset',
       resource_locators:
-        'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+        '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
       additionalInformation: '',
       lineage: '',
       publicationInformation: '',
@@ -757,7 +757,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       resource_type_and_hierarchy: 'Dataset',
       hierarchy_level: 'Dataset',
       resource_locators:
-        'Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)',
+        '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
       additionalInformation: '',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',

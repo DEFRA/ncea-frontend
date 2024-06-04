@@ -76,6 +76,17 @@ describe('getAccessTabData functions', () => {
         '<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>',
       );
     });
+
+    test('should return an empty string when empty array is provided', () => {
+      expect(getCoupledResource([])).toBe('');
+    });
+
+    test('should create a link with decoded data as href when we provide array of links', () => {
+      const data = ['https:\\/\\/example.com', 'https:\\/\\/example.com'];
+      expect(getCoupledResource(data)).toBe(
+        '<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>\n<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>',
+      );
+    });
   });
 
   describe('getResourceLocators', () => {
@@ -100,10 +111,6 @@ describe('getAccessTabData functions', () => {
     test('should generate resource locator strings for valid data', () => {
       const searchItem = {
         _source: {
-          cl_function: [
-            { key: 'function1', default: 'Function1' },
-            { key: 'function2', default: 'Function2' },
-          ],
           link: [
             {
               function: 'function1',
@@ -119,17 +126,13 @@ describe('getAccessTabData functions', () => {
         },
       };
       const expected =
-        'Function1 from Name1 (<a class="govuk-link" href="https://example.com/1" target="_blank">https://example.com/1</a>)\nFunction2 from Name2 (<a class="govuk-link" href="https://example.com/2" target="_blank">https://example.com/2</a>)';
+        '<p>Function1 from Name1 (<a class="govuk-link" href="https://example.com/1" target="_blank">https://example.com/1</a>)</p>\n<p>Function2 from Name2 (<a class="govuk-link" href="https://example.com/2" target="_blank">https://example.com/2</a>)</p>';
       expect(getResourceLocators(searchItem)).toBe(expected);
     });
 
     test('should generate resource locator strings when link data is missing for some functions', () => {
       const searchItem = {
         _source: {
-          cl_function: [
-            { key: 'function1', default: 'Function1' },
-            { key: 'function2', default: 'Function2' },
-          ],
           link: [
             {
               function: 'function1',
@@ -140,7 +143,7 @@ describe('getAccessTabData functions', () => {
         },
       };
       const expected =
-        'Function1 from Name1 (<a class="govuk-link" href="https://example.com/1" target="_blank">https://example.com/1</a>)';
+        '<p>Function1 from Name1 (<a class="govuk-link" href="https://example.com/1" target="_blank">https://example.com/1</a>)</p>';
       expect(getResourceLocators(searchItem)).toBe(expected);
     });
 

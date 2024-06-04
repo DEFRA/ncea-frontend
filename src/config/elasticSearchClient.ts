@@ -1,8 +1,23 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import { environmentConfig } from './environmentConfig';
 import { geoNetworkIndex } from '../utils/constants';
-import { Client, estypes } from '@elastic/elasticsearch';
+import { Client, ClientOptions, estypes } from '@elastic/elasticsearch';
 
-const client = new Client({ node: environmentConfig.elasticSearchAPI });
+const { elasticSearchAPI, elasticSearchUsername, elasticSearchPassword } = environmentConfig;
+
+const hasCredentials: boolean = !!elasticSearchUsername?.length && !!elasticSearchPassword?.length;
+
+const clientOptions: ClientOptions = {
+  node: elasticSearchAPI,
+  ...(hasCredentials && {
+    auth: {
+      username: elasticSearchUsername as string,
+      password: elasticSearchPassword as string,
+    },
+  }),
+};
+const client = new Client(clientOptions);
 
 const performQuery = async <T>(payload: estypes.SearchRequest, isCount: boolean = false): Promise<T> => {
   try {
@@ -12,10 +27,9 @@ const performQuery = async <T>(payload: estypes.SearchRequest, isCount: boolean 
       ...payload,
     });
     return result as T;
-  } catch (error) {
-    console.error('Elasticsearch error:', error);
-    throw error;
+  } catch (error: any) {
+    throw new Error(`Elasticsearch results: ${error.message}`);
   }
 };
 
-export { performQuery };
+export { performQuery, hasCredentials, clientOptions };
