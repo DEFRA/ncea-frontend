@@ -52,7 +52,7 @@ export const getStudyPeriodDetails = (isDetails: boolean, dateRanges: IDateRange
     }
   }
 
-  return resultString.join('\n');
+  return resultString.join('<br>');
 };
 
 const formatSearchResponse = async (
