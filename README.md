@@ -99,7 +99,7 @@ npm run start:dev
 - **Eslint** - it is a static code analysis tool
 - **Husky** - it is a tool that simplifies the setup and management of pre-commit hooks
 - **Pino** - it is a logging framework for node.js
-- **Axios** - it is a promise-based HTTP library that lets make requests to fetch data
+- **Elasticsearch** - Create an ES connection and perform queries.
 
 ## Application Anatomy
 
@@ -108,7 +108,9 @@ npm run start:dev
 │   ├── assets             // Contains all the sass styles and scripts
 │   │   ├── sass           // Contains all the sass styles and functions
 │   ├── config             // To define and initiate the configurations
-│   │   └── geoNetwork..ts // Here is where you can find the initialization of the axios clients
+│   │   ├── azureKeyVa..ts // This is to create a connection object that reads data from the Azure key vault
+│   │   ├── elasticSea..ts // Create a connection object for Elasticsearch.
+│   │   └── environment..ts// The purpose of this is to read the environment variables.
 │   ├── controllers        // The definition of all route handlers can be found here
 │   │   ├── api            // For API rest endpoint controller are arranged here
 │   │   └── web            // For web view rendering, controllers are arranged by module names
@@ -125,7 +127,6 @@ npm run start:dev
 │   ├── schema             // To identify all the schema related to Joi
 │   ├── services           // The definition of api clients and api handlers can be found heres
 │   │   └── handlers       // Contains all the API handlers, each endpoint will have its asynchronous
-│   ├── types              // To declare the custom type definitions
 │   ├── utils              // utils contains common utility and helper reusable methods that can be used by controllers function
 │   ├── views              // All server-rendered nunjucks templates, partials and helpers
 │   │   ├── layout         // Contains the basic customized layout of the template
@@ -214,34 +215,38 @@ It is important to create the.env file at the root folder level, and the require
 ```bash
 PORT=
 NODE_ENV=
+APPINSIGHTS_SECRET_NAME=
 APPINSIGHTS_INSTRUMENTATIONKEY=
 AZURE_KEYVAULT_URL=
 ELASTICSEARCH_API=
-APPINSIGHTS_SECRET_NAME=
+GTM_ID=
+ES_USERNAME=
+ES_PASSWORD=
 ```
 
-***Pipeline Variables***
+**_Pipeline Variables_**
 Variable Groups
+
 - pipelineVariables
-    - *acrConatinerRegistry*
-    - *acrContainerRepositoryHarvester*
-    - *acrName*
-    - *sonarCloudOrganization*
-    - *sonarProjectKeySearchWebApp*
-    - *sonarProjectNameSerachWebApp*
+  - _acrConatinerRegistry_
+  - _acrContainerRepositoryHarvester_
+  - _acrName_
+  - _sonarCloudOrganization_
+  - _sonarProjectKeySearchWebApp_
+  - _sonarProjectNameSerachWebApp_
 - azureVariables-[dev/test/sandbox/...]
-    - *aksNamespace*
-    - *blobStorageUri*
-    - *keyVaultUri*
-    - *serviceBusHostName*
-- *searchWebAppVariables-[dev/test/sandbox/...]*
-    - *appinsightsSecretName*
-    - *containerRepositoryFullPath*
-    - *elasticSearchApi*
-    - *hostName*
-    - *nodeEnv*
-    - *port*
-    - *serviceAccountSearchWebApp*
+  - _aksNamespace_
+  - _blobStorageUri_
+  - _keyVaultUri_
+  - _serviceBusHostName_
+- _searchWebAppVariables-[dev/test/sandbox/...]_
+  - _appinsightsSecretName_
+  - _containerRepositoryFullPath_
+  - _elasticSearchApi_
+  - _hostName_
+  - _nodeEnv_
+  - _port_
+  - _serviceAccountSearchWebApp_
 
 ## TODO
 

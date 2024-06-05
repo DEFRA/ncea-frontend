@@ -460,3 +460,16 @@
 .defra-filter-options--open .defra-filter-options__container {
   display: block;
 }
+
+.defra-reset-study-period--link {
+  @include font-style-stack(16px, 20px, 300, normal, true);
+  color: $govuk-link-colour !important;
+
+  &:hover {
+    color: $govuk-link-hover-colour !important;
+  }
+
+  &:focus {
+    color: $govuk-link-hover-colour !important;
+  }
+}

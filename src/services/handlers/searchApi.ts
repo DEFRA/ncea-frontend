@@ -1,21 +1,25 @@
 import { IFilterFlags } from '@/src/interfaces/searchPayload.interface';
-import { defaultFilterOptions } from '../../utils/constants';
 import { estypes } from '@elastic/elasticsearch';
 import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 import { performQuery } from '../../config/elasticSearchClient';
 import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
+import { defaultFilterOptions, quickSearchTargetFields } from '../../utils/constants';
 import { generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
 
 const getSearchResults = async (
   searchFieldsObject: ISearchPayload,
   isMapResults: boolean = false,
+  isQuickSearchJourney: boolean = false,
 ): Promise<ISearchResults> => {
   try {
     if (Object.keys(searchFieldsObject.fields).length) {
       const searchBuilderPayload: ISearchBuilderPayload = {
         searchFieldsObject,
+        ...(isQuickSearchJourney && {
+          fieldsToSearch: quickSearchTargetFields,
+        }),
       };
       const payload = generateSearchQuery(searchBuilderPayload);
       const response = await performQuery<estypes.SearchResponse>(payload);
@@ -52,6 +56,7 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
 const getFilterOptions = async (
   searchFieldsObject: ISearchPayload,
   filterFlags?: IFilterFlags,
+  isQuickSearchJourney: boolean = false,
 ): Promise<IAggregationOptions> => {
   try {
     const { isStudyPeriod = false } = filterFlags as IFilterFlags;
@@ -59,6 +64,9 @@ const getFilterOptions = async (
       const searchBuilderPayload: ISearchBuilderPayload = {
         searchFieldsObject,
         isAggregation: true,
+        ...(isQuickSearchJourney && {
+          fieldsToSearch: quickSearchTargetFields,
+        }),
       };
       const payload = generateFilterQuery(searchBuilderPayload, {
         isStudyPeriod,

@@ -9,26 +9,12 @@ import { getQualityTabData } from './getQualityTabData';
 import { toggleContent } from './toggleContent';
 import {
   IAccumulatedCoordinatesWithCenter,
+  IDateRange,
   IOtherSearchItem,
   ISearchItem,
   ISearchResults,
 } from '../interfaces/searchResponse.interface';
 import { formatDate, getYear } from './formatDate';
-
-const getStudyPeriod = (startDate: string, endDate: string): string => {
-  const formattedStartDate: string = formatDate(startDate);
-  const formattedEndDate: string = formatDate(endDate);
-  let studyPeriod = '';
-  if (formattedStartDate && formattedEndDate) {
-    studyPeriod = `${formattedStartDate} to ${formattedEndDate}`;
-  } else if (formattedStartDate && !formattedEndDate) {
-    studyPeriod = `${formattedStartDate} to ${formattedStartDate}`;
-  } else if (!formattedStartDate && formattedEndDate) {
-    studyPeriod = `${formattedEndDate} to ${formattedEndDate}`;
-  }
-
-  return studyPeriod;
-};
 
 const getAbstractContent = (data: Record<string, any>, id: string): string => {
   if (Object.keys(data).length && data?.default) {
@@ -42,6 +28,31 @@ const getResourceLocatorURL = (data: string | string[]): string => {
     return data[0] as string;
   }
   return data as string;
+};
+
+export const getStudyPeriodDetails = (isDetails: boolean, dateRanges: IDateRange[] = []): string => {
+  const studyPeriodString = (startDate: string, endDate: string): string => {
+    if (!startDate && !endDate) return '';
+    if (!startDate) return `${endDate} to ${endDate}`;
+    if (!endDate) return `${startDate} to ${startDate}`;
+    return `${startDate} to ${endDate}`;
+  };
+
+  if (dateRanges.length <= 0) return '';
+
+  const resultString: string[] = [];
+  for (const dateRange of dateRanges) {
+    const startDate: string = dateRange?.start?.date ? formatDate(dateRange.start.date) : '';
+    const endDate: string = dateRange?.end?.date ? formatDate(dateRange.end.date) : '';
+    const dateString = studyPeriodString(startDate, endDate);
+    resultString.push(dateString);
+
+    if (!isDetails) {
+      break;
+    }
+  }
+
+  return resultString.join('<br>');
 };
 
 const formatSearchResponse = async (
@@ -60,7 +71,7 @@ const formatSearchResponse = async (
   const responseItems: Promise<ISearchItem>[] = apiSearchItems.map(async (searchItem: Record<string, any>) => {
     const startDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.start?.date ?? '';
     const endDate: string = searchItem?._source?.resourceTemporalExtentDetails?.[0]?.end?.date ?? '';
-    const studyPeriod = getStudyPeriod(startDate, endDate);
+    const studyPeriod = getStudyPeriodDetails(isDetails, searchItem?._source?.resourceTemporalExtentDetails ?? []);
     const publishedBy = getOrganisationDetails(searchItem?._source, false);
     const organisationDetails = getOrganisationDetails(searchItem?._source, true);
     const startYear: string = getYear(startDate);

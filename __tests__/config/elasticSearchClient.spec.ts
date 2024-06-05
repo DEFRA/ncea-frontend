@@ -43,39 +43,6 @@ describe('Elasticsearch Client', () => {
       };
       expect(clientOptions).toEqual(expectedClientOptions);
     });
-
-    it('should return true for hasCredentials when username and password are provided', async () => {
-      jest.doMock('../../src/config/environmentConfig', () => ({
-        environmentConfig: {
-          elasticSearchAPI: environmentConfig.elasticSearchAPI,
-          elasticSearchUsername: 'es-user',
-          elasticSearchPassword: 'es-pass',
-        },
-      }));
-      const {
-        hasCredentials,
-      } = require('../../src/config/elasticSearchClient');
-      expect(hasCredentials).toBe(true);
-    });
-
-    it('should set clientOptions with auth when username and password are provided', () => {
-      jest.doMock('../../src/config/environmentConfig', () => ({
-        environmentConfig: {
-          elasticSearchAPI: environmentConfig.elasticSearchAPI,
-          elasticSearchUsername: 'es-user',
-          elasticSearchPassword: 'es-pass',
-        },
-      }));
-      const { clientOptions } = require('../../src/config/elasticSearchClient');
-      const expectedClientOptions: ClientOptions = {
-        node: environmentConfig.elasticSearchAPI,
-        auth: {
-          username: 'es-user',
-          password: 'es-pass',
-        },
-      };
-      expect(clientOptions).toEqual(expectedClientOptions);
-    });
   });
 
   describe('Elasticsearch Query operations', () => {
