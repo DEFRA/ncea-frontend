@@ -608,7 +608,7 @@ describe('Format the search response', () => {
         { start: { date: '2022-02-01' }, end: { date: '2022-02-28' } },
       ];
       expect(getStudyPeriodDetails(true, dateRanges)).toBe(
-        '1 January 2022 to 31 January 2022\n1 February 2022 to 28 February 2022',
+        '1 January 2022 to 31 January 2022<br>1 February 2022 to 28 February 2022',
       );
     });
     test('handles missing start date', () => {
