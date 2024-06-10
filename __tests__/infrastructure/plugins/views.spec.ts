@@ -56,8 +56,8 @@ describe('Vision Plugin Configuration', () => {
     expect(options.isCached).toBe(process.env.NODE_ENV !== 'production');
     expect(options.context).toEqual({
       assetPath: '/assets',
-      serviceName: 'Natural Capital Search Service',
-      pageTitle: 'Natural Capital Search Service - GOV.UK',
+      serviceName: 'Find Natural Capital data',
+      pageTitle: 'Find Natural Capital data - GOV.UK',
       routes: {
         homePage,
         searchResults,

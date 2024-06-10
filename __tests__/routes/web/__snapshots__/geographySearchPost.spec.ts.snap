@@ -35,13 +35,13 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -178,7 +178,7 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     

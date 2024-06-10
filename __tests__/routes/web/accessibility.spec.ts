@@ -130,7 +130,7 @@ describe('Accessibility Screen', () => {
         'p.ncea-static-page__content-item',
       );
       expect(items?.[0]?.textContent?.trim()).toEqual(
-        'This accessibility statement applies to the Natural Capital Search Service.',
+        'This accessibility statement applies to the find natural capital data service.',
       );
       expect(items?.[1]?.textContent?.trim()).toEqual(
         'This service is run by the NCEA programme, on behalf of the Department for Environment, Food and Rural Affairs (Defra).',
