@@ -35,13 +35,13 @@ exports[`Results block template Guided search journey Search results with empty 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -178,7 +178,7 @@ exports[`Results block template Guided search journey Search results with empty 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -682,7 +682,7 @@ exports[`Results block template Guided search journey Search results with error 
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  Find Natural Capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -711,13 +711,13 @@ exports[`Results block template Guided search journey Search results with error 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -854,7 +854,7 @@ exports[`Results block template Guided search journey Search results with error 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -1286,13 +1286,13 @@ exports[`Results block template Quick search journey Search results with data sh
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -1429,7 +1429,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -1902,7 +1902,7 @@ exports[`Results block template Quick search journey Search results with data sh
   <div class="modal-content">
     
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave the find natural capital data service</h1>
     <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>Your are following a link to an external catalogue managed by<br/>"<span id='resource_party'></span>"</p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       
@@ -2088,13 +2088,13 @@ exports[`Results block template Quick search journey Search results with empty d
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -2231,7 +2231,7 @@ exports[`Results block template Quick search journey Search results with empty d
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -2710,7 +2710,7 @@ exports[`Results block template Quick search journey Search results with error s
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  Find Natural Capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -2739,13 +2739,13 @@ exports[`Results block template Quick search journey Search results with error s
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -2882,7 +2882,7 @@ exports[`Results block template Quick search journey Search results with error s
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     

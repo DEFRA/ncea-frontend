@@ -32,13 +32,13 @@ exports[`Accessibility Screen Accessibility > Sanpshot verification should match
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -175,7 +175,7 @@ exports[`Accessibility Screen Accessibility > Sanpshot verification should match
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -228,7 +228,7 @@ exports[`Accessibility Screen Accessibility > Sanpshot verification should match
     <article class="govuk-grid-column-full ncea-static-page">
       <h1 class="govuk-heading-m ncea-static-page__heading-m">Accessibility statement</h1>
       <section class="ncea-static-page__content">
-        <p class="ncea-static-page__content-item">This accessibility statement applies to the Natural Capital Search Service.</p>
+        <p class="ncea-static-page__content-item">This accessibility statement applies to the find natural capital data service.</p>
         <p class="ncea-static-page__content-item">This service is run by the NCEA programme, on behalf of the Department for Environment, Food and Rural Affairs (Defra).</p>
         <p class="ncea-static-page__content-item">We want as many people as possible to be able to use this website. It has been designed using GDS components and patterns, which are accessible. We've also made the website text as simple as possible to understand.</p>
       </section>

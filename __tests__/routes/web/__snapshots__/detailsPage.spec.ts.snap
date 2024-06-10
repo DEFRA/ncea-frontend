@@ -35,13 +35,13 @@ exports[`Details route template Document details with data Check status code and
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -178,7 +178,7 @@ exports[`Details route template Document details with data Check status code and
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -907,7 +907,7 @@ exports[`Details route template Document details with data Check status code and
   <div class="modal-content">
     
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave the find natural capital data service</h1>
     <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>Your are following a link to an external catalogue managed by<br/>"<span id='resource_party'></span>"</p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       
@@ -1094,13 +1094,13 @@ exports[`Details route template Document details with partial data Check status 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -1237,7 +1237,7 @@ exports[`Details route template Document details with partial data Check status 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
