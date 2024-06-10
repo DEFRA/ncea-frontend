@@ -2,10 +2,10 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 
 resources:
   repositories:
-    - repository: ncea-test-automation
-      type: github
-      endpoint: github
-      name: DEFRA/ncea-test-automation
+    # - repository: ncea-test-automation
+    #   type: github
+    #   endpoint: github
+    #   name: DEFRA/ncea-test-automation
 
 trigger:
   branches:

@@ -1,6 +1,6 @@
 steps:
 
-  - checkout: ncea-test-automation
+  # - checkout: ncea-test-automation
 
   - task: UseDotNet@2
     inputs:
