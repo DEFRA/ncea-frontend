@@ -48,6 +48,11 @@ export const requiredFieldsForMap: string[] = [
   'resourceType',
   'resourceTemporalExtentDetails',
   'ownerOrgForResourceObject',
+  'originatorOrgForResourceObject',
+  'custodianOrgForResourceObject',
+  'distributorOrgForResourceObject',
+  'pointOfContactOrgObject',
+  'linkUrl',
 ];
 
 export const quickSearchTargetFields: string[] = [
