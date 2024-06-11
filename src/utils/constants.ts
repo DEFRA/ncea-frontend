@@ -139,29 +139,29 @@ export const detailsTabOptions: TabOptions = {
       column: 'keywords',
     },
     {
-      label: 'Languages',
+      label: 'Resource languages',
       column: 'language',
     },
   ],
   access: [
     {
-      label: 'NCEA catalogue number',
+      label: 'File Identifier',
       column: 'ncea_catalogue_number',
     },
     {
-      label: 'Host catalogue number',
+      label: 'Resource Identifier',
       column: 'host_catalogue_number',
     },
     {
-      label: 'Host catalogue entry',
+      label: 'Coupled resources',
       column: 'host_catalogue_entry',
     },
     {
-      label: 'Resource type and hierarchy',
+      label: 'Resource type',
       column: 'resource_type_and_hierarchy',
     },
     {
-      label: 'Hierarchy level',
+      label: 'Hierarchy level name',
       column: 'hierarchy_level',
     },
     {
