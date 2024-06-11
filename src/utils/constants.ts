@@ -56,6 +56,7 @@ export const requiredFieldsForMap: string[] = [
 ];
 
 export const quickSearchTargetFields: string[] = [
+  'metadataIdentifier',
   'resourceTitleObject.default',
   'resourceAltTitleObject.default',
   'resourceAbstractObject.default',
