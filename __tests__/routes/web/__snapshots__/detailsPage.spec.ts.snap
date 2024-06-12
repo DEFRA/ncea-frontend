@@ -561,10 +561,9 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Metadata standard</h2>
           
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  UNAVAILABLE
-</strong>
-
+            <span class='tab-content-value'>
+              MEDIN
+            </span>
           
         </div>
       
