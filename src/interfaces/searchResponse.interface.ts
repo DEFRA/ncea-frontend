@@ -25,15 +25,15 @@ export interface IAccessItem {
   resource_type_and_hierarchy?: string;
   hierarchy_level?: string;
   resource_locators?: string;
+  host_service_catalogue_number?: string;
+  ncea_group_reference?: string;
+  mdata_std?: string;
+  project_number?: string;
+  Metadata_language?: string;
 }
 
 export interface IGovernance {
-  ncea_group_reference?: string;
-  metadata_standard?: string;
-  project_number?: string;
-  Metadata_language?: string;
   ncea_catalogue_date?: string;
-  host_service_catalogue_number?: string;
 }
 
 export interface ILicense {

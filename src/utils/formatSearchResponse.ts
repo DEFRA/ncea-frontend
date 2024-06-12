@@ -133,7 +133,7 @@ const getOtherDetails = async (
     ...getQualityTabData(searchItem),
     host_service_catalogue_number: searchItem?._source?.sourceCatalogue ?? '',
     ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
-    metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
+    mdata_std: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
     Metadata_language: searchItem?._source?.mainLanguage ?? '',
     ncea_catalogue_date: formatDate(searchItem?._source?.dateStamp, false, false, '-'),

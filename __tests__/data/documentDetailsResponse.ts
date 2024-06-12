@@ -209,7 +209,7 @@ const formattedDetailsResponse: ISearchResults = {
       lineage: '',
       publicationInformation: '',
       conformity: '',
-      metadata_standard: '',
+      mdata_std: '',
       ncea_catalogue_date: '26-January-2010',
       ncea_group_reference: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       project_number: '',
@@ -775,7 +775,7 @@ const formattedDetailsFullResponse: ISearchResults = {
                       <td>inapplicable</td>
                     </tr></tbody></table>`,
       host_service_catalogue_number: '3ce46f92-509c-4529-a062-c8b48788340d',
-      metadata_standard: 'MEDIN',
+      mdata_std: 'MEDIN',
       ncea_catalogue_date: '16-January-2024',
       ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       project_number: '',
