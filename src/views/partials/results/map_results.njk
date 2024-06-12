@@ -7,12 +7,15 @@
 
 {% block beforeModalContent %}
   <div class='govuk-grid-column-full'>
-    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-      </svg>
-    </a>
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
+    </div>
   </div>
 {% endblock %}
 
@@ -80,13 +83,14 @@
                       <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                       <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                     </svg>
-                    &nbsp;&nbsp;Bounding box',
+                    &nbsp;Show all bounding boxes',
               attributes: {'class': 'defra-checkboxes__input'},
               label: {classes: 'defra-checkboxes__label'}
             }
           ]
         }) }}
       </div>
+      <div id="defra-bounding-box-info" class="govuk-!-margin-bottom-2">Filter your results to reduce the number of bounding boxes</div>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="{{routes.getMapFilters}}" data-fetch-map-filters></div>
     </div>

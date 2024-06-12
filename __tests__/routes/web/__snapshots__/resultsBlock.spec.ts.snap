@@ -35,13 +35,13 @@ exports[`Results block template Guided search journey Search results with empty 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -178,7 +178,7 @@ exports[`Results block template Guided search journey Search results with empty 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -202,7 +202,7 @@ exports[`Results block template Guided search journey Search results with empty 
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -267,12 +267,15 @@ exports[`Results block template Guided search journey Search results with empty 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-      </svg>
-    </a>
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
+    </div>
   </div>
 
 <div id="modal" class="modal map-modal">
@@ -352,7 +355,7 @@ exports[`Results block template Guided search journey Search results with empty 
                               <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                               <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                             </svg>
-                            &nbsp;&nbsp;Bounding box
+                            &nbsp;Show all bounding boxes
       </label>
             
           </div>
@@ -365,6 +368,7 @@ exports[`Results block template Guided search journey Search results with empty 
 </div>
 
       </div>
+      <div id="defra-bounding-box-info" class="govuk-!-margin-bottom-2">Filter your results to reduce the number of bounding boxes</div>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
@@ -678,7 +682,7 @@ exports[`Results block template Guided search journey Search results with error 
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  Find Natural Capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -707,13 +711,13 @@ exports[`Results block template Guided search journey Search results with error 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -850,7 +854,7 @@ exports[`Results block template Guided search journey Search results with error 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -874,7 +878,7 @@ exports[`Results block template Guided search journey Search results with error 
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -939,12 +943,15 @@ exports[`Results block template Guided search journey Search results with error 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-      </svg>
-    </a>
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
+    </div>
   </div>
 
 <div id="modal" class="modal map-modal">
@@ -1024,7 +1031,7 @@ exports[`Results block template Guided search journey Search results with error 
                               <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                               <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                             </svg>
-                            &nbsp;&nbsp;Bounding box
+                            &nbsp;Show all bounding boxes
       </label>
             
           </div>
@@ -1037,6 +1044,7 @@ exports[`Results block template Guided search journey Search results with error 
 </div>
 
       </div>
+      <div id="defra-bounding-box-info" class="govuk-!-margin-bottom-2">Filter your results to reduce the number of bounding boxes</div>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
@@ -1278,13 +1286,13 @@ exports[`Results block template Quick search journey Search results with data sh
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -1421,7 +1429,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -1445,7 +1453,7 @@ exports[`Results block template Quick search journey Search results with data sh
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -1510,12 +1518,15 @@ exports[`Results block template Quick search journey Search results with data sh
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-      </svg>
-    </a>
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
+    </div>
   </div>
 
 <div id="modal" class="modal map-modal">
@@ -1595,7 +1606,7 @@ exports[`Results block template Quick search journey Search results with data sh
                               <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                               <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                             </svg>
-                            &nbsp;&nbsp;Bounding box
+                            &nbsp;Show all bounding boxes
       </label>
             
           </div>
@@ -1608,6 +1619,7 @@ exports[`Results block template Quick search journey Search results with data sh
 </div>
 
       </div>
+      <div id="defra-bounding-box-info" class="govuk-!-margin-bottom-2">Filter your results to reduce the number of bounding boxes</div>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
@@ -1890,7 +1902,7 @@ exports[`Results block template Quick search journey Search results with data sh
   <div class="modal-content">
     
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave the find natural capital data service</h1>
     <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>Your are following a link to an external catalogue managed by<br/>"<span id='resource_party'></span>"</p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       
@@ -2076,13 +2088,13 @@ exports[`Results block template Quick search journey Search results with empty d
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -2219,7 +2231,7 @@ exports[`Results block template Quick search journey Search results with empty d
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -2243,7 +2255,7 @@ exports[`Results block template Quick search journey Search results with empty d
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -2308,12 +2320,15 @@ exports[`Results block template Quick search journey Search results with empty d
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-      </svg>
-    </a>
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
+    </div>
   </div>
 
 <div id="modal" class="modal map-modal">
@@ -2393,7 +2408,7 @@ exports[`Results block template Quick search journey Search results with empty d
                               <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                               <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                             </svg>
-                            &nbsp;&nbsp;Bounding box
+                            &nbsp;Show all bounding boxes
       </label>
             
           </div>
@@ -2406,6 +2421,7 @@ exports[`Results block template Quick search journey Search results with empty d
 </div>
 
       </div>
+      <div id="defra-bounding-box-info" class="govuk-!-margin-bottom-2">Filter your results to reduce the number of bounding boxes</div>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
@@ -2694,7 +2710,7 @@ exports[`Results block template Quick search journey Search results with error s
   <head>
     <meta charset="utf-8">
     <title>
-  Natural Capital Search Service - GOV.UK
+  Find Natural Capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -2723,13 +2739,13 @@ exports[`Results block template Quick search journey Search results with error s
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -2866,7 +2882,7 @@ exports[`Results block template Quick search journey Search results with error s
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -2890,7 +2906,7 @@ exports[`Results block template Quick search journey Search results with error s
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -2955,12 +2971,15 @@ exports[`Results block template Quick search journey Search results with error s
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
   <div class='govuk-grid-column-full'>
-    <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
       View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
       <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-      </svg>
-    </a>
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
+    </div>
   </div>
 
 <div id="modal" class="modal map-modal">
@@ -3040,7 +3059,7 @@ exports[`Results block template Quick search journey Search results with error s
                               <rect x="0.923077" y="1.17308" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                               <rect x="10.1535" y="8.55784" width="20.3077" height="14.7692" stroke="#0B0C0C" stroke-width="1.84615"/>
                             </svg>
-                            &nbsp;&nbsp;Bounding box
+                            &nbsp;Show all bounding boxes
       </label>
             
           </div>
@@ -3053,6 +3072,7 @@ exports[`Results block template Quick search journey Search results with error s
 </div>
 
       </div>
+      <div id="defra-bounding-box-info" class="govuk-!-margin-bottom-2">Filter your results to reduce the number of bounding boxes</div>
       <div class="govuk-section-break--visible"></div>
       <div id="map-filter-block" data-action="/map-filters" data-fetch-map-filters></div>
     </div>
