@@ -11,11 +11,10 @@ const processDetailsTabData = async (
     return `<a class="govuk-link" href="${value}" target="_blank">${value}</a>`;
   };
 
-  const processTabOption = (tabOptions: TabOption[]): FormattedTabOption[] => {
-    return tabOptions.map((option) => {
-      const displayValue: string[] = [];
-
-      option.column.split(' ').forEach((part) => {
+  const processTabOption = (tabOptions: TabOption): FormattedTabOption[] => {
+    return Object.keys(tabOptions).map((label) => {
+      const displayValue: string[] = [];      
+      tabOptions[label]?.split(' ')?.forEach((part) => {
         const sanitizedPart = part.replace(/[()]/g, '');
         const value = docDetails[sanitizedPart];
 
@@ -32,7 +31,7 @@ const processDetailsTabData = async (
       });
 
       return {
-        label: option.label,
+        label,
         displayValue: displayValue.length > 0 ? displayValue.join(' ') : '',
       };
     });
@@ -40,7 +39,8 @@ const processDetailsTabData = async (
 
   Object.keys(detailsTabOptions).forEach((tabKey) => {
     const tabOptions = detailsTabOptions[tabKey];
-    if (tabOptions && Array.isArray(tabOptions)) {
+    if (tabOptions) {
+      console.log({tabKey});
       processedTabOption[tabKey] = processTabOption(tabOptions);
     }
   });
