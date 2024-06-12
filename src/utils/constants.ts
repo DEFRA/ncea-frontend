@@ -168,6 +168,30 @@ export const detailsTabOptions: TabOptions = {
       label: 'Resource locators',
       column: 'resource_locators',
     },
+    {
+      label: 'Catalouge entry',
+      column: 'ncea_catalogue_number',
+    },
+    {
+      label: 'NCEA search service catalogue number',
+      column: 'host_service_catalogue_number',
+    },
+    {
+      label: 'Parent ID',
+      column: 'ncea_group_reference',
+    },
+    {
+      label: 'Metadata standard',
+      column: 'metadata_standard',
+    },
+    {
+      label: 'Project number',
+      column: 'project_number',
+    },
+    {
+      label: 'Metadata language',
+      column: 'Metadata_language',
+    },
   ],
   quality: [
     {
@@ -188,30 +212,6 @@ export const detailsTabOptions: TabOptions = {
     },
   ],
   governance: [
-    {
-      label: 'NCEA catalogue number',
-      column: 'ncea_catalogue_number',
-    },
-    {
-      label: 'Host service catalogue number',
-      column: 'host_service_catalogue_number',
-    },
-    {
-      label: 'NCEA group reference',
-      column: 'ncea_group_reference',
-    },
-    {
-      label: 'Metadata standard',
-      column: 'metadata_standard',
-    },
-    {
-      label: 'Project number',
-      column: 'project_number',
-    },
-    {
-      label: 'Metadata language',
-      column: 'Metadata_language',
-    },
     {
       label: 'NCEA catalogue date',
       column: 'ncea_catalogue_date',
