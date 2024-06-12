@@ -182,15 +182,15 @@ export const detailsTabOptions: TabOptions = {
     },
     {
       label: 'Metadata standard',
-      column: 'metadata_standard',
+      column: 'mdata_std',
     },
     {
       label: 'Project number',
-      column: 'project_number',
+      column: 'pjt_num',
     },
     {
       label: 'Metadata language',
-      column: 'Metadata_language',
+      column: 'mdata_lang',
     },
   ],
   quality: [

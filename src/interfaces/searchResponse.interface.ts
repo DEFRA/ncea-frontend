@@ -28,8 +28,8 @@ export interface IAccessItem {
   host_service_catalogue_number?: string;
   ncea_group_reference?: string;
   mdata_std?: string;
-  project_number?: string;
-  Metadata_language?: string;
+  pjt_num?: string;
+  mdata_lang?: string;
 }
 
 export interface IGovernance {
