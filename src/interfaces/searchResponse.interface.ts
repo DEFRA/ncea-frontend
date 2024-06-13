@@ -27,9 +27,9 @@ export interface IAccessItem {
   resource_locators?: string;
   host_service_catalogue_number?: string;
   ncea_group_reference?: string;
-  mdata_std?: string;
-  pjt_num?: string;
-  mdata_lang?: string;
+  metadata_standard?: string;
+  project_number?: string;
+  metadata_language?: string;
 }
 
 export interface IGovernance {

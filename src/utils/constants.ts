@@ -138,9 +138,9 @@ export const detailsTabOptions: TabOptions = {
     'Catalouge entry': 'ncea_catalogue_number',
     'NCEA search service catalogue number': 'host_service_catalogue_number',
     'Parent ID': 'ncea_group_reference',
-    'Metadata standard': 'mdata_std',
-    'Project number': 'pjt_num',
-    'Metadata language': 'mdata_lang',
+    'Metadata standard': 'metadata_standard',
+    'Project number': 'project_number',
+    'Metadata language': 'metadata_language',
   },
   quality: {
     'Publication information': 'publicationInformation',
