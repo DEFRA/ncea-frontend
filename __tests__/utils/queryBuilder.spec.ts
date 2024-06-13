@@ -10,7 +10,7 @@ import {
   generateSearchQuery,
 } from '../../src/utils/queryBuilder';
 
-const recentStudySortScript = buildCustomSortScriptForStudyPeriod();
+const recentStudySortScript = buildCustomSortScriptForStudyPeriod('asc');
 
 describe('Build the search query', () => {
   describe('Search query without sort', () => {
@@ -847,7 +847,7 @@ describe('Build the search query', () => {
             wst: '901',
           },
         },
-        sort: 'recent_study',
+        sort: 'study_period_ascending',
         filters: {},
         rowsPerPage: 20,
         page: 1,
@@ -939,7 +939,7 @@ describe('Build the search query', () => {
             wst: '901',
           },
         },
-        sort: 'recent_study',
+        sort: 'study_period_ascending',
         filters: {},
         rowsPerPage: 20,
         page: 1,
@@ -1021,7 +1021,7 @@ describe('Build the search query', () => {
             q: 'example',
           },
         },
-        sort: 'recent_study',
+        sort: 'study_period_ascending',
         filters: {},
         rowsPerPage: 20,
         page: 1,
@@ -1064,7 +1064,7 @@ describe('Build the search query', () => {
             q: 'example',
           },
         },
-        sort: 'recent_study',
+        sort: 'study_period_ascending',
         filters: {},
         rowsPerPage: 20,
         page: 1,
@@ -1108,7 +1108,7 @@ describe('Build the search query', () => {
             tdm: '12',
           },
         },
-        sort: 'recent_study',
+        sort: 'study_period_ascending',
         filters: {},
         rowsPerPage: 20,
         page: 1,
@@ -1168,7 +1168,7 @@ describe('Build the search query', () => {
             wst: '901',
           },
         },
-        sort: 'recent_study',
+        sort: 'study_period_ascending',
         filters: {},
         rowsPerPage: 20,
         page: 1,

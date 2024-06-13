@@ -472,7 +472,13 @@ exports[`Results block template Guided search journey Search results with empty 
     
       
       
-      <option value="recent_study">Most Recent</option>
+      <option value="study_period_ascending">Study period ascending</option>
+    
+  
+    
+      
+      
+      <option value="study_period_descending">Study period descending</option>
     
   
   </select>
@@ -1723,7 +1729,13 @@ exports[`Results block template Quick search journey Search results with data sh
     
       
       
-      <option value="recent_study">Most Recent</option>
+      <option value="study_period_ascending">Study period ascending</option>
+    
+  
+    
+      
+      
+      <option value="study_period_descending">Study period descending</option>
     
   
   </select>
@@ -2525,7 +2537,13 @@ exports[`Results block template Quick search journey Search results with empty d
     
       
       
-      <option value="recent_study">Most Recent</option>
+      <option value="study_period_ascending">Study period ascending</option>
+    
+  
+    
+      
+      
+      <option value="study_period_descending">Study period descending</option>
     
   
   </select>
