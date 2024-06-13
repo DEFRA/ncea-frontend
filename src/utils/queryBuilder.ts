@@ -17,7 +17,7 @@ const _generateQueryStringBlock = (
   return {
     query_string: {
       query: searchTerm,
-      default_operator: 'OR',
+      default_operator: 'AND',
       ...(fieldsToSearch.length > 0 && { fields: fieldsToSearch }),
     },
   };
@@ -54,19 +54,26 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
 
   const rangeBlock: estypes.QueryDslQueryContainer[] = [
     {
-      range: {
-        'resourceTemporalExtentDetails.start.date': {
-          gte: startDateValue,
-          lte: toDateValue,
-        },
-      },
-    },
-    {
-      range: {
-        'resourceTemporalExtentDetails.end.date': {
-          gte: startDateValue,
-          lte: toDateValue,
-        },
+      bool: {
+        should: [
+          {
+            range: {
+              'resourceTemporalExtentDetails.start.date': {
+                gte: startDateValue,
+                lte: toDateValue,
+              },
+            },
+          },
+          {
+            range: {
+              'resourceTemporalExtentDetails.end.date': {
+                gte: startDateValue,
+                lte: toDateValue,
+              },
+            },
+          },
+        ],
+        minimum_should_match: 1,
       },
     },
   ];
@@ -177,6 +184,7 @@ const _generateDateRangeQuery = (
 ): estypes.QueryDslQueryContainer[] => {
   const { searchFieldsObject } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
+
   const filterBlock: estypes.QueryDslQueryContainer[] =
     (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };

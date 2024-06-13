@@ -48,7 +48,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -68,19 +68,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -95,7 +102,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result?.query?.bool?.must).toHaveLength(1);
-      expect(result?.query?.bool?.filter).toHaveLength(3);
+      expect(result?.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with both search term and date range', () => {
@@ -132,7 +139,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -153,19 +160,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -183,7 +197,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with only search term', () => {
@@ -207,7 +221,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -249,7 +263,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -289,19 +303,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -316,7 +337,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query correctly with only Geo Coordinates with out dpt', () => {
@@ -432,7 +453,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -452,19 +473,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -484,7 +512,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with best match sort when both search term and date range', () => {
@@ -521,7 +549,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -542,19 +570,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -577,7 +612,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with best match sort when only search term', () => {
@@ -601,7 +636,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -648,7 +683,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -693,19 +728,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -725,7 +767,7 @@ describe('Build the search query', () => {
       const result = generateSearchQuery({ searchFieldsObject });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query correctly with best match sort when only Geo Coordinates with out dpt', () => {
@@ -818,7 +860,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -838,19 +880,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -866,7 +915,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with most recent study sort when both search term and date range', () => {
@@ -903,7 +952,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -924,19 +973,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -955,7 +1011,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with most recent study sort when only search term', () => {
@@ -979,7 +1035,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -1022,7 +1078,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -1063,19 +1119,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1092,7 +1155,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(0);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query correctly with most recent study sort when only Geo Coordinates with out dpt', () => {
@@ -1182,7 +1245,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -1202,19 +1265,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1234,7 +1304,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with results per page as 100', () => {
@@ -1271,7 +1341,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -1292,19 +1362,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1327,7 +1404,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
   });
   describe('Search query with pagination', () => {
@@ -1365,7 +1442,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -1385,19 +1462,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1417,7 +1501,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query correctly with pagination for page 5', () => {
@@ -1454,7 +1538,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['field1', 'field2', 'field3'],
                 },
               },
@@ -1475,19 +1559,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1510,7 +1601,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
   });
 
@@ -1536,7 +1627,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -1584,7 +1675,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -1634,7 +1725,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -1688,25 +1779,32 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1728,7 +1826,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query when filtering with both resourceType and study period', () => {
@@ -1757,7 +1855,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -1768,19 +1866,26 @@ describe('Build the search query', () => {
             ],
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1802,7 +1907,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(2);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
   });
 
@@ -1828,7 +1933,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -1875,19 +1980,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -1912,7 +2024,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query for resourceType aggregation with geography coordinates', () => {
@@ -2013,19 +2125,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2050,7 +2169,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for resourceType aggregation with study period filter', () => {
@@ -2078,25 +2197,32 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2122,7 +2248,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query for resourceType aggregation with study period filter ignore date range', () => {
@@ -2149,19 +2275,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2186,7 +2319,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query for resourceType aggregation with study period filter with coordinates', () => {
@@ -2229,19 +2362,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2266,7 +2406,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for study period aggregation', () => {
@@ -2290,7 +2430,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -2342,19 +2482,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2385,7 +2532,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
       expect(result.query?.bool?.must).toHaveLength(0);
     });
 
@@ -2494,19 +2641,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2537,7 +2691,7 @@ describe('Build the search query', () => {
       );
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
       expect(result.query?.bool?.must).toHaveLength(0);
     });
 
@@ -2562,7 +2716,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -2619,19 +2773,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2669,7 +2830,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
     it('should build the search query for study period aggregation with resourceType filter and coordinates', () => {
@@ -2783,19 +2944,26 @@ describe('Build the search query', () => {
                 },
               },
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2017-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2017-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2833,7 +3001,7 @@ describe('Build the search query', () => {
 
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(1);
-      expect(result.query?.bool?.filter).toHaveLength(3);
+      expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
     it('should build the search query for study period aggregation with resourceType filter ignoring study period filter', () => {
@@ -2863,7 +3031,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -2924,7 +3092,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
@@ -2965,19 +3133,26 @@ describe('Build the search query', () => {
           bool: {
             filter: [
               {
-                range: {
-                  'resourceTemporalExtentDetails.start.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
-                },
-              },
-              {
-                range: {
-                  'resourceTemporalExtentDetails.end.date': {
-                    gte: '2022-01-01',
-                    lte: '2022-12-31',
-                  },
+                bool: {
+                  should: [
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.start.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                    {
+                      range: {
+                        'resourceTemporalExtentDetails.end.date': {
+                          gte: '2022-01-01',
+                          lte: '2022-12-31',
+                        },
+                      },
+                    },
+                  ],
+                  minimum_should_match: 1,
                 },
               },
             ],
@@ -2992,7 +3167,7 @@ describe('Build the search query', () => {
       });
 
       expect(result).toEqual(expectedQuery);
-      expect(result.query?.bool?.filter).toHaveLength(2);
+      expect(result.query?.bool?.filter).toHaveLength(1);
       expect(result.query?.bool?.must).toHaveLength(0);
     });
   });
@@ -3008,7 +3183,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: '12313-123232-1231231',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                   fields: ['_id'],
                 },
               },
@@ -3045,7 +3220,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -3094,7 +3269,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
               {
@@ -3148,7 +3323,7 @@ describe('Build the search query', () => {
               {
                 query_string: {
                   query: 'example',
-                  default_operator: 'OR',
+                  default_operator: 'AND',
                 },
               },
             ],
