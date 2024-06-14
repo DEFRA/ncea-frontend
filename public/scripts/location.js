@@ -849,27 +849,26 @@ function keydownHandler(event) {
 
 function checkNUpdateMarkerTooltip(event) {
   const visibleMarkers = markerLayer
-    .getSource()
-    .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+      .getSource()
+      .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
   markerOverlays.forEach((overlay) => map.removeOverlay(overlay));
   markerOverlays.length = 0;
   document.removeEventListener('keydown', keydownHandler);
   resetFeatureStyle();
   closeInfoPopup();
-
   function keydownHandler(event) {
-    if (event.key === 'Tab') {
-        if (visibleMarkers.length <= maxMarkerAllowed) {
-            visibleMarkers.forEach((marker, index) => {
-                createTooltipOverlay(index);
-                const coord = marker.getGeometry().getCoordinates();
-                markerOverlays[index].setPosition(coord);
-            });
-            document.addEventListener('keydown', keydownHandler);
-        }
-    }
-}
-document.addEventListener('keydown', keydownHandler);
+      if (event.key === 'Tab') { // Check if the key pressed is Tab
+          if (visibleMarkers.length <= maxMarkerAllowed) {
+              visibleMarkers.forEach((marker, index) => {
+                  createTooltipOverlay(index);
+                  const coord = marker.getGeometry().getCoordinates();
+                  markerOverlays[index].setPosition(coord);
+              });
+              document.removeEventListener('keydown', keydownHandler); // Remove listener after handling
+          }
+      }
+  }
+  document.addEventListener('keydown', keydownHandler);
 }
 
 function fitMapToExtent() {
