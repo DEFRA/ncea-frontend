@@ -48,9 +48,15 @@ export const requiredFieldsForMap: string[] = [
   'resourceType',
   'resourceTemporalExtentDetails',
   'ownerOrgForResourceObject',
+  'originatorOrgForResourceObject',
+  'custodianOrgForResourceObject',
+  'distributorOrgForResourceObject',
+  'pointOfContactOrgObject',
+  'linkUrl',
 ];
 
 export const quickSearchTargetFields: string[] = [
+  'metadataIdentifier',
   'resourceTitleObject.default',
   'resourceAltTitleObject.default',
   'resourceAbstractObject.default',
@@ -115,162 +121,54 @@ export const defaultFilterOptions: IFilterOptions = [
 ];
 
 export const detailsTabOptions: TabOptions = {
-  general: [
-    {
-      label: 'Abstract',
-      column: 'content',
-    },
-    {
-      label: 'Study periods',
-      column: 'studyPeriod',
-    },
-    {
-      label: 'Topic categories',
-      column: 'topicCategories',
-    },
-    {
-      label: 'Keywords',
-      column: 'keywords',
-    },
-    {
-      label: 'Languages',
-      column: 'language',
-    },
-  ],
-  access: [
-    {
-      label: 'NCEA catalogue number',
-      column: 'ncea_catalogue_number',
-    },
-    {
-      label: 'Host catalogue number',
-      column: 'host_catalogue_number',
-    },
-    {
-      label: 'Host catalogue entry',
-      column: 'host_catalogue_entry',
-    },
-    {
-      label: 'Resource type and hierarchy',
-      column: 'resource_type_and_hierarchy',
-    },
-    {
-      label: 'Hierarchy level',
-      column: 'hierarchy_level',
-    },
-    {
-      label: 'Resource locators',
-      column: 'resource_locators',
-    },
-  ],
-  quality: [
-    {
-      label: 'Publication information',
-      column: 'publicationInformation',
-    },
-    {
-      label: 'Lineage',
-      column: 'lineage',
-    },
-    {
-      label: 'Conformity',
-      column: 'conformity',
-    },
-    {
-      label: 'Additional information',
-      column: 'additionalInformation',
-    },
-  ],
-  governance: [
-    {
-      label: 'NCEA catalogue number',
-      column: 'ncea_catalogue_number',
-    },
-    {
-      label: 'Host service catalogue number',
-      column: 'host_service_catalogue_number',
-    },
-    {
-      label: 'NCEA group reference',
-      column: 'ncea_group_reference',
-    },
-    {
-      label: 'Metadata standard',
-      column: 'metadata_standard',
-    },
-    {
-      label: 'Project number',
-      column: 'project_number',
-    },
-    {
-      label: 'Metadata language',
-      column: 'Metadata_language',
-    },
-    {
-      label: 'NCEA catalogue date',
-      column: 'ncea_catalogue_date',
-    },
-  ],
-  geography: [
-    {
-      label: 'Spatial data service',
-      column: 'spatialDataService',
-    },
-    {
-      label: 'Spatial representation service',
-      column: 'spatialRepresentationService',
-    },
-    {
-      label: 'Spatial referencing system',
-      column: 'spatialReferencingSystem',
-    },
-    {
-      label: 'Geographic locations',
-      column: 'geographicLocations',
-    },
-    {
-      label: 'Geographic boundary',
-      column: 'geographicBoundaryHtml',
-    },
-    {
-      label: 'map',
-      column: 'geographicBoundary',
-    },
-    {
-      label: 'Vertical extent<br /><span>(Meters above sea level)</span>',
-      column: 'verticalExtent',
-    },
-    {
-      label: 'Sampling resolution',
-      column: 'samplingResolution',
-    },
-  ],
-  license: [
-    {
-      label: 'Limitations on public access',
-      column: 'limitation_on_public_access',
-    },
-    {
-      label: 'License constraints',
-      column: 'license_constraints',
-    },
-    {
-      label: 'Data owner',
-      column: 'data_owner',
-    },
-    {
-      label: 'Available formats',
-      column: 'available_formats',
-    },
-    {
-      label: 'Frequency of update',
-      column: 'frequency_of_update',
-    },
-    {
-      label: 'Character encoding',
-      column: 'character_encoding',
-    },
-  ],
+  general: {
+    Abstract: 'content',
+    'Study periods': 'studyPeriod',
+    'Topic categories': 'topicCategories',
+    Keywords: 'keywords',
+    'Resource languages': 'language',
+  },
+  access: {
+    'File Identifier': 'ncea_catalogue_number',
+    'Resource Identifier': 'host_catalogue_number',
+    'Coupled resources': 'host_catalogue_entry',
+    'Resource type': 'resource_type_and_hierarchy',
+    'Hierarchy level name': 'hierarchy_level',
+    'Resource locators': 'resource_locators',
+    'Catalouge entry': 'ncea_catalogue_number',
+    'NCEA search service catalogue number': 'host_service_catalogue_number',
+    'Parent ID': 'ncea_group_reference',
+    'Metadata standard': 'metadata_standard',
+    'Project number': 'project_number',
+    'Metadata language': 'metadata_language',
+  },
+  quality: {
+    'Publication information': 'publicationInformation',
+    Lineage: 'lineage',
+    Conformity: 'conformity',
+    'Additional information': 'additionalInformation',
+  },
+  governance: {
+    'NCEA catalogue date': 'ncea_catalogue_date',
+  },
+  geography: {
+    'Spatial data service': 'spatialDataService',
+    'Spatial representation service': 'spatialRepresentationService',
+    'Spatial referencing system': 'spatialReferencingSystem',
+    'Geographic locations': 'geographicLocations',
+    'Geographic boundary': 'geographicBoundaryHtml',
+    map: 'geographicBoundary',
+    'Vertical extent<br /><span>(Meters above sea level)</span>': 'verticalExtent',
+    'Sampling resolution': 'samplingResolution',
+  },
+  license: {
+    'Limitations on public access': 'limitation_on_public_access',
+    'License constraints': 'license_constraints',
+    'Data owner': 'data_owner',
+    'Available formats': 'available_formats',
+    'Frequency of update': 'frequency_of_update',
+    'Character encoding': 'character_encoding',
+  },
 };
 
 export const pageTitles = {

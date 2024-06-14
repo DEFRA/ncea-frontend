@@ -29,9 +29,9 @@ const filterBlockId = 'map-filter-block';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
 const extentSearchZoomLevel = 5;
 const responseSuccessStatusCode = 200;
-const marketYPoint = 46;
-const highlightedMarkerIcon = '/assets/images/highlight-blue-marker-icon.png';
-const markerIcon = '/assets/images/blue-marker-icon.svg';
+const highlightedMarkerIcon = '/assets/images/highlight-marker-icon.svg';
+const hoverMarkerIcon = '/assets/images/hover-marker-icon.svg';
+const markerIcon = '/assets/images/marker-icon.svg';
 const mapInfoBlock = document.getElementById('map-info');
 const contentMaxChar = 500;
 let selectedRecord = '';
@@ -47,14 +47,19 @@ const defaultMapProjection = 'EPSG:3857';
 const extentTransformProjection = 'EPSG:4326';
 let firstMove = true;
 const resetControl = document.getElementById('defra-map-reset');
-const markerOverlayOffsetX = -14;
-const markerOverlayOffsetY = -80;
+const markerOverlayOffsetX = -15;
+const markerOverlayOffsetY = -50;
 const maxMarkerAllowed = 9;
 const leftArrowKey = 37;
 const upArrowKey = 38;
 const rightArrowKey = 39;
 const downArrowKey = 40;
 let resetData = false;
+let selectedFeatureId = '';
+let selectedBoundingBox = '';
+let hasResourceListener = false;
+const maxCountForBoundingBoxInfo = 50;
+const polygonFeatureData = [];
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -158,6 +163,19 @@ function mapEventListener() {
     map.getTargetElement().style.cursor = isMarkerFeature(feature)
       ? 'pointer'
       : '';
+    markerSource.getFeatures().forEach(function (feature) {
+      if (
+        isMarkerFeature(feature) &&
+        map.getFeaturesAtPixel(pixel).includes(feature) &&
+        selectedFeatureId !== feature.get('id')
+      ) {
+        feature.setStyle(getMarkerStyle(hoverMarkerIcon));
+      } else if (selectedFeatureId === feature.get('id')) {
+        feature.setStyle(getHighlighterMarkerStyle(highlightedMarkerIcon));
+      } else {
+        feature.setStyle(getMarkerStyle(markerIcon));
+      }
+    });
   });
   map.on('click', (event) => {
     const pixel = event.pixel;
@@ -170,7 +188,9 @@ function mapEventListener() {
     if (feature && isMarkerFeature(feature)) {
       const recordId = feature.get('id');
       const boundingBox = feature.get('boundingBox');
-      feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+      feature.setStyle(getHighlighterMarkerStyle(highlightedMarkerIcon));
+      selectedFeatureId = recordId;
+      selectedBoundingBox = boundingBox;
       showInformationPopup(recordId, boundingBox);
     }
   });
@@ -198,6 +218,8 @@ function truncateString(inputString, maxLength) {
 
 function showInformationPopup(recordId, boundingBox) {
   selectedRecord = mapResults.find((item) => item?.id === recordId);
+  infoListener();
+  boundingBoxListener(boundingBoxCheckbox.checked);
   const titleElement = document.getElementById('info-title');
   const publishedBlock = document.getElementById('info-published-block');
   const publishedByElement = document.getElementById('info-published-by');
@@ -240,7 +262,10 @@ function closeInfoPopup() {
     publishedByElement.textContent = '';
     contentElement.textContent = '';
   }
+  selectedFeatureId = '';
+  selectedBoundingBox = '';
   resetFeatureStyle();
+  boundingBoxListener(boundingBoxCheckbox.checked);
 }
 
 function calculateCoordinates() {
@@ -352,7 +377,7 @@ function calculatePolygonFromCoordinates() {
   addPolygon({ north, south, east, west }, completedStyle);
 }
 
-function addPolygon(coordinates, style) {
+function addPolygon(coordinates, style, addToVector = true) {
   const { north, south, east, west } = coordinates;
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
@@ -372,7 +397,10 @@ function addPolygon(coordinates, style) {
       ]),
     });
     polygonFeature.setStyle(style);
-    vectorSource.addFeature(polygonFeature);
+    addToVector && vectorSource.addFeature(polygonFeature);
+    if (!addToVector) {
+      polygonFeatureData.push(polygonFeature);
+    }
     return polygonFeature;
   }
   return null;
@@ -399,12 +427,20 @@ function disableInteractions() {
 const getMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
-      anchor: [0.5, marketYPoint],
-      anchorXUnits: 'fraction',
-      anchorYUnits: 'pixels',
       src: iconPath,
       scale: 1.0,
     }),
+  });
+};
+
+const getHighlighterMarkerStyle = (iconPath) => {
+  return new ol.style.Style({
+    image: new ol.style.Icon({
+      src: iconPath,
+      anchor: [0.5,1],
+      scale: 1.0,
+    }),
+    zIndex: 10
   });
 };
 
@@ -465,7 +501,6 @@ function resetMap() {
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
   firstMove = true;
-  const resetControl = document.getElementById('defra-map-reset');
   if (resetControl) {
     resetControl.style.display = 'none';
   }
@@ -492,31 +527,17 @@ function exitMapEventListener() {
   }
 }
 
-function getFilterRecordIds() {
-  const { startYear, toYear, resourceType } = appliedFilterOptions;
-  const filteredIds = mapResults
-    .filter(
-      (record) =>
-        (!startYear || record.startYear >= startYear) &&
-        (!toYear || record.toYear >= toYear) &&
-        (!resourceType.length ||
-          record?.resourceType?.some((type) => resourceType.includes(type))),
-    )
-    .map((record) => record.id);
-  return filteredIds;
-}
-
 function drawBoundingBoxWithMarker(fitToMapExtentFlag, doRecenter = true) {
-  const filteredIds = getFilterRecordIds();
-  const records = mapResults.filter((record) =>
-    filteredIds.includes(record.id),
-  );
   vectorSource.clear();
   markerSource.clear();
   map.updateSize();
   const centerArray = [];
   mapResults.forEach((record) => {
-    const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
+    const boundingBox = addPolygon(
+      record.geographicBoundary,
+      mapResultsStyle,
+      false,
+    );
     placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
 
     const markersArray = record.geographicCenter.split('_');
@@ -545,12 +566,34 @@ function drawBoundingBoxWithMarker(fitToMapExtentFlag, doRecenter = true) {
   fitToMapExtentFlag && fitMapToExtent();
 }
 
+const boundingBoxListener = (boundingBoxCheckboxState) => {
+  polygonFeatureData.forEach((feature) => {
+    const isFeatureExists = vectorSource
+      .getFeatures()
+      .some(
+        (f) =>
+          f.getGeometry().getCoordinates().toString() ===
+          feature.getGeometry().getCoordinates().toString(),
+      );
+    if (feature !== selectedBoundingBox) {
+      if (boundingBoxCheckboxState) {
+        !isFeatureExists && vectorSource.addFeature(feature);
+        feature.setStyle(mapResultsStyle);
+      } else {
+        isFeatureExists && vectorSource.removeFeature(feature);
+      }
+    } else {
+      !isFeatureExists && vectorSource.addFeature(feature);
+      feature.setStyle(mapResultsHighlightStyle);
+    }
+  });
+};
+
 const attachBoundingBoxToggleListener = () => {
   if (boundingBoxCheckbox) {
     boundingBoxCheckboxChange(false);
-    vectorLayer.setVisible(false);
     boundingBoxCheckbox.addEventListener('change', () => {
-      vectorLayer.setVisible(boundingBoxCheckbox.checked);
+      boundingBoxListener(boundingBoxCheckbox.checked);
     });
   }
 };
@@ -601,6 +644,17 @@ const getMapResults = async (path, fitToMapExtentFlag) => {
       mapResultsButton.removeAttribute('disabled');
       mapResultsCount.textContent = mapResultsJson.total;
       if (mapResultsJson.total > 0) {
+        const boundingBoxInfo = document.getElementById(
+          'defra-bounding-box-info',
+        );
+        if (
+          boundingBoxInfo &&
+          mapResultsJson.total > maxCountForBoundingBoxInfo
+        ) {
+          boundingBoxInfo.style.display = 'block';
+        } else {
+          boundingBoxInfo.style.display = 'none';
+        }
         mapResults = mapResultsJson.items;
         setTimeout(() => {
           drawBoundingBoxWithMarker(fitToMapExtentFlag, true);
@@ -648,25 +702,79 @@ const getPathWithQueryParams = (basePath, needOriginalQueryParams) => {
   return `${basePath}${queryString}`;
 };
 
+const checkLatestBrowser = () => {
+  try {
+    eval('const x = (y) => y + 1');
+    return true;
+  } catch (e) {
+    const mapResultsBlock = document.getElementById('map-results-block');
+    if (mapResultsBlock) {
+      mapResultsBlock.classList.add('map-results-block');
+    }
+    const mapResultsButton = document.getElementById(mapResultsButtonId);
+    if (mapResultsButton) {
+      mapResultsButton.style.marginBottom = '10px';
+      mapResultsButton.setAttribute('disabled', true);
+    }
+    const mapUnavailableInfo = document.getElementById(
+      'map-results-unavailable',
+    );
+    if (mapUnavailableInfo) {
+      mapUnavailableInfo.style.display = 'block';
+    }
+    return false;
+  }
+};
+
 const invokeMapResults = (
   fitToMapExtentFlag = false,
   needOriginalQueryParams = false,
 ) => {
-  const fetchResults = document.querySelector('[data-fetch-map-results]');
-  if (fetchResults) {
-    const action = fetchResults.getAttribute(actionDataAttribute);
-    getMapResults(
-      getPathWithQueryParams(action, needOriginalQueryParams),
-      fitToMapExtentFlag,
-    );
+  if (checkLatestBrowser()) {
+    const fetchResults = document.querySelector('[data-fetch-map-results]');
+    if (fetchResults) {
+      const action = fetchResults.getAttribute(actionDataAttribute);
+      getMapResults(
+        getPathWithQueryParams(action, needOriginalQueryParams),
+        fitToMapExtentFlag,
+      );
+    }
   }
 };
 
-const invokeMapFilters = (needOriginalQueryParams = false) => {
-  const fetchFilters = document.querySelector('[data-fetch-map-filters]');
-  if (fetchFilters) {
-    const action = fetchFilters.getAttribute(actionDataAttribute);
-    getMapFilters(getPathWithQueryParams(action, needOriginalQueryParams));
+const toggleResetStudyPeriodLink = () => {
+  const { startYear, toYear } = appliedFilterOptions;
+  const mapResetFilter = document.getElementById(
+    'reset-map-study-period-filter',
+  );
+  if (mapResetFilter) {
+    mapResetFilter.addEventListener('click', () => {
+      appliedFilterOptions = {
+        ...appliedFilterOptions,
+        startYear: '',
+        toYear: '',
+      };
+      invokeMapFilters(true);
+      invokeMapResults(true, true);
+    });
+    if (startYear && toYear) {
+      mapResetFilter.style.display = 'block';
+    } else {
+      mapResetFilter.style.display = 'none';
+    }
+  }
+};
+
+const invokeMapFilters = async (needOriginalQueryParams = false) => {
+  if (checkLatestBrowser()) {
+    const fetchFilters = document.querySelector('[data-fetch-map-filters]');
+    if (fetchFilters) {
+      const action = fetchFilters.getAttribute(actionDataAttribute);
+      await getMapFilters(
+        getPathWithQueryParams(action, needOriginalQueryParams),
+      );
+      toggleResetStudyPeriodLink();
+    }
   }
 };
 
@@ -684,12 +792,18 @@ function createTooltipOverlay(index) {
   tooltip.innerHTML = (index + 1).toString();
   tooltip.style.position = 'absolute';
   tooltip.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-  tooltip.style.padding = '4px 8px';
-  tooltip.style.borderRadius = '2px';
+  tooltip.style.padding = '4px 4px';
+  tooltip.style.borderRadius = '7px';
   tooltip.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
   tooltip.style.pointerEvents = 'none';
-  tooltip.style.border = '2px solid #000';
+  tooltip.style.border = '3px solid #000';
   tooltip.style.fontWeight = 'bold';
+  tooltip.style.fontSize = '20px';
+  tooltip.style.display = 'flex';
+  tooltip.style.alignItems = 'center';
+  tooltip.style.justifyContent = 'center';
+  tooltip.style.width = '16px';
+  tooltip.style.height = '16px';
   tooltip.style.fontFamily = "'GDS Transport', arial, sans-serif";
 
   const markerOverlay = new ol.Overlay({
@@ -722,6 +836,8 @@ function keydownHandler(event) {
           if (feature === marker && isMarkerFeature(feature)) {
             const recordId = feature.get('id');
             const boundingBox = feature.get('boundingBox');
+            selectedFeatureId = recordId;
+            selectedBoundingBox = boundingBox;
             feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
             showInformationPopup(recordId, boundingBox);
           }
@@ -820,13 +936,16 @@ function infoListener() {
     } else {
       goToResourceElement.removeAttribute('disabled');
     }
-    goToResourceElement.addEventListener('click', () => {
-      window.openDataModal(
-        selectedRecord.organisationName,
-        selectedRecord.resourceLocator,
-        true,
-      );
-    });
+    if (!hasResourceListener) {
+      goToResourceElement.addEventListener('click', () => {
+        window.openDataModal(
+          selectedRecord.organisationName,
+          selectedRecord.resourceLocator,
+          true,
+        );
+      });
+      hasResourceListener = true;
+    }
   }
 }
 
@@ -877,7 +996,6 @@ document.addEventListener('DOMContentLoaded', () => {
       invokeMapFilters();
       exitMapEventListener();
       disableInteractions();
-      infoListener();
       customControls();
       checkNUpdateMarkerTooltip();
       document.addEventListener('keydown', handleKeyboardArrowEvent);

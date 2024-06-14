@@ -32,13 +32,13 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
-  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Natural Capital Search Service" id="cookie_banner">
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
     <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         
-        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Natural Capital Search Service</h2>
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
         
 
         <div class="govuk-cookie-banner__content">
@@ -175,7 +175,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -198,7 +198,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -209,7 +209,7 @@ exports[`Home Screen Home > Sanpshot verification should match the home screen s
   <header class="full-width-banner" role="banner">
     <div class="banner-container">
       <img alt="Department for Environment Food &amp; Rural Affairs Logo" src="/assets/images/NCEA-logo-landscape.png" class="banner-container__ncea-logo">
-      <h1 class="govuk-heading-xl banner-container__heading-xl">Natural Capital Search Service</h1>
+      <h1 class="govuk-heading-xl banner-container__heading-xl">Find Natural Capital data</h1>
       <span class="govuk-caption-l banner-container__caption-l">Use this service to search for data and information about the environment and ecosystems in  the UK.</span>
       <span class="govuk-caption-l banner-container__caption-l">This service supports the use of natural capital approaches to gathering evidence and making decisions.</span>
     </div>

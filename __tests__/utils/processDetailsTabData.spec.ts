@@ -37,7 +37,7 @@ describe('Process details tab data function', () => {
   it('should process when column has parentheses and the value is not an URL', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: '(title)' }],
+        mock: { 'Title': '(title)' },
       },
     }));
     const {
@@ -58,7 +58,7 @@ describe('Process details tab data function', () => {
   it('should process when column has parentheses and the value is an URL', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: '(resourceLocator)' }],
+        mock: { 'Title': '(resourceLocator)' },
       },
     }));
     const {
@@ -79,7 +79,7 @@ describe('Process details tab data function', () => {
   it('should process when column having the value as an URL without parentheses', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: 'resourceLocator' }],
+        mock: { 'Title': 'resourceLocator' },
       },
     }));
     const {
@@ -100,7 +100,7 @@ describe('Process details tab data function', () => {
   it('should process when column and display plain value', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: 'title' }],
+        mock: { 'Title': 'title' },
       },
     }));
     const {
@@ -119,7 +119,7 @@ describe('Process details tab data function', () => {
   it('should process the empty displayValue', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: 'title12' }],
+        mock: { 'Title': 'title12' },
       },
     }));
     const {
@@ -138,7 +138,7 @@ describe('Process details tab data function', () => {
   it('should process the value with the given format when having two columns', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: 'title (resourceLocator)' }],
+        mock: { 'Title': 'title (resourceLocator)' },
       },
     }));
     const {
@@ -159,7 +159,7 @@ describe('Process details tab data function', () => {
   it('should process the value with the given format when having two columns and link having target', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {
-        mock: [{ label: 'Title', column: 'title (resourceLocator)' }],
+        mock: { 'Title': 'title (resourceLocator)' },
       },
     }));
     global.window!.location.hostname = 'localhost:4000';

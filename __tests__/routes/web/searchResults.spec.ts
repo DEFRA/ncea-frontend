@@ -357,7 +357,7 @@ describe('Results Screen', () => {
           document
             ?.querySelector('.banner-container__heading-xl')
             ?.textContent?.trim(),
-        ).toBe('Natural Capital Search Service');
+        ).toBe('Find Natural Capital data');
       });
     });
 
