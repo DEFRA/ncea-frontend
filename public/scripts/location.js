@@ -437,7 +437,7 @@ const getHighlighterMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
       src: iconPath,
-      anchor: [0.5,1],
+      anchor: [0.5,0.8],
       scale: 1.0,
     }),
     zIndex: 10
@@ -847,7 +847,7 @@ function keydownHandler(event) {
   }
 }
 
-function checkNUpdateMarkerTooltip() {
+function checkNUpdateMarkerTooltip(event) {
   const visibleMarkers = markerLayer
     .getSource()
     .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
@@ -857,14 +857,19 @@ function checkNUpdateMarkerTooltip() {
   resetFeatureStyle();
   closeInfoPopup();
 
-  if (visibleMarkers.length <= maxMarkerAllowed) {
-    visibleMarkers.forEach((marker, index) => {
-      createTooltipOverlay(index);
-      const coord = marker.getGeometry().getCoordinates();
-      markerOverlays[index].setPosition(coord);
-    });
-    document.addEventListener('keydown', keydownHandler);
-  }
+  function keydownHandler(event) {
+    if (event.key === 'Tab') {
+        if (visibleMarkers.length <= maxMarkerAllowed) {
+            visibleMarkers.forEach((marker, index) => {
+                createTooltipOverlay(index);
+                const coord = marker.getGeometry().getCoordinates();
+                markerOverlays[index].setPosition(coord);
+            });
+            document.addEventListener('keydown', keydownHandler);
+        }
+    }
+}
+document.addEventListener('keydown', keydownHandler);
 }
 
 function fitMapToExtent() {
