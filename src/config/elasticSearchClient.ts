@@ -9,7 +9,7 @@ import { Client, ClientOptions, estypes } from '@elastic/elasticsearch';
 const { elasticSearchAPI, elasticSearchUsername, elasticSearchPassword } = environmentConfig;
 
 const hasCredentials: boolean = !!elasticSearchUsername?.length && !!elasticSearchPassword?.length;
-const certPath: string = path.join('/usr/share/elasticsearch/config/certs', 'ca.crt');
+const certPath: string = path.join('/app/build/config/certs', 'ca.crt');
 
 const clientOptions: ClientOptions = {
   node: elasticSearchAPI,
