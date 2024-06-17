@@ -857,14 +857,14 @@ function checkNUpdateMarkerTooltip(event) {
   resetFeatureStyle();
   closeInfoPopup();
   function keydownHandler(event) {
-      if (event.key === 'Tab') { // Check if the key pressed is Tab
+      if (event.key === 'Tab') {
           if (visibleMarkers.length <= maxMarkerAllowed) {
               visibleMarkers.forEach((marker, index) => {
                   createTooltipOverlay(index);
                   const coord = marker.getGeometry().getCoordinates();
                   markerOverlays[index].setPosition(coord);
               });
-              document.removeEventListener('keydown', keydownHandler); // Remove listener after handling
+              document.removeEventListener('keydown', keydownHandler);
           }
       }
   }
