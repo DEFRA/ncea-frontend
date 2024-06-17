@@ -60,6 +60,7 @@ let selectedBoundingBox = '';
 let hasResourceListener = false;
 const maxCountForBoundingBoxInfo = 50;
 const polygonFeatureData = [];
+let tabKeyHandled = false;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -854,20 +855,28 @@ function checkNUpdateMarkerTooltip(event) {
   markerOverlays.forEach((overlay) => map.removeOverlay(overlay));
   markerOverlays.length = 0;
   document.removeEventListener('keydown', keydownHandler);
+  document.removeEventListener('keydown', tabKeyPressed);
   resetFeatureStyle();
   closeInfoPopup();
-  function keydownHandler(event) {
-      if (event.key === 'Tab') {
+  function tabKeyPressed(event) {
+      if (event.key === 'Tab' && !tabKeyHandled) {
+          tabKeyHandled = true;
+          const visibleMarkers = markerLayer
+              .getSource()
+              .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
           if (visibleMarkers.length <= maxMarkerAllowed) {
               visibleMarkers.forEach((marker, index) => {
                   createTooltipOverlay(index);
                   const coord = marker.getGeometry().getCoordinates();
                   markerOverlays[index].setPosition(coord);
               });
-              document.removeEventListener('keydown', keydownHandler);
           }
+          setTimeout(() => {
+              tabKeyHandled = false;
+          }, 100);
       }
   }
+  document.addEventListener('keydown', tabKeyPressed);
   document.addEventListener('keydown', keydownHandler);
 }
 
