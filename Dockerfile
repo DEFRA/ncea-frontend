@@ -23,6 +23,7 @@ WORKDIR /app
 
 # Copy only the 'build' folder from the builder stage
 COPY --from=builder /app/build ./build
+COPY src/config/certs/ca.crt ./build/certs/
 
 # Copy the 'node_modules' folder from the builder stage
 COPY --from=builder /app/node_modules ./node_modules
