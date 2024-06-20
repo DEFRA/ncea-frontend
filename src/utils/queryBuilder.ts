@@ -105,7 +105,9 @@ const buildCustomSortScriptForStudyPeriod = (orderType): estypes.Sort => {
     type: 'number',
     script: {
       source:
-        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
+        orderType === 'asc'
+          ? "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; }} } return millis;"
+          : "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
     },
     order: orderType,
   };
@@ -122,9 +124,9 @@ const _buildBestScoreSort = (): estypes.Sort => ({
 });
 
 const _generateSortBlock = (sort: string): estypes.Sort => {
-  const orderType = sort === 'study_period_ascending' ? 'asc' : 'desc';
+  const orderType = sort === 'oldest_study_period' ? 'asc' : 'desc';
   const sortBlock: estypes.Sort =
-    sort === 'study_period_ascending' || sort === 'study_period_descending'
+    sort === 'oldest_study_period' || sort === 'newest_study_period'
       ? buildCustomSortScriptForStudyPeriod(orderType)
       : _buildBestScoreSort();
   return sortBlock;
