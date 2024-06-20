@@ -5,10 +5,12 @@ import { IQualityItem } from '../interfaces/searchResponse.interface';
 import { formatDate } from './formatDate';
 import { toggleContent } from './toggleContent';
 
-const getPublicationInformation = (data: Record<string, any>[]): string => {
+const getPublicationInformation = (data: Record<string, any>[], type: string): string => {
   if (Array.isArray(data) && data.length > 0) {
-    const obj = data.find((item: Record<string, any>) => item?.type?.toLowerCase() === 'publication');
-    return obj?.date ? `${formatDate(obj?.date, false, false)} - Last Revision` : '';
+    const item = data.find((item: Record<string, any>) => item.type?.toLowerCase() === type.toLowerCase());
+    if (item) {
+      return formatDate(item.date, false, false);
+    }
   }
   return '';
 };
@@ -54,7 +56,10 @@ const generateConformityData = (data: Record<string, any>[]): string => {
 };
 
 const getQualityTabData = (searchItem: Record<string, any>): IQualityItem => ({
-  publicationInformation: getPublicationInformation(searchItem?._source?.resourceDate ?? []),
+  publicationInformation: getPublicationInformation(searchItem?._source?.resourceDate, 'publication'),
+  creationInformation: getPublicationInformation(searchItem?._source?.resourceDate, 'creation'),
+  revisionInformation: getPublicationInformation(searchItem?._source?.resourceDate, 'revision'),
+  metadataDate: searchItem?._source?.dateStamp ? `${formatDate(searchItem?._source?.dateStamp, false, false)}` : '',
   lineage: getLineage(searchItem?._source?.lineageObject ?? ''),
   conformity: generateConformityData(searchItem?._source?.specificationConformance ?? []),
   additionalInformation: searchItem?._source?.supplementalInformationObject?.default ?? '',

@@ -616,10 +616,46 @@ exports[`Details route template Document details with data Check status code and
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Publication information</h2>
+          <h2 class='tab-content-label'>Date of publication</h2>
           
             <span class='tab-content-value'>
-              23 March 2022 - Last Revision
+              23 March 2022
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of creation</h2>
+          
+            <span class='tab-content-value'>
+              23 March 2022
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of last revision</h2>
+          
+            <span class='tab-content-value'>
+              23 March 2022
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata date</h2>
+          
+            <span class='tab-content-value'>
+              16 January 2024
             </span>
           
         </div>
@@ -769,7 +805,7 @@ exports[`Details route template Document details with data Check status code and
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Sampling resolution</h2>
+          <h2 class='tab-content-label'>Spatial resolution</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
   Unavailable
@@ -1670,12 +1706,50 @@ exports[`Details route template Document details with partial data Check status 
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Publication information</h2>
+          <h2 class='tab-content-label'>Date of publication</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
   Unavailable
 </strong>
 
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of creation</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of last revision</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata date</h2>
+          
+            <span class='tab-content-value'>
+              26 January 2010
+            </span>
           
         </div>
       
@@ -1815,7 +1889,7 @@ exports[`Details route template Document details with partial data Check status 
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Sampling resolution</h2>
+          <h2 class='tab-content-label'>Spatial resolution</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
   Unavailable
