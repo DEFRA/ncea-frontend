@@ -47,6 +47,9 @@ export interface ILicense {
 
 export interface IQualityItem {
   publicationInformation?: string;
+  creationInformation?: string;
+  revisionInformation?: string;
+  metadataDate?: string;
   lineage?: string;
   conformity?: string;
   additionalInformation?: string;

@@ -143,7 +143,10 @@ export const detailsTabOptions: TabOptions = {
     'Metadata language': 'metadata_language',
   },
   quality: {
-    'Publication information': 'publicationInformation',
+    'Date of publication': 'publicationInformation',
+    'Date of creation': 'creationInformation',
+    'Date of last revision': 'revisionInformation',
+    'Metadata date': 'metadataDate',
     Lineage: 'lineage',
     Conformity: 'conformity',
     'Additional information': 'additionalInformation',
@@ -159,7 +162,7 @@ export const detailsTabOptions: TabOptions = {
     'Geographic boundary': 'geographicBoundaryHtml',
     map: 'geographicBoundary',
     'Vertical extent<br /><span>(Meters above sea level)</span>': 'verticalExtent',
-    'Sampling resolution': 'samplingResolution',
+    'Spatial resolution': 'samplingResolution',
   },
   license: {
     'Limitations on public access': 'limitation_on_public_access',

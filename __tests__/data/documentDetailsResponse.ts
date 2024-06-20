@@ -208,6 +208,9 @@ const formattedDetailsResponse: ISearchResults = {
       additionalInformation: '',
       lineage: '',
       publicationInformation: '',
+      creationInformation:'',
+      revisionInformation:'',
+      metadataDate: "26 January 2010",
       conformity: '',
       metadata_standard: '',
       ncea_catalogue_date: '26-January-2010',
@@ -357,6 +360,14 @@ const detailsSuccessAPIFullData = {
           resourceDate: [
             {
               type: 'publication',
+              date: '2022-03-23T17:26:25.000Z',
+            },
+            {
+              type: 'creation',
+              date: '2022-03-23T17:26:25.000Z',
+            },
+            {
+              type: 'revision',
               date: '2022-03-23T17:26:25.000Z',
             },
           ],
@@ -756,12 +767,15 @@ const formattedDetailsFullResponse: ISearchResults = {
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'Dataset',
       hierarchy_level: 'Dataset',
+      metadataDate: "16 January 2024",
       resource_locators:
         '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
       additionalInformation: '',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',
-      publicationInformation: '23 March 2022 - Last Revision',
+      publicationInformation: '23 March 2022',
+      creationInformation: "23 March 2022",
+      revisionInformation: "23 March 2022",
       conformity: `<table class="details-table">
                       <thead>
                         <tr>
