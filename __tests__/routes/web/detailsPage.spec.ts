@@ -451,7 +451,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Abstract');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('UNAVAILABLE');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the study periods details', async () => {
@@ -463,7 +463,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Study periods');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('UNAVAILABLE');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the topic categories details', async () => {
@@ -475,7 +475,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Topic categories');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('UNAVAILABLE');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the keywords details', async () => {
@@ -487,7 +487,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Keywords');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('UNAVAILABLE');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the language details', async () => {
