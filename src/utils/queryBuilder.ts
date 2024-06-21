@@ -140,9 +140,9 @@ const _buildBestScoreSort = (): estypes.Sort => ({
 });
 
 const _generateSortBlock = (sort: string): estypes.Sort => {
-  const orderType = sort === 'study_period_ascending' ? 'asc' : 'desc';
+  const orderType = sort === 'oldest_study_period' ? 'asc' : 'desc';
   const sortBlock: estypes.Sort =
-    sort === 'study_period_ascending' || sort === 'study_period_descending'
+    sort === 'oldest_study_period' || sort === 'newest_study_period'
       ? buildCustomSortScriptForStudyPeriod(orderType)
       : _buildBestScoreSort();
   return sortBlock;

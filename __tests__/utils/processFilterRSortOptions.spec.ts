@@ -60,7 +60,7 @@ describe('processFilterRSortOptions', () => {
 
     test('should correctly process query params and update sort and rowsPerPage options', async () => {
       const requestQuery: RequestQuery = {
-        [queryParamKeys.sort]: 'study_period_ascending',
+        [queryParamKeys.sort]: 'oldest_study_period',
         [queryParamKeys.rowsPerPage]: '50',
       };
 

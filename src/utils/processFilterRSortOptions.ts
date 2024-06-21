@@ -56,13 +56,13 @@ const processSortOptions = async (requestQuery: RequestQuery): Promise<IAggregat
       selected: true,
     },
     {
-      value: 'study_period_ascending',
-      text: 'Study period ascending',
+      value: 'oldest_study_period',
+      text: 'Oldest Study Period',
       selected: false,
     },
     {
-      value: 'study_period_descending',
-      text: 'Study period descending',
+      value: 'newest_study_period',
+      text: 'Newest Study period',
       selected: false,
     },
   ];
