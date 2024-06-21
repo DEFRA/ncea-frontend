@@ -57,19 +57,35 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
       bool: {
         should: [
           {
-            range: {
-              'resourceTemporalExtentDetails.start.date': {
-                gte: startDateValue,
-                lte: toDateValue,
-              },
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { lt: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { gt: toDateValue } } },
+              ],
             },
           },
           {
-            range: {
-              'resourceTemporalExtentDetails.end.date': {
-                gte: startDateValue,
-                lte: toDateValue,
-              },
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { lt: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { lt: toDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gt: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { lt: toDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gt: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { gt: toDateValue } } },
+              ],
             },
           },
         ],
@@ -105,7 +121,9 @@ const buildCustomSortScriptForStudyPeriod = (orderType): estypes.Sort => {
     type: 'number',
     script: {
       source:
-        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
+        orderType === 'asc'
+          ? "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; }} } return millis;"
+          : "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
     },
     order: orderType,
   };

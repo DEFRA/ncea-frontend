@@ -67,23 +67,40 @@ describe('Build the search query', () => {
                   },
                 },
               },
+
               {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -163,19 +180,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -306,19 +339,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -476,19 +525,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -573,19 +638,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -731,19 +812,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -883,19 +980,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -976,19 +1089,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1122,19 +1251,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1268,19 +1413,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1365,19 +1526,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1465,19 +1642,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1562,19 +1755,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1788,19 +1997,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1865,23 +2090,39 @@ describe('Build the search query', () => {
               },
             ],
             filter: [
-              {
+               {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -1983,19 +2224,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2128,19 +2385,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2206,19 +2479,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2278,19 +2567,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2365,19 +2670,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2485,19 +2806,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2644,19 +2981,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2776,19 +3129,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -2947,19 +3316,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2017-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2017-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],
@@ -3136,19 +3521,35 @@ describe('Build the search query', () => {
                 bool: {
                   should: [
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.start.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                     {
-                      range: {
-                        'resourceTemporalExtentDetails.end.date': {
-                          gte: '2022-01-01',
-                          lte: '2022-12-31',
-                        },
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { lt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { lt: '2022-12-31' } } },
+                        ],
+                      },
+                    },
+                    {
+                      bool: {
+                        must: [
+                          { range: { 'resourceTemporalExtentDetails.start.date': { gt: '2022-01-01' } } },
+                          { range: { 'resourceTemporalExtentDetails.end.date': { gt: '2022-12-31' } } },
+                        ],
                       },
                     },
                   ],

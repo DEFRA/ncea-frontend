@@ -136,7 +136,6 @@ const getOtherDetails = async (
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
     metadata_language: searchItem?._source?.mainLanguage ?? '',
-    ncea_catalogue_date: formatDate(searchItem?._source?.dateStamp, false, false, '-'),
     ...getLicenseTabData(searchItem, publishedBy),
     ...getGeographyTabData(searchItem),
   };

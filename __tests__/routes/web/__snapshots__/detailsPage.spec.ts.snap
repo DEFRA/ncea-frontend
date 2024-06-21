@@ -833,9 +833,10 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>NCEA catalogue date</h2>
           
-            <span class='tab-content-value'>
-              16-January-2024
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  UNAVAILABLE
+</strong>
+
           
         </div>
       
@@ -1917,9 +1918,10 @@ exports[`Details route template Document details with partial data Check status 
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>NCEA catalogue date</h2>
           
-            <span class='tab-content-value'>
-              26-January-2010
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  UNAVAILABLE
+</strong>
+
           
         </div>
       
