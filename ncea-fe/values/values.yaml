@@ -56,9 +56,14 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-volumes: []
+volumes:
+- name: elasticsearch-certs
+  secret:
+    secretName: elasticsearch-master-certs
 
-volumeMounts: []
+volumeMounts:
+- mountPath: /usr/share/elasticsearch/config/certs
+  name: elasticsearch-certs
 
 nodeSelector: {}
 

@@ -5,16 +5,11 @@ import { IQualityItem } from '../interfaces/searchResponse.interface';
 import { formatDate } from './formatDate';
 import { toggleContent } from './toggleContent';
 
-const getPublicationInformation = (
-  data: Record<string, any>[],
-  type: string
-): string => {
+const getPublicationInformation = (data: Record<string, any>[], type: string): string => {
   if (Array.isArray(data) && data.length > 0) {
-    const item = data.find(
-      (item: Record<string, any>) => item.type?.toLowerCase() === type.toLowerCase()
-    );
+    const item = data.find((item: Record<string, any>) => item.type?.toLowerCase() === type.toLowerCase());
     if (item) {
-return formatDate(item.date, false, false);
+      return formatDate(item.date, false, false);
     }
   }
   return '';
