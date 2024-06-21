@@ -194,9 +194,9 @@ describe('Details route template', () => {
     });
 
     describe('Tab block details', () => {
-      it('should render the 7 tabs', async () => {
+      it('should render the 5 tabs', async () => {
         const tabList = document?.querySelector('.govuk-tabs__list');
-        expect(tabList?.childElementCount).toEqual(7);
+        expect(tabList?.childElementCount).toEqual(5);
       });
     });
 
@@ -419,9 +419,9 @@ describe('Details route template', () => {
     });
 
     describe('Tab block details', () => {
-      it('should render the 7 tabs', async () => {
+      it('should render the 5 tabs', async () => {
         const tabList = document?.querySelector('.govuk-tabs__list');
-        expect(tabList?.childElementCount).toEqual(7);
+        expect(tabList?.childElementCount).toEqual(5);
       });
     });
 

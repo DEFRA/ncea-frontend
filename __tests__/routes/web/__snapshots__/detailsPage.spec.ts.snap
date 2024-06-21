@@ -323,15 +323,6 @@ exports[`Details route template Document details with data Check status code and
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail - Natural Capital&quot;)">
-            Natural Capital
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail - Quality&quot;)">
             Quality
           </a>
@@ -343,15 +334,6 @@ exports[`Details route template Document details with data Check status code and
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail - Geography&quot;)">
             Geography
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
-            Governance
           </a>
         </li>
       
@@ -602,13 +584,6 @@ exports[`Details route template Document details with data Check status code and
   
     
       
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="natural-capital">
-        
-      </div>
-    
-  
-    
-      
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="quality">
         
           
@@ -811,31 +786,6 @@ exports[`Details route template Document details with data Check status code and
   Unavailable
 </strong>
 
-          
-        </div>
-      
-      
-    
-  </div>
-
-        
-      </div>
-    
-  
-    
-      
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="governance">
-        
-          
-  <div class='tab-content-container'>
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue date</h2>
-          
-            <span class='tab-content-value'>
-              16-January-2024
-            </span>
           
         </div>
       
@@ -1408,15 +1358,6 @@ exports[`Details route template Document details with partial data Check status 
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail - Natural Capital&quot;)">
-            Natural Capital
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail - Quality&quot;)">
             Quality
           </a>
@@ -1428,15 +1369,6 @@ exports[`Details route template Document details with partial data Check status 
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail - Geography&quot;)">
             Geography
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
-            Governance
           </a>
         </li>
       
@@ -1692,13 +1624,6 @@ exports[`Details route template Document details with partial data Check status 
   
     
       
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="natural-capital">
-        
-      </div>
-    
-  
-    
-      
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="quality">
         
           
@@ -1895,31 +1820,6 @@ exports[`Details route template Document details with partial data Check status 
   Unavailable
 </strong>
 
-          
-        </div>
-      
-      
-    
-  </div>
-
-        
-      </div>
-    
-  
-    
-      
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="governance">
-        
-          
-  <div class='tab-content-container'>
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue date</h2>
-          
-            <span class='tab-content-value'>
-              26-January-2010
-            </span>
           
         </div>
       
