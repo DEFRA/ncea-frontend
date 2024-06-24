@@ -32,10 +32,6 @@ export interface IAccessItem {
   metadata_language?: string;
 }
 
-export interface IGovernance {
-  ncea_catalogue_date?: string;
-}
-
 export interface ILicense {
   limitation_on_public_access?: string;
   license_constraints?: string;
