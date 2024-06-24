@@ -52,6 +52,7 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
     true,
   );
 
+
   const rangeBlock: estypes.QueryDslQueryContainer[] = [
     {
       bool: {
