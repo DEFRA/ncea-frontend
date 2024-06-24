@@ -82,7 +82,7 @@ export interface IGeographyItem {
   samplingResolution?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & ILicense & IGeographyItem;
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & ILicense & IGeographyItem;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {
