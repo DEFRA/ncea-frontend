@@ -167,8 +167,7 @@ export const detailsTabOptions: TabOptions = {
   license: {
     'Limitations on public access': 'limitation_on_public_access',
     'License constraints': 'license_constraints',
-    'Data owner': 'data_owner',
-    'Available formats': 'available_formats',
+    'Distribution formats': 'available_formats',
     'Frequency of update': 'frequency_of_update',
     'Character encoding': 'character_encoding',
   },

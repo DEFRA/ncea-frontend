@@ -830,19 +830,7 @@ exports[`Details route template Document details with data Check status code and
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Data owner</h2>
-          
-            <span class='tab-content-value'>
-              owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Available formats</h2>
+          <h2 class='tab-content-label'>Distribution formats</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
   Unavailable
@@ -1866,20 +1854,7 @@ exports[`Details route template Document details with partial data Check status 
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Data owner</h2>
-          
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  Unavailable
-</strong>
-
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Available formats</h2>
+          <h2 class='tab-content-label'>Distribution formats</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
   Unavailable
