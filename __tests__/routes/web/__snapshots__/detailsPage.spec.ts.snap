@@ -569,7 +569,7 @@ exports[`Details route template Document details with data Check status code and
           <h2 class='tab-content-label'>Metadata language</h2>
           
             <span class='tab-content-value'>
-              eng
+              ENG
             </span>
           
         </div>
@@ -1597,7 +1597,7 @@ exports[`Details route template Document details with partial data Check status 
           <h2 class='tab-content-label'>Metadata language</h2>
           
             <span class='tab-content-value'>
-              eng
+              ENG
             </span>
           
         </div>
