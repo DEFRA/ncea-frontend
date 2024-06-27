@@ -60,6 +60,7 @@ let selectedBoundingBox = '';
 let hasResourceListener = false;
 const maxCountForBoundingBoxInfo = 50;
 const polygonFeatureData = [];
+let tabKeyHandled = false;
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -437,7 +438,7 @@ const getHighlighterMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
       src: iconPath,
-      anchor: [0.5,1],
+      anchor: [0.5,0.8],
       scale: 1.0,
     }),
     zIndex: 10
@@ -847,24 +848,36 @@ function keydownHandler(event) {
   }
 }
 
-function checkNUpdateMarkerTooltip() {
+function checkNUpdateMarkerTooltip(event) {
   const visibleMarkers = markerLayer
-    .getSource()
-    .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+      .getSource()
+      .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
   markerOverlays.forEach((overlay) => map.removeOverlay(overlay));
   markerOverlays.length = 0;
   document.removeEventListener('keydown', keydownHandler);
+  document.removeEventListener('keydown', tabKeyPressed);
   resetFeatureStyle();
   closeInfoPopup();
-
-  if (visibleMarkers.length <= maxMarkerAllowed) {
-    visibleMarkers.forEach((marker, index) => {
-      createTooltipOverlay(index);
-      const coord = marker.getGeometry().getCoordinates();
-      markerOverlays[index].setPosition(coord);
-    });
-    document.addEventListener('keydown', keydownHandler);
+  function tabKeyPressed(event) {
+      if (event.key === 'Tab' && !tabKeyHandled) {
+          tabKeyHandled = true;
+          const visibleMarkers = markerLayer
+              .getSource()
+              .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+          if (visibleMarkers.length <= maxMarkerAllowed) {
+              visibleMarkers.forEach((marker, index) => {
+                  createTooltipOverlay(index);
+                  const coord = marker.getGeometry().getCoordinates();
+                  markerOverlays[index].setPosition(coord);
+              });
+          }
+          setTimeout(() => {
+              tabKeyHandled = false;
+          }, 100);
+      }
   }
+  document.addEventListener('keydown', tabKeyPressed);
+  document.addEventListener('keydown', keydownHandler);
 }
 
 function fitMapToExtent() {
