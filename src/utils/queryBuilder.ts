@@ -60,32 +60,24 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
           {
             bool: {
               must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { lt: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.end.date': { gt: toDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { gte: startDateValue } } },
               ],
             },
           },
           {
             bool: {
               must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { lt: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.end.date': { lt: toDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { lte: toDateValue } } },
               ],
             },
           },
           {
             bool: {
               must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { gt: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.end.date': { lt: toDateValue } } },
-              ],
-            },
-          },
-          {
-            bool: {
-              must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { gt: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.end.date': { gt: toDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: toDateValue } } },
               ],
             },
           },

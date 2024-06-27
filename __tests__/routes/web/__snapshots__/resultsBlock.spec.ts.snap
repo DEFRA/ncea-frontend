@@ -466,19 +466,19 @@ exports[`Results block template Guided search journey Search results with empty 
     
       
       
-      <option value="best_match" selected>Best Fit</option>
+      <option value="best_match" selected>Best fit</option>
     
   
     
       
       
-      <option value="oldest_study_period">Oldest Study Period</option>
+      <option value="oldest_study_period">Oldest study period</option>
     
   
     
       
       
-      <option value="newest_study_period">Newest Study period</option>
+      <option value="newest_study_period">Newest study period</option>
     
   
   </select>
@@ -1723,19 +1723,19 @@ exports[`Results block template Quick search journey Search results with data sh
     
       
       
-      <option value="best_match" selected>Best Fit</option>
+      <option value="best_match" selected>Best fit</option>
     
   
     
       
       
-      <option value="oldest_study_period">Oldest Study Period</option>
+      <option value="oldest_study_period">Oldest study period</option>
     
   
     
       
       
-      <option value="newest_study_period">Newest Study period</option>
+      <option value="newest_study_period">Newest study period</option>
     
   
   </select>
@@ -2531,19 +2531,19 @@ exports[`Results block template Quick search journey Search results with empty d
     
       
       
-      <option value="best_match" selected>Best Fit</option>
+      <option value="best_match" selected>Best fit</option>
     
   
     
       
       
-      <option value="oldest_study_period">Oldest Study Period</option>
+      <option value="oldest_study_period">Oldest study period</option>
     
   
     
       
       
-      <option value="newest_study_period">Newest Study period</option>
+      <option value="newest_study_period">Newest study period</option>
     
   
   </select>
