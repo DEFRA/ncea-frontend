@@ -192,7 +192,7 @@ const formattedDetailsResponse: ISearchResults = {
       toYear: '',
       resourceLocator: '',
       language: 'ENG',
-      metadata_language: 'eng',
+      metadata_language: 'ENG',
       keywords: '',
       topicCategories: '',
       alternateTitle: '',
@@ -754,7 +754,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       toYear: '2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
       language: 'ENG',
-      metadata_language: 'eng',
+      metadata_language: 'ENG',
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
       topicCategories: 'Elevation',

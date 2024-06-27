@@ -88,6 +88,7 @@ const getAccessTabData = (searchItem: Record<string, any>): IAccessItem => ({
   resource_type_and_hierarchy: getResourceTypeHierarchy(searchItem),
   hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '',
   resource_locators: getResourceLocators(searchItem),
+  metadata_language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
 });
 
 export { getAccessTabData, getHostCatalogueNumber, getResourceLocators, getCoupledResource, getResourceTypeHierarchy };
