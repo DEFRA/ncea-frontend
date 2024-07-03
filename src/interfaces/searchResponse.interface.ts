@@ -32,10 +32,6 @@ export interface IAccessItem {
   metadata_language?: string;
 }
 
-export interface IGovernance {
-  ncea_catalogue_date?: string;
-}
-
 export interface ILicense {
   limitation_on_public_access?: string;
   license_constraints?: string;
@@ -86,7 +82,7 @@ export interface IGeographyItem {
   samplingResolution?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & ILicense & IGeographyItem;
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & ILicense & IGeographyItem;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {

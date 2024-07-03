@@ -151,9 +151,6 @@ export const detailsTabOptions: TabOptions = {
     Conformity: 'conformity',
     'Additional information': 'additionalInformation',
   },
-  governance: {
-    'NCEA catalogue date': 'ncea_catalogue_date',
-  },
   geography: {
     'Spatial data service': 'spatialDataService',
     'Spatial representation service': 'spatialRepresentationService',
