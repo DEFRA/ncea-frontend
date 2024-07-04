@@ -70,6 +70,8 @@ spec:
             value: "{{ .Values.env.ES_USERNAME }}"
           - name: ES_PASSWORD
             value: "{{ .Values.env.ES_PASSWORD }}"
+          - name: CLASSIFIER_API
+            value: "{{ .Values.env.CLASSIFIER_API }}"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
