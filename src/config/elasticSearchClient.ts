@@ -1,12 +1,15 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import { environmentConfig } from './environmentConfig';
+import fs from 'fs';
 import { geoNetworkIndex } from '../utils/constants';
+import path from 'path';
 import { Client, ClientOptions, estypes } from '@elastic/elasticsearch';
 
 const { elasticSearchAPI, elasticSearchUsername, elasticSearchPassword } = environmentConfig;
 
 const hasCredentials: boolean = !!elasticSearchUsername?.length && !!elasticSearchPassword?.length;
+const certPath: string = path.join('/usr/share/elasticsearch/config/certs', 'ca.crt');
 
 const clientOptions: ClientOptions = {
   node: elasticSearchAPI,
@@ -14,6 +17,10 @@ const clientOptions: ClientOptions = {
     auth: {
       username: elasticSearchUsername as string,
       password: elasticSearchPassword as string,
+    },
+    tls: {
+      ca: fs.readFileSync(certPath),
+      rejectUnauthorized: true,
     },
   }),
 };

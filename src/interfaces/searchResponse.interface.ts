@@ -25,15 +25,11 @@ export interface IAccessItem {
   resource_type_and_hierarchy?: string;
   hierarchy_level?: string;
   resource_locators?: string;
-}
-
-export interface IGovernance {
+  host_service_catalogue_number?: string;
   ncea_group_reference?: string;
   metadata_standard?: string;
   project_number?: string;
-  Metadata_language?: string;
-  ncea_catalogue_date?: string;
-  host_service_catalogue_number?: string;
+  metadata_language?: string;
 }
 
 export interface ILicense {
@@ -47,6 +43,9 @@ export interface ILicense {
 
 export interface IQualityItem {
   publicationInformation?: string;
+  creationInformation?: string;
+  revisionInformation?: string;
+  metadataDate?: string;
   lineage?: string;
   conformity?: string;
   additionalInformation?: string;
@@ -83,7 +82,7 @@ export interface IGeographyItem {
   samplingResolution?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & IGovernance & ILicense & IGeographyItem;
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & ILicense & IGeographyItem;
 export type ISearchItem = IBaseItem & IOtherSearchItem;
 
 export interface ISearchResults {

@@ -1,9 +1,8 @@
 export interface TabOption {
-  label: string;
-  column: string;
+  [key: string]: string;
 }
 export interface TabOptions {
-  [key: string]: TabOption[];
+  [key: string]: TabOption;
 }
 
 export interface FormattedTabOption {

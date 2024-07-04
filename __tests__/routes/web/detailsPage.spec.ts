@@ -194,9 +194,9 @@ describe('Details route template', () => {
     });
 
     describe('Tab block details', () => {
-      it('should render the 7 tabs', async () => {
+      it('should render the 5 tabs', async () => {
         const tabList = document?.querySelector('.govuk-tabs__list');
-        expect(tabList?.childElementCount).toEqual(7);
+        expect(tabList?.childElementCount).toEqual(5);
       });
     });
 
@@ -280,7 +280,7 @@ describe('Details route template', () => {
         const labelElement = rowElement?.children?.[0];
         const valueElement = rowElement?.children?.[1];
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
-        expect(labelElement?.textContent?.trim()).toBe('Languages');
+        expect(labelElement?.textContent?.trim()).toBe('Resource languages');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
           detailsFullResponse?.language,
@@ -419,9 +419,9 @@ describe('Details route template', () => {
     });
 
     describe('Tab block details', () => {
-      it('should render the 7 tabs', async () => {
+      it('should render the 5 tabs', async () => {
         const tabList = document?.querySelector('.govuk-tabs__list');
-        expect(tabList?.childElementCount).toEqual(7);
+        expect(tabList?.childElementCount).toEqual(5);
       });
     });
 
@@ -451,7 +451,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Abstract');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('NOT PROVIDED');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the study periods details', async () => {
@@ -463,7 +463,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Study periods');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('NOT PROVIDED');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the topic categories details', async () => {
@@ -475,7 +475,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Topic categories');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('NOT PROVIDED');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the keywords details', async () => {
@@ -487,7 +487,7 @@ describe('Details route template', () => {
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
         expect(labelElement?.textContent?.trim()).toBe('Keywords');
         expect(valueElement?.tagName.toLowerCase()).toBe('strong');
-        expect(valueElement?.textContent?.trim()).toBe('NOT PROVIDED');
+        expect(valueElement?.textContent?.trim()).toBe('Unavailable');
       });
 
       it('should render the language details', async () => {
@@ -497,7 +497,7 @@ describe('Details route template', () => {
         const labelElement = rowElement?.children?.[0];
         const valueElement = rowElement?.children?.[1];
         expect(labelElement?.tagName.toLowerCase()).toBe('h2');
-        expect(labelElement?.textContent?.trim()).toBe('Languages');
+        expect(labelElement?.textContent?.trim()).toBe('Resource languages');
         expect(valueElement?.tagName.toLowerCase()).toBe('span');
         expect(valueElement?.textContent?.trim()).toBe(
           detailsFullResponse?.language,

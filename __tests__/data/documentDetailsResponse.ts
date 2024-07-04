@@ -192,7 +192,7 @@ const formattedDetailsResponse: ISearchResults = {
       toYear: '',
       resourceLocator: '',
       language: 'ENG',
-      Metadata_language: 'eng',
+      metadata_language: 'ENG',
       keywords: '',
       topicCategories: '',
       alternateTitle: '',
@@ -208,9 +208,11 @@ const formattedDetailsResponse: ISearchResults = {
       additionalInformation: '',
       lineage: '',
       publicationInformation: '',
+      creationInformation:'',
+      revisionInformation:'',
+      metadataDate: "26 January 2010",
       conformity: '',
       metadata_standard: '',
-      ncea_catalogue_date: '26-January-2010',
       ncea_group_reference: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       project_number: '',
       license_constraints: '',
@@ -357,6 +359,14 @@ const detailsSuccessAPIFullData = {
           resourceDate: [
             {
               type: 'publication',
+              date: '2022-03-23T17:26:25.000Z',
+            },
+            {
+              type: 'creation',
+              date: '2022-03-23T17:26:25.000Z',
+            },
+            {
+              type: 'revision',
               date: '2022-03-23T17:26:25.000Z',
             },
           ],
@@ -744,7 +754,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       toYear: '2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
       language: 'ENG',
-      Metadata_language: 'eng',
+      metadata_language: 'ENG',
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
       topicCategories: 'Elevation',
@@ -756,12 +766,15 @@ const formattedDetailsFullResponse: ISearchResults = {
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'Dataset',
       hierarchy_level: 'Dataset',
+      metadataDate: "16 January 2024",
       resource_locators:
         '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
       additionalInformation: '',
       lineage:
         'This data set has been derived from an Echosounder - multibeam survey which was collected for the purpose of Safety of navigation, which was collected against S-44 survey specification (of the time). The survey has been validated and processed by the UKHO.',
-      publicationInformation: '23 March 2022 - Last Revision',
+      publicationInformation: '23 March 2022',
+      creationInformation: "23 March 2022",
+      revisionInformation: "23 March 2022",
       conformity: `<table class="details-table">
                       <thead>
                         <tr>
@@ -776,7 +789,6 @@ const formattedDetailsFullResponse: ISearchResults = {
                     </tr></tbody></table>`,
       host_service_catalogue_number: '3ce46f92-509c-4529-a062-c8b48788340d',
       metadata_standard: 'MEDIN',
-      ncea_catalogue_date: '16-January-2024',
       ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       project_number: '',
       license_constraints:

@@ -17,7 +17,7 @@ const _generateQueryStringBlock = (
   return {
     query_string: {
       query: searchTerm,
-      default_operator: 'OR',
+      default_operator: 'AND',
       ...(fieldsToSearch.length > 0 && { fields: fieldsToSearch }),
     },
   };
@@ -54,19 +54,34 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
 
   const rangeBlock: estypes.QueryDslQueryContainer[] = [
     {
-      range: {
-        'resourceTemporalExtentDetails.start.date': {
-          gte: startDateValue,
-          lte: toDateValue,
-        },
-      },
-    },
-    {
-      range: {
-        'resourceTemporalExtentDetails.end.date': {
-          gte: startDateValue,
-          lte: toDateValue,
-        },
+      bool: {
+        should: [
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { gte: startDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { lte: toDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: toDateValue } } },
+              ],
+            },
+          },
+        ],
+        minimum_should_match: 1,
       },
     },
   ];
@@ -93,14 +108,16 @@ const _generateGeoShapeBlock = (geoCoordinates: IGeoCoordinates): estypes.QueryD
   return geoShapeBlock as estypes.QueryDslQueryContainer;
 };
 
-const buildCustomSortScriptForStudyPeriod = (): estypes.Sort => {
+const buildCustomSortScriptForStudyPeriod = (orderType): estypes.Sort => {
   const customScript: estypes.ScriptSort = {
     type: 'number',
     script: {
       source:
-        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
+        orderType === 'asc'
+          ? "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; }} } return millis;"
+          : "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
     },
-    order: 'desc',
+    order: orderType,
   };
   const sortBlock: estypes.SortOptions = {
     _script: customScript,
@@ -115,8 +132,11 @@ const _buildBestScoreSort = (): estypes.Sort => ({
 });
 
 const _generateSortBlock = (sort: string): estypes.Sort => {
+  const orderType = sort === 'oldest_study_period' ? 'asc' : 'desc';
   const sortBlock: estypes.Sort =
-    sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : _buildBestScoreSort();
+    sort === 'oldest_study_period' || sort === 'newest_study_period'
+      ? buildCustomSortScriptForStudyPeriod(orderType)
+      : _buildBestScoreSort();
   return sortBlock;
 };
 
@@ -177,6 +197,7 @@ const _generateDateRangeQuery = (
 ): estypes.QueryDslQueryContainer[] => {
   const { searchFieldsObject } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
+
   const filterBlock: estypes.QueryDslQueryContainer[] =
     (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };

@@ -137,7 +137,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
     
   <script>
-    var gtmIdValue = "G-0FDPPSVB0H"
+    var gtmIdValue = "GTM-PZJ4WBG7"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -466,13 +466,19 @@ exports[`Results block template Guided search journey Search results with empty 
     
       
       
-      <option value="best_match" selected>Best Fit</option>
+      <option value="best_match" selected>Best fit</option>
     
   
     
       
       
-      <option value="recent_study">Most Recent</option>
+      <option value="oldest_study_period">Oldest study period</option>
+    
+  
+    
+      
+      
+      <option value="newest_study_period">Newest study period</option>
     
   
   </select>
@@ -813,7 +819,7 @@ exports[`Results block template Guided search journey Search results with error 
 
     
   <script>
-    var gtmIdValue = "G-0FDPPSVB0H"
+    var gtmIdValue = "GTM-PZJ4WBG7"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1388,7 +1394,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
     
   <script>
-    var gtmIdValue = "G-0FDPPSVB0H"
+    var gtmIdValue = "GTM-PZJ4WBG7"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1717,13 +1723,19 @@ exports[`Results block template Quick search journey Search results with data sh
     
       
       
-      <option value="best_match" selected>Best Fit</option>
+      <option value="best_match" selected>Best fit</option>
     
   
     
       
       
-      <option value="recent_study">Most Recent</option>
+      <option value="oldest_study_period">Oldest study period</option>
+    
+  
+    
+      
+      
+      <option value="newest_study_period">Newest study period</option>
     
   
   </select>
@@ -2190,7 +2202,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
     
   <script>
-    var gtmIdValue = "G-0FDPPSVB0H"
+    var gtmIdValue = "GTM-PZJ4WBG7"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -2519,13 +2531,19 @@ exports[`Results block template Quick search journey Search results with empty d
     
       
       
-      <option value="best_match" selected>Best Fit</option>
+      <option value="best_match" selected>Best fit</option>
     
   
     
       
       
-      <option value="recent_study">Most Recent</option>
+      <option value="oldest_study_period">Oldest study period</option>
+    
+  
+    
+      
+      
+      <option value="newest_study_period">Newest study period</option>
     
   
   </select>
@@ -2841,7 +2859,7 @@ exports[`Results block template Quick search journey Search results with error s
 
     
   <script>
-    var gtmIdValue = "G-0FDPPSVB0H"
+    var gtmIdValue = "GTM-PZJ4WBG7"
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">

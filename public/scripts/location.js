@@ -171,7 +171,7 @@ function mapEventListener() {
       ) {
         feature.setStyle(getMarkerStyle(hoverMarkerIcon));
       } else if (selectedFeatureId === feature.get('id')) {
-        feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+        feature.setStyle(getHighlighterMarkerStyle(highlightedMarkerIcon));
       } else {
         feature.setStyle(getMarkerStyle(markerIcon));
       }
@@ -188,7 +188,7 @@ function mapEventListener() {
     if (feature && isMarkerFeature(feature)) {
       const recordId = feature.get('id');
       const boundingBox = feature.get('boundingBox');
-      feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+      feature.setStyle(getHighlighterMarkerStyle(highlightedMarkerIcon));
       selectedFeatureId = recordId;
       selectedBoundingBox = boundingBox;
       showInformationPopup(recordId, boundingBox);
@@ -430,6 +430,17 @@ const getMarkerStyle = (iconPath) => {
       src: iconPath,
       scale: 1.0,
     }),
+  });
+};
+
+const getHighlighterMarkerStyle = (iconPath) => {
+  return new ol.style.Style({
+    image: new ol.style.Icon({
+      src: iconPath,
+      anchor: [0.5,1],
+      scale: 1.0,
+    }),
+    zIndex: 10
   });
 };
 

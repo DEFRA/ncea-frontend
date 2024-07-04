@@ -59,6 +59,9 @@ steps:
         env.NODE_ENV=$(nodeEnv)
         env.AZURE_KEYVAULT_URL=$(keyVaultUri)
         env.ELASTICSEARCH_API=$(elasticSearchApi)
+        env.ES_USERNAME=$(elasticSearchUser)
+        env.ES_PASSWORD=$(elasticSearchPassword)
+        env.CLASSIFIER_API=$(classifierApiBaseUri)
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}

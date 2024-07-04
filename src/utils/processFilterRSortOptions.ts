@@ -52,12 +52,17 @@ const processSortOptions = async (requestQuery: RequestQuery): Promise<IAggregat
   const sortValueOptions: IAggregationOption[] = [
     {
       value: 'best_match',
-      text: 'Best Fit',
+      text: 'Best fit',
       selected: true,
     },
     {
-      value: 'recent_study',
-      text: 'Most Recent',
+      value: 'oldest_study_period',
+      text: 'Oldest study period',
+      selected: false,
+    },
+    {
+      value: 'newest_study_period',
+      text: 'Newest study period',
       selected: false,
     },
   ];
