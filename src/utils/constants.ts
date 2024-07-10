@@ -53,6 +53,7 @@ export const requiredFieldsForMap: string[] = [
   'distributorOrgForResourceObject',
   'pointOfContactOrgObject',
   'linkUrl',
+  'OrgNceaClassifiers'
 ];
 
 export const quickSearchTargetFields: string[] = [

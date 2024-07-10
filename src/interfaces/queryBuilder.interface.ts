@@ -118,6 +118,8 @@ interface ISearchFilter {
 interface ISearchPayload {
   fields: ISearchFields;
   sort: string;
+  level?: number;
+  code? : string[];
   filters: ISearchFilter;
   rowsPerPage: number;
   page: number | null;
