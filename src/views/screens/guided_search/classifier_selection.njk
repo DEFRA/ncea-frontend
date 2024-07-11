@@ -34,7 +34,7 @@
         {% for classify in classifierItems %}
           {% set checkboxItems = [] %}
           {% for item in classify.classifiers %}
-            {% set _ = checkboxItems.push({value: item.value, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
+            {% set _ = checkboxItems.push({value: item.code, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
           {% endfor %}
           {% set _ = checkboxItems.push({divider: "or" }) %}
           {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %}
@@ -50,7 +50,8 @@
             {% set sectionIntro = 'Select all that apply' %}
           {% endif %}
           {{ govukCheckboxes({
-              name: "parent",
+              name: "parent[]",
+              idPrefix: sectionTitle,
               fieldset: {
                 legend: {
                   text: sectionTitle,

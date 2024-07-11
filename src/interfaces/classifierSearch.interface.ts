@@ -1,14 +1,16 @@
 export interface classify {
   text?: string;
   value?: string;
-  title: string;
-  description: string;
+  name: string;
+  definition: string;
   id: string;
+  themeName?: string;
+  code: string;
 }
 
 export interface classifiers {
   sectionTitle: string;
-  sectionIntro: string;
+  sectionIntroduction: string;
   classifiers: classify[];
   selectAll?: string;
 }

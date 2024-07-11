@@ -78,7 +78,9 @@ const hydrateFormFromStorage = (form) => {
 // Function to check if any field is empty
 const isAllFieldEmpty = (formId) => {
   const sessionData = getStorageData();
+  console.log(sessionData);
   const form = sessionData.fields[formId];
+  console.log(form);
   if (!form) {
     return true;
   }
@@ -89,6 +91,7 @@ const isAllFieldEmpty = (formId) => {
 const updateSubmitButtonState = (form) => {
   const submitButton = form.querySelector('button[data-to-disable]');
   if (submitButton) {
+    console.log(form.id);
     submitButton.disabled = isAllFieldEmpty(form.id);
   }
 };

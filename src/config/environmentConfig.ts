@@ -21,6 +21,8 @@ const config: EnvironmentConfig = {
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
   isLocal: process.env.NODE_ENV === 'local',
   gtmId: process.env.GTM_ID,
+  classifierApiUrl: process.env.CLASSIFIER_API_URL,
+  classifierApiKey: process.env.CLASSIFIER_API_KEY
 };
 
 const { error, value } = environmentSchema.validate(config);

@@ -16,7 +16,8 @@ const ClassifierSearchController = {
     const classifierItems = await getClassifierThemes(level, parent);
     const nextLevel: string = (+level + 1).toString();
     const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
-    const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
+    // const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
+    // console.log(searchResultsCount);
     //hidden fields for selected level1, 2, 3 classifier categories
     return response.view('screens/guided_search/classifier_selection.njk', {
       guidedClassifierSearchPath,
@@ -24,7 +25,8 @@ const ClassifierSearchController = {
       skipPath,
       formId,
       classifierItems,
-      count: searchResultsCount.totalResults.toString(),
+      count: 0,
+      // searchResultsCount.totalResults.toString()
       backLinkPath: 'javascript:history.back()'
     });
   },
