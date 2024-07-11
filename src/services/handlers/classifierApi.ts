@@ -15,14 +15,13 @@ export const getClassifierThemes = async (level: string, parents: string = ''): 
     let url = `${environmentConfig.classifierApiUrl}?level=${level}`;
     if (parents) {
       console.log(parents);
-      url =
-        url + `&Parents=${parents}`
+      url = url + `&Parents=${parents}`;
     }
     const headers = {
       headers: {
-        'X-API-Key': environmentConfig.classifierApiKey
-      }
-    }
+        'X-API-Key': environmentConfig.classifierApiKey,
+      },
+    };
     const response: AxiosResponse = await axios.get(url, headers);
     // console.log(response);
     const classifierResponse: classifiers[] = response.data.map((classifier: classifiers) => {

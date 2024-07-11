@@ -27,7 +27,7 @@ const ClassifierSearchController = {
       classifierItems,
       count: 0,
       // searchResultsCount.totalResults.toString()
-      backLinkPath: 'javascript:history.back()'
+      backLinkPath: 'javascript:history.back()',
     });
   },
 };

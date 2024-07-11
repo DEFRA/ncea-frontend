@@ -57,8 +57,8 @@ interface IBoolQuery {
 
 interface IFilterQuery {
   term: {
-    [key: string]: string | string[]
-  }
+    [key: string]: string | string[];
+  };
 }
 
 interface ISortOrder {
@@ -199,5 +199,5 @@ export {
   IAggregationDateScript,
   IAggregationData,
   IAggregationType,
-  IFilterQuery
+  IFilterQuery,
 };
