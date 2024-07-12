@@ -20,6 +20,8 @@ variables:
     value: true
   - name: deployToTest
     value: true
+  - name: deployToPre
+    value: true
 
 stages:
   - stage: 'Build'
@@ -95,4 +97,4 @@ stages:
                 - template: steps-deploy-helm-charts.yaml
                   parameters:
                     releaseName: ncea-fe-pre
-                    armServiceConnection: AZR-NCE-PRE1
+                    armServiceConnection: AZR-NCE-PRE
