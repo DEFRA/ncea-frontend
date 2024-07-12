@@ -1,27 +1,29 @@
-import { IFilterOptions } from '@/src/interfaces/searchPayload.interface';
-import { elasticSearchClient } from '../../config/elasticSearchClient';
+import { IFilterFlags } from '@/src/interfaces/searchPayload.interface';
+import { estypes } from '@elastic/elasticsearch';
+import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
-
-import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
-import { buildSearchQuery, classifierAggregationQuery } from '../../utils/queryBuilder';
-import { defaultFilterOptions, elasticSearchAPIPaths } from '../../utils/constants';
-import { formatAggregationResponse, formatClassifierResponse } from '../../utils/formatAggregationResponse';
-
+import { performQuery } from '../../config/elasticSearchClient';
 import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
+import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
+import { defaultFilterOptions, quickSearchTargetFields } from '../../utils/constants';
+import { generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
 
 const getSearchResults = async (
   searchFieldsObject: ISearchPayload,
   isMapResults: boolean = false,
+  isQuickSearchJourney: boolean = false,
 ): Promise<ISearchResults> => {
   try {
     if (Object.keys(searchFieldsObject.fields).length) {
       const searchBuilderPayload: ISearchBuilderPayload = {
         searchFieldsObject,
-        ignoreAggregation: true,
+        ...(isQuickSearchJourney && {
+          fieldsToSearch: quickSearchTargetFields,
+        }),
       };
-      const payload = buildSearchQuery(searchBuilderPayload);
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: ISearchResults = await formatSearchResponse(response.data, false, isMapResults);
+      const payload = generateSearchQuery(searchBuilderPayload);
+      const response = await performQuery<estypes.SearchResponse>(payload);
+      const finalResponse: ISearchResults = await formatSearchResponse(response, false, isMapResults);
       return finalResponse;
     } else {
       return Promise.resolve({ total: 0, items: [] });
@@ -37,13 +39,11 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
     const searchBuilderPayload: ISearchBuilderPayload = {
       searchFieldsObject,
       isCount: true,
-      ignoreAggregation: true,
     };
-    const payload = buildSearchQuery(searchBuilderPayload);
-    if (payload.query.bool.must?.length) {
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.countPath, payload);
-      const data = await response.data;
-      return { totalResults: data?.count ?? 0 };
+    const payload = generateSearchQuery(searchBuilderPayload);
+    if (Object.keys(searchFieldsObject.fields).length) {
+      const response = await performQuery<estypes.CountResponse>(payload, true);
+      return { totalResults: response?.count ?? 0 };
     } else {
       return Promise.resolve({ totalResults: 0 });
     }
@@ -55,20 +55,27 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
 
 const getFilterOptions = async (
   searchFieldsObject: ISearchPayload,
-  filterOptions: IFilterOptions = defaultFilterOptions,
+  filterFlags?: IFilterFlags,
+  isQuickSearchJourney: boolean = false,
 ): Promise<IAggregationOptions> => {
   try {
-    if (Object.keys(searchFieldsObject.fields).length && filterOptions.length > 0) {
+    const { isStudyPeriod = false } = filterFlags as IFilterFlags;
+    if (Object.keys(searchFieldsObject.fields).length) {
       const searchBuilderPayload: ISearchBuilderPayload = {
         searchFieldsObject,
-        filterOptions,
+        isAggregation: true,
+        ...(isQuickSearchJourney && {
+          fieldsToSearch: quickSearchTargetFields,
+        }),
       };
-      const payload = buildSearchQuery(searchBuilderPayload);
-      const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-      const finalResponse: IAggregationOptions = await formatAggregationResponse(response.data, filterOptions);
+      const payload = generateFilterQuery(searchBuilderPayload, {
+        isStudyPeriod,
+      });
+      const response = await performQuery<estypes.SearchResponse>(payload);
+      const finalResponse: IAggregationOptions = await formatAggregationResponse(response, defaultFilterOptions);
       return finalResponse;
     } else {
-      const fallbackResolve: IAggregationOptions = filterOptions.reduce((acc, curr) => {
+      const fallbackResolve: IAggregationOptions = defaultFilterOptions.reduce((acc, curr) => {
         acc[curr.key] = [];
         return acc;
       }, {});
@@ -81,10 +88,10 @@ const getFilterOptions = async (
 
 const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
   try {
-    const payload = buildSearchQuery({ docId });
-    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-    const responseData = response?.data;
-    if (responseData?.hits?.total?.value) {
+    const payload = generateSearchQuery({ docId });
+    const response = await performQuery<estypes.SearchResponse>(payload);
+    const responseData = response;
+    if (responseData?.hits?.total?.valueOf) {
       const finalResponse: ISearchResults = await formatSearchResponse(responseData, true);
       return finalResponse?.items?.[0] as ISearchItem;
     } else {

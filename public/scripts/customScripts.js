@@ -210,7 +210,7 @@ const handleSearchJourney = (event) => {
 };
 
 const hydrateTodayDate = (checked) => {
-  let sessionData = getStorageData();
+  const sessionData = getStorageData();
   if (!sessionData.fields.hasOwnProperty('date')) {
     sessionData.fields['date'] = {};
   }
@@ -256,7 +256,7 @@ const attachTodayDateEventListener = () => {
 
 const todayCheckboxStatus = () => {
   if (todayCheckbox && todayCheckbox.checked) {
-    let sessionData = getStorageData();
+    const sessionData = getStorageData();
     if (sessionData.fields.hasOwnProperty('date')) {
       const { tdd, tmd, tdy } = sessionData.fields['date'];
       const currentDate = new Date();

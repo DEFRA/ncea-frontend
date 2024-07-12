@@ -18,6 +18,12 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/config/elasticSearchClient', () => ({
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
+}));
+
 let serverRequest;
 
 const invokeRoute = async (route, payload, method = 'post') => {
@@ -351,7 +357,7 @@ describe('Results Screen', () => {
           document
             ?.querySelector('.banner-container__heading-xl')
             ?.textContent?.trim(),
-        ).toBe('Natural Capital Search Service');
+        ).toBe('Find Natural Capital data');
       });
     });
 
@@ -524,7 +530,7 @@ describe('Results Screen', () => {
       it('should render the questionnaire search container heading', async () => {
         expect(
           document
-            ?.querySelectorAll('.govuk-heading-m')?.[1]
+            ?.querySelectorAll('.govuk-heading-m')?.[2]
             ?.textContent?.trim(),
         ).toBe('Questionnaire search');
       });

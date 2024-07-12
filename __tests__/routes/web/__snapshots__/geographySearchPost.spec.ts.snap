@@ -35,6 +35,100 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
+    <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button" id="accept_button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button" id="reject_button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="accept_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="reject_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -42,31 +136,11 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
     
 
     
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id= "
-height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <script>
+    var gtmIdValue = "GTM-PZJ4WBG7"
+  </script>
+  <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer'
-            ? '&l=' + l
-            : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f
-          .parentNode
-          .insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', '');
-    </script>
-    <!-- End Google Tag Manager -->
 
     <!--Will be removed once Defra GA accounts been created -->
 
@@ -104,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -128,7 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -150,7 +224,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>
-      <h1 class="govuk-heading-m">Draw area on map</h1>
+      <h1 class="govuk-heading-m coordinate-sub-heading">Draw area on map</h1>
       <span class="govuk-caption-m">Click and drag to draw a boundary box. This will auto-populate the geographical coordinate box.</span>
     </div>
   </div>
@@ -276,7 +350,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">
+<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons" data-module="govuk-button">
   Previous question
 </a>
 
@@ -289,7 +363,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<a href="/search?" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
+<a href="/search?" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons" data-module="govuk-button" data-do-storage-skip="">
   Skip question
 </a>
 
@@ -300,7 +374,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-right-0" data-module="govuk-button" data-to-disable="" data-next-question="">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-right-0 coordinate-buttons" data-module="govuk-button" data-to-disable="" data-next-question="">
   Show results
 </button>
 
@@ -337,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>

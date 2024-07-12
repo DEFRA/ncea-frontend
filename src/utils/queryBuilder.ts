@@ -1,113 +1,103 @@
+import { estypes } from '@elastic/elasticsearch';
 import { generateDateString } from './generateDateString';
-import { mapResultMaxCount } from './constants';
 import {
-  IAggregateClassifierQuery,
-  IAggregationQuery,
-  IBoolQuery,
-  ICustomSortScript,
-  IFieldExist,
+  IDateValues,
   IGeoCoordinates,
-  IGeoShapeQuery,
-  IMatchQuery,
-  IQuery,
-  IQueryString,
-  IRangeQuery,
+  IGeoShapeBlock,
   ISearchBuilderPayload,
-  ISearchFields,
-  ISearchFilter,
   ISearchPayload,
   IShapeCoordinates,
-  ISortQuery,
-  IFilterQuery,
 } from '../interfaces/queryBuilder.interface';
-import { IFilterOption, IFilterOptions } from '../interfaces/searchPayload.interface';
+import { mapResultMaxCount, resourceTypeFilterField, studyPeriodFilterField } from './constants';
 
-const buildKeywordSearchQuery = (searchTerm: string): IQueryString => {
-  const queryString: IQueryString = {
+const _generateQueryStringBlock = (
+  searchTerm: string,
+  fieldsToSearch: string[] = [],
+): estypes.QueryDslQueryContainer => {
+  return {
     query_string: {
       query: searchTerm,
       default_operator: 'AND',
+      ...(fieldsToSearch.length > 0 && { fields: fieldsToSearch }),
     },
   };
-  return queryString;
 };
 
-const buildSearchQueryWithFields = (searchTerm: string | string[], fieldsToSearch: string[]): IBoolQuery => {
-  const matchQueryKey = Array.isArray(searchTerm) ? 'terms' : 'match';
-  const matchQueries: IMatchQuery[] = fieldsToSearch.map((field: string) => ({
-    [matchQueryKey]: {
-      [field]: searchTerm,
-    },
-  })) as IMatchQuery[];
-
-  const matchShould: IBoolQuery = {
-    bool: {
-      should: matchQueries,
-      minimum_should_match: 1,
+const _generateTermsBlock = (field: string, values: string[]): estypes.QueryDslQueryContainer => {
+  return {
+    terms: {
+      [field]: values,
     },
   };
-  return matchShould;
 };
 
-const buildDateQuery = (fields: ISearchFields, isToDate: boolean = false): IRangeQuery => {
-  const key: string = isToDate ? 'resourceTemporalExtentDetails.end.date' : 'resourceTemporalExtentDetails.start.date';
-  const operatorKey: string = isToDate ? 'lte' : 'gte';
-  const yearKey = isToDate ? 'tdy' : 'fdy';
-  const monthKey = isToDate ? 'tdm' : 'fdm';
-  const dateKey = isToDate ? 'tdd' : 'fdd';
-  const dateValue: string = generateDateString(
+const _generateFieldExistsBlock = (field: string): estypes.QueryDslQueryContainer => {
+  return {
+    exists: { field },
+  };
+};
+
+const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContainer[] => {
+  const startDateValue: string = generateDateString({
+    year: parseInt(fields.fdy!),
+    month: parseInt(fields.fdm ?? ''),
+    day: parseInt(fields.fdd ?? ''),
+  });
+  const toDateValue: string = generateDateString(
     {
-      year: parseInt(fields.date ? (fields.date?.[yearKey] as string) : ''),
-      month: parseInt(fields.date ? (fields.date?.[monthKey] as string) : ''),
-      day: parseInt(fields.date ? (fields.date?.[dateKey] as string) : ''),
+      year: parseInt(fields.tdy!),
+      month: parseInt(fields.tdm ?? ''),
+      day: parseInt(fields.tdd ?? ''),
     },
-    isToDate,
+    true,
   );
 
-  const rangeQuery: IRangeQuery = {
-    range: {
-      [key]: {
-        [operatorKey]: dateValue,
-        format: 'yyyy-MM-dd',
+  const rangeBlock: estypes.QueryDslQueryContainer[] = [
+    {
+      bool: {
+        should: [
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { gte: startDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { lte: toDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: toDateValue } } },
+              ],
+            },
+          },
+        ],
+        minimum_should_match: 1,
       },
     },
-  };
-  return rangeQuery;
+  ];
+  return rangeBlock;
 };
 
-const buildClassifierFitlerQuery = (fields: ISearchFields): IFilterQuery => {};
-
-const buildCustomSortScriptForStudyPeriod = (): ISortQuery => {
-  const customScript: ICustomSortScript = {
-    type: 'number',
-    script: {
-      source:
-        "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
-    },
-    order: 'desc',
-  };
-  const sortQuery: ISortQuery = {
-    _script: customScript,
-  };
-  return sortQuery;
-};
-
-const buildBestScoreSort = (): ISortQuery => ({
-  _score: {
-    order: 'desc',
-  },
-});
-
-const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => {
+const _generateGeoShapeBlock = (geoCoordinates: IGeoCoordinates): estypes.QueryDslQueryContainer => {
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
-      [parseFloat(geoCoordinates.wst), parseFloat(geoCoordinates.nth)],
-      [parseFloat(geoCoordinates.est), parseFloat(geoCoordinates.sth)],
+      [parseFloat(geoCoordinates.wst!), parseFloat(geoCoordinates.nth!)],
+      [parseFloat(geoCoordinates.est!), parseFloat(geoCoordinates.sth!)],
     ],
   };
 
-  const geoShapeQuery: IGeoShapeQuery = {
+  const geoShapeBlock: IGeoShapeBlock = {
     geo_shape: {
       geom: {
         shape: geoShape,
@@ -115,209 +105,205 @@ const buildGeoShapeQuery = (geoCoordinates: IGeoCoordinates): IGeoShapeQuery => 
       },
     },
   };
-  return geoShapeQuery;
+  return geoShapeBlock as estypes.QueryDslQueryContainer;
 };
 
-const buildSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): IQuery => {
-  const {
-    searchFieldsObject,
-    fieldsToSearch = [],
-    isCount = false,
-    ignoreAggregation = false,
-    filterOptions = [],
-    docId = '',
-  } = searchBuilderPayload;
-  const boolQuery: IBoolQuery = {
-    bool: {
-      must: [],
+const buildCustomSortScriptForStudyPeriod = (orderType): estypes.Sort => {
+  const customScript: estypes.ScriptSort = {
+    type: 'number',
+    script: {
+      source:
+        orderType === 'asc'
+          ? "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; }} } return millis;"
+          : "def millis = 0; if (params._source.containsKey('resourceTemporalExtentDateRange')) { for (date in params._source.resourceTemporalExtentDateRange) { if (date.containsKey('lte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['lte']); millis = parsedDate.getTime(); break; } if (date.containsKey('gte')) { def dateFormat = new java.text.SimpleDateFormat('yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''); def parsedDate = dateFormat.parse(date['gte']); millis = parsedDate.getTime(); break; } } } return millis;",
     },
+    order: orderType,
   };
-  const {
-    fields,
-    sort,
-    rowsPerPage,
-    page,
-    filters,
-    fieldsExist = [],
-    requiredFields = [],
-  } = (searchFieldsObject as ISearchPayload) ?? {};
+  const sortBlock: estypes.SortOptions = {
+    _script: customScript,
+  };
+  return sortBlock;
+};
 
-  addKeywordSearchQuery(fields, fieldsToSearch, boolQuery);
-  addFilterOptionsQuery(filters, isCount, ignoreAggregation, boolQuery);
-  addDateSearchQuery(fields, boolQuery);
-  addCoordinateSearchQuery(fields, boolQuery);
-  addClassifierSearchQuery(fields, boolQuery);
-  !Object.keys(searchFieldsObject ?? {}).length && docId && addDetailsQuery(docId, boolQuery);
+const _buildBestScoreSort = (): estypes.Sort => ({
+  _score: {
+    order: 'desc',
+  },
+});
 
-  const isSort = sort && !isCount;
-  const isAggregation = !ignoreAggregation && !isCount && filterOptions.length > 0;
-  fieldsExist.length > 0 && addFieldExistsQuery(boolQuery, fieldsExist);
+const _generateSortBlock = (sort: string): estypes.Sort => {
+  const orderType = sort === 'oldest_study_period' ? 'asc' : 'desc';
+  const sortBlock: estypes.Sort =
+    sort === 'oldest_study_period' || sort === 'newest_study_period'
+      ? buildCustomSortScriptForStudyPeriod(orderType)
+      : _buildBestScoreSort();
+  return sortBlock;
+};
 
-  const finalQuery: IQuery = {
-    query: boolQuery,
-    ...(isSort && { sort: [] }),
-    ...(isAggregation && { aggs: {} }),
-    ...(!isCount && { size: isAggregation ? 0 : rowsPerPage }),
-    ...(page &&
+const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const { searchFieldsObject, isCount = false, isAggregation = false, docId = '' } = searchBuilderPayload;
+  const { sort, rowsPerPage, page, requiredFields = [] } = (searchFieldsObject as ISearchPayload) ?? {};
+
+  const isSort: boolean = sort !== '' && !isCount && docId === '' && !isAggregation;
+  const sortBlock: estypes.Sort = isSort ? _generateSortBlock(sort) : '';
+
+  return {
+    ...(isSort && { sort: sortBlock }),
+    ...(!isCount && docId === '' && { size: isAggregation ? 0 : rowsPerPage }),
+    ...(!isCount &&
+      !isAggregation &&
+      docId === '' &&
+      page &&
       rowsPerPage !== mapResultMaxCount && {
         from: page === 1 ? 0 : (page - 1) * rowsPerPage,
       }),
-    ...(!isCount && { _source: requiredFields ?? [] }),
-  };
-
-  isSort && addSortQuery(finalQuery, sort, isCount);
-  if (isAggregation) {
-    const aggregateQuery: IAggregationQuery = generateAggregationQuery(filterOptions);
-    finalQuery.aggs = { ...aggregateQuery };
-  }
-
-  return finalQuery;
+    ...(!isCount && docId === '' && !isAggregation && { _source: requiredFields }),
+  } as estypes.SearchRequest;
 };
 
-const addFieldExistsQuery = (boolQuery: IBoolQuery, fieldsExist: string[]): void => {
-  fieldsExist.forEach((field: string) => {
-    const fieldExists: IFieldExist = { exists: { field } };
-    boolQuery.bool.must?.push(fieldExists);
-  });
-};
+const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const { searchFieldsObject, fieldsToSearch = [], docId = '' } = searchBuilderPayload;
+  const { fields, fieldsExist = [] } = (searchFieldsObject as ISearchPayload) ?? {};
 
-const addKeywordSearchQuery = (fields: ISearchFields, fieldsToSearch: string[], boolQuery: IBoolQuery): void => {
-  if (fields?.keyword) {
-    const searchTerm: string = fields?.keyword?.q as string;
-    let queryString: IQueryString | IBoolQuery;
-    if (fieldsToSearch.length) {
-      queryString = buildSearchQueryWithFields(searchTerm, fieldsToSearch);
-    } else {
-      queryString = buildKeywordSearchQuery(searchTerm);
-    }
-    boolQuery.bool.must?.push(queryString);
-  }
-};
+  const searchTerm: string = fields?.keyword?.q as string;
 
-const addFilterOptionsQuery = (
-  filterOptions: ISearchFilter,
-  isCount: boolean,
-  ignoreAggregation: boolean,
-  boolQuery: IBoolQuery,
-): void => {
-  if (filterOptions && Object.keys(filterOptions).length && !isCount && ignoreAggregation) {
-    const filteredOptions = Object.keys(filterOptions).filter((key) => filterOptions[key] !== 'all') ?? [];
-
-    filteredOptions.forEach((key) => {
-      if (key.includes('resourceType')) {
-        const matchShould: IBoolQuery = buildSearchQueryWithFields(filterOptions[key] as string | string[], [key]);
-        boolQuery.bool.must?.push(matchShould);
-      }
-      if (key.includes('Date')) {
-        const startDateRangeQuery: IRangeQuery = buildDateQuery(filterOptions[key] as ISearchFields);
-        boolQuery.bool.must?.push(startDateRangeQuery);
-        const endDateRangeQuery: IRangeQuery = buildDateQuery(filterOptions[key] as ISearchFields, true);
-        boolQuery.bool.must?.push(endDateRangeQuery);
-      }
+  const mustBlock: estypes.QueryDslQueryContainer[] = docId ? [_generateQueryStringBlock(docId, ['_id'])] : [];
+  if (searchTerm && docId === '') mustBlock.push(_generateQueryStringBlock(searchTerm, fieldsToSearch));
+  if (fieldsExist.length > 0 && docId === '') {
+    fieldsExist.forEach((field: string) => {
+      mustBlock.push(_generateFieldExistsBlock(field));
     });
   }
-};
 
-const addClassifierSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
-  if (fields?.classify?.level && fields?.classify?.parent) {
-    const classifierFilterQuery: IFilterQuery = buildClassifierFitlerQuery(fields);
-    boolQuery.bool.must?.push(classifierFilterQuery);
-  }
-};
-
-const addDateSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
-  if (fields?.date?.fdy && fields?.date?.tdy) {
-    const startDateRangeQuery: IRangeQuery = buildDateQuery(fields);
-    boolQuery.bool.must?.push(startDateRangeQuery);
-    const endDateRangeQuery: IRangeQuery = buildDateQuery(fields, true);
-    boolQuery.bool.must?.push(endDateRangeQuery);
-  }
-};
-
-const addCoordinateSearchQuery = (fields: ISearchFields, boolQuery: IBoolQuery): void => {
   const geoCoordinates: IGeoCoordinates = fields?.extent as IGeoCoordinates;
+  const { nth = '', sth = '', est = '', wst = '' } = geoCoordinates ?? {};
+  const filterBlock: estypes.QueryDslQueryContainer[] =
+    nth && sth && est && wst ? [_generateGeoShapeBlock(geoCoordinates)] : [];
 
-  if (geoCoordinates?.nth && geoCoordinates?.sth && geoCoordinates?.est && geoCoordinates?.wst) {
-    const geoShapeQuery: IGeoShapeQuery = buildGeoShapeQuery(geoCoordinates);
-    boolQuery.bool.must?.push(geoShapeQuery);
-  }
+  return {
+    query: {
+      bool: {
+        ...(mustBlock.length && { must: mustBlock }),
+        ...(filterBlock.length && { filter: filterBlock }),
+      },
+    },
+    ..._generateOtherQueryProperties(searchBuilderPayload),
+  };
 };
 
-const addSortQuery = (finalQuery: IQuery, sort: string, isCount: boolean): void => {
-  if (sort && !isCount) {
-    const sortQuery: ISortQuery =
-      sort === 'recent_study' ? buildCustomSortScriptForStudyPeriod() : buildBestScoreSort();
-    finalQuery.sort?.push(sortQuery);
-  }
-};
+const _generateDateRangeQuery = (
+  searchBuilderPayload: ISearchBuilderPayload,
+  queryPayload: estypes.SearchRequest,
+): estypes.QueryDslQueryContainer[] => {
+  const { searchFieldsObject } = searchBuilderPayload;
+  const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
 
-const generateAggregationQuery = (filteredOptions: IFilterOptions): IAggregationQuery => {
-  const aggregationQuery: IAggregationQuery = {};
-  filteredOptions.forEach((filterOption: IFilterOption) => {
-    const { key, field, isTerm, isDate, order } = filterOption;
-    if (isTerm) {
-      const fieldValue: string = field as string;
-      aggregationQuery[key] = {
-        terms: {
-          field: fieldValue,
-          size: mapResultMaxCount,
-          ...(order && { order: { _key: order } }),
-        },
-      };
-    } else if (isDate) {
-      const fieldValues: string[] = field as string[];
-      fieldValues.forEach((fieldValue: string) => {
-        const [maxMinKey, field] = fieldValue.split('_');
-        aggregationQuery[`${maxMinKey}-${key}`] = {
-          [maxMinKey!]: {
-            script: {
-              source: `if (doc['${field}'].size() > 0) { doc['${field}'].value.year } else { null }`,
-            },
-          },
-        };
-      });
-    }
-  });
-  return aggregationQuery;
-};
-
-const addDetailsQuery = (docId: string, boolQuery: IBoolQuery): void => {
-  if (docId) {
-    const queryString: IBoolQuery = buildSearchQueryWithFields(docId, ['_id']);
-    boolQuery.bool.must?.push(queryString);
-  }
-};
-
-const classifierAggregationQuery = (
-  filters: Record<string, string | string[]>[],
-  uniqueField: string,
-): IAggregateClassifierQuery => {
-  const mustFilter: Record<string, Record<string, string | string[]>>[] = filters.map((filter) => {
-    return {
-      term: filter,
+  const filterBlock: estypes.QueryDslQueryContainer[] =
+    (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
+  const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
+  if (studyPeriodFilter?.fdy && studyPeriodFilter?.tdy) {
+    const newFields: IDateValues = {
+      fdy: studyPeriodFilter?.fdy,
+      tdy: studyPeriodFilter?.tdy,
     };
-  });
-  const classifierQuery: IAggregateClassifierQuery = {
-    size: 0,
-    aggs: {
-      classifier_level: {
-        filter: {
-          bool: {
-            must: mustFilter,
-          },
-        },
-        aggs: {
-          classifier_values: {
-            terms: {
-              field: uniqueField,
-            },
-          },
-        },
+    filterBlock.push(..._generateRangeBlock(newFields));
+  } else if (fields?.date?.fdy && fields?.date?.tdy) {
+    filterBlock.push(..._generateRangeBlock(fields.date));
+  }
+  return filterBlock;
+};
+
+const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
+  const { searchFieldsObject, docId = '' } = searchBuilderPayload;
+  const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
+  if (docId === '') {
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    const mustBlock: estypes.QueryDslQueryContainer[] =
+      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
+
+    const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
+    if (resourceTypeFilters.length > 0) {
+      mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
+    }
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        must: [...mustBlock],
+        filter: [...filterBlock],
+      };
+    }
+  }
+  return queryPayload;
+};
+
+const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
+  const { searchFieldsObject, docId = '' } = searchBuilderPayload;
+  const { fields, filters } = searchFieldsObject as ISearchPayload;
+  if (docId === '') {
+    const mustBlock: estypes.QueryDslQueryContainer[] =
+      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
+    const filterBlock: estypes.QueryDslQueryContainer[] =
+      (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
+    const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
+    if (fields?.date?.fdy && fields?.date?.tdy) {
+      filterBlock.push(..._generateRangeBlock(fields.date));
+    }
+    if (resourceTypeFilters.length > 0) {
+      mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
+    }
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        ...queryPayload.query.bool,
+        filter: [...filterBlock],
+        must: [...mustBlock],
+      };
+    }
+  }
+  queryPayload.aggs = {
+    min_year: {
+      min: {
+        field: 'resourceTemporalExtentDetails.start.date',
+      },
+    },
+    max_year: {
+      max: {
+        field: 'resourceTemporalExtentDetails.end.date',
       },
     },
   };
-
-  return classifierQuery;
+  return queryPayload;
 };
 
-export { buildSearchQuery, buildCustomSortScriptForStudyPeriod, classifierAggregationQuery };
+const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
+  const { docId = '' } = searchBuilderPayload;
+  if (docId === '') {
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        ...queryPayload.query.bool,
+        filter: [...filterBlock],
+      };
+    }
+  }
+  queryPayload.aggs = {
+    unique_resource_types: {
+      terms: {
+        field: 'resourceType',
+      },
+    },
+  };
+  return queryPayload;
+};
+
+const generateFilterQuery = (
+  searchBuilderPayload: ISearchBuilderPayload,
+  { isStudyPeriod = false },
+): estypes.SearchRequest => {
+  return isStudyPeriod
+    ? _generateStudyPeriodFilterQuery(searchBuilderPayload)
+    : _generateResourceTypeFilterQuery(searchBuilderPayload);
+};
+
+export { generateSearchQuery, generateFilterQuery, buildCustomSortScriptForStudyPeriod };

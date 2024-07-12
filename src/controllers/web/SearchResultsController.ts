@@ -9,19 +9,22 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import {
+  deleteQueryParams,
+  generateQueryBuilderPayload,
+  readQueryParams,
+  upsertQueryParams,
+} from '../../utils/queryStringHelper';
+import {
   formIds,
   mapResultMaxCount,
   pageTitles,
   queryParamKeys,
   requiredFieldsForMap,
+  startYearRangeKey,
+  toYearRangeKey,
+  uniqueResourceTypesKey,
   webRoutePaths,
 } from '../../utils/constants';
-import {
-  generateCountPayload,
-  generateQueryBuilderPayload,
-  readQueryParams,
-  upsertQueryParams,
-} from '../../utils/queryStringHelper';
 import { getDocumentDetails, getFilterOptions, getSearchResults } from '../../services/handlers/searchApi';
 import { processFilterOptions, processSortOptions } from '../../utils/processFilterRSortOptions';
 
@@ -29,13 +32,29 @@ const SearchResultsController = {
   renderSearchResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const { quickSearchFID } = formIds;
     const journey: string = readQueryParams(request.query, queryParamKeys.journey);
+    const studyPeriodFromYear: string = readQueryParams(request.query, queryParamKeys.startYear);
+    const studyPeriodToYear: string = readQueryParams(request.query, queryParamKeys.toYear);
+    const hasStudyPeriodFilterApplied: boolean = !!studyPeriodFromYear.length && !!studyPeriodToYear.length;
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
-    const filterPayload: ISearchPayload = generateCountPayload(request.query);
     const { rowsPerPage, page } = payload;
     const isQuickSearchJourney = journey === 'qs';
     try {
-      const searchResults: ISearchResults = await getSearchResults(payload);
-      const filterOptions: IAggregationOptions = await getFilterOptions(filterPayload);
+      const searchResults: ISearchResults = await getSearchResults(payload, false, isQuickSearchJourney);
+      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(
+        payload,
+        { isStudyPeriod: true },
+        isQuickSearchJourney,
+      );
+      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(
+        payload,
+        { isStudyPeriod: false },
+        isQuickSearchJourney,
+      );
+      const filterOptions: IAggregationOptions = {
+        [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
+        [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
+        [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
+      };
       const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage, request.query);
       const queryString = readQueryParams(request.query);
       const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
@@ -43,6 +62,11 @@ const SearchResultsController = {
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
       const processedSortOptions = await processSortOptions(request.query);
+      const resetStudyPeriodQueryString: string = deleteQueryParams(request.query, [
+        queryParamKeys.startYear,
+        queryParamKeys.toYear,
+      ]);
+      const resetStudyPeriodLink: string = `${webRoutePaths.results}?${resetStudyPeriodQueryString}`;
       return response.view('screens/results/template', {
         pageTitle: pageTitles.results,
         quickSearchFID,
@@ -58,6 +82,8 @@ const SearchResultsController = {
         dateSearchPath: webRoutePaths.guidedDateSearch,
         filterInstance: 'search_results',
         queryString,
+        hasStudyPeriodFilterApplied,
+        resetStudyPeriodLink,
       });
     } catch (error) {
       return response.view('screens/results/template', {
@@ -95,7 +121,9 @@ const SearchResultsController = {
     return response.view(view, context).code(400).takeover();
   },
   getMapResultsHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const journey: string = readQueryParams(request.query, queryParamKeys.journey);
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
+    const isQuickSearchJourney = journey === 'qs';
     try {
       const mapPayload: ISearchPayload = {
         ...payload,
@@ -103,14 +131,16 @@ const SearchResultsController = {
         fieldsExist: ['geom'],
         requiredFields: requiredFieldsForMap,
       };
-      const searchMapResults: ISearchResults = await getSearchResults(mapPayload, true);
+      const searchMapResults: ISearchResults = await getSearchResults(mapPayload, true, isQuickSearchJourney);
       return response.response(searchMapResults).header('Content-Type', 'application/json');
     } catch (error) {
       return response.response({ error: 'An error occurred while processing your request' }).code(500);
     }
   },
   getMapFiltersHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const filterPayload: ISearchPayload = generateCountPayload(request.query);
+    const filterPayload: ISearchPayload = generateQueryBuilderPayload(request.query);
+    const journey: string = readQueryParams(request.query, queryParamKeys.journey);
+    const isQuickSearchJourney = journey === 'qs';
     try {
       const mapPayload: ISearchPayload = {
         ...filterPayload,
@@ -118,7 +148,23 @@ const SearchResultsController = {
         fieldsExist: ['geom'],
         requiredFields: requiredFieldsForMap,
       };
-      const filterOptions: IAggregationOptions = await getFilterOptions(mapPayload);
+      const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(
+        mapPayload,
+        { isStudyPeriod: true },
+        isQuickSearchJourney,
+      );
+      const resourceTypeFilterOptions: IAggregationOptions = await getFilterOptions(
+        mapPayload,
+        {
+          isStudyPeriod: false,
+        },
+        isQuickSearchJourney,
+      );
+      const filterOptions: IAggregationOptions = {
+        [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
+        [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
+        [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
+      };
       const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
       return response.view('partials/results/filters', {
         filterOptions: processedFilterOptions,

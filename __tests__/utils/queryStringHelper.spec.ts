@@ -9,6 +9,7 @@ import {
   generateCountPayload,
   generateQueryBuilderFields,
   generateQueryBuilderPayload,
+  deleteQueryParams,
 } from '../../src/utils/queryStringHelper';
 
 describe('queryStringHelper functions', () => {
@@ -59,6 +60,26 @@ describe('queryStringHelper functions', () => {
       const queryParamsObject = { t: '' };
       const result = upsertQueryParams(requestQuery, queryParamsObject, false);
       expect(result).toBe('q=oldQuery');
+    });
+  });
+
+  describe('deleteQueryParams', () => {
+    test('should delete query parameters if exists', () => {
+      const requestQuery = { sy: '2002', q: 'query', pg: '1' };
+      const result = deleteQueryParams(requestQuery, ['sy']);
+      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match');
+    });
+
+    test('should delete multiple query parameters if exists', () => {
+      const requestQuery = { sy: '2002', ty: '2023', q: 'query', pg: '1' };
+      const result = deleteQueryParams(requestQuery, ['sy', 'ty']);
+      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match');
+    });
+
+    test('should delete query parameters if exists and return without default parameters', () => {
+      const requestQuery = { sy: '2002', q: 'query' };
+      const result = deleteQueryParams(requestQuery, ['sy'], false);
+      expect(result).toBe('q=query');
     });
   });
 
@@ -319,7 +340,7 @@ describe('queryStringHelper functions', () => {
         page: 1,
         rowsPerPage: 20,
         filters: {
-          resourceType: ['article'],
+          resourceTypeFilter: ['article'],
         },
       });
     });
@@ -365,7 +386,7 @@ describe('queryStringHelper functions', () => {
         page: 2,
         rowsPerPage: 10,
         filters: {
-          resourceType: ['article'],
+          resourceTypeFilter: ['article'],
         },
       });
     });

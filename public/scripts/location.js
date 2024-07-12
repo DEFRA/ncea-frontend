@@ -29,9 +29,9 @@ const filterBlockId = 'map-filter-block';
 const boundingBoxCheckbox = document.getElementById('bounding-box');
 const extentSearchZoomLevel = 5;
 const responseSuccessStatusCode = 200;
-const marketYPoint = 46;
-const highlightedMarkerIcon = '/assets/images/highlight-blue-marker-icon.png';
-const markerIcon = '/assets/images/blue-marker-icon.svg';
+const highlightedMarkerIcon = '/assets/images/highlight-marker-icon.svg';
+const hoverMarkerIcon = '/assets/images/hover-marker-icon.svg';
+const markerIcon = '/assets/images/marker-icon.svg';
 const mapInfoBlock = document.getElementById('map-info');
 const contentMaxChar = 500;
 let selectedRecord = '';
@@ -41,11 +41,25 @@ const defaultFilterOptions = {
   toYear: '',
   resourceType: [],
 };
-const appliedFilterOptions = { ...defaultFilterOptions };
+let appliedFilterOptions = { ...defaultFilterOptions };
 const markerOverlays = [];
 const defaultMapProjection = 'EPSG:3857';
 const extentTransformProjection = 'EPSG:4326';
 let firstMove = true;
+const resetControl = document.getElementById('defra-map-reset');
+const markerOverlayOffsetX = -15;
+const markerOverlayOffsetY = -50;
+const maxMarkerAllowed = 9;
+const leftArrowKey = 37;
+const upArrowKey = 38;
+const rightArrowKey = 39;
+const downArrowKey = 40;
+let resetData = false;
+let selectedFeatureId = '';
+let selectedBoundingBox = '';
+let hasResourceListener = false;
+const maxCountForBoundingBoxInfo = 50;
+const polygonFeatureData = [];
 
 const drawStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
@@ -149,6 +163,19 @@ function mapEventListener() {
     map.getTargetElement().style.cursor = isMarkerFeature(feature)
       ? 'pointer'
       : '';
+    markerSource.getFeatures().forEach(function (feature) {
+      if (
+        isMarkerFeature(feature) &&
+        map.getFeaturesAtPixel(pixel).includes(feature) &&
+        selectedFeatureId !== feature.get('id')
+      ) {
+        feature.setStyle(getMarkerStyle(hoverMarkerIcon));
+      } else if (selectedFeatureId === feature.get('id')) {
+        feature.setStyle(getHighlighterMarkerStyle(highlightedMarkerIcon));
+      } else {
+        feature.setStyle(getMarkerStyle(markerIcon));
+      }
+    });
   });
   map.on('click', (event) => {
     const pixel = event.pixel;
@@ -161,7 +188,9 @@ function mapEventListener() {
     if (feature && isMarkerFeature(feature)) {
       const recordId = feature.get('id');
       const boundingBox = feature.get('boundingBox');
-      feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
+      feature.setStyle(getHighlighterMarkerStyle(highlightedMarkerIcon));
+      selectedFeatureId = recordId;
+      selectedBoundingBox = boundingBox;
       showInformationPopup(recordId, boundingBox);
     }
   });
@@ -189,6 +218,8 @@ function truncateString(inputString, maxLength) {
 
 function showInformationPopup(recordId, boundingBox) {
   selectedRecord = mapResults.find((item) => item?.id === recordId);
+  infoListener();
+  boundingBoxListener(boundingBoxCheckbox.checked);
   const titleElement = document.getElementById('info-title');
   const publishedBlock = document.getElementById('info-published-block');
   const publishedByElement = document.getElementById('info-published-by');
@@ -231,7 +262,10 @@ function closeInfoPopup() {
     publishedByElement.textContent = '';
     contentElement.textContent = '';
   }
+  selectedFeatureId = '';
+  selectedBoundingBox = '';
   resetFeatureStyle();
+  boundingBoxListener(boundingBoxCheckbox.checked);
 }
 
 function calculateCoordinates() {
@@ -274,24 +308,17 @@ vectorSource.on('change', () => {
 });
 
 const toggleClearSelectionBlock = () => {
-  const north = document.getElementById('north');
-  const south = document.getElementById('south');
-  const east = document.getElementById('east');
-  const west = document.getElementById('west');
   const clearSelection = document.getElementById('clear-map-selection');
-  if (
-    north &&
-    north.value &&
-    south &&
-    south.value &&
-    east &&
-    east.value &&
-    west &&
-    west.value
-  ) {
-    if (clearSelection) clearSelection.style.display = 'block';
-  } else {
-    if (clearSelection) clearSelection.style.display = 'none';
+  if (clearSelection) {
+    const north = document.getElementById('north')?.value;
+    const south = document.getElementById('south')?.value;
+    const east = document.getElementById('east')?.value;
+    const west = document.getElementById('west')?.value;
+    if (north && south && east && west) {
+      clearSelection.style.display = 'block';
+    } else {
+      clearSelection.style.display = 'none';
+    }
   }
 };
 
@@ -350,7 +377,7 @@ function calculatePolygonFromCoordinates() {
   addPolygon({ north, south, east, west }, completedStyle);
 }
 
-function addPolygon(coordinates, style) {
+function addPolygon(coordinates, style, addToVector = true) {
   const { north, south, east, west } = coordinates;
   if (north && south && east && west) {
     const extent = ol.proj.transformExtent(
@@ -370,7 +397,10 @@ function addPolygon(coordinates, style) {
       ]),
     });
     polygonFeature.setStyle(style);
-    vectorSource.addFeature(polygonFeature);
+    addToVector && vectorSource.addFeature(polygonFeature);
+    if (!addToVector) {
+      polygonFeatureData.push(polygonFeature);
+    }
     return polygonFeature;
   }
   return null;
@@ -397,12 +427,20 @@ function disableInteractions() {
 const getMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
-      anchor: [0.5, marketYPoint],
-      anchorXUnits: 'fraction',
-      anchorYUnits: 'pixels',
       src: iconPath,
       scale: 1.0,
     }),
+  });
+};
+
+const getHighlighterMarkerStyle = (iconPath) => {
+  return new ol.style.Style({
+    image: new ol.style.Icon({
+      src: iconPath,
+      anchor: [0.5,1],
+      scale: 1.0,
+    }),
+    zIndex: 10
   });
 };
 
@@ -462,7 +500,7 @@ function resetMap() {
   map.getView().setZoom(initialZoom);
   map.getView().animate({ center: initialCenter, duration: 1000 });
   viewChanged = false;
-  const resetControl = document.getElementById('defra-map-reset');
+  firstMove = true;
   if (resetControl) {
     resetControl.style.display = 'none';
   }
@@ -474,6 +512,12 @@ function resetMap() {
 function exitMap() {
   resetMap();
   resetFilterData();
+  if (resetData) {
+    appliedFilterOptions = { ...defaultFilterOptions };
+    invokeMapResults(true, true);
+    invokeMapFilters(true);
+    resetData = false;
+  }
 }
 
 function exitMapEventListener() {
@@ -483,29 +527,17 @@ function exitMapEventListener() {
   }
 }
 
-function getFilterRecordIds() {
-  const { startYear, toYear, resourceType } = appliedFilterOptions;
-  const filteredIds = mapResults
-    .filter(
-      (record) =>
-        (!startYear || record.startYear >= startYear) &&
-        (!toYear || record.toYear >= toYear) &&
-        (!resourceType.length ||
-          record?.resourceType?.some((type) => resourceType.includes(type))),
-    )
-    .map((record) => record.id);
-  return filteredIds;
-}
-
-function drawBoundingBoxWithMarker(doRecenter = true) {
-  const filteredIds = getFilterRecordIds();
-  const records = mapResults.filter((record) =>
-    filteredIds.includes(record.id),
-  );
+function drawBoundingBoxWithMarker(fitToMapExtentFlag, doRecenter = true) {
+  vectorSource.clear();
+  markerSource.clear();
   map.updateSize();
   const centerArray = [];
-  records.forEach((record) => {
-    const boundingBox = addPolygon(record.geographicBoundary, mapResultsStyle);
+  mapResults.forEach((record) => {
+    const boundingBox = addPolygon(
+      record.geographicBoundary,
+      mapResultsStyle,
+      false,
+    );
     placeMarkers(record.geographicCenter, markerIcon, record.id, boundingBox);
 
     const markersArray = record.geographicCenter.split('_');
@@ -531,14 +563,37 @@ function drawBoundingBoxWithMarker(doRecenter = true) {
       map.getView().setZoom(initialZoom);
     }
   }
+  fitToMapExtentFlag && fitMapToExtent();
 }
+
+const boundingBoxListener = (boundingBoxCheckboxState) => {
+  polygonFeatureData.forEach((feature) => {
+    const isFeatureExists = vectorSource
+      .getFeatures()
+      .some(
+        (f) =>
+          f.getGeometry().getCoordinates().toString() ===
+          feature.getGeometry().getCoordinates().toString(),
+      );
+    if (feature !== selectedBoundingBox) {
+      if (boundingBoxCheckboxState) {
+        !isFeatureExists && vectorSource.addFeature(feature);
+        feature.setStyle(mapResultsStyle);
+      } else {
+        isFeatureExists && vectorSource.removeFeature(feature);
+      }
+    } else {
+      !isFeatureExists && vectorSource.addFeature(feature);
+      feature.setStyle(mapResultsHighlightStyle);
+    }
+  });
+};
 
 const attachBoundingBoxToggleListener = () => {
   if (boundingBoxCheckbox) {
     boundingBoxCheckboxChange(false);
-    vectorLayer.setVisible(false);
     boundingBoxCheckbox.addEventListener('change', () => {
-      vectorLayer.setVisible(boundingBoxCheckbox.checked);
+      boundingBoxListener(boundingBoxCheckbox.checked);
     });
   }
 };
@@ -555,13 +610,11 @@ const attachMapResultsFilterCheckboxChangeListener = () => {
         if (checked && index === -1) {
           appliedFilterOptions.resourceType.push(value);
         } else {
-          if (index !== -1) {
-            appliedFilterOptions.resourceType.splice(index, 1);
-          }
+          appliedFilterOptions.resourceType.splice(index, 1);
         }
-        vectorSource.clear();
-        markerSource.clear();
-        drawBoundingBoxWithMarker(false);
+        resetData = true;
+        invokeMapResults(true);
+        invokeMapFilters();
       });
     });
   }
@@ -575,13 +628,13 @@ const updateStudyPeriodFilter = () => {
     appliedFilterOptions.toYear = document.getElementById(
       'map_results-to_year',
     ).value;
-    vectorSource.clear();
-    markerSource.clear();
-    drawBoundingBoxWithMarker(false);
+    resetData = true;
+    invokeMapResults(true);
+    invokeMapFilters();
   }, 100);
 };
 
-const getMapResults = async (path) => {
+const getMapResults = async (path, fitToMapExtentFlag) => {
   const mapResultsButton = document.getElementById(mapResultsButtonId);
   const mapResultsCount = document.getElementById(mapResultsCountId);
   const response = await invokeAjaxCall(path, {}, false, 'GET');
@@ -591,9 +644,20 @@ const getMapResults = async (path) => {
       mapResultsButton.removeAttribute('disabled');
       mapResultsCount.textContent = mapResultsJson.total;
       if (mapResultsJson.total > 0) {
+        const boundingBoxInfo = document.getElementById(
+          'defra-bounding-box-info',
+        );
+        if (
+          boundingBoxInfo &&
+          mapResultsJson.total > maxCountForBoundingBoxInfo
+        ) {
+          boundingBoxInfo.style.display = 'block';
+        } else {
+          boundingBoxInfo.style.display = 'none';
+        }
         mapResults = mapResultsJson.items;
         setTimeout(() => {
-          drawBoundingBoxWithMarker();
+          drawBoundingBoxWithMarker(fitToMapExtentFlag, true);
         }, 100);
         attachBoundingBoxToggleListener();
       } else {
@@ -607,38 +671,110 @@ const getMapResults = async (path) => {
 
 const getMapFilters = async (path) => {
   const response = await invokeAjaxCall(path, {}, false, 'GET');
-  if (response) {
-    if (response.status === responseSuccessStatusCode) {
-      const mapFiltersHtml = await response.text();
-      document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
-      addFilterHeadingClickListeners('map_results');
-      attachStudyPeriodChangeListener('map_results');
-      attachMapResultsFilterCheckboxChangeListener();
-      const mapFilterStartYear = document.getElementById(
-        'map_results-start_year',
-      );
-      const mapFilterToYear = document.getElementById('map_results-to_year');
-      if (mapFilterStartYear && mapFilterToYear) {
-        mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
-        mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
-      }
+  if (response && response?.status === responseSuccessStatusCode) {
+    const mapFiltersHtml = await response.text();
+    document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
+    addFilterHeadingClickListeners('map_results');
+    attachStudyPeriodChangeListener('map_results');
+    attachMapResultsFilterCheckboxChangeListener();
+    const mapFilterStartYear = document.getElementById(
+      'map_results-start_year',
+    );
+    const mapFilterToYear = document.getElementById('map_results-to_year');
+    if (mapFilterStartYear && mapFilterToYear) {
+      mapFilterStartYear.addEventListener('change', updateStudyPeriodFilter);
+      mapFilterToYear.addEventListener('change', updateStudyPeriodFilter);
     }
   }
 };
 
-const invokeMapResults = () => {
-  const fetchResults = document.querySelector('[data-fetch-map-results]');
-  if (fetchResults) {
-    const action = fetchResults.getAttribute(actionDataAttribute);
-    getMapResults(`${action}${window.location.search}`);
+const getPathWithQueryParams = (basePath, needOriginalQueryParams) => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const { startYear, toYear, resourceType } = appliedFilterOptions;
+  if (startYear && toYear && !needOriginalQueryParams) {
+    queryParams.set('sy', startYear);
+    queryParams.set('ty', toYear);
+  }
+  if (resourceType.length > 0 && !needOriginalQueryParams) {
+    queryParams.set('rty', resourceType.join(','));
+  }
+  const queryString = queryParams.size > 0 ? `?${queryParams.toString()}` : '';
+  return `${basePath}${queryString}`;
+};
+
+const checkLatestBrowser = () => {
+  try {
+    eval('const x = (y) => y + 1');
+    return true;
+  } catch (e) {
+    const mapResultsBlock = document.getElementById('map-results-block');
+    if (mapResultsBlock) {
+      mapResultsBlock.classList.add('map-results-block');
+    }
+    const mapResultsButton = document.getElementById(mapResultsButtonId);
+    if (mapResultsButton) {
+      mapResultsButton.style.marginBottom = '10px';
+      mapResultsButton.setAttribute('disabled', true);
+    }
+    const mapUnavailableInfo = document.getElementById(
+      'map-results-unavailable',
+    );
+    if (mapUnavailableInfo) {
+      mapUnavailableInfo.style.display = 'block';
+    }
+    return false;
   }
 };
 
-const invokeMapFilters = () => {
-  const fetchFilters = document.querySelector('[data-fetch-map-filters]');
-  if (fetchFilters) {
-    const action = fetchFilters.getAttribute(actionDataAttribute);
-    getMapFilters(`${action}${window.location.search}`);
+const invokeMapResults = (
+  fitToMapExtentFlag = false,
+  needOriginalQueryParams = false,
+) => {
+  if (checkLatestBrowser()) {
+    const fetchResults = document.querySelector('[data-fetch-map-results]');
+    if (fetchResults) {
+      const action = fetchResults.getAttribute(actionDataAttribute);
+      getMapResults(
+        getPathWithQueryParams(action, needOriginalQueryParams),
+        fitToMapExtentFlag,
+      );
+    }
+  }
+};
+
+const toggleResetStudyPeriodLink = () => {
+  const { startYear, toYear } = appliedFilterOptions;
+  const mapResetFilter = document.getElementById(
+    'reset-map-study-period-filter',
+  );
+  if (mapResetFilter) {
+    mapResetFilter.addEventListener('click', () => {
+      appliedFilterOptions = {
+        ...appliedFilterOptions,
+        startYear: '',
+        toYear: '',
+      };
+      invokeMapFilters(true);
+      invokeMapResults(true, true);
+    });
+    if (startYear && toYear) {
+      mapResetFilter.style.display = 'block';
+    } else {
+      mapResetFilter.style.display = 'none';
+    }
+  }
+};
+
+const invokeMapFilters = async (needOriginalQueryParams = false) => {
+  if (checkLatestBrowser()) {
+    const fetchFilters = document.querySelector('[data-fetch-map-filters]');
+    if (fetchFilters) {
+      const action = fetchFilters.getAttribute(actionDataAttribute);
+      await getMapFilters(
+        getPathWithQueryParams(action, needOriginalQueryParams),
+      );
+      toggleResetStudyPeriodLink();
+    }
   }
 };
 
@@ -656,18 +792,24 @@ function createTooltipOverlay(index) {
   tooltip.innerHTML = (index + 1).toString();
   tooltip.style.position = 'absolute';
   tooltip.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-  tooltip.style.padding = '4px 8px';
-  tooltip.style.borderRadius = '2px';
+  tooltip.style.padding = '4px 4px';
+  tooltip.style.borderRadius = '7px';
   tooltip.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
   tooltip.style.pointerEvents = 'none';
-  tooltip.style.border = '2px solid #000';
+  tooltip.style.border = '3px solid #000';
   tooltip.style.fontWeight = 'bold';
+  tooltip.style.fontSize = '20px';
+  tooltip.style.display = 'flex';
+  tooltip.style.alignItems = 'center';
+  tooltip.style.justifyContent = 'center';
+  tooltip.style.width = '16px';
+  tooltip.style.height = '16px';
   tooltip.style.fontFamily = "'GDS Transport', arial, sans-serif";
 
   const markerOverlay = new ol.Overlay({
     element: tooltip,
     positioning: 'top-center',
-    offset: [-14, -80],
+    offset: [markerOverlayOffsetX, markerOverlayOffsetY],
     stopEvent: false,
   });
 
@@ -677,7 +819,7 @@ function createTooltipOverlay(index) {
 
 function keydownHandler(event) {
   const key = event.key;
-  if (key >= 1 && key <= 9) {
+  if (key >= 1 && key <= maxMarkerAllowed) {
     const markerIndex = parseInt(key) - 1;
     const visibleMarkers = markerLayer
       .getSource()
@@ -694,6 +836,8 @@ function keydownHandler(event) {
           if (feature === marker && isMarkerFeature(feature)) {
             const recordId = feature.get('id');
             const boundingBox = feature.get('boundingBox');
+            selectedFeatureId = recordId;
+            selectedBoundingBox = boundingBox;
             feature.setStyle(getMarkerStyle(highlightedMarkerIcon));
             showInformationPopup(recordId, boundingBox);
           }
@@ -713,7 +857,7 @@ function checkNUpdateMarkerTooltip() {
   resetFeatureStyle();
   closeInfoPopup();
 
-  if (visibleMarkers.length <= 9) {
+  if (visibleMarkers.length <= maxMarkerAllowed) {
     visibleMarkers.forEach((marker, index) => {
       createTooltipOverlay(index);
       const coord = marker.getGeometry().getCoordinates();
@@ -724,7 +868,6 @@ function checkNUpdateMarkerTooltip() {
 }
 
 function fitMapToExtent() {
-  const resetControl = document.getElementById('defra-map-reset');
   const padding = 50;
   const visibleMarkers = markerLayer.getSource().getFeatures();
   const extent = ol.extent.createEmpty();
@@ -749,7 +892,6 @@ function fitMapToExtent() {
 function customControls() {
   const zoomInElement = document.getElementById('defra-map-zoom-in');
   const zoomOutElement = document.getElementById('defra-map-zoom-out');
-  const resetControl = document.getElementById('defra-map-reset');
   if (zoomInElement) {
     zoomInElement.addEventListener('click', () => {
       animateZoom(1);
@@ -794,13 +936,16 @@ function infoListener() {
     } else {
       goToResourceElement.removeAttribute('disabled');
     }
-    goToResourceElement.addEventListener('click', () => {
-      window.openDataModal(
-        selectedRecord.organisationName,
-        selectedRecord.resourceLocator,
-        true,
-      );
-    });
+    if (!hasResourceListener) {
+      goToResourceElement.addEventListener('click', () => {
+        window.openDataModal(
+          selectedRecord.organisationName,
+          selectedRecord.resourceLocator,
+          true,
+        );
+      });
+      hasResourceListener = true;
+    }
   }
 }
 
@@ -809,29 +954,31 @@ function handleKeyboardArrowEvent(event) {
   const delta = view.getResolution() * 100;
 
   switch (event.keyCode) {
-    case 37: // Left arrow key
+    case leftArrowKey: // Left arrow key
       view.animate({
         center: [view.getCenter()[0] - delta, view.getCenter()[1]],
         duration: 100,
       });
       break;
-    case 38: // Up arrow key
+    case upArrowKey: // Up arrow key
       view.animate({
         center: [view.getCenter()[0], view.getCenter()[1] + delta],
         duration: 100,
       });
       break;
-    case 39: // Right arrow key
+    case rightArrowKey: // Right arrow key
       view.animate({
         center: [view.getCenter()[0] + delta, view.getCenter()[1]],
         duration: 100,
       });
       break;
-    case 40: // Down arrow key
+    case downArrowKey: // Down arrow key
       view.animate({
         center: [view.getCenter()[0], view.getCenter()[1] - delta],
         duration: 100,
       });
+      break;
+    default:
       break;
   }
 }
@@ -849,7 +996,6 @@ document.addEventListener('DOMContentLoaded', () => {
       invokeMapFilters();
       exitMapEventListener();
       disableInteractions();
-      infoListener();
       customControls();
       checkNUpdateMarkerTooltip();
       document.addEventListener('keydown', handleKeyboardArrowEvent);

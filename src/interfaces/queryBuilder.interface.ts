@@ -1,21 +1,30 @@
 import { IFilterOptions } from './searchPayload.interface';
 
-interface IMatchQuery {
-  match?: {
-    [key: string]: string;
+interface IQueryStringBlock {
+  query_string: {
+    query: string;
+    fields?: string[];
+    default_operator: string;
   };
-  terms?: {
+}
+
+interface ITermsBlock {
+  terms: {
     [key: string]: string[];
   };
 }
 
-interface IRangeQuery {
+interface IFieldExistsBlock {
+  exists: {
+    field: string;
+  };
+}
+
+interface IRangeBlock {
   range: {
     [key: string]: {
-      gte?: string;
-      lte?: string;
-      format?: string;
-      value?: string;
+      gte: string;
+      lte: string;
     };
   };
 }
@@ -25,7 +34,7 @@ interface IShapeCoordinates {
   coordinates: [[number, number], [number, number]];
 }
 
-interface IGeoShapeQuery {
+interface IGeoShapeBlock {
   geo_shape: {
     [key: string]: {
       shape: IShapeCoordinates;
@@ -34,24 +43,12 @@ interface IGeoShapeQuery {
   };
 }
 
-interface IQueryString {
-  query_string: {
-    query: string;
-    default_operator: string;
-  };
-}
-
-interface IFieldExist {
-  exists: {
-    field: string;
-  };
-}
-
-interface IBoolQuery {
-  bool: {
-    must?: (IBoolQuery | IRangeQuery | IGeoShapeQuery | IQueryString | IFieldExist | IFilterQuery)[];
-    should?: IMatchQuery[];
-    minimum_should_match?: number;
+type IAggregationType = 'terms' | 'max' | 'min';
+interface IAggregationBlock {
+  [key: string]: {
+    [key in IAggregationType]?: {
+      field: string;
+    };
   };
 }
 
@@ -70,72 +67,58 @@ interface ICustomSortScript extends ISortOrder {
     source: string;
   };
 }
-interface ISortQuery {
+interface ISortBlock {
   [key: string]: ISortOrder | ICustomSortScript;
 }
 
-type IAggregationType = 'terms' | 'max' | 'min';
+type IMustBlock = (IQueryStringBlock | ITermsBlock | IFieldExistsBlock)[];
+type IFilterBlock = (IRangeBlock | IGeoShapeBlock)[];
 
-interface IAggregationQueryTerm {
-  field: string;
-  size?: number;
-  order?: { _key: string };
-}
-
-interface IAggregationDateScript {
-  script: { source: string };
-}
-
-type IAggregationData = IAggregationQueryTerm | IAggregationDateScript;
-
-interface IAggregationQuery {
-  [key: string]: {
-    [key in IAggregationType]?: IAggregationData;
+interface IQueryBlock {
+  query: {
+    bool?: {
+      must?: IMustBlock;
+      filter?: IFilterBlock;
+    };
   };
 }
 
-interface IQuery {
+interface IOtherQueryProperties {
+  aggs?: IAggregationBlock;
+  sort?: ISortBlock[];
   size?: number;
-  query: IBoolQuery;
-  sort?: ISortQuery[];
-  aggs?: IAggregationQuery;
   from?: number;
   _source?: string[];
 }
 
+type IQuery = IQueryBlock & IOtherQueryProperties;
+
 interface IGeoCoordinates {
-  nth: string;
-  sth: string;
-  est: string;
-  wst: string;
+  nth?: string;
+  sth?: string;
+  est?: string;
+  wst?: string;
+}
+
+interface IDateValues {
+  fdy?: string;
+  fdd?: string;
+  fdm?: string;
+  tdy?: string;
+  tdm?: string;
+  tdd?: string;
 }
 
 interface ISearchFields {
   keyword?: {
     q?: string;
   };
-  date?: {
-    fdy?: string;
-    fdd?: string;
-    fdm?: string;
-    tdy?: string;
-    tdm?: string;
-    tdd?: string;
-  };
-  extent?: {
-    nth?: string;
-    sth?: string;
-    est?: string;
-    wst?: string;
-  };
-  classify?: {
-    level: string;
-    parent?: string;
-  };
+  date?: IDateValues;
+  extent?: IGeoCoordinates;
 }
 
 interface ISearchFilter {
-  [key: string]: string | string[] | ISearchFields;
+  [key: string]: string[] | IDateValues;
 }
 
 interface ISearchPayload {
@@ -152,7 +135,7 @@ interface ISearchBuilderPayload {
   searchFieldsObject?: ISearchPayload;
   fieldsToSearch?: string[];
   isCount?: boolean;
-  ignoreAggregation?: boolean;
+  isAggregation?: boolean;
   filterOptions?: IFilterOptions;
   docId?: string;
 }
@@ -178,26 +161,24 @@ interface IAggregateClassifierQuery {
 }
 
 export {
-  IMatchQuery,
-  IBoolQuery,
-  IRangeQuery,
-  IQuery,
-  ISearchPayload,
-  ISearchFields,
-  IShapeCoordinates,
-  IGeoShapeQuery,
-  IGeoCoordinates,
-  IQueryString,
-  ISortQuery,
+  IAggregationBlock,
   ICustomSortScript,
-  IAggregationQuery,
-  ISearchFilter,
+  IDateValues,
+  IFieldExistsBlock,
+  IFilterBlock,
+  IGeoCoordinates,
+  IGeoShapeBlock,
+  IMustBlock,
+  IRangeBlock,
+  IQuery,
+  IQueryStringBlock,
   ISearchBuilderPayload,
-  IAggregateClassifierQuery,
-  IFieldExist,
-  IAggregationQueryTerm,
-  IAggregationDateScript,
-  IAggregationData,
-  IAggregationType,
-  IFilterQuery,
+  ISearchFields,
+  ISearchFilter,
+  ISearchPayload,
+  IShapeCoordinates,
+  ISortBlock,
+  ITermsBlock,
+  IQueryBlock,
+  IOtherQueryProperties,
 };

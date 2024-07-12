@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "ncea-frontend"
+  description: |
+    ncea-frontend
+  annotations:
+    github.com/project-slug: DEFRA/ncea-frontend
+    dev.azure.com/project: DEFRA-NCEA
+    dev.azure.com/build-definition: ADP-NCEA-Frontend
+    sonarqube.org/project-key: adp-ncea-frontend
+    backstage.io/techdocs-ref: dir:.
+    defra.com/techdocs-builder: local
+    backstage.io/kubernetes-id: ncea-frontend
+  tags:
+    - node
+    - front-end
+spec:
+  type: frontend
+  lifecycle: beta
+  owner: "group:default/ncea-search"
+  system: ncea-search-system

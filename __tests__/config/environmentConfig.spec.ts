@@ -50,7 +50,7 @@ describe('Environment environmentConfig', () => {
       } = require('../../src/config/environmentConfig');
       expect(environmentConfig).toBeDefined();
       expect(typeof environmentConfig).toBe('object');
-      expect(Object.keys(environmentConfig).length).toBe(8);
+      expect(Object.keys(environmentConfig).length).toBe(10);
     });
 
     it('should validate and export the configuration object', () => {
@@ -75,6 +75,8 @@ describe('Environment environmentConfig', () => {
         elasticSearchAPI: Joi.string().allow('').default(''),
         isLocal: Joi.boolean().valid(true, false).default(false),
         gtmId: Joi.string().allow('').default(''),
+        elasticSearchUsername: Joi.string().allow('').default(''),
+        elasticSearchPassword: Joi.string().allow('').default(''),
       });
 
       const {

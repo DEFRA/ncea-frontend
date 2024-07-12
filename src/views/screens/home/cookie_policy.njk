@@ -1,0 +1,138 @@
+{% extends "layout/default.njk" %}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: routes.homePage,
+        attributes: {
+          'data-do-storage-reset': ''
+        }
+      },
+      {
+        text: "Cookies"
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% set notificationHtml %}
+<p class="govuk-notification-banner__heading">Your cookie settings were saved</p>
+<span class="ncea-static-page__content-item">Government services may set additional cookies and, if so, will have their own cookie policy and banner.</span>
+{% endset %}
+
+{% block content %}
+  <article class="govuk-grid-row" role="article">
+    <article class="govuk-grid-column-full ncea-static-page">
+      {{ govukNotificationBanner({
+        type: 'success',
+        html: notificationHtml,
+        classes: 'govuk-!-margin-bottom-6 hide',
+        attributes: {id: 'ncea_cookie_alert'}
+      }) }}
+      <h1 class="govuk-heading-m ncea-static-page__heading-m">Cookies</h1>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">We use 2 types of cookie. You can choose which cookies you're happy for us to use.</p>
+        <p class="ncea-static-page__content-item">Cookies are files saved on your phone, tablet or computer when you visit a website. On this service we only use strictly necessary cookies.</p>
+      </section>
+      <div class="govuk-section-break--visible govuk-!-margin-top-4"></div>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Essential cookies</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">These essential cookies do things like remember who you are and whether you are authorised. They always need to be on.</p>
+      </section>
+      <table class="ncea-static-page__table govuk-!-margin-top-4">
+        <thead>
+          <tr>
+            <th width="35%">Name</th>
+            <th width="35%">Purpose</th>
+            <th width="30%">Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ai_user</td>
+            <td>Used with Microsoft Application Insights for collecting statistical usage and telemetry information.</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td>ai_session</td>
+            <td>Unique user identifier cookie for counting the number of users accessing an application over time.</td>
+            <td>30 minutes</td>
+          </tr>
+          <tr>
+            <td>ncea-search-data</td>
+            <td>localStorage allows web applications to store data locally within the user's browser.</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td>ncea-cookie-banner-dismissed</td>
+            <td>User has accepted &amp; hide cookie banner or rejected the cookie policy banner.</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td>ncea-cookie-acceptance-level</td>
+            <td>On the find natural capital data service, this field indicates whether the user wants non-essential cookies to be used. The answer is True if they accept them, False if they reject them</td>
+            <td>1 year</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="govuk-heading-s ncea-static-page__heading-s govuk-!-margin-top-4">Non-essential cookies</h2>
+      <section class="ncea-static-page__content">
+        <p class="ncea-static-page__content-item">We are continually working on improving the services we provide you with. To support this work, we need to understand how users navigate through, and use our pages and services.</p>
+        <p class="ncea-static-page__content-item">The following cookies, whilst not essential to the running of the core find natural capital data service functions, are needed for Google Analytics to provide us with statistics on how you use our platform, so we can improve it based on user experiences. These cookies collect information about:</p>
+      </section>
+      <ol class="govuk-!-margin-left-0 govuk-!-padding-left-5">
+        <li class="ncea-static-page__content-item">Technical problems preventing you from using the service</li>
+        <li class="ncea-static-page__content-item">The pages you visit - how long you spend on each page</li>
+        <li class="ncea-static-page__content-item">How you got to the service</li>
+        <li class="ncea-static-page__content-item">What you click on while you are using the service</li>
+      </ol>
+      <table class="ncea-static-page__table govuk-!-margin-top-4">
+        <thead>
+          <tr>
+            <th width="35%">Name</th>
+            <th width="35%">Purpose</th>
+            <th width="30%">Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>_ga</td>
+            <td>Used to distinguish users</td>
+            <td>2 years</td>
+          </tr>
+        </tbody>
+      </table>
+      <section class="ncea-static-page__content govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+        <p class="ncea-static-page__content-item">We do not allow Google to use or share the data about how you use this site.</p>
+        <p class="ncea-static-page__content-item">Please select below how you would like to interact with the Google Analytics cookies:</p>
+      </section>
+      {{ govukRadios({
+        name: "ne_cookie_preference",
+        items: [
+          {
+            value: "yes",
+            id: "ne_cookie_preference-yes",
+            text: "Use cookies that measure my website use"
+          },
+          {
+            value: "no",
+            id: "ne_cookie_preference-no",
+            text: "Do not use cookies that measure my website use"
+          }
+        ]
+      }) }}
+      {{ govukButton({
+        text: "Save cookie settings",
+        attributes: {id: "ncea_save_cookies"}
+      }) }}
+    </article>
+  </article>
+{% endblock %}

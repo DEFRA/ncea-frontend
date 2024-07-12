@@ -43,4 +43,10 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   classifierApiKey: Joi.string().allow('').default('').messages({
     'string.base': 'Classifier search api key must be a string',
   }),
+  elasticSearchUsername: Joi.string().allow('').default('').messages({
+    'string.base': 'The Elasticsearch username must be a string.',
+  }),
+  elasticSearchPassword: Joi.string().allow('').default('').messages({
+    'string.base': 'The Elasticsearch password must be a string.',
+  }),
 });

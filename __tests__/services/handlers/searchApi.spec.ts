@@ -1,13 +1,8 @@
-import { buildSearchQuery } from '../../../src/utils/queryBuilder';
-import { elasticSearchClient } from '../../../src/config/elasticSearchClient';
+import { generateSearchQuery } from '../../../src/utils/queryBuilder';
+import { performQuery } from '../../../src/config/elasticSearchClient';
+import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import {
-  IQuery,
-  ISearchPayload,
-} from '../../../src/interfaces/queryBuilder.interface';
-import {
-  elasticSearchAPIPaths,
-  startYearRangeKey,
-  toYearRangeKey,
+  resourceTypeFilterField,
   uniqueResourceTypesKey,
   yearRange,
 } from '../../../src/utils/constants';
@@ -31,13 +26,12 @@ import {
   IAggregationOptions,
   ISearchResults,
 } from '../../../src/interfaces/searchResponse.interface';
+import { estypes } from '@elastic/elasticsearch';
 
 jest.mock('../../../src/config/elasticSearchClient', () => ({
-  elasticSearchClient: {
-    post: jest.fn(() => {
-      return Promise.resolve({ data: 'mocked response' });
-    }),
-  },
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
 }));
 jest.mock('../../../src/utils/formatSearchResponse', () => ({
   formatSearchResponse: jest.fn((apiResponse) => ({
@@ -55,7 +49,7 @@ describe('Search API', () => {
     jest.clearAllMocks();
   });
   describe('Search API - To fetch the search results', () => {
-    it('should call elasticSearchClient.post with correct arguments', async () => {
+    it('should call performQuery with correct arguments', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           keyword: {
@@ -67,12 +61,11 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      const payload: IQuery = buildSearchQuery({ searchFieldsObject });
+      const payload: estypes.SearchRequest = generateSearchQuery({
+        searchFieldsObject,
+      });
       await getSearchResults(searchFieldsObject);
-      expect(elasticSearchClient.post).toHaveBeenCalledWith(
-        elasticSearchAPIPaths.searchPath,
-        payload,
-      );
+      expect(performQuery).toHaveBeenCalledWith(payload);
     });
 
     it('should return the response from elasticSearchClient.post', async () => {
@@ -103,9 +96,9 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      elasticSearchClient.post = jest
-        .fn()
-        .mockRejectedValueOnce(new Error('Mocked error'));
+      (performQuery as jest.Mock).mockRejectedValueOnce(
+        new Error('Mocked error'),
+      );
       await expect(getSearchResults(searchFieldsObject)).rejects.toThrow(
         'Error fetching results: Mocked error',
       );
@@ -124,7 +117,7 @@ describe('Search API', () => {
   });
 
   describe('Search API - To fetch the search results count', () => {
-    it('should call elasticSearchClient.post with correct arguments', async () => {
+    it('should call performQuery with correct arguments', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           keyword: {
@@ -136,11 +129,11 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
+      (performQuery as jest.Mock).mockResolvedValueOnce({
         data: { totalResults: 10 },
       });
       await getSearchResultsCount(searchFieldsObject);
-      expect(elasticSearchClient.post).toHaveBeenCalledTimes(1);
+      expect(performQuery).toHaveBeenCalledTimes(1);
     });
 
     it('should return the total results count', async () => {
@@ -155,9 +148,7 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
-        data: { count: 10 },
-      });
+      (performQuery as jest.Mock).mockResolvedValueOnce({ count: 10 });
       const result = await getSearchResultsCount(searchFieldsObject);
       expect(result).toEqual({ totalResults: 10 });
     });
@@ -185,9 +176,9 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      elasticSearchClient.post = jest
-        .fn()
-        .mockRejectedValueOnce(new Error('Mocked error'));
+      (performQuery as jest.Mock).mockRejectedValueOnce(
+        new Error('Mocked error'),
+      );
       await expect(getSearchResultsCount(searchFieldsObject)).rejects.toThrow(
         'Error fetching results: Mocked error',
       );
@@ -195,7 +186,7 @@ describe('Search API', () => {
   });
 
   describe('Search API - To fetch the aggregated results for filters', () => {
-    it('should return the response from elasticSearchClient.post', async () => {
+    it('should return the response from performQuery', async () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           keyword: {
@@ -203,17 +194,19 @@ describe('Search API', () => {
           },
         },
         sort: 'best_match',
-        filters: { resourceType: 'dataset' },
+        filters: { [resourceTypeFilterField]: ['dataset'] },
         rowsPerPage: 20,
         page: 1,
       };
-      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce(
+      (performQuery as jest.Mock).mockResolvedValueOnce(
         resourceTypeAPIResponse,
       );
       (formatAggregationResponse as jest.Mock).mockResolvedValueOnce(
         formattedResourceTypeResponse,
       );
-      const result = await getFilterOptions(searchFieldsObject);
+      const result = await getFilterOptions(searchFieldsObject, {
+        isStudyPeriod: false,
+      });
       expect(result).toEqual(formattedResourceTypeResponse);
     });
 
@@ -229,22 +222,29 @@ describe('Search API', () => {
         rowsPerPage: 20,
         page: 1,
       };
-      elasticSearchClient.post = jest
-        .fn()
-        .mockRejectedValueOnce(new Error('Mocked error'));
-      await expect(getFilterOptions(searchFieldsObject)).rejects.toThrow(
-        'Error fetching results: Mocked error',
+      (performQuery as jest.Mock).mockRejectedValueOnce(
+        new Error('Mocked error'),
       );
+      await expect(
+        getFilterOptions(searchFieldsObject, {
+          isStudyPeriod: false,
+        }),
+      ).rejects.toThrow('Error fetching results: Mocked error');
     });
 
     it('should return the default response when no fields data is present', async () => {
-      const result = await getFilterOptions({
-        fields: {},
-        sort: '',
-        rowsPerPage: 20,
-        filters: {},
-        page: 1,
-      });
+      const result = await getFilterOptions(
+        {
+          fields: {},
+          sort: '',
+          rowsPerPage: 20,
+          filters: {},
+          page: 1,
+        },
+        {
+          isStudyPeriod: false,
+        },
+      );
       const filterOptionsResponse: IAggregationOptions = {
         [yearRange]: [],
         [uniqueResourceTypesKey]: [],
@@ -254,31 +254,31 @@ describe('Search API', () => {
   });
 
   describe('Search API - To fetch the document details', () => {
-    it('should return the response from elasticSearchClient.post', async () => {
+    it('should return the response from performQuery', async () => {
       const docId = '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2';
-      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
-        data: detailsSuccessAPIResponse,
-      });
+      (performQuery as jest.Mock).mockResolvedValueOnce(
+        detailsSuccessAPIResponse,
+      );
       const formattedDetailsResponse: ISearchResults =
         await formatSearchResponse(detailsSuccessAPIResponse, true);
       const result = await getDocumentDetails(docId);
       expect(result).toEqual(formattedDetailsResponse?.items?.[0]);
     });
 
-    it('should return the empty object when no document found from elasticSearchClient.post', async () => {
+    it('should return the empty object when no document found from performQuery', async () => {
       const docId = '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2';
-      (elasticSearchClient.post as jest.Mock).mockResolvedValueOnce({
-        data: detailsEmptyAPIResponse,
-      });
+      (performQuery as jest.Mock).mockResolvedValueOnce(
+        detailsEmptyAPIResponse,
+      );
       const result = await getDocumentDetails(docId);
       expect(result).toEqual({});
     });
 
     it('should handle errors and throw an error message', async () => {
       const docId = '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2';
-      elasticSearchClient.post = jest
-        .fn()
-        .mockRejectedValueOnce(new Error('Mocked error'));
+      (performQuery as jest.Mock).mockRejectedValueOnce(
+        new Error('Mocked error'),
+      );
       await expect(getDocumentDetails(docId)).rejects.toThrow(
         'Error fetching results: Mocked error',
       );

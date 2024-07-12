@@ -1,6 +1,7 @@
+import { getYear } from './formatDate';
 import { IAggregationOption, IAggregationOptions } from '../interfaces/searchResponse.interface';
 import { IFilterOption, IFilterOptions } from '../interfaces/searchPayload.interface';
-import { startYearRangeKey, toYearRangeKey } from './constants';
+import { startYearRangeKey, toYearRangeKey, uniqueResourceTypesKey } from './constants';
 
 const capitalizeWords = (string: string): string => {
   return string.replace(/\b\w/g, (match) => match.toUpperCase());
@@ -36,11 +37,15 @@ const formatAggregationResponse = async (
           };
         });
       } else if (isDate) {
-        const maxYearValue: number = apiResponse?.aggregations?.[`max-${filterOption.key}`]?.value ?? null;
-        const minYearValue: number = apiResponse?.aggregations?.[`min-${filterOption.key}`]?.value ?? null;
-        if (maxYearValue && minYearValue) {
-          const maxYear: number = Math.floor(maxYearValue);
-          const minYear: number = Math.floor(minYearValue);
+        const maxYearDateString: string =
+          apiResponse?.aggregations?.[`max_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
+        const minYearDateString: string =
+          apiResponse?.aggregations?.[`min_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
+        if (maxYearDateString && minYearDateString) {
+          const maxYearValue: string = getYear(maxYearDateString);
+          const minYearValue: string = getYear(minYearDateString);
+          const maxYear: number = Math.floor(parseInt(maxYearValue));
+          const minYear: number = Math.floor(parseInt(minYearValue));
           const yearRange: IAggregationOption[] = generateRange(minYear, maxYear);
           finalResponse[startYearRangeKey] = yearRange.map((year) => ({
             ...year,
@@ -53,7 +58,9 @@ const formatAggregationResponse = async (
           finalResponse[toYearRangeKey] = [];
         }
       } else {
-        finalResponse[filterOption.key] = [];
+        finalResponse[uniqueResourceTypesKey] = [];
+        finalResponse[startYearRangeKey] = [];
+        finalResponse[toYearRangeKey] = [];
       }
     });
     return finalResponse;

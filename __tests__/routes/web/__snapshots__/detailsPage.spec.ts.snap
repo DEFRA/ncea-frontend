@@ -35,6 +35,100 @@ exports[`Details route template Document details with data Check status code and
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
+    <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button" id="accept_button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button" id="reject_button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="accept_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="reject_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -42,31 +136,11 @@ exports[`Details route template Document details with data Check status code and
     
 
     
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id= "
-height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <script>
+    var gtmIdValue = "GTM-PZJ4WBG7"
+  </script>
+  <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer'
-            ? '&l=' + l
-            : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f
-          .parentNode
-          .insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', '');
-    </script>
-    <!-- End Google Tag Manager -->
 
     <!--Will be removed once Defra GA accounts been created -->
 
@@ -104,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -128,7 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -211,7 +285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-4  govuk-button--start" data-module="govuk-button" onclick="openDataModal(&#39;United Kingdom Hydrographic Office&#39;, &#39;https://seabed.admiralty.co.uk&#39;)">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-4 go-to-resource govuk-button--start" data-module="govuk-button" onclick="openDataModal(&#39;United Kingdom Hydrographic Office&#39;, &#39;https://seabed.admiralty.co.uk&#39;)">
   Go to resource
   <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
     <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
@@ -249,15 +323,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail - Natural Capital&quot;)">
-            Natural Capital
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail - Quality&quot;)">
             Quality
           </a>
@@ -269,15 +334,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail - Geography&quot;)">
             Geography
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
-            Governance
           </a>
         </li>
       
@@ -351,7 +407,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Languages</h2>
+          <h2 class='tab-content-label'>Resource languages</h2>
           
             <span class='tab-content-value'>
               ENG
@@ -376,7 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue number</h2>
+          <h2 class='tab-content-label'>File Identifier</h2>
           
             <span class='tab-content-value'>
               fb8dca0f-7425-4f50-86a1-c4673b1aef88
@@ -388,7 +444,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Host catalogue number</h2>
+          <h2 class='tab-content-label'>Resource Identifier</h2>
           
             <span class='tab-content-value'>
               https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88
@@ -400,10 +456,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Host catalogue entry</h2>
+          <h2 class='tab-content-label'>Coupled resources</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -413,7 +469,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Resource type and hierarchy</h2>
+          <h2 class='tab-content-label'>Resource type</h2>
           
             <span class='tab-content-value'>
               Dataset
@@ -425,7 +481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Hierarchy level</h2>
+          <h2 class='tab-content-label'>Hierarchy level name</h2>
           
             <span class='tab-content-value'>
               Dataset
@@ -440,7 +496,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Resource locators</h2>
           
             <span class='tab-content-value'>
-              Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)
+              <p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Catalouge entry</h2>
+          
+            <span class='tab-content-value'>
+              fb8dca0f-7425-4f50-86a1-c4673b1aef88
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>NCEA search service catalogue number</h2>
+          
+            <span class='tab-content-value'>
+              3ce46f92-509c-4529-a062-c8b48788340d
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Parent ID</h2>
+          
+            <span class='tab-content-value'>
+              fb8dca0f-7425-4f50-86a1-c4673b1aef88
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata standard</h2>
+          
+            <span class='tab-content-value'>
+              MEDIN
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Project number</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata language</h2>
+          
+            <span class='tab-content-value'>
+              ENG
             </span>
           
         </div>
@@ -455,13 +584,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     
       
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="natural-capital">
-        
-      </div>
-    
-  
-    
-      
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="quality">
         
           
@@ -469,10 +591,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Publication information</h2>
+          <h2 class='tab-content-label'>Date of publication</h2>
           
             <span class='tab-content-value'>
-              23 March 2022 - Last Revision
+              23 March 2022
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of creation</h2>
+          
+            <span class='tab-content-value'>
+              23 March 2022
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of last revision</h2>
+          
+            <span class='tab-content-value'>
+              23 March 2022
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata date</h2>
+          
+            <span class='tab-content-value'>
+              16 January 2024
             </span>
           
         </div>
@@ -500,7 +658,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                       <thead>
                         <tr>
                           <th width="60%">Specification</th>
-                          <th>Degree</th>
+                          <th width="10%">Degree</th>
                           <th>Explanation</th>
                         </tr>
                       </thead><tbody><tr>
@@ -519,7 +677,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Additional information</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -545,7 +703,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Spatial data service</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -582,7 +740,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Geographic locations</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -612,7 +770,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Vertical extent<br /><span>(Meters above sea level)</span></h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -622,110 +780,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Sampling resolution</h2>
+          <h2 class='tab-content-label'>Spatial resolution</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
-          
-        </div>
-      
-      
-    
-  </div>
-
-        
-      </div>
-    
-  
-    
-      
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="governance">
-        
-          
-  <div class='tab-content-container'>
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue number</h2>
-          
-            <span class='tab-content-value'>
-              fb8dca0f-7425-4f50-86a1-c4673b1aef88
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Host service catalogue number</h2>
-          
-            <span class='tab-content-value'>
-              3ce46f92-509c-4529-a062-c8b48788340d
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA group reference</h2>
-          
-            <span class='tab-content-value'>
-              fb8dca0f-7425-4f50-86a1-c4673b1aef88
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Metadata standard</h2>
-          
-            <span class='tab-content-value'>
-              MEDIN
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Project number</h2>
-          
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Metadata language</h2>
-          
-            <span class='tab-content-value'>
-              eng
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue date</h2>
-          
-            <span class='tab-content-value'>
-              16-January-2024
-            </span>
           
         </div>
       
@@ -770,22 +830,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Data owner</h2>
-          
-            <span class='tab-content-value'>
-              owner, Maritime and Coastguard Agency <br>customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Available formats</h2>
+          <h2 class='tab-content-label'>Distribution formats</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -833,8 +881,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   <div class="modal-content">
     
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Natural Capital Search Service</h1>
-    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue hosted by:<br/>"<span id='resource_party'></span>"</p>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave the find natural capital data service</h1>
+    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>Your are following a link to an external catalogue managed by<br/>"<span id='resource_party'></span>"</p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       
   
@@ -893,7 +941,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>
@@ -1020,6 +1068,100 @@ exports[`Details route template Document details with partial data Check status 
   <body class="govuk-template__body app-body-class">
     <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
     
+  <div class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on the find natural capital data service" id="cookie_banner">
+    <div class="govuk-cookie-banner__message govuk-width-container" id="cookie_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on the find natural capital data service</h2>
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">We use some essential cookies to make this service work.</p>
+<p class="govuk-body">We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button" id="accept_button">
+              Accept analytics cookies
+            </button>
+          
+        
+          
+            <button type="button" class="govuk-button" data-module="govuk-button" id="reject_button">
+              Reject analytics cookies
+            </button>
+          
+        
+          
+            
+              <a class="govuk-link help-link" href="/cookie-policy">View cookies</a>
+            
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="accept_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've accepted additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+    <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="reject_block" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        
+
+        <div class="govuk-cookie-banner__content">
+<p class="govuk-body">You've rejected additional cookies. You can <a class="govuk-link help-link" href="/cookie-policy">change your cookie settings</a> at any time.</p>
+</div>
+      </div>
+    </div>
+
+      
+      <div class="govuk-button-group">
+        
+          
+            <button type="button" class="govuk-button hide_button" data-module="govuk-button">
+              Hide cookie message
+            </button>
+          
+        
+      </div>
+      
+    </div>
+  
+</div>
+
+
 
     
       <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
@@ -1027,31 +1169,11 @@ exports[`Details route template Document details with partial data Check status 
     
 
     
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id= "
-height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <script>
+    var gtmIdValue = "GTM-PZJ4WBG7"
+  </script>
+  <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer'
-            ? '&l=' + l
-            : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f
-          .parentNode
-          .insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', '');
-    </script>
-    <!-- End Google Tag Manager -->
 
     <!--Will be removed once Defra GA accounts been created -->
 
@@ -1089,7 +1211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Natural Capital Search Service
+        Find Natural Capital data
       </a>
     
     
@@ -1113,7 +1235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
@@ -1184,7 +1306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
   
 
-<button type="submit" class="govuk-button govuk-!-margin-bottom-4  govuk-button--start" data-module="govuk-button" disabled="true">
+<button type="submit" class="govuk-button govuk-!-margin-bottom-4 go-to-resource govuk-button--start" data-module="govuk-button" disabled="true">
   Go to resource
   <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
     <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
@@ -1224,15 +1346,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       
         
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#natural-capital" onclick="changeTitle(&quot;NCEA Catalogue Detail - Natural Capital&quot;)">
-            Natural Capital
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#quality" onclick="changeTitle(&quot;NCEA Catalogue Detail - Quality&quot;)">
             Quality
           </a>
@@ -1244,15 +1357,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#geography" onclick="changeTitle(&quot;NCEA Catalogue Detail - Geography&quot;)">
             Geography
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
-            Governance
           </a>
         </li>
       
@@ -1281,7 +1385,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Abstract</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1294,7 +1398,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Study periods</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1307,7 +1411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Topic categories</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1320,7 +1424,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Keywords</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1330,7 +1434,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Languages</h2>
+          <h2 class='tab-content-label'>Resource languages</h2>
           
             <span class='tab-content-value'>
               ENG
@@ -1355,7 +1459,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue number</h2>
+          <h2 class='tab-content-label'>File Identifier</h2>
           
             <span class='tab-content-value'>
               3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
@@ -1367,7 +1471,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Host catalogue number</h2>
+          <h2 class='tab-content-label'>Resource Identifier</h2>
           
             <span class='tab-content-value'>
               3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
@@ -1379,10 +1483,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Host catalogue entry</h2>
+          <h2 class='tab-content-label'>Coupled resources</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1392,7 +1496,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Resource type and hierarchy</h2>
+          <h2 class='tab-content-label'>Resource type</h2>
           
             <span class='tab-content-value'>
               Dataset
@@ -1404,7 +1508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Hierarchy level</h2>
+          <h2 class='tab-content-label'>Hierarchy level name</h2>
           
             <span class='tab-content-value'>
               Dataset
@@ -1419,7 +1523,81 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Resource locators</h2>
           
             <span class='tab-content-value'>
-              Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)
+              <p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Catalouge entry</h2>
+          
+            <span class='tab-content-value'>
+              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>NCEA search service catalogue number</h2>
+          
+            <span class='tab-content-value'>
+              2fc172f5-4c8e-493b-8277-3492b3ed504c
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Parent ID</h2>
+          
+            <span class='tab-content-value'>
+              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
+            </span>
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata standard</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Project number</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata language</h2>
+          
+            <span class='tab-content-value'>
+              ENG
             </span>
           
         </div>
@@ -1434,13 +1612,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   
     
       
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="natural-capital">
-        
-      </div>
-    
-  
-    
-      
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="quality">
         
           
@@ -1448,12 +1619,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Publication information</h2>
+          <h2 class='tab-content-label'>Date of publication</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of creation</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Date of last revision</h2>
+          
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+          
+        </div>
+      
+      
+    
+      
+        <div class='tab-content-row'>
+          <h2 class='tab-content-label'>Metadata date</h2>
+          
+            <span class='tab-content-value'>
+              26 January 2010
+            </span>
           
         </div>
       
@@ -1464,7 +1673,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Lineage</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1477,7 +1686,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Conformity</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1490,7 +1699,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Additional information</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1516,7 +1725,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Spatial data service</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1529,7 +1738,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Spatial representation service</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1542,7 +1751,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Spatial referencing system</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1555,7 +1764,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Geographic locations</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1583,7 +1792,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Vertical extent<br /><span>(Meters above sea level)</span></h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1593,111 +1802,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Sampling resolution</h2>
+          <h2 class='tab-content-label'>Spatial resolution</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
-          
-        </div>
-      
-      
-    
-  </div>
-
-        
-      </div>
-    
-  
-    
-      
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="governance">
-        
-          
-  <div class='tab-content-container'>
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue number</h2>
-          
-            <span class='tab-content-value'>
-              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Host service catalogue number</h2>
-          
-            <span class='tab-content-value'>
-              2fc172f5-4c8e-493b-8277-3492b3ed504c
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA group reference</h2>
-          
-            <span class='tab-content-value'>
-              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Metadata standard</h2>
-          
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Project number</h2>
-          
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Metadata language</h2>
-          
-            <span class='tab-content-value'>
-              eng
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA catalogue date</h2>
-          
-            <span class='tab-content-value'>
-              26-January-2010
-            </span>
           
         </div>
       
@@ -1721,7 +1831,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Limitations on public access</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1734,7 +1844,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>License constraints</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1744,23 +1854,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Data owner</h2>
+          <h2 class='tab-content-label'>Distribution formats</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
-</strong>
-
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Available formats</h2>
-          
-            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1773,7 +1870,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <h2 class='tab-content-label'>Frequency of update</h2>
           
             <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
-  NOT PROVIDED
+  Unavailable
 </strong>
 
           
@@ -1835,7 +1932,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 </li>
               
                 <li class="govuk-footer__inline-list-item">
-                  <a class="govuk-footer__link" href="#">
+                  <a class="govuk-footer__link" href="/cookie-policy">
                     Cookies
                   </a>
                 </li>

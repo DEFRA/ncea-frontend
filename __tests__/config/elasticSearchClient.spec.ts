@@ -1,80 +1,99 @@
-import MockAdapter from 'axios-mock-adapter';
-import { elasticSearchClient } from '../../src/config/elasticSearchClient';
-import {
-  elasticSearchAPIPaths,
-  geoNetworkIndex,
-} from '../../src/utils/constants';
+import { Client, ClientOptions } from '@elastic/elasticsearch';
 import { environmentConfig } from '../../src/config/environmentConfig';
+import { geoNetworkIndex } from '../../src/utils/constants';
+import { performQuery } from '../../src/config/elasticSearchClient';
 
-const mock = new MockAdapter(elasticSearchClient);
+jest.mock('@elastic/elasticsearch', () => {
+  const mClient = {
+    search: jest.fn(),
+    count: jest.fn(),
+  };
+  return {
+    Client: jest.fn(() => mClient),
+  };
+});
 
-const mockConfig = {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-};
-const mockError = {
-  response: {
-    status: 404,
-    data: 'Not Found',
-  },
-};
-const mockErrorInterceptor = jest.fn((error) => Promise.reject(error));
-const mockRequestInterceptor = jest.fn((config) => config);
-elasticSearchClient.interceptors.request.use(
-  mockRequestInterceptor,
-  mockErrorInterceptor,
-);
+describe('Elasticsearch Client', () => {
+  describe('Elasticsearch Client Configurations', () => {
+    beforeEach(() => {
+      jest.mock('../../src/config/environmentConfig', () => ({
+        environmentConfig: {
+          elasticSearchAPI: environmentConfig.elasticSearchAPI,
+          elasticSearchUsername: '',
+          elasticSearchPassword: '',
+        },
+      }));
+    });
 
-describe('Elasticsearch instance configuration', () => {
-  beforeEach(() => {
-    mock.reset();
-  });
+    afterEach(() => {
+      jest.resetModules();
+    });
 
-  describe('Elasticsearch instance creation', () => {
-    it('should create Elasticsearch instance with correct base url and headers', async () => {
-      expect(elasticSearchClient.defaults.baseURL).toBe(
-        `${environmentConfig.elasticSearchAPI}${geoNetworkIndex}`,
-      );
-      expect(elasticSearchClient.defaults.headers.Accept).toEqual(
-        'application/json',
-      );
+    it('should return false for hasCredentials when username and password are empty', async () => {
+      const {
+        hasCredentials,
+      } = require('../../src/config/elasticSearchClient');
+      expect(hasCredentials).toBe(false);
+    });
+
+    it('should set clientOptions without auth when username and password are empty', () => {
+      const { clientOptions } = require('../../src/config/elasticSearchClient');
+      const expectedClientOptions: ClientOptions = {
+        node: environmentConfig.elasticSearchAPI,
+      };
+      expect(clientOptions).toEqual(expectedClientOptions);
     });
   });
 
-  describe('Elasticsearch request and response interceptors', () => {
-    it('should handle successful responses correctly', async () => {
-      const responseData = { message: 'Success' };
-      mock
-        .onPost(elasticSearchAPIPaths.searchPath, {}, mockConfig.headers)
-        .reply(200, responseData);
+  describe('Elasticsearch Query operations', () => {
+    let client;
+    let payload;
 
-      const response = await elasticSearchClient.post(
-        elasticSearchAPIPaths.searchPath,
-        {},
-        mockConfig,
-      );
-
-      expect(response.status).toBe(200);
-      expect(response.data).toEqual(responseData);
-      expect(mockRequestInterceptor).toHaveBeenCalledTimes(1);
+    beforeEach(() => {
+      client = new Client({ node: environmentConfig.elasticSearchAPI });
+      payload = { body: { query: { match_all: {} } } };
     });
 
-    it('should reject the promise with the received error', async () => {
-      mock.onGet('fake-url').reply(404, { message: 'Mock error' });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
-      try {
-        await elasticSearchClient.get('/fake-url');
-        fail('Promise should have been rejected');
-      } catch (error: any) {
-        await expect(error.response?.status).toBe(404);
-        await expect(error.response?.data?.message).toEqual('Mock error');
-        await expect(mockErrorInterceptor(mockError)).rejects.toEqual(
-          mockError,
-        );
-        await expect(mockErrorInterceptor).toHaveBeenCalledWith(mockError);
-      }
+    it('should perform a search query successfully', async () => {
+      const expectedResult = { hits: { hits: [] } };
+      client.search.mockResolvedValueOnce(expectedResult);
+
+      const result = await performQuery(payload);
+
+      expect(client.search).toHaveBeenCalledWith({
+        index: geoNetworkIndex,
+        ...payload,
+      });
+      expect(result).toBe(expectedResult);
+    });
+
+    it('should perform a count query successfully', async () => {
+      const expectedResult = { count: 0 };
+      client.count.mockResolvedValueOnce(expectedResult);
+
+      const result = await performQuery(payload, true);
+
+      expect(client.count).toHaveBeenCalledWith({
+        index: geoNetworkIndex,
+        ...payload,
+      });
+      expect(result).toBe(expectedResult);
+    });
+
+    it('should handle errors', async () => {
+      const errorMessage = 'Elasticsearch error';
+      client.search.mockRejectedValueOnce(new Error(errorMessage));
+
+      await expect(performQuery(payload)).rejects.toThrow(errorMessage);
+
+      expect(client.search).toHaveBeenCalledWith({
+        index: geoNetworkIndex,
+        ...payload,
+      });
     });
   });
 });

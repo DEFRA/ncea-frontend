@@ -56,9 +56,14 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-volumes: []
+volumes:
+- name: elasticsearch-certs
+  secret:
+    secretName: elasticsearch-master-certs
 
-volumeMounts: []
+volumeMounts:
+- mountPath: /usr/share/elasticsearch/config/certs
+  name: elasticsearch-certs
 
 nodeSelector: {}
 
@@ -71,3 +76,6 @@ env:
   NODE_ENV: $(nodeEnd)
   AZURE_KEYVAULT_URL: $(keyVaultUri)
   ELASTICSEARCH_API: $(elasticSearchApi)
+  ES_USERNAME: $(elasticSearchUser)
+  ES_PASSWORD: $(elasticSearchPassword)
+  CLASSIFIER_API: $(classifierApiBaseUri)

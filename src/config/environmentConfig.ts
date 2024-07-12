@@ -23,6 +23,8 @@ const config: EnvironmentConfig = {
   gtmId: process.env.GTM_ID,
   classifierApiUrl: process.env.CLASSIFIER_API_URL,
   classifierApiKey: process.env.CLASSIFIER_API_KEY,
+  elasticSearchUsername: process.env.ES_USERNAME,
+  elasticSearchPassword: process.env.ES_PASSWORD,
 };
 
 const { error, value } = environmentSchema.validate(config);

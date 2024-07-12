@@ -9,32 +9,45 @@ const getHostCatalogueNumber = (searchItem: Record<string, any>): string => {
   return `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''}${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`;
 };
 
-const getCoupledResource = (data: string): string => {
-  let cleanedURL: string = '';
-  if (data) {
-    const cleanedString: string = data.replace(/\\(.)/g, '$1');
-    cleanedURL = `<a class="govuk-link" href="${decodeURIComponent(cleanedString)}" target="_blank">${decodeURIComponent(cleanedString)}</a>`;
+const getCoupledResource = (data: string | string[]): string => {
+  const getCoupleResourceLink = (url: string): string => {
+    const cleanedString: string = url.replace(/\\(.)/g, '$1');
+    return `<a class="govuk-link" href="${decodeURIComponent(cleanedString)}" target="_blank">${decodeURIComponent(cleanedString)}</a>`;
+  };
+  if ((typeof data === 'string' && data.length === 0) || (Array.isArray(data) && data.length === 0)) {
+    return '';
   }
-  return cleanedURL;
+  const coupleResourceUrl: string[] = [];
+  if (Array.isArray(data) && data.length) {
+    data.forEach((resourceUrl: string) => {
+      coupleResourceUrl.push(getCoupleResourceLink(resourceUrl));
+    });
+  } else {
+    coupleResourceUrl.push(getCoupleResourceLink(data as string));
+  }
+  return coupleResourceUrl.join('\n');
 };
 
 const getResourceLocators = (searchItem: Record<string, any>): string => {
-  const functionsData: Record<string, any>[] = searchItem?._source?.cl_function ?? [];
+  const linkDataObject: Record<string, any>[] = searchItem?._source?.link ?? [];
   const resourceLocatorStrings: string[] = [];
   let resourceLocatorString: string = '';
-  if (Array.isArray(functionsData) && functionsData.length) {
-    functionsData.forEach((funData: Record<string, any>) => {
-      const linkDataObject: Record<string, any>[] = searchItem?._source?.link ?? [];
-      const linkData: Record<string, any> | undefined = linkDataObject.find(
-        (linkItem: Record<string, any>) => linkItem?.['function']?.toLowerCase() === funData.key.toLowerCase(),
-      );
-      if (linkData && linkData !== undefined) {
-        const urlData: string = linkData?.urlObject?.default ?? '';
-        const nameData: string = linkData?.nameObject?.default ?? '';
-        if (urlData && nameData) {
-          const resLocStr: string = `${funData.default} from ${nameData} (<a class="govuk-link" href="${urlData}" target="_blank">${urlData}</a>)`;
-          resourceLocatorStrings.push(resLocStr);
-        }
+  if (Array.isArray(linkDataObject) && linkDataObject.length) {
+    linkDataObject.forEach((linkData: Record<string, any>) => {
+      let resLocStr: string = '';
+      const urlData: string = linkData?.urlObject?.default ?? '';
+      const nameData: string = linkData?.nameObject?.default ?? '';
+      const funcData: string = linkData?.function ?? '';
+      const descriptionData: string = linkData?.descriptionObject?.default ?? '';
+      if (urlData) {
+        resLocStr += '<p>';
+        resLocStr += funcData ? `${capitalizeWords(funcData)} from ` : '';
+        resLocStr += nameData ? `${nameData} (` : '';
+        resLocStr += `<a class="govuk-link" href="${urlData}" target="_blank">${urlData}</a>`;
+        resLocStr += nameData ? `)` : '';
+        resLocStr += descriptionData ? ` :- ${descriptionData}` : '';
+        resLocStr += '</p>';
+        resourceLocatorStrings.push(resLocStr);
       }
     });
   }
@@ -75,6 +88,7 @@ const getAccessTabData = (searchItem: Record<string, any>): IAccessItem => ({
   resource_type_and_hierarchy: getResourceTypeHierarchy(searchItem),
   hierarchy_level: searchItem?._source?.cl_hierarchyLevel?.[0]?.default ?? '',
   resource_locators: getResourceLocators(searchItem),
+  metadata_language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
 });
 
 export { getAccessTabData, getHostCatalogueNumber, getResourceLocators, getCoupledResource, getResourceTypeHierarchy };

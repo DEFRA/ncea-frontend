@@ -2,7 +2,6 @@
 
 import Joi from 'joi';
 import {
-  IAggregationOption,
   IAggregationOptions,
   ISearchItem,
 } from '../../../src/interfaces/searchResponse.interface';
@@ -25,6 +24,7 @@ import {
 } from '../../../src/utils/constants';
 import { getPaginationItems } from '../../../src/utils/paginationBuilder';
 import {
+  deleteQueryParams,
   readQueryParams,
   upsertQueryParams,
 } from '../../../src/utils/queryStringHelper';
@@ -77,6 +77,11 @@ describe('Deals with search results controller', () => {
         request.query,
       );
       const processedSortOptions = await processSortOptions(request.query);
+      const resetStudyPeriodQueryString: string = deleteQueryParams(
+        request.query,
+        [queryParamKeys.startYear, queryParamKeys.toYear],
+      );
+      const resetStudyPeriodLink: string = `${webRoutePaths.results}?${resetStudyPeriodQueryString}`;
       await SearchResultsController.renderSearchResultsHandler(
         request,
         response,
@@ -96,6 +101,8 @@ describe('Deals with search results controller', () => {
         dateSearchPath: webRoutePaths.guidedDateSearch,
         filterInstance: 'search_results',
         queryString,
+        hasStudyPeriodFilterApplied: false,
+        resetStudyPeriodLink,
       });
     });
 
@@ -135,6 +142,11 @@ describe('Deals with search results controller', () => {
         request.query,
       );
       const processedSortOptions = await processSortOptions(request.query);
+      const resetStudyPeriodQueryString: string = deleteQueryParams(
+        request.query,
+        [queryParamKeys.startYear, queryParamKeys.toYear],
+      );
+      const resetStudyPeriodLink: string = `${webRoutePaths.results}?${resetStudyPeriodQueryString}`;
       await SearchResultsController.renderSearchResultsHandler(
         request,
         response,
@@ -154,6 +166,8 @@ describe('Deals with search results controller', () => {
         dateSearchPath: webRoutePaths.guidedDateSearch,
         filterInstance: 'search_results',
         queryString,
+        hasStudyPeriodFilterApplied: false,
+        resetStudyPeriodLink,
       });
     });
 

@@ -18,6 +18,12 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/config/elasticSearchClient', () => ({
+  performQuery: jest.fn(() => {
+    return Promise.resolve({ data: 'mocked response' });
+  }),
+}));
+
 let serverRequest;
 
 const invokeRoute = async (route) => {
@@ -124,7 +130,7 @@ describe('Accessibility Screen', () => {
         'p.ncea-static-page__content-item',
       );
       expect(items?.[0]?.textContent?.trim()).toEqual(
-        'This accessibility statement applies to the Natural Capital Search Service.',
+        'This accessibility statement applies to the find natural capital data service.',
       );
       expect(items?.[1]?.textContent?.trim()).toEqual(
         'This service is run by the NCEA programme, on behalf of the Department for Environment, Food and Rural Affairs (Defra).',
@@ -160,7 +166,6 @@ describe('Accessibility Screen', () => {
       const items = content?.querySelectorAll(
         'p.ncea-static-page__content-item',
       );
-      console.log(items?.[0]?.textContent);
       expect(items?.[0]?.textContent?.trim()).toEqual(
         'This service is currently in private beta. It does not yet fully meet Web Content Accessibility Guidelines version 2.2 AA standard.',
       );

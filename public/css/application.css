@@ -7569,7 +7569,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
+  width: 50%;
+  max-height: 65%;
 }
 
 .map-modal {
@@ -7649,11 +7650,15 @@
 }
 
 .help-link {
-  color: #1D70B8 !important;
+  color: #1d70b8 !important;
 }
 
 .ncea-static-page-line-item {
   margin-bottom: 0px;
+}
+
+.hide {
+  display: none;
 }
 
 .ncea-static-page__heading-m {
@@ -7684,6 +7689,35 @@
   line-height: 25px;
   color: #0b0c0c;
   margin: 0;
+}
+.ncea-static-page__table {
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+.ncea-static-page__table thead tr,
+.ncea-static-page__table tbody tr,
+.ncea-static-page__table thead {
+  border-bottom: 1px solid #b1b4b6;
+}
+.ncea-static-page__table th {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+}
+.ncea-static-page__table td {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 25px;
+}
+.ncea-static-page__table th,
+.ncea-static-page__table td {
+  vertical-align: top;
+  padding: 10px 20px 10px 0;
 }
 
 @media only screen and (min-width: 769px) {
@@ -8097,9 +8131,8 @@
   }
 }
 .govuk-checkboxes__input {
-  width: 26px;
-  height: 26px;
-  margin-left: 2px;
+  width: 23px;
+  height: 23px;
   margin-top: 5px;
 }
 
@@ -8112,18 +8145,19 @@
 .defra-checkboxes__label {
   display: flex;
   align-items: center;
+  padding: 4px 10px;
 }
 .defra-checkboxes__label::before {
   top: 5px;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
 }
 .defra-checkboxes__label::after {
-  top: 12px;
-  left: 7px;
-  width: 19px;
-  border-width: 0 0 4px 4px;
-  height: 10px;
+  top: 11px;
+  left: 6px;
+  width: 17px;
+  border-width: 0 0 3px 3px;
+  height: 8px;
 }
 
 .defra-filter-section select {
@@ -8225,6 +8259,45 @@
 
 .govuk-checkboxes__label {
   padding: 7px 30px;
+}
+
+.defra-reset-study-period--link {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  color: #1d70b8 !important;
+}
+.defra-reset-study-period--link:hover {
+  color: #003078 !important;
+}
+.defra-reset-study-period--link:focus {
+  color: #003078 !important;
+}
+
+#defra-bounding-box-info {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  color: #d4351c;
+  display: none;
+}
+
+.map-results-block {
+  border-left: 5px solid #d4351c;
+  padding-left: 10px;
+}
+.map-results-unavailable {
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+  color: #d4351c;
+  display: none;
 }
 
 .details-title {

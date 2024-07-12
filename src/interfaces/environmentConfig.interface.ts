@@ -9,4 +9,6 @@ export interface EnvironmentConfig {
   gtmId?: string;
   classifierApiUrl: string | undefined;
   classifierApiKey: string | undefined;
+  elasticSearchUsername?: string;
+  elasticSearchPassword?: string;
 }
