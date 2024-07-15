@@ -78,9 +78,7 @@ const hydrateFormFromStorage = (form) => {
 // Function to check if any field is empty
 const isAllFieldEmpty = (formId) => {
   const sessionData = getStorageData();
-  console.log(sessionData);
   const form = sessionData.fields[formId];
-  console.log(form);
   if (!form) {
     return true;
   }
@@ -91,7 +89,6 @@ const isAllFieldEmpty = (formId) => {
 const updateSubmitButtonState = (form) => {
   const submitButton = form.querySelector('button[data-to-disable]');
   if (submitButton) {
-    console.log(form.id);
     submitButton.disabled = isAllFieldEmpty(form.id);
   }
 };
@@ -258,19 +255,43 @@ const todayCheckboxStatus = () => {
   if (todayCheckbox && todayCheckbox.checked) {
     const sessionData = getStorageData();
     if (sessionData.fields.hasOwnProperty('date')) {
-      const { tdd, tmd, tdy } = sessionData.fields['date'];
+      const { tdd, tdm, tdy } = sessionData.fields['date'];
       const currentDate = new Date();
       const date = currentDate.getDate();
       const month = currentDate.getMonth() + 1;
       const year = currentDate.getFullYear();
       if (
-        parseInt(tdd) !== date &&
-        parseInt(month) !== tmd &&
-        parseInt(year) !== tdy
+        parseInt(tdd) !== date ||
+        parseInt(tdm) !== month ||
+        parseInt(tdy) !== year
       ) {
         hydrateTodayDate(true);
       }
     }
+  }
+};
+
+// Function to attach event listeners to date input fields
+const attachDateInputListeners = () => {
+  const dateDayInput = document.querySelector('input[name="to-date-day"]');
+  const dateMonthInput = document.querySelector('input[name="to-date-month"]');
+  const dateYearInput = document.querySelector('input[name="to-date-year"]');
+
+  const uncheckTodayDate = () => {
+    if (todayCheckbox && todayCheckbox.checked) {
+      todayCheckbox.checked = false;
+      hydrateTodayDate(false);
+    }
+  };
+
+  if (dateDayInput) {
+    dateDayInput.addEventListener('input', uncheckTodayDate);
+  }
+  if (dateMonthInput) {
+    dateMonthInput.addEventListener('input', uncheckTodayDate);
+  }
+  if (dateYearInput) {
+    dateYearInput.addEventListener('input', uncheckTodayDate);
   }
 };
 
@@ -293,6 +314,7 @@ if (typeof Storage !== 'undefined') {
     previousQuestion();
     attachTodayDateEventListener();
     todayCheckboxStatus();
+    attachDateInputListeners();
 
     const searchJourneyElement = document.querySelectorAll(
       '[data-do-quick-search]',

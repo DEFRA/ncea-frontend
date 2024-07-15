@@ -216,15 +216,24 @@ const _generateDateRangeQuery = (
 const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
   const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
-  const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
+  const { filters, level, parent } = (searchFieldsObject as ISearchPayload) ?? {};
+  const levelMap = {
+    1: 'OrgNceaClassifiers.code.keyword',
+    2: 'OrgNceaClassifiers.classifiers.code.keyword',
+    3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword'
+  };
   if (docId === '') {
     const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
     const mustBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
 
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
+
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
+    }
+    if (level && levelMap[level]) {
+      filterBlock.push(_generateTermsBlock(levelMap[level], parent as string[]));
     }
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
