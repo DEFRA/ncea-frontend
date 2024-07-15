@@ -4,7 +4,7 @@ import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { getClassifierThemes } from '../../services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, guidedSearchSteps, webRoutePaths ,queryParamKeys} from '../../utils/constants';
+import { formIds, guidedSearchSteps, webRoutePaths, queryParamKeys } from '../../utils/constants';
 import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
@@ -16,7 +16,7 @@ const ClassifierSearchController = {
     const classifierItems = await getClassifierThemes(level, parent);
     const nextLevel: string = (+level + 1).toString();
     const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
-    //  const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
+     //  const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
     // console.log(searchResultsCount);
     //hidden fields for selected level1, 2, 3 classifier categories
     return response.view('screens/guided_search/classifier_selection.njk', {
@@ -30,15 +30,23 @@ const ClassifierSearchController = {
       backLinkPath: 'javascript:history.back()',
     });
   },
-  classifierSearchSubmitHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
+  classifierSearchSubmitHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload = request.payload as Record<string, string>;
-    console.log('submit handler payload',payload);
+    const level = payload?.['level'] ?? '';
+    console.log('payload')
+    const nextLevel = (+level + 1);
+    const parent = payload?.['parent'] ?? '';
     const queryParamsObject: Record<string, string> = {
-      [queryParamKeys.level]: payload?.['level'] ?? '',
-      [queryParamKeys.parent]: payload?.['parent'] ?? ''
+      [queryParamKeys.level]: nextLevel.toString(),
+      [queryParamKeys.parent]: parent,
     };
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
-    return response.redirect(`${webRoutePaths.intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`);
+
+    if (nextLevel > 3) {
+      return response.redirect(`${webRoutePaths.guidedDateSearch}?${queryString}`);
+    } else {
+      return response.redirect(`${webRoutePaths.intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`);
+    }
   },
 };
 
