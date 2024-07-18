@@ -26,10 +26,9 @@
 {% endblock %}
 
 {% block content %}
-  <div>
+  <div class="govuk-grid-row">
     {% include "partials/results_count/template.njk" %}
-     <div class="govuk-grid-row">
-    <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
+    <form method="GET" id="{{formId}}" action="{{guidedClassifierSearchPath}}" data-do-browser-storage>
       <input type="hidden" name="level" value="{{nextLevel}}" />
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
         {% for classify in classifierItems %}
@@ -66,13 +65,7 @@
               items: checkboxItems
             }) }}
         {% endfor %}
-
-      </div>
-    </form>
-    </div>
-     <div class="govuk-grid-row">
-      <form method="POST" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
-    <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
+        <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
           {% if nextLevel > 2 %}
             <div class="govuk-grid-column-one-half geography-buttons__left">
               {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: 'javascript:history.back()' }) }}
@@ -84,7 +77,7 @@
             'data-do-storage-skip': ''
           } }) }}
           {{ govukButton({ text: "Next question", attributes: {
-
+            'data-to-disable': '',
             'data-next-question': ''
           } }) }}
           {% if nextLevel > 2 %}
@@ -92,7 +85,7 @@
           {% endif %}
           </div>
         </div>
-        </div>
-  </form>
+      </div>
+    </form>
   </div>
 {% endblock %}

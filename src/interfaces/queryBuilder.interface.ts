@@ -109,12 +109,18 @@ interface IDateValues {
   tdd?: string;
 }
 
+interface IClassifyValue {
+  level?: string;
+  parent?: []
+}
+
 interface ISearchFields {
   keyword?: {
     q?: string;
   };
   date?: IDateValues;
   extent?: IGeoCoordinates;
+  classify?:IClassifyValue;
 }
 
 interface ISearchFilter {
@@ -125,7 +131,7 @@ interface ISearchPayload {
   fields: ISearchFields;
   sort: string;
   level?: number;
-  parent? : string[];
+  parent?: string[];
   filters: ISearchFilter;
   rowsPerPage: number;
   page: number | null;

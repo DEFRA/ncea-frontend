@@ -4,48 +4,67 @@ import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { getClassifierThemes } from '../../services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, guidedSearchSteps, webRoutePaths, queryParamKeys } from '../../utils/constants';
-import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
+import { formIds, webRoutePaths } from '../../utils/constants';
+import { generateCountPayload, readQueryParams } from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
-  renderClassifierSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch: skipPath } = webRoutePaths;
+  renderClassifierSearchHandler: async (
+    request: Request,
+    response: ResponseToolkit
+  ): Promise<ResponseObject> => {
+    const {
+      guidedClassifierSearch: guidedClassifierSearchPath,
+      guidedDateSearch: skipPath,
+      results,
+    } = webRoutePaths;
     const formId: string = formIds.classifierSearch;
-    const level: string = readQueryParams(request.query, 'level');
-    const parent: string = readQueryParams(request.query, 'parent');
-    const classifierItems = await getClassifierThemes(level, parent);
+    const level: string = readQueryParams(request.query, "level");
+    const parent: string = readQueryParams(request.query, "parent");
     const nextLevel: string = (+level + 1).toString();
-    const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
-     //  const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
-    // console.log(searchResultsCount);
-    //hidden fields for selected level1, 2, 3 classifier categories
-    return response.view('screens/guided_search/classifier_selection.njk', {
-      guidedClassifierSearchPath,
-      nextLevel,
-      skipPath,
-      formId,
-      classifierItems,
-      count: 0,
-      // searchResultsCount.totalResults.toString()
-      backLinkPath: 'javascript:history.back()',
-    });
-  },
-  classifierSearchSubmitHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const payload = request.payload as Record<string, string>;
-    const level = payload?.['level'] ?? '';
-    console.log('payload')
-    const nextLevel = (+level + 1);
-    const parent = payload?.['parent'] ?? '';
-    const queryParamsObject: Record<string, string> = {
-      [queryParamKeys.level]: nextLevel.toString(),
-      [queryParamKeys.parent]: parent,
+    const payloadQuery = {
+      ...request.query,
+      level: (Number(level) - 1).toString(),
     };
-    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    const resultPathQueryString: string = readQueryParams(
+      payloadQuery,
+      "",
+      true
+    );
+    const resultsPath: string = `${results}?${resultPathQueryString}`;
 
-    if (nextLevel > 3) {
-      return response.redirect(`${webRoutePaths.guidedDateSearch}?${queryString}`);
+    const renderView = async (showCount: boolean) => {
+      let count: string | null = null;
+      if (showCount) {
+        const queryBuilderSearchObject: ISearchPayload =
+          generateCountPayload(payloadQuery);
+        const searchResultsCount: { totalResults: number } =
+          await getSearchResultsCount(queryBuilderSearchObject);
+        count = searchResultsCount.totalResults.toString() || null;
+      }
+      const classifierItems = await getClassifierThemes(level, parent);
+      return response.view("screens/guided_search/classifier_selection.njk", {
+        guidedClassifierSearchPath,
+        nextLevel,
+        skipPath,
+        formId,
+        classifierItems,
+        count,
+        resultsPath,
+        backLinkPath: "javascript:history.back()",
+      });
+    };
+    if (Number(level) - 1 == 3) {
+      const queryBuilderSearchObject: ISearchPayload =
+        generateCountPayload(payloadQuery);
+      const searchResultsCount: { totalResults: number } =
+        await getSearchResultsCount(queryBuilderSearchObject);
+      return response.redirect(
+        `${skipPath}?cnt=${searchResultsCount.totalResults.toString()}`
+      );
+    } else if (Number(payloadQuery.level) >= 1) {
+      return renderView(true);
     } else {
-      return response.redirect(`${webRoutePaths.intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`);
+      return renderView(false);
     }
   },
 };
