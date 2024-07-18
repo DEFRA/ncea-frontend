@@ -52,12 +52,6 @@ interface IAggregationBlock {
   };
 }
 
-interface IFilterQuery {
-  term: {
-    [key: string]: string | string[];
-  };
-}
-
 interface ISortOrder {
   order: string;
 }
@@ -181,4 +175,5 @@ export {
   ITermsBlock,
   IQueryBlock,
   IOtherQueryProperties,
+  IAggregateClassifierQuery,
 };

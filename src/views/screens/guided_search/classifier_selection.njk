@@ -31,21 +31,27 @@
     <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
       <input type="hidden" name="level" value="{{nextLevel}}" />
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
-        {% for classify in classifierItems %}
+        {% for classify  in classifierItems %}
           {% set checkboxItems = [] %}
+          {% set legendClass = 'govuk-fieldset__legend--l' %}
           {% for item in classify.classifiers %}
             {% set _ = checkboxItems.push({value: item.code, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
           {% endfor %}
-          {% set _ = checkboxItems.push({divider: "or" }) %}
-          {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %}
+          {% if checkboxItems.length > 0 %}
+            {% set _ = checkboxItems.push({divider: "or" }) %}
+            {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %}
+          {% endif %}
           {% if classify.sectionTitle.length > 0 %}
             {% set sectionTitle = classify.sectionTitle %}
           {% else %}
             {% set sectionTitle = 'Select a natural capital theme' %}
           {% endif %}
 
-          {% if classify.sectionIntro.length > 0 %}
-            {% set sectionIntro = classify.sectionIntro %}
+          {% if classify.sectionIntroduction.length > 0 %}
+            {% set sectionIntro = classify.sectionIntroduction %}
+          {% elif nextLevel > 3 %}
+            {% set sectionIntro = '' %}
+            {% set legendClass = 'govuk-fieldset__legend--m' %}
           {% else %}
             {% set sectionIntro = 'Select all that apply' %}
           {% endif %}
@@ -55,8 +61,8 @@
               fieldset: {
                 legend: {
                   text: sectionTitle,
-                  isPageHeading: true,
-                  classes: "govuk-fieldset__legend--l"
+                  isPageHeading: false,
+                  classes: legendClass
                 }
               },
               hint: {
@@ -66,23 +72,14 @@
             }) }}
         {% endfor %}
         <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
-          {% if nextLevel > 2 %}
-            <div class="govuk-grid-column-one-half geography-buttons__left">
-              {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: 'javascript:history.back()' }) }}
-            </div>  
-            <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
-          {% endif %}
-          <div class="govuk-button-group">          
-          {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary", href: skipPath, attributes: {
+          <div class="govuk-button-group govuk-grid-column-one-half">          
+          {{ govukButton({ text: "Skip", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
             'data-do-storage-skip': ''
           } }) }}
-          {{ govukButton({ text: "Next question", attributes: {
+          {{ govukButton({ text: "Next", attributes: {
             'data-to-disable': '',
             'data-next-question': ''
           } }) }}
-          {% if nextLevel > 2 %}
-          </div>
-          {% endif %} 
           </div>
         </div>
       </div>

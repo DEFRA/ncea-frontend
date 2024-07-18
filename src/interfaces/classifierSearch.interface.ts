@@ -3,14 +3,19 @@ export interface classify {
   value?: string;
   name: string;
   definition: string;
-  id: string;
   themeName?: string;
   code: string;
+  classifiers?: classify[];
 }
 
 export interface classifiers {
   sectionTitle: string;
   sectionIntroduction: string;
-  classifiers: classify[];
+  classifiers: classify[] | [];
   selectAll?: string;
+  level?: number;
+  code?: string;
+  name?: string;
+  text?: string;
+  value?: string;
 }

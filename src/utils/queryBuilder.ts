@@ -1,6 +1,7 @@
 import { estypes } from '@elastic/elasticsearch';
 import { generateDateString } from './generateDateString';
 import {
+  IAggregateClassifierQuery,
   IDateValues,
   IGeoCoordinates,
   IGeoShapeBlock,
@@ -306,4 +307,36 @@ const generateFilterQuery = (
     : _generateResourceTypeFilterQuery(searchBuilderPayload);
 };
 
-export { generateSearchQuery, generateFilterQuery, buildCustomSortScriptForStudyPeriod };
+const classifierAggregationQuery = (
+  filters: Record<string, string | string[]>[],
+  uniqueField: string,
+): IAggregateClassifierQuery => {
+  const mustFilter: Record<string, Record<string, string | string[]>>[] = filters.map((filter) => {
+    return {
+      term: filter,
+    };
+  });
+  const classifierQuery: IAggregateClassifierQuery = {
+    size: 0,
+    aggs: {
+      classifier_level: {
+        filter: {
+          bool: {
+            must: mustFilter,
+          },
+        },
+        aggs: {
+          classifier_values: {
+            terms: {
+              field: uniqueField,
+            },
+          },
+        },
+      },
+    },
+  };
+
+  return classifierQuery;
+};
+
+export { generateSearchQuery, generateFilterQuery, buildCustomSortScriptForStudyPeriod, classifierAggregationQuery };

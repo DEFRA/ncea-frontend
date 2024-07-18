@@ -1,12 +1,14 @@
 import { IFilterFlags } from '@/src/interfaces/searchPayload.interface';
 import { estypes } from '@elastic/elasticsearch';
-import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 import { performQuery } from '../../config/elasticSearchClient';
-import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
+
 import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { defaultFilterOptions, quickSearchTargetFields } from '../../utils/constants';
-import { generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
+import { formatAggregationResponse, formatClassifierResponse } from '../../utils/formatAggregationResponse';
+
+import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
+import { classifierAggregationQuery, generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
 
 const getSearchResults = async (
   searchFieldsObject: ISearchPayload,
@@ -142,10 +144,10 @@ const getClassifierDetails = async (level: number, level1?: string[], level2?: s
         });
     }
     const payload = classifierAggregationQuery(mustFilters, uniqueField);
-    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-    const responseData = response?.data;
-    if (responseData?.hits?.total?.value) {
-      const finalResponse: string[] = await formatClassifierResponse(responseData?.aggregations);
+    const response = await performQuery<estypes.SearchResponse>(payload);
+    const responseData = response;
+    if (responseData?.hits?.total?.valueOf) {
+      const finalResponse: string[] = await formatClassifierResponse(responseData?.aggregations || {});
       return finalResponse;
     } else {
       return Promise.resolve([] as string[]);
