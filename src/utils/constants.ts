@@ -72,9 +72,6 @@ export const quickSearchTargetFields: string[] = [
 
 export const guidedSearchSteps = {
   classifierSearch: 'classifier-search',
-  // theme:'theme',
-  // category:'category',
-  // subcategory:'subcategory',
   date: 'date',
   coordinate: 'extent',
 };

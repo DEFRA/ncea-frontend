@@ -11,9 +11,13 @@ import { readQueryParams, upsertQueryParams } from '../../utils/queryStringHelpe
 
 const DateSearchController = {
   renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath, home } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, home,results } = webRoutePaths;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const formId: string = formIds.dataQuestionnaireFID;
+    const queryString: string = readQueryParams(request.query, '');
+    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;;
+    const resultPathQueryString: string = readQueryParams(request.query, '', true);
+    const resultsPath: string = `${results}?${resultPathQueryString}`;
     return response.view('screens/guided_search/date_questionnaire', {
       pageTitle: pageTitles.date,
       fromDate,
@@ -22,6 +26,7 @@ const DateSearchController = {
       skipPath,
       formId,
       count,
+      resultsPath,
       backLinkPath: home,
     });
   },
@@ -30,7 +35,7 @@ const DateSearchController = {
     response: ResponseToolkit,
     error: Joi.ValidationError,
   ): Lifecycle.ReturnValue => {
-    const { guidedDateSearch: guidedDateSearchPath, geographySearch: skipPath, home } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, home } = webRoutePaths;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
@@ -47,6 +52,8 @@ const DateSearchController = {
       items: toItems,
     };
     const formId: string = formIds.dataQuestionnaireFID;
+    const queryString: string = readQueryParams(request.query, '');
+    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;;
     return response
       .view('screens/guided_search/date_questionnaire', {
         pageTitle: pageTitles.date,
