@@ -1,14 +1,14 @@
 import { IFilterFlags } from '@/src/interfaces/searchPayload.interface';
 import { estypes } from '@elastic/elasticsearch';
+import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 import { performQuery } from '../../config/elasticSearchClient';
 
 import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { defaultFilterOptions, quickSearchTargetFields } from '../../utils/constants';
-import { formatAggregationResponse, formatClassifierResponse } from '../../utils/formatAggregationResponse';
 
 import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
-import { classifierAggregationQuery, generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
+import { generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
 
 const getSearchResults = async (
   searchFieldsObject: ISearchPayload,
@@ -105,57 +105,4 @@ const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
   }
 };
 
-const getClassifierDetails = async (level: number, level1?: string[], level2?: string[]): Promise<string[]> => {
-  try {
-    const mustFilters: Record<string, string | string[]>[] = [];
-    let uniqueField: string = '';
-    switch (level) {
-      case 3:
-        uniqueField = 'OrgNceaClassifiers.classifiers.classifiers.classifierValue.keyword';
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifiers.classifierType.keyword': 'Level 2',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierValue.keyword': level1 || [],
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifiers.classifierValue.keyword': level2 || [],
-        });
-        break;
-      case 2:
-        uniqueField = 'OrgNceaClassifiers.classifiers.classifierValue.keyword';
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifiers.classifierType.keyword': 'Level 2',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierValue.keyword': level1 || [],
-        });
-        break;
-      default:
-        uniqueField = 'OrgNceaClassifiers.classifierValue.keyword';
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
-        });
-    }
-    const payload = classifierAggregationQuery(mustFilters, uniqueField);
-    const response = await performQuery<estypes.SearchResponse>(payload);
-    const responseData = response;
-    if (responseData?.hits?.total?.valueOf) {
-      const finalResponse: string[] = await formatClassifierResponse(responseData?.aggregations || {});
-      return finalResponse;
-    } else {
-      return Promise.resolve([] as string[]);
-    }
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
-  } catch (error: any) {
-    throw new Error(`Error fetching results: ${error.message}`);
-  }
-};
-
-export { getDocumentDetails, getFilterOptions, getSearchResultsCount, getSearchResults, getClassifierDetails };
+export { getDocumentDetails, getFilterOptions, getSearchResultsCount, getSearchResults };

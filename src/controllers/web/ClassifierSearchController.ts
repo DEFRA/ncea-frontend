@@ -1,11 +1,9 @@
 'use strict';
 
-import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { getClassifierThemes } from '../../services/handlers/classifierApi';
-import { getSearchResultsCount } from '../../services/handlers/searchApi';
+import { readQueryParams } from '../../utils/queryStringHelper';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 import { formIds, webRoutePaths } from '../../utils/constants';
-import { generateCountPayload, readQueryParams } from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
   renderClassifierSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
@@ -15,8 +13,6 @@ const ClassifierSearchController = {
     const parent: string = readQueryParams(request.query, 'parent[]');
     const classifierItems = await getClassifierThemes(level, parent);
     const nextLevel: string = (+level + 1).toString();
-    const queryBuilderSearchObject: ISearchPayload = generateCountPayload(request.query);
-    const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
     //hidden fields for selected level1, 2, 3 classifier categories
     return response.view('screens/guided_search/classifier_selection.njk', {
       guidedClassifierSearchPath,
@@ -24,7 +20,7 @@ const ClassifierSearchController = {
       skipPath,
       formId,
       classifierItems,
-      count: searchResultsCount?.totalResults?.toString() || 0,
+      count: 0,
       backLinkPath: 'javascript:history.back()',
     });
   },

@@ -69,20 +69,4 @@ const formatAggregationResponse = async (
   }
 };
 
-const formatClassifierResponse = async (apiResponse: Record<string, any>): Promise<string[]> => {
-  try {
-    const finalResponse: string[] = [];
-    const apiAggregationOptions = apiResponse?.classifier_level?.classifier_values?.buckets;
-
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
-    apiAggregationOptions.forEach((aggregationOption: Record<string, any>) => {
-      finalResponse.push(aggregationOption.key);
-    });
-
-    return finalResponse;
-  } catch (error: any) {
-    throw new Error(`Error formatting the aggregation: ${error.message}`);
-  }
-};
-
-export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange, formatClassifierResponse };
+export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange };
