@@ -25,7 +25,7 @@ const transformClassifierLevel3Details = (Level2Classifiers: classify[]): classi
   });
 };
 
-const invokeClassifierApi = async(level: string, parents: string = ''): Promise<AxiosResponse> => {
+const invokeClassifierApi = async (level: string, parents: string = ''): Promise<AxiosResponse> => {
   try {
     let url = `${environmentConfig.classifierApiUrl}?level=${level}`;
     if (parents) {
@@ -39,9 +39,9 @@ const invokeClassifierApi = async(level: string, parents: string = ''): Promise<
     const response: AxiosResponse = await axios.get(url, headers);
     return response;
   } catch (error: unknown) {
-    throw new Error('Error invoking classifier list api.')
+    throw new Error('Error invoking classifier list api.');
   }
-}
+};
 
 export const getClassifierThemes = async (level: string, parents: string = ''): Promise<classifiers[]> => {
   try {
