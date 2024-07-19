@@ -6,9 +6,11 @@ import {
   level1ApiResponse,
   level2ApiResponse,
   level3ApiResponse,
+  level3MissingClassifiersApiResponse,
   level1ClassifierItems,
   level2ClassifierItems,
-  level3ClassifierItems
+  level3ClassifierItems,
+  level3MissingClassifierItems
 } from '../../data/classifierSearch';
 
 jest.mock('axios');
@@ -32,6 +34,17 @@ describe('Classifier API', () => {
       mockedAxios.get.mockResolvedValue({data: level3ApiResponse});
       const classifierItems3 = await getClassifierThemes("3", "lvl2-001,lvl2-003");
       expect(classifierItems3).toEqual(level3ClassifierItems);
+    });
+
+    it('classifier list error', async () => {
+      mockedAxios.get.mockRejectedValue('Network error: Something went wrong');
+      const classifierItems4 = await getClassifierThemes("3", "lvl2-001,lvl2-003");
+      expect(classifierItems4).toEqual([]);
+    });
+    it('no classifiers for some of the level 2 categories', async () => {
+      mockedAxios.get.mockResolvedValue({data: level3MissingClassifiersApiResponse});
+      const classifierItems4 = await getClassifierThemes("3", "lvl2-001,lvl2-003");
+      expect(classifierItems4).toEqual(level3MissingClassifierItems);
     });
   });
 });
