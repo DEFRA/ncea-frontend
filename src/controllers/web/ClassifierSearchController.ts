@@ -74,11 +74,7 @@ const ClassifierSearchController = {
         });
       }
     };
-    if (Number(level) - 1 == 3) {
-      return response.redirect(
-        `${webRoutePaths.intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`
-      );
-    } else if (Number(payloadQuery.level) >= 1) {
+    if (Number(payloadQuery.level) >= 1) {
       return renderView(true);
     } else {
       return renderView(false);

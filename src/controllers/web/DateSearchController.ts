@@ -9,13 +9,15 @@ import { formIds, formKeys, guidedSearchSteps, pageTitles, queryParamKeys, webRo
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
 import { readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
+let newRequest:String;
 const DateSearchController = {
   renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     const { guidedDateSearch: guidedDateSearchPath, home,results } = webRoutePaths;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const formId: string = formIds.dataQuestionnaireFID;
     const queryString: string = readQueryParams(request.query, '');
-    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;;
+    newRequest = queryString;
+    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     return response.view('screens/guided_search/date_questionnaire', {
@@ -79,7 +81,7 @@ const DateSearchController = {
       [queryParamKeys.toDateMonth]: payload?.['to-date-month'] ?? '',
       [queryParamKeys.toDateYear]: payload?.['to-date-year'] ?? '',
     };
-    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    const queryString: string = upsertQueryParams(newRequest, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`);
   },
 };
