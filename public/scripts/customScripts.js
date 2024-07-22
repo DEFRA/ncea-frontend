@@ -78,9 +78,7 @@ const hydrateFormFromStorage = (form) => {
 // Function to check if any field is empty
 const isAllFieldEmpty = (formId) => {
   const sessionData = getStorageData();
-  console.log(sessionData);
   const form = sessionData.fields[formId];
-  console.log(form);
   if (!form) {
     return true;
   }
@@ -91,7 +89,6 @@ const isAllFieldEmpty = (formId) => {
 const updateSubmitButtonState = (form) => {
   const submitButton = form.querySelector('button[data-to-disable]');
   if (submitButton) {
-    console.log(form.id);
     submitButton.disabled = isAllFieldEmpty(form.id);
   }
 };
@@ -276,7 +273,6 @@ const todayCheckboxStatus = () => {
 
 const classifierBackLinkHandler = () => {
   const backLinkElements = document.querySelector('.back-link-classifier');
-  console.log(backLinkElements);
   if (backLinkElements) {
     backLinkElements.addEventListener('click', () => {
         window.history.go(-1);
