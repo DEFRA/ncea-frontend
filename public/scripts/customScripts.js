@@ -271,6 +271,31 @@ const todayCheckboxStatus = () => {
   }
 };
 
+const todayDateUncheck = (checked) => {
+  const sessionData = getStorageData();
+  if (!sessionData.fields.hasOwnProperty('date')) {
+      sessionData.fields['date'] = {};
+  }
+  if (checked) {
+      const currentDate = new Date();
+      const day = currentDate.getDate();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      sessionData.fields['date'] = {
+          ...sessionData.fields['date'],
+          tdcheck: 'true',
+          tdd: day.toString(),
+          tdm: month.toString(),
+          tdy: year.toString(),
+      };
+  } else {
+      sessionData.fields['date'] = {
+          ...sessionData.fields['date'],
+          tdcheck: '',
+      };
+  }
+}
+
 // Function to attach event listeners to date input fields
 const attachDateInputListeners = () => {
   const dateDayInput = document.querySelector('input[name="to-date-day"]');
@@ -280,7 +305,7 @@ const attachDateInputListeners = () => {
   const uncheckTodayDate = () => {
     if (todayCheckbox && todayCheckbox.checked) {
       todayCheckbox.checked = false;
-      hydrateTodayDate(false);
+     todayDateUncheck(false);
     }
   };
 
