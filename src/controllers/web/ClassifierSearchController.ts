@@ -56,7 +56,8 @@ const ClassifierSearchController = {
           classifierItems,
           count,
           resultsPath,
-          backLinkPath: "javascript:history.back()",
+          backLinkPath: '#',
+          backLinkClasses: 'back-link-classifier',
         });
       }else{
         const classifierItems = await getClassifierThemes(level, parent);
@@ -68,7 +69,8 @@ const ClassifierSearchController = {
           classifierItems,
           count,
           resultsPath,
-          backLinkPath: "javascript:history.back()",
+          backLinkPath: '#',
+          backLinkClasses: 'back-link-classifier',
         });
       }
     };

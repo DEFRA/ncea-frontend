@@ -8,7 +8,7 @@ const classifierSearchRoutes = [
     method: 'GET',
     path: webRoutePaths.guidedClassifierSearch,
     handler: ClassifierSearchController.renderClassifierSearchHandler,
-  }
+  },
 ];
 
 export { classifierSearchRoutes };

@@ -85,7 +85,7 @@ npm install --no-optional
 npm run start:dev
 ```
 
-- The server should be running at: http://localhost:3000
+- The server should be running at: https://dev-ncea-search.azure.defra.cloud
 
 ## Technology
 

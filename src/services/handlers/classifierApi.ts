@@ -1,20 +1,34 @@
 import { environmentConfig } from '../../config/environmentConfig';
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { classifiers, classify } from '../../interfaces/classifierSearch.interface';
+import { Classifiers, Classify } from '../../interfaces/classifierSearch.interface';
+import axios, { AxiosResponse } from 'axios';
 
-const transformClassifierDetails = (classifiers: classify[]): classify[] => {
-  return classifiers.map((classifier) => ({
+const transformClassifierDetails = (classifiers: Classify[]): Classify[] => {
+  return classifiers?.map((classifier) => ({
     ...classifier,
     text: classifier.definition,
-    value: classifier.themeName || classifier.name,
+    value: classifier.themeName ?? classifier.name,
   }));
 };
 
-export const getClassifierThemes = async (level: string, parents: string = ''): Promise<classifiers[]> => {
+const transformClassifierLevel3Details = (Level2Classifiers: Classify[]): Classifiers[] => {
+  return Level2Classifiers.map((classifier2: Classify) => {
+    const classifiers3 = classifier2.classifiers ? transformClassifierDetails(classifier2.classifiers) : [];
+    return {
+      ...classifier2,
+      sectionTitle: classifier2.name,
+      sectionIntroduction: '',
+      classifiers: classifiers3,
+      selectAll: classifiers3?.map((classify) => classify.code).join(','),
+      text: '',
+      value: classifier2.name,
+    };
+  });
+};
+
+const invokeClassifierApi = async (level: string, parents: string = ''): Promise<AxiosResponse> => {
   try {
     let url = `${environmentConfig.classifierApiUrl}?level=${level}`;
     if (parents) {
-      console.log(parents);
       url = url + `&Parents=${parents}`;
     }
     const headers = {
@@ -23,21 +37,38 @@ export const getClassifierThemes = async (level: string, parents: string = ''): 
       },
     };
     const response: AxiosResponse = await axios.get(url, headers);
-    // console.log(response);
-    const classifierResponse: classifiers[] = response.data.map((classifier: classifiers) => {
-      const classifiers = transformClassifierDetails(classifier.classifiers);
-      // console.log(classifiers);
-      return {
-        sectionTitle: classifier.sectionTitle,
-        sectionIntro: classifier.sectionIntroduction,
-        classifiers,
-        selectAll: classifiers.map((classify) => classify.code).join(','),
-      };
+    return response;
+  } catch (error: unknown) {
+    throw new Error('Error invoking classifier list api.');
+  }
+};
+
+export const getClassifierThemes = async (level: string, parents: string = ''): Promise<Classifiers[]> => {
+  try {
+    const response: AxiosResponse = await invokeClassifierApi(level, parents);
+    const classifierResponse: Classifiers[] = [];
+    response.data.forEach((classifier: Classifiers) => {
+      if (classifier.level === 3) {
+        classifierResponse.push({
+          sectionTitle: classifier.sectionTitle,
+          sectionIntroduction: classifier.sectionIntroduction,
+          classifiers: [],
+          selectAll: '',
+        });
+        const lvl3: Classifiers[] = transformClassifierLevel3Details(classifier.classifiers);
+        classifierResponse.push(...lvl3);
+      } else {
+        const classifiers = transformClassifierDetails(classifier.classifiers);
+        classifierResponse.push({
+          sectionTitle: classifier.sectionTitle,
+          sectionIntroduction: classifier.sectionIntroduction,
+          classifiers,
+          selectAll: classifiers.map((classify) => classify.code).join(','),
+        });
+      }
     });
-    // console.log(JSON.stringify(classifierResponse));
     return classifierResponse;
-  } catch (error: AxiosError) {
-    console.error(error);
+  } catch (error: unknown) {
     return [];
   }
 };

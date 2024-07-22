@@ -14,6 +14,8 @@ describe('Environment Configuration Schema', () => {
       expect(value.gtmId).toEqual('');
       expect(value.elasticSearchUsername).toEqual('');
       expect(value.elasticSearchPassword).toEqual('');
+      expect(value.classifierApiUrl).toEqual('');
+      expect(value.classifierApiKey).toEqual('');
     });
 
     it('should keep provided values for fields if available', () => {
@@ -33,6 +35,8 @@ describe('Environment Configuration Schema', () => {
       expect(value.gtmId).toEqual('');
       expect(value.elasticSearchUsername).toEqual('');
       expect(value.elasticSearchPassword).toEqual('');
+      expect(value.classifierApiUrl).toEqual('');
+      expect(value.classifierApiKey).toEqual('');
     });
   });
 
@@ -49,6 +53,8 @@ describe('Environment Configuration Schema', () => {
         gtmId: 'your-key',
         elasticSearchUsername: 'es-username',
         elasticSearchPassword: 'es-password',
+        classifierApiUrl: 'https://example.com/api',
+        classifierApiKey: 'your-key',
       };
 
       const { error, value } = environmentSchema.validate(validConfig);
