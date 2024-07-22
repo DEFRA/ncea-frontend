@@ -21,7 +21,8 @@ const ClassifierSearchController = {
       formId,
       classifierItems,
       count: 0,
-      backLinkPath: 'javascript:history.back()',
+      backLinkPath: '#',
+      backLinkClasses: 'back-link-classifier',
     });
   },
 };

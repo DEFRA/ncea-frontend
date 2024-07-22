@@ -1,17 +1,17 @@
-export interface classify {
+export interface Classify {
   text?: string;
   value?: string;
   name: string;
   definition: string;
   themeName?: string;
   code: string;
-  classifiers?: classify[];
+  classifiers?: Classify[];
 }
 
-export interface classifiers {
+export interface Classifiers {
   sectionTitle: string;
   sectionIntroduction: string;
-  classifiers: classify[] | [];
+  classifiers: Classify[] | [];
   selectAll?: string;
   level?: number;
   code?: string;

@@ -1,17 +1,17 @@
 import { environmentConfig } from '../../config/environmentConfig';
+import { Classifiers, Classify } from '../../interfaces/classifierSearch.interface';
 import axios, { AxiosResponse } from 'axios';
-import { classifiers, classify } from '../../interfaces/classifierSearch.interface';
 
-const transformClassifierDetails = (classifiers: classify[]): classify[] => {
+const transformClassifierDetails = (classifiers: Classify[]): Classify[] => {
   return classifiers?.map((classifier) => ({
     ...classifier,
     text: classifier.definition,
-    value: classifier.themeName || classifier.name,
+    value: classifier.themeName ?? classifier.name,
   }));
 };
 
-const transformClassifierLevel3Details = (Level2Classifiers: classify[]): classifiers[] => {
-  return Level2Classifiers.map((classifier2: classify) => {
+const transformClassifierLevel3Details = (Level2Classifiers: Classify[]): Classifiers[] => {
+  return Level2Classifiers.map((classifier2: Classify) => {
     const classifiers3 = classifier2.classifiers ? transformClassifierDetails(classifier2.classifiers) : [];
     return {
       ...classifier2,
@@ -43,11 +43,11 @@ const invokeClassifierApi = async (level: string, parents: string = ''): Promise
   }
 };
 
-export const getClassifierThemes = async (level: string, parents: string = ''): Promise<classifiers[]> => {
+export const getClassifierThemes = async (level: string, parents: string = ''): Promise<Classifiers[]> => {
   try {
     const response: AxiosResponse = await invokeClassifierApi(level, parents);
-    const classifierResponse: classifiers[] = [];
-    response.data.forEach((classifier: classifiers) => {
+    const classifierResponse: Classifiers[] = [];
+    response.data.forEach((classifier: Classifiers) => {
       if (classifier.level === 3) {
         classifierResponse.push({
           sectionTitle: classifier.sectionTitle,
@@ -55,7 +55,7 @@ export const getClassifierThemes = async (level: string, parents: string = ''): 
           classifiers: [],
           selectAll: '',
         });
-        const lvl3: classifiers[] = transformClassifierLevel3Details(classifier.classifiers);
+        const lvl3: Classifiers[] = transformClassifierLevel3Details(classifier.classifiers);
         classifierResponse.push(...lvl3);
       } else {
         const classifiers = transformClassifierDetails(classifier.classifiers);
