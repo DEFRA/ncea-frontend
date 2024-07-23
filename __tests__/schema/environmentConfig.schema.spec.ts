@@ -16,6 +16,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.elasticSearchPassword).toEqual('');
       expect(value.classifierApiUrl).toEqual('');
       expect(value.classifierApiKey).toEqual('');
+      expect(value.webDomain).toEqual('');
     });
 
     it('should keep provided values for fields if available', () => {
@@ -37,6 +38,7 @@ describe('Environment Configuration Schema', () => {
       expect(value.elasticSearchPassword).toEqual('');
       expect(value.classifierApiUrl).toEqual('');
       expect(value.classifierApiKey).toEqual('');
+      expect(value.webDomain).toEqual('');
     });
   });
 
@@ -55,6 +57,7 @@ describe('Environment Configuration Schema', () => {
         elasticSearchPassword: 'es-password',
         classifierApiUrl: 'https://example.com/api',
         classifierApiKey: 'your-key',
+        webDomain: ''
       };
 
       const { error, value } = environmentSchema.validate(validConfig);
