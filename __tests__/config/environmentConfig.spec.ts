@@ -62,6 +62,7 @@ describe('Environment environmentConfig', () => {
         APPINSIGHTS_SECRET_NAME: 'appinsights--connections string',
         ELASTICSEARCH_API: 'https://elasticsearch-api.com',
         WEBDOMAIN: ''
+        WEBDOMAIN: ''
       };
       process.env = { ...mockConfig };
 
