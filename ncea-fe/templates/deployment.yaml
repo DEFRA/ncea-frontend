@@ -72,6 +72,8 @@ spec:
             value: "{{ .Values.env.ES_PASSWORD }}"
           - name: CLASSIFIER_API
             value: "{{ .Values.env.CLASSIFIER_API }}"
+          - name: WEBDOMAIN
+            value: "{{ .Values.env.WEBDOMAIN }}"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

@@ -61,6 +61,7 @@ describe('Environment environmentConfig', () => {
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
         APPINSIGHTS_SECRET_NAME: 'appinsights--connections string',
         ELASTICSEARCH_API: 'https://elasticsearch-api.com',
+        WEBDOMAIN: ''
       };
       process.env = { ...mockConfig };
 
@@ -77,6 +78,7 @@ describe('Environment environmentConfig', () => {
         gtmId: Joi.string().allow('').default(''),
         elasticSearchUsername: Joi.string().allow('').default(''),
         elasticSearchPassword: Joi.string().allow('').default(''),
+        webDomain: Joi.string().allow('').default(''),
         classifierApiUrl: Joi.string().allow('').default(''),
         classifierApiKey: Joi.string().allow('').default(''),
       });

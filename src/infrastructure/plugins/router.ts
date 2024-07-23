@@ -9,6 +9,7 @@ import {
   homeRoutes,
   searchResultsRoutes,
   staticRoutes,
+  mdcRoutes
 } from '../../routes/index';
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
   ...dateSearchRoutes,
   ...geographySearchRoutes,
   ...searchResultsRoutes,
+  ...mdcRoutes
 ];
 
 const customHapiRoutes = {

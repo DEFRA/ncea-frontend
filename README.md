@@ -222,6 +222,7 @@ ELASTICSEARCH_API=
 GTM_ID=
 ES_USERNAME=
 ES_PASSWORD=
+WEBDOMAIN=
 ```
 
 **_Pipeline Variables_**
