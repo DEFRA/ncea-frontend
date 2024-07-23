@@ -49,4 +49,7 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   elasticSearchPassword: Joi.string().allow('').default('').messages({
     'string.base': 'The Elasticsearch password must be a string.',
   }),
+  webDomain: Joi.string().allow('').default('').messages({
+    'string.base': 'The web domain must be a string.',
+  })
 });
