@@ -1,5 +1,4 @@
 'use strict';
-import { Console } from 'console';
 import { environmentConfig } from '../../config/environmentConfig';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
