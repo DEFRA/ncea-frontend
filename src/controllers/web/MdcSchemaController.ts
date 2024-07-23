@@ -5,7 +5,6 @@ import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 const MdcSchemaController = {
   MdcSchemaHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     try {
-      console.log(environmentConfig.webDomain);
       return response.view("screens/mdc/mdc", {webDomain: environmentConfig.webDomain}).header('Content-Type', 'application/xml');
     } catch (error) {
       return response.response({ error: 'An error occurred while processing your request' }).code(500);
