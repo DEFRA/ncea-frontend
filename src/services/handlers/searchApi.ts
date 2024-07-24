@@ -3,9 +3,11 @@ import { estypes } from '@elastic/elasticsearch';
 import { formatAggregationResponse } from '../../utils/formatAggregationResponse';
 import { formatSearchResponse } from '../../utils/formatSearchResponse';
 import { performQuery } from '../../config/elasticSearchClient';
-import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
+
 import { ISearchBuilderPayload, ISearchPayload } from '../../interfaces/queryBuilder.interface';
 import { defaultFilterOptions, quickSearchTargetFields } from '../../utils/constants';
+
+import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfaces/searchResponse.interface';
 import { generateFilterQuery, generateSearchQuery } from '../../utils/queryBuilder';
 
 const getSearchResults = async (

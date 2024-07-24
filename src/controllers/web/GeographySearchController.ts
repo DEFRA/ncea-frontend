@@ -45,6 +45,7 @@ const GeographySearchController = {
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
+    console.log(count);
     return response
       .view('screens/guided_search/geography_questionnaire', {
         pageTitle: pageTitles.geography,

@@ -2,6 +2,7 @@
 
 import { Server } from '@hapi/hapi';
 import {
+  classifierSearchRoutes,
   dateSearchRoutes,
   errorRoutes,
   geographySearchRoutes,
@@ -14,6 +15,7 @@ const routes = [
   ...errorRoutes,
   ...staticRoutes,
   ...homeRoutes,
+  ...classifierSearchRoutes,
   ...dateSearchRoutes,
   ...geographySearchRoutes,
   ...searchResultsRoutes,

@@ -8,7 +8,8 @@ import { webRoutePaths } from '../../utils/constants';
 const {
   home: homePage,
   results: searchResults,
-  guidedDateSearch: guidedSearch,
+  guidedClassifierSearch: guidedSearch,
+  guidedDateSearch,
   getMapResults,
   getMapFilters,
   filterResourceType,
@@ -69,6 +70,7 @@ const customHapiViews = {
         homePage,
         searchResults,
         guidedSearch,
+        guidedDateSearch,
         getMapResults,
         getMapFilters,
         filterResourceType,

@@ -9,7 +9,8 @@ jest.mock('nunjucks');
 const {
   home: homePage,
   results: searchResults,
-  guidedDateSearch: guidedSearch,
+  guidedClassifierSearch: guidedSearch,
+  guidedDateSearch,
   getMapResults,
   getMapFilters,
   filterResourceType,
@@ -62,6 +63,7 @@ describe('Vision Plugin Configuration', () => {
         homePage,
         searchResults,
         guidedSearch,
+        guidedDateSearch,
         getMapResults,
         getMapFilters,
         filterResourceType,

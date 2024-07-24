@@ -4,6 +4,7 @@ import { TabOptions } from '../interfaces/detailsTab.interface';
 export const webRoutePaths = {
   home: '/',
   results: '/search',
+  guidedClassifierSearch: '/classifier-search',
   guidedDateSearch: '/date-search',
   geographySearch: '/coordinate-search',
   intermediate: '/intermediate',
@@ -29,6 +30,7 @@ export const formKeys = {
 };
 
 export const formIds = {
+  classifierSearch: 'classifier-search',
   quickSearchFID: 'keyword',
   dataQuestionnaireFID: 'date',
   geographyQuestionnaireFID: 'extent',
@@ -93,6 +95,8 @@ export const queryParamKeys = {
   resourceType: 'rty',
   startYear: 'sy',
   toYear: 'ty',
+  level: 'level',
+  parent: 'parent',
 };
 
 export const uniqueResourceTypesKey: string = 'unique_resource_types';

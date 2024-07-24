@@ -271,6 +271,15 @@ const todayCheckboxStatus = () => {
   }
 };
 
+const classifierBackLinkHandler = () => {
+  const backLinkElements = document.querySelector('.back-link-classifier');
+  if (backLinkElements) {
+    backLinkElements.addEventListener('click', () => {
+        window.history.go(-1);
+    });
+  }
+};
+
 if (typeof Storage !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('[data-do-browser-storage]');
@@ -290,6 +299,7 @@ if (typeof Storage !== 'undefined') {
     previousQuestion();
     attachTodayDateEventListener();
     todayCheckboxStatus();
+    classifierBackLinkHandler();
 
     const searchJourneyElement = document.querySelectorAll(
       '[data-do-quick-search]',

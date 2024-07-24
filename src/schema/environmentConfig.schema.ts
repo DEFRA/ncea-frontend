@@ -37,6 +37,12 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   gtmId: Joi.string().allow('').default('').messages({
     'string.base': 'GTM ID must be a string',
   }),
+  classifierApiUrl: Joi.string().uri().allow('').default('').messages({
+    'string.uri': 'Classifier search api URI must be a valid URL or an empty string',
+  }),
+  classifierApiKey: Joi.string().allow('').default('').messages({
+    'string.base': 'Classifier search api key must be a string',
+  }),
   elasticSearchUsername: Joi.string().allow('').default('').messages({
     'string.base': 'The Elasticsearch username must be a string.',
   }),

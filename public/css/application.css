@@ -8257,6 +8257,10 @@
   display: block;
 }
 
+.govuk-checkboxes__label {
+  padding: 7px 30px;
+}
+
 .defra-reset-study-period--link {
   font-family: "GDS Transport", arial, sans-serif;
   font-size: 1rem;

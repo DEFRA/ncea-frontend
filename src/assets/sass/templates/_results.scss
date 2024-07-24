@@ -461,6 +461,9 @@
   display: block;
 }
 
+.govuk-checkboxes__label {
+  padding: 7px 30px;
+}
 .defra-reset-study-period--link {
   @include font-style-stack(16px, 20px, 300, normal, true);
   color: $govuk-link-colour !important;
