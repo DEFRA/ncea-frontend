@@ -24,7 +24,6 @@ const getSearchResults = async (
         }),
       };
       const payload = generateSearchQuery(searchBuilderPayload);
-      console.log('payload', JSON.stringify(payload));
       const response = await performQuery<estypes.SearchResponse>(payload);
       const finalResponse: ISearchResults = await formatSearchResponse(response, false, isMapResults);
       return finalResponse;
@@ -44,7 +43,6 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
       isCount: true,
     };
     const payload = generateSearchQuery(searchBuilderPayload);
-    console.log('payload', JSON.stringify(payload));
     if (Object.keys(searchFieldsObject.fields).length) {
       const response = await performQuery<estypes.CountResponse>(payload, true);
       return { totalResults: response?.count ?? 0 };

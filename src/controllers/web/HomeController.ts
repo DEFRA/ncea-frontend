@@ -43,12 +43,16 @@ const HomeController = {
     if (step) {
       const stepMatrix: IStepRouteMatrix = stepRouteMatrix?.[step] ?? {};
       if (Object.keys(stepMatrix).length) {
-      const level: string = readQueryParams(request.query, "level");
-      const adjustedLevel = (Number(level))  === 4 ? 3 : level;
-        const queryString: string = readQueryParams({
-          ...request.query,
-          level: adjustedLevel,
-        }, '', true);
+        const level: string = readQueryParams(request.query, 'level');
+        const adjustedLevel = Number(level) === 4 ? 3 : level;
+        const queryString: string = readQueryParams(
+          {
+            ...request.query,
+            level: adjustedLevel,
+          },
+          '',
+          true,
+        );
 
         const queryBuilderSearchObject: ISearchPayload = generateCountPayload({
           ...request.query,
@@ -56,12 +60,11 @@ const HomeController = {
         });
         try {
           const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
-          console.log("searchResultsCount",searchResultsCount)
           if (searchResultsCount.totalResults > 0) {
             const queryString: string = upsertQueryParams(
               {
                 ...request.query,
-                level: (Number(level)) === 4 ? 3 : (Number(level)),
+                level: Number(level) === 4 ? 3 : Number(level),
               },
               {
                 [queryParamKeys.count]: searchResultsCount.totalResults.toString(),
