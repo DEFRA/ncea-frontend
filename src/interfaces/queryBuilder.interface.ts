@@ -52,11 +52,11 @@ interface IAggregationBlock {
   };
 }
 
-interface IFilterQuery {
-  term: {
-    [key: string]: string | string[];
-  };
-}
+// interface IFilterQuery {
+//   term: {
+//     [key: string]: string | string[];
+//   };
+// }
 
 interface ISortOrder {
   order: string;
@@ -111,7 +111,7 @@ interface IDateValues {
 
 interface IClassifyValue {
   level?: string;
-  parent?: []
+  parent?: [];
 }
 
 interface ISearchFields {
@@ -120,7 +120,7 @@ interface ISearchFields {
   };
   date?: IDateValues;
   extent?: IGeoCoordinates;
-  classify?:IClassifyValue;
+  classify?: IClassifyValue;
 }
 
 interface ISearchFilter {
@@ -148,25 +148,25 @@ interface ISearchBuilderPayload {
   docId?: string;
 }
 
-interface IAggregateClassifierQuery {
-  size: number;
-  aggs: {
-    classifier_level: {
-      filter: {
-        bool: {
-          must: Record<string, Record<string, string | string[]>>[];
-        };
-      };
-      aggs: {
-        classifier_values: {
-          terms: {
-            field: string;
-          };
-        };
-      };
-    };
-  };
-}
+// interface IAggregateClassifierQuery {
+//   size: number;
+//   aggs: {
+//     classifier_level: {
+//       filter: {
+//         bool: {
+//           must: Record<string, Record<string, string | string[]>>[];
+//         };
+//       };
+//       aggs: {
+//         classifier_values: {
+//           terms: {
+//             field: string;
+//           };
+//         };
+//       };
+//     };
+//   };
+// }
 
 export {
   IAggregationBlock,

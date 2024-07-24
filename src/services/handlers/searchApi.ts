@@ -24,6 +24,7 @@ const getSearchResults = async (
         }),
       };
       const payload = generateSearchQuery(searchBuilderPayload);
+      console.log('payload', JSON.stringify(payload));
       const response = await performQuery<estypes.SearchResponse>(payload);
       const finalResponse: ISearchResults = await formatSearchResponse(response, false, isMapResults);
       return finalResponse;
@@ -43,6 +44,7 @@ const getSearchResultsCount = async (searchFieldsObject: ISearchPayload): Promis
       isCount: true,
     };
     const payload = generateSearchQuery(searchBuilderPayload);
+    console.log('payload', JSON.stringify(payload));
     if (Object.keys(searchFieldsObject.fields).length) {
       const response = await performQuery<estypes.CountResponse>(payload, true);
       return { totalResults: response?.count ?? 0 };
@@ -105,57 +107,57 @@ const getDocumentDetails = async (docId: string): Promise<ISearchItem> => {
   }
 };
 
-const getClassifierDetails = async (level: number, level1?: string[], level2?: string[]): Promise<string[]> => {
-  try {
-    const mustFilters: Record<string, string | string[]>[] = [];
-    let uniqueField: string = '';
-    switch (level) {
-      case 3:
-        uniqueField = 'OrgNceaClassifiers.classifiers.classifiers.classifierValue.keyword';
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifiers.classifierType.keyword': 'Level 2',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierValue.keyword': level1 || [],
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifiers.classifierValue.keyword': level2 || [],
-        });
-        break;
-      case 2:
-        uniqueField = 'OrgNceaClassifiers.classifiers.classifierValue.keyword';
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifiers.classifierType.keyword': 'Level 2',
-        });
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierValue.keyword': level1 || [],
-        });
-        break;
-      default:
-        uniqueField = 'OrgNceaClassifiers.classifierValue.keyword';
-        mustFilters.push({
-          'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
-        });
-    }
-    const payload = classifierAggregationQuery(mustFilters, uniqueField);
-    const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
-    const responseData = response?.data;
-    if (responseData?.hits?.total?.value) {
-      const finalResponse: string[] = await formatClassifierResponse(responseData?.aggregations);
-      return finalResponse;
-    } else {
-      return Promise.resolve([] as string[]);
-    }
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
-  } catch (error: any) {
-    throw new Error(`Error fetching results: ${error.message}`);
-  }
-};
+// const getClassifierDetails = async (level: number, level1?: string[], level2?: string[]): Promise<string[]> => {
+//   try {
+//     const mustFilters: Record<string, string | string[]>[] = [];
+//     let uniqueField: string = '';
+//     switch (level) {
+//       case 3:
+//         uniqueField = 'OrgNceaClassifiers.classifiers.classifiers.classifierValue.keyword';
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
+//         });
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifiers.classifierType.keyword': 'Level 2',
+//         });
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifierValue.keyword': level1 || [],
+//         });
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifiers.classifierValue.keyword': level2 || [],
+//         });
+//         break;
+//       case 2:
+//         uniqueField = 'OrgNceaClassifiers.classifiers.classifierValue.keyword';
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
+//         });
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifiers.classifierType.keyword': 'Level 2',
+//         });
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifierValue.keyword': level1 || [],
+//         });
+//         break;
+//       default:
+//         uniqueField = 'OrgNceaClassifiers.classifierValue.keyword';
+//         mustFilters.push({
+//           'OrgNceaClassifiers.classifierType.keyword': 'Level 1',
+//         });
+//     }
+//     const payload = classifierAggregationQuery(mustFilters, uniqueField);
+//     const response = await elasticSearchClient.post(elasticSearchAPIPaths.searchPath, payload);
+//     const responseData = response?.data;
+//     if (responseData?.hits?.total?.value) {
+//       const finalResponse: string[] = await formatClassifierResponse(responseData?.aggregations);
+//       return finalResponse;
+//     } else {
+//       return Promise.resolve([] as string[]);
+//     }
+//     /* eslint-disable  @typescript-eslint/no-explicit-any */
+//   } catch (error: any) {
+//     throw new Error(`Error fetching results: ${error.message}`);
+//   }
+// };
 
-export { getDocumentDetails, getFilterOptions, getSearchResultsCount, getSearchResults, getClassifierDetails };
+export { getDocumentDetails, getFilterOptions, getSearchResultsCount, getSearchResults };

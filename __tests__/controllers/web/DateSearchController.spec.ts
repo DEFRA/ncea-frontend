@@ -21,17 +21,24 @@ import {
 import Joi from 'joi';
 import { FormFieldError } from '../../../src/interfaces/guidedSearch.interface';
 import { upsertQueryParams } from '../../../src/utils/queryStringHelper';
+import { readQueryParams } from '../../../src/utils/queryStringHelper';
 
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
-    const request: Request = {} as any;
+    const request: Request = { query: {} } as any;
     const response: ResponseToolkit = { view: jest.fn() } as any;
     const {
       guidedDateSearch: guidedDateSearchPath,
-      geographySearch: skipPath,
       home,
+      results
     } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
+    const count: string = readQueryParams(request.query, queryParamKeys.count);
+    const queryString: string = readQueryParams(request.query, '');
+    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;
+    const resultPathQueryString: string = readQueryParams(request.query, '', true);
+    const resultsPath: string = `${results}?${resultPathQueryString}`;
+
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
@@ -42,7 +49,8 @@ describe('Deals with the Date Search Controller', () => {
         guidedDateSearchPath,
         skipPath,
         formId,
-        count: '',
+        count,
+        resultsPath,
         backLinkPath: home,
       },
     );
@@ -57,7 +65,7 @@ describe('Deals with the Date Search Controller', () => {
       'to-date-month': '',
       'to-date-year': '2023',
     };
-    const request: Request = { payload: { ...dateFormFields } } as any;
+    const request: Request = { payload: { ...dateFormFields }, query: {} } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
     const queryParamsObject: Record<string, string> = {
@@ -82,7 +90,7 @@ describe('Deals with the Date Search Controller', () => {
 
   it('should build the query params and navigate to intermediate route without data', async () => {
     const dateFormFields = {};
-    const request: Request = { payload: { ...dateFormFields } } as any;
+    const request: Request = { payload: { ...dateFormFields }, query: {} } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
     const queryParamsObject: Record<string, string> = {
@@ -106,7 +114,7 @@ describe('Deals with the Date Search Controller', () => {
   });
 
   it('should validate the date questionnaire form', async () => {
-    const request: Request = {} as any;
+    const request: Request = { query: {} } as any;
     const response: ResponseToolkit = {
       view: jest.fn().mockReturnValue({
         code: jest.fn().mockReturnThis(),
@@ -130,9 +138,11 @@ describe('Deals with the Date Search Controller', () => {
 
     const {
       guidedDateSearch: guidedDateSearchPath,
-      geographySearch: skipPath,
-      home,
+      home
     } = webRoutePaths;
+    const count: string = readQueryParams(request.query, queryParamKeys.count);
+    const queryString: string = readQueryParams(request.query, '');
+    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;
 
     await DateSearchController.dateSearchFailActionHandler(
       request,
@@ -148,7 +158,7 @@ describe('Deals with the Date Search Controller', () => {
         guidedDateSearchPath,
         skipPath,
         formId,
-        count: '',
+        count,
         backLinkPath: home,
       },
     );

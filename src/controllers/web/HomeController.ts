@@ -43,15 +43,16 @@ const HomeController = {
     if (step) {
       const stepMatrix: IStepRouteMatrix = stepRouteMatrix?.[step] ?? {};
       if (Object.keys(stepMatrix).length) {
-        const level: string = readQueryParams(request.query, "level");
+      const level: string = readQueryParams(request.query, "level");
+      const adjustedLevel = (Number(level))  === 4 ? 3 : level;
         const queryString: string = readQueryParams({
           ...request.query,
-          level: (Number(level)) === 4 ? 3 : (Number(level)),
+          level: adjustedLevel,
         }, '', true);
 
         const queryBuilderSearchObject: ISearchPayload = generateCountPayload({
           ...request.query,
-          level: (Number(level)) === 4 ? 3 : (Number(level)),
+          level: adjustedLevel,
         });
         try {
           const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
@@ -78,6 +79,7 @@ const HomeController = {
     }
     return response.redirect(webRoutePaths.home);
   },
+
   helpHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
     return response.view('screens/home/help', {
       pageTitle: pageTitles.help,

@@ -15,20 +15,16 @@ import {
   upsertQueryParams,
 } from '../../../src/utils/queryStringHelper';
 
-jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
-  info: jest.fn(),
-}));
-
 jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResultsCount: jest.fn(),
 }));
 
 describe('Deals with Home Controller', () => {
   describe('Deals with the renderHomeHandler', () => {
-    it('should call the home view with context', async () => {
+    it('should call the home view with context', () => {
       const request: Request = {} as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
-      await HomeController.renderHomeHandler(request, response);
+      HomeController.renderHomeHandler(request, response);
       const { quickSearchFID } = formIds;
       expect(response.view).toHaveBeenCalledWith('screens/home/template', {
         pageTitle: pageTitles.home,
@@ -37,6 +33,7 @@ describe('Deals with Home Controller', () => {
       });
     });
   });
+
   describe('Deals with the intermediateHandler', () => {
     it('should redirect to home if step is undefined', async () => {
       const request: Request = { params: {} } as any;
@@ -44,82 +41,68 @@ describe('Deals with Home Controller', () => {
       await HomeController.intermediateHandler(request, response);
       expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.home);
     });
+
     it('should redirect to home if step is empty', async () => {
       const request: Request = { params: { step: '' } } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
       await HomeController.intermediateHandler(request, response);
       expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.home);
     });
+
     it('should redirect to home if step is invalid', async () => {
       const request: Request = { params: { step: 'invalid' } } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
       await HomeController.intermediateHandler(request, response);
       expect(response.redirect).toHaveBeenCalledWith(webRoutePaths.home);
     });
-    it('should redirect to geography page if step is date and search results count > 0', async () => {
-      const dateFormFields = {
-        'from-date-day': '2',
-        'from-date-month': '',
-        'from-date-year': '2000',
-        'to-date-day': '',
-        'to-date-month': '',
-        'to-date-year': '2023',
-      };
-      const request: Request = {
-        params: { step: guidedSearchSteps.date },
-        payload: { ...dateFormFields },
-      } as any;
+
+    it('should redirect to next step if search results count > 0', async () => {
+      const request: Request = { params: { step: guidedSearchSteps.date }, query: { level: '3' } } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
-      (getSearchResultsCount as jest.Mock).mockResolvedValue({
-        totalResults: 10,
-      });
-      const queryString: string = upsertQueryParams(
-        request.query,
+      (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 10 });
+
+      await HomeController.intermediateHandler(request, response);
+
+      const expectedQueryString = upsertQueryParams(
+        {
+          ...request.query,
+          level: '3',
+        },
         {
           [queryParamKeys.count]: '10',
         },
         false,
       );
-      await HomeController.intermediateHandler(request, response);
+
       expect(response.redirect).toHaveBeenCalledWith(
-        `${webRoutePaths.geographySearch}?${queryString}`,
+        `${webRoutePaths.geographySearch}?${expectedQueryString}`,
       );
     });
-    it('should redirect to results page if step is date and search results count <= 0', async () => {
-      const dateFormFields = {
-        'from-date-day': '2',
-        'from-date-month': '',
-        'from-date-year': '2000',
-        'to-date-day': '',
-        'to-date-month': '',
-        'to-date-year': '2023',
-      };
-      const request: Request = {
-        params: { step: guidedSearchSteps.date },
-        payload: { ...dateFormFields },
-      } as any;
-      const response: ResponseToolkit = { redirect: jest.fn() } as any;
-      (getSearchResultsCount as jest.Mock).mockResolvedValue({
-        totalResults: 0,
-      });
 
-      const queryString: string = readQueryParams(request.query, '', true);
+    it('should redirect to results page if search results count <= 0', async () => {
+      const request: Request = { params: { step: guidedSearchSteps.date }, query: { level: '3' } } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+      (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
+
+      const queryString: string = readQueryParams({ ...request.query, level: '3' }, '', true);
+
       await HomeController.intermediateHandler(request, response);
+
       expect(response.redirect).toHaveBeenCalledWith(
         `${webRoutePaths.results}?${queryString}`,
       );
     });
+
     it('should redirect to results page if an error occurs during count retrieval', async () => {
-      const request: Request = {
-        params: { step: guidedSearchSteps.date },
-        payload: {},
-      } as any;
+      const request: Request = { params: { step: guidedSearchSteps.date }, query: { level: '3' } } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
       const error = new Error('Mocked error');
       (getSearchResultsCount as jest.Mock).mockRejectedValue(error);
 
-      const queryString: string = readQueryParams(request.query, '', true);
+      const queryString: string = readQueryParams({ ...request.query, level: '3' }, '', true);
+
       await HomeController.intermediateHandler(request, response);
+
       expect(response.redirect).toHaveBeenCalledWith(
         `${webRoutePaths.results}?${queryString}`,
       );
