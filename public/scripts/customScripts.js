@@ -73,6 +73,21 @@ const hydrateFormFromStorage = (form) => {
       checkbox.checked = sessionData.fields[form.id][fieldAltName] === 'true';
     }
   });
+  if (form.id === 'classifier-search') {
+    const classifierData = sessionData.fields['classifier-search'] || {};
+    Object.keys(classifierData).forEach((levelKey) => {
+      if (levelKey === 'currentLevel') return;
+      const valuesArray = classifierData[levelKey] || [];
+      valuesArray.forEach((value) => {
+        const checkbox = form.querySelector(
+          `input[type="checkbox"][value="${value}"]`
+        );
+        if (checkbox) {
+          checkbox.checked = true;
+        }
+      });
+    });
+  }
 };
 
 // Function to check if any field is empty
@@ -82,7 +97,12 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  return !Object.values(form).some((value) => value?.trim() !== '');
+  return !Object.values(form).some((value) => {
+    if (Array.isArray(value)) {
+      return value.length > 0;
+    }
+    return typeof value === 'string' && value.trim() !== '';
+  });
 };
 
 // Function to update submit button state
@@ -93,17 +113,57 @@ const updateSubmitButtonState = (form) => {
   }
 };
 
-//Listen for the input event on input fields
 const attachEventListeners = (form) => {
   form.querySelectorAll('input').forEach((input) => {
-    input.addEventListener('input', () => {
+    input.addEventListener('change', () => {
       const sessionData = getStorageData();
-      const fieldAltName = input.getAttribute('altName');
-      const value = input.value;
-      if (!sessionData.fields.hasOwnProperty(form.id)) {
-        sessionData.fields[form.id] = {};
+      const fieldAltName = input.getAttribute('altName') || input.value;
+      if (input.type === 'checkbox') {
+        const value = input.value;
+        let levelKey = '';
+
+        // Determine the level and key
+        if (value.startsWith('lvl')) {
+          levelKey = `level${value.slice(3, 4)}`;
+        } else if (value.startsWith('lv')) {
+          levelKey = `level${value.slice(2, 3)}`;
+        }
+
+        if (!sessionData.fields.hasOwnProperty('classifier-search')) {
+          sessionData.fields['classifier-search'] = {};
+        }
+
+        if (!sessionData.fields['classifier-search'].hasOwnProperty(levelKey)) {
+          sessionData.fields['classifier-search'][levelKey] = [];
+        }
+
+       sessionData.fields['classifier-search']['currentLevel'] = levelKey
+
+        const valuesArray = sessionData.fields['classifier-search'][levelKey];
+        if (input.checked) {
+          if (!valuesArray.includes(value)) {
+            valuesArray.push(value);
+          }
+        } else {
+          const valueIndex = valuesArray.indexOf(value);
+          if (valueIndex !== -1) {
+            valuesArray.splice(valueIndex, 1);
+          }
+        }
+
+        // Clean up empty levels
+        if (sessionData.fields['classifier-search'][levelKey].length === 0) {
+          delete sessionData.fields['classifier-search'][levelKey];
+        }
+
+      } else {
+        const value = input.value;
+        if (!sessionData.fields.hasOwnProperty(form.id)) {
+          sessionData.fields[form.id] = {};
+        }
+        sessionData.fields[form.id][fieldAltName] = value;
       }
-      sessionData.fields[form.id][fieldAltName] = value;
+
       storeStorageData(sessionData);
       updateSubmitButtonState(form);
     });

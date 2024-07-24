@@ -12,7 +12,7 @@ const ClassifierSearchController = {
       guidedClassifierSearch: guidedClassifierSearchPath,
       guidedDateSearch: skipPath,
       results,
-      intermediate
+      intermediate,
     } = webRoutePaths;
     const formId: string = formIds.classifierSearch;
     const level: number = Number(readQueryParams(request.query, 'level'));

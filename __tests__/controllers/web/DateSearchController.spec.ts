@@ -28,7 +28,7 @@ describe('Deals with the Date Search Controller', () => {
     const request: Request = { query: {} } as any;
     const response: ResponseToolkit = { view: jest.fn() } as any;
     const {
-      guidedDateSearch: guidedDateSearchPath,
+      guidedDateSearch,
       home,
       results
     } = webRoutePaths;
@@ -38,6 +38,7 @@ describe('Deals with the Date Search Controller', () => {
     const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
+    const guidedDateSearchPath: string = `${guidedDateSearch}?${queryString}`;
 
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(

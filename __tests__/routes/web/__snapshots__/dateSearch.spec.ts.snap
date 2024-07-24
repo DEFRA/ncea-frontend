@@ -218,7 +218,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   </div>
 </div>
   <div class="govuk-grid-row date-search-form">
-    <form method="POST" id="date" action="/date-search" data-do-browser-storage>
+    <form method="POST" id="date" action="/date-search?" data-do-browser-storage>
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
