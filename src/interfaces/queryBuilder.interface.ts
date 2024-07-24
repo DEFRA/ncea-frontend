@@ -52,12 +52,6 @@ interface IAggregationBlock {
   };
 }
 
-// interface IFilterQuery {
-//   term: {
-//     [key: string]: string | string[];
-//   };
-// }
-
 interface ISortOrder {
   order: string;
 }
@@ -147,26 +141,6 @@ interface ISearchBuilderPayload {
   filterOptions?: IFilterOptions;
   docId?: string;
 }
-
-// interface IAggregateClassifierQuery {
-//   size: number;
-//   aggs: {
-//     classifier_level: {
-//       filter: {
-//         bool: {
-//           must: Record<string, Record<string, string | string[]>>[];
-//         };
-//       };
-//       aggs: {
-//         classifier_values: {
-//           terms: {
-//             field: string;
-//           };
-//         };
-//       };
-//     };
-//   };
-// }
 
 export {
   IAggregationBlock,
