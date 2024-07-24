@@ -1,4 +1,5 @@
 import { environmentConfig } from '../../config/environmentConfig';
+import { getSecret } from '../../utils/keyvault';
 import { Classifiers, Classify } from '../../interfaces/classifierSearch.interface';
 import axios, { AxiosResponse } from 'axios';
 
@@ -27,13 +28,17 @@ const transformClassifierLevel3Details = (Level2Classifiers: Classify[]): Classi
 
 const invokeClassifierApi = async (level: string, parents: string = ''): Promise<AxiosResponse> => {
   try {
-    let url = `${environmentConfig.classifierApiUrl}?level=${level}`;
+    const classifierApiAuthKey = await getSecret(
+      environmentConfig.classifierApiKey ?? 'nceaClassifierMicroServiceApiKey',
+    );
+    let url = `${environmentConfig.classifierApiUrl}api/classifiers?level=${level}`;
+
     if (parents) {
       url = url + `&Parents=${parents}`;
     }
     const headers = {
       headers: {
-        'X-API-Key': environmentConfig.classifierApiKey,
+        'X-API-Key': classifierApiAuthKey,
       },
     };
     const response: AxiosResponse = await axios.get(url, headers);
