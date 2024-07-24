@@ -1,11 +1,24 @@
-'use strict';
+"use strict";
 
-import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
-import { getSearchResultsCount } from '../../services/handlers/searchApi';
-import { IGuidedSearchStepsMatrix, IStepRouteMatrix } from '../../interfaces/guidedSearch.interface';
-import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, guidedSearchSteps, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
-import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
+import { ISearchPayload } from "../../interfaces/queryBuilder.interface";
+import { getSearchResultsCount } from "../../services/handlers/searchApi";
+import {
+  IGuidedSearchStepsMatrix,
+  IStepRouteMatrix,
+} from "../../interfaces/guidedSearch.interface";
+import { Request, ResponseObject, ResponseToolkit } from "@hapi/hapi";
+import {
+  formIds,
+  guidedSearchSteps,
+  pageTitles,
+  queryParamKeys,
+  webRoutePaths,
+} from "../../utils/constants";
+import {
+  generateCountPayload,
+  readQueryParams,
+  upsertQueryParams,
+} from "../../utils/queryStringHelper";
 
 /**
  * This code snippet exports a module named HomeController.
@@ -17,15 +30,21 @@ import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../
  */
 
 const HomeController = {
-  renderHomeHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const { quickSearchFID } = formIds;
-    return response.view('screens/home/template', {
+  renderHomeHandler: (
+    request: Request,
+    response: ResponseToolkit
+  ): ResponseObject => {
+    return response.view("screens/home/template", {
       pageTitle: pageTitles.home,
-      quickSearchFID,
+      quickSearchFID: formIds.quickSearchFID,
       searchInputError: undefined,
     });
   },
-  intermediateHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+
+  intermediateHandler: async (
+    request: Request,
+    response: ResponseToolkit
+  ): Promise<ResponseObject> => {
     const stepRouteMatrix: IGuidedSearchStepsMatrix = {
       [guidedSearchSteps.classifierSearch]: {
         self: webRoutePaths.guidedClassifierSearch,
@@ -39,72 +58,94 @@ const HomeController = {
         self: webRoutePaths.geographySearch,
       },
     };
-    const step: string = request.params?.step ?? '';
-    if (step) {
-      const stepMatrix: IStepRouteMatrix = stepRouteMatrix?.[step] ?? {};
-      if (Object.keys(stepMatrix).length) {
-        const level: string = readQueryParams(request.query, 'level');
-        const adjustedLevel = Number(level) === 4 ? 3 : level;
-        const queryString: string = readQueryParams(
-          {
-            ...request.query,
-            level: adjustedLevel,
-          },
-          '',
-          true,
-        );
 
-        const queryBuilderSearchObject: ISearchPayload = generateCountPayload({
-          ...request.query,
-          level: adjustedLevel,
-        });
-        try {
-          const searchResultsCount: { totalResults: number } = await getSearchResultsCount(queryBuilderSearchObject);
-          if (searchResultsCount.totalResults > 0) {
-            const queryString: string = upsertQueryParams(
-              {
-                ...request.query,
-                level: Number(level) === 4 ? 3 : Number(level),
-              },
-              {
-                [queryParamKeys.count]: searchResultsCount.totalResults.toString(),
-              },
-              false,
-            );
-            return response.redirect(`${stepMatrix.next}?${queryString}`);
-          } else {
-            return response.redirect(`${webRoutePaths.results}?${queryString}`);
-          }
-        } catch (error) {
-          return response.redirect(`${webRoutePaths.results}?${queryString}`);
-        }
-      }
+    const step: string = request.params?.step ?? "";
+    const stepMatrix: IStepRouteMatrix = stepRouteMatrix[step] ?? {};
+
+    if (!step || !Object.keys(stepMatrix).length) {
+      return response.redirect(webRoutePaths.home);
     }
-    return response.redirect(webRoutePaths.home);
+
+    const level: string = readQueryParams(request.query, "level");
+    const adjustedLevel = Number(level) === 4 ? 3 : level;
+    const queryString: string = readQueryParams(
+      {
+        ...request.query,
+        level: adjustedLevel,
+      },
+      "",
+      true
+    );
+
+    const queryBuilderSearchObject: ISearchPayload = generateCountPayload({
+      ...request.query,
+      level: adjustedLevel,
+    });
+
+    try {
+      const searchResultsCount = await getSearchResultsCount(
+        queryBuilderSearchObject
+      );
+
+      const updatedQuery = {
+        ...request.query,
+        level: adjustedLevel,
+      };
+      if (searchResultsCount.totalResults > 0) {
+        updatedQuery[queryParamKeys.count] =
+          searchResultsCount.totalResults.toString();
+        return response.redirect(
+          `${stepMatrix.next}?${upsertQueryParams(updatedQuery, {}, false)}`
+        );
+      } else {
+        return response.redirect(`${webRoutePaths.results}?${queryString}`);
+      }
+    } catch (error) {
+      return response.redirect(`${webRoutePaths.results}?${queryString}`);
+    }
   },
 
-  helpHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.view('screens/home/help', {
+  helpHandler: (
+    request: Request,
+    response: ResponseToolkit
+  ): ResponseObject => {
+    return response.view("screens/home/help", {
       pageTitle: pageTitles.help,
     });
   },
-  accessibilityHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.view('screens/home/accessibility', {
+
+  accessibilityHandler: (
+    request: Request,
+    response: ResponseToolkit
+  ): ResponseObject => {
+    return response.view("screens/home/accessibility", {
       pageTitle: pageTitles.accessibility,
     });
   },
-  termsConditionsHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.view('screens/home/terms_conditions', {
+
+  termsConditionsHandler: (
+    request: Request,
+    response: ResponseToolkit
+  ): ResponseObject => {
+    return response.view("screens/home/terms_conditions", {
       pageTitle: pageTitles.termsAndConditions,
     });
   },
-  privacyPolicyHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.view('screens/home/privacy_policy', {
+
+  privacyPolicyHandler: (
+    request: Request,
+    response: ResponseToolkit
+  ): ResponseObject => {
+    return response.view("screens/home/privacy_policy", {
       pageTitle: pageTitles.privacyPolicy,
     });
   },
-  cookiePolicyHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    return response.view('screens/home/cookie_policy', {
+
+  cookiePolicyHandler: (
+    request: Request,
+    response: ResponseToolkit
+  ): ResponseObject => {
+    return response.view("screens/home/cookie_policy", {
       pageTitle: pageTitles.cookiePolicy,
     });
   },
