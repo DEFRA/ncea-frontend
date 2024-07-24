@@ -31,7 +31,8 @@ const invokeClassifierApi = async (level: string, parents: string = ''): Promise
     const classifierApiAuthKey = await getSecret(
       environmentConfig.classifierApiKey ?? 'nceaClassifierMicroServiceApiKey',
     );
-    let url = `${environmentConfig.classifierApiUrl}/api/classifiers?level=${level}`;
+    let url = `${environmentConfig.classifierApiUrl}api/classifiers?level=${level}`;
+
     if (parents) {
       url = url + `&Parents=${parents}`;
     }
