@@ -333,7 +333,7 @@ exports[`Guided Search - Geography Questionnaire Screen GET Request Geography Qu
       </div>
     </div>
     <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
-      <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
+       <div class="govuk-button-group govuk-grid-column-one-half">
         
   
 

@@ -208,12 +208,6 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(buttons.length).toBe(1);
       });
 
-      it('should have 2 buttons in right layout', () => {
-        const buttonBlock = document?.querySelector(
-          '.geography-buttons__right',
-        );
-        expect(buttonBlock?.childElementCount).toBe(2);
-      });
     });
   });
 });
