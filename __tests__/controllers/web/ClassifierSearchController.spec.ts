@@ -2,11 +2,11 @@
 
 import { ClassifierSearchController } from '../../../src/controllers/web/ClassifierSearchController';
 import { Request, ResponseToolkit } from '@hapi/hapi';
-import { formIds, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../../src/utils/constants';
+import { formIds, queryParamKeys, webRoutePaths } from '../../../src/utils/constants';
 import { level3ClassifierItems } from '../../data/classifierSearch';
 import { getClassifierThemes } from '../../../src/services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../../src/services/handlers/searchApi';
-import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../../src/utils/queryStringHelper';
+import { readQueryParams, upsertQueryParams } from '../../../src/utils/queryStringHelper';
 
 jest.mock('../../../src/services/handlers/classifierApi', () => ({
   getClassifierThemes: jest.fn(),
@@ -50,7 +50,7 @@ describe('Classifier Search Controller', () => {
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-      const skipPathUrl = `${intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`;
+      const skipPathUrl = `${skipPath}?${queryString}`;
 
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
@@ -125,7 +125,7 @@ describe('Classifier Search Controller', () => {
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-      const skipPathUrl = `${intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`;
+      const skipPathUrl = `${skipPath}?${queryString}`;
 
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,

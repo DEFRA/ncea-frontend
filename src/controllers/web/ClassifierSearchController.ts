@@ -3,7 +3,7 @@
 import { getClassifierThemes } from '../../services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, guidedSearchSteps, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { formIds, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
@@ -12,7 +12,6 @@ const ClassifierSearchController = {
       guidedClassifierSearch: guidedClassifierSearchPath,
       guidedDateSearch: skipPath,
       results,
-      intermediate,
     } = webRoutePaths;
     const formId: string = formIds.classifierSearch;
     const level: number = Number(readQueryParams(request.query, 'level'));
@@ -32,7 +31,7 @@ const ClassifierSearchController = {
 
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-    const skipPathUrl: string = `${intermediate}/${guidedSearchSteps.classifierSearch}?${queryString}`;
+    const skipPathUrl: string = `${skipPath}?${queryString}`;
 
     const classifierItems = await getClassifierThemes(level.toString(), parent);
 
