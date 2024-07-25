@@ -4,10 +4,17 @@ import { getClassifierThemes } from '../../services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 import { formIds, queryParamKeys, webRoutePaths } from '../../utils/constants';
-import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
+import {
+  generateCountPayload,
+  readQueryParams,
+  upsertQueryParams,
+} from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
-  renderClassifierSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+  renderClassifierSearchHandler: async (
+    request: Request,
+    response: ResponseToolkit,
+  ): Promise<ResponseObject> => {
     const {
       guidedClassifierSearch: guidedClassifierSearchPath,
       guidedDateSearch: skipPath,
@@ -29,15 +36,23 @@ const ClassifierSearchController = {
       [queryParamKeys.parent]: parent,
     };
 
-    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    let queryString: string = '';
+    if (level - 1 > 0) {
+      queryString = upsertQueryParams(request.query, queryParamsObject, false);
+    }
+
     const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-    const skipPathUrl: string = `${skipPath}?${queryString}`;
+    const skipPathUrl: string = queryString
+      ? `${skipPath}?${queryString}`
+      : skipPath;
 
     const classifierItems = await getClassifierThemes(level.toString(), parent);
 
     const renderView = async (showCount: boolean) => {
       const count = showCount
-        ? (await getSearchResultsCount(generateCountPayload(payloadQuery))).totalResults.toString()
+        ? (
+            await getSearchResultsCount(generateCountPayload(payloadQuery))
+          ).totalResults.toString()
         : null;
 
       return response.view('screens/guided_search/classifier_selection.njk', {

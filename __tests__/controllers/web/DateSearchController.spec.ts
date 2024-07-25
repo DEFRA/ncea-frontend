@@ -30,12 +30,15 @@ describe('Deals with the Date Search Controller', () => {
     const {
       guidedDateSearch,
       home,
-      results
+      results,
+      geographySearch
     } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const queryString: string = readQueryParams(request.query, '');
-    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;
+    const skipPath: string = queryString
+    ? `${geographySearch}?${queryString}`
+    : geographySearch;
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     const guidedDateSearchPath: string = `${guidedDateSearch}?${queryString}`;
@@ -139,11 +142,14 @@ describe('Deals with the Date Search Controller', () => {
 
     const {
       guidedDateSearch: guidedDateSearchPath,
-      home
+      home,
+      geographySearch
     } = webRoutePaths;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const queryString: string = readQueryParams(request.query, '');
-    const skipPath: string = `${webRoutePaths.intermediate}/${guidedSearchSteps.date}?${queryString}`;
+    const skipPath: string = queryString
+    ? `${geographySearch}?${queryString}`
+    : geographySearch;
 
     await DateSearchController.dateSearchFailActionHandler(
       request,

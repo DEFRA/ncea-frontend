@@ -408,7 +408,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     
   
 
-<a href="/intermediate/date?" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
+<a href="/coordinate-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
   Skip question
 </a>
 
