@@ -198,6 +198,7 @@ const formattedDetailsResponse: ISearchResults = {
       alternateTitle: '',
       organisationName: '',
       ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      ncea_catalogue_entry: '',
       host_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'Dataset',
@@ -761,6 +762,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       alternateTitle: 'This is an alternate title',
       organisationName: 'United Kingdom Hydrographic Office',
       ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      ncea_catalogue_entry: '',
       host_catalogue_number:
         'https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_entry: '',

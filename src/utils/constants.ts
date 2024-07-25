@@ -139,7 +139,7 @@ export const detailsTabOptions: TabOptions = {
     'Resource type': 'resource_type_and_hierarchy',
     'Hierarchy level name': 'hierarchy_level',
     'Resource locators': 'resource_locators',
-    'Catalouge entry': 'ncea_catalogue_number',
+    'Catalouge entry': 'ncea_catalogue_entry',
     'NCEA search service catalogue number': 'host_service_catalogue_number',
     'Parent ID': 'ncea_group_reference',
     'Metadata standard': 'metadata_standard',

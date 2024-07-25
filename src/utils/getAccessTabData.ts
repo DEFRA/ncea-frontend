@@ -83,6 +83,7 @@ const getResourceTypeHierarchy = (searchItem: Record<string, any>): string => {
 
 const getAccessTabData = (searchItem: Record<string, any>): IAccessItem => ({
   ncea_catalogue_number: searchItem?._source?.uuid,
+  ncea_catalogue_entry: searchItem?._source?.OrgNceaIdentifiers?.masterReferenceID?.catalogueEntry ?? '',
   host_catalogue_number: getHostCatalogueNumber(searchItem),
   host_catalogue_entry: getCoupledResource(searchItem?._source?.OrgCoupledResource ?? ''),
   resource_type_and_hierarchy: getResourceTypeHierarchy(searchItem),

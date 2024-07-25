@@ -327,6 +327,7 @@ describe('Format the search response', () => {
           language: '',
           topicCategories: '',
           ncea_catalogue_number: 'af7cd14f-6c20-445f-abd0-7c41385ba999',
+          ncea_catalogue_entry: '',
           host_catalogue_number: '',
           host_catalogue_entry: '',
           resource_type_and_hierarchy: '',
@@ -378,6 +379,7 @@ describe('Format the search response', () => {
           language: '',
           topicCategories: '',
           ncea_catalogue_number: 'ac7db62c-1908-48a3-a4be-8ca8526b4948',
+          ncea_catalogue_entry: '',
           host_catalogue_number:
             'https://seabed.admiralty.co.ukaf7cd14f-6c20-445f-abd0-7c41385ba999',
           host_catalogue_entry: '',

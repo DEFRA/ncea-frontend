@@ -507,9 +507,10 @@ exports[`Details route template Document details with data Check status code and
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Catalouge entry</h2>
           
-            <span class='tab-content-value'>
-              fb8dca0f-7425-4f50-86a1-c4673b1aef88
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
           
         </div>
       
@@ -1534,9 +1535,10 @@ exports[`Details route template Document details with partial data Check status 
         <div class='tab-content-row'>
           <h2 class='tab-content-label'>Catalouge entry</h2>
           
-            <span class='tab-content-value'>
-              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
           
         </div>
       
