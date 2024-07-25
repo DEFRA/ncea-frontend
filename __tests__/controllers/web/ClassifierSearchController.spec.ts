@@ -20,7 +20,7 @@ describe('Classifier Search Controller', () => {
   describe('renderClassifierSearchHandler', () => {
     let request: Request;
     let response: ResponseToolkit;
-    const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch: skipPath, results, intermediate } = webRoutePaths;
+    const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch: skipPath, results } = webRoutePaths;
     const { classifierSearch } = formIds;
 
     beforeEach(() => {
@@ -46,6 +46,7 @@ describe('Classifier Search Controller', () => {
         [queryParamKeys.journey]: 'gs',
         [queryParamKeys.level]: '2',
         [queryParamKeys.parent]: 'lv2-001,lv2-002',
+        [queryParamKeys.count]: '0',
       };
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
@@ -83,16 +84,15 @@ describe('Classifier Search Controller', () => {
         [queryParamKeys.journey]: 'gs',
         [queryParamKeys.level]: '-1',
         [queryParamKeys.parent]: '',
+        [queryParamKeys.count]: '0',
       };
 
-      const queryString = upsertQueryParams(request.query, queryParamsObject, false);
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-      const skipPathUrl = "/date-search";
 
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
         nextLevel: "1",
-        skipPath: skipPathUrl,
+        skipPath,
         formId: classifierSearch,
         classifierItems: level3ClassifierItems,
         count: null,
@@ -121,6 +121,7 @@ describe('Classifier Search Controller', () => {
         [queryParamKeys.journey]: 'gs',
         [queryParamKeys.level]: '2',
         [queryParamKeys.parent]: 'lv2-001,lv2-002',
+        [queryParamKeys.count]: '10',
       };
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
