@@ -16,6 +16,10 @@ import {
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
+jest.mock('../../../src/utils/keyvault', () => ({
+  getSecret: jest.fn(),
+}));
+
 describe('Classifier API', () => {
   describe('getClassifierThemes', () => {
     it('should call classifier list api for level 1', async () => {

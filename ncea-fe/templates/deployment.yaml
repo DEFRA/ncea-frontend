@@ -70,8 +70,10 @@ spec:
             value: "{{ .Values.env.ES_USERNAME }}"
           - name: ES_PASSWORD
             value: "{{ .Values.env.ES_PASSWORD }}"
-          - name: CLASSIFIER_API
+          - name: CLASSIFIER_API_URL
             value: "{{ .Values.env.CLASSIFIER_API }}"
+          - name: CLASSIFIER_API_KEY
+            value: "nceaClassifierMicroServiceApiKey"
           - name: WEBDOMAIN
             value: "{{ .Values.env.WEBDOMAIN }}"
       {{- with .Values.volumes }}
