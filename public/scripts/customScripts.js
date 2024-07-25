@@ -320,15 +320,15 @@ const todayCheckboxStatus = () => {
   if (todayCheckbox && todayCheckbox.checked) {
     const sessionData = getStorageData();
     if (sessionData.fields.hasOwnProperty('date')) {
-      const { tdd, tdm, tdy } = sessionData.fields['date'];
+      const { tdd, tmd, tdy } = sessionData.fields['date'];
       const currentDate = new Date();
       const date = currentDate.getDate();
       const month = currentDate.getMonth() + 1;
       const year = currentDate.getFullYear();
       if (
-        parseInt(tdd) !== date ||
-        parseInt(tdm) !== month ||
-        parseInt(tdy) !== year
+        parseInt(tdd) !== date &&
+        parseInt(month) !== tmd &&
+        parseInt(year) !== tdy
       ) {
         hydrateTodayDate(true);
       }
