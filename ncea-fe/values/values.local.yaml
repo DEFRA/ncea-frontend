@@ -65,3 +65,4 @@ env:
   AZURE_KEYVAULT_URL: https://devnceinfkvt1401.vault.azure.net/
   ELASTICSEARCH_API: http://elasticsearch.geonetwork.svc.cluster.local/
   CLASSIFIER_API: https://dev-ncea-classifier.azure.defra.cloud/
+  WEBDOMAIN: https://dev-ncea-search.azure.defra.cloud/

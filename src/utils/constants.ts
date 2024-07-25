@@ -18,6 +18,9 @@ export const webRoutePaths = {
   termsAndConditions: '/terms-conditions',
   privacyPolicy: '/privacy-policy',
   cookiePolicy: '/cookie-policy',
+  mdc: '/mdc/mdc.xsd',
+  mdcClassifiers: '/mdc/classifiers.xsd',
+  mdcIdentifiers: '/mdc/identifiers.xsd',
 };
 
 export const elasticSearchAPIPaths = {
