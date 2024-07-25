@@ -79,3 +79,4 @@ env:
   ES_USERNAME: $(elasticSearchUser)
   ES_PASSWORD: $(elasticSearchPassword)
   CLASSIFIER_API: $(classifierApiBaseUri)
+  WEBDOMAIN: $(webdomain)
