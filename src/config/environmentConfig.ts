@@ -25,6 +25,7 @@ const config: EnvironmentConfig = {
   classifierApiKey: process.env.CLASSIFIER_API_KEY,
   elasticSearchUsername: process.env.ES_USERNAME,
   elasticSearchPassword: process.env.ES_PASSWORD,
+  webDomain: process.env.WEBDOMAIN,
 };
 
 const { error, value } = environmentSchema.validate(config);

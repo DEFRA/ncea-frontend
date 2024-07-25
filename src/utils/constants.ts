@@ -18,6 +18,9 @@ export const webRoutePaths = {
   termsAndConditions: '/terms-conditions',
   privacyPolicy: '/privacy-policy',
   cookiePolicy: '/cookie-policy',
+  mdc: '/mdc/mdc.xsd',
+  mdcClassifiers: '/mdc/classifiers.xsd',
+  mdcIdentifiers: '/mdc/identifiers.xsd',
 };
 
 export const elasticSearchAPIPaths = {
@@ -139,8 +142,7 @@ export const detailsTabOptions: TabOptions = {
     'Resource type': 'resource_type_and_hierarchy',
     'Hierarchy level name': 'hierarchy_level',
     'Resource locators': 'resource_locators',
-    'Catalouge entry': 'ncea_catalogue_number',
-    'NCEA search service catalogue number': 'host_service_catalogue_number',
+    'Catalouge entry': 'ncea_catalogue_entry',
     'Parent ID': 'ncea_group_reference',
     'Metadata standard': 'metadata_standard',
     'Project number': 'project_number',

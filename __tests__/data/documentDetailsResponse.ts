@@ -198,10 +198,10 @@ const formattedDetailsResponse: ISearchResults = {
       alternateTitle: '',
       organisationName: '',
       ncea_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      ncea_catalogue_entry: '',
       host_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'Dataset',
-      host_service_catalogue_number: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
       hierarchy_level: 'Dataset',
       resource_locators:
         '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
@@ -761,6 +761,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       alternateTitle: 'This is an alternate title',
       organisationName: 'United Kingdom Hydrographic Office',
       ncea_catalogue_number: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      ncea_catalogue_entry: '',
       host_catalogue_number:
         'https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_entry: '',
@@ -787,7 +788,6 @@ const formattedDetailsFullResponse: ISearchResults = {
                       <td>false</td>
                       <td>inapplicable</td>
                     </tr></tbody></table>`,
-      host_service_catalogue_number: '3ce46f92-509c-4529-a062-c8b48788340d',
       metadata_standard: 'MEDIN',
       ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
       project_number: '',
