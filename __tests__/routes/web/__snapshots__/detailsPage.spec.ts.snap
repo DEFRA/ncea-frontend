@@ -518,18 +518,6 @@ exports[`Details route template Document details with data Check status code and
     
       
         <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA search service catalogue number</h2>
-          
-            <span class='tab-content-value'>
-              3ce46f92-509c-4529-a062-c8b48788340d
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
           <h2 class='tab-content-label'>Parent ID</h2>
           
             <span class='tab-content-value'>
@@ -1539,18 +1527,6 @@ exports[`Details route template Document details with partial data Check status 
   Unavailable
 </strong>
 
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>NCEA search service catalogue number</h2>
-          
-            <span class='tab-content-value'>
-              2fc172f5-4c8e-493b-8277-3492b3ed504c
-            </span>
           
         </div>
       

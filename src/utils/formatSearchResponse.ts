@@ -131,7 +131,6 @@ const getOtherDetails = async (
     ...getGeneralTabData(searchItem),
     ...getAccessTabData(searchItem),
     ...getQualityTabData(searchItem),
-    host_service_catalogue_number: searchItem?._source?.sourceCatalogue ?? '',
     ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
