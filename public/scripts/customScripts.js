@@ -204,7 +204,12 @@ const skipStorage = () => {
         if (associatedForm) {
           const sessionData = getStorageData();
           if (sessionData.fields.hasOwnProperty(associatedForm.id)) {
-            delete sessionData.fields[associatedForm.id];
+            if (associatedForm.id === 'classifier-search' && sessionData.fields['classifier-search'].currentLevel) {
+              const currentLevel = sessionData.fields['classifier-search'].currentLevel;
+              delete sessionData.fields['classifier-search'][currentLevel];
+            } else {
+              delete sessionData.fields[associatedForm.id];
+            }
           }
           sessionData.stepState[associatedForm.id] = 'skipped';
           sessionData.previousStep = `${window.location.pathname}${window.location.search}`;

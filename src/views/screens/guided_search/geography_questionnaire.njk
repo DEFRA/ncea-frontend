@@ -62,14 +62,11 @@
       </div>
     </div>
     <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
-      <div class="govuk-grid-column-one-half geography-buttons__left">
-        {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons", href: guidedDateSearchPath }) }}
-      </div>
       <div class="govuk-grid-column-one-half govuk-button-group govuk-!-margin-bottom-0 geography-buttons__right">
-        {{ govukButton({ text: "Skip question", classes: "govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons", href: skipPath, attributes: {
+        {{ govukButton({ text: "Skip", classes: "govuk-button--secondary govuk-!-margin-bottom-0 coordinate-buttons", href: skipPath, attributes: {
             'data-do-storage-skip': ''
           } }) }}
-        {{ govukButton({ text: "Show results", classes: "govuk-!-margin-bottom-0 govuk-!-margin-right-0 coordinate-buttons", attributes: {
+        {{ govukButton({ text: "See Results", classes: "govuk-!-margin-bottom-0 govuk-!-margin-right-0 coordinate-buttons", attributes: {
             'data-to-disable': '',
             'data-next-question': ''
           } }) }}
