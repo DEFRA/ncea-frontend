@@ -74,6 +74,8 @@ spec:
             value: "{{ .Values.env.CLASSIFIER_API }}"
           - name: CLASSIFIER_API_KEY
             value: "nceaClassifierMicroServiceApiKey"
+          - name: WEBDOMAIN
+            value: "{{ .Values.env.WEBDOMAIN }}"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

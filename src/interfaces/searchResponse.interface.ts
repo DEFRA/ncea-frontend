@@ -30,6 +30,7 @@ export interface IAccessItem {
   metadata_standard?: string;
   project_number?: string;
   metadata_language?: string;
+  ncea_catalogue_entry?: string;
 }
 
 export interface ILicense {

@@ -62,6 +62,7 @@ steps:
         env.ES_USERNAME=$(elasticSearchUser)
         env.ES_PASSWORD=$(elasticSearchPassword)
         env.CLASSIFIER_API=$(classifierApiBaseUri)
+        env.WEBDOMAIN=$(webdomain)
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
