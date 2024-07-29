@@ -166,7 +166,7 @@ describe('Deals with the Date Search Controller', () => {
         skipPath,
         formId,
         count,
-        backLinkPath: home,
+        backLinkClasses: 'back-link-date',
       },
     );
   });

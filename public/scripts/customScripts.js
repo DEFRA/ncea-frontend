@@ -232,6 +232,14 @@ const nextQuestion = () => {
           const sessionData = getStorageData();
           sessionData.stepState[associatedForm.id] = 'submitted';
           sessionData.previousStep = `${window.location.pathname}${window.location.search}`;
+
+          const classifierField = sessionData.fields['classifier-search'];
+          if (associatedForm.id === 'classifier-search' && classifierField && classifierField.currentLevel) {
+            const levels = ['level1', 'level2', 'level3'];
+            const currentIndex = levels.indexOf(classifierField.currentLevel);
+            classifierField.currentLevel = levels[Math.min(currentIndex + 1, levels.length - 1)];
+          }
+
           storeStorageData(sessionData);
         }
       });
@@ -394,6 +402,32 @@ const classifierBackLinkHandler = () => {
   }
 };
 
+function redirectToClassifierSearch(){
+  const sessionData = getStorageData();
+  const classifierData = sessionData.fields['classifier-search'] || {};
+  const currentLevel = classifierData.currentLevel;
+  const levelKeys = Object.keys(classifierData).filter(key => key.startsWith('level'));
+
+  const currentLevelNumber = currentLevel && parseInt(currentLevel.replace('level', ''));
+  let level = currentLevelNumber || 1;
+  let associatedLevel = [];
+
+  if (currentLevelNumber > 1) {
+      const previousLevel = `level${currentLevelNumber - 1}`;
+      if (classifierData[previousLevel]) {
+          associatedLevel = classifierData[previousLevel];
+      }
+  } else {
+      associatedLevel = [];
+  }
+  const parents = associatedLevel;
+  const params = new URLSearchParams({ level });
+  parents.forEach(parent => params.append('parent[]', parent));
+  const url = `/classifier-search?${params.toString()}`;
+  window.location.href = url;
+
+}
+
 if (typeof Storage !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('[data-do-browser-storage]');
@@ -415,6 +449,9 @@ if (typeof Storage !== 'undefined') {
     todayCheckboxStatus();
     attachDateInputListeners();
     classifierBackLinkHandler();
+   // dateBackbreadcrumHandler();
+   document.querySelector('.back-link-date') && document.querySelector('.back-link-date').addEventListener('click', redirectToClassifierSearch);
+
 
     const searchJourneyElement = document.querySelectorAll(
       '[data-do-quick-search]',

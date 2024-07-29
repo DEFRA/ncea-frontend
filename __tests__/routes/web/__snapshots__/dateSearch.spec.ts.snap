@@ -207,7 +207,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
   
 
-<a href="/" class="govuk-back-link">Back</a>
+<a href="#" class="govuk-back-link back-link-date">Back</a>
 
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
@@ -218,7 +218,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
   </div>
 </div>
   <div class="govuk-grid-row date-search-form">
-    <form method="POST" id="date" action="/date-search?" data-do-browser-storage>
+    <form method="POST" id="date" action="/date-search?jry=gs&amp;cnt=0" data-do-browser-storage>
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
         <h1 class="govuk-heading-m">
           When was the data or information collected?
@@ -406,7 +406,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
     
   
 
-<a href="/coordinate-search" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
+<a href="/coordinate-search?jry=gs&amp;cnt=0" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button" data-do-storage-skip="">
   Skip
 </a>
 

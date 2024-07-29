@@ -17,6 +17,15 @@ const GeographySearchController = {
     const queryString: string = readQueryParams(request.query, '');
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
     const skipPath: string = `${results}?${queryString}`;
+    // const guidedDateSearchPathNew: string = `${guidedDateSearchPath}${queryString && (queryString.includes('level=') || queryString.includes('parent=')) ? `?${queryString}` : ''}`;
+
+    // const queryStringObj = new URLSearchParams(queryString);
+    // queryStringObj.delete('fdy');
+    // queryStringObj.delete('tdy');
+    // queryStringObj.delete('cnt');
+    // const hasLevelOrParent = queryStringObj.has('level') || queryStringObj.has('parent');
+    // const guidedDateSearchPathNew: string = `${guidedDateSearchPath}${hasLevelOrParent ? '?' + queryStringObj.toString() : ''}`;
+    const guidedDateSearchPathNew: string = `${guidedDateSearchPath}?${queryString}`;
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     return response.view('screens/guided_search/geography_questionnaire', {
@@ -28,7 +37,7 @@ const GeographySearchController = {
       skipPath,
       count,
       resultsPath,
-      backLinkPath: guidedDateSearchPath,
+      backLinkPath: guidedDateSearchPathNew,
     });
   },
   doGeographySearchFailActionHandler: async (

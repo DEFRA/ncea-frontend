@@ -43,9 +43,9 @@ describe('Classifier Search Controller', () => {
       };
 
       const queryParamsObject = {
-        [queryParamKeys.journey]: 'gs',
         [queryParamKeys.level]: '2',
         [queryParamKeys.parent]: 'lv2-001,lv2-002',
+        [queryParamKeys.journey]:'gs',
         [queryParamKeys.count]: '0',
       };
 
@@ -118,9 +118,9 @@ describe('Classifier Search Controller', () => {
       };
 
       const queryParamsObject = {
-        [queryParamKeys.journey]: 'gs',
         [queryParamKeys.level]: '2',
         [queryParamKeys.parent]: 'lv2-001,lv2-002',
+        [queryParamKeys.journey]:'gs',
         [queryParamKeys.count]: '10',
       };
 

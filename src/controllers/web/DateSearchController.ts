@@ -4,21 +4,27 @@ import { FormFieldError } from '../../interfaces/guidedSearch.interface';
 import Joi from 'joi';
 import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
+import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { transformErrors } from '../../utils/transformErrors';
 import { formIds, formKeys, guidedSearchSteps, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { fromDate, toDate } from '../../data/dateQuestionnaireFieldOptions';
-import { readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
+import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const DateSearchController = {
-  renderGuidedSearchHandler: (request: Request, response: ResponseToolkit): ResponseObject => {
-    const { guidedDateSearch, geographySearch,home, results } = webRoutePaths;
-    const count: string = readQueryParams(request.query, queryParamKeys.count);
+  renderGuidedSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const { guidedDateSearch, geographySearch, results } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
-    const queryString: string = readQueryParams(request.query, '');
+    const countPayload = generateCountPayload(request.query);
+    const count = (await getSearchResultsCount(countPayload)).totalResults.toString();
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.count]: count,
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     const guidedDateSearchPath: string = `${guidedDateSearch}?${queryString}`;
-    const skipPath: string = queryString
-    ? `${geographySearch}?${queryString}`
-    : geographySearch;
+    const skipPath: string = queryString ? `${geographySearch}?${queryString}` : geographySearch;
+
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     return response.view('screens/guided_search/date_questionnaire', {
@@ -30,7 +36,8 @@ const DateSearchController = {
       formId,
       count,
       resultsPath,
-      backLinkPath: home,
+      backLinkPath: '#',
+      backLinkClasses: 'back-link-date',
     });
   },
   dateSearchFailActionHandler: (
@@ -38,7 +45,7 @@ const DateSearchController = {
     response: ResponseToolkit,
     error: Joi.ValidationError,
   ): Lifecycle.ReturnValue => {
-    const { guidedDateSearch: guidedDateSearchPath,geographySearch, home } = webRoutePaths;
+    const { guidedDateSearch: guidedDateSearchPath, geographySearch } = webRoutePaths;
     const count: string = readQueryParams(request.query, queryParamKeys.count);
     const { fromError, fromItems, toError, toItems } = transformErrors(
       error,
@@ -56,9 +63,7 @@ const DateSearchController = {
     };
     const formId: string = formIds.dataQuestionnaireFID;
     const queryString: string = readQueryParams(request.query, '');
-    const skipPath: string = queryString
-    ? `${geographySearch}?${queryString}`
-    : geographySearch;
+    const skipPath: string = queryString ? `${geographySearch}?${queryString}` : geographySearch;
     return response
       .view('screens/guided_search/date_questionnaire', {
         pageTitle: pageTitles.date,
@@ -68,7 +73,8 @@ const DateSearchController = {
         skipPath,
         formId,
         count,
-        backLinkPath: home,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-classifier',
       })
       .code(400)
       .takeover();
