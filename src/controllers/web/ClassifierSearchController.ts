@@ -25,7 +25,7 @@ const ClassifierSearchController = {
     };
 
     const queryString: string = level - 1 > 0 ? upsertQueryParams(payloadQuery, queryParamsObject, false) : '';
-    const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`
+    const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`;
 
     const skipPathUrl: string = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
     const classifierItems = await getClassifierThemes(level.toString(), parent);
@@ -35,6 +35,7 @@ const ClassifierSearchController = {
       nextLevel,
       skipPath: skipPathUrl,
       formId,
+      journey: 'gs',
       classifierItems,
       count: level >= 1 ? totalCount : null,
       resultsPath,

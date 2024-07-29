@@ -63,7 +63,14 @@ const DateSearchController = {
     };
     const formId: string = formIds.dataQuestionnaireFID;
     const queryString: string = readQueryParams(request.query, '');
-    const skipPath: string = queryString ? `${geographySearch}?${queryString}` : geographySearch;
+
+    // Updated logic for skipPath
+    const queryStringObj = new URLSearchParams(queryString);
+    queryStringObj.delete('fdy');
+    queryStringObj.delete('tdy');
+    const hasLevelOrParent = queryStringObj.has('level') || queryStringObj.has('parent');
+    const skipPath: string = `${geographySearch}${hasLevelOrParent ? '?' + queryStringObj.toString() : ''}`;
+
     return response
       .view('screens/guided_search/date_questionnaire', {
         pageTitle: pageTitles.date,

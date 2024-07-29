@@ -45,7 +45,7 @@ const getResourceLocators = (searchItem: Record<string, any>): string => {
         resLocStr += nameData ? `${nameData} (` : '';
         resLocStr += `<a class="govuk-link" href="${urlData}" target="_blank">${urlData}</a>`;
         resLocStr += nameData ? `)` : '';
-        resLocStr += descriptionData ? ` :- ${descriptionData}` : '';
+        resLocStr += descriptionData ? `: ${descriptionData}` : '';
         resLocStr += '</p>';
         resourceLocatorStrings.push(resLocStr);
       }

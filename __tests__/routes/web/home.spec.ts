@@ -85,7 +85,7 @@ describe('Home Screen', () => {
           document
             ?.querySelector('.banner-container__heading-xl')
             ?.textContent?.trim(),
-        ).toBe('Find Natural Capital data');
+        ).toBe('Find natural capital data');
       });
     });
   });

@@ -197,7 +197,13 @@ const _generateDateRangeQuery = (
 ): estypes.QueryDslQueryContainer[] => {
   const { searchFieldsObject } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
-
+  const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
+  const levelMap = {
+    1: 'OrgNceaClassifiers.code.keyword',
+    2: 'OrgNceaClassifiers.classifiers.code.keyword',
+    3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
+  };
+  const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   const filterBlock: estypes.QueryDslQueryContainer[] =
     (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
@@ -209,6 +215,8 @@ const _generateDateRangeQuery = (
     filterBlock.push(..._generateRangeBlock(newFields));
   } else if (fields?.date?.fdy && fields?.date?.tdy) {
     filterBlock.push(..._generateRangeBlock(fields.date));
+  }else if(fields?.classify?.level && fields.classify.parent){
+    filterBlock.push(_generateTermsBlock(level && levelMap[level], parentArray as string[]));
   }
   return filterBlock;
 };
@@ -251,6 +259,13 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { fields, filters } = searchFieldsObject as ISearchPayload;
+  const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
+  const levelMap = {
+    1: 'OrgNceaClassifiers.code.keyword',
+    2: 'OrgNceaClassifiers.classifiers.code.keyword',
+    3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
+  };
+  const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
@@ -262,6 +277,9 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
     }
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
+    }
+    if (level && levelMap[level]) {
+      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray as string[]));
     }
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
