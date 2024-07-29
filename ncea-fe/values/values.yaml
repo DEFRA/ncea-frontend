@@ -51,7 +51,7 @@ resources:
 
 autoscaling:
   enabled: $(autoScalingEnabled)
-  minReplicas: 1
+  minReplicas: $(autoScalingMinReplicas)
   maxReplicas: $(autoScalingMaxReplicas)
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
