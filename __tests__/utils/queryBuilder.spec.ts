@@ -2719,39 +2719,107 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
-    it('should generate a query with level and parent', () => {
-      const searchFieldsObject: ISearchPayload = {
-        fields: {
-          date: {
-            fdy: '2017',
-            tdy: '2022',
-          },
-          classify: {
-            level: '2',
-            parent: ['lv2-001', 'lv2-003'],
-          },
+   it('should generate a query with level 1 and parent', () => {
+    const searchFieldsObject: ISearchPayload = {
+      fields: {
+        date: {
+          fdy: '2017',
+          tdy: '2022',
         },
-        sort: 'best_match',
-        filters: {},
-        rowsPerPage: 20,
-        page: 1,
-      };
-      const result = generateFilterQuery(
-        {
-          searchFieldsObject,
-          isAggregation: true,
+        classify: {
+          level: '1',
+          parent: ['lvl1-001'],
         },
-        { isStudyPeriod: false },
-      );
-      expect(result.query?.bool?.filter).toBeDefined();
-      const filterBlock = result.query?.bool?.filter as any[];
+      },
+      sort: 'best_match',
+      filters: {},
+      rowsPerPage: 20,
+      page: 1,
+    };
+    const result = generateFilterQuery(
+      {
+        searchFieldsObject,
+        isAggregation: true,
+      },
+      { isStudyPeriod: false },
+    );
+    expect(result.query?.bool?.filter).toBeDefined();
+    const filterBlock = result.query?.bool?.filter as any[];
 
-      const termsBlock = filterBlock.find(block => block.terms);
-      expect(termsBlock).toBeDefined();
-      if (termsBlock) {
-        expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toBeDefined();
-      }
-   });
+    const termsBlock = filterBlock.find(block => block.terms);
+    expect(termsBlock).toBeDefined();
+    if (termsBlock) {
+      expect(termsBlock.terms['OrgNceaClassifiers.code.keyword']).toBeDefined();
+    }
+ });
+
+ it('should generate a query with level 2 and parent', () => {
+  const searchFieldsObject: ISearchPayload = {
+    fields: {
+      date: {
+        fdy: '2017',
+        tdy: '2022',
+      },
+      classify: {
+        level: '2',
+        parent: ['lv2-001', 'lv2-003'],
+      },
+    },
+    sort: 'best_match',
+    filters: {},
+    rowsPerPage: 20,
+    page: 1,
+  };
+  const result = generateFilterQuery(
+    {
+      searchFieldsObject,
+      isAggregation: true,
+    },
+    { isStudyPeriod: false },
+  );
+  expect(result.query?.bool?.filter).toBeDefined();
+  const filterBlock = result.query?.bool?.filter as any[];
+
+  const termsBlock = filterBlock.find(block => block.terms);
+  expect(termsBlock).toBeDefined();
+  if (termsBlock) {
+    expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toBeDefined();
+  }
+});
+
+ it('should generate a query with level 3 and parent', () => {
+  const searchFieldsObject: ISearchPayload = {
+    fields: {
+      date: {
+        fdy: '2017',
+        tdy: '2022',
+      },
+      classify: {
+        level: '3',
+        parent: ['lv3-020'],
+      },
+    },
+    sort: 'best_match',
+    filters: {},
+    rowsPerPage: 20,
+    page: 1,
+  };
+  const result = generateFilterQuery(
+    {
+      searchFieldsObject,
+      isAggregation: true,
+    },
+    { isStudyPeriod: false },
+  );
+  expect(result.query?.bool?.filter).toBeDefined();
+  const filterBlock = result.query?.bool?.filter as any[];
+
+  const termsBlock = filterBlock.find(block => block.terms);
+  expect(termsBlock).toBeDefined();
+  if (termsBlock) {
+    expect(termsBlock.terms['OrgNceaClassifiers.classifiers.classifiers.code.keyword']).toBeDefined();
+  }
+});
 
     it('should generate a query without level and parent', () => {
       const searchFieldsObject: ISearchPayload = {
