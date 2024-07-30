@@ -88,3 +88,18 @@
     justify-content: center;
   }
 }
+
+.map-container {
+  width: 640px;
+  height: 130px;
+  background-image: url(/assets/images/view-result-button-map.png);
+  border-width: 2px;
+  border-color: #002D18;
+  border-style: solid;
+}
+
+.map-container-button{
+  top: 50.5px;
+  left: 159.5px;
+  padding: 7px 12px 6px 12px;
+}
