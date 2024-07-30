@@ -105,7 +105,7 @@ interface IDateValues {
 
 interface IClassifyValue {
   level?: string;
-  parent?: [];
+  parent?: string[];
 }
 
 interface ISearchFields {
