@@ -17,7 +17,6 @@ const GeographySearchController = {
     const queryString: string = readQueryParams(request.query, '');
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
     const skipPath: string = `${results}?${queryString}`;
-    // const guidedDateSearchPathNew: string = `${guidedDateSearchPath}${queryString && (queryString.includes('level=') || queryString.includes('parent=')) ? `?${queryString}` : ''}`;
 
     const queryStringObj = new URLSearchParams(queryString);
     queryStringObj.delete('fdy');
@@ -54,7 +53,6 @@ const GeographySearchController = {
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
     const geographySearchPath: string = `${geographySearch}?${queryString}`;
-    console.log(count);
     return response
       .view('screens/guided_search/geography_questionnaire', {
         pageTitle: pageTitles.geography,
