@@ -55,6 +55,7 @@ steps:
         ingress.hosts[0].host=$(hostName)
         autoscaling.enabled=$(autoScalingEnabled)
         autoscaling.maxReplicas=$(autoScalingMaxReplicas)
+        autoscaling.minReplicas=$(autoScalingMinReplicas)
         env.PORT=$(port)
         env.NODE_ENV=$(nodeEnv)
         env.AZURE_KEYVAULT_URL=$(keyVaultUri)
