@@ -2853,6 +2853,120 @@ describe('Build the search query', () => {
       expect(filterBlock.every(block => !block.terms)).toBeTruthy();
   });
 
+
+  it('should not add a terms block to the filter block when level is not provided', () => {
+    const searchFieldsObject: ISearchPayload = {
+      fields: {
+        date: {
+          fdy: '2017',
+          tdy: '2022',
+        },
+        classify: {
+          parent: ['lvl1-001'],
+        },
+      },
+      sort: 'best_match',
+      filters: {},
+      rowsPerPage: 20,
+      page: 1,
+    };
+
+    const expectedQuery: estypes.SearchRequest = {
+      query: {
+        bool: {
+          filter: [
+            {
+              bool: {
+                minimum_should_match: 1,
+                should: [
+                  {
+                    bool: {
+                      must: [
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              lte: '2017-01-01',
+                            },
+                          },
+                        },
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.end.date': {
+                              gte: '2017-01-01',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    bool: {
+                      must: [
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              gte: '2017-01-01',
+                            },
+                          },
+                        },
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.end.date': {
+                              lte: '2022-12-31',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    bool: {
+                      must: [
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              gte: '2017-01-01',
+                            },
+                          },
+                        },
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              lte: '2022-12-31',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          must: [],
+        },
+      },
+      size: 20,
+      sort: {
+        _score: {
+          order: 'desc',
+        },
+      },
+      _source: [],
+      from: 0,
+    };
+
+    const result = generateSearchQuery({
+      searchFieldsObject,
+      isCount: false,
+    });
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query?.bool?.filter).toHaveLength(1);
+  });
+
+
+
   it('should generate a query with level and parent when isStudyPeriod is false', () => {
     const searchFieldsObject: ISearchPayload = {
       fields: {
