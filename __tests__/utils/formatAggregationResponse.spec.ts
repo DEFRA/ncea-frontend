@@ -203,6 +203,7 @@ describe('formatAggregationResponse', () => {
       formatAggregationResponse(apiResponse, filterOptions),
     ).rejects.toThrow();
   });
+
 });
 
 describe('capitalizeWords', () => {
@@ -296,4 +297,28 @@ describe('formatClassifierResponse', () => {
     expect(result).toEqual([]);
   });
 
+});
+
+describe('Error handling in formatClassifierResponse', () => {
+  it('should throw an error with the correct message when an error occurs', async () => {
+    // Mock data
+    const apiResponse = {
+      classifier_level: {
+        classifier_values: {
+          buckets: [{ key: 'someKey' }],
+        },
+      },
+    };
+
+    // Mock a function to throw an error
+    jest.spyOn(Array.prototype, 'forEach').mockImplementationOnce(() => {
+      throw new Error('Mock error');
+    });
+
+    try {
+      await formatClassifierResponse(apiResponse);
+    } catch (error) {
+      expect(error).toEqual(new Error('Error formatting the aggregation: Mock error'));
+    }
+  });
 });
