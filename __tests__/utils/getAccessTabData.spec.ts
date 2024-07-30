@@ -102,6 +102,127 @@ describe('getAccessTabData functions', () => {
       expect(getResourceLocators({})).toBe('');
     });
 
+    test('should handle cases where funcData and descriptionData are missing', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>)</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+    test('should handle cases where funcData is present and descriptionData is missing', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              function: 'example function',
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Function from Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>)</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+    test('should handle cases where funcData is missing and descriptionData is present', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+              descriptionObject: { default: 'Example Description' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>): Example Description</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+    test('should handle cases where both funcData and descriptionData are present', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              function: 'example function',
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+              descriptionObject: { default: 'Example Description' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Function from Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>): Example Description</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+    test('should handle cases where funcData is empty and descriptionData is present', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              function: '',
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+              descriptionObject: { default: 'Example Description' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>): Example Description</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+    test('should handle cases where funcData is present and descriptionData is empty', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              function: 'example function',
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+              descriptionObject: { default: '' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Function from Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>)</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+    test('should handle cases where both funcData and descriptionData are empty', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            {
+              function: '',
+              urlObject: { default: 'https://example.com' },
+              nameObject: { default: 'Example Name' },
+              descriptionObject: { default: '' },
+            },
+          ],
+        },
+      };
+      const expected =
+        '<p>Example Name (<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>)</p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
     test('should return an empty string when _source.cl_function is null', () => {
       const searchItem = {
         _source: { cl_function: null },
@@ -342,4 +463,6 @@ describe('getAccessTabData functions', () => {
       expect(getResourceTypeHierarchy(searchItem)).toBe('');
     });
   });
+
+
 });
