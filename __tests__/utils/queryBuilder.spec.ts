@@ -2719,6 +2719,40 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
+
+    it('should generate a query without level and parent', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+          classify: {},
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      // Assert that the query does not have the level and parent terms
+      expect(result.query?.bool?.filter).toBeDefined();
+      const filterBlock = result.query?.bool?.filter as any[];
+
+      // Check for absence of terms block for level and parent
+      expect(filterBlock.every(block => !block.terms)).toBeTruthy();
+  });
+
+
     it('should build the search query for resourceType aggregation with study period filter', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
