@@ -12,6 +12,12 @@ describe('getAccessTabData functions', () => {
       expect(getHostCatalogueNumber({})).toBe('');
     });
 
+    test('should handle cases where resourceIdentifier is undefined or empty array', () => {
+      expect(getHostCatalogueNumber({ _source: { resourceIdentifier: undefined } })).toBe('');
+      expect(getHostCatalogueNumber({ _source: { resourceIdentifier: [] } })).toBe('');
+    });
+
+
     test('should return an empty string when searchItem._source is missing', () => {
       expect(getHostCatalogueNumber({ _source: undefined })).toBe('');
     });
@@ -70,12 +76,14 @@ describe('getAccessTabData functions', () => {
       expect(getCoupledResource('')).toBe('');
     });
 
+
     test('should create a link with decoded data as href', () => {
       const data = 'https:\\/\\/example.com';
       expect(getCoupledResource(data)).toBe(
         '<a class="govuk-link" href="https://example.com" target="_blank">https://example.com</a>',
       );
     });
+
 
     test('should return an empty string when empty array is provided', () => {
       expect(getCoupledResource([])).toBe('');
@@ -194,6 +202,22 @@ describe('getAccessTabData functions', () => {
       };
       expect(getResourceLocators(searchItem)).toBe('');
     });
+
+    test('should handle case where linkDataObject has missing urlObject or nameObject', () => {
+      const searchItem = {
+        _source: {
+          link: [
+            { function: 'function1', urlObject: { default: '' }, nameObject: { default: '' } },
+            { function: 'function2', urlObject: undefined, nameObject: { default: 'Name2' } },
+            { function: 'function3', urlObject: { default: 'https://example.com/3' }, nameObject: undefined },
+          ],
+        },
+      };
+      const expected = '<p>Function3 from <a class="govuk-link" href="https://example.com/3" target="_blank">https://example.com/3</a></p>';
+      expect(getResourceLocators(searchItem)).toBe(expected);
+    });
+
+
   });
 
   describe('getAccessTabData result', () => {
@@ -304,6 +328,11 @@ describe('getAccessTabData functions', () => {
         },
       };
       expect(getResourceTypeHierarchy(searchItem)).toBe('Direct level');
+    });
+
+    test('should handle case where resourceType is an empty array', () => {
+      const searchItem = { _source: { resourceType: [], cl_hierarchyLevel: [{ default: 'level' }] } };
+      expect(getResourceTypeHierarchy(searchItem)).toBe('level');
     });
 
     it('returns empty string if resource type or hierarchy level is not provided', () => {
