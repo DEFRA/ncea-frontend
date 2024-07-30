@@ -21,6 +21,12 @@ import {
 import Joi from 'joi';
 import { FormFieldError } from '../../../src/interfaces/guidedSearch.interface';
 import { upsertQueryParams, readQueryParams } from '../../../src/utils/queryStringHelper';
+import { getSearchResultsCount } from '../../../src/services/handlers/searchApi';
+
+jest.mock('../../../src/services/handlers/searchApi', () => ({
+  getSearchResultsCount: jest.fn(),
+}));
+
 
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
@@ -32,14 +38,18 @@ describe('Deals with the Date Search Controller', () => {
       geographySearch
     } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
-    const count: string = readQueryParams(request.query, queryParamKeys.count);
-    const queryString: string = readQueryParams(request.query, '');
-    const skipPath: string = queryString
-    ? `${geographySearch}?${queryString}`
-    : geographySearch;
+    (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
+
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.count]: '0',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     const guidedDateSearchPath: string = `${guidedDateSearch}?${queryString}`;
+    const skipPath: string = queryString ? `${geographySearch}?${queryString}` : geographySearch;
 
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(
@@ -51,7 +61,7 @@ describe('Deals with the Date Search Controller', () => {
         guidedDateSearchPath,
         skipPath,
         formId,
-        count,
+        count:'0',
         resultsPath,
         backLinkPath: '#',
         backLinkClasses: 'back-link-date',
@@ -176,7 +186,7 @@ describe('Deals with the Date Search Controller', () => {
         formId,
         count,
         backLinkPath: '#',
-        backLinkClasses: 'back-link-classifier',
+        backLinkClasses: 'back-link-date',
       },
     );
   });

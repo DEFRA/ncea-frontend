@@ -215,7 +215,8 @@ const _generateDateRangeQuery = (
     filterBlock.push(..._generateRangeBlock(newFields));
   } else if (fields?.date?.fdy && fields?.date?.tdy) {
     filterBlock.push(..._generateRangeBlock(fields.date));
-  }else if(fields?.classify?.level && fields.classify.parent){
+  }
+  if (fields?.classify?.level && fields.classify.parent) {
     filterBlock.push(_generateTermsBlock(level && levelMap[level], parentArray as string[]));
   }
   return filterBlock;

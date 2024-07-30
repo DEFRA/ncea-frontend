@@ -81,7 +81,7 @@ const DateSearchController = {
         formId,
         count,
         backLinkPath: '#',
-        backLinkClasses: 'back-link-classifier',
+        backLinkClasses: 'back-link-date',
       })
       .code(400)
       .takeover();

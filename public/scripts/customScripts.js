@@ -396,8 +396,30 @@ const attachDateInputListeners = () => {
 const classifierBackLinkHandler = () => {
   const backLinkElements = document.querySelector('.back-link-classifier');
   if (backLinkElements) {
+    const sessionData = getStorageData();
+    const classifierData = sessionData.fields['classifier-search'] || {};
+
     backLinkElements.addEventListener('click', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const currentLevel = parseInt(urlParams.get('level'), 10);
+
+      if (currentLevel && currentLevel > 1) {
+        const previousLevel = currentLevel - 1;
+        const previousLevelKey = `level${previousLevel-1}`;
+        const parentValues = classifierData[previousLevelKey] || [];
+
+        urlParams.set('level', previousLevel);
+        urlParams.delete('parent[]');
+
+        parentValues.forEach(value => {
+          urlParams.append('parent[]', value);
+        });
+
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+        window.location.href = newUrl;
+      } else {
         window.history.go(-1);
+      }
     });
   }
 };
