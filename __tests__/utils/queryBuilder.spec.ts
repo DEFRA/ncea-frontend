@@ -1,5 +1,5 @@
 import { estypes } from '@elastic/elasticsearch';
-import { ISearchPayload } from '../../src/interfaces/queryBuilder.interface';
+import { ISearchPayload,ISearchBuilderPayload } from '../../src/interfaces/queryBuilder.interface';
 import {
   resourceTypeFilterField,
   studyPeriodFilterField,
@@ -2853,7 +2853,40 @@ describe('Build the search query', () => {
       expect(filterBlock.every(block => !block.terms)).toBeTruthy();
   });
 
+  it('should generate a query with level and parent when isStudyPeriod is false', () => {
+    const searchFieldsObject: ISearchPayload = {
+      fields: {
+        classify: {
+          level: '2',
+          parent: ['lv2-009'],
+        },
+      },
+      filters: {},
+      sort: '',
+      rowsPerPage: 10,
+      page: 1,
+    };
 
+    const searchBuilderPayload: ISearchBuilderPayload = {
+      searchFieldsObject,
+      isCount: false,
+      isAggregation: false,
+    };
+
+    const result = generateFilterQuery(searchBuilderPayload, { isStudyPeriod: false });
+
+    console.log(JSON.stringify(result, null, 2)); // Debug output
+
+    // Assertions to ensure the correct structure
+    expect(result.query?.bool?.filter).toBeDefined();
+    const filterBlock = result.query?.bool?.filter as any[];
+
+    const termsBlock = filterBlock.find(block => block.terms);
+    expect(termsBlock).toBeDefined();
+    if (termsBlock) {
+      expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toEqual([]);
+    }
+  });
     it('should build the search query for resourceType aggregation with study period filter', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -3806,6 +3839,8 @@ describe('Build the search query', () => {
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(2);
     });
+
+
   });
 
   describe('Search query for count', () => {
