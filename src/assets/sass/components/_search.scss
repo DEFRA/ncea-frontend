@@ -88,3 +88,23 @@
     justify-content: center;
   }
 }
+
+.map-container {
+  width: 640px;
+  height: 130px;
+  background-image: url(/assets/images/view-result-button-map.png);
+  border-width: 2px;
+  border-color: #002D18;
+  border-style: solid;
+  background-size: contain;
+}
+
+#map-results-block a{
+  left: 159.5px;
+  padding: 7px 12px 6px 12px;
+  top: 50.5px;
+}
+
+.no-script-container{
+  padding-top: 15px;
+}

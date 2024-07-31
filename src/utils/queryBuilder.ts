@@ -217,7 +217,7 @@ const _generateDateRangeQuery = (
     filterBlock.push(..._generateRangeBlock(fields.date));
   }
   if (fields?.classify?.level && fields.classify.parent) {
-    filterBlock.push(_generateTermsBlock(level && levelMap[level], parentArray as string[]));
+    filterBlock.push(_generateTermsBlock(level && levelMap[level], parentArray));
   }
   return filterBlock;
 };
@@ -244,7 +244,7 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
     if (level && levelMap[level]) {
-      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray as string[]));
+      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray));
     }
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
@@ -280,7 +280,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
     if (level && levelMap[level]) {
-      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray as string[]));
+      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray));
     }
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
