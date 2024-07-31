@@ -1,3 +1,4 @@
+
 'use strict';
 
 import { Request, ResponseToolkit } from '@hapi/hapi';

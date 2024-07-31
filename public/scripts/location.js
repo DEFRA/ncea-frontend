@@ -247,7 +247,8 @@ function showInformationPopup(recordId, boundingBox) {
 
 function moreInfoNavigation() {
   if (selectedRecord && Object.keys(selectedRecord).length) {
-    window.location.href = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}${window.location.search}`;
+    const moreInfoUrl = `${window.location.origin}${window.location.pathname}/${selectedRecord.id}${window.location.search}`;
+    window.open(moreInfoUrl, '_blank');
   }
 }
 function closeInfoPopup() {

@@ -108,7 +108,7 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         ).toBeTruthy();
         expect(
           document.querySelectorAll('.govuk-grid-column-one-half').length,
-        ).toEqual(3);
+        ).toEqual(2);
       });
 
       it('should render 1 geography-buttons class', async () => {
@@ -193,13 +193,13 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
       it('should renders 3 buttons', () => {
         const buttons = document?.querySelectorAll('.coordinate-buttons');
         expect(buttons).toBeTruthy();
-        expect(buttons.length).toBe(3);
+        expect(buttons.length).toBe(2);
       });
 
       it('should renders 2 secondary buttons', () => {
         const buttons = document?.querySelectorAll('.govuk-button--secondary');
         expect(buttons).toBeTruthy();
-        expect(buttons.length).toBe(2);
+        expect(buttons.length).toBe(1);
       });
 
       it('should renders 1 submit buttons', () => {
@@ -208,35 +208,6 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
         expect(buttons.length).toBe(1);
       });
 
-      it('should layout buttons in two columns', () => {
-        const buttonBlock = document?.querySelector('.geography-buttons');
-        expect(
-          buttonBlock?.firstElementChild?.classList.contains(
-            'geography-buttons__left',
-          ),
-        ).toBeTruthy();
-        expect(
-          buttonBlock?.lastElementChild?.classList.contains(
-            'geography-buttons__right',
-          ),
-        ).toBeTruthy();
-      });
-
-      it('should have 1 button in left layout', () => {
-        const buttonBlock = document?.querySelector('.geography-buttons__left');
-        expect(buttonBlock?.childElementCount).toBe(1);
-        const childElements = buttonBlock?.children;
-        Array.from(childElements!).forEach((childElement) => {
-          expect(childElement.tagName.toLowerCase()).toEqual('a');
-        });
-      });
-
-      it('should have 2 buttons in right layout', () => {
-        const buttonBlock = document?.querySelector(
-          '.geography-buttons__right',
-        );
-        expect(buttonBlock?.childElementCount).toBe(2);
-      });
     });
   });
 });

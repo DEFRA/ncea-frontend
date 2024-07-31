@@ -20,18 +20,37 @@ import {
 } from '../../../src/utils/constants';
 import Joi from 'joi';
 import { FormFieldError } from '../../../src/interfaces/guidedSearch.interface';
-import { upsertQueryParams } from '../../../src/utils/queryStringHelper';
+import { upsertQueryParams, readQueryParams } from '../../../src/utils/queryStringHelper';
+import { getSearchResultsCount } from '../../../src/services/handlers/searchApi';
+
+jest.mock('../../../src/services/handlers/searchApi', () => ({
+  getSearchResultsCount: jest.fn(),
+}));
+
 
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
-    const request: Request = {} as any;
+    const request: Request = { query: {} } as any;
     const response: ResponseToolkit = { view: jest.fn() } as any;
     const {
-      guidedDateSearch: guidedDateSearchPath,
-      geographySearch: skipPath,
-      home,
+      guidedDateSearch,
+      results,
+      geographySearch
     } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
+    (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
+
+    const resultPathQueryString: string = readQueryParams(request.query, '', true);
+    const resultsPath: string = `${results}?${resultPathQueryString}`;
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.count]: '0',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    const guidedDateSearchPath: string = `${guidedDateSearch}?${queryString}`;
+    const skipPath: string = queryString ? `${geographySearch}?${queryString}` : geographySearch;
+
     await DateSearchController.renderGuidedSearchHandler(request, response);
     expect(response.view).toHaveBeenCalledWith(
       'screens/guided_search/date_questionnaire',
@@ -42,8 +61,10 @@ describe('Deals with the Date Search Controller', () => {
         guidedDateSearchPath,
         skipPath,
         formId,
-        count: '',
-        backLinkPath: home,
+        count:'0',
+        resultsPath,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-date',
       },
     );
   });
@@ -57,7 +78,7 @@ describe('Deals with the Date Search Controller', () => {
       'to-date-month': '',
       'to-date-year': '2023',
     };
-    const request: Request = { payload: { ...dateFormFields } } as any;
+    const request: Request = { payload: { ...dateFormFields }, query: {} } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
     const queryParamsObject: Record<string, string> = {
@@ -82,7 +103,7 @@ describe('Deals with the Date Search Controller', () => {
 
   it('should build the query params and navigate to intermediate route without data', async () => {
     const dateFormFields = {};
-    const request: Request = { payload: { ...dateFormFields } } as any;
+    const request: Request = { payload: { ...dateFormFields }, query: {} } as any;
     const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
     const queryParamsObject: Record<string, string> = {
@@ -106,7 +127,7 @@ describe('Deals with the Date Search Controller', () => {
   });
 
   it('should validate the date questionnaire form', async () => {
-    const request: Request = {} as any;
+    const request: Request = { query: {} } as any;
     const response: ResponseToolkit = {
       view: jest.fn().mockReturnValue({
         code: jest.fn().mockReturnThis(),
@@ -123,16 +144,31 @@ describe('Deals with the Date Search Controller', () => {
         },
       ],
     } as unknown as Joi.ValidationError;
+
     jest
       .spyOn(errorTransformer, 'transformErrors')
-      .mockReturnValue(dateQuestionChronologicalError as FormFieldError);
+      .mockReturnValue({
+        fromError: '"from-date-year" is required',
+        fromItems: [],
+        toError: '',
+        toItems: [],
+      } as FormFieldError);
+
     const formId: string = formIds.dataQuestionnaireFID;
 
     const {
       guidedDateSearch: guidedDateSearchPath,
-      geographySearch: skipPath,
-      home,
+      geographySearch,
     } = webRoutePaths;
+    const count: string = readQueryParams(request.query, queryParamKeys.count);
+    const queryString: string = readQueryParams(request.query, '');
+
+    // Updated logic for skipPath
+    const queryStringObj = new URLSearchParams(queryString);
+    queryStringObj.delete('fdy');
+    queryStringObj.delete('tdy');
+    const hasLevelOrParent = queryStringObj.has('level') || queryStringObj.has('parent');
+    const skipPath: string = `${geographySearch}${hasLevelOrParent ? '?' + queryStringObj.toString() : ''}`;
 
     await DateSearchController.dateSearchFailActionHandler(
       request,
@@ -143,14 +179,16 @@ describe('Deals with the Date Search Controller', () => {
       'screens/guided_search/date_questionnaire',
       {
         pageTitle: pageTitles.date,
-        fromDate: dateQuestionnaireGovUKError.fromDate,
-        toDate: dateQuestionnaireGovUKError.toDate,
+        fromDate: { ...fromDate, errorMessage: { text: '"from-date-year" is required' }, items: [] },
+        toDate: { ...toDate, items: [] },
         guidedDateSearchPath,
         skipPath,
         formId,
-        count: '',
-        backLinkPath: home,
+        count,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-date',
       },
     );
   });
+
 });

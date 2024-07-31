@@ -22,14 +22,15 @@
     ]
   }) }}
   {% endif %}
-  
+
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
     {% include "partials/results_count/template.njk" %}
     <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
-      <input type="hidden" name="level" value="{{nextLevel}}" />
+     <input type="hidden" name="jry" value="{{journey}}" />
+     <input type="hidden" name="level" value="{% if nextLevel > 3 %}3{% else %}{{ nextLevel }}{% endif %}" />
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
         {% for classify  in classifierItems %}
           {% set checkboxItems = [] %}
@@ -72,7 +73,7 @@
             }) }}
         {% endfor %}
         <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
-          <div class="govuk-button-group govuk-grid-column-one-half">          
+          <div class="govuk-button-group govuk-grid-column-one-half">
           {{ govukButton({ text: "Skip", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
             'data-do-storage-skip': ''
           } }) }}

@@ -266,18 +266,6 @@ exports[`Results block template Guided search journey Search results with empty 
 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
-  <div class='govuk-grid-column-full'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
-      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
-    </div>
-  </div>
-
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -451,6 +439,22 @@ exports[`Results block template Guided search journey Search results with empty 
   </h2>
   <div class="govuk-section-break--visible"></div>
 
+<div class='map-container'>
+    <div id="map-results-block">
+      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4 map-container-button' data-module='govuk-button'>
+      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="govuk-section-break--visible"></div>
+  <div class="no-script-container">
+    <noscript>
+        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-error-message">Enable or install JavaScript in your browser to use the map.</p>
+    </noscript>
+  </div>
   <form class='option-container govuk-section-break--visible' action="/sort-results?fdy=2000&amp;tdy=2023&amp;jry=gs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="sort_results" method="post">
     
 
@@ -550,7 +554,7 @@ exports[`Results block template Guided search journey Search results with empty 
     
   
 
-<a href="/date-search" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+<a href="/classifier-search?level=1" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
   Restart questionnaire search
 </a>
 
@@ -558,6 +562,7 @@ exports[`Results block template Guided search journey Search results with empty 
       
     </p>
   </div>
+
 
 
 
@@ -948,18 +953,6 @@ exports[`Results block template Guided search journey Search results with error 
 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
-  <div class='govuk-grid-column-full'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
-      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
-    </div>
-  </div>
-
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -1127,6 +1120,7 @@ exports[`Results block template Guided search journey Search results with error 
 
 
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
+
 
 
 
@@ -1523,18 +1517,6 @@ exports[`Results block template Quick search journey Search results with data sh
 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
-  <div class='govuk-grid-column-full'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
-      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
-    </div>
-  </div>
-
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -1915,7 +1897,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
   <div class='data-container'>
     <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave the find natural capital data service</h1>
-    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>Your are following a link to an external catalogue managed by<br/>"<span id='resource_party'></span>"</p>
+    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue managed by<br/><span id='resource_party'></span></p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       
   
@@ -1944,6 +1926,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
   </div>
 </div>
+
       </div>
     </div>
   
@@ -2331,18 +2314,6 @@ exports[`Results block template Quick search journey Search results with empty d
 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
-  <div class='govuk-grid-column-full'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
-      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
-    </div>
-  </div>
-
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -2598,6 +2569,7 @@ exports[`Results block template Quick search journey Search results with empty d
       
     </p>
   </div>
+
 
 
 
@@ -2988,18 +2960,6 @@ exports[`Results block template Quick search journey Search results with error s
 
   
     <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
-  <div class='govuk-grid-column-full'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4" data-module="govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
-      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 map-results-unavailable">Map functionality unavailable. Browser does not support JavaScript. Please update or enable JavaScript.</p>
-    </div>
-  </div>
-
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -3167,6 +3127,7 @@ exports[`Results block template Quick search journey Search results with error s
 
 
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
+
 
 
 

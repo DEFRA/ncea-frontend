@@ -58,6 +58,7 @@ export const requiredFieldsForMap: string[] = [
   'distributorOrgForResourceObject',
   'pointOfContactOrgObject',
   'linkUrl',
+  'OrgNceaClassifiers',
 ];
 
 export const quickSearchTargetFields: string[] = [
@@ -73,6 +74,7 @@ export const quickSearchTargetFields: string[] = [
 ];
 
 export const guidedSearchSteps = {
+  classifierSearch: 'classifier-search',
   date: 'date',
   coordinate: 'extent',
 };
@@ -99,7 +101,7 @@ export const queryParamKeys = {
   startYear: 'sy',
   toYear: 'ty',
   level: 'level',
-  parent: 'parent',
+  parent: 'parent[]',
 };
 
 export const uniqueResourceTypesKey: string = 'unique_resource_types';

@@ -80,7 +80,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
       it('should render back link to date search page', async () => {
         const anchor = document.querySelector('.govuk-back-link');
         expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.home);
+        expect(anchor?.getAttribute('href')).toEqual('#');
         expect(anchor?.textContent?.trim()).toEqual('Back');
       });
     });

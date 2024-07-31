@@ -1,26 +1,44 @@
 'use strict';
 
 import { getClassifierThemes } from '../../services/handlers/classifierApi';
-import { readQueryParams } from '../../utils/queryStringHelper';
+import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, webRoutePaths } from '../../utils/constants';
+import { formIds, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
   renderClassifierSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch: skipPath } = webRoutePaths;
+    const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch, results } = webRoutePaths;
     const formId: string = formIds.classifierSearch;
-    const level: string = readQueryParams(request.query, 'level');
-    const parent: string = readQueryParams(request.query, 'parent[]');
-    const classifierItems = await getClassifierThemes(level, parent);
-    const nextLevel: string = (+level + 1).toString();
-    //hidden fields for selected level1, 2, 3 classifier categories
+    const level: number = Number(readQueryParams(request.query, 'level'));
+    const parent: string = readQueryParams(request.query, 'parent[]') || '';
+    const nextLevel: string = (level + 1).toString();
+    const payloadQuery = {
+      ...request.query,
+      level: (level - 1).toString(),
+    };
+    const countPayload = generateCountPayload(payloadQuery);
+    const totalCount = (await getSearchResultsCount(countPayload)).totalResults.toString();
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.count]: totalCount,
+    };
+
+    const queryString: string = level - 1 > 0 ? upsertQueryParams(payloadQuery, queryParamsObject, false) : '';
+    const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`;
+
+    const skipPathUrl: string = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
+    const classifierItems = await getClassifierThemes(level.toString(), parent);
+
     return response.view('screens/guided_search/classifier_selection.njk', {
       guidedClassifierSearchPath,
       nextLevel,
-      skipPath,
+      skipPath: skipPathUrl,
       formId,
+      journey: 'gs',
       classifierItems,
-      count: 0,
+      count: level >= 1 ? totalCount : null,
+      resultsPath,
       backLinkPath: '#',
       backLinkClasses: 'back-link-classifier',
     });

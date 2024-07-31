@@ -3,13 +3,15 @@ import { IFilterOptions } from '../../src/interfaces/searchPayload.interface';
 import {
   formatAggregationResponse,
   capitalizeWords,
+  addSpaces,
+  generateRange,
+  formatClassifierResponse,
 } from '../../src/utils/formatAggregationResponse';
 import {
   defaultFilterOptions,
   startYearRangeKey,
   toYearRangeKey,
   uniqueResourceTypesKey,
-  yearRange,
 } from '../../src/utils/constants';
 
 describe('formatAggregationResponse', () => {
@@ -201,6 +203,7 @@ describe('formatAggregationResponse', () => {
       formatAggregationResponse(apiResponse, filterOptions),
     ).rejects.toThrow();
   });
+
 });
 
 describe('capitalizeWords', () => {
@@ -217,5 +220,105 @@ describe('capitalizeWords', () => {
   it('should handle single word', () => {
     const result = capitalizeWords('hello');
     expect(result).toEqual('Hello');
+  });
+});
+
+describe('addSpaces', () => {
+  it('should add spaces before capital letters in a string', () => {
+    const result = addSpaces('HelloWorld');
+    expect(result).toEqual('Hello World');
+  });
+
+  it('should handle empty string', () => {
+    const result = addSpaces('');
+    expect(result).toEqual('');
+  });
+
+  it('should handle string without capital letters', () => {
+    const result = addSpaces('helloworld');
+    expect(result).toEqual('helloworld');
+  });
+
+  it('should handle string with multiple capital letters', () => {
+    const result = addSpaces('ThisIsATest');
+    expect(result).toEqual('This Is A Test');
+  });
+});
+
+describe('generateRange', () => {
+  it('should generate a range with the same start and end year', () => {
+    const result = generateRange(2023, 2023);
+    expect(result).toEqual([{ value: '2023', text: '2023' }]);
+  });
+
+  it('should generate a range with different start and end years', () => {
+    const result = generateRange(2022, 2023);
+    expect(result).toEqual([
+      { value: '2022', text: '2022' },
+      { value: '2023', text: '2023' },
+    ]);
+  });
+});
+
+describe('formatClassifierResponse', () => {
+  it('should return classifier values', async () => {
+    const apiResponse = {
+      classifier_level: {
+        classifier_values: {
+          buckets: [
+            { key: 'value1' },
+            { key: 'value2' },
+          ],
+        },
+      },
+    };
+
+    const result = await formatClassifierResponse(apiResponse);
+    expect(result).toEqual(['value1', 'value2']);
+  });
+
+  it('should return empty array if no classifier values', async () => {
+    const apiResponse = {
+      classifier_level: {
+        classifier_values: {
+          buckets: [],
+        },
+      },
+    };
+
+    const result = await formatClassifierResponse(apiResponse);
+    expect(result).toEqual([]);
+  });
+
+  it('should return empty array if no classifier level', async () => {
+    const apiResponse = {};
+
+    const result = await formatClassifierResponse(apiResponse);
+    expect(result).toEqual([]);
+  });
+
+});
+
+describe('Error handling in formatClassifierResponse', () => {
+  it('should throw an error with the correct message when an error occurs', async () => {
+    // Mock data
+    const apiResponse = {
+      classifier_level: {
+        classifier_values: {
+          buckets: [{ key: 'someKey' }],
+        },
+      },
+    };
+
+    // Mock a function to throw an error
+    jest.spyOn(Array.prototype, 'forEach').mockImplementationOnce(() => {
+      throw new Error('Mock error');
+    });
+
+    try {
+      await formatClassifierResponse(apiResponse);
+    } catch (error) {
+      expect(error).toEqual(new Error('Error formatting the aggregation: Mock error'));
+    }
   });
 });

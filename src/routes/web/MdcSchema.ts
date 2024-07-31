@@ -18,7 +18,7 @@ const mdcRoutes = [
     method: 'GET',
     path: webRoutePaths.mdcIdentifiers,
     handler: MdcSchemaController.MdcIdentifierSchemaHandler,
-  }
+  },
 ];
 
 export { mdcRoutes };

@@ -9,6 +9,21 @@ const capitalizeWords = (string: string): string => {
 
 const addSpaces = (string: string): string => string.split(/(?=[A-Z])/).join(' ');
 
+type AggregationOption = {
+  key: string;
+};
+
+type ClassifierValues = {
+  buckets: AggregationOption[];
+};
+
+type ClassifierLevel = {
+  classifier_values?: ClassifierValues;
+};
+
+type ApiResponse = {
+  classifier_level?: ClassifierLevel;
+};
 const generateRange = (start, end): IAggregationOption[] => {
   return Array.from({ length: end - start + 1 }, (_, index) => ({
     value: String(start + index),
@@ -69,4 +84,22 @@ const formatAggregationResponse = async (
   }
 };
 
-export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange };
+const formatClassifierResponse = async (apiResponse: ApiResponse): Promise<string[]> => {
+  try {
+    const finalResponse: string[] = [];
+    const apiAggregationOptions = apiResponse?.classifier_level?.classifier_values?.buckets;
+
+    if (apiAggregationOptions) {
+      apiAggregationOptions.forEach((aggregationOption) => {
+        finalResponse.push(aggregationOption.key);
+      });
+    }
+
+    return finalResponse;
+  } catch (error) {
+    throw new Error(`Error formatting the aggregation: ${(error as Error).message}`);
+  }
+};
+
+
+export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange, formatClassifierResponse };

@@ -1,5 +1,5 @@
 import { estypes } from '@elastic/elasticsearch';
-import { ISearchPayload } from '../../src/interfaces/queryBuilder.interface';
+import { ISearchPayload,ISearchBuilderPayload } from '../../src/interfaces/queryBuilder.interface';
 import {
   resourceTypeFilterField,
   studyPeriodFilterField,
@@ -2719,6 +2719,288 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
+   it('should generate a query with level 1 and parent', () => {
+    const searchFieldsObject: ISearchPayload = {
+      fields: {
+        date: {
+          fdy: '2017',
+          tdy: '2022',
+        },
+        classify: {
+          level: '1',
+          parent: ['lvl1-001'],
+        },
+      },
+      sort: 'best_match',
+      filters: {},
+      rowsPerPage: 20,
+      page: 1,
+    };
+    const result = generateFilterQuery(
+      {
+        searchFieldsObject,
+        isAggregation: true,
+      },
+      { isStudyPeriod: false },
+    );
+    expect(result.query?.bool?.filter).toBeDefined();
+    const filterBlock = result.query?.bool?.filter as any[];
+
+    const termsBlock = filterBlock.find(block => block.terms);
+    expect(termsBlock).toBeDefined();
+    if (termsBlock) {
+      expect(termsBlock.terms['OrgNceaClassifiers.code.keyword']).toBeDefined();
+    }
+ });
+
+ it('should generate a query with level 2 and parent', () => {
+  const searchFieldsObject: ISearchPayload = {
+    fields: {
+      date: {
+        fdy: '2017',
+        tdy: '2022',
+      },
+      classify: {
+        level: '2',
+        parent: ['lv2-001', 'lv2-003'],
+      },
+    },
+    sort: 'best_match',
+    filters: {},
+    rowsPerPage: 20,
+    page: 1,
+  };
+  const result = generateFilterQuery(
+    {
+      searchFieldsObject,
+      isAggregation: true,
+    },
+    { isStudyPeriod: false },
+  );
+  expect(result.query?.bool?.filter).toBeDefined();
+  const filterBlock = result.query?.bool?.filter as any[];
+
+  const termsBlock = filterBlock.find(block => block.terms);
+  expect(termsBlock).toBeDefined();
+  if (termsBlock) {
+    expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toBeDefined();
+  }
+});
+
+ it('should generate a query with level 3 and parent', () => {
+  const searchFieldsObject: ISearchPayload = {
+    fields: {
+      date: {
+        fdy: '2017',
+        tdy: '2022',
+      },
+      classify: {
+        level: '3',
+        parent: ['lv3-020'],
+      },
+    },
+    sort: 'best_match',
+    filters: {},
+    rowsPerPage: 20,
+    page: 1,
+  };
+  const result = generateFilterQuery(
+    {
+      searchFieldsObject,
+      isAggregation: true,
+    },
+    { isStudyPeriod: false },
+  );
+  expect(result.query?.bool?.filter).toBeDefined();
+  const filterBlock = result.query?.bool?.filter as any[];
+
+  const termsBlock = filterBlock.find(block => block.terms);
+  expect(termsBlock).toBeDefined();
+  if (termsBlock) {
+    expect(termsBlock.terms['OrgNceaClassifiers.classifiers.classifiers.code.keyword']).toBeDefined();
+  }
+});
+
+    it('should generate a query without level and parent', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          date: {
+            fdy: '2017',
+            tdy: '2022',
+          },
+          classify: {},
+        },
+        sort: 'best_match',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+
+      const result = generateFilterQuery(
+        {
+          searchFieldsObject,
+          isAggregation: true,
+        },
+        { isStudyPeriod: false },
+      );
+
+      // Assert that the query does not have the level and parent terms
+      expect(result.query?.bool?.filter).toBeDefined();
+      const filterBlock = result.query?.bool?.filter as any[];
+
+      // Check for absence of terms block for level and parent
+      expect(filterBlock.every(block => !block.terms)).toBeTruthy();
+  });
+
+
+  it('should not add a terms block to the filter block when level is not provided', () => {
+    const searchFieldsObject: ISearchPayload = {
+      fields: {
+        date: {
+          fdy: '2017',
+          tdy: '2022',
+        },
+        classify: {
+          parent: ['lvl1-001'],
+        },
+      },
+      sort: 'best_match',
+      filters: {},
+      rowsPerPage: 20,
+      page: 1,
+    };
+
+    const expectedQuery: estypes.SearchRequest = {
+      query: {
+        bool: {
+          filter: [
+            {
+              bool: {
+                minimum_should_match: 1,
+                should: [
+                  {
+                    bool: {
+                      must: [
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              lte: '2017-01-01',
+                            },
+                          },
+                        },
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.end.date': {
+                              gte: '2017-01-01',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    bool: {
+                      must: [
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              gte: '2017-01-01',
+                            },
+                          },
+                        },
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.end.date': {
+                              lte: '2022-12-31',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    bool: {
+                      must: [
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              gte: '2017-01-01',
+                            },
+                          },
+                        },
+                        {
+                          range: {
+                            'resourceTemporalExtentDetails.start.date': {
+                              lte: '2022-12-31',
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          must: [],
+        },
+      },
+      size: 20,
+      sort: {
+        _score: {
+          order: 'desc',
+        },
+      },
+      _source: [],
+      from: 0,
+    };
+
+    const result = generateSearchQuery({
+      searchFieldsObject,
+      isCount: false,
+    });
+
+    expect(result).toEqual(expectedQuery);
+    expect(result.query?.bool?.filter).toHaveLength(1);
+  });
+
+
+
+  it('should generate a query with level and parent when isStudyPeriod is false', () => {
+    const searchFieldsObject: ISearchPayload = {
+      fields: {
+        classify: {
+          level: '2',
+          parent: ['lv2-009'],
+        },
+      },
+      filters: {},
+      sort: '',
+      rowsPerPage: 10,
+      page: 1,
+    };
+
+    const searchBuilderPayload: ISearchBuilderPayload = {
+      searchFieldsObject,
+      isCount: false,
+      isAggregation: false,
+    };
+
+    const result = generateFilterQuery(searchBuilderPayload, { isStudyPeriod: false });
+
+    console.log(JSON.stringify(result, null, 2)); // Debug output
+
+    // Assertions to ensure the correct structure
+    expect(result.query?.bool?.filter).toBeDefined();
+    const filterBlock = result.query?.bool?.filter as any[];
+
+    const termsBlock = filterBlock.find(block => block.terms);
+    expect(termsBlock).toBeDefined();
+    if (termsBlock) {
+      expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toEqual([]);
+    }
+  });
     it('should build the search query for resourceType aggregation with study period filter', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -3671,6 +3953,8 @@ describe('Build the search query', () => {
       expect(result).toEqual(expectedQuery);
       expect(result.query?.bool?.must).toHaveLength(2);
     });
+
+
   });
 
   describe('Search query for count', () => {
