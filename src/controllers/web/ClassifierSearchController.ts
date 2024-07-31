@@ -26,22 +26,27 @@ const ClassifierSearchController = {
 
     const queryString: string = level - 1 > 0 ? upsertQueryParams(payloadQuery, queryParamsObject, false) : '';
     const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`;
+    let skipPathUrl: string;
+    const hasSearchResultOrlevelFirst = Number(totalCount) > 0 || level == 1;
 
-    const skipPathUrl: string = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
-    const classifierItems = await getClassifierThemes(level.toString(), parent);
-
-    return response.view('screens/guided_search/classifier_selection.njk', {
-      guidedClassifierSearchPath,
-      nextLevel,
-      skipPath: skipPathUrl,
-      formId,
-      journey: 'gs',
-      classifierItems,
-      count: level >= 1 ? totalCount : null,
-      resultsPath,
-      backLinkPath: '#',
-      backLinkClasses: 'back-link-classifier',
-    });
+    if (hasSearchResultOrlevelFirst) {
+      skipPathUrl = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
+      const classifierItems = await getClassifierThemes(level.toString(), parent);
+      return response.view('screens/guided_search/classifier_selection.njk', {
+        guidedClassifierSearchPath,
+        nextLevel,
+        skipPath: skipPathUrl,
+        formId,
+        journey: 'gs',
+        classifierItems,
+        count: level >= 1 ? totalCount : null,
+        resultsPath,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-classifier',
+      });
+    } else {
+      return response.redirect(`${webRoutePaths.results}?${queryString}`);
+    }
   },
 };
 

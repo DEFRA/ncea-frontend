@@ -31,12 +31,8 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
     const request: Request = { query: {} } as any;
-    const response: ResponseToolkit = { view: jest.fn() } as any;
-    const {
-      guidedDateSearch,
-      results,
-      geographySearch
-    } = webRoutePaths;
+    const response: ResponseToolkit = { view: jest.fn(), redirect: jest.fn() } as any;
+    const { guidedDateSearch, results, geographySearch } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
     (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
 

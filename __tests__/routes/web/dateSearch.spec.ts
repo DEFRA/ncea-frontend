@@ -5,9 +5,11 @@
 'use strict';
 
 import { Server, ServerInjectResponse } from '@hapi/hapi';
-
 import { initializeServer } from '../../../src/infrastructure/server';
 import { webRoutePaths } from '../../../src/utils/constants';
+import { DateSearchController } from '../../../src/controllers/web/DateSearchController';
+import { dateSearchRoutes } from '../../../src/routes/web/dateSearch';
+
 
 jest.mock('../../../src/infrastructure/plugins/appinsights-logger', () => ({
   logger: jest.fn(),
@@ -23,30 +25,34 @@ jest.mock('../../../src/config/elasticSearchClient', () => ({
   }),
 }));
 
+jest.mock('../../../src/services/handlers/searchApi', () => ({
+  getSearchResultsCount: jest.fn(() => {
+    return Promise.resolve({ totalResults: 10 });
+  }),
+}));
+
 describe('Guided Search - Date Questionnaire Screen', () => {
   let server: Server;
   let response: ServerInjectResponse<object>;
   let document: Document;
 
-  beforeAll((done) => {
-    initializeServer().then(async (s: Server) => {
-      server = s;
+  beforeAll(async () => {
+    server = await initializeServer();
+    // server.route(dateSearchRoutes);
 
-      const options = {
-        method: 'GET',
-        url: webRoutePaths.guidedDateSearch,
-      };
+    const options = {
+      method: 'GET',
+      url: webRoutePaths.guidedDateSearch,
+    };
 
-      response = await server.inject(options);
-      const rawHTML = response.payload;
-      const parser = new DOMParser();
-      document = parser.parseFromString(rawHTML, 'text/html');
-      done();
-    });
+    response = await server.inject(options);
+    const rawHTML = response.payload;
+    const parser = new DOMParser();
+    document = parser.parseFromString(rawHTML, 'text/html');
   });
 
-  afterAll((done) => {
-    server.stop().then(() => done());
+  afterAll(async () => {
+    await server.stop();
   });
 
   describe('Guided Search > Date Questionnaire > Snapshot verification', () => {
@@ -70,9 +76,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
 
     describe('Back link items', () => {
       it('should render 1 item', async () => {
-        expect(document.querySelectorAll('.govuk-back-link')?.length).toEqual(
-          1,
-        );
+        expect(document.querySelectorAll('.govuk-back-link')?.length).toEqual(1);
       });
     });
 
@@ -95,21 +99,12 @@ describe('Guided Search - Date Questionnaire Screen', () => {
 
     describe('Date Questionnaire block heading', () => {
       it('should render the search container heading', async () => {
-        expect(
-          document
-            ?.querySelectorAll('.govuk-heading-m')?.[1]
-            ?.textContent?.trim(),
-        ).toBe('When was the data or information collected?');
-        expect(
-          document
-            ?.querySelectorAll('.govuk-heading-m')?.[2]
-            ?.textContent?.trim(),
-        ).toBe('From');
-        expect(
-          document
-            ?.querySelectorAll('.govuk-heading-m')?.[3]
-            ?.textContent?.trim(),
-        ).toBe('To');
+        expect(document?.querySelectorAll('.govuk-heading-m')?.[1]?.textContent?.trim())
+          .toBe('When was the data or information collected?');
+        expect(document?.querySelectorAll('.govuk-heading-m')?.[2]?.textContent?.trim())
+          .toBe('From');
+        expect(document?.querySelectorAll('.govuk-heading-m')?.[3]?.textContent?.trim())
+          .toBe('To');
       });
     });
 
@@ -155,9 +150,7 @@ describe('Guided Search - Date Questionnaire Screen', () => {
       });
 
       it('should renders a button', () => {
-        const buttonElement = document?.querySelector(
-          'button[data-module="govuk-button"]',
-        );
+        const buttonElement = document?.querySelector('button[data-module="govuk-button"]');
         expect(buttonElement).toBeTruthy();
       });
     });

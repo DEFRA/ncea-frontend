@@ -178,6 +178,12 @@ export const detailsTabOptions: TabOptions = {
   },
 };
 
+export const levelMap = {
+  1: 'OrgNceaClassifiers.code.keyword',
+  2: 'OrgNceaClassifiers.classifiers.code.keyword',
+  3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
+};
+
 export const pageTitles = {
   home: 'NCEA Search Service Home',
   date: 'NCEA Guided Search - Study Period',
