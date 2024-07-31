@@ -17,7 +17,7 @@ const dateSearchRoutes = [
     options: {
       validate: {
         payload: dateSchema,
-        failAction: DateSearchController.dateSearchFailActionHandler,
+        failAction: (request, h, error) => DateSearchController.dateSearchFailActionHandler(request, h, error),
       },
     },
   },

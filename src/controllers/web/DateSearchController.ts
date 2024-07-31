@@ -27,18 +27,24 @@ const DateSearchController = {
 
     const resultPathQueryString: string = readQueryParams(request.query, '', true);
     const resultsPath: string = `${results}?${resultPathQueryString}`;
-    return response.view('screens/guided_search/date_questionnaire', {
-      pageTitle: pageTitles.date,
-      fromDate,
-      toDate,
-      guidedDateSearchPath,
-      skipPath,
-      formId,
-      count,
-      resultsPath,
-      backLinkPath: '#',
-      backLinkClasses: 'back-link-date',
-    });
+    const hasSearchResultORSkipOnLevel1 = Number(count) > 0 || Object.keys(request.query).length === 0;
+
+    if (hasSearchResultORSkipOnLevel1) {
+      return response.view('screens/guided_search/date_questionnaire', {
+        pageTitle: pageTitles.date,
+        fromDate,
+        toDate,
+        guidedDateSearchPath,
+        skipPath,
+        formId,
+        count,
+        resultsPath,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-date',
+      });
+    } else {
+      return response.redirect(`${webRoutePaths.results}?${queryString}`);
+    }
   },
   dateSearchFailActionHandler: (
     request: Request,

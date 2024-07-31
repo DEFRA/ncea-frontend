@@ -8,7 +8,7 @@ import {
   ISearchPayload,
   IShapeCoordinates,
 } from '../interfaces/queryBuilder.interface';
-import { mapResultMaxCount, resourceTypeFilterField, studyPeriodFilterField } from './constants';
+import { levelMap, mapResultMaxCount, resourceTypeFilterField, studyPeriodFilterField } from './constants';
 
 const _generateQueryStringBlock = (
   searchTerm: string,
@@ -198,11 +198,6 @@ const _generateDateRangeQuery = (
   const { searchFieldsObject } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
   const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
-  const levelMap = {
-    1: 'OrgNceaClassifiers.code.keyword',
-    2: 'OrgNceaClassifiers.classifiers.code.keyword',
-    3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
-  };
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   const filterBlock: estypes.QueryDslQueryContainer[] =
     (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
@@ -226,13 +221,6 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
   const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
-  const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
-  const levelMap = {
-    1: 'OrgNceaClassifiers.code.keyword',
-    2: 'OrgNceaClassifiers.classifiers.code.keyword',
-    3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
-  };
-  const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   if (docId === '') {
     const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
     const mustBlock: estypes.QueryDslQueryContainer[] =
@@ -242,9 +230,6 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
 
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
-    }
-    if (level && levelMap[level]) {
-      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray));
     }
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
@@ -261,11 +246,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { fields, filters } = searchFieldsObject as ISearchPayload;
   const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
-  const levelMap = {
-    1: 'OrgNceaClassifiers.code.keyword',
-    2: 'OrgNceaClassifiers.classifiers.code.keyword',
-    3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
-  };
+
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =

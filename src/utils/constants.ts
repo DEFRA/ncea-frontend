@@ -196,3 +196,9 @@ export const pageTitles = {
   privacyPolicy: 'Privacy policy',
   cookiePolicy: 'Cookies',
 };
+
+export const levelMap = {
+  1: 'OrgNceaClassifiers.code.keyword',
+  2: 'OrgNceaClassifiers.classifiers.code.keyword',
+  3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
+};

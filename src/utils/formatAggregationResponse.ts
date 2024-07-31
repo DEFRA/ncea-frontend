@@ -101,5 +101,4 @@ const formatClassifierResponse = async (apiResponse: ApiResponse): Promise<strin
   }
 };
 
-
 export { addSpaces, capitalizeWords, formatAggregationResponse, generateRange, formatClassifierResponse };
