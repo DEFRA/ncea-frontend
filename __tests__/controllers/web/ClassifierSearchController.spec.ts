@@ -24,7 +24,7 @@ describe('Classifier Search Controller', () => {
     const { classifierSearch } = formIds;
 
     beforeEach(() => {
-      response = { view: jest.fn() } as any;
+      response = { view: jest.fn(), redirect: jest.fn() } as any;
     });
 
     it('should call the classifier view with context when level is greater than or equal to 1 and count is 0', async () => {
@@ -145,6 +145,33 @@ describe('Classifier Search Controller', () => {
         backLinkPath: '#',
         backLinkClasses: 'back-link-classifier',
       });
+    });
+    it('should redirect to date search page when there are no items for the parent category', async () => {
+      request = {
+        query: { level: '2', 'parent[]': 'lv1-001,lv1-002' },
+      } as any;
+
+      (getClassifierThemes as jest.Mock).mockResolvedValue([]);
+      (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 10 });
+
+      await ClassifierSearchController.renderClassifierSearchHandler(request, response);
+
+      const payloadQuery = {
+        level: '2',
+        'parent[]': 'lv1-001,lv1-002',
+      };
+
+      const queryParamsObject = {
+        [queryParamKeys.level]: '1',
+        [queryParamKeys.parent]: 'lv1-001,lv1-002',
+        [queryParamKeys.journey]: 'gs',
+        [queryParamKeys.count]: '10',
+      };
+
+      const queryString = upsertQueryParams(request.query, queryParamsObject, false);
+      const skipPathUrl = `${skipPath}?${queryString}`;
+
+      expect(response.redirect).toHaveBeenCalledWith(skipPathUrl);
     });
   });
 });
