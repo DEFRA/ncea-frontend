@@ -56,6 +56,7 @@ describe('Classifier Search Controller', () => {
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
         nextLevel: "4",
+        pageTitle: "NCEA questionnaire  Search- subcategories",
         skipPath: skipPathUrl,
         formId: classifierSearch,
         classifierItems: level3ClassifierItems,
@@ -93,6 +94,7 @@ describe('Classifier Search Controller', () => {
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
         nextLevel: "1",
+        pageTitle: undefined,
         skipPath,
         formId: classifierSearch,
         classifierItems: level3ClassifierItems,
@@ -133,6 +135,7 @@ describe('Classifier Search Controller', () => {
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
         nextLevel: "4",
+        pageTitle: "NCEA questionnaire  Search- subcategories",
         skipPath: skipPathUrl,
         formId: classifierSearch,
         classifierItems: level3ClassifierItems,
