@@ -23,7 +23,6 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResultsCount: jest.fn(),
 }));
 
-
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
     const request: Request = { query: {} } as any;
@@ -59,6 +58,21 @@ describe('Deals with the Date Search Controller', () => {
         backLinkClasses: 'back-link-date',
       },
     );
+  });
+
+  it('should redirect to results if no search result or query is present', async () => {
+    const request: Request = { query: { someParam: 'someValue' } } as any;
+    const response: ResponseToolkit = { view: jest.fn(), redirect: jest.fn() } as any;
+    (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.count]: '0',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+
+    await DateSearchController.renderGuidedSearchHandler(request, response);
+    expect(response.redirect).toHaveBeenCalledWith(`${webRoutePaths.results}?${queryString}`);
   });
 
   it('should build the query params and navigate to intermediate route with data', async () => {
