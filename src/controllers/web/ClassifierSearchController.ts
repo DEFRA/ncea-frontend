@@ -3,7 +3,7 @@
 import { getClassifierThemes } from '../../services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
-import { formIds, queryParamKeys, webRoutePaths } from '../../utils/constants';
+import { formIds, pageTitles, queryParamKeys, webRoutePaths } from '../../utils/constants';
 import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../utils/queryStringHelper';
 
 const ClassifierSearchController = {
@@ -17,6 +17,7 @@ const ClassifierSearchController = {
       ...request.query,
       level: (level - 1).toString(),
     };
+    const classifierPageTitle = pageTitles.Classifier[level - 1];
     const countPayload = generateCountPayload(payloadQuery);
     const totalCount = (await getSearchResultsCount(countPayload)).totalResults.toString();
     const queryParamsObject: Record<string, string> = {
@@ -30,18 +31,23 @@ const ClassifierSearchController = {
     const skipPathUrl: string = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
     const classifierItems = await getClassifierThemes(level.toString(), parent);
 
-    return response.view('screens/guided_search/classifier_selection.njk', {
-      guidedClassifierSearchPath,
-      nextLevel,
-      skipPath: skipPathUrl,
-      formId,
-      journey: 'gs',
-      classifierItems,
-      count: level >= 1 ? totalCount : null,
-      resultsPath,
-      backLinkPath: '#',
-      backLinkClasses: 'back-link-classifier',
-    });
+    if (classifierItems.length > 0) {
+      return response.view('screens/guided_search/classifier_selection.njk', {
+        pageTitle: classifierPageTitle,
+        guidedClassifierSearchPath,
+        nextLevel,
+        skipPath: skipPathUrl,
+        formId,
+        journey: 'gs',
+        classifierItems,
+        count: level >= 1 ? totalCount : null,
+        resultsPath,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-classifier',
+      });
+    } else {
+      return response.redirect(skipPathUrl);
+    }
   },
 };
 
