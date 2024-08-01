@@ -97,12 +97,20 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  return !Object.values(form).some((value) => {
-    if (Array.isArray(value)) {
-      return value.length > 0;
-    }
-    return typeof value === 'string' && value.trim() !== '';
-  });
+  
+  if(formId === 'classifier-search'){
+    const urlParams = new URLSearchParams(window.location.search);
+    const levelNo = parseInt(urlParams.get('level'), 10);
+    const currentLevelValues = form['level'+levelNo];
+    return currentLevelValues === undefined || currentLevelValues.length === 0;
+  }else{
+    return !Object.values(form).some((value) => {
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      }
+      return typeof value === 'string' && value.trim() !== '';
+    });
+  }
 };
 
 // Function to update submit button state
@@ -203,7 +211,7 @@ const previousQuestion = () => {
 const skipStorage = () => {
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
   const urlParams = new URLSearchParams(window.location.search);
-      const level = parseInt(urlParams.get('level'), 10);
+  const level = parseInt(urlParams.get('level'), 10);
   if (skipElements.length > 0) {
     skipElements.forEach((element) => {
       element.addEventListener('click', (event) => {
