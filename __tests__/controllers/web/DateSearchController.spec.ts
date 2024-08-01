@@ -4,10 +4,6 @@ import * as errorTransformer from '../../../src/utils/transformErrors';
 import { DateSearchController } from '../../../src/controllers/web/DateSearchController';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import {
-  dateQuestionChronologicalError,
-  dateQuestionnaireGovUKError,
-} from '../../data/dateQuestionnaire';
-import {
   fromDate,
   toDate,
 } from '../../../src/data/dateQuestionnaireFieldOptions';
@@ -27,16 +23,11 @@ jest.mock('../../../src/services/handlers/searchApi', () => ({
   getSearchResultsCount: jest.fn(),
 }));
 
-
 describe('Deals with the Date Search Controller', () => {
   it('should render the guided data search handler', async () => {
     const request: Request = { query: {} } as any;
-    const response: ResponseToolkit = { view: jest.fn() } as any;
-    const {
-      guidedDateSearch,
-      results,
-      geographySearch
-    } = webRoutePaths;
+    const response: ResponseToolkit = { view: jest.fn(), redirect: jest.fn() } as any;
+    const { guidedDateSearch, results, geographySearch } = webRoutePaths;
     const formId: string = formIds.dataQuestionnaireFID;
     (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
 
@@ -67,6 +58,21 @@ describe('Deals with the Date Search Controller', () => {
         backLinkClasses: 'back-link-date',
       },
     );
+  });
+
+  it('should redirect to results if no search result or query is present', async () => {
+    const request: Request = { query: { someParam: 'someValue' } } as any;
+    const response: ResponseToolkit = { view: jest.fn(), redirect: jest.fn() } as any;
+    (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 0 });
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.journey]: 'gs',
+      [queryParamKeys.count]: '0',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+
+    await DateSearchController.renderGuidedSearchHandler(request, response);
+    expect(response.redirect).toHaveBeenCalledWith(`${webRoutePaths.results}?${queryString}`);
   });
 
   it('should build the query params and navigate to intermediate route with data', async () => {

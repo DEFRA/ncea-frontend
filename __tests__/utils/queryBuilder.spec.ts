@@ -2989,9 +2989,6 @@ describe('Build the search query', () => {
 
     const result = generateFilterQuery(searchBuilderPayload, { isStudyPeriod: false });
 
-    console.log(JSON.stringify(result, null, 2)); // Debug output
-
-    // Assertions to ensure the correct structure
     expect(result.query?.bool?.filter).toBeDefined();
     const filterBlock = result.query?.bool?.filter as any[];
 

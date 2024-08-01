@@ -195,4 +195,15 @@ export const pageTitles = {
   termsAndConditions: 'Terms and conditions',
   privacyPolicy: 'Privacy policy',
   cookiePolicy: 'Cookies',
+  Classifier: [
+    'NCEA questionnaire search - natural capital theme',
+    'NCEA Guided Search- Categories',
+    'NCEA questionnaire  Search- subcategories',
+  ],
+};
+
+export const levelMap = {
+  1: 'OrgNceaClassifiers.code.keyword',
+  2: 'OrgNceaClassifiers.classifiers.code.keyword',
+  3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
 };

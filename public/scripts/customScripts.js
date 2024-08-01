@@ -471,7 +471,6 @@ if (typeof Storage !== 'undefined') {
     todayCheckboxStatus();
     attachDateInputListeners();
     classifierBackLinkHandler();
-   // dateBackbreadcrumHandler();
    document.querySelector('.back-link-date') && document.querySelector('.back-link-date').addEventListener('click', redirectToClassifierSearch);
 
 
