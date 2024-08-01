@@ -197,6 +197,8 @@ const previousQuestion = () => {
 
 const skipStorage = () => {
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
+  const urlParams = new URLSearchParams(window.location.search);
+      const level = parseInt(urlParams.get('level'), 10);
   if (skipElements.length > 0) {
     skipElements.forEach((element) => {
       element.addEventListener('click', (event) => {
@@ -204,9 +206,15 @@ const skipStorage = () => {
         if (associatedForm) {
           const sessionData = getStorageData();
           if (sessionData.fields.hasOwnProperty(associatedForm.id)) {
-            if (associatedForm.id === 'classifier-search' && sessionData.fields['classifier-search'].currentLevel) {
-              const currentLevel = sessionData.fields['classifier-search'].currentLevel;
-              delete sessionData.fields['classifier-search'][currentLevel];
+            if (associatedForm.id === 'classifier-search' ) {
+
+              if(sessionData.fields['classifier-search'].currentLevel.slice(-1)==level){
+                delete sessionData.fields['classifier-search']['level'+level];
+              }
+              if(level<=3){
+                sessionData.fields['classifier-search']['currentLevel'] = 'level'+level
+              }
+
             } else {
               delete sessionData.fields[associatedForm.id];
             }
@@ -233,12 +241,6 @@ const nextQuestion = () => {
           sessionData.stepState[associatedForm.id] = 'submitted';
           sessionData.previousStep = `${window.location.pathname}${window.location.search}`;
 
-          const classifierField = sessionData.fields['classifier-search'];
-          if (associatedForm.id === 'classifier-search' && classifierField && classifierField.currentLevel) {
-            const levels = ['level1', 'level2', 'level3'];
-            const currentIndex = levels.indexOf(classifierField.currentLevel);
-            classifierField.currentLevel = levels[Math.min(currentIndex + 1, levels.length - 1)];
-          }
 
           storeStorageData(sessionData);
         }
