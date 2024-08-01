@@ -30,7 +30,7 @@ const ClassifierSearchController = {
     const classifierItems = await getClassifierThemes(level.toString(), parent);
     const skipPathUrl = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
 
-    if (!(classifierItems.length > 0)) {
+    if (classifierItems.length <= 0) {
       return response.redirect(skipPathUrl);
     }
     const hasSearchResultOrlevelFirst = Number(totalCount) > 0 || level == 1;
