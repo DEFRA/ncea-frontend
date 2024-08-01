@@ -13,7 +13,7 @@
     {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
   </h2>
   <div class="govuk-section-break--visible"></div>
-
+{% if not hasError and searchResults.total %}
 <div class='map-container'>
     <div id="map-results-block">
       <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4' data-module='govuk-button'>
@@ -25,11 +25,13 @@
     </div>
   </div>
   <div class="govuk-section-break--visible"></div>
+{% endif %}
   <div class="no-script-container">
     <noscript>
         <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
+  {% if not hasError and searchResults.total %}
   <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="sort_results" method="post">
     {{ govukSelect({
       id: "sort",
@@ -60,7 +62,7 @@
     }) }}
   </form>
 {% endif %}
-
+{% endif %}
 {% if not hasError and searchResults.total %}
   <div class='search-result__items'>
     {% for item in searchResults.items %}
