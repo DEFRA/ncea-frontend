@@ -54,7 +54,7 @@ describe('Classifier Search Controller', () => {
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
       const skipPathUrl = `${skipPath}?${queryString}`;
 
-      expect(response.redirect).toHaveBeenCalledWith(`${results}?${queryString}`);
+      expect(response.redirect).toHaveBeenCalledWith(`${skipPathUrl}`);
     });
 
     it('should call the classifier view with context when count is present', async () => {
@@ -86,6 +86,7 @@ describe('Classifier Search Controller', () => {
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
         nextLevel: "4",
+        pageTitle: "NCEA questionnaire  Search- subcategories",
         skipPath: skipPathUrl,
         formId: classifierSearch,
         classifierItems: level3ClassifierItems,
@@ -123,6 +124,34 @@ describe('Classifier Search Controller', () => {
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
 
       expect(response.redirect).toHaveBeenCalledWith(`${results}?${queryString}`);
+    });
+
+    it('should redirect to date search page when there are no items for the parent category', async () => {
+      request = {
+        query: { level: '2', 'parent[]': 'lv1-001,lv1-002' },
+      } as any;
+
+      (getClassifierThemes as jest.Mock).mockResolvedValue([]);
+      (getSearchResultsCount as jest.Mock).mockResolvedValue({ totalResults: 10 });
+
+      await ClassifierSearchController.renderClassifierSearchHandler(request, response);
+
+      const payloadQuery = {
+        level: '2',
+        'parent[]': 'lv1-001,lv1-002',
+      };
+
+      const queryParamsObject = {
+        [queryParamKeys.level]: '1',
+        [queryParamKeys.parent]: 'lv1-001,lv1-002',
+        [queryParamKeys.journey]: 'gs',
+        [queryParamKeys.count]: '10',
+      };
+
+      const queryString = upsertQueryParams(request.query, queryParamsObject, false);
+      const skipPathUrl = `${skipPath}?${queryString}`;
+
+      expect(response.redirect).toHaveBeenCalledWith(skipPathUrl);
     });
   });
 });

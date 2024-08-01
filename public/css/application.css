@@ -7535,7 +7535,7 @@
   border-width: 2px;
   border-color: #002D18;
   border-style: solid;
-  background-size: contain;
+  background-size: cover;
 }
 
 #map-results-block a {

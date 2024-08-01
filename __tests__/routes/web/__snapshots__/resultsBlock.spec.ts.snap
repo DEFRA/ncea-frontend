@@ -452,7 +452,7 @@ exports[`Results block template Guided search journey Search results with empty 
   <div class="govuk-section-break--visible"></div>
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-error-message">Enable or install JavaScript in your browser to use the map.</p>
+        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   <form class='option-container govuk-section-break--visible' action="/sort-results?fdy=2000&amp;tdy=2023&amp;jry=gs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="sort_results" method="post">
@@ -1703,7 +1703,7 @@ exports[`Results block template Quick search journey Search results with data sh
   <div class="govuk-section-break--visible"></div>
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-error-message">Enable or install JavaScript in your browser to use the map.</p>
+        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="sort_results" method="post">
@@ -2516,7 +2516,7 @@ exports[`Results block template Quick search journey Search results with empty d
   <div class="govuk-section-break--visible"></div>
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-error-message">Enable or install JavaScript in your browser to use the map.</p>
+        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="sort_results" method="post">
