@@ -1,7 +1,8 @@
 import { environmentConfig } from '../../config/environmentConfig';
-import { getSecret } from '../../utils/keyvault';
 import { Classifiers, Classify } from '../../interfaces/classifierSearch.interface';
 import axios, { AxiosResponse } from 'axios';
+
+const auth = require('../../auth/auth');
 
 const transformClassifierDetails = (classifiers: Classify[]): Classify[] => {
   return classifiers?.map((classifier) => ({
@@ -28,20 +29,20 @@ const transformClassifierLevel3Details = (Level2Classifiers: Classify[]): Classi
 
 const invokeClassifierApi = async (level: string, parents: string = ''): Promise<AxiosResponse> => {
   try {
-    const classifierApiAuthKey = await getSecret(
-      environmentConfig.classifierApiKey ?? 'nceaClassifierMicroServiceApiKey',
-    );
     let url = `${environmentConfig.classifierApiUrl}api/classifiers?level=${level}`;
 
     if (parents) {
       url = url + `&Parents=${parents}`;
     }
-    const headers = {
+
+    const authResponse = await auth.getToken(auth.tokenRequest);
+
+    const options = {
       headers: {
-        'X-API-Key': classifierApiAuthKey,
-      },
-    };
-    const response: AxiosResponse = await axios.get(url, headers);
+          Authorization: `Bearer ${authResponse.accessToken}`
+      }
+  };
+    const response: AxiosResponse = await axios.get(url, options);
     return response;
   } catch (error: unknown) {
     throw new Error('Error invoking classifier list api.');
