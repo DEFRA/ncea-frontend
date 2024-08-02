@@ -7536,6 +7536,7 @@
   border-color: #002D18;
   border-style: solid;
   background-size: cover;
+  display: none;
 }
 
 #map-results-block a {
@@ -8278,7 +8279,7 @@
 }
 
 .govuk-checkboxes__label {
-  padding: 7px 30px;
+  padding: 7px 25px;
 }
 
 .defra-reset-study-period--link {
