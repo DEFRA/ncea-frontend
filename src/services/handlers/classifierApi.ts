@@ -2,7 +2,7 @@ import { environmentConfig } from '../../config/environmentConfig';
 import { Classifiers, Classify } from '../../interfaces/classifierSearch.interface';
 import axios, { AxiosResponse } from 'axios';
 
-const auth = require('../../auth/auth');
+const auth = require('../handlers/classifierApiTokenProvider');
 
 const transformClassifierDetails = (classifiers: Classify[]): Classify[] => {
   return classifiers?.map((classifier) => ({
@@ -29,7 +29,7 @@ const transformClassifierLevel3Details = (Level2Classifiers: Classify[]): Classi
 
 const invokeClassifierApi = async (level: string, parents: string = ''): Promise<AxiosResponse> => {
   try {
-    let url = `${environmentConfig.classifierApiUrl}api/classifiers?level=${level}`;
+    let url = `${environmentConfig.classifierApi.endpoint}api/classifiers?level=${level}`;
 
     if (parents) {
       url = url + `&Parents=${parents}`;

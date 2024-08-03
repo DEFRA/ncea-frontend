@@ -61,7 +61,12 @@ describe('Environment environmentConfig', () => {
         AZURE_KEYVAULT_URL: 'https://azure-keyvault.com',
         APPINSIGHTS_SECRET_NAME: 'appinsights--connections string',
         ELASTICSEARCH_API: 'https://elasticsearch-api.com',
-        WEBDOMAIN: ''
+        WEBDOMAIN: '',
+        CLASSIFIER_API_URL: 'https://dev-ncea-classifier.azure.defra.cloud/',
+        CLIENT_ID: '',
+        CLIENT_SECRET: '',
+        AUTHORITY: '',
+        SCOPES: ''
       };
       process.env = { ...mockConfig };
 
@@ -79,8 +84,13 @@ describe('Environment environmentConfig', () => {
         elasticSearchUsername: Joi.string().allow('').default(''),
         elasticSearchPassword: Joi.string().allow('').default(''),
         webDomain: Joi.string().allow('').default(''),
-        classifierApiUrl: Joi.string().allow('').default(''),
-        classifierApiKey: Joi.string().allow('').default(''),
+        classifierApi: Joi.object({
+          endpoint: Joi.string().uri().allow('').default(''),
+          clientId: Joi.string().allow('').default(''),
+          clientSecret: Joi.string().allow('').default(''),
+          authority: Joi.string().allow('').default(''),
+          scopes: Joi.array().items(Joi.string()).min(1).required()
+        })
       });
 
       const {

@@ -20,6 +20,11 @@ jest.mock('../../../src/utils/keyvault', () => ({
   getSecret: jest.fn(),
 }));
 
+jest.mock('../../../src/services/handlers/classifierApiTokenProvider', () => ({
+  getToken: jest.fn(),
+  tokenRequest: jest.fn()
+}));
+
 describe('Classifier API', () => {
   describe('getClassifierThemes', () => {
     it('should call classifier list api for level 1', async () => {

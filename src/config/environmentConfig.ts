@@ -21,11 +21,16 @@ const config: EnvironmentConfig = {
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
   isLocal: process.env.NODE_ENV === 'local',
   gtmId: process.env.GTM_ID,
-  classifierApiUrl: process.env.CLASSIFIER_API_URL,
-  classifierApiKey: process.env.CLASSIFIER_API_KEY,
   elasticSearchUsername: process.env.ES_USERNAME,
   elasticSearchPassword: process.env.ES_PASSWORD,
   webDomain: process.env.WEBDOMAIN,
+  classifierApi: {
+    endpoint: process.env.CLASSIFIER_API_URL || 'https://dev-ncea-classifier.azure.defra.cloud/',
+    clientId: process.env.CLIENT_ID || 'Enter_the_Application_Id_Here',
+    clientSecret: process.env.CLIENT_SECRET || 'Enter_the_Application_Secret_Here',
+    authority: process.env.AUTHORITY || 'https://Enter_the_Tenant_Subdomain_Here.ciamlogin.com/',
+    scopes: [process.env.SCOPES || 'api://Enter_the_Web_Api_Application_Id_Here']
+  }
 };
 
 const { error, value } = environmentSchema.validate(config);

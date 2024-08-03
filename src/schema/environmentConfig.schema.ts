@@ -36,13 +36,7 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   }),
   gtmId: Joi.string().allow('').default('').messages({
     'string.base': 'GTM ID must be a string',
-  }),
-  classifierApiUrl: Joi.string().uri().allow('').default('').messages({
-    'string.uri': 'Classifier search api URI must be a valid URL or an empty string',
-  }),
-  classifierApiKey: Joi.string().allow('').default('').messages({
-    'string.base': 'Classifier search api key must be a string',
-  }),
+  }),  
   elasticSearchUsername: Joi.string().allow('').default('').messages({
     'string.base': 'The Elasticsearch username must be a string.',
   }),
@@ -52,4 +46,22 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
   webDomain: Joi.string().allow('').default('').messages({
     'string.base': 'The web domain must be a string.',
   }),
+  classifierApi: Joi.object({
+    endpoint: Joi.string().uri().allow('').default('').messages({
+      'string.uri': 'Classifier API must be a valid URL or an empty string',
+    }),
+    clientId: Joi.string().allow('').default('').messages({
+      'string.base': 'Classifier API client id must be a string',
+    }),
+    clientSecret: Joi.string().allow('').default('').messages({
+      'string.base': 'Classifier API client id must be a string',
+    }),
+    authority: Joi.string().allow('').default('').messages({
+      'string.base': 'Classifier API app authority must be a string',
+    }),
+    scopes: Joi.array().items(Joi.string()).min(1).required().messages({
+      "any.required": "scopes must include only strings",
+      "string.base": "scopes must include only strings"
+    })
+  })
 });
