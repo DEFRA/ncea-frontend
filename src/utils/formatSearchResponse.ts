@@ -110,7 +110,7 @@ const formatSearchResponse = async (
     }
 
     if (isDetails) {
-      const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem, publishedBy);
+      const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem);
       item = { ...item, ...otherDetails };
     }
 
@@ -121,10 +121,7 @@ const formatSearchResponse = async (
   return finalResponse;
 };
 
-const getOtherDetails = async (
-  searchItem: Record<string, any>,
-  publishedBy: Record<string, any>,
-): Promise<IOtherSearchItem> => {
+const getOtherDetails = async (searchItem: Record<string, any>): Promise<IOtherSearchItem> => {
   const projectId: string =
     searchItem?._source?.OrgNceaIdentifiers?.projectId ?? searchItem?._source?.OrgNceaIdentifiers?.projectNumber;
   return {
@@ -134,7 +131,7 @@ const getOtherDetails = async (
     ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
-    ...getLicenseTabData(searchItem, publishedBy),
+    ...getLicenseTabData(searchItem),
     ...getGeographyTabData(searchItem),
   };
 };

@@ -35,7 +35,10 @@ export interface IAccessItem {
 
 export interface ILicense {
   limitation_on_public_access?: string;
-  license_constraints?: string;
+  limitation_on_public_access_other_constraint?: string;
+  conditions_for_access_and_use_use_constraints?: string;
+  conditions_for_access_and_use_other_constraints?: string;
+  other_constraint?: string;
   data_owner?: string;
   available_formats?: string | string[];
   frequency_of_update?: string;

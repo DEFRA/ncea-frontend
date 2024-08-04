@@ -3,77 +3,135 @@
 
 import { ILicense } from '../interfaces/searchResponse.interface';
 
-const getLicenseConstraints = (searchItem: Record<string, any>): string => {
-  let licenseConstraints = '';
-
-  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default) {
-    licenseConstraints = `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[0]?.default} <br>`;
-  }
-  if (searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text) {
-    licenseConstraints =
-      licenseConstraints + `${searchItem?._source?.MD_LegalConstraintsOtherConstraintsObject?.[2]?.text}`;
-  }
-
-  return licenseConstraints;
-};
-
 const getLimitationPublicAccess = (searchItem: Record<string, any>): string => {
   let limitationPublicAccess = '';
-
-  if (searchItem?._source?.cl_accessConstraints?.[0]?.default) {
-    limitationPublicAccess = `${searchItem?._source?.cl_accessConstraints?.[0]?.default} <br>`;
+  if (
+    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
+    searchItem._source.OrgResourceConstraints.length > 0
+  ) {
+    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: any) => {
+      if (constraint?.OrgAccessConstraints) {
+        constraint?.OrgAccessConstraints?.forEach((accessConstraint: string) => {
+          limitationPublicAccess += accessConstraint + '\n';
+        });
+      }
+    });
   }
-  if (searchItem?._source?.cl_accessConstraints?.[0]?.text) {
-    limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.cl_accessConstraints?.[0]?.text} <br>`;
-  }
-  if (searchItem?._source?.licenseObject?.[0]?.default) {
-    limitationPublicAccess = limitationPublicAccess + `${searchItem?._source?.licenseObject?.[0]?.default}`;
-  }
-
   return limitationPublicAccess;
 };
 
-const getPublishedBy = (publishedBy: Record<string, any>): string => {
-  let dataOwner = '';
-
-  if (publishedBy.role) {
-    dataOwner = `${publishedBy.role}, `;
+const getLimitationPublicAccessOtherConstraint = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccessOtherConstraint = '';
+  if (
+    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
+    searchItem._source.OrgResourceConstraints.length > 0
+  ) {
+    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: any) => {
+      if (constraint?.OrgOtherConstraints) {
+        constraint?.OrgOtherConstraints.forEach((otherConstraint: string) => {
+          limitationPublicAccessOtherConstraint += otherConstraint + '\n';
+        });
+      }
+    });
   }
-  if (publishedBy.organisationValue) {
-    dataOwner += `${publishedBy.organisationValue} <br>`;
-  }
-  if (publishedBy.email) {
-    dataOwner += `${publishedBy.email}`;
-  }
-
-  return dataOwner;
+  return limitationPublicAccessOtherConstraint;
 };
 
-const getAvailableFormats = (formats: Record<string, any> | Record<string, any>[]): string => {
-  const availableFormats: string[] = [];
-  let formatsArray: Record<string, any>[] = [];
-  if (formats && !Array.isArray(formats) && typeof formats === 'object') {
-    formatsArray.push(formats);
+const getLimitationPublicAccessUseConstraint = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccessUseConstraint = '';
+  if (
+    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
+    searchItem._source.OrgResourceConstraints.length > 0
+  ) {
+    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: any) => {
+      if (constraint?.OrgOtherConstraints && constraint?.OrgUseConstraints) {
+        constraint?.OrgUseConstraints?.forEach((useConstraint: string) => {
+          limitationPublicAccessUseConstraint += useConstraint + '\n';
+        });
+      }
+    });
   }
-  if (Array.isArray(formats) && formats.every((format) => typeof format === 'object')) {
-    formatsArray = [...formats];
-  }
-  formatsArray.forEach((format: Record<string, any>) => {
-    let formatString: string = '';
-    if (format.name) formatString = format.name;
-    if (format.version && format.version.toLowerCase() !== 'unknown') formatString += `(${format.version})`;
-    if (formatString) availableFormats.push(formatString);
-  });
-  return availableFormats.join(', ');
+  return limitationPublicAccessUseConstraint;
 };
 
-const getLicenseTabData = (searchItem: Record<string, any>, publishedBy: Record<string, any>): ILicense => ({
+const getLimitationPublicAccessUseOtherConstraint = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccessUseOtherConstraint = '';
+
+  if (
+    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
+    searchItem._source.OrgResourceConstraints.length > 0
+  ) {
+    searchItem._source.OrgResourceConstraints.forEach((constraint: any) => {
+      if (Array.isArray(constraint?.OrgOtherConstraints) && Array.isArray(constraint?.OrgUseConstraints)) {
+        constraint.OrgOtherConstraints.forEach((otherConstraint: string) => {
+          limitationPublicAccessUseOtherConstraint += otherConstraint + '\n';
+        });
+      }
+    });
+  }
+
+  return limitationPublicAccessUseOtherConstraint;
+};
+
+const getLimitationPublicOtherConstraint = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccessOtherConstraint = '';
+
+  if (
+    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
+    searchItem._source.OrgResourceConstraints.length > 0
+  ) {
+    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: Record<string, any>) => {
+      if (constraint?.OrgOtherConstraints && !constraint?.OrgAccessConstraints && !constraint?.OrgUseConstraints) {
+        limitationPublicAccessOtherConstraint = constraint?.OrgOtherConstraints.join(', ');
+      }
+    });
+  }
+
+  return limitationPublicAccessOtherConstraint;
+};
+
+const getFrequencyUpdate = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccessOtherConstraint = '';
+
+  if (
+    Array.isArray(searchItem?._source?.cl_maintenanceAndUpdateFrequency) &&
+    searchItem._source.cl_maintenanceAndUpdateFrequency.length > 0
+  ) {
+    limitationPublicAccessOtherConstraint = searchItem._source.cl_maintenanceAndUpdateFrequency
+      .map((constraint: Record<string, any>) => constraint.default)
+      .join(', ');
+  }
+
+  return limitationPublicAccessOtherConstraint;
+};
+
+const getAvailableFormats = (searchItem: Record<string, any>): string => {
+  let limitationPublicAccessAvailableFormats = '';
+  if (searchItem.OrgDistributionFormats && searchItem.OrgDistributionFormats.length > 0) {
+    const formatNames = searchItem.OrgDistributionFormats.map((format: Record<string, any>) => format.name);
+    limitationPublicAccessAvailableFormats = formatNames.join(', ');
+  }
+  return limitationPublicAccessAvailableFormats;
+};
+
+const getLicenseTabData = (searchItem: Record<string, any>): ILicense => ({
   limitation_on_public_access: getLimitationPublicAccess(searchItem),
-  license_constraints: getLicenseConstraints(searchItem),
-  data_owner: getPublishedBy(publishedBy),
-  available_formats: getAvailableFormats(searchItem?._source?.OrgDistributionFormats ?? []),
-  frequency_of_update: searchItem?._source?.cl_maintenanceAndUpdateFrequency?.[0]?.default ?? '',
+  limitation_on_public_access_other_constraint: getLimitationPublicAccessOtherConstraint(searchItem),
+  conditions_for_access_and_use_use_constraints: getLimitationPublicAccessUseConstraint(searchItem),
+  conditions_for_access_and_use_other_constraints: getLimitationPublicAccessUseOtherConstraint(searchItem),
+  other_constraint: getLimitationPublicOtherConstraint(searchItem),
+  available_formats: getAvailableFormats(searchItem),
+  frequency_of_update: getFrequencyUpdate(searchItem),
   character_encoding: 'utf8',
 });
 
-export { getLicenseTabData, getLicenseConstraints, getLimitationPublicAccess, getPublishedBy, getAvailableFormats };
+export {
+  getLicenseTabData,
+  getLimitationPublicAccess,
+  getLimitationPublicAccessOtherConstraint,
+  getLimitationPublicAccessUseConstraint,
+  getLimitationPublicAccessUseOtherConstraint,
+  getLimitationPublicOtherConstraint,
+  getAvailableFormats,
+  getFrequencyUpdate,
+};
