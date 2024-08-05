@@ -64,12 +64,14 @@ const getFrequencyUpdate = (searchItem: Record<string, any>): string => {
 };
 
 const getAvailableFormats = (searchItem: Record<string, any>): string => {
-  let limitationPublicAccessAvailableFormats = '';
-  if (searchItem?._source?.OrgDistributionFormats && searchItem?._source?.OrgDistributionFormats.length > 0) {
-    const formatNames = searchItem?._source?.OrgDistributionFormats.map((format: Record<string, any>) => format.name);
-    limitationPublicAccessAvailableFormats = formatNames.join(', ');
-  }
-  return limitationPublicAccessAvailableFormats;
+ let limitationPublicAccessAvailableFormats = '';
+ const data = ensureArray(searchItem?._source?.OrgDistributionFormats);
+ if (data) {
+   limitationPublicAccessAvailableFormats = data
+     .map((format: { name: string }) => format.name)
+     .join(', ');
+ }
+ return limitationPublicAccessAvailableFormats;
 };
 
 const getLicenseTabData = (searchItem: Record<string, any>): ILicense => ({
