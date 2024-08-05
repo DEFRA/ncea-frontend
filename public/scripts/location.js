@@ -645,6 +645,7 @@ const getMapResults = async (path, fitToMapExtentFlag) => {
       mapResultsButton.removeAttribute('disabled');
       mapResultsCount.textContent = mapResultsJson.total;
       if (mapResultsJson.total > 0) {
+        document.querySelector('.map-container').style.display = 'block';
         const boundingBoxInfo = document.getElementById(
           'defra-bounding-box-info',
         );
@@ -662,6 +663,7 @@ const getMapResults = async (path, fitToMapExtentFlag) => {
         }, 100);
         attachBoundingBoxToggleListener();
       } else {
+        document.querySelector('.map-container').style.display = 'none';
         mapResultsButton.setAttribute('disabled', true);
       }
     } else {

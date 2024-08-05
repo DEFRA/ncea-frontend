@@ -34,13 +34,20 @@
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
         {% for classify  in classifierItems %}
           {% set checkboxItems = [] %}
+          {% set sectionIndex = loop.index %}
           {% set legendClass = 'govuk-fieldset__legend--l' %}
+          {% if classify.sectionTitle.length > 0 %}
+            {% set sectionTitle = classify.sectionTitle %}
+          {% else %}
+            {% set sectionTitle = 'Select a natural capital theme' %}
+          {% endif %}
           {% for item in classify.classifiers %}
-            {% set _ = checkboxItems.push({value: item.code, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
+            {% set _ = checkboxItems.push({value: item.code, id: 'checkbox-'+sectionIndex+'-'+loop.index, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
           {% endfor %}
           {% if checkboxItems.length > 0 %}
             {% set _ = checkboxItems.push({divider: "or" }) %}
-            {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %}
+            {# {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %} #}
+            {% set _ = checkboxItems.push({value: classify.selectAll, id: 'checkboxall-'+sectionIndex+'-all', text: "Select all"}) %}
           {% endif %}
           {% if classify.sectionTitle.length > 0 %}
             {% set sectionTitle = classify.sectionTitle %}
@@ -58,7 +65,6 @@
           {% endif %}
           {{ govukCheckboxes({
               name: "parent[]",
-              idPrefix: sectionTitle,
               fieldset: {
                 legend: {
                   text: sectionTitle,
