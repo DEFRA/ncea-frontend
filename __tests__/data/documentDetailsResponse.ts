@@ -202,7 +202,6 @@ const formattedDetailsResponse: ISearchResults = {
       host_catalogue_number: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'Dataset',
-      hierarchy_level: 'Dataset',
       resource_locators:
         '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
       additionalInformation: '',
@@ -766,7 +765,6 @@ const formattedDetailsFullResponse: ISearchResults = {
         'https://seabed.admiralty.co.ukfb8dca0f-7425-4f50-86a1-c4673b1aef88',
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'Dataset',
-      hierarchy_level: 'Dataset',
       metadataDate: "16 January 2024",
       resource_locators:
         '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',

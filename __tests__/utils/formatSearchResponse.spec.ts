@@ -331,7 +331,6 @@ describe('Format the search response', () => {
           host_catalogue_number: '',
           host_catalogue_entry: '',
           resource_type_and_hierarchy: '',
-          hierarchy_level: '',
           resource_locators:
             '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
           additionalInformation: '',
@@ -383,7 +382,6 @@ describe('Format the search response', () => {
             'https://seabed.admiralty.co.ukaf7cd14f-6c20-445f-abd0-7c41385ba999',
           host_catalogue_entry: '',
           resource_type_and_hierarchy: 'Dataset',
-          hierarchy_level: 'Dataset',
           resource_locators:
             '<p>Download from Seabed Mapping Service (<a class="govuk-link" href="https://seabed.admiralty.co.uk" target="_blank">https://seabed.admiralty.co.uk</a>)</p>',
           additionalInformation: '',

@@ -358,7 +358,6 @@ describe('getAccessTabData functions', () => {
         '<a class="govuk-link" href="example.com" target="_blank">example.com</a>',
       );
       expect(result.resource_type_and_hierarchy).toBe('level1');
-      expect(result.hierarchy_level).toBe('level1');
       expect(result.resource_locators).toBe('');
     });
 
