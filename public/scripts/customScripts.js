@@ -97,12 +97,20 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  return !Object.values(form).some((value) => {
-    if (Array.isArray(value)) {
-      return value.length > 0;
-    }
-    return typeof value === 'string' && value.trim() !== '';
-  });
+  
+  if(formId === 'classifier-search'){
+    const urlParams = new URLSearchParams(window.location.search);
+    const levelNo = parseInt(urlParams.get('level'), 10);
+    const currentLevelValues = form['level'+levelNo];
+    return currentLevelValues === undefined || currentLevelValues.length === 0;
+  }else{
+    return !Object.values(form).some((value) => {
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      }
+      return typeof value === 'string' && value.trim() !== '';
+    });
+  }
 };
 
 // Function to update submit button state
@@ -140,15 +148,20 @@ const attachEventListeners = (form) => {
        sessionData.fields['classifier-search']['currentLevel'] = levelKey
 
         const valuesArray = sessionData.fields['classifier-search'][levelKey];
+        const checkboxValue = value.split(',');
         if (input.checked) {
-          if (!valuesArray.includes(value)) {
-            valuesArray.push(value);
-          }
+          checkboxValue.forEach(val => {
+            if (!valuesArray.includes(val)) {
+              valuesArray.push(val);
+            }
+          });
         } else {
-          const valueIndex = valuesArray.indexOf(value);
-          if (valueIndex !== -1) {
-            valuesArray.splice(valueIndex, 1);
-          }
+          checkboxValue.forEach(val => {
+            const valueIndex = valuesArray.indexOf(val);
+            if (valueIndex !== -1) {
+              valuesArray.splice(valueIndex, 1);
+            }
+          }); 
         }
 
         // Clean up empty levels
@@ -197,6 +210,8 @@ const previousQuestion = () => {
 
 const skipStorage = () => {
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
+  const urlParams = new URLSearchParams(window.location.search);
+  const level = parseInt(urlParams.get('level'), 10);
   if (skipElements.length > 0) {
     skipElements.forEach((element) => {
       element.addEventListener('click', (event) => {
@@ -204,9 +219,15 @@ const skipStorage = () => {
         if (associatedForm) {
           const sessionData = getStorageData();
           if (sessionData.fields.hasOwnProperty(associatedForm.id)) {
-            if (associatedForm.id === 'classifier-search' && sessionData.fields['classifier-search'].currentLevel) {
-              const currentLevel = sessionData.fields['classifier-search'].currentLevel;
-              delete sessionData.fields['classifier-search'][currentLevel];
+            if (associatedForm.id === 'classifier-search' ) {
+
+              if(sessionData.fields['classifier-search'].currentLevel.slice(-1)==level){
+                delete sessionData.fields['classifier-search']['level'+level];
+              }
+              if(level<=3){
+                sessionData.fields['classifier-search']['currentLevel'] = 'level'+level
+              }
+
             } else {
               delete sessionData.fields[associatedForm.id];
             }
@@ -233,12 +254,6 @@ const nextQuestion = () => {
           sessionData.stepState[associatedForm.id] = 'submitted';
           sessionData.previousStep = `${window.location.pathname}${window.location.search}`;
 
-          const classifierField = sessionData.fields['classifier-search'];
-          if (associatedForm.id === 'classifier-search' && classifierField && classifierField.currentLevel) {
-            const levels = ['level1', 'level2', 'level3'];
-            const currentIndex = levels.indexOf(classifierField.currentLevel);
-            classifierField.currentLevel = levels[Math.min(currentIndex + 1, levels.length - 1)];
-          }
 
           storeStorageData(sessionData);
         }
@@ -369,6 +384,34 @@ const todayDateUncheck = (checked) => {
   }
 }
 
+const toggleClassifierCheckbox = () => {
+  //code for checking or unchecking the select all
+  const selectAllCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="checkboxall-"]');
+  selectAllCheckboxes.forEach(all => {
+    all.addEventListener('change', (event) => {
+      const suffix = all.getAttribute("id").split('-')[1];
+      const checkboxItems = document.querySelectorAll(`input[type="checkbox"][id^="checkbox-${suffix}-"]`);
+      const isChecked = event.target.checked;
+      checkboxItems.forEach(chkbox => {
+        chkbox.checked = isChecked;
+      });
+    });
+  });
+
+  //code for other checkboxes
+  const otherCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="checkbox-"]');
+  otherCheckboxes.forEach(chkbox => {
+    chkbox.addEventListener('change', (event) => {
+      const suffix = chkbox.getAttribute("id").split('-')[1];
+      const selectAll = document.querySelector(`input[type="checkbox"][id^="checkboxall-${suffix}-all"]`);
+      const isChecked = event.target.checked;
+      if(!isChecked && selectAll.checked){
+        selectAll.checked = false;
+      }
+    });
+  });
+}
+
 // Function to attach event listeners to date input fields
 const attachDateInputListeners = () => {
   const dateDayInput = document.querySelector('input[name="to-date-day"]');
@@ -471,6 +514,7 @@ if (typeof Storage !== 'undefined') {
     todayCheckboxStatus();
     attachDateInputListeners();
     classifierBackLinkHandler();
+    toggleClassifierCheckbox();
    document.querySelector('.back-link-date') && document.querySelector('.back-link-date').addEventListener('click', redirectToClassifierSearch);
 
 
