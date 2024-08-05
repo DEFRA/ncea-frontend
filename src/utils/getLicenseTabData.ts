@@ -3,96 +3,55 @@
 
 import { ILicense } from '../interfaces/searchResponse.interface';
 
-const getLimitationPublicAccess = (searchItem: Record<string, any>): string => {
-  let limitationPublicAccess = '';
-  if (
-    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
-    searchItem._source.OrgResourceConstraints.length > 0
-  ) {
-    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: any) => {
-      if (constraint?.OrgAccessConstraints) {
+const ensureArray = (response) => {
+  if (response && !Array.isArray(response)) {
+    response = [response];
+  }
+  return response;
+};
+
+const getLimitationData = (searchItem: Record<string, any>, type: string): string => {
+  let result = '';
+  const data = ensureArray(searchItem?._source?.OrgResourceConstraints);
+  const filteredData = data?.filter((value) => Object.keys(value).length !== 0);
+
+  if (filteredData) {
+    filteredData.forEach((constraint: any) => {
+      if (type === 'access' && constraint?.OrgAccessConstraints) {
         constraint?.OrgAccessConstraints?.forEach((accessConstraint: string) => {
-          limitationPublicAccess += accessConstraint + '\n';
+          result += accessConstraint + '<br>';
         });
       }
-    });
-  }
-  return limitationPublicAccess;
-};
-
-const getLimitationPublicAccessOtherConstraint = (searchItem: Record<string, any>): string => {
-  let limitationPublicAccessOtherConstraint = '';
-  if (
-    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
-    searchItem._source.OrgResourceConstraints.length > 0
-  ) {
-    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: any) => {
-      if (constraint?.OrgOtherConstraints) {
-        constraint?.OrgOtherConstraints.forEach((otherConstraint: string) => {
-          limitationPublicAccessOtherConstraint += otherConstraint + '\n';
+      if (type === 'other' && constraint?.OrgAccessConstraints && !constraint?.OrgUseConstraints) {
+        constraint?.OrgOtherConstraints?.forEach((otherConstraint: string) => {
+          result += otherConstraint + '<br>';
         });
       }
-    });
-  }
-  return limitationPublicAccessOtherConstraint;
-};
-
-const getLimitationPublicAccessUseConstraint = (searchItem: Record<string, any>): string => {
-  let limitationPublicAccessUseConstraint = '';
-  if (
-    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
-    searchItem._source.OrgResourceConstraints.length > 0
-  ) {
-    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: any) => {
-      if (constraint?.OrgOtherConstraints && constraint?.OrgUseConstraints) {
+      if (type === 'use' && constraint?.OrgUseConstraints) {
         constraint?.OrgUseConstraints?.forEach((useConstraint: string) => {
-          limitationPublicAccessUseConstraint += useConstraint + '\n';
+          result += useConstraint + '<br>';
         });
       }
-    });
-  }
-  return limitationPublicAccessUseConstraint;
-};
-
-const getLimitationPublicAccessUseOtherConstraint = (searchItem: Record<string, any>): string => {
-  let limitationPublicAccessUseOtherConstraint = '';
-
-  if (
-    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
-    searchItem._source.OrgResourceConstraints.length > 0
-  ) {
-    searchItem._source.OrgResourceConstraints.forEach((constraint: any) => {
-      if (Array.isArray(constraint?.OrgOtherConstraints) && Array.isArray(constraint?.OrgUseConstraints)) {
-        constraint.OrgOtherConstraints.forEach((otherConstraint: string) => {
-          limitationPublicAccessUseOtherConstraint += otherConstraint + '\n';
+      if (type === 'useOther' && constraint?.OrgUseConstraints && !constraint?.OrgAccessConstraints) {
+        constraint?.OrgOtherConstraints?.forEach((otherConstraint: string) => {
+          result += otherConstraint + '<br>';
         });
       }
-    });
-  }
-
-  return limitationPublicAccessUseOtherConstraint;
-};
-
-const getLimitationPublicOtherConstraint = (searchItem: Record<string, any>): string => {
-  let limitationPublicAccessOtherConstraint = '';
-
-  if (
-    Array.isArray(searchItem?._source?.OrgResourceConstraints) &&
-    searchItem._source.OrgResourceConstraints.length > 0
-  ) {
-    searchItem?._source?.OrgResourceConstraints?.forEach((constraint: Record<string, any>) => {
-      if (constraint?.OrgOtherConstraints && !constraint?.OrgAccessConstraints && !constraint?.OrgUseConstraints) {
-        limitationPublicAccessOtherConstraint = constraint?.OrgOtherConstraints.join(', ');
+      if (
+        type === 'publicOther' &&
+        ((!constraint?.OrgAccessConstraints && !constraint?.OrgUseConstraints) ||
+          (constraint?.OrgAccessConstraints && constraint?.OrgUseConstraints))
+      ) {
+        result = constraint.OrgOtherConstraints.join(', ');
       }
     });
   }
 
-  return limitationPublicAccessOtherConstraint;
+  return result;
 };
 
 const getFrequencyUpdate = (searchItem: Record<string, any>): string => {
   let limitationPublicAccessOtherConstraint = '';
-
   if (
     Array.isArray(searchItem?._source?.cl_maintenanceAndUpdateFrequency) &&
     searchItem._source.cl_maintenanceAndUpdateFrequency.length > 0
@@ -101,37 +60,27 @@ const getFrequencyUpdate = (searchItem: Record<string, any>): string => {
       .map((constraint: Record<string, any>) => constraint.default)
       .join(', ');
   }
-
   return limitationPublicAccessOtherConstraint;
 };
 
 const getAvailableFormats = (searchItem: Record<string, any>): string => {
   let limitationPublicAccessAvailableFormats = '';
-  if (searchItem.OrgDistributionFormats && searchItem.OrgDistributionFormats.length > 0) {
-    const formatNames = searchItem.OrgDistributionFormats.map((format: Record<string, any>) => format.name);
+  if (searchItem?._source?.OrgDistributionFormats && searchItem?._source?.OrgDistributionFormats.length > 0) {
+    const formatNames = searchItem?._source?.OrgDistributionFormats.map((format: Record<string, any>) => format.name);
     limitationPublicAccessAvailableFormats = formatNames.join(', ');
   }
   return limitationPublicAccessAvailableFormats;
 };
 
 const getLicenseTabData = (searchItem: Record<string, any>): ILicense => ({
-  limitation_on_public_access: getLimitationPublicAccess(searchItem),
-  limitation_on_public_access_other_constraint: getLimitationPublicAccessOtherConstraint(searchItem),
-  conditions_for_access_and_use_use_constraints: getLimitationPublicAccessUseConstraint(searchItem),
-  conditions_for_access_and_use_other_constraints: getLimitationPublicAccessUseOtherConstraint(searchItem),
-  other_constraint: getLimitationPublicOtherConstraint(searchItem),
+  limitation_on_public_access: getLimitationData(searchItem, 'access'),
+  limitation_on_public_access_otherconstraint: getLimitationData(searchItem, 'other'),
+  conditions_for_access_and_use_useConstraints: getLimitationData(searchItem, 'use'),
+  conditions_for_access_and_useOtherConstraints: getLimitationData(searchItem, 'useOther'),
+  other_constraint: getLimitationData(searchItem, 'publicOther'),
   available_formats: getAvailableFormats(searchItem),
   frequency_of_update: getFrequencyUpdate(searchItem),
   character_encoding: 'utf8',
 });
 
-export {
-  getLicenseTabData,
-  getLimitationPublicAccess,
-  getLimitationPublicAccessOtherConstraint,
-  getLimitationPublicAccessUseConstraint,
-  getLimitationPublicAccessUseOtherConstraint,
-  getLimitationPublicOtherConstraint,
-  getAvailableFormats,
-  getFrequencyUpdate,
-};
+export { getLicenseTabData, getLimitationData, getAvailableFormats, getFrequencyUpdate };

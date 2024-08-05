@@ -171,9 +171,9 @@ export const detailsTabOptions: TabOptions = {
   },
   license: {
     'Limitations on public access -<br /> Access constraints': 'limitation_on_public_access',
-    'Limitations on public access -<br /> Other constraints': 'limitation_on_public_access_other_constraint',
-    'Conditions for access and use -<br /> Use constraints': 'conditions_for_access_and_use_use_constraints',
-    'Conditions for access and use -<br /> Other constraints': 'conditions_for_access_and_use_other_constraints',
+    'Limitations on public access -<br /> Other constraints': 'limitation_on_public_access_otherconstraint',
+    'Conditions for access and use -<br /> Use constraints': 'conditions_for_access_and_use_useConstraints',
+    'Conditions for access and use -<br /> Other constraints': 'conditions_for_access_and_useOtherConstraints',
     'Other Constraint': 'other_constraint',
     'Distribution formats': 'available_formats',
     'Frequency of update': 'frequency_of_update',

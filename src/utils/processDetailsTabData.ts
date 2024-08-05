@@ -20,7 +20,7 @@ const processDetailsTabData = async (
           const value = docDetails[sanitizedPart];
 
           if (value) {
-            const isLink = /^https?:\/\/.*$/.test(value);
+            const isLink = /^(http|https):\/\/.*$/.test(value);
             const formattedValue = isLink && part !== 'host_catalogue_number' ? addLink(value) : value;
 
             if (part.includes('(') && part.includes(')')) {
