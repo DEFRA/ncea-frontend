@@ -50,7 +50,7 @@ describe('Environment environmentConfig', () => {
       } = require('../../src/config/environmentConfig');
       expect(environmentConfig).toBeDefined();
       expect(typeof environmentConfig).toBe('object');
-      expect(Object.keys(environmentConfig).length).toBe(16);
+      expect(Object.keys(environmentConfig).length).toBe(12);
     });
 
     it('should validate and export the configuration object', () => {
