@@ -179,7 +179,6 @@ describe('getLicenseTabData', () => {
         OrgDistributionFormats: [{ name: 'Format1' }, { name: 'Format2' }],
       },
     };
-    const publishedBy = {};
     const expectedData = {
       limitation_on_public_access: 'Access Constraint\n',
       limitation_on_public_access_other_constraint: 'Other Constraint\n',
@@ -201,7 +200,6 @@ describe('getLicenseTabData', () => {
         OrgDistributionFormats: [],
       },
     };
-    const publishedBy = {};
     const expectedData = {
       limitation_on_public_access: '',
       limitation_on_public_access_other_constraint: '',
