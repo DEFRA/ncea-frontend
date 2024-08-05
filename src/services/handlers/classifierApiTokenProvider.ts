@@ -1,11 +1,11 @@
 const msal = require('@azure/msal-node');
 import { environmentConfig } from '../../config/environmentConfig';
 
-const tokenRequest = {
+export const tokenRequest = {
     scopes: [`${environmentConfig.classifierApi.scopes}/.default`],
 };
 
-const apiConfig = {
+export const apiConfig = {
     uri: environmentConfig.classifierApi.endpoint,
 };
 
@@ -32,12 +32,6 @@ const cca = new msal.ConfidentialClientApplication(msalConfig);
  * Acquires token with client credentials.
  * @param {object} tokenRequest
  */
-async function getToken(tokenRequest) {
+export const getToken = async(tokenRequest) {
     return await cca.acquireTokenByClientCredential(tokenRequest);
 }
-
-module.exports = {
-    apiConfig: apiConfig,
-    tokenRequest: tokenRequest,
-    getToken: getToken,
-};
