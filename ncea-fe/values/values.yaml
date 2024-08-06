@@ -80,3 +80,4 @@ env:
   ES_PASSWORD: $(elasticSearchPassword)
   CLASSIFIER_API: $(classifierApiBaseUri)
   WEBDOMAIN: $(webdomain)
+  GTM_ID: $(gtmId)
