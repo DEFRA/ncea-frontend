@@ -76,6 +76,8 @@ spec:
             value: "nceaClassifierMicroServiceApiKey"
           - name: WEBDOMAIN
             value: "{{ .Values.env.WEBDOMAIN }}"
+          - name: GTM_ID
+            value: "{{ .Values.env.GTM_ID }}"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

@@ -64,6 +64,7 @@ steps:
         env.ES_PASSWORD=$(elasticSearchPassword)
         env.CLASSIFIER_API=$(classifierApiBaseUri)
         env.WEBDOMAIN=$(webdomain)
+        env.GTM_ID=$(gtmId)
     install: true
     force: true
     releaseName: ${{ parameters.releaseName }}
