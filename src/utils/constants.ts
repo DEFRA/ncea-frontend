@@ -143,6 +143,7 @@ export const detailsTabOptions: TabOptions = {
     'Coupled resources': 'host_catalogue_entry',
     'Resource type': 'resource_type_and_hierarchy',
     'Resource locators': 'resource_locators',
+    'Contact information': 'contact_information',
     'Catalouge entry': 'ncea_catalogue_entry',
     'Parent identifier': 'ncea_group_reference',
     'Metadata standard': 'metadata_standard',

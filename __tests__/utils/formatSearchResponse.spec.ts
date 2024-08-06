@@ -30,12 +30,14 @@ describe('Format the search response', () => {
                     default: 'United Kingdom Hydrographic Office',
                   },
                   role: 'custodian',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
                 {
                   organisationObject: {
                     default: 'Geological Survey of Ireland (GSI)',
                   },
                   role: 'owner',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
               ],
               ownerOrgForResourceObject: {
@@ -73,12 +75,14 @@ describe('Format the search response', () => {
                     default: 'United Kingdom Hydrographic Office',
                   },
                   role: 'originator',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
                 {
                   organisationObject: {
                     default: 'Geological Survey of Ireland (GSI)',
                   },
                   role: 'owner',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
               ],
               ownerOrgForResourceObject: {
@@ -149,12 +153,14 @@ describe('Format the search response', () => {
                     default: 'United Kingdom Hydrographic Office',
                   },
                   role: 'custodian',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
                 {
                   organisationObject: {
                     default: 'Geological Survey of Ireland (GSI)',
                   },
                   role: 'owner',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
               ],
               ownerOrgForResourceObject: {
@@ -230,12 +236,14 @@ describe('Format the search response', () => {
                     default: 'United Kingdom Hydrographic Office',
                   },
                   role: 'originator',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
                 {
                   organisationObject: {
                     default: 'Geological Survey of Ireland (GSI)',
                   },
                   role: 'owner',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
               ],
               ownerOrgForResourceObject: {
@@ -361,6 +369,7 @@ describe('Format the search response', () => {
           geographicMarkers: '',
           verticalExtent: '',
           samplingResolution: '',
+          contact_information: "United Kingdom Hydrographic Office, <br />United Kingdom Hydrographic Office",
         },
         {
           id: '2',
@@ -412,6 +421,7 @@ describe('Format the search response', () => {
           geographicMarkers: '',
           verticalExtent: '',
           samplingResolution: '',
+          contact_information: "United Kingdom Hydrographic Office, <br />United Kingdom Hydrographic Office",
         },
       ],
     };
@@ -515,12 +525,14 @@ describe('Format the search response', () => {
                     default: 'United Kingdom Hydrographic Office',
                   },
                   role: 'custodian',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
                 {
                   organisationObject: {
                     default: 'Maritime and Coastguard Agency',
                   },
                   role: 'owner',
+                  organisationName:'United Kingdom Hydrographic Office',
                 },
               ],
             },

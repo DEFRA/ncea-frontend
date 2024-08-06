@@ -4,6 +4,8 @@ import {
   getResourceLocators,
   getAccessTabData,
   getResourceTypeHierarchy,
+  getContactInformation,
+  combineAndSortContacts,
 } from '../../src/utils/getAccessTabData';
 
 describe('getAccessTabData functions', () => {
@@ -290,7 +292,7 @@ describe('getAccessTabData functions', () => {
           },
         },
       };
-      const expected = 'For access contact Org :- test@example.com';
+      const expected = 'Contact organisation for Resource locator information';
       expect(getResourceLocators(searchItem)).toBe(expected);
     });
 
@@ -377,7 +379,7 @@ describe('getAccessTabData functions', () => {
       };
       const result = getAccessTabData(searchItem);
       expect(result.resource_locators).toBe(
-        'For access contact Org :- test@example.com',
+        'Contact organisation for Resource locator information',
       );
     });
 
@@ -464,4 +466,95 @@ describe('getAccessTabData functions', () => {
   });
 
 
+});
+describe('contactFunctions', () => {
+  describe('combineAndSortContacts', () => {
+    const rolePrecedence = ['owner', 'pointOfContact', 'custodian', 'distributor', 'originator'];
+
+    it('should combine and sort contacts based on role precedence', () => {
+      const contactForResource = [
+        { role: 'distributor', organisationName: 'OrgA', email: 'orgA@example.com' }
+      ];
+      const contact = [
+        { role: 'pointOfContact', organisationName: 'OrgC', email: 'orgC@example.com' },
+        { role: 'custodian', organisationName: 'OrgD', email: 'orgD@example.com' },
+      ];
+
+      const result = combineAndSortContacts(contactForResource, contact);
+
+      expect(result).toEqual([
+        { role: 'pointOfContact', organisationName: 'OrgC', email: 'orgC@example.com' },
+        { role: 'custodian', organisationName: 'OrgD', email: 'orgD@example.com' },
+        { role: 'distributor', organisationName: 'OrgA', email: 'orgA@example.com' },
+      ]);
+    });
+
+    it('should handle cases where one or both contact arrays are undefined or null', () => {
+      expect(combineAndSortContacts(undefined ?? [], undefined ?? [])).toEqual([]);
+      expect(combineAndSortContacts(null ?? [], null ?? [])).toEqual([]);
+      expect(combineAndSortContacts([{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }], null ?? [])).toEqual([{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }]);
+    });
+
+    it('should handle case where contacts have roles not in rolePrecedence', () => {
+      const contactForResource = [{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }];
+      const contact = [{ role: 'custodian', organisationName: 'OrgB', email: 'orgB@example.com' }];
+
+      const result = combineAndSortContacts(contactForResource, contact);
+
+      expect(result).toEqual([
+        { role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' },
+        { role: 'custodian', organisationName: 'OrgB', email: 'orgB@example.com' },
+
+      ]);
+    });
+  });
+
+  describe('getContactInformation', () => {
+    it('should return contact information formatted correctly when email is present', () => {
+      const searchItem = {
+        _source: {
+          contact: [{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }],
+          contactForResource: [{ role: 'custodian', organisationName: 'OrgB', email: 'orgB@example.com' }],
+        },
+      };
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('OrgA :- orgA@example.com, <br />OrgB :- orgB@example.com');
+    });
+
+    it('should return contact information formatted correctly when email is not present', () => {
+      const searchItem = {
+        _source: {
+          contact: [{ role: 'owner', organisationName: 'OrgA', email: '' }],
+          contactForResource: [{ role: 'custodian', organisationName: 'OrgB' }],
+        },
+      };
+
+      const result = getContactInformation(searchItem);
+    console.log("res",result)
+      expect(result).toBe('OrgA, <br />OrgB');
+    });
+
+    it('should return a default message when there are no contacts', () => {
+      const searchItem = {
+        _source: {
+          contact: [],
+          contactForResource: [],
+        },
+      };
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('Find contact information on the Governance tab');
+    });
+
+    it('should handle cases where searchItem._source is missing or undefined', () => {
+      const searchItem = {};
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('Find contact information on the Governance tab');
+    });
+  });
 });

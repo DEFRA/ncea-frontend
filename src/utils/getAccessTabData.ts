@@ -5,6 +5,21 @@ import { IAccessItem } from '../interfaces/searchResponse.interface';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { addSpaces, capitalizeWords } from './formatAggregationResponse';
 
+const rolePrecedence = ['owner', 'pointOfContact', 'custodian', 'distributor', 'originator'];
+
+const combineAndSortContacts = (contactForResource: any[], contact: any[]): any[] => {
+  const contactForResourceArray = contactForResource ?? [];
+  const contactArray = contact ?? [];
+  const combined = [...contactForResourceArray, ...contactArray];
+  combined.sort((a, b) => {
+    const roleIndexA = rolePrecedence.indexOf(a.role.toLowerCase());
+    const roleIndexB = rolePrecedence.indexOf(b.role.toLowerCase());
+
+    return roleIndexA - roleIndexB;
+  });
+  return combined;
+};
+
 const getHostCatalogueNumber = (searchItem: Record<string, any>): string => {
   return `${searchItem?._source?.resourceIdentifier?.[0]?.codeSpace ?? ''}${searchItem?._source?.resourceIdentifier?.[0]?.code ?? ''}`;
 };
@@ -55,10 +70,34 @@ const getResourceLocators = (searchItem: Record<string, any>): string => {
   if (resourceLocatorString === '') {
     const { organisationValue, email } = getOrganisationDetails(searchItem?._source, true);
     if (organisationValue && email) {
-      resourceLocatorString = `For access contact ${organisationValue} :- ${email}`;
+      resourceLocatorString = `Contact organisation for Resource locator information`;
     }
   }
   return resourceLocatorString;
+};
+
+const getContactInformation = (searchItem: Record<string, any>): string => {
+  const contactInformationArray: string[] = [];
+
+  const sortedArrayAndCombinedContact = combineAndSortContacts(
+    searchItem?._source?.contact,
+    searchItem?._source?.contactForResource,
+  );
+
+  if (sortedArrayAndCombinedContact.length > 0) {
+    sortedArrayAndCombinedContact.forEach((contact) => {
+      const contactInfo = contact.email
+        ? `${contact.organisationName} :- ${contact.email}`
+        : `${contact.organisationName}`;
+      contactInformationArray.push(contactInfo);
+    });
+  }
+
+  if (contactInformationArray.length === 0) {
+    return 'Find contact information on the Governance tab';
+  } else {
+    return contactInformationArray.join(', <br />');
+  }
 };
 
 const getResourceTypeHierarchy = (searchItem: Record<string, any>): string => {
@@ -88,7 +127,16 @@ const getAccessTabData = (searchItem: Record<string, any>): IAccessItem => ({
   host_catalogue_entry: getCoupledResource(searchItem?._source?.OrgCoupledResource ?? ''),
   resource_type_and_hierarchy: getResourceTypeHierarchy(searchItem),
   resource_locators: getResourceLocators(searchItem),
+  contact_information: getContactInformation(searchItem),
   metadata_language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
 });
 
-export { getAccessTabData, getHostCatalogueNumber, getResourceLocators, getCoupledResource, getResourceTypeHierarchy };
+export {
+  getAccessTabData,
+  getHostCatalogueNumber,
+  getResourceLocators,
+  getCoupledResource,
+  getResourceTypeHierarchy,
+  getContactInformation,
+  combineAndSortContacts,
+};
