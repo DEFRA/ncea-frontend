@@ -7,10 +7,12 @@ import { IAggregationOptions, ISearchItem, ISearchResults } from '../../interfac
 import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
 
 import { getPaginationItems } from '../../utils/paginationBuilder';
+import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import {
   deleteQueryParams,
   generateQueryBuilderPayload,
+  generateCountPayload,
   readQueryParams,
   upsertQueryParams,
 } from '../../utils/queryStringHelper';
@@ -36,9 +38,11 @@ const SearchResultsController = {
     const studyPeriodToYear: string = readQueryParams(request.query, queryParamKeys.toYear);
     const hasStudyPeriodFilterApplied: boolean = !!studyPeriodFromYear.length && !!studyPeriodToYear.length;
     const payload: ISearchPayload = generateQueryBuilderPayload(request.query);
+    const countPayload = generateCountPayload(request.query);
     const { rowsPerPage, page } = payload;
     const isQuickSearchJourney = journey === 'qs';
     try {
+      const count = (await getSearchResultsCount(countPayload)).totalResults;
       const searchResults: ISearchResults = await getSearchResults(payload, false, isQuickSearchJourney);
       const studyPeriodFilterOptions: IAggregationOptions = await getFilterOptions(
         payload,
@@ -55,7 +59,7 @@ const SearchResultsController = {
         [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
         [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
       };
-      const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage, request.query);
+      const paginationItems = getPaginationItems(page, count?? 0, rowsPerPage, request.query);
       const queryString = readQueryParams(request.query);
       const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
       const filterStudyPeriodPath = `${webRoutePaths.filterStudyPeriod}?${queryString}`;
@@ -71,6 +75,7 @@ const SearchResultsController = {
         pageTitle: pageTitles.results,
         quickSearchFID,
         searchResults,
+        count,
         hasError: false,
         isQuickSearchJourney,
         paginationItems,

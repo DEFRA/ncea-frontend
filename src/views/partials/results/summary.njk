@@ -10,10 +10,10 @@
 
 {% if not hasError %}
   <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
-    {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
+    {{count}} results{% if not count %} found {% endif %}
   </h2>
   <div class="govuk-section-break--visible"></div>
-{% if not hasError and searchResults.total %}
+{% if not hasError and count %}
 <div class='map-container'>
     <div id="map-results-block">
       <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4' data-module='govuk-button'>
@@ -31,7 +31,7 @@
         <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
-  {% if not hasError and searchResults.total %}
+  {% if not hasError and count %}
   <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="sort_results" method="post">
     {{ govukSelect({
       id: "sort",
@@ -63,7 +63,7 @@
   </form>
 {% endif %}
 {% endif %}
-{% if not hasError and searchResults.total %}
+{% if not hasError and count %}
   <div class='search-result__items'>
     {% for item in searchResults.items %}
       <div class='govuk-section-break--visible search-result__item'>
@@ -103,7 +103,7 @@
 
 {% endif %}
 
-{% if not searchResults.total and not hasError %}
+{% if not count and not hasError %}
   <div class='search-result__item'>
     <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
     <p class='search-result__content search-result__content--empty'>
@@ -127,6 +127,6 @@
   </div>
 {% endif %}
 
-{% if searchResults.total and not hasError %}
+{% if count and not hasError %}
   {%- include 'partials/go_to_resource/modal.njk' -%}
 {% endif %}
