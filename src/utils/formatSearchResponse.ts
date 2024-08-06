@@ -131,7 +131,7 @@ const getOtherDetails = async (
     ...getGeneralTabData(searchItem),
     ...getAccessTabData(searchItem),
     ...getQualityTabData(searchItem),
-    ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
+    ncea_group_reference: searchItem?._source?.parentUuid ?? '',
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
     ...getLicenseTabData(searchItem, publishedBy),

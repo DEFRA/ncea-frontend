@@ -207,6 +207,7 @@ describe('Format the search response', () => {
               frequency_of_update: '',
               license_constraints: '',
               limitation_on_public_access: '',
+              catalogue_number: "",
               tag: [
                 {
                   default: 'Elevation',
@@ -310,6 +311,7 @@ describe('Format the search response', () => {
               frequency_of_update: '',
               license_constraints: '',
               limitation_on_public_access: '',
+              catalogue_number: "",
               linkUrl: ['https://seabed.admiralty.co.uk'],
             },
           },

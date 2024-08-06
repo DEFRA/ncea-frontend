@@ -145,6 +145,7 @@ export const detailsTabOptions: TabOptions = {
     'Resource locators': 'resource_locators',
     'Contact information': 'contact_information',
     'Catalouge entry': 'ncea_catalogue_entry',
+    'NCEA catalogue number': 'catalogue_number',
     'Parent identifier': 'ncea_group_reference',
     'Metadata standard': 'metadata_standard',
     'Project number': 'project_number',

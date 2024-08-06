@@ -214,7 +214,7 @@ const formattedDetailsResponse: ISearchResults = {
       metadataDate: "26 January 2010",
       conformity: '',
       metadata_standard: '',
-      ncea_group_reference: '3c080cb6-2ed9-43e7-9323-9ce42b05b9a2',
+      ncea_group_reference: '',
       project_number: '',
       license_constraints: '',
       limitation_on_public_access: '',
@@ -758,6 +758,7 @@ const formattedDetailsFullResponse: ISearchResults = {
       toYear: '2019',
       resourceLocator: 'https://seabed.admiralty.co.uk',
       language: 'ENG',
+      catalogue_number: "",
       metadata_language: 'ENG',
       keywords:
         'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
@@ -792,7 +793,7 @@ const formattedDetailsFullResponse: ISearchResults = {
                       <td>inapplicable</td>
                     </tr></tbody></table>`,
       metadata_standard: 'MEDIN',
-      ncea_group_reference: 'fb8dca0f-7425-4f50-86a1-c4673b1aef88',
+      ncea_group_reference: '',
       project_number: '',
       license_constraints:
         'There are no limitations on public access to spatial data sets and services. <br>',

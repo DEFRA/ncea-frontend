@@ -24,6 +24,7 @@ export interface IAccessItem {
   host_catalogue_entry?: string;
   resource_type_and_hierarchy?: string;
   contact_information?: string;
+  catalogue_number?: string;
   resource_locators?: string;
   host_service_catalogue_number?: string;
   ncea_group_reference?: string;

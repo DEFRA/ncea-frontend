@@ -5,6 +5,7 @@ import {
   getAccessTabData,
   getResourceTypeHierarchy,
   getContactInformation,
+  getCatelogue,
   combineAndSortContacts,
 } from '../../src/utils/getAccessTabData';
 
@@ -556,5 +557,60 @@ describe('contactFunctions', () => {
 
       expect(result).toBe('Find contact information on the Governance tab');
     });
+  });
+});
+
+describe('getCatelogue', () => {
+  test('should return the correct source system reference ID when it is present', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: {
+          masterReferenceID: {
+            sourceSystemReferenceID: '12345'
+          }
+        }
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('12345');
+  });
+
+  test('should return an empty string when sourceSystemReferenceID is undefined', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: {
+          masterReferenceID: {
+            sourceSystemReferenceID: undefined
+          }
+        }
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
+
+  test('should return an empty string when masterReferenceID is undefined', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: {
+          masterReferenceID: undefined
+        }
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
+
+  test('should return an empty string when OrgNceaIdentifiers is undefined', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: undefined
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
+
+  test('should return an empty string when _source is undefined', () => {
+    const searchItem = {
+      _source: undefined
+    };
+    expect(getCatelogue(searchItem)).toBe('');
   });
 });

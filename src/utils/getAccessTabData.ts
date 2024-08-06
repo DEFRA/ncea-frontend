@@ -120,6 +120,9 @@ const getResourceTypeHierarchy = (searchItem: Record<string, any>): string => {
   return resourceTypeHierarchy;
 };
 
+const getCatelogue = (searchItem: Record<string, any>): string => {
+  return `${searchItem?._source?.OrgNceaIdentifiers?.masterReferenceID?.sourceSystemReferenceID ?? ''}`;
+};
 const getAccessTabData = (searchItem: Record<string, any>): IAccessItem => ({
   ncea_catalogue_number: searchItem?._source?.uuid,
   ncea_catalogue_entry: searchItem?._source?.OrgNceaIdentifiers?.masterReferenceID?.catalogueEntry ?? '',
@@ -128,6 +131,7 @@ const getAccessTabData = (searchItem: Record<string, any>): IAccessItem => ({
   resource_type_and_hierarchy: getResourceTypeHierarchy(searchItem),
   resource_locators: getResourceLocators(searchItem),
   contact_information: getContactInformation(searchItem),
+  catalogue_number: getCatelogue(searchItem),
   metadata_language: searchItem?._source?.mainLanguage?.toUpperCase() ?? '',
 });
 
@@ -138,5 +142,6 @@ export {
   getCoupledResource,
   getResourceTypeHierarchy,
   getContactInformation,
+  getCatelogue,
   combineAndSortContacts,
 };
