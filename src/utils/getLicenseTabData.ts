@@ -4,7 +4,10 @@
 import { ILicense } from '../interfaces/searchResponse.interface';
 
 const ensureArray = (response) => {
-  if (response && !Array.isArray(response)) {
+  if (response === undefined || response === null) {
+    return [];
+  }
+  if (!Array.isArray(response)) {
     response = [response];
   }
   return response;
@@ -64,14 +67,12 @@ const getFrequencyUpdate = (searchItem: Record<string, any>): string => {
 };
 
 const getAvailableFormats = (searchItem: Record<string, any>): string => {
- let limitationPublicAccessAvailableFormats = '';
- const data = ensureArray(searchItem?._source?.OrgDistributionFormats);
- if (data) {
-   limitationPublicAccessAvailableFormats = data
-     .map((format: { name: string }) => format.name)
-     .join(', ');
- }
- return limitationPublicAccessAvailableFormats;
+  let limitationPublicAccessAvailableFormats = '';
+  const data = ensureArray(searchItem?._source?.OrgDistributionFormats);
+  if (data) {
+    limitationPublicAccessAvailableFormats = data.map((format: { name: string }) => format.name).join(', ');
+  }
+  return limitationPublicAccessAvailableFormats;
 };
 
 const getLicenseTabData = (searchItem: Record<string, any>): ILicense => ({
@@ -85,4 +86,4 @@ const getLicenseTabData = (searchItem: Record<string, any>): ILicense => ({
   character_encoding: 'utf8',
 });
 
-export { getLicenseTabData, getLimitationData, getAvailableFormats, getFrequencyUpdate };
+export { getLicenseTabData, getLimitationData, getAvailableFormats, getFrequencyUpdate,ensureArray };

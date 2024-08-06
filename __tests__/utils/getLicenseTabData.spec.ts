@@ -3,7 +3,31 @@ import {
   getLimitationData,
   getAvailableFormats,
   getFrequencyUpdate,
+  ensureArray,
 } from '../../src/utils/getLicenseTabData';
+
+describe('ensureArray', () => {
+  test('should wrap a non-array response in an array', () => {
+    const response = { key: 'value' };
+    expect(ensureArray(response)).toEqual([response]);
+  });
+
+  test('should return the response as-is if it is already an array', () => {
+    const response = [{ key: 'value' }];
+    expect(ensureArray(response)).toEqual(response);
+  });
+
+  test('should return an empty array if the response is undefined', () => {
+    const response = undefined;
+    expect(ensureArray(response)).toEqual([]);
+  });
+
+  test('should return an empty array if the response is null', () => {
+    const response = null;
+    expect(ensureArray(response)).toEqual([]);
+  });
+});
+
 
 describe('getLimitationData', () => {
   test('should return correct limitation public access', () => {
@@ -194,8 +218,8 @@ describe('getLicenseTabData', () => {
     const expectedData = {
       limitation_on_public_access: '',
       limitation_on_public_access_otherconstraint: '',
-      conditions_for_access_and_useOtherConstraints: "",
-      conditions_for_access_and_use_useConstraints: "",
+      conditions_for_access_and_use_useConstraints: '',
+      conditions_for_access_and_useOtherConstraints: '',
       other_constraint: '',
       available_formats: '',
       frequency_of_update: '',
