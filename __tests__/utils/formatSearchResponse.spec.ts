@@ -371,6 +371,7 @@ describe('Format the search response', () => {
           geographicMarkers: '',
           verticalExtent: '',
           samplingResolution: '',
+          catalogue_number: "",
           contact_information: "United Kingdom Hydrographic Office, <br />United Kingdom Hydrographic Office",
         },
         {
@@ -423,6 +424,7 @@ describe('Format the search response', () => {
           geographicMarkers: '',
           verticalExtent: '',
           samplingResolution: '',
+          catalogue_number: "",
           contact_information: "United Kingdom Hydrographic Office, <br />United Kingdom Hydrographic Office",
         },
       ],

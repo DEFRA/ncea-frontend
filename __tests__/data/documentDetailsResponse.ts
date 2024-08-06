@@ -156,6 +156,7 @@ const detailsSuccessAPIResponse = {
           sourceCatalogue: '2fc172f5-4c8e-493b-8277-3492b3ed504c',
           cl_accessConstraints: [],
           licenseObject: [],
+          catalogue_number:''
         },
       },
     ],
@@ -234,6 +235,7 @@ const formattedDetailsResponse: ISearchResults = {
       verticalExtent: '',
       samplingResolution: '',
       contact_information: ", <br />",
+      catalogue_number:''
     },
   ],
 };
