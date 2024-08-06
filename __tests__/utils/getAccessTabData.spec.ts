@@ -470,52 +470,192 @@ describe('getAccessTabData functions', () => {
 });
 describe('contactFunctions', () => {
   describe('combineAndSortContacts', () => {
-    const rolePrecedence = ['owner', 'pointOfContact', 'custodian', 'distributor', 'originator'];
+    const rolePrecedence = ['owner', 'pointofcontact', 'custodian', 'distributor', 'originator'];
 
     it('should combine and sort contacts based on role precedence', () => {
       const contactForResource = [
-        { role: 'distributor', organisationName: 'OrgA', email: 'orgA@example.com' }
+        {
+          role: 'distributor',
+          organisationName: 'OrgA',
+          email: 'orgA@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        }
       ];
       const contact = [
-        { role: 'pointOfContact', organisationName: 'OrgC', email: 'orgC@example.com' },
-        { role: 'custodian', organisationName: 'OrgD', email: 'orgD@example.com' },
+        {
+          role: 'pointofcontact',
+          organisationName: 'OrgC',
+          email: 'orgC@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
+        {
+          role: 'custodian',
+          organisationName: 'OrgD',
+          email: 'orgD@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
       ];
 
       const result = combineAndSortContacts(contactForResource, contact);
 
       expect(result).toEqual([
-        { role: 'pointOfContact', organisationName: 'OrgC', email: 'orgC@example.com' },
-        { role: 'custodian', organisationName: 'OrgD', email: 'orgD@example.com' },
-        { role: 'distributor', organisationName: 'OrgA', email: 'orgA@example.com' },
+        {
+          role: 'pointofcontact',
+          organisationName: 'OrgC',
+          email: 'orgC@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
+        {
+          role: 'custodian',
+          organisationName: 'OrgD',
+          email: 'orgD@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
+        {
+          role: 'distributor',
+          organisationName: 'OrgA',
+          email: 'orgA@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
       ]);
     });
 
     it('should handle cases where one or both contact arrays are undefined or null', () => {
       expect(combineAndSortContacts(undefined ?? [], undefined ?? [])).toEqual([]);
       expect(combineAndSortContacts(null ?? [], null ?? [])).toEqual([]);
-      expect(combineAndSortContacts([{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }], null ?? [])).toEqual([{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }]);
+      expect(combineAndSortContacts([{
+        role: 'owner',
+        organisationName: 'OrgA',
+        email: 'orgA@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: ''
+      }], null ?? [])).toEqual([{
+        role: 'owner',
+        organisationName: 'OrgA',
+        email: 'orgA@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: ''
+      }]);
     });
 
     it('should handle case where contacts have roles not in rolePrecedence', () => {
-      const contactForResource = [{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }];
-      const contact = [{ role: 'custodian', organisationName: 'OrgB', email: 'orgB@example.com' }];
+      const contactForResource = [{
+        role: 'owner',
+        organisationName: 'OrgA',
+        email: 'orgA@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: ''
+      }];
+      const contact = [{
+        role: 'custodian',
+        organisationName: 'OrgB',
+        email: 'orgB@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: ''
+      }];
 
       const result = combineAndSortContacts(contactForResource, contact);
 
       expect(result).toEqual([
-        { role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' },
-        { role: 'custodian', organisationName: 'OrgB', email: 'orgB@example.com' },
-
+        {
+          role: 'owner',
+          organisationName: 'OrgA',
+          email: 'orgA@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
+        {
+          role: 'custodian',
+          organisationName: 'OrgB',
+          email: 'orgB@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: ''
+        },
       ]);
     });
   });
+
 
   describe('getContactInformation', () => {
     it('should return contact information formatted correctly when email is present', () => {
       const searchItem = {
         _source: {
-          contact: [{ role: 'owner', organisationName: 'OrgA', email: 'orgA@example.com' }],
-          contactForResource: [{ role: 'custodian', organisationName: 'OrgB', email: 'orgB@example.com' }],
+          contact: [{
+            role: 'owner',
+            organisationName: 'OrgA',
+            email: 'orgA@example.com',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: ''
+          }],
+          contactForResource: [{
+            role: 'custodian',
+            organisationName: 'OrgB',
+            email: 'orgB@example.com',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: ''
+          }],
         },
       };
 
@@ -527,13 +667,33 @@ describe('contactFunctions', () => {
     it('should return contact information formatted correctly when email is not present', () => {
       const searchItem = {
         _source: {
-          contact: [{ role: 'owner', organisationName: 'OrgA', email: '' }],
-          contactForResource: [{ role: 'custodian', organisationName: 'OrgB' }],
+          contact: [{
+            role: 'owner',
+            organisationName: 'OrgA',
+            email: '',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: ''
+          }],
+          contactForResource: [{
+            role: 'custodian',
+            organisationName: 'OrgB',
+            email: '',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: ''
+          }],
         },
       };
 
       const result = getContactInformation(searchItem);
-    console.log("res",result)
+
       expect(result).toBe('OrgA, <br />OrgB');
     });
 
@@ -558,6 +718,7 @@ describe('contactFunctions', () => {
       expect(result).toBe('Find contact information on the Governance tab');
     });
   });
+
 });
 
 describe('getCatelogue', () => {

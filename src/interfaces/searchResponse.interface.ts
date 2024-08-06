@@ -34,6 +34,17 @@ export interface IAccessItem {
   ncea_catalogue_entry?: string;
 }
 
+export interface Contact {
+  organisationName: string;
+  role: string;
+  email: string;
+  website: string;
+  logo: string;
+  individual: string;
+  position: string;
+  phone: string;
+  address: string;
+}
 export interface ILicense {
   limitation_on_public_access?: string;
   license_constraints?: string;

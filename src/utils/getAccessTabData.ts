@@ -1,13 +1,13 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 'use strict';
 
-import { IAccessItem } from '../interfaces/searchResponse.interface';
 import { getOrganisationDetails } from './getOrganisationDetails';
+import { Contact, IAccessItem } from '../interfaces/searchResponse.interface';
 import { addSpaces, capitalizeWords } from './formatAggregationResponse';
 
-const rolePrecedence = ['owner', 'pointOfContact', 'custodian', 'distributor', 'originator'];
+const rolePrecedence = ['owner', 'pointofcontact', 'custodian', 'distributor', 'originator'];
 
-const combineAndSortContacts = (contactForResource: any[], contact: any[]): any[] => {
+const combineAndSortContacts = (contactForResource: Contact[], contact: Contact[]): Contact[] => {
   const contactForResourceArray = contactForResource ?? [];
   const contactArray = contact ?? [];
   const combined = [...contactForResourceArray, ...contactArray];
@@ -85,7 +85,7 @@ const getContactInformation = (searchItem: Record<string, any>): string => {
   );
 
   if (sortedArrayAndCombinedContact.length > 0) {
-    sortedArrayAndCombinedContact.forEach((contact) => {
+    sortedArrayAndCombinedContact.forEach((contact: Contact) => {
       const contactInfo = contact.email
         ? `${contact.organisationName} :- ${contact.email}`
         : `${contact.organisationName}`;

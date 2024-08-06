@@ -822,8 +822,8 @@ const formattedDetailsFullResponse: ISearchResults = {
       geographicMarkers: '-11.14563,49.0466505',
       verticalExtent: '',
       samplingResolution: '',
-      contact_information:  "United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk",
-    },
+      contact_information: "undefined :- customerservices@ukho.gov.uk, <br />United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk",
+     },
   ],
 };
 
