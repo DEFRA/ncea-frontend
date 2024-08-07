@@ -59,9 +59,8 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
     authority: Joi.string().allow('').default('').messages({
       'string.base': 'Classifier API app authority must be a string',
     }),
-    scopes: Joi.array().items(Joi.string()).min(1).required().messages({
-      "any.required": "scopes must include only strings",
-      "string.base": "scopes must include only strings"
+    scopes: Joi.string().allow('').default('').messages({
+      'string.base': 'Classifier API scope must be a string',
     })
   })
 });

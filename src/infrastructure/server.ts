@@ -27,6 +27,15 @@ const server: Server = Hapi.server({
 const initializeServer = async (): Promise<Server> => {
   if (!shouldPushToAppInsights) {
     const appInsightsConnectionString = await getSecret(appInsightsConnectionStringSecretName);
+
+    // const clientId = await getSecret('daemon-app-clientid');
+    // const clientSecret = await getSecret('daemon-app-secret');
+    // const classifierApiClientId = await getSecret('daemon-app-secret');
+
+    // environmentConfig.classifierApi.clientId = clientId;
+    // environmentConfig.classifierApi.clientSecret = clientSecret;
+    // environmentConfig.classifierApi.scopes = classifierApiClientId;
+
     environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
     customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
   }
