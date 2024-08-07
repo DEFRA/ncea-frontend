@@ -1,157 +1,230 @@
 import {
   getLicenseTabData,
-  getLicenseConstraints,
-  getLimitationPublicAccess,
-  getPublishedBy,
+  getLimitationData,
   getAvailableFormats,
+  getFrequencyUpdate,
+  ensureArray,
 } from '../../src/utils/getLicenseTabData';
 
-describe('getLicenseTabData', () => {
-  test('should return correct license tab data with all properties filled', () => {
-    const searchItem = {
-      _source: {
-        MD_LegalConstraintsOtherConstraintsObject: [
-          { default: 'Constraint 1' },
-          {},
-          { text: 'Constraint 2' },
-        ],
-        cl_accessConstraints: [{ default: 'Access Constraint', text: 'Text' }],
-        licenseObject: [{ default: 'License Object' }],
-        OrgDistributionFormats: [
-          { name: 'Format1', version: '1.0' },
-          { name: 'Format2', version: '2.0' },
-        ],
-        cl_maintenanceAndUpdateFrequency: [{ default: 'Daily' }],
-      },
-    };
-    const publishedBy = {
-      role: 'Role',
-      organisationValue: 'Organization',
-      email: 'email@example.com',
-    };
-    const expectedData = {
-      limitation_on_public_access:
-        'Access Constraint <br>Text <br>License Object',
-      license_constraints: 'Constraint 1 <br>Constraint 2',
-      data_owner: 'Role, Organization <br>email@example.com',
-      available_formats: 'Format1(1.0), Format2(2.0)',
-      frequency_of_update: 'Daily',
-      character_encoding: 'utf8',
-    };
-    expect(getLicenseTabData(searchItem, publishedBy)).toEqual(expectedData);
+describe('ensureArray', () => {
+  test('should wrap a non-array response in an array', () => {
+    const response = { key: 'value' };
+    expect(ensureArray(response)).toEqual([response]);
   });
 
-  test('should return correct license tab data with empty or missing properties', () => {
-    const searchItem = {
-      _source: {
-        MD_LegalConstraintsOtherConstraintsObject: [],
-        cl_accessConstraints: [],
-        licenseObject: [],
-        OrgDistributionFormats: [],
-        cl_maintenanceAndUpdateFrequency: [],
-      },
-    };
-    const publishedBy = {};
-    const expectedData = {
-      limitation_on_public_access: '',
-      license_constraints: '',
-      data_owner: '',
-      available_formats: '',
-      frequency_of_update: '',
-      character_encoding: 'utf8',
-    };
-    expect(getLicenseTabData(searchItem, publishedBy)).toEqual(expectedData);
+  test('should return the response as-is if it is already an array', () => {
+    const response = [{ key: 'value' }];
+    expect(ensureArray(response)).toEqual(response);
+  });
+
+  test('should return an empty array if the response is undefined', () => {
+    const response = undefined;
+    expect(ensureArray(response)).toEqual([]);
+  });
+
+  test('should return an empty array if the response is null', () => {
+    const response = null;
+    expect(ensureArray(response)).toEqual([]);
   });
 });
 
-describe('getLicenseConstraints', () => {
-  test('should return correct license constraints with all properties filled', () => {
+
+describe('getLimitationData', () => {
+  test('should return correct limitation public access', () => {
     const searchItem = {
       _source: {
-        MD_LegalConstraintsOtherConstraintsObject: [
-          { default: 'Constraint 1' },
-          {},
-          { text: 'Constraint 2' },
+        OrgResourceConstraints: [
+          { OrgAccessConstraints: ['Access 1', 'Access 2'] },
         ],
       },
     };
-    const expectedConstraints = 'Constraint 1 <br>Constraint 2';
-    expect(getLicenseConstraints(searchItem)).toEqual(expectedConstraints);
-  });
-
-  test('should return empty string when no constraints provided', () => {
-    const searchItem = {
-      _source: {
-        MD_LegalConstraintsOtherConstraintsObject: [],
-      },
-    };
-    expect(getLicenseConstraints(searchItem)).toEqual('');
-  });
-});
-
-describe('getLimitationPublicAccess', () => {
-  test('should return correct limitation public access with all properties filled', () => {
-    const searchItem = {
-      _source: {
-        cl_accessConstraints: [{ default: 'Access Constraint', text: 'Text' }],
-        licenseObject: [{ default: 'License Object' }],
-      },
-    };
-    const expectedAccess = 'Access Constraint <br>Text <br>License Object';
-    expect(getLimitationPublicAccess(searchItem)).toEqual(expectedAccess);
+    expect(getLimitationData(searchItem, 'access')).toBe('Access 1<br>Access 2<br>');
   });
 
   test('should return empty string when no access constraints provided', () => {
     const searchItem = {
       _source: {
-        cl_accessConstraints: [],
-        licenseObject: [],
+        OrgResourceConstraints: [],
       },
     };
-    expect(getLimitationPublicAccess(searchItem)).toEqual('');
+    expect(getLimitationData(searchItem, 'access')).toBe('');
+  });
+
+  test('should return correct limitation public access other constraint', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [
+          { OrgOtherConstraints: ['Other Constraint 1', 'Other Constraint 2'] },
+        ],
+      },
+    };
+    expect(getLimitationData(searchItem, 'other')).toBe('');
+  });
+
+  test('should return empty string when no other constraints provided', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [],
+      },
+    };
+    expect(getLimitationData(searchItem, 'other')).toBe('');
+  });
+
+  test('should return correct limitation public access use constraint', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [
+          {
+            OrgUseConstraints: ['Use Constraint 1', 'Use Constraint 2'],
+          },
+        ],
+      },
+    };
+    expect(getLimitationData(searchItem, 'use')).toBe('Use Constraint 1<br>Use Constraint 2<br>');
+  });
+
+  test('should return empty string when no use constraints provided', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [],
+      },
+    };
+    expect(getLimitationData(searchItem, 'use')).toBe('');
+  });
+
+  test('should return correct limitation public access use other constraint', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [
+          {
+            OrgOtherConstraints: ['Other Constraint 1', 'Other Constraint 2'],
+            OrgUseConstraints: ['Use Constraint 1', 'Use Constraint 2'],
+          },
+        ],
+      },
+    };
+    expect(getLimitationData(searchItem, 'useOther')).toBe('Other Constraint 1<br>Other Constraint 2<br>');
+  });
+
+  test('should return empty string when no use other constraints provided', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [],
+      },
+    };
+    expect(getLimitationData(searchItem, 'useOther')).toBe('');
+  });
+
+  test('should return correct limitation public other constraint', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [
+          { OrgOtherConstraints: ['Other Constraint 1'] },
+        ],
+      },
+    };
+    expect(getLimitationData(searchItem, 'publicOther')).toBe('Other Constraint 1');
+  });
+
+  test('should return empty string when no other constraints provided', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [],
+      },
+    };
+    expect(getLimitationData(searchItem, 'publicOther')).toBe('');
   });
 });
 
-describe('getPublishedBy', () => {
-  test('should return correct data owner with all properties filled', () => {
-    const publishedBy = {
-      role: 'Role',
-      organisationValue: 'Organization',
-      email: 'email@example.com',
+describe('getFrequencyUpdate', () => {
+  test('should return correct frequency update', () => {
+    const searchItem = {
+      _source: {
+        cl_maintenanceAndUpdateFrequency: [{ default: 'Daily' }],
+      },
     };
-    const expectedOwner = 'Role, Organization <br>email@example.com';
-    expect(getPublishedBy(publishedBy)).toEqual(expectedOwner);
+    expect(getFrequencyUpdate(searchItem)).toBe('Daily');
   });
 
-  test('should return empty string when no properties provided', () => {
-    const publishedBy = {};
-    expect(getPublishedBy(publishedBy)).toEqual('');
+  test('should return empty string when no update frequency provided', () => {
+    const searchItem = {
+      _source: {
+        cl_maintenanceAndUpdateFrequency: [],
+      },
+    };
+    expect(getFrequencyUpdate(searchItem)).toBe('');
   });
 });
 
 describe('getAvailableFormats', () => {
-  test('should return correct available formats with all properties filled', () => {
-    const formats = [
-      { name: 'Format1', version: '1.0' },
-      { name: 'Format2', version: '2.0' },
-    ];
-    const expectedFormats = 'Format1(1.0), Format2(2.0)';
-    expect(getAvailableFormats(formats)).toEqual(expectedFormats);
+  test('should return correct available formats', () => {
+    const searchItem = {
+      _source: {
+        OrgDistributionFormats: [
+          { name: 'Format1' },
+          { name: 'Format2' },
+        ],
+      },
+    };
+    expect(getAvailableFormats(searchItem)).toBe('Format1, Format2');
   });
 
   test('should return empty string when no formats provided', () => {
-    const formats = [];
-    expect(getAvailableFormats(formats)).toEqual('');
+    const searchItem = {
+      _source: {
+        OrgDistributionFormats: [],
+      },
+    };
+    expect(getAvailableFormats(searchItem)).toBe('');
+  });
+});
+
+describe('getLicenseTabData', () => {
+  test('should return correct license tab data', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [
+          {
+            OrgAccessConstraints: ['Access Constraint'],
+            OrgOtherConstraints: ['Other Constraint'],
+            OrgUseConstraints: ['Use Constraint'],
+          },
+        ],
+        cl_maintenanceAndUpdateFrequency: [{ default: 'Daily' }],
+        OrgDistributionFormats: [{ name: 'Format1' }, { name: 'Format2' }],
+      },
+    };
+    const expectedData = {
+      limitation_on_public_access: 'Access Constraint<br>',
+      limitation_on_public_access_otherconstraint: '',
+      conditions_for_access_and_use_useConstraints: 'Use Constraint<br>',
+      conditions_for_access_and_useOtherConstraints: '',
+      other_constraint: 'Other Constraint',
+      available_formats: 'Format1, Format2',
+      frequency_of_update: 'Daily',
+      character_encoding: 'utf8',
+    };
+    expect(getLicenseTabData(searchItem)).toEqual(expectedData);
   });
 
-  test('should return correct available format when single format provided', () => {
-    const formats = { name: 'Format1', version: '1.0' };
-    const expectedFormats = 'Format1(1.0)';
-    expect(getAvailableFormats(formats)).toEqual(expectedFormats);
-  });
-
-  test('should return empty string when invalid formats provided', () => {
-    const formats = ['Invalid Format'];
-    expect(getAvailableFormats(formats)).toEqual('');
+  test('should return empty data when no constraints provided', () => {
+    const searchItem = {
+      _source: {
+        OrgResourceConstraints: [],
+        cl_maintenanceAndUpdateFrequency: [],
+        OrgDistributionFormats: [],
+      },
+    };
+    const expectedData = {
+      limitation_on_public_access: '',
+      limitation_on_public_access_otherconstraint: '',
+      conditions_for_access_and_use_useConstraints: '',
+      conditions_for_access_and_useOtherConstraints: '',
+      other_constraint: '',
+      available_formats: '',
+      frequency_of_update: '',
+      character_encoding: 'utf8',
+    };
+    expect(getLicenseTabData(searchItem)).toEqual(expectedData);
   });
 });

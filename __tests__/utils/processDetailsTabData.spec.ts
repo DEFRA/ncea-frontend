@@ -26,14 +26,68 @@ describe('Process details tab data function', () => {
     const docDetails: ISearchItem = {
       ...(formattedDetailsFullResponse.items[0] as ISearchItem),
     };
-    const {
-      processDetailsTabData,
-    } = require('../../src/utils/processDetailsTabData');
-    const processedData: FormattedTabOptions =
-      await processDetailsTabData(docDetails);
+    const { processDetailsTabData } = require('../../src/utils/processDetailsTabData');
+    const processedData: FormattedTabOptions = await processDetailsTabData(docDetails);
     expect(processedData).toBeDefined();
   });
 
+  it('should filter out options with label "Other Constraint" and empty displayValue', async () => {
+    jest.mock('../../src/utils/constants', () => ({
+      detailsTabOptions: {
+        mock: { 'Other Constraint': 'emptyValue' },
+      },
+    }));
+    const { processDetailsTabData } = require('../../src/utils/processDetailsTabData');
+    const docDetails: ISearchItem = {
+      ...(formattedDetailsFullResponse.items[0] as ISearchItem),
+    };
+    const processedData: FormattedTabOptions = await processDetailsTabData(docDetails);
+    expect(processedData).toBeDefined();
+    expect(processedData['mock']).toBeDefined();
+    expect(processedData['mock']).toHaveLength(0);
+  });
+
+  it('should include options with label "Other Constraint" and non-empty displayValue', async () => {
+    jest.mock('../../src/utils/constants', () => ({
+      detailsTabOptions: {
+        mock: { 'Other Constraint': 'title' },
+      },
+    }));
+    const { processDetailsTabData } = require('../../src/utils/processDetailsTabData');
+    const docDetails: ISearchItem = {
+      ...(formattedDetailsFullResponse.items[0] as ISearchItem),
+    };
+    const processedData: FormattedTabOptions = await processDetailsTabData(docDetails);
+    expect(processedData).toBeDefined();
+    expect(processedData['mock']).toBeDefined();
+
+    const mockData = processedData['mock'];
+    expect(mockData).toBeDefined();
+    if (mockData) {
+      expect(mockData.length).toBeGreaterThan(0);
+
+      if (mockData[0]) {
+        expect(mockData[0].label).toBe('Other Constraint');
+        expect(mockData[0].displayValue).toBe(docDetails.title);
+      }
+    }
+  });
+
+  it('should filter out options with label "Other Constraint" and empty displayValue', async () => {
+    jest.mock('../../src/utils/constants', () => ({
+      detailsTabOptions: {
+        mock: { 'Other Constraint': 'emptyValue' },
+      },
+    }));
+    const { processDetailsTabData } = require('../../src/utils/processDetailsTabData');
+    const docDetails: ISearchItem = {
+      ...(formattedDetailsFullResponse.items[0] as ISearchItem),
+    };
+    const processedData: FormattedTabOptions = await processDetailsTabData(docDetails);
+    expect(processedData).toBeDefined();
+    expect(processedData['mock']).toBeDefined();
+    expect(processedData['mock']).toHaveLength(0);
+  });
   it('should process when column has parentheses and the value is not an URL', async () => {
     jest.mock('../../src/utils/constants', () => ({
       detailsTabOptions: {

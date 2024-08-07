@@ -12,29 +12,31 @@ const processDetailsTabData = async (
   };
 
   const processTabOption = (tabOptions: TabOption): FormattedTabOption[] => {
-    return Object.keys(tabOptions).map((label) => {
-      const displayValue: string[] = [];
-      tabOptions[label]?.split(' ')?.forEach((part) => {
-        const sanitizedPart = part.replace(/[()]/g, '');
-        const value = docDetails[sanitizedPart];
+    return Object.keys(tabOptions)
+      .map((label) => {
+        const displayValue: string[] = [];
+        tabOptions[label]?.split(' ')?.forEach((part) => {
+          const sanitizedPart = part.replace(/[()]/g, '');
+          const value = docDetails[sanitizedPart];
 
-        if (value) {
-          const isLink = /^https?:\/\/.*$/.test(value);
-          const formattedValue = isLink && part !== 'host_catalogue_number' ? addLink(value) : value;
+          if (value) {
+            const isLink = /^(http|https):\/\/.*$/.test(value);
+            const formattedValue = isLink && part !== 'host_catalogue_number' ? addLink(value) : value;
 
-          if (part.includes('(') && part.includes(')')) {
-            displayValue.push(`(${formattedValue})`);
-          } else {
-            displayValue.push(formattedValue);
+            if (part.includes('(') && part.includes(')')) {
+              displayValue.push(`(${formattedValue})`);
+            } else {
+              displayValue.push(formattedValue);
+            }
           }
-        }
-      });
+        });
 
-      return {
-        label,
-        displayValue: displayValue.length > 0 ? displayValue.join(' ') : '',
-      };
-    });
+        return {
+          label,
+          displayValue: displayValue.length > 0 ? displayValue.join(' ') : '',
+        };
+      })
+      .filter((option) => !(option.label === 'Other Constraint' && option.displayValue == ''));
   };
 
   Object.keys(detailsTabOptions).forEach((tabKey) => {
