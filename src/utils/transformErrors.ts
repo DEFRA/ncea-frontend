@@ -59,6 +59,10 @@ const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefine
   };
   let toError: string = '';
   const toItems: GovUKItems[] = [];
+
+  if (error._original && 'today-date' in error._original) {
+    delete error._original['today-date'];
+  }
   Object.keys(error._original).forEach((field) => {
     const item = {
       classes: `${field.includes('-year') ? 'govuk-input--width-4' : 'govuk-input--width-2'}`,
