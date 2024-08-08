@@ -7,9 +7,14 @@ export interface EnvironmentConfig {
   elasticSearchAPI: string | undefined;
   isLocal?: boolean;
   gtmId?: string;
-  classifierApiUrl: string | undefined;
-  classifierApiKey: string | undefined;
   elasticSearchUsername?: string;
   elasticSearchPassword?: string;
   webDomain?: string;
+  classifierApi: {
+    endpoint: string | undefined;
+    clientId: string | undefined;
+    clientSecret: string | undefined;
+    authority: string | undefined;
+    scopes: string | undefined;
+  }
 }

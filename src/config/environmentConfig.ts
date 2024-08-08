@@ -21,11 +21,16 @@ const config: EnvironmentConfig = {
   elasticSearchAPI: process.env.ELASTICSEARCH_API,
   isLocal: process.env.NODE_ENV === 'local',
   gtmId: process.env.GTM_ID,
-  classifierApiUrl: process.env.CLASSIFIER_API_URL,
-  classifierApiKey: process.env.CLASSIFIER_API_KEY,
   elasticSearchUsername: process.env.ES_USERNAME,
   elasticSearchPassword: process.env.ES_PASSWORD,
   webDomain: process.env.WEBDOMAIN,
+  classifierApi: {
+    endpoint: process.env.CLASSIFIER_API_URL,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    authority: process.env.AUTHORITY,
+    scopes: process.env.SCOPES
+  }
 };
 
 const { error, value } = environmentSchema.validate(config);
