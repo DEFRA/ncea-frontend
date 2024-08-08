@@ -103,4 +103,4 @@ const dateErrorHandler = (error: Joi.ValidationError): FormFieldError | undefine
   };
 };
 
-export { transformErrors, transformTextInputError,dateErrorHandler };
+export { transformErrors, transformTextInputError, dateErrorHandler };

@@ -86,4 +86,4 @@ const getLicenseTabData = (searchItem: Record<string, any>): ILicense => ({
   character_encoding: 'utf8',
 });
 
-export { getLicenseTabData, getLimitationData, getAvailableFormats, getFrequencyUpdate,ensureArray };
+export { getLicenseTabData, getLimitationData, getAvailableFormats, getFrequencyUpdate, ensureArray };

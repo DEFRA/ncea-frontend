@@ -137,7 +137,7 @@ exports[`Details route template Document details with data Check status code and
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -178,7 +178,7 @@ exports[`Details route template Document details with data Check status code and
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
@@ -496,7 +496,7 @@ exports[`Details route template Document details with data Check status code and
           <h2 class='tab-content-label'>Contact information</h2>
 
             <span class='tab-content-value'>
-              United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk
+              undefined :- customerservices@ukho.gov.uk, <br />United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />undefined :- customerservices@ukho.gov.uk, <br />United Kingdom Hydrographic Office :- customerservices@ukho.gov.uk
             </span>
 
         </div>
@@ -518,11 +518,25 @@ exports[`Details route template Document details with data Check status code and
 
 
         <div class='tab-content-row'>
+          <h2 class='tab-content-label'>NCEA catalogue number</h2>
+
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+
+        </div>
+
+
+
+
+        <div class='tab-content-row'>
           <h2 class='tab-content-label'>Parent identifier</h2>
 
-            <span class='tab-content-value'>
-              fb8dca0f-7425-4f50-86a1-c4673b1aef88
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
 
         </div>
 
@@ -1187,7 +1201,7 @@ exports[`Details route template Document details with partial data Check status 
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1228,7 +1242,7 @@ exports[`Details route template Document details with partial data Check status 
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
@@ -1562,11 +1576,25 @@ exports[`Details route template Document details with partial data Check status 
 
 
         <div class='tab-content-row'>
+          <h2 class='tab-content-label'>NCEA catalogue number</h2>
+
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
+
+        </div>
+
+
+
+
+        <div class='tab-content-row'>
           <h2 class='tab-content-label'>Parent identifier</h2>
 
-            <span class='tab-content-value'>
-              3c080cb6-2ed9-43e7-9323-9ce42b05b9a2
-            </span>
+            <strong class="govuk-tag govuk-tag--grey tab-content-value__not-provided">
+  Unavailable
+</strong>
+
 
         </div>
 

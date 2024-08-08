@@ -137,7 +137,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -178,7 +178,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
@@ -746,7 +746,7 @@ exports[`Results block template Guided search journey Search results with error 
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -787,7 +787,7 @@ exports[`Results block template Guided search journey Search results with error 
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
@@ -1309,7 +1309,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1350,7 +1350,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
@@ -2124,7 +2124,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -2165,7 +2165,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
@@ -2708,7 +2708,7 @@ exports[`Results block template Quick search journey Search results with error s
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -2749,7 +2749,7 @@ exports[`Results block template Quick search journey Search results with error s
 
 
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
 
 
