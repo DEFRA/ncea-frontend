@@ -130,7 +130,7 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
 
     describe('Geography Questionnaire > Coordinate questionnaire form', () => {
       describe('Coordinate questionnaire block classes', () => {
-        it('renders 9 govuk-grid-row class', async () => {
+        it('renders 8 govuk-grid-row class', async () => {
           expect(document.querySelector('.govuk-grid-row')).toBeTruthy();
           expect(document.querySelectorAll('.govuk-grid-row').length).toEqual(
             8,
