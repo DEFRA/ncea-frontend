@@ -1,17 +1,17 @@
-{# temporary fix until we find out elastic search issue of 10000 record #}
-<div class="govuk-grid-column-full">
- {% if count >0 %}
-<div class="count-block">
-<a href="{{ resultsPath }}" class="govuk-link count-block-link">
-       Click to see
-       {% if count > 10000 %}
-         10000
-       {% else %}
-         {{ count }}
-       {% endif %}
-       results from previous selection
-</a>
-</div>
-<div class="govuk-section-break--visible"></div>
- {% endif %}
-</div>
+<div class="govuk-grid-row">
+     <div class="govuk-grid-column-full">
+          {% if count >0 %}
+               <div class="count-block">
+                    <a href="{{ resultsPath }}" class="govuk-link count-block-link">
+                         Click to see
+                         {% if count > 10000 %}
+                              10000
+                         {% else %}
+                              {{ count }}
+                         {% endif %}
+                         results from previous selection
+                    </a>
+               </div>
+               <div class="govuk-section-break--visible"></div>
+          {% endif %}
+     </div>
