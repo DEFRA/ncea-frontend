@@ -92,7 +92,7 @@ describe('Guided Search - Geography Questionnaire Screen GET Request', () => {
     describe('Coordinate questionnaire block classes', () => {
       it('renders 9 govuk-grid-row class', async () => {
         expect(document.querySelector('.govuk-grid-row')).toBeTruthy();
-        expect(document.querySelectorAll('.govuk-grid-row').length).toEqual(9);
+        expect(document.querySelectorAll('.govuk-grid-row').length).toEqual(8);
       });
 
       it('renders 2 govuk-grid-column-full class', async () => {

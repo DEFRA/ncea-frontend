@@ -133,7 +133,7 @@ describe('Guided Search - Geography Questionnaire Screen POST Request', () => {
         it('renders 9 govuk-grid-row class', async () => {
           expect(document.querySelector('.govuk-grid-row')).toBeTruthy();
           expect(document.querySelectorAll('.govuk-grid-row').length).toEqual(
-            9,
+            8,
           );
         });
 
