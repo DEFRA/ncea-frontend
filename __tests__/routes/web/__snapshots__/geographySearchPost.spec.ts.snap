@@ -216,10 +216,10 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
 
   <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
+     <div class="govuk-grid-column-full">
 
-  </div>
-</div>
+     </div>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full govuk-!-padding-top-6 govuk-!-padding-bottom-6">
       <h2 class="govuk-heading-l">What geography does it cover?</h2>

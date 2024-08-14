@@ -1,5 +1,6 @@
 import {
   IDateRange,
+  IGovernance,
   ISearchResults,
 } from '../../src/interfaces/searchResponse.interface';
 import { formatDate } from '../../src/utils/formatDate';
@@ -149,19 +150,37 @@ describe('Format the search response', () => {
               resourceTitleObject: { default: 'Title 1' },
               contactForResource: [
                 {
-                  organisationObject: {
-                    default: 'United Kingdom Hydrographic Office',
-                  },
-                  role: 'custodian',
-                  organisationName:'United Kingdom Hydrographic Office',
+                  "organisationName": "Data Archive for Seabed Species and Habitats (DASSH)",
+                  "role": "originator",
+                  "email": "dassh.enquiries@mba.ac.uk",
+                  "website": "",
+                  "logo": "",
+                  "individual": "E. Wilson",
+                  "position": "",
+                  "phone": "01752 633102",
+                  "address": "Marine Biological Association of the UK, The Laboratory, Citadel Hill, Plymouth, PL1 2PB",
+                  "deliveryPoint": "Marine Biological Association of the UK, The Laboratory, Citadel Hill",
+                  "postalCode": "PL1 2PB",
+                  "city": "Plymouth",
+                  "country": "",
+                  "administrativeArea": ""
                 },
                 {
-                  organisationObject: {
-                    default: 'Geological Survey of Ireland (GSI)',
-                  },
-                  role: 'owner',
-                  organisationName:'United Kingdom Hydrographic Office',
-                },
+                  "organisationName": "Data Archive for Seabed Species and Habitats (DASSH)",
+                  "role": "custodian",
+                  "email": "dassh.enquiries@mba.ac.uk",
+                  "website": "",
+                  "logo": "",
+                  "individual": "Becky Seeley",
+                  "position": "",
+                  "phone": "01752 633102",
+                  "address": "Marine Biological Association of the UK, The Laboratory, Citadel Hill, Plymouth, PL1 2PB",
+                  "deliveryPoint": "Marine Biological Association of the UK, The Laboratory, Citadel Hill",
+                  "postalCode": "PL1 2PB",
+                  "city": "Plymouth",
+                  "country": "",
+                  "administrativeArea": ""
+                }
               ],
               ownerOrgForResourceObject: {
                 default: 'Geological Survey of Ireland (GSI)',
@@ -177,6 +196,24 @@ describe('Format the search response', () => {
                   },
                   end: {},
                 },
+              ],
+              contact: [
+                {
+                  "organisationName": "Data Archivxe for Seabed Species and Habitats (DASSH)",
+                  "role": "pointOfContact",
+                  "email": "dassh.enquiries@mba.ac.uk",
+                  "website": "",
+                  "logo": "",
+                  "individual": "Esther Hughes",
+                  "position": "Data Manager",
+                  "phone": "01752 633102",
+                  "address": "Marine Biological Association of the UK, The Laboratory, Citadel Hill, Plymouth, PL1 2PB",
+                  "deliveryPoint": "Marine Biological Association of the UK, The Laboratory, Citadel Hill",
+                  "postalCode": "PL1 2PB",
+                  "city": "Plymouth",
+                  "country": "",
+                  "administrativeArea": ""
+                }
               ],
               cl_function: [
                 {
@@ -234,19 +271,25 @@ describe('Format the search response', () => {
               resourceTitleObject: { default: 'Title 2' },
               contactForResource: [
                 {
-                  organisationObject: {
-                    default: 'United Kingdom Hydrographic Office',
-                  },
-                  role: 'originator',
-                  organisationName:'United Kingdom Hydrographic Office',
+                  role: "custodian",
+                  email: "renewables@centrica.com",
+                  website: "www.centricaenergy.com",
+                  logo: "",
+                  individual: "",
+                  position: "Project manager",
+                  phone: "+44 (0)1753 492 188",
+                  address: "Maidenhead Road, Windsor, Berkshire, SL4 5GD"
                 },
                 {
-                  organisationObject: {
-                    default: 'Geological Survey of Ireland (GSI)',
-                  },
-                  role: 'owner',
-                  organisationName:'United Kingdom Hydrographic Office',
-                },
+                  role: "originator",
+                  email: "renewables@centrica.com",
+                  website: "www.centricaenergy.com",
+                  logo: "",
+                  individual: "",
+                  position: "Project manager",
+                  phone: "+44 (0)1753 492 188",
+                  address: "Maidenhead Road, Windsor, Berkshire, SL4 5GD"
+                }
               ],
               ownerOrgForResourceObject: {
                 default: 'Geological Survey of Ireland (GSI)',
@@ -260,6 +303,18 @@ describe('Format the search response', () => {
                 {
                   default: 'Dataset',
                 },
+              ],
+              contact: [
+                {
+                  role: "pointOfContact",
+                  email: "renewables@centrica.com",
+                  website: "www.centricaenergy.com",
+                  logo: "",
+                  individual: "",
+                  position: "Project manager",
+                  phone: "+44 (0)1753 492 188",
+                  address: "Maidenhead Road, Windsor, Berkshire, SL4 5GD"
+                }
               ],
               cl_function: [
                 {
@@ -324,7 +379,7 @@ describe('Format the search response', () => {
         {
           id: '1',
           title: 'Title 1',
-          publishedBy: 'Geological Survey of Ireland (GSI)',
+          publishedBy: "",
           content: 'Content 1',
           studyPeriod: '4 January 1960 to 4 January 1960',
           startYear: '1960',
@@ -332,6 +387,7 @@ describe('Format the search response', () => {
           resourceLocator: '',
           organisationName: 'United Kingdom Hydrographic Office',
           alternateTitle: '',
+          other_constraint: "",
           keywords:
             'Elevation, Marine Environmental Data and Information Network, Bathymetry and Elevation',
           language: '',
@@ -362,7 +418,6 @@ describe('Format the search response', () => {
           limitation_on_public_access: '',
           limitation_on_public_access_otherconstraint: "",
           spatialDataService: '',
-          other_constraint: "",
           spatialRepresentationService: '',
           spatialReferencingSystem: '',
           geographicLocations: '',
@@ -374,12 +429,57 @@ describe('Format the search response', () => {
           verticalExtent: '',
           samplingResolution: '',
           catalogue_number: "",
-          contact_information: "United Kingdom Hydrographic Office, <br />United Kingdom Hydrographic Office",
+          contact_information:  "Data Archivxe for Seabed Species and Habitats (DASSH) :- dassh.enquiries@mba.ac.uk, <br />Data Archive for Seabed Species and Habitats (DASSH) :- dassh.enquiries@mba.ac.uk, <br />Data Archive for Seabed Species and Habitats (DASSH) :- dassh.enquiries@mba.ac.uk",
+          "0" :{
+                   "administrative_area": "",
+                   "city": "Plymouth",
+                   "country": "",
+                   "delivery_point": "Marine Biological Association of the UK, The Laboratory, Citadel Hill, Plymouth, PL1 2PB",
+                 "email": "dassh.enquiries@mba.ac.uk",
+                 "individual_name": "Esther Hughes",
+                 "organization_name": "Data Archivxe for Seabed Species and Habitats (DASSH)",
+                 "position_name": "Data Manager",
+                 "postal_code": "PL1 2PB",
+                   "role": "pointOfContact",
+                   "tab": "governance",
+                   "telephone_number": "01752 633102",
+                       "web_address": "",
+                 },
+                 "1" :{
+                   "administrative_area": "",
+                   "city": "Plymouth",
+                   "country": "",
+                   "delivery_point": "Marine Biological Association of the UK, The Laboratory, Citadel Hill, Plymouth, PL1 2PB",
+                   "email": "dassh.enquiries@mba.ac.uk",
+                   "individual_name": "Becky Seeley",
+                   "organization_name": "Data Archive for Seabed Species and Habitats (DASSH)",
+                   "position_name": "",
+                   "postal_code": "PL1 2PB",
+                   "role": "custodian",
+                   "tab": "governance",
+                   "telephone_number":"01752 633102",
+                   "web_address": "",
+                 },
+                 "2" :{
+                   "administrative_area": "",
+                   "city": "Plymouth",
+                   "country": "",
+                   "delivery_point": "Marine Biological Association of the UK, The Laboratory, Citadel Hill, Plymouth, PL1 2PB",
+                   "email": "dassh.enquiries@mba.ac.uk",
+                   "individual_name": "E. Wilson",
+                   "organization_name": "Data Archive for Seabed Species and Habitats (DASSH)",
+                   "position_name": "",
+                   "postal_code": "PL1 2PB",
+                   "role": "originator",
+                   "tab": "governance",
+                   "telephone_number":  "01752 633102",
+                    "web_address": "",
+                 },
         },
         {
           id: '2',
           title: 'Title 2',
-          publishedBy: 'Geological Survey of Ireland (GSI)',
+          publishedBy: "",
           content: 'Content 2',
           studyPeriod: '4 January 1960 to 12 January 2009',
           startYear: '1960',
@@ -429,10 +529,57 @@ describe('Format the search response', () => {
           verticalExtent: '',
           samplingResolution: '',
           catalogue_number: "",
-          contact_information: "United Kingdom Hydrographic Office, <br />United Kingdom Hydrographic Office",
+          contact_information:  "undefined :- renewables@centrica.com, <br />undefined :- renewables@centrica.com, <br />undefined :- renewables@centrica.com",
+          "0":  {
+           "administrative_area": "",
+           "city": "",
+           "country": "",
+           "delivery_point": "Maidenhead Road, Windsor, Berkshire, SL4 5GD",
+           "email": "renewables@centrica.com",
+           "individual_name": "",
+           "organization_name": "",
+           "position_name": "Project manager",
+           "postal_code": "",
+           "role": "pointOfContact",
+           "tab": "governance",
+           "telephone_number": "+44 (0)1753 492 188",
+           "web_address": "www.centricaenergy.com",
+         },
+         "1":  {
+           "administrative_area": "",
+           "city": "",
+           "country": "",
+           "delivery_point": "Maidenhead Road, Windsor, Berkshire, SL4 5GD",
+           "email": "renewables@centrica.com",
+           "individual_name": "",
+           "organization_name": "",
+           "position_name": "Project manager",
+           "postal_code": "",
+           "role": "custodian",
+           "tab": "governance",
+           "telephone_number": "+44 (0)1753 492 188",
+           "web_address": "www.centricaenergy.com",
+         },
+         "2":  {
+           "administrative_area": "",
+           "city": "",
+           "country": "",
+           "delivery_point": "Maidenhead Road, Windsor, Berkshire, SL4 5GD",
+           "email": "renewables@centrica.com",
+           "individual_name": "",
+           "organization_name": "",
+           "position_name": "Project manager",
+           "postal_code": "",
+           "role": "originator",
+           "tab": "governance",
+           "telephone_number": "+44 (0)1753 492 188",
+           "web_address": "www.centricaenergy.com",
+         },
         },
       ],
     };
+
+
     const result = await formatSearchResponse(apiResponse, true);
     expect(result).toEqual(expectedResponse);
   });

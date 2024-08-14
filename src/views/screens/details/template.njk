@@ -43,33 +43,30 @@
 {% endblock %}
 
 {% block content %}
-  {% if docDetails !== undefined and docDetails.title %}
-    {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
-    {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
-    {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
-    {% set governanceHtml = details({options: detailsTabOptions.governance, hasData: docDetails.title}) %}
-    {% set geographyHtml = details({options: detailsTabOptions.geography, hasData: docDetails.title}) %}
-    {% set licenseHtml = details({options: detailsTabOptions.license, hasData: docDetails.title}) %}
-
-    <h1 class='govuk-heading-m details-title'>{{docDetails.title}}</h1>
-
-    {% if docDetails !== undefined and docDetails.alternateTitle %}
-      {{ govukDetails({
+    {% if docDetails !== undefined and docDetails.title %}
+      {% set generalHTML = details({options: detailsTabOptions.general, hasData: docDetails.title}) %}
+      {% set accessHtml = details({options: detailsTabOptions.access, hasData: docDetails.title}) %}
+      {% set qualityHtml = details({options: detailsTabOptions.quality, hasData: docDetails.title}) %}
+      {% set governanceHtml = details({options: detailsTabOptions.governance, hasData: docDetails.title}) %}
+      {% set geographyHtml = details({options: detailsTabOptions.geography, hasData: docDetails.title}) %}
+      {% set licenseHtml = details({options: detailsTabOptions.license, hasData: docDetails.title}) %}
+      <h1 class='govuk-heading-m details-title'>{{ docDetails.title }}</h1>
+      {% if docDetails !== undefined and docDetails.alternateTitle %}
+        {{ govukDetails({
         summaryText: "Alternate title (additional business name or alternative language)",
         text: docDetails.alternateTitle,
         classes: "details-alt_title",
         open: false
       }) }}
-    {% endif %}
-
-    <div {% if not docDetails.resourceLocator or not docDetails.organisationName %} class="open-data-block--disabled" {% endif %}>
-      {{ goToResource({ organisationName: docDetails.organisationName, resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}
-      {% if not docDetails.resourceLocator or not docDetails.organisationName %}
-        <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access tab for further details</span>
       {% endif %}
-    </div>
-
-    {{ govukTabs({
+      <div {% if not docDetails.resourceLocator or not docDetails.organisationName %} class="open-data-block--disabled" {% endif %}>
+        {{ goToResource({ organisationName: docDetails.organisationName, resourceLocator: docDetails.resourceLocator, isDetailsPage: true }) }}
+        {% if not docDetails.resourceLocator or not docDetails.organisationName %}
+          <span class="open-data-block--tag">Access to this data resource is by application to the owner - please refer to access
+            tab for further details</span>
+        {% endif %}
+      </div>
+      {{ govukTabs({
     items: [
       {
         label: 'General',
@@ -120,6 +117,16 @@
         attributes: {
           'onclick': 'changeTitle("'+pageTitles.licenseTab+'")'
         }
+      },
+        {
+        label: 'Governance',
+        id: 'governance',
+        panel: {
+          html: governanceHtml
+        },
+        attributes: {
+          'onclick': 'changeTitle("'+pageTitles.governanceTab+'")'
+        }
       }
     ]
   }) }}
@@ -149,3 +156,4 @@
   <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
   <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
 {% endblock %}
+

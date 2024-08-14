@@ -180,6 +180,20 @@ export const detailsTabOptions: TabOptions = {
     'Frequency of update': 'frequency_of_update',
     'Character encoding': 'character_encoding',
   },
+  governance: {
+    Role: 'role',
+    'Organization name': 'organization_name',
+    'Individual name': 'individual_name',
+    'Position name': 'position_name',
+    'Telephone number': 'telephone_number',
+    'Delivery point': 'delivery_point',
+    'Postal code': 'postal_code',
+    City: 'city',
+    'Administrative area': 'administrative_area',
+    Country: 'country',
+    'Web address': 'web_address',
+    Email: 'email',
+  },
 };
 
 export const pageTitles = {
@@ -189,7 +203,7 @@ export const pageTitles = {
   results: 'NCEA Search Results Summary',
   generalTab: 'NCEA Catalogue Detail - General',
   accessTab: 'NCEA Catalogue Detail - Access',
-  naturalCapitalTab: 'NCEA Catalogue Detail - Natural Capital',
+  naturalTab: 'NCEA Catalogue Detail - Natural Capital',
   qualityTab: 'NCEA Catalogue Detail - Quality',
   geographyTab: 'NCEA Catalogue Detail - Geography',
   governanceTab: 'NCEA Catalogue Detail - Governance',

@@ -41,6 +41,10 @@ export interface Contact {
   website: string;
   logo: string;
   individual: string;
+  postalCode: string;
+  administrativeArea: string;
+  country: string;
+  city: string;
   position: string;
   phone: string;
   address: string;
@@ -55,6 +59,22 @@ export interface ILicense {
   available_formats?: string | string[];
   frequency_of_update?: string;
   character_encoding?: string;
+}
+
+export interface IGovernance {
+  tab?: string;
+  role?: string;
+  organization_name?: string;
+  individual_name?: string;
+  position_name?: string;
+  telephone_number?: string;
+  delivery_point?: string;
+  postal_code?: string;
+  city?: string;
+  administrative_area?: string;
+  country?: string;
+  web_address?: string;
+  email?: string;
 }
 
 export interface IQualityItem {
@@ -98,8 +118,15 @@ export interface IGeographyItem {
   samplingResolution?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & ILicense & IGeographyItem;
-export type ISearchItem = IBaseItem & IOtherSearchItem;
+export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & ILicense & IGeographyItem & IGovernance;
+
+export interface ISearchItem extends IBaseItem, IOtherSearchItem {
+  [key: string]: IGovernance | string | number | undefined | string[] | IAccumulatedCoordinates;
+}
+
+export interface TabbedItem {
+  tab?: string;
+}
 
 export interface ISearchResults {
   total: number;

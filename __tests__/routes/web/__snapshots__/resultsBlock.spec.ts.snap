@@ -615,7 +615,7 @@ exports[`Results block template Guided search journey Search results with error 
   <head>
     <meta charset="utf-8">
     <title>
-  Find Natural Capital data - GOV.UK
+  Find natural capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -1835,7 +1835,7 @@ exports[`Results block template Quick search journey Search results with data sh
   <div class="modal-content">
 
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave Find natural capital data</h1>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave find natural capital data</h1>
     <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue managed by:<br/><span id='resource_party'></span></p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
 
@@ -2577,7 +2577,7 @@ exports[`Results block template Quick search journey Search results with error s
   <head>
     <meta charset="utf-8">
     <title>
-  Find Natural Capital data - GOV.UK
+  Find natural capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">

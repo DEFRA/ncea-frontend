@@ -3,6 +3,7 @@ import { getAccessTabData } from './getAccessTabData';
 import { getAccumulatedCoordinatesNCenter } from './getBoundingBoxData';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
+import { getGovernanceTabData } from './getGovernanceTab';
 import { getLicenseTabData } from './getLicenseTabData';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
@@ -124,6 +125,7 @@ const formatSearchResponse = async (
 const getOtherDetails = async (searchItem: Record<string, any>): Promise<IOtherSearchItem> => {
   const projectId: string =
     searchItem?._source?.OrgNceaIdentifiers?.projectId ?? searchItem?._source?.OrgNceaIdentifiers?.projectNumber;
+
   return {
     ...getGeneralTabData(searchItem),
     ...getAccessTabData(searchItem),
@@ -132,6 +134,7 @@ const getOtherDetails = async (searchItem: Record<string, any>): Promise<IOtherS
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
     ...getLicenseTabData(searchItem),
+    ...getGovernanceTabData(searchItem),
     ...getGeographyTabData(searchItem),
   };
 };

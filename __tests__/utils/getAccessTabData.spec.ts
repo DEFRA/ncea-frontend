@@ -483,7 +483,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         }
       ];
       const contact = [
@@ -496,7 +500,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
         {
           role: 'custodian',
@@ -507,7 +515,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
       ];
 
@@ -523,7 +535,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
         {
           role: 'custodian',
@@ -534,7 +550,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
         {
           role: 'distributor',
@@ -545,7 +565,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
       ]);
     });
@@ -562,7 +586,11 @@ describe('contactFunctions', () => {
         individual: '',
         position: '',
         phone: '',
-        address: ''
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
       }], null ?? [])).toEqual([{
         role: 'owner',
         organisationName: 'OrgA',
@@ -572,7 +600,11 @@ describe('contactFunctions', () => {
         individual: '',
         position: '',
         phone: '',
-        address: ''
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
       }]);
     });
 
@@ -586,7 +618,11 @@ describe('contactFunctions', () => {
         individual: '',
         position: '',
         phone: '',
-        address: ''
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
       }];
       const contact = [{
         role: 'custodian',
@@ -597,7 +633,11 @@ describe('contactFunctions', () => {
         individual: '',
         position: '',
         phone: '',
-        address: ''
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
       }];
 
       const result = combineAndSortContacts(contactForResource, contact);
@@ -612,7 +652,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
         {
           role: 'custodian',
@@ -623,7 +667,11 @@ describe('contactFunctions', () => {
           individual: '',
           position: '',
           phone: '',
-          address: ''
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
         },
       ]);
     });
@@ -643,7 +691,11 @@ describe('contactFunctions', () => {
             individual: '',
             position: '',
             phone: '',
-            address: ''
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
           }],
           contactForResource: [{
             role: 'custodian',
@@ -654,7 +706,11 @@ describe('contactFunctions', () => {
             individual: '',
             position: '',
             phone: '',
-            address: ''
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
           }],
         },
       };
@@ -676,7 +732,11 @@ describe('contactFunctions', () => {
             individual: '',
             position: '',
             phone: '',
-            address: ''
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
           }],
           contactForResource: [{
             role: 'custodian',
@@ -687,7 +747,11 @@ describe('contactFunctions', () => {
             individual: '',
             position: '',
             phone: '',
-            address: ''
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
           }],
         },
       };
