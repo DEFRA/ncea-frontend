@@ -8370,6 +8370,7 @@
   line-height: 20px;
 }
 .tab-content-value {
+  overflow: auto;
   font-size: 1rem;
   font-style: normal;
   font-weight: 300;

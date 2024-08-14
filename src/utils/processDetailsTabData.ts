@@ -32,7 +32,7 @@ const processTabOption = (tabOptions: TabOption, entry: Record<string, unknown>,
         displayValue: displayValue.length > 0 ? displayValue.join(' ') : '',
       };
     })
-    .filter((option) => !(option.label === 'Other Constraint' && option.displayValue == ''));
+    .filter((option) => !(option.label === 'Other Constraint' && option.displayValue === ''));
 };
 
 const processTabOptionParts = (option: string | undefined, entry: Record<string, unknown>, docDetails: ISearchItem | Record<string, unknown>, displayValue: string[]) => {
@@ -57,7 +57,8 @@ const processMultipleEntries = (
   Object.keys(doc).forEach((key, index) => {
     const entry = doc[key] as Record<string, unknown>;
     if (typeof entry === 'object' && entry !== null && entry['tab'] == tabKey) {
-      const entryResults = processTabOption(tabOptions, entry, docDetails);
+      const entryResults = processTabOption(tabOptions, entry, docDetails)
+        .filter((option) => option.displayValue !== '');
       if (entryResults.length > 0) {
         results.push(...entryResults);
         if (index < noOfOBjectInTab - 1) {
