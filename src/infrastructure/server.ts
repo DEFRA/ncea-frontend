@@ -28,17 +28,16 @@ const initializeServer = async (): Promise<Server> => {
   if (!shouldPushToAppInsights) {
     const appInsightsConnectionString = await getSecret(appInsightsConnectionStringSecretName);
 
-    // const clientId = await getSecret('daemon-app-clientid');
-    // const clientSecret = await getSecret('daemon-app-secret');
-    // const classifierApiClientId = await getSecret('daemon-app-secret');
-
-    // environmentConfig.classifierApi.clientId = clientId;
-    // environmentConfig.classifierApi.clientSecret = clientSecret;
-    // environmentConfig.classifierApi.scopes = classifierApiClientId;
-
     environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
     customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
   }
+
+  // const clientId = await getSecret('daemon-app-clientid');
+  // const clientSecret = await getSecret('daemon-app-secret');
+  // const classifierApiClientId = await getSecret('classifier-app-api-clientid');
+
+
+
   // Register vendors plugins
   await server.register([inert, vision]);
 

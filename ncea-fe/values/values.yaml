@@ -79,4 +79,5 @@ env:
   ES_USERNAME: $(elasticSearchUser)
   ES_PASSWORD: $(elasticSearchPassword)
   CLASSIFIER_API: $(classifierApiBaseUri)
+  CLASSIFIER_API_AUTHORITY: $(classifierApiAuthority)
   WEBDOMAIN: $(webdomain)

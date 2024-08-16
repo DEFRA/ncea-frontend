@@ -28,7 +28,7 @@ const config: EnvironmentConfig = {
     endpoint: process.env.CLASSIFIER_API_URL,
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    authority: process.env.AUTHORITY,
+    authority: process.env.CLASSIFIER_API_AUTHORITY,
     scopes: process.env.SCOPES
   }
 };
