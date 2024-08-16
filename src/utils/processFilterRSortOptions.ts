@@ -51,8 +51,8 @@ const processSortOptions = async (requestQuery: RequestQuery): Promise<IAggregat
   const rowsPerPageValue = readQueryParams(requestQuery, rowsPerPage);
   const sortValueOptions: IAggregationOption[] = [
     {
-      value: 'best_match',
-      text: 'Best fit',
+      value: 'most_relevant',
+      text: 'Most relevant',
       selected: true,
     },
     {

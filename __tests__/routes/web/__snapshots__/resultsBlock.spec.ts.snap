@@ -137,7 +137,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7";
+  var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -418,6 +418,8 @@ exports[`Results block template Guided search journey Search results with empty 
           Filters
         </h2>
         <div class="govuk-section-break--visible"></div>
+
+
 
 
 
@@ -1032,6 +1034,8 @@ exports[`Results block template Guided search journey Search results with error 
 
 
 
+
+
       </div>
       <div class="govuk-grid-column-two-thirds">
 
@@ -1309,7 +1313,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7";
+     var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1595,6 +1599,8 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
+
+
       </div>
       <div class="govuk-grid-column-two-thirds">
 
@@ -1629,7 +1635,7 @@ exports[`Results block template Quick search journey Search results with data sh
     </noscript>
   </div>
 
-  <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="sort_results" method="post">
+  <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" id="sort_results" method="post">
 
 
 
@@ -1644,7 +1650,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
-      <option value="best_match" selected>Best fit</option>
+      <option value="most_relevant" selected>Most relevant</option>
 
 
 
@@ -1752,7 +1758,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
-<a href="/search/1?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/1?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
 </a>
 
@@ -1810,7 +1816,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
 
-<a href="/search/2?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/2?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
 </a>
 
@@ -1820,7 +1826,7 @@ exports[`Results block template Quick search journey Search results with data sh
   </div>
 
   <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item govuk-pagination__item--current">
-            <a class="govuk-link govuk-pagination__link" href="/search?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" aria-label="Page 1" aria-current="page" data-page-id="1">
+            <a class="govuk-link govuk-pagination__link" href="/search?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" aria-label="Page 1" aria-current="page" data-page-id="1">
               1
             </a>
           </li></ul></nav>
@@ -2410,6 +2416,8 @@ exports[`Results block template Quick search journey Search results with empty d
 
 
 
+
+
       </div>
       <div class="govuk-grid-column-two-thirds">
 
@@ -2708,7 +2716,7 @@ exports[`Results block template Quick search journey Search results with error s
 
 
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7";
+     var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -2989,6 +2997,8 @@ exports[`Results block template Quick search journey Search results with error s
           Filters
         </h2>
         <div class="govuk-section-break--visible"></div>
+
+
 
 
 

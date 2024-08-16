@@ -48,7 +48,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -113,7 +113,7 @@ describe('Deals with search results controller', () => {
         jry: 'gs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -178,7 +178,7 @@ describe('Deals with search results controller', () => {
         jry: 'gs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const { quickSearchFID } = formIds;
       const request: Request = { query: { ...queryObject } } as any;
@@ -336,7 +336,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = {
         params: { id: '123' },
@@ -365,7 +365,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = {
         params: { id: '123' },
@@ -409,7 +409,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = {
@@ -431,7 +431,7 @@ describe('Deals with search results controller', () => {
         jry: 'gs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = {
@@ -545,14 +545,14 @@ describe('Deals with search results controller', () => {
     it('should build the query params and navigate to search page', async () => {
       const request: Request = {
         payload: {
-          sort: 'best_match',
+          sort: 'most_relevant',
           'page-results': '20',
         },
       } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
       const queryParamsObject: Record<string, string> = {
-        [queryParamKeys.sort]: 'best_match',
+        [queryParamKeys.sort]: 'most_relevant',
         [queryParamKeys.rowsPerPage]: '20',
         [queryParamKeys.page]: '1',
       };
@@ -575,7 +575,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;

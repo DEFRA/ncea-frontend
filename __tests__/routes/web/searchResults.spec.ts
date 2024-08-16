@@ -81,7 +81,7 @@ describe('Results Screen', () => {
   describe('Quick search POST verification on results page', () => {
     let document;
     let response;
-    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=best_match`;
+    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=most_relevant`;
 
     beforeAll(async () => {
       const responseObject = await invokeRoute(
@@ -96,7 +96,7 @@ describe('Results Screen', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         },
       );

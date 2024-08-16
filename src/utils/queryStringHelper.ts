@@ -7,7 +7,7 @@ const setDefaultQueryParams = (searchParams: URLSearchParams): URLSearchParams =
   searchParams.set(queryParamKeys.page, page);
   const rowsPerPage = searchParams.get(queryParamKeys.rowsPerPage) ?? '20';
   searchParams.set(queryParamKeys.rowsPerPage, rowsPerPage);
-  const sort = searchParams.get(queryParamKeys.sort) ?? 'best_match';
+  const sort = searchParams.get(queryParamKeys.sort) ?? 'most_relevant';
   searchParams.set(queryParamKeys.sort, sort);
   return searchParams;
 };

@@ -77,7 +77,7 @@ describe('Results block template', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -159,7 +159,7 @@ describe('Results block template', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -210,7 +210,7 @@ describe('Results block template', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -255,7 +255,7 @@ describe('Results block template', () => {
           jry: 'gs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -313,7 +313,7 @@ describe('Results block template', () => {
           jry: 'gs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;

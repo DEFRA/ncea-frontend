@@ -4,7 +4,7 @@
 const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
-  sort: 'best_match',
+  sort: 'most_relevant',
   filters: {},
   rowsPerPage: '20',
   page: 1,
@@ -97,7 +97,7 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  
+
   if(formId === 'classifier-search'){
     const urlParams = new URLSearchParams(window.location.search);
     const levelNo = parseInt(urlParams.get('level'), 10);
@@ -161,7 +161,7 @@ const attachEventListeners = (form) => {
             if (valueIndex !== -1) {
               valuesArray.splice(valueIndex, 1);
             }
-          }); 
+          });
         }
 
         // Clean up empty levels
