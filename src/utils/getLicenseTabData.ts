@@ -45,7 +45,9 @@ const getLimitationData = (searchItem: Record<string, any>, type: string): strin
         ((!constraint?.OrgAccessConstraints && !constraint?.OrgUseConstraints) ||
           (constraint?.OrgAccessConstraints && constraint?.OrgUseConstraints))
       ) {
-        result = constraint.OrgOtherConstraints.join(', ');
+        if (constraint?.OrgOtherConstraints) {
+          result = constraint?.OrgOtherConstraints?.join(', ');
+        }
       }
     });
   }

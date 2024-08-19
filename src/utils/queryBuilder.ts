@@ -59,14 +59,14 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
           {
             range: {
               'resourceTemporalExtentDetails.start.date': {
-                gte: startDateValue
+                gte: startDateValue,
               },
             },
           },
           {
             range: {
               'resourceTemporalExtentDetails.end.date': {
-                lte: toDateValue
+                lte: toDateValue,
               },
             },
           },
