@@ -137,7 +137,7 @@ exports[`Guided Search - Geography Questionnaire Screen POST Request HTML elemen
 
 
   <script>
-     var gtmIdValue = "GTM-PZJ4WBG7";
+      var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">

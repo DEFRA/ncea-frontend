@@ -8,7 +8,7 @@ import { generateCountPayload, readQueryParams, upsertQueryParams } from '../../
 
 const ClassifierSearchController = {
   renderClassifierSearchHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
-    const { guidedClassifierSearch: guidedClassifierSearchPath, guidedDateSearch, results } = webRoutePaths;
+    const { guidedClassifierSearch: guidedClassifierSearchPath, results } = webRoutePaths;
     const formId: string = formIds.classifierSearch;
     const level: number = Number(readQueryParams(request.query, 'level'));
     const parent: string = readQueryParams(request.query, 'parent[]') || '';
@@ -21,17 +21,18 @@ const ClassifierSearchController = {
     const countPayload = generateCountPayload(payloadQuery);
     const totalCount = (await getSearchResultsCount(countPayload)).totalResults.toString();
     const queryParamsObject: Record<string, string> = {
+      ...request.query,
+      level: (level - 1).toString(),
       [queryParamKeys.journey]: 'gs',
       [queryParamKeys.count]: totalCount,
     };
 
-    const queryString: string = level - 1 > 0 ? upsertQueryParams(payloadQuery, queryParamsObject, false) : '';
-    const resultsPath: string = `${results}?${readQueryParams(payloadQuery, '', true)}`;
+    const queryString: string = level - 1 > 0 ? upsertQueryParams(payloadQuery, queryParamsObject, true) : '';
+    const resultsPath: string = `${results}?${readQueryParams(queryParamsObject, '', true)}`;
     const classifierItems = await getClassifierThemes(level.toString(), parent);
-    const skipPathUrl = queryString ? `${guidedDateSearch}?${queryString}` : guidedDateSearch;
 
     if (classifierItems.length <= 0) {
-      return response.redirect(skipPathUrl);
+      return response.redirect(resultsPath);
     }
     const hasSearchResultOrlevelFirst = Number(totalCount) > 0 || level == 1;
 
@@ -40,7 +41,7 @@ const ClassifierSearchController = {
         pageTitle: classifierPageTitle,
         guidedClassifierSearchPath,
         nextLevel,
-        skipPath: skipPathUrl,
+        skipPath:resultsPath,
         formId,
         journey: 'gs',
         classifierItems,

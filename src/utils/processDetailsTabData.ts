@@ -22,7 +22,11 @@ const appendFormattedValue = (value: unknown, part: string, displayValue: string
   }
 };
 
-const processTabOption = (tabOptions: TabOption, entry: Record<string, unknown>, docDetails: ISearchItem | Record<string, unknown>): FormattedTabOption[] => {
+const processTabOption = (
+  tabOptions: TabOption,
+  entry: Record<string, unknown>,
+  docDetails: ISearchItem | Record<string, unknown>,
+): FormattedTabOption[] => {
   return Object.keys(tabOptions)
     .map((label) => {
       const displayValue: string[] = [];
@@ -35,7 +39,12 @@ const processTabOption = (tabOptions: TabOption, entry: Record<string, unknown>,
     .filter((option) => !(option.label === 'Other Constraint' && option.displayValue === ''));
 };
 
-const processTabOptionParts = (option: string | undefined, entry: Record<string, unknown>, docDetails: ISearchItem | Record<string, unknown>, displayValue: string[]) => {
+const processTabOptionParts = (
+  option: string | undefined,
+  entry: Record<string, unknown>,
+  docDetails: ISearchItem | Record<string, unknown>,
+  displayValue: string[],
+) => {
   option?.split(' ')?.forEach((part) => {
     const sanitizedPart = part.replace(/[()]/g, '');
     const value = entry[sanitizedPart] || docDetails[sanitizedPart];
@@ -47,18 +56,17 @@ const processMultipleEntries = (
   tabOptions: TabOption,
   doc: Record<string, unknown>,
   tabKey: string,
-  docDetails: ISearchItem | Record<string, unknown>
+  docDetails: ISearchItem | Record<string, unknown>,
 ): FormattedTabOption[] => {
   const results: FormattedTabOption[] = [];
-  const noOfOBjectInTab: number = Object.values(docDetails).filter(
-    (obj) => (obj as TabbedItem).tab === tabKey,
-  ).length;
+  const noOfOBjectInTab: number = Object.values(docDetails).filter((obj) => (obj as TabbedItem).tab === tabKey).length;
 
   Object.keys(doc).forEach((key, index) => {
     const entry = doc[key] as Record<string, unknown>;
     if (typeof entry === 'object' && entry !== null && entry['tab'] == tabKey) {
-      const entryResults = processTabOption(tabOptions, entry, docDetails)
-        .filter((option) => option.displayValue !== '');
+      const entryResults = processTabOption(tabOptions, entry, docDetails).filter(
+        (option) => option.displayValue !== '',
+      );
       if (entryResults.length > 0) {
         results.push(...entryResults);
         if (index < noOfOBjectInTab - 1) {

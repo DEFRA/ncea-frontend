@@ -4,13 +4,12 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "partials/results_count/macro.njk" import resultsCount %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
-
 {% block beforeContent %}
   {{ super() }}
   {% if nextLevel > 2 %}
-  {% include "partials/guided_search_breadcrumb/template.njk" %}
+    {% include "partials/guided_search_breadcrumb/template.njk" %}
   {% else %}
-  {{ govukBreadcrumbs({
+    {{ govukBreadcrumbs({
     items: [
       {
         text: "Home",
@@ -25,15 +24,17 @@
     ]
   }) }}
   {% endif %}
-
 {% endblock %}
-
 {% block content %}
   <div class="govuk-grid-row">
     {% include "partials/results_count/template.njk" %}
-    <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
-     <input type="hidden" name="jry" value="{{journey}}" />
-     <input type="hidden" name="level" value="{% if nextLevel > 3 %}3{% else %}{{ nextLevel }}{% endif %}" />
+    <form method="GET" id="{{ formId }}" action="{% if nextLevel > 3 %} {{ skipPath }} {% else %} {{ guidedClassifierSearchPath }} {% endif %}" data-do-browser-storage>
+      <input type="hidden" name="jry" value="{{ journey }}"/>
+      {% if nextLevel > 3 %}
+        <input type="hidden" name="srt" value="most_relevant"/>
+        <input type="hidden" name="rpp" value="20"/>
+      {% endif %}
+      <input type="hidden" name="level" value="{% if nextLevel > 3 %}3{% else %}{{ nextLevel }}{% endif %}"/>
       <div class="govuk-grid-column-full govuk-!-padding-top-6">
         {% for classify  in classifierItems %}
           {% set checkboxItems = [] %}
@@ -57,7 +58,6 @@
           {% else %}
             {% set sectionTitle = 'Select a natural capital theme' %}
           {% endif %}
-
           {% if classify.sectionIntroduction.length > 0 %}
             {% set sectionIntro = classify.sectionIntroduction %}
           {% elif nextLevel > 3 %}
@@ -83,10 +83,10 @@
         {% endfor %}
         <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
           <div class="govuk-button-group govuk-grid-column-one-half">
-          {{ govukButton({ text: "Skip", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
+            {{ govukButton({ text: "Skip", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
             'data-do-storage-skip': ''
           } }) }}
-          {{ govukButton({ text: "Next", attributes: {
+            {{ govukButton({ text: "Next", attributes: {
             'data-to-disable': '',
             'data-next-question': ''
           } }) }}
