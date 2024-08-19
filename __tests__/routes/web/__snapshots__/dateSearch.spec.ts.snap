@@ -134,7 +134,7 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
 
   <script>
-      var gtmIdValue = "GTM-PZJ4WBG7";
+   var gtmIdValue = "GTM-PZJ4WBG7";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">

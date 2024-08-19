@@ -343,15 +343,6 @@ exports[`Details route template Document details with data Check status code and
         </li>
       
     
-      
-        
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
-            Governance
-          </a>
-        </li>
-      
-    
   </ul>
   
   
@@ -907,211 +898,6 @@ exports[`Details route template Document details with data Check status code and
       </div>
     
   
-    
-      
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="governance">
-        
-          
-  <div class='tab-content-container'>
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Role</h2>
-          
-            <span class='tab-content-value'>
-              owner
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Email</h2>
-          
-            <span class='tab-content-value'>
-              customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'><div class="govuk-section-break--visible"></div></h2>
-          
-            <span class='tab-content-value'>
-              <div class="govuk-section-break--visible"></div>
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Role</h2>
-          
-            <span class='tab-content-value'>
-              pointOfContact
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Organization name</h2>
-          
-            <span class='tab-content-value'>
-              United Kingdom Hydrographic Office
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Email</h2>
-          
-            <span class='tab-content-value'>
-              customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'><div class="govuk-section-break--visible"></div></h2>
-          
-            <span class='tab-content-value'>
-              <div class="govuk-section-break--visible"></div>
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Role</h2>
-          
-            <span class='tab-content-value'>
-              custodian
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Email</h2>
-          
-            <span class='tab-content-value'>
-              customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'><div class="govuk-section-break--visible"></div></h2>
-          
-            <span class='tab-content-value'>
-              <div class="govuk-section-break--visible"></div>
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Role</h2>
-          
-            <span class='tab-content-value'>
-              distributor
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Email</h2>
-          
-            <span class='tab-content-value'>
-              customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'><div class="govuk-section-break--visible"></div></h2>
-          
-            <span class='tab-content-value'>
-              <div class="govuk-section-break--visible"></div>
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Role</h2>
-          
-            <span class='tab-content-value'>
-              originator
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Organization name</h2>
-          
-            <span class='tab-content-value'>
-              United Kingdom Hydrographic Office
-            </span>
-          
-        </div>
-      
-      
-    
-      
-        <div class='tab-content-row'>
-          <h2 class='tab-content-label'>Email</h2>
-          
-            <span class='tab-content-value'>
-              customerservices@ukho.gov.uk
-            </span>
-          
-        </div>
-      
-      
-    
-  </div>
-
-        
-      </div>
-    
-  
 </div>
 
 
@@ -1604,15 +1390,6 @@ exports[`Details route template Document details with partial data Check status 
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#license" onclick="changeTitle(&quot;NCEA Catalogue Detail - License&quot;)">
             License
-          </a>
-        </li>
-      
-    
-      
-        
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#governance" onclick="changeTitle(&quot;NCEA Catalogue Detail - Governance&quot;)">
-            Governance
           </a>
         </li>
       
@@ -2165,19 +1942,6 @@ exports[`Details route template Document details with partial data Check status 
         </div>
       
       
-    
-  </div>
-
-        
-      </div>
-    
-  
-    
-      
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="governance">
-        
-          
-  <div class='tab-content-container'>
     
   </div>
 
