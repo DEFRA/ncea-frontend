@@ -430,6 +430,11 @@ describe('Format the search response', () => {
           samplingResolution: '',
           catalogue_number: "",
           contact_information:  "Data Archivxe for Seabed Species and Habitats (DASSH) :- dassh.enquiries@mba.ac.uk, <br />Data Archive for Seabed Species and Habitats (DASSH) :- dassh.enquiries@mba.ac.uk, <br />Data Archive for Seabed Species and Habitats (DASSH) :- dassh.enquiries@mba.ac.uk",
+          Natural_capital_data: "",
+          Natural_capital_description: "Natural capital records are classified by themes and categories which indicate whether the record relates to natural capital assets (such as habitats and species), the ecosystem services they deliver, the pressures that act on them and/or their value.",
+         Natural_capital_glossary_link: "Natural capital classification glossary",
+         Natural_capital_no_data: "This record is not classifiable within the current natural capital vocabulary.",
+         Natural_capital_title: "Natural capital classification",
           "0" :{
                    "administrative_area": "",
                    "city": "Plymouth",
@@ -530,6 +535,11 @@ describe('Format the search response', () => {
           samplingResolution: '',
           catalogue_number: "",
           contact_information:  "undefined :- renewables@centrica.com, <br />undefined :- renewables@centrica.com, <br />undefined :- renewables@centrica.com",
+          Natural_capital_data: "",
+          Natural_capital_description: "Natural capital records are classified by themes and categories which indicate whether the record relates to natural capital assets (such as habitats and species), the ecosystem services they deliver, the pressures that act on them and/or their value.",
+          Natural_capital_glossary_link: "Natural capital classification glossary",
+          Natural_capital_no_data: "This record is not classifiable within the current natural capital vocabulary.",
+          Natural_capital_title: "Natural capital classification",
           "0":  {
            "administrative_area": "",
            "city": "",

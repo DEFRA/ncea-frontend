@@ -180,6 +180,13 @@ export const detailsTabOptions: TabOptions = {
     'Frequency of update': 'frequency_of_update',
     'Character encoding': 'character_encoding',
   },
+  natural:{
+    'Natural_capital_title':'Natural_capital_title',
+    "Natural_capital_description":'Natural_capital_description',
+    "Natural_capital_data":'Natural_capital_data',
+    "Natural_capital_glossary_link":'Natural_capital_glossary_link',
+    "Natural_capital_no_data":"Natural_capital_no_data"
+   },
   governance: {
     Role: 'role',
     'Organization name': 'organization_name',
@@ -225,3 +232,11 @@ export const levelMap = {
   2: 'OrgNceaClassifiers.classifiers.code.keyword',
   3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
 };
+
+export const naturalTabStaticData = {
+  title:'Natural capital classification',
+  description:'Natural capital records are classified by themes and categories which indicate whether the record relates to natural capital assets (such as habitats and species), the ecosystem services they deliver, the pressures that act on them and/or their value.',
+ noRecord:"This record is not classifiable within the current natural capital vocabulary.",
+  link:'Natural capital classification glossary',
+}
+

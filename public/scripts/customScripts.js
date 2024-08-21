@@ -379,9 +379,11 @@ const todayDateUncheck = (checked) => {
   } else {
       sessionData.fields['date'] = {
           ...sessionData.fields['date'],
-          tdcheck: '',
+          tdcheck: 'false',
       };
+
   }
+  storeStorageData(sessionData);
 }
 
 const toggleClassifierCheckbox = () => {

@@ -5,6 +5,7 @@ import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
 import { getGovernanceTabData } from './getGovernanceTab';
 import { getLicenseTabData } from './getLicenseTabData';
+import {getNaturalTab} from './getNaturalCapitalTab'
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
 import { toggleContent } from './toggleContent';
@@ -134,6 +135,7 @@ const getOtherDetails = async (searchItem: Record<string, any>): Promise<IOtherS
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
     ...getLicenseTabData(searchItem),
+    ...getNaturalTab(searchItem),
     ...getGovernanceTabData(searchItem),
     ...getGeographyTabData(searchItem),
   };

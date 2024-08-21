@@ -1,0 +1,33 @@
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% set title = "" %}
+{% set description = "" %}
+{% set classifierData = [] %}
+{% set noData = "" %}
+
+  {% if params.options and params.hasData %}
+  {% for option in params.options %}
+    {% if option.label == "Natural_capital_title" %}
+      {% set title = option.displayValue %}
+    {% elseif option.label == "Natural_capital_description" %}
+      {% set description = option.displayValue %}
+    {% elseif option.label == "Natural_capital_data" %}
+      {% set classifierData = option.displayValue %}
+    {% elseif option.label == "Natural_capital_no_data" %}
+      {% set noData = option.displayValue %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if title %}
+  <h1 class="quick_search-container__heading-m">{{ title | safe }}</h1>
+{% endif %}
+{% if description %}
+  <p class="ncea-static-page__content-item govuk-!-margin-top-4"">{{ description | safe }}</p>
+{% endif %}
+ {% if classifierData.length > 0 %}
+ <p class="ncea-static-page__content-item govuk-!-margin-top-4">{{ classifierData | safe }}</p>
+ {% else%}
+  <p class="search-result__heading govuk-!-margin-top-4">{{ noData | safe }}</p>
+{% endif %}
+
+
