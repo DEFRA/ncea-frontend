@@ -99,14 +99,26 @@ const createRow = (
   hasCategory: boolean,
   hasSubcategory: boolean
 ): string => {
+  const themeCell = index === 0 && subIndex === 0 ? `<td>${themeName}</td>` : '<td></td>';
+
+  let categoryCell = '';
+  if (hasCategory && subIndex === 0) {
+    categoryCell = `<td>${categoryName}</td>`;
+  } else if (hasCategory) {
+    categoryCell = '<td></td>';
+  }
+
+  const subcategoryCell = hasSubcategory ? `<td>${subcategoryName}</td>` : '';
+
   return `
     <tr>
-      ${index === 0 && subIndex === 0 ? `<td>${themeName}</td>` : '<td></td>'}
-      ${hasCategory && subIndex === 0 ? `<td>${categoryName}</td>` : hasCategory ? '<td></td>' : ''}
-      ${hasSubcategory ? `<td>${subcategoryName}</td>` : ''}
+      ${themeCell}
+      ${categoryCell}
+      ${subcategoryCell}
     </tr>
   `;
 };
+
 
 
 const getNaturalTab = (searchItem: Record<string, any>): INatural => ({
