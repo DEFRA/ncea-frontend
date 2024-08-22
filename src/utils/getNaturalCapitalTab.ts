@@ -13,10 +13,7 @@ const generateClassifierTable = (data: Record<string, any>[]): string => {
       if (Array.isArray(item.classifiers) && item.classifiers.length > 0) {
         hasCategory = true;
         item.classifiers.forEach((category: Record<string, any>) => {
-          if (
-            Array.isArray(category.classifiers) &&
-            category.classifiers.length > 0
-          ) {
+          if (Array.isArray(category.classifiers) && category.classifiers.length > 0) {
             hasSubcategory = true;
           }
         });
@@ -42,33 +39,26 @@ const generateClassifierTable = (data: Record<string, any>[]): string => {
       const themeName = item?.name ?? '';
 
       if (Array.isArray(item.classifiers) && item.classifiers.length > 0) {
-        item.classifiers.forEach(
-          (category: Record<string, any>, index: number) => {
-            const categoryName = category?.name ?? '';
-            if (
-              Array.isArray(category.classifiers) &&
-              category.classifiers.length > 0
-            ) {
-              category.classifiers.forEach(
-                (subcategory: Record<string, any>, subIndex: number) => {
-                  const subcategoryName = subcategory?.name ?? '';
-                  tableHTML += `<tr>
+        item.classifiers.forEach((category: Record<string, any>, index: number) => {
+          const categoryName = category?.name ?? '';
+          if (Array.isArray(category.classifiers) && category.classifiers.length > 0) {
+            category.classifiers.forEach((subcategory: Record<string, any>, subIndex: number) => {
+              const subcategoryName = subcategory?.name ?? '';
+              tableHTML += `<tr>
                               ${index === 0 && subIndex === 0 ? `<td>${themeName}</td>` : '<td></td>'}
                               ${hasCategory && subIndex === 0 ? `<td>${categoryName}</td>` : hasCategory ? '<td></td>' : ''}
                               ${hasSubcategory ? `<td>${subcategoryName}</td>` : ''}
                             </tr>`;
-                },
-              );
-            } else {
-              tableHTML += `<tr>
+            });
+          } else {
+            tableHTML += `<tr>
                             ${index === 0 ? `<td>${themeName}</td>` : '<td></td>'}
                             ${hasCategory ? `<td>${categoryName}</td>` : ''}
                             ${hasSubcategory ? '<td></td>' : ''}
                           </tr>
                           `;
-            }
-          },
-        );
+          }
+        });
       } else {
         tableHTML += `<tr>
                         <td>${themeName}</td>
@@ -84,6 +74,7 @@ const generateClassifierTable = (data: Record<string, any>[]): string => {
     tableHTML += `</tbody></table>`;
 
     return tableHTML;
+
   }
   return '';
 };
@@ -91,9 +82,7 @@ const generateClassifierTable = (data: Record<string, any>[]): string => {
 const getNaturalTab = (searchItem: Record<string, any>): INatural => ({
   Natural_capital_title: naturalTabStaticData.title,
   Natural_capital_description: naturalTabStaticData.description,
-  Natural_capital_data: generateClassifierTable(
-    searchItem?._source?.OrgNceaClassifiers || [],
-  ),
+  Natural_capital_displayData: generateClassifierTable(searchItem?._source?.OrgNceaClassifiers || []),
   Natural_capital_no_data: naturalTabStaticData.noRecord,
   Natural_capital_glossary_link: naturalTabStaticData.link,
 });

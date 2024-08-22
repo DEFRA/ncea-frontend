@@ -119,14 +119,20 @@ export interface IGeographyItem {
 }
 
 export interface INatural {
-  Natural_capital_title?:string;
-  Natural_capital_description?:string;
-  Natural_capital_data?:string;
-  Natural_capital_no_data?:string;
+  Natural_capital_title?: string;
+  Natural_capital_description?: string;
+  Natural_capital_displayData?: string;
+  Natural_capital_no_data?: string;
   Natural_capital_glossary_link?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & INatural & IQualityItem & ILicense & IGeographyItem & IGovernance;
+export type IOtherSearchItem = IGeneralItem &
+  IAccessItem &
+  INatural &
+  IQualityItem &
+  ILicense &
+  IGeographyItem &
+  IGovernance;
 
 export interface ISearchItem extends IBaseItem, IOtherSearchItem {
   [key: string]: IGovernance | string | number | undefined | string[] | IAccumulatedCoordinates;

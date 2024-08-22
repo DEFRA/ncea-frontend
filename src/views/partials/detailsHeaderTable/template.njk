@@ -6,13 +6,13 @@
 
   {% if params.options and params.hasData %}
   {% for option in params.options %}
-    {% if option.label == "Natural_capital_title" %}
+    {% if "title" in option.label%}
       {% set title = option.displayValue %}
-    {% elseif option.label == "Natural_capital_description" %}
+    {% elseif "description" in option.label %}
       {% set description = option.displayValue %}
-    {% elseif option.label == "Natural_capital_data" %}
+    {% elseif "displayData" in option.label %}
       {% set classifierData = option.displayValue %}
-    {% elseif option.label == "Natural_capital_no_data" %}
+    {% elseif "no_data" in option.label %}
       {% set noData = option.displayValue %}
     {% endif %}
   {% endfor %}

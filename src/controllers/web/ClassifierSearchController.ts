@@ -41,7 +41,7 @@ const ClassifierSearchController = {
         pageTitle: classifierPageTitle,
         guidedClassifierSearchPath,
         nextLevel,
-        skipPath:resultsPath,
+        skipPath: resultsPath,
         formId,
         journey: 'gs',
         classifierItems,

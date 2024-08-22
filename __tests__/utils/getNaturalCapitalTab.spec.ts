@@ -31,12 +31,12 @@ describe('getNaturalTab', () => {
     expect(result).toEqual({
       Natural_capital_title: naturalTabStaticData.title,
       Natural_capital_description: naturalTabStaticData.description,
-      Natural_capital_data: expect.any(String), // Asserting it's a non-empty string
+      Natural_capital_displayData: expect.any(String),
       Natural_capital_no_data: naturalTabStaticData.noRecord,
       Natural_capital_glossary_link: naturalTabStaticData.link,
     });
 
-    expect(result.Natural_capital_data).toContain('<table class="details-table-full">');
+    expect(result.Natural_capital_displayData).toContain('<table class="details-table-full">');
   });
 
   it('should return an empty string for Natural_capital_data if OrgNceaClassifiers is empty', () => {
@@ -51,7 +51,7 @@ describe('getNaturalTab', () => {
     expect(result).toEqual({
       Natural_capital_title: naturalTabStaticData.title,
       Natural_capital_description: naturalTabStaticData.description,
-      Natural_capital_data: '',
+      Natural_capital_displayData: '',
       Natural_capital_no_data: naturalTabStaticData.noRecord,
       Natural_capital_glossary_link: naturalTabStaticData.link,
     });
@@ -65,7 +65,7 @@ describe('getNaturalTab', () => {
     expect(result).toEqual({
       Natural_capital_title: naturalTabStaticData.title,
       Natural_capital_description: naturalTabStaticData.description,
-      Natural_capital_data: '',
+      Natural_capital_displayData: '',
       Natural_capital_no_data: naturalTabStaticData.noRecord,
       Natural_capital_glossary_link: naturalTabStaticData.link,
     });

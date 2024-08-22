@@ -5,7 +5,7 @@ import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
 import { getGovernanceTabData } from './getGovernanceTab';
 import { getLicenseTabData } from './getLicenseTabData';
-import {getNaturalTab} from './getNaturalCapitalTab'
+import { getNaturalTab } from './getNaturalCapitalTab';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
 import { toggleContent } from './toggleContent';
