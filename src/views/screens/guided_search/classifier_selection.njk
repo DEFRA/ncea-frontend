@@ -43,7 +43,7 @@
           {% if classify.sectionTitle.length > 0 %}
             {% set sectionTitle = classify.sectionTitle %}
           {% else %}
-            {% set sectionTitle = 'Select a natural capital theme' %}
+            {% set sectionTitle = 'Natural capital themes' %}
           {% endif %}
           {% for item in classify.classifiers %}
             {% set _ = checkboxItems.push({value: item.code, id: 'checkbox-'+sectionIndex+'-'+loop.index, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
@@ -56,7 +56,7 @@
           {% if classify.sectionTitle.length > 0 %}
             {% set sectionTitle = classify.sectionTitle %}
           {% else %}
-            {% set sectionTitle = 'Select a natural capital theme' %}
+            {% set sectionTitle = 'Natural capital themes' %}
           {% endif %}
           {% if classify.sectionIntroduction.length > 0 %}
             {% set sectionIntro = classify.sectionIntroduction %}
