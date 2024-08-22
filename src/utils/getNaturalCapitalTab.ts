@@ -5,79 +5,109 @@ import { INatural } from '../interfaces/searchResponse.interface';
 import { naturalTabStaticData } from '../utils/constants';
 
 const generateClassifierTable = (data: Record<string, any>[]): string => {
-  if (Array.isArray(data) && data?.length > 0) {
-    let hasCategory = false;
-    let hasSubcategory = false;
+  if (!Array.isArray(data) || data.length === 0) {
+    return '';
+  }
 
-    data.forEach((item: Record<string, any>) => {
-      if (Array.isArray(item.classifiers) && item.classifiers.length > 0) {
-        hasCategory = true;
-        item.classifiers.forEach((category: Record<string, any>) => {
-          if (Array.isArray(category.classifiers) && category.classifiers.length > 0) {
-            hasSubcategory = true;
-          }
-        });
-      }
-    });
+  const { hasCategory, hasSubcategory } = analyzeClassifiers(data);
 
-    let tableHTML = `<table class="details-table-full">
-                      <thead>
-                        <tr>
-                          <th width="${hasCategory || hasSubcategory ? '30%' : '100%'}">Theme</th>`;
-    if (hasCategory) {
-      tableHTML += `<th width="${hasSubcategory ? '35%' : '70%'}">Category</th>`;
+  const tableHTML = `
+    <table class="details-table-full">
+      ${generateTableHeader(hasCategory, hasSubcategory)}
+      <tbody>
+        ${generateTableRows(data, hasCategory, hasSubcategory)}
+      </tbody>
+    </table>
+  `;
+
+  return tableHTML;
+};
+
+const analyzeClassifiers = (data: Record<string, any>[]) => {
+  let hasCategory = false;
+  let hasSubcategory = false;
+
+  data.forEach((item: Record<string, any>) => {
+    if (Array.isArray(item.classifiers) && item.classifiers.length > 0) {
+      hasCategory = true;
+      item.classifiers.forEach((category: Record<string, any>) => {
+        if (Array.isArray(category.classifiers) && category.classifiers.length > 0) {
+          hasSubcategory = true;
+        }
+      });
     }
-    if (hasSubcategory) {
-      tableHTML += `<th width="35%">Subcategory</th>`;
-    }
-    const colspan = 1 + (hasCategory ? 1 : 0) + (hasSubcategory ? 1 : 0);
-    tableHTML += `<tr><td colspan="${colspan}" class="details-table-hr"></td></tr>`;
-    tableHTML += `</tr>
-                      </thead><tbody>`;
+  });
 
-    data.forEach((item: Record<string, any>) => {
-      const themeName = item?.name ?? '';
+  return { hasCategory, hasSubcategory };
+};
 
-      if (Array.isArray(item.classifiers) && item.classifiers.length > 0) {
-        item.classifiers.forEach((category: Record<string, any>, index: number) => {
-          const categoryName = category?.name ?? '';
-          if (Array.isArray(category.classifiers) && category.classifiers.length > 0) {
-            category.classifiers.forEach((subcategory: Record<string, any>, subIndex: number) => {
-              const subcategoryName = subcategory?.name ?? '';
-              tableHTML += `<tr>
-                              ${index === 0 && subIndex === 0 ? `<td>${themeName}</td>` : '<td></td>'}
-                              ${hasCategory && subIndex === 0 ? `<td>${categoryName}</td>` : hasCategory ? '<td></td>' : ''}
-                              ${hasSubcategory ? `<td>${subcategoryName}</td>` : ''}
-                            </tr>`;
-            });
-          } else {
-            tableHTML += `<tr>
-                            ${index === 0 ? `<td>${themeName}</td>` : '<td></td>'}
-                            ${hasCategory ? `<td>${categoryName}</td>` : ''}
-                            ${hasSubcategory ? '<td></td>' : ''}
-                          </tr>
-                          `;
-          }
+const generateTableHeader = (hasCategory: boolean, hasSubcategory: boolean): string => {
+  const categoryWidth = hasSubcategory ? '35%' : '70%';
+  const subcategoryWidth = '35%';
+  const themeWidth = hasCategory || hasSubcategory ? '30%' : '100%';
+
+  return `
+    <thead>
+      <tr>
+        <th width="${themeWidth}">Theme</th>
+        ${hasCategory ? `<th width="${categoryWidth}">Category</th>` : ''}
+        ${hasSubcategory ? `<th width="${subcategoryWidth}">Subcategory</th>` : ''}
+      </tr>
+      <tr><td colspan="${1 + (hasCategory ? 1 : 0) + (hasSubcategory ? 1 : 0)}" class="details-table-hr"></td></tr>
+    </thead>
+  `;
+};
+
+const generateTableRows = (data: Record<string, any>[], hasCategory: boolean, hasSubcategory: boolean): string => {
+  return data
+    .map(item => generateTableRow(item, hasCategory, hasSubcategory))
+    .join('');
+};
+
+const generateTableRow = (item: Record<string, any>, hasCategory: boolean, hasSubcategory: boolean): string => {
+  const themeName = item?.name ?? '';
+  let rows = '';
+
+  if (Array.isArray(item.classifiers) && item.classifiers.length > 0) {
+    item.classifiers.forEach((category: Record<string, any>, index: number) => {
+      const categoryName = category?.name ?? '';
+      if (Array.isArray(category.classifiers) && category.classifiers.length > 0) {
+        category.classifiers.forEach((subcategory: Record<string, any>, subIndex: number) => {
+          const subcategoryName = subcategory?.name ?? '';
+          rows += createRow(themeName, categoryName, subcategoryName, index, subIndex, hasCategory, hasSubcategory);
         });
       } else {
-        tableHTML += `<tr>
-                        <td>${themeName}</td>
-                        ${hasCategory ? '<td></td>' : ''}
-                        ${hasSubcategory ? '<td></td>' : ''}
-                      </tr>`;
+        rows += createRow(themeName, categoryName, '', index, 0, hasCategory, hasSubcategory);
       }
-
-      const colspan = 1 + (hasCategory ? 1 : 0) + (hasSubcategory ? 1 : 0);
-      tableHTML += `<tr><td colspan="${colspan}" class="details-table-hr"></td></tr>`;
     });
-
-    tableHTML += `</tbody></table>`;
-
-    return tableHTML;
-
+  } else {
+    rows += createRow(themeName, '', '', 0, 0, hasCategory, hasSubcategory);
   }
-  return '';
+
+  const colspan = 1 + (hasCategory ? 1 : 0) + (hasSubcategory ? 1 : 0);
+  rows += `<tr><td colspan="${colspan}" class="details-table-hr"></td></tr>`;
+
+  return rows;
 };
+
+const createRow = (
+  themeName: string,
+  categoryName: string,
+  subcategoryName: string,
+  index: number,
+  subIndex: number,
+  hasCategory: boolean,
+  hasSubcategory: boolean
+): string => {
+  return `
+    <tr>
+      ${index === 0 && subIndex === 0 ? `<td>${themeName}</td>` : '<td></td>'}
+      ${hasCategory && subIndex === 0 ? `<td>${categoryName}</td>` : hasCategory ? '<td></td>' : ''}
+      ${hasSubcategory ? `<td>${subcategoryName}</td>` : ''}
+    </tr>
+  `;
+};
+
 
 const getNaturalTab = (searchItem: Record<string, any>): INatural => ({
   Natural_capital_title: naturalTabStaticData.title,
