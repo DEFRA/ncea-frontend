@@ -209,6 +209,10 @@ const previousQuestion = () => {
 };
 
 const skipStorage = () => {
+ //clear local storage if user comes to home page by clicking on 'find natural capital data' from header
+  if (document.title === "NCEA Search Service Home" && document.getElementById('keyword')) {
+      storeStorageData(JSON.parse(defaultSessionData));
+  }
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
   const urlParams = new URLSearchParams(window.location.search);
   const level = parseInt(urlParams.get('level'), 10);

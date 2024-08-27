@@ -97,7 +97,7 @@ const createRow = (
   index: number,
   subIndex: number,
   hasCategory: boolean,
-  hasSubcategory: boolean
+  hasSubcategory: boolean,
 ): string => {
   const themeCell = index === 0 && subIndex === 0 ? `<td>${themeName}</td>` : '<td></td>';
 
@@ -118,8 +118,6 @@ const createRow = (
     </tr>
   `;
 };
-
-
 
 const getNaturalTab = (searchItem: Record<string, any>): INatural => ({
   Natural_capital_title: naturalTabStaticData.title,
