@@ -237,7 +237,6 @@ const skipStorage = () => {
               }
 
             } else {
-              console.log("associatedForm.id",associatedForm.id)
               delete sessionData.fields[associatedForm.id];
             }
           }
