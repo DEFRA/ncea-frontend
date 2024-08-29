@@ -7884,7 +7884,7 @@
 
 .option-container {
   display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
+  grid-template-columns: 1.3fr 1.4fr;
   gap: 10px;
   margin-top: 15px;
 }
@@ -7897,7 +7897,7 @@
   font-weight: 300;
   line-height: 25px;
   min-width: auto;
-  width: 160px;
+  width: 210px;
 }
 .option-label {
   font-size: 1.1875rem;
@@ -8381,7 +8381,6 @@
   line-height: 20px;
 }
 .tab-content-value {
-  overflow: auto;
   font-size: 1rem;
   font-style: normal;
   font-weight: 300;
@@ -8446,27 +8445,6 @@
 
 .detail-map {
   border: 2px solid #0b0c0c;
-}
-
-.details-table-full {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.details-table-full th,
-.details-table-full td {
-  padding: 8px 0;
-  text-align: left;
-  vertical-align: top;
-}
-
-.details-table-full th {
-  padding-top: 0;
-}
-
-.details-table-hr {
-  padding: 0 !important;
-  border-bottom: 1px solid #B1B4B6;
 }
 
 @media (min-width: 768px) {
