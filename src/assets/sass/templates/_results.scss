@@ -54,7 +54,7 @@
 .option {
   &-container {
     display: grid;
-    grid-template-columns: 0.9fr 1.4fr;
+    grid-template-columns: 1.3fr 1.4fr;
     gap: 10px;
     margin-top: 15px;
   }
@@ -66,7 +66,7 @@
   &-block {
     @include font-style-stack(19px, 25px, 300, normal);
     min-width: auto;
-    width: 160px;
+    width: 210px;
   }
 
   &-label {

@@ -8381,6 +8381,7 @@
   line-height: 20px;
 }
 .tab-content-value {
+  overflow: auto;
   font-size: 1rem;
   font-style: normal;
   font-weight: 300;
@@ -8445,6 +8446,27 @@
 
 .detail-map {
   border: 2px solid #0b0c0c;
+}
+
+.details-table-full {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.details-table-full th,
+.details-table-full td {
+  padding: 8px 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.details-table-full th {
+  padding-top: 0;
+}
+
+.details-table-hr {
+  padding: 0 !important;
+  border-bottom: 1px solid #B1B4B6;
 }
 
 @media (min-width: 768px) {
