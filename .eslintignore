@@ -8,6 +8,5 @@ src/services/*.json
 tools/**
 __tests__
 public/**
-src/assets/sass/**
 src/assets/**
 copyNonTSFiles.js
