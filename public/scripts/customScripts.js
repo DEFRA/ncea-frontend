@@ -14,6 +14,9 @@ const defaultSessionData = JSON.stringify({
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;
 const todayCheckbox = document.getElementById('today-date');
+const keywordElement = document.getElementById('keyword');
+const searchTermInput = document.getElementById("search_term");
+
 
 // Store the data to storage
 const storeStorageData = (newSessionData) => {
@@ -210,8 +213,9 @@ const previousQuestion = () => {
 
 const skipStorage = () => {
  //clear local storage if user comes to home page by clicking on 'find natural capital data' from header
-  if (document.title === "NCEA Search Service Home" && document.getElementById('keyword')) {
+  if (  document.title === "NCEA Search Service Home" && keywordElement) {
       storeStorageData(JSON.parse(defaultSessionData));
+      searchTermInput.value='';
   }
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
   const urlParams = new URLSearchParams(window.location.search);
@@ -552,3 +556,4 @@ window.addEventListener('storage', (event) => {
 });
 
 export { getStorageData, fireEventAfterStorage, updateSubmitButtonState };
+
