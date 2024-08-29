@@ -5,12 +5,14 @@
                     <a href="{{ resultsPath }}" class="govuk-link count-block-link">
                          Click to see
                          {% if count > 10000 %}
-                              10000
+                             first 10000 of {{ count}}
                          {% else %}
                               {{ count }}
                          {% endif %}
-                         results from previous selection
+                         relevant results from your previous selection
                     </a>
+
+                    <div class='search-result__parameter-value govuk-!-margin-top-4'>Select additional categories to narrow down your results</div>
                </div>
                <div class="govuk-section-break--visible"></div>
           {% endif %}

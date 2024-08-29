@@ -7594,6 +7594,17 @@
   max-height: 65%;
 }
 
+.skip-questionnaire-modal {
+  z-index: 1002;
+  background-color: #505a5f;
+  padding: 40px 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  max-height: 65%;
+}
+
 .map-modal {
   background-color: #ffffff;
   box-sizing: border-box;
@@ -7873,7 +7884,7 @@
 
 .option-container {
   display: grid;
-  grid-template-columns: 1.3fr 1.4fr;
+  grid-template-columns: 0.9fr 1.4fr;
   gap: 10px;
   margin-top: 15px;
 }
@@ -7886,7 +7897,7 @@
   font-weight: 300;
   line-height: 25px;
   min-width: auto;
-  width: 210px;
+  width: 160px;
 }
 .option-label {
   font-size: 1.1875rem;
@@ -8392,13 +8403,6 @@
   margin: 0;
   height: fit-content;
 }
-.tab-content-natural-capital {
-font-family: "GDS Transport", arial, sans-serif;
-font-size: 19px;
-font-weight: 700;
-line-height: 25px;
-text-align: left;
-}
 
 .open-data-block--disabled {
   padding-left: 15px;
@@ -8440,16 +8444,15 @@ text-align: left;
   border-bottom: 1px solid #b1b4b6;
 }
 
-
 .detail-map {
   border: 2px solid #0b0c0c;
 }
-
 
 .details-table-full {
   border-collapse: collapse;
   width: 100%;
 }
+
 .details-table-full th,
 .details-table-full td {
   padding: 8px 0;
@@ -8461,7 +8464,7 @@ text-align: left;
   padding-top: 0;
 }
 
-.details-table-hr{
+.details-table-hr {
   padding: 0 !important;
   border-bottom: 1px solid #B1B4B6;
 }
