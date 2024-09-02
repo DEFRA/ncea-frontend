@@ -7601,7 +7601,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 630px;
   max-height: 65%;
 }
 
@@ -7798,6 +7798,28 @@
   display: flex;
   justify-content: flex-end;
   float: right;
+}
+
+.classifier-error-summary {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.govuk-error-summary {
+  margin-bottom: 40px;
+}
+
+.govuk-error-summary__body ul.govuk-list li {
+  font-weight: 700;
+  color: #d4351c;
+  font-size: 1.188rem;
+  line-height: 1.3157894737;
+}
+
+.govuk-error-summary__title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 20px;
 }
 
 .defra-map-clear-selection__block {

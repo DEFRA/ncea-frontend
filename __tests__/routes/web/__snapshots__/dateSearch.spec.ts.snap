@@ -212,7 +212,8 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
 
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-  <div class="govuk-grid-row">
+  
+<div class="govuk-grid-row">
      <div class="govuk-grid-column-full">
           
                <div class="count-block">
@@ -223,8 +224,30 @@ exports[`Guided Search - Date Questionnaire Screen Guided Search > Date Question
                          
                          relevant results from your previous selection
                     </a>
+                    <div class='search-result__parameter-value govuk-!-margin-top-4'>Select additional categories to narrow down your
+                         results</div>
+               </div>
+               <div id='errorBlock' style="display:none;">
+                    <div class="govuk-error-summary" data-module="govuk-error-summary">
+  <div role="alert">
+    <h2 class="govuk-error-summary__title">
+      There is a problem
+    </h2>
+    <div class="govuk-error-summary__body">
+      
+      <ul class="govuk-list govuk-error-summary__list">
+      
+        <li>
+        
+          You must make a selection or click skip to continue
+        
+        </li>
+      
+      </ul>
+    </div>
+  </div>
+</div>
 
-                    <div class='search-result__parameter-value govuk-!-margin-top-4'>Select additional categories to narrow down your results</div>
                </div>
                <div class="govuk-section-break--visible"></div>
           
