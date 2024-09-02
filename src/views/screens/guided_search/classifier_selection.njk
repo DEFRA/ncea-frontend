@@ -147,38 +147,3 @@ document.getElementById('classifier-search').addEventListener('submit', function
   }
 });
 </script>{% endblock %}
-
-
- {# document.getElementById('classifier-search').addEventListener('submit', function (event) {
-  var errorMessage = "";
-  const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="parent[]"]:checked'));
-  const checkboxGroups = document.querySelectorAll('.govuk-checkboxes');
-  const isAnyCheckboxNotSelected = selectedCheckboxes.length == 0;
-
-  if (isAnyCheckboxNotSelected) {
-    event.preventDefault();
-    document.getElementById("errorBlock").style.display = '';
-    checkboxGroups.forEach(group => {
-      const formGroup = group.closest('.govuk-form-group');
-      let errorElement = formGroup.querySelector('.govuk-error-message');
-
-      if (!errorElement) {
-        const errorHTML = '';
-        formGroup.insertAdjacentHTML('afterbegin', errorHTML);
-        formGroup.classList.add('govuk-form-group--error');
-      }
-    });
-  } else {
-    checkboxGroups.forEach(group => {
-      const formGroup = group.closest('.govuk-form-group');
-      let errorElement = formGroup.querySelector('.govuk-error-message');
-
-      if ([...group.querySelectorAll('input[type="checkbox"]')].some(checkbox => checkbox.checked)) {
-        if (errorElement) {
-          errorElement.remove();
-        }
-        formGroup.classList.remove('govuk-form-group--error');
-      }
-    });
-  }
-}); #}
