@@ -7450,13 +7450,12 @@
   font-size: 36px;
 }
 .quick_search-container__caption-m {
-  width: 640px;
   font-size: 1.1875rem;
   font-style: normal;
   font-weight: 300;
   line-height: 25px;
   color: #0b0c0c;
-  padding-top: 20px;
+  padding-top: 30px;
 }
 @media screen and (max-width: 799px) {
   .quick_search-container__caption-m {
@@ -7910,6 +7909,10 @@
 }
 .search-result__button-group > .govuk-button {
   margin-bottom: 0;
+}
+
+.search-result-input-spacing {
+  margin-bottom: 60px;
 }
 
 .option-container {

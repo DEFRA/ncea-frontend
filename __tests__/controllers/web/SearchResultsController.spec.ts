@@ -103,6 +103,8 @@ describe('Deals with search results controller', () => {
         queryString,
         hasStudyPeriodFilterApplied: false,
         resetStudyPeriodLink,
+        backLinkClasses: "back-link-search-result",
+        backLinkPath: "#",
       });
     });
 
@@ -168,6 +170,8 @@ describe('Deals with search results controller', () => {
         queryString,
         hasStudyPeriodFilterApplied: false,
         resetStudyPeriodLink,
+        backLinkClasses: "back-link-search-result",
+        backLinkPath: "#",
       });
     });
 

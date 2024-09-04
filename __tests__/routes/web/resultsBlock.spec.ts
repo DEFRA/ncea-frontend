@@ -193,7 +193,7 @@ describe('Results block template', () => {
           document
             .querySelector('.search-result__content')
             ?.textContent?.trim(),
-        ).toEqual('Search with different keywords.');
+        ).toEqual('There are no results that match your search. Try a new search using different keywords or filters.');
       });
     });
 
@@ -289,13 +289,13 @@ describe('Results block template', () => {
           document
             .querySelector('.search-result__content')
             ?.textContent?.trim(),
-        ).toEqual('Choose different answers to see results.');
+        ).toEqual('There are no results that match your search. Try a new search using different keywords or filters.');
       });
 
       it('should render three secondary buttons', async () => {
         expect(
           document.querySelectorAll('.govuk-button--secondary')?.length,
-        ).toBe(3);
+        ).toBe(2);
       });
     });
 

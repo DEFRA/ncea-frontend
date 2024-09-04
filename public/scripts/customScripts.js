@@ -477,6 +477,15 @@ const classifierBackLinkHandler = () => {
   }
 };
 
+const searchResultBackLinkHandler = () => {
+  const backLinkElements = document.querySelector('.back-link-search-result');
+  if (backLinkElements) {
+    backLinkElements.addEventListener('click', () => {
+        window.history.go(-1);
+    });
+  }
+};
+
 function redirectToClassifierSearch(){
   const sessionData = getStorageData();
   const classifierData = sessionData.fields['classifier-search'] || {};
@@ -524,6 +533,7 @@ if (typeof Storage !== 'undefined') {
     todayCheckboxStatus();
     attachDateInputListeners();
     classifierBackLinkHandler();
+    searchResultBackLinkHandler();
     toggleClassifierCheckbox();
    document.querySelector('.back-link-date') && document.querySelector('.back-link-date').addEventListener('click', redirectToClassifierSearch);
 

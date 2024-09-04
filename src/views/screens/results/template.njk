@@ -1,69 +1,48 @@
 {% extends "layout/default.njk" %}
-
 {% from "partials/quick_search/macro.njk" import quickSearch %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="{{ assetPath }}/css/ol.css">
-{% endblock %}
-
-{% block beforeContent %}
-  {{ super() }}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: routes.homePage,
-        attributes: {
-          'data-do-storage-reset': ''
-        }
-      },
-      {
-        text: "Search results"
-      }
-    ]
-  }) }}
-{% endblock %}
-
-{% block content %}
-
-  {{ quickSearch({
-    isResultPage: true,
-    searchPath: routes.searchResults,
-    formId: quickSearchFID,
-    searchInputError : searchInputError
-  }) }}
-
-  {%if searchInputError === undefined %}
-    <div class="govuk-grid-row" id="map-result-block" data-action="{{routes.getMapResults}}" data-fetch-map-results>
-      {%- include 'partials/results/map_results.njk' -%}
+  {% endblock %}
+  {% block beforeContent %}
+    {{ super() }}
+    {% include "partials/guided_search_breadcrumb/template.njk" %}
+  {% endblock %}
+  {% block content %}
+    <h1 class="govuk-heading-l ">Search results</h1>
+    <div class="govuk-grid-row govuk-!-text-align-right">
+      {{ govukButton({ text: "New search", classes: "govuk-button--secondary", href: routes.homePage, attributes: {
+            'data-do-storage-reset': ''
+          } }) }}
     </div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
-          Filters
-        </h2>
-        <div class="govuk-section-break--visible"></div>
-        {% include 'partials/results/filters.njk' %}
+    {% if searchInputError === undefined %}
+      <div class="govuk-grid-row" id="map-result-block" data-action="{{ routes.getMapResults }}" data-fetch-map-results>
+        {%- include 'partials/results/map_results.njk' -%}
       </div>
-      <div class="govuk-grid-column-two-thirds">
-        {% include 'partials/results/summary.njk' %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+            Filters
+          </h2>
+          <div class="govuk-section-break--visible"></div>
+          {% include 'partials/results/filters.njk' %}
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          {% include 'partials/results/summary.njk' %}
+        </div>
       </div>
-    </div>
-  {% endif %}
-
-{% endblock %}
-
-{% block bodyEnd %}
-  {{ super() }}
-  <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
-  <script src="{{ assetPath }}/scripts/ol.js"></script>
-  <script>
-    var isViewMapResults = true;
-  </script>
-  <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
-  <script type="module" src="{{ assetPath }}/scripts/filters.js"></script>
-  <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
-{% endblock %}
+    {% endif %}
+  {% endblock %}
+  {% block bodyEnd %}
+    {{ super() }}
+    <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
+    <script src="{{ assetPath }}/scripts/ol.js"></script>
+    <script>
+      var isViewMapResults = true;
+    </script>
+    <script type="module" src="{{ assetPath }}/scripts/location.js"></script>
+    <script type="module" src="{{ assetPath }}/scripts/filters.js"></script>
+    <script type="module" src="{{ assetPath }}/scripts/details.js"></script>
+  {% endblock %}

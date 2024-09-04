@@ -1,39 +1,55 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
-
 {% from 'partials/go_to_resource/macro.njk' import goToResource %}
-
 {% if hasError %}
   <p class="govuk-caption-m govuk-!-font-size-14">Unable to fetch the search results. Please try again.</p>
 {% endif %}
-
 {% if not hasError %}
   <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
-    {{searchResults.total}} results{% if not searchResults.total %} found {% endif %}
+    {{ searchResults.total }} results{% if not searchResults.total %} found
+    {% endif %}
   </h2>
   <div class="govuk-section-break--visible"></div>
-{% if not hasError and searchResults.total %}
-<div class='map-container'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4' data-module='govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
+  {% if not hasError and searchResults.total %}
+    <div class='map-container'>
+      <div id="map-results-block">
+        <a
+          href="javascript:void(0);"
+          id='map-result-button'
+          disabled="true"
+          onclick="openMapModal()"
+          role="button"
+          draggable="false"
+          class='govuk-button govuk-button--map govuk-!-margin-bottom-4'
+          data-module='govuk-button'>
+          View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+          <svg
+            class='govuk-button__start-icon'
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="20"
+            viewBox="0 0 16 20"
+            fill="none">
+            <path
+              d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10
+                6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z"
+              fill="white"/>
+          </svg>
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="govuk-section-break--visible"></div>
-{% endif %}
+    <div class="govuk-section-break--visible"></div>
+  {% endif %}
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">
+      Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   {% if not hasError and searchResults.total %}
-  <form class='option-container govuk-section-break--visible' action="{{sortSubmitPath}}" id="sort_results" method="post">
-    {{ govukSelect({
+    <form class='option-container govuk-section-break--visible' action="{{ sortSubmitPath }}" id="sort_results" method="post">
+      {{ govukSelect({
       id: "sort",
       name: "sort",
       label: {
@@ -46,8 +62,7 @@
       },
       items: sortOptions.sortOptions
     }) }}
-
-    {{ govukSelect({
+      {{ govukSelect({
       id: "page-results",
       name: "page-results",
       label: {
@@ -60,35 +75,33 @@
       },
       items: sortOptions.rowsPerPageOptions
     }) }}
-  </form>
-{% endif %}
+    </form>
+  {% endif %}
 {% endif %}
 {% if not hasError and searchResults.total %}
   <div class='search-result__items'>
     {% for item in searchResults.items %}
       <div class='govuk-section-break--visible search-result__item'>
-        <h2 class='govuk-heading-m search-result__heading'>{{item.title}}</h2>
+        <h2 class='govuk-heading-m search-result__heading'>{{ item.title }}</h2>
         {% if item.publishedBy %}
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__published-label'>Published by</span>
-            <span class='search-result__parameter-value search-result__published-value'>{{item.publishedBy}}</span>
+            <span class='search-result__parameter-value search-result__published-value'>{{ item.publishedBy }}</span>
           </div>
         {% endif %}
         {% if item.studyPeriod %}
           <div class='search-result__parameter'>
             <span class='search-result__parameter-label search-result__study-label'>Study period</span>
             <span class='search-result__parameter-value search-result__study-value'>
-              {{item.studyPeriod}}
+              {{ item.studyPeriod }}
             </span>
           </div>
         {% endif %}
         <p class='search-result__content'>
-          {{item.content | safe}}
+          {{ item.content | safe }}
         </p>
-
         <div class='govuk-button-group search-result__button-group'>
           {{ goToResource({ organisationName: item.organisationName, resourceLocator: item.resourceLocator, isDetailsPage: false }) }}
-
           {{ govukButton({
             text: 'More info',
             classes: 'govuk-button--secondary',
@@ -98,35 +111,16 @@
       </div>
     {% endfor %}
   </div>
-
   {{ govukPagination(paginationItems) }}
-
 {% endif %}
-
 {% if not searchResults.total and not hasError %}
   <div class='search-result__item'>
     <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-    <p class='search-result__content search-result__content--empty'>
-      {% if isQuickSearchJourney %}
-        Search with different keywords.
-      {% else %}
-        Choose different answers to see results.
-      {% endif %}
-
-      {% if not isQuickSearchJourney %}
-        <div class="govuk-button-group">
-          {{ govukButton({ text: "Previous question", classes: "govuk-button--secondary", attributes: {
-            'data-do-previous-page': ''
-          } }) }}
-          {{ govukButton({ text: "Restart questionnaire search", classes: "govuk-button--secondary", href: routes.guidedSearch+'?level=1', attributes: {
-            'data-do-storage-reset': ''
-          } }) }}
-        </div>
-      {% endif %}
+    <p class='search-result__content search-result__content--empty govuk-!-margin-bottom-8'>
+      There are no results that match your search. Try a new search using different keywords or filters.
     </p>
   </div>
 {% endif %}
-
 {% if searchResults.total and not hasError %}
   {%- include 'partials/go_to_resource/modal.njk' -%}
 {% endif %}
