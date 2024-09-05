@@ -55,22 +55,33 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
   const rangeBlock: estypes.QueryDslQueryContainer[] = [
     {
       bool: {
-        must: [
+        should: [
           {
-            range: {
-              'resourceTemporalExtentDetails.start.date': {
-                gte: startDateValue,
-              },
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { gte: startDateValue } } },
+              ],
             },
           },
           {
-            range: {
-              'resourceTemporalExtentDetails.end.date': {
-                lte: toDateValue,
-              },
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.end.date': { lte: toDateValue } } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: [
+                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
+                { range: { 'resourceTemporalExtentDetails.start.date': { lte: toDateValue } } },
+              ],
             },
           },
         ],
+        minimum_should_match: 1,
       },
     },
   ];
