@@ -10,6 +10,7 @@ import { Request, ResponseToolkit } from '@hapi/hapi';
 
 import { formattedDetailsResponse } from '../../data/documentDetailsResponse';
 import { processDetailsTabData } from '../../../src/utils/processDetailsTabData';
+import {appendPublication} from '../../../src/utils/queryStringHelper'
 import { quickSearchJoiError } from '../../data/quickSearch';
 import {
   getDocumentDetails,
@@ -619,4 +620,31 @@ describe('Deals with search results controller', () => {
       });
     });
   });
+
+  describe('appendPublication', () => {
+    it('should add "publication" if "nonGeographicDataset" is present but "publication" is not', () => {
+      const input = 'nonGeographicDataset';
+      const result = appendPublication(input);
+      expect(result).toBe('nonGeographicDataset,publication');
+    });
+
+    it('should add "nonGeographicDataset" if "publication" is present but "nonGeographicDataset" is not', () => {
+      const input = 'publication';
+      const result = appendPublication(input);
+      expect(result).toBe('publication,nonGeographicDataset');
+    });
+
+    it('should not modify resourceTypes if both "nonGeographicDataset" and "publication" are present', () => {
+      const input = 'nonGeographicDataset,publication';
+      const result = appendPublication(input);
+      expect(result).toBe('nonGeographicDataset,publication');
+    });
+
+    it('should not modify resourceTypes if neither "nonGeographicDataset" nor "publication" are present', () => {
+      const input = 'someOtherType';
+      const result = appendPublication(input);
+      expect(result).toBe('someOtherType');
+    });
+  });
+
 });

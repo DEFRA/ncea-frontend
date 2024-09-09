@@ -9,6 +9,7 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import {
+  appendPublication,
   deleteQueryParams,
   generateQueryBuilderPayload,
   readQueryParams,
@@ -206,15 +207,6 @@ const SearchResultsController = {
   filterResourceTypeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload = request.payload as Record<string, string>;
     let resourceTypeValues = '';
-
-    const appendPublication = (resourceTypes: string): string => {
-      if (resourceTypes.includes('nonGeographicDataset') && !resourceTypes.includes('publication')) {
-        resourceTypes += ',publication';
-      } else if (resourceTypes.includes('publication') && !resourceTypes.includes('nonGeographicDataset')) {
-        resourceTypes += ',nonGeographicDataset';
-      }
-      return resourceTypes;
-    };
 
     if (payload?.['resource_type']) {
       if (Array.isArray(payload['resource_type'])) {

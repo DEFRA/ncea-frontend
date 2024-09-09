@@ -175,6 +175,15 @@ const generateQueryBuilderPayload = (requestQuery: RequestQuery): ISearchPayload
   return searchPayload;
 };
 
+ const appendPublication = (resourceTypes: string): string => {
+  if (resourceTypes.includes('nonGeographicDataset') && !resourceTypes.includes('publication')) {
+    resourceTypes += ',publication';
+  } else if (resourceTypes.includes('publication') && !resourceTypes.includes('nonGeographicDataset')) {
+    resourceTypes += ',nonGeographicDataset';
+  }
+  return resourceTypes;
+};
+
 export {
   getQueryStringParams,
   upsertQueryParams,
@@ -187,4 +196,5 @@ export {
   generateQueryBuilderFields,
   getClassifierParams,
   deleteQueryParams,
+  appendPublication,
 };

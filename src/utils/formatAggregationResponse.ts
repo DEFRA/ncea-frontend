@@ -45,15 +45,15 @@ const formatAggregationResponse = async (
         let nonGeoIndex = -1;
         let publicationIndex = -1;
         apiAggValues.buckets.forEach((bucket, index) => {
-          if (bucket.key === "nonGeographicDataset") nonGeoIndex = index;
-          if (bucket.key === "publication") publicationIndex = index;
+          if (bucket.key === 'nonGeographicDataset') nonGeoIndex = index;
+          if (bucket.key === 'publication') publicationIndex = index;
         });
 
         if (nonGeoIndex !== -1 && publicationIndex !== -1) {
           apiAggValues.buckets[nonGeoIndex].doc_count += apiAggValues.buckets[publicationIndex].doc_count;
           apiAggValues.buckets.splice(publicationIndex, 1);
         } else if (nonGeoIndex === -1 && publicationIndex !== -1) {
-          apiAggValues.buckets[publicationIndex].key = "nonGeographicDataset";
+          apiAggValues.buckets[publicationIndex].key = 'nonGeographicDataset';
         }
         finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
           const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
