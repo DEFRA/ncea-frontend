@@ -206,22 +206,23 @@ const SearchResultsController = {
   filterResourceTypeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload = request.payload as Record<string, string>;
     let resourceTypeValues = '';
-    if (payload?.['resource_type'] && Array.isArray(payload?.['resource_type'])) {
-      resourceTypeValues = payload['resource_type'].join(',');
-      if (payload['resource_type'].includes('nonGeographicDataset') && !resourceTypeValues.includes('publication')) {
-        resourceTypeValues += ',publication';
+
+    const appendPublication = (resourceTypes: string): string => {
+      if (resourceTypes.includes('nonGeographicDataset') && !resourceTypes.includes('publication')) {
+        resourceTypes += ',publication';
+      } else if (resourceTypes.includes('publication') && !resourceTypes.includes('nonGeographicDataset')) {
+        resourceTypes += ',nonGeographicDataset';
       }
-      if (payload['resource_type'].includes('publication') && !resourceTypeValues.includes('nonGeographicDataset')) {
-        resourceTypeValues += ',nonGeographicDataset';
+      return resourceTypes;
+    };
+
+    if (payload?.['resource_type']) {
+      if (Array.isArray(payload['resource_type'])) {
+        resourceTypeValues = payload['resource_type'].join(',');
+      } else if (typeof payload['resource_type'] === 'string') {
+        resourceTypeValues = payload['resource_type'];
       }
-    } else if (payload?.['resource_type'] && typeof payload?.['resource_type'] === 'string') {
-      resourceTypeValues = payload?.['resource_type'];
-      if (resourceTypeValues.includes('nonGeographicDataset') && !resourceTypeValues.includes('publication')) {
-        resourceTypeValues += ',publication';
-      }
-      if (resourceTypeValues.includes('publication') && !resourceTypeValues.includes('nonGeographicDataset')) {
-        resourceTypeValues += ',nonGeographicDataset';
-      }
+      resourceTypeValues = appendPublication(resourceTypeValues);
     }
 
     const queryParamsObject: Record<string, string> = {
