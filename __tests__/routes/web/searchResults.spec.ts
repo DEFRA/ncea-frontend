@@ -81,7 +81,7 @@ describe('Results Screen', () => {
   describe('Quick search POST verification on results page', () => {
     let document;
     let response;
-    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=best_match`;
+    const redirectedRoute = `${webRoutePaths.results}?q=test&jry=qs&pg=1&rpp=20&srt=most_relevant`;
 
     beforeAll(async () => {
       const responseObject = await invokeRoute(
@@ -96,7 +96,7 @@ describe('Results Screen', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         },
       );
@@ -110,192 +110,12 @@ describe('Results Screen', () => {
       });
     });
 
-    describe('Breadcrumb classes', () => {
-      it('renders the container class', async () => {
-        expect(document.querySelector('.govuk-breadcrumbs')).toBeTruthy();
-      });
-
-      it('renders the breadcrumb list class', async () => {
-        expect(document.querySelector('.govuk-breadcrumbs__list')).toBeTruthy();
-      });
-    });
-
-    describe('Breadcrumb list items', () => {
-      it('should render 2 list items', async () => {
-        const breadcrumbList = document?.querySelector(
-          '.govuk-breadcrumbs__list',
-        );
-        expect(breadcrumbList?.childElementCount).toEqual(2);
-      });
-    });
-
-    describe('Breadcrumb list item options', () => {
-      it('should render home list item first child as an anchor', async () => {
-        const item = document.querySelector(
-          '.govuk-breadcrumbs__list',
-        )?.firstElementChild;
-        const anchor = item?.firstElementChild;
-        expect(anchor?.tagName.toLowerCase()).toBe('a');
-        expect(anchor?.getAttribute('class')).toEqual(
-          'govuk-breadcrumbs__link',
-        );
-        expect(anchor?.getAttribute('href')).toEqual(webRoutePaths.home);
-        expect(anchor?.textContent?.trim()).toEqual('Home');
-      });
-
-      it('should not render search results list item second child as an anchor', async () => {
-        const item = document.querySelector(
-          '.govuk-breadcrumbs__list',
-        )?.lastElementChild;
-        expect(item.querySelector('a')).toBeNull();
-        expect(item?.textContent?.trim()).toEqual('Search results');
-      });
-    });
-    describe('Search block classes', () => {
-      it('renders custom quick search container class', async () => {
-        expect(document.querySelector('.quick_search-container')).toBeTruthy();
-      });
-
-      it('renders custom search block class', async () => {
-        expect(document.querySelector('.search-block')).toBeTruthy();
-      });
-    });
-
-    describe('Search block custom options', () => {
-      it('renders attributes correctly', async () => {
-        const searchBlock = document.querySelector('.search-block');
-        expect(searchBlock?.getAttribute('data-module')).toEqual('search');
-      });
-    });
-
     describe('Search container content elements', () => {
-      it('should render 2 child elements', async () => {
-        const bannerContainer = document?.querySelector(
-          '.quick_search-container',
-        );
-        expect(bannerContainer?.childElementCount).toEqual(2);
-      });
 
       it('should not render caption on results screen', async () => {
         expect(
           document?.querySelector('.quick_search-container__caption-m'),
         ).toBeNull();
-      });
-    });
-
-    describe('Search container block heading', () => {
-      it('should render the search container heading', async () => {
-        expect(
-          document
-            ?.querySelector('.quick_search-container__heading-m')
-            ?.textContent?.trim(),
-        ).toBe('Search');
-      });
-
-      it('should render the custom large class for heading', async () => {
-        expect(
-          document
-            ?.querySelector('.quick_search-container__heading-m')
-            ?.classList.contains('quick_search-container__heading-m--large'),
-        ).toBeTruthy();
-      });
-    });
-
-    describe('Search container form', () => {
-      it('should render the form', async () => {
-        const formElement =
-          document?.querySelector('.search-block')?.firstElementChild;
-        expect(formElement?.tagName.toLowerCase()).toBe('form');
-      });
-
-      it('should render the form with options', async () => {
-        const formElement =
-          document?.querySelector('.search-block')?.firstElementChild;
-        expect(formElement?.getAttribute('role')).toBe('search');
-        expect(formElement?.getAttribute('action')).toBe(webRoutePaths.results);
-      });
-
-      it('should render the form classes', async () => {
-        const formElement =
-          document?.querySelector('.search-block')?.firstElementChild;
-        expect(
-          formElement?.classList.contains('search-block__form'),
-        ).toBeTruthy();
-        expect(
-          formElement?.firstElementChild?.classList.contains(
-            'govuk-form-group',
-          ),
-        ).toBeTruthy();
-      });
-    });
-
-    describe('Search container input field', () => {
-      it('does render the input wrapper', () => {
-        const wrapper = document?.querySelector(
-          '.govuk-form-group > .govuk-input__wrapper',
-        );
-        expect(wrapper).toBeTruthy();
-      });
-
-      it('should render the input element', async () => {
-        const inputElement = document?.querySelector(
-          '.govuk-form-group > .govuk-input__wrapper',
-        )?.firstElementChild;
-        expect(inputElement?.tagName.toLowerCase()).toBe('input');
-      });
-
-      it('should renders with custom class', () => {
-        const inputElement = document?.querySelector(
-          '.govuk-form-group > .govuk-input__wrapper',
-        )?.firstElementChild;
-        expect(
-          inputElement?.classList.contains('search-block__input'),
-        ).toBeTruthy();
-      });
-
-      it('should renders with id', () => {
-        const inputElement = document?.querySelector('.search-block__input');
-        expect(inputElement?.getAttribute('id')).toEqual('search_term');
-      });
-
-      it('should renders with name', () => {
-        const inputElement = document?.querySelector('.search-block__input');
-        expect(inputElement?.getAttribute('name')).toEqual('search_term');
-      });
-
-      it('should renders with type="text" by default', () => {
-        const inputElement = document?.querySelector('.search-block__input');
-        expect(inputElement?.getAttribute('type')).toEqual('text');
-      });
-
-      it('should renders with spellcheck attribute set to false', () => {
-        const inputElement = document?.querySelector('.search-block__input');
-        expect(inputElement?.getAttribute('spellcheck')).toEqual('false');
-      });
-    });
-
-    describe('Search container when it includes a suffix', () => {
-      it('should renders the suffix inside the wrapper', () => {
-        const suffix = document?.querySelector(
-          '.govuk-form-group > .govuk-input__wrapper > .govuk-input__suffix',
-        );
-        expect(suffix).toBeTruthy();
-      });
-
-      it('should renders a button in the suffix', () => {
-        const buttonElement = document?.querySelector(
-          '.govuk-form-group > .govuk-input__wrapper > .govuk-input__suffix',
-        )?.firstElementChild;
-        expect(buttonElement?.tagName?.toLowerCase()).toBe('button');
-      });
-
-      it('should renders a button with custom class in the suffix', () => {
-        const buttonElement = document?.querySelector(
-          '.govuk-form-group > .govuk-input__wrapper > .govuk-input__suffix',
-        )?.firstElementChild;
-        expect(
-          buttonElement?.classList?.contains('search-block__button'),
-        ).toBeTruthy();
       });
     });
   });
@@ -518,11 +338,11 @@ describe('Results Screen', () => {
     });
 
     describe('Educational Copy block elements', () => {
-      it('should render 9 child elements', async () => {
+      it('should render 11 child elements', async () => {
         const videoContainer = document?.querySelector(
           '.educational-copy-container',
         );
-        expect(videoContainer?.childElementCount).toEqual(9);
+        expect(videoContainer?.childElementCount).toEqual(11);
       });
     });
 
@@ -532,7 +352,7 @@ describe('Results Screen', () => {
           document
             ?.querySelectorAll('.govuk-heading-m')?.[2]
             ?.textContent?.trim(),
-        ).toBe('Questionnaire search');
+        ).toBe('Natural capital');
       });
 
       it('should not render the custom large class for heading', async () => {

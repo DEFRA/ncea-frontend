@@ -105,6 +105,82 @@ describe('Date Questionnaire Schema', () => {
       );
     });
 
+    it('should invalidate with invalid day in from-date', () => {
+      const invalidData = {
+        'from-date-day': 32,
+        'from-date-month': 5,
+        'from-date-year': 2023,
+        'to-date-day': 1,
+        'to-date-month': 6,
+        'to-date-year': 2024,
+      };
+
+      const { error } = dateSchema.validate(invalidData);
+      expect(error).toBeDefined();
+      expect(error?.details[0]?.message).toContain('"Day" must be less than or equal to 31');
+    });
+
+
+  it('should invalidate when from-date is not a valid date', () => {
+    const invalidData = {
+      'from-date-day': 31,
+      'from-date-month': 2,
+      'from-date-year': 2023,
+      'to-date-day': 1,
+      'to-date-month': 3,
+      'to-date-year': 2024,
+    };
+
+    const { error } = dateSchema.validate(invalidData);
+    expect(error).toBeDefined();
+    expect(error?.details[0]?.message).toContain('The date must be a valid date');
+  });
+
+  it('should invalidate when to-date is not a valid date', () => {
+    const invalidData = {
+      'from-date-day': 1,
+      'from-date-month': 3,
+      'from-date-year': 2023,
+      'to-date-day': 31,
+      'to-date-month': 2,
+      'to-date-year': 2024,
+    };
+
+    const { error } = dateSchema.validate(invalidData);
+    expect(error).toBeDefined();
+    expect(error?.details[0]?.message).toContain('The date must be a valid date');
+  });
+
+  it('should invalidate when all fields are empty', () => {
+    const invalidData = {
+      'from-date-day': '',
+      'from-date-month': '',
+      'from-date-year': '',
+      'to-date-day': '',
+      'to-date-month': '',
+      'to-date-year': '',
+    };
+
+    const { error } = dateSchema.validate(invalidData);
+    expect(error).toBeDefined();
+    expect(error?.details[0]?.message).toContain('The date must include a valid year');
+  });
+
+    it('should invalidate with invalid day in to-date', () => {
+      const invalidData = {
+        'from-date-day': 1,
+        'from-date-month': 5,
+        'from-date-year': 2023,
+        'to-date-day': 32,
+        'to-date-month': 6,
+        'to-date-year': 2024,
+      };
+
+      const { error } = dateSchema.validate(invalidData);
+      expect(error).toBeDefined();
+      expect(error?.details[0]?.message).toContain('"Day" must be less than or equal to 31');
+    });
+
     it('should invalidate with wrong month', () => {
       const invalidData = {
         'from-date-day': 1,

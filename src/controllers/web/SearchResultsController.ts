@@ -84,6 +84,8 @@ const SearchResultsController = {
         queryString,
         hasStudyPeriodFilterApplied,
         resetStudyPeriodLink,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-search-result',
       });
     } catch (error) {
       return response.view('screens/results/template', {

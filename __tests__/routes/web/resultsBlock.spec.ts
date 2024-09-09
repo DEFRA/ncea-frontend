@@ -77,7 +77,7 @@ describe('Results block template', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -159,7 +159,7 @@ describe('Results block template', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -193,7 +193,7 @@ describe('Results block template', () => {
           document
             .querySelector('.search-result__content')
             ?.textContent?.trim(),
-        ).toEqual('Search with different keywords.');
+        ).toEqual('There are no results that match your search. Try a new search using different keywords or filters.');
       });
     });
 
@@ -210,7 +210,7 @@ describe('Results block template', () => {
           jry: 'qs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -255,7 +255,7 @@ describe('Results block template', () => {
           jry: 'gs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;
@@ -289,13 +289,13 @@ describe('Results block template', () => {
           document
             .querySelector('.search-result__content')
             ?.textContent?.trim(),
-        ).toEqual('Choose different answers to see results.');
+        ).toEqual('There are no results that match your search. Try a new search using different keywords or filters.');
       });
 
       it('should render three secondary buttons', async () => {
         expect(
           document.querySelectorAll('.govuk-button--secondary')?.length,
-        ).toBe(3);
+        ).toBe(2);
       });
     });
 
@@ -313,7 +313,7 @@ describe('Results block template', () => {
           jry: 'gs',
           pg: '1',
           rpp: '20',
-          srt: 'best_match',
+          srt: 'most_relevant',
           rty: 'all',
         });
         response = responseObject.response;

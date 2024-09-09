@@ -4,6 +4,9 @@ import {
   getResourceLocators,
   getAccessTabData,
   getResourceTypeHierarchy,
+  getContactInformation,
+  getCatelogue,
+  combineAndSortContacts,
 } from '../../src/utils/getAccessTabData';
 
 describe('getAccessTabData functions', () => {
@@ -290,7 +293,7 @@ describe('getAccessTabData functions', () => {
           },
         },
       };
-      const expected = 'For access contact Org :- test@example.com';
+      const expected = 'Contact organisation for Resource locator information';
       expect(getResourceLocators(searchItem)).toBe(expected);
     });
 
@@ -358,7 +361,6 @@ describe('getAccessTabData functions', () => {
         '<a class="govuk-link" href="example.com" target="_blank">example.com</a>',
       );
       expect(result.resource_type_and_hierarchy).toBe('level1');
-      expect(result.hierarchy_level).toBe('level1');
       expect(result.resource_locators).toBe('');
     });
 
@@ -378,7 +380,7 @@ describe('getAccessTabData functions', () => {
       };
       const result = getAccessTabData(searchItem);
       expect(result.resource_locators).toBe(
-        'For access contact Org :- test@example.com',
+        'Contact organisation for Resource locator information',
       );
     });
 
@@ -465,4 +467,375 @@ describe('getAccessTabData functions', () => {
   });
 
 
+});
+describe('contactFunctions', () => {
+  describe('combineAndSortContacts', () => {
+    const rolePrecedence = ['owner', 'pointofcontact', 'custodian', 'distributor', 'originator'];
+
+    it('should combine and sort contacts based on role precedence', () => {
+      const contactForResource = [
+        {
+          role: 'distributor',
+          organisationName: 'OrgA',
+          email: 'orgA@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        }
+      ];
+      const contact = [
+        {
+          role: 'pointofcontact',
+          organisationName: 'OrgC',
+          email: 'orgC@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+        {
+          role: 'custodian',
+          organisationName: 'OrgD',
+          email: 'orgD@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+      ];
+
+      const result = combineAndSortContacts(contactForResource, contact);
+
+      expect(result).toEqual([
+        {
+          role: 'pointofcontact',
+          organisationName: 'OrgC',
+          email: 'orgC@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+        {
+          role: 'custodian',
+          organisationName: 'OrgD',
+          email: 'orgD@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+        {
+          role: 'distributor',
+          organisationName: 'OrgA',
+          email: 'orgA@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+      ]);
+    });
+
+    it('should handle cases where one or both contact arrays are undefined or null', () => {
+      expect(combineAndSortContacts(undefined ?? [], undefined ?? [])).toEqual([]);
+      expect(combineAndSortContacts(null ?? [], null ?? [])).toEqual([]);
+      expect(combineAndSortContacts([{
+        role: 'owner',
+        organisationName: 'OrgA',
+        email: 'orgA@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
+      }], null ?? [])).toEqual([{
+        role: 'owner',
+        organisationName: 'OrgA',
+        email: 'orgA@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
+      }]);
+    });
+
+    it('should handle case where contacts have roles not in rolePrecedence', () => {
+      const contactForResource = [{
+        role: 'owner',
+        organisationName: 'OrgA',
+        email: 'orgA@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
+      }];
+      const contact = [{
+        role: 'custodian',
+        organisationName: 'OrgB',
+        email: 'orgB@example.com',
+        website: '',
+        logo: '',
+        individual: '',
+        position: '',
+        phone: '',
+        address: '',
+        city:'',
+        country:'',
+        administrativeArea:'',
+        postalCode:''
+      }];
+
+      const result = combineAndSortContacts(contactForResource, contact);
+
+      expect(result).toEqual([
+        {
+          role: 'owner',
+          organisationName: 'OrgA',
+          email: 'orgA@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+        {
+          role: 'custodian',
+          organisationName: 'OrgB',
+          email: 'orgB@example.com',
+          website: '',
+          logo: '',
+          individual: '',
+          position: '',
+          phone: '',
+          address: '',
+          city:'',
+          country:'',
+          administrativeArea:'',
+          postalCode:''
+        },
+      ]);
+    });
+  });
+
+
+  describe('getContactInformation', () => {
+    it('should return contact information formatted correctly when email is present', () => {
+      const searchItem = {
+        _source: {
+          contact: [{
+            role: 'owner',
+            organisationName: 'OrgA',
+            email: 'orgA@example.com',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
+          }],
+          contactForResource: [{
+            role: 'custodian',
+            organisationName: 'OrgB',
+            email: 'orgB@example.com',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
+          }],
+        },
+      };
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('OrgA :- orgA@example.com, <br />OrgB :- orgB@example.com');
+    });
+
+    it('should return contact information formatted correctly when email is not present', () => {
+      const searchItem = {
+        _source: {
+          contact: [{
+            role: 'owner',
+            organisationName: 'OrgA',
+            email: '',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
+          }],
+          contactForResource: [{
+            role: 'custodian',
+            organisationName: 'OrgB',
+            email: '',
+            website: '',
+            logo: '',
+            individual: '',
+            position: '',
+            phone: '',
+            address: '',
+            city:'',
+            country:'',
+            administrativeArea:'',
+            postalCode:''
+          }],
+        },
+      };
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('OrgA, <br />OrgB');
+    });
+
+    it('should return a default message when there are no contacts', () => {
+      const searchItem = {
+        _source: {
+          contact: [],
+          contactForResource: [],
+        },
+      };
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('Find contact information on the Governance tab');
+    });
+
+    it('should handle cases where searchItem._source is missing or undefined', () => {
+      const searchItem = {};
+
+      const result = getContactInformation(searchItem);
+
+      expect(result).toBe('Find contact information on the Governance tab');
+    });
+  });
+
+});
+
+describe('getCatelogue', () => {
+  test('should return the correct source system reference ID when it is present', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: {
+          masterReferenceID: {
+            sourceSystemReferenceID: '12345'
+          }
+        }
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('12345');
+  });
+
+  test('should return an empty string when sourceSystemReferenceID is undefined', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: {
+          masterReferenceID: {
+            sourceSystemReferenceID: undefined
+          }
+        }
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
+
+  test('should return an empty string when masterReferenceID is undefined', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: {
+          masterReferenceID: undefined
+        }
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
+
+  test('should return an empty string when OrgNceaIdentifiers is undefined', () => {
+    const searchItem = {
+      _source: {
+        OrgNceaIdentifiers: undefined
+      }
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
+
+  test('should return an empty string when _source is undefined', () => {
+    const searchItem = {
+      _source: undefined
+    };
+    expect(getCatelogue(searchItem)).toBe('');
+  });
 });

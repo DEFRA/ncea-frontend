@@ -3,9 +3,10 @@
 {% if filterOptions.start_year_range and filterOptions.start_year_range.length > 0 and filterOptions.to_year_range and filterOptions.to_year_range.length > 0 %}
   <form action="{{filterStudyPeriodPath}}" id="study_period_filter-{{filterInstance}}" method="post">
     <section class="defra-filter-section">
-      <h2 class='govuk-heading-m filter-study-period-heading govuk-!-margin-top-3 govuk-!-margin-bottom-2'>
-      Study period
+      <h2 class='govuk-heading-m filter-study-period-heading govuk-!-margin-top-3 govuk-!-margin-bottom-3'>
+      Study period including:
     </h2>
+     <p class="search-result__parameter-value">Results may include records from studies that overlap with your selected dates</p>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
           <div class="filter-study-period-group">
@@ -33,7 +34,9 @@
               classes: 'govuk-!-margin-bottom-3'
             }
           }) }}
+
           </div>
+
           {% if filterInstance === 'search_results' and hasStudyPeriodFilterApplied %}
             <a href="{{resetStudyPeriodLink}}" class="govuk-link defra-reset-study-period--link">
               Reset study period
@@ -86,3 +89,4 @@
       </section>
     </form>
   {% endif %}
+

@@ -23,7 +23,8 @@ export interface IAccessItem {
   host_catalogue_number?: string;
   host_catalogue_entry?: string;
   resource_type_and_hierarchy?: string;
-  hierarchy_level?: string;
+  contact_information?: string;
+  catalogue_number?: string;
   resource_locators?: string;
   host_service_catalogue_number?: string;
   ncea_group_reference?: string;
@@ -33,13 +34,47 @@ export interface IAccessItem {
   ncea_catalogue_entry?: string;
 }
 
+export interface Contact {
+  organisationName: string;
+  role: string;
+  email: string;
+  website: string;
+  logo: string;
+  individual: string;
+  postalCode: string;
+  administrativeArea: string;
+  country: string;
+  city: string;
+  position: string;
+  phone: string;
+  address: string;
+}
 export interface ILicense {
   limitation_on_public_access?: string;
-  license_constraints?: string;
+  limitation_on_public_access_otherconstraint?: string;
+  conditions_for_access_and_use_useConstraints?: string;
+  conditions_for_access_and_useOtherConstraints?: string;
+  other_constraint?: string;
   data_owner?: string;
   available_formats?: string | string[];
   frequency_of_update?: string;
   character_encoding?: string;
+}
+
+export interface IGovernance {
+  tab?: string;
+  role?: string;
+  organization_name?: string;
+  individual_name?: string;
+  position_name?: string;
+  telephone_number?: string;
+  delivery_point?: string;
+  postal_code?: string;
+  city?: string;
+  administrative_area?: string;
+  country?: string;
+  web_address?: string;
+  email?: string;
 }
 
 export interface IQualityItem {
@@ -83,8 +118,29 @@ export interface IGeographyItem {
   samplingResolution?: string;
 }
 
-export type IOtherSearchItem = IGeneralItem & IAccessItem & IQualityItem & ILicense & IGeographyItem;
-export type ISearchItem = IBaseItem & IOtherSearchItem;
+export interface INatural {
+  Natural_capital_title?: string;
+  Natural_capital_description?: string;
+  Natural_capital_displayData?: string;
+  Natural_capital_no_data?: string;
+  Natural_capital_glossary_link?: string;
+}
+
+export type IOtherSearchItem = IGeneralItem &
+  IAccessItem &
+  INatural &
+  IQualityItem &
+  ILicense &
+  IGeographyItem &
+  IGovernance;
+
+export interface ISearchItem extends IBaseItem, IOtherSearchItem {
+  [key: string]: IGovernance | string | number | undefined | string[] | IAccumulatedCoordinates;
+}
+
+export interface TabbedItem {
+  tab?: string;
+}
 
 export interface ISearchResults {
   total: number;

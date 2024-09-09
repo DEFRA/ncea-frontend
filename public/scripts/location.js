@@ -850,6 +850,21 @@ function keydownHandler(event) {
   }
 }
 
+function keyupHandler(event) {
+  const key = event.key;
+  //Will be required if Tab press
+  // if (key === 'Tab') {
+    const visibleMarkers = markerLayer
+      .getSource()
+      .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+    visibleMarkers.forEach((marker, index) => {
+      createTooltipOverlay(index);
+      const coord = marker.getGeometry().getCoordinates();
+      markerOverlays[index].setPosition(coord);
+    });
+  // }
+}
+
 function checkNUpdateMarkerTooltip() {
   const visibleMarkers = markerLayer
     .getSource()
@@ -857,16 +872,13 @@ function checkNUpdateMarkerTooltip() {
   markerOverlays.forEach((overlay) => map.removeOverlay(overlay));
   markerOverlays.length = 0;
   document.removeEventListener('keydown', keydownHandler);
+  document.removeEventListener('keyup', keyupHandler);
   resetFeatureStyle();
   closeInfoPopup();
 
   if (visibleMarkers.length <= maxMarkerAllowed) {
-    visibleMarkers.forEach((marker, index) => {
-      createTooltipOverlay(index);
-      const coord = marker.getGeometry().getCoordinates();
-      markerOverlays[index].setPosition(coord);
-    });
     document.addEventListener('keydown', keydownHandler);
+    document.addEventListener('keyup', keyupHandler);
   }
 }
 

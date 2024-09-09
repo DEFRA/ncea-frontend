@@ -8,7 +8,7 @@ const requestQuery: RequestQuery = {
   jry: 'qs',
   pg: '1',
   rpp: '20',
-  srt: 'best_match',
+  srt: 'most_relevant',
 };
 const getUrl = (page: number): string => {
   const queryParamsObject: Record<string, string> = {

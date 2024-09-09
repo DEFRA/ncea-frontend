@@ -2,18 +2,14 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m {%- if params.isResultPage %} quick_search-container__heading-m--large {% endif %}">
-      {% if params.isResultPage %}
-        Search
-      {% else %}
+    <h1 class="govuk-heading-m quick_search-container__heading-m govuk-!-margin-top-2">
         Quick search
-      {% endif %}
     </h1>
     {% if not params.isResultPage %}
-      <span class="govuk-caption-m quick_search-container__caption-m">You can search by keyword, theme, title or project code, for example: "hedgehog population Bristol", "Community Supported Fisheries", "AE0101".</span>
+      <span class="govuk-caption-m quick_search-container__caption-m">You can search by keyword, theme, title or project code, for example: “peat”, “community supported fisheries”, “AE0101”.</span>
     {% endif %}
     <div class="search-block" data-module="search">
-      <form action="{{params.searchPath}}" id="{{params.formId}}" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
+      <form action="{{params.searchPath}}" id="{{params.formId}}" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-6">
         {{ govukInput({
           id: 'search_term',
           name: 'search_term',
@@ -35,7 +31,7 @@
           },
           errorMessage: params.searchInputError,
           formGroup: {
-            classes: 'govuk-!-margin-bottom-4'
+            classes: 'search-result-input-spacing'
           }
         }) }}
         <input type="hidden" name="pageName" value="{% if not params.isResultPage %}home{% else %}results{% endif %}">

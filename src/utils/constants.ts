@@ -142,10 +142,11 @@ export const detailsTabOptions: TabOptions = {
     'Resource Identifier': 'host_catalogue_number',
     'Coupled resources': 'host_catalogue_entry',
     'Resource type': 'resource_type_and_hierarchy',
-    'Hierarchy level name': 'hierarchy_level',
     'Resource locators': 'resource_locators',
+    'Contact information': 'contact_information',
     'Catalouge entry': 'ncea_catalogue_entry',
-    'Parent ID': 'ncea_group_reference',
+    'NCEA catalogue number': 'catalogue_number',
+    'Parent identifier': 'ncea_group_reference',
     'Metadata standard': 'metadata_standard',
     'Project number': 'project_number',
     'Metadata language': 'metadata_language',
@@ -170,11 +171,35 @@ export const detailsTabOptions: TabOptions = {
     'Spatial resolution': 'samplingResolution',
   },
   license: {
-    'Limitations on public access': 'limitation_on_public_access',
-    'License constraints': 'license_constraints',
+    'Limitations on public access -<br /> Access constraints': 'limitation_on_public_access',
+    'Limitations on public access -<br /> Other constraints': 'limitation_on_public_access_otherconstraint',
+    'Conditions for access and use -<br /> Use constraints': 'conditions_for_access_and_use_useConstraints',
+    'Conditions for access and use -<br /> Other constraints': 'conditions_for_access_and_useOtherConstraints',
+    'Other Constraint': 'other_constraint',
     'Distribution formats': 'available_formats',
     'Frequency of update': 'frequency_of_update',
     'Character encoding': 'character_encoding',
+  },
+  natural: {
+    Natural_capital_title: 'Natural_capital_title',
+    Natural_capital_description: 'Natural_capital_description',
+    Natural_capital_displayData: 'Natural_capital_displayData',
+    Natural_capital_glossary_link: 'Natural_capital_glossary_link',
+    Natural_capital_no_data: 'Natural_capital_no_data',
+  },
+  governance: {
+    Role: 'role',
+    'Organization name': 'organization_name',
+    'Individual name': 'individual_name',
+    'Position name': 'position_name',
+    'Telephone number': 'telephone_number',
+    'Delivery point': 'delivery_point',
+    'Postal code': 'postal_code',
+    City: 'city',
+    'Administrative area': 'administrative_area',
+    Country: 'country',
+    'Web address': 'web_address',
+    Email: 'email',
   },
 };
 
@@ -185,7 +210,7 @@ export const pageTitles = {
   results: 'NCEA Search Results Summary',
   generalTab: 'NCEA Catalogue Detail - General',
   accessTab: 'NCEA Catalogue Detail - Access',
-  naturalCapitalTab: 'NCEA Catalogue Detail - Natural Capital',
+  naturalTab: 'NCEA Catalogue Detail - Natural Capital',
   qualityTab: 'NCEA Catalogue Detail - Quality',
   geographyTab: 'NCEA Catalogue Detail - Geography',
   governanceTab: 'NCEA Catalogue Detail - Governance',
@@ -206,4 +231,12 @@ export const levelMap = {
   1: 'OrgNceaClassifiers.code.keyword',
   2: 'OrgNceaClassifiers.classifiers.code.keyword',
   3: 'OrgNceaClassifiers.classifiers.classifiers.code.keyword',
+};
+
+export const naturalTabStaticData = {
+  title: 'Natural capital classification',
+  description:
+    'Natural capital records are classified by themes and categories which indicate whether the record relates to natural capital assets (such as habitats and species), the ecosystem services they deliver, the pressures that act on them and/or their value.',
+  noRecord: 'This record is not classifiable within the current natural capital vocabulary.',
+  link: 'Natural capital classification glossary',
 };

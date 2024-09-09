@@ -14,7 +14,6 @@ const searchResultsWithData: ISearchResults = {
       host_catalogue_number: 'https://seabed.admiralty.co.uk af7cd14f-6c20-445f-abd0-7c41385ba999',
       host_catalogue_entry: 'https://seabed.admiralty.co.uk',
       resource_type_and_hierarchy: 'dataset',
-      hierarchy_level: 'Dataset',
       resource_locators : 'Download from Seabed Mapping Service (https://seabed.admiralty.co.uk)'
     },
     {
@@ -28,7 +27,6 @@ const searchResultsWithData: ISearchResults = {
       host_catalogue_number: 'https://seabed.admiralty.co.uk ac7db62c-1908-48a3-a4be-8ca8526b4948',
       host_catalogue_entry: '',
       resource_type_and_hierarchy: 'dataset',
-      hierarchy_level: 'Dataset',
       resource_locators : 'Download from Seabed Mapping Service (https://seabed.admiralty.co.uk)'
     },
   ],

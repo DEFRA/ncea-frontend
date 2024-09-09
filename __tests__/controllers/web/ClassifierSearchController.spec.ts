@@ -48,18 +48,21 @@ describe('Classifier Search Controller', () => {
         [queryParamKeys.parent]: 'lv2-001,lv2-002',
         [queryParamKeys.journey]: 'gs',
         [queryParamKeys.count]: '0',
+        [queryParamKeys.page]:'1',
+        [queryParamKeys.rowsPerPage]:'20',
+        [queryParamKeys.sort]:'most_relevant'
       };
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-      const skipPathUrl = `${skipPath}?${queryString}`;
+      const skipPathUrl = `${results}?${queryString}`;
 
       expect(response.redirect).toHaveBeenCalledWith(`${skipPathUrl}`);
     });
 
     it('should call the classifier view with context when count is present', async () => {
       request = {
-        query: { level: '3', 'parent[]': 'lv2-001,lv2-002' },
+        query: { level: '3', 'parent[]': 'lv2-001' },
       } as any;
 
       (getClassifierThemes as jest.Mock).mockResolvedValue(level3ClassifierItems);
@@ -69,25 +72,33 @@ describe('Classifier Search Controller', () => {
 
       const payloadQuery = {
         level: '2',
-        'parent[]': 'lv2-001,lv2-002',
+        'parent[]': 'lv2-001',
+        [queryParamKeys.journey]:'gs',
+        [queryParamKeys.count]: '10',
+        [queryParamKeys.page]:'1',
+        [queryParamKeys.rowsPerPage]:'20',
+        [queryParamKeys.sort]:'most_relevant'
       };
 
       const queryParamsObject = {
         [queryParamKeys.level]: '2',
-        [queryParamKeys.parent]: 'lv2-001,lv2-002',
+        [queryParamKeys.parent]: 'lv2-001',
         [queryParamKeys.journey]:'gs',
         [queryParamKeys.count]: '10',
+        [queryParamKeys.page]:'1',
+        [queryParamKeys.rowsPerPage]:'20',
+        [queryParamKeys.sort]:'most_relevant'
       };
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
       const resultsPath = `${results}?${readQueryParams(payloadQuery, '', true)}`;
-      const skipPathUrl = `${skipPath}?${queryString}`;
+      const skipPathUrl = `${results}?${queryString}`;
 
       expect(response.view).toHaveBeenCalledWith('screens/guided_search/classifier_selection.njk', {
         guidedClassifierSearchPath,
         nextLevel: "4",
         pageTitle: "NCEA questionnaire  Search- subcategories",
-        skipPath: skipPathUrl,
+        skipPath: resultsPath,
         formId: classifierSearch,
         classifierItems: level3ClassifierItems,
         count: '10',
@@ -118,6 +129,9 @@ describe('Classifier Search Controller', () => {
         [queryParamKeys.parent]: 'lv2-001,lv2-002',
         [queryParamKeys.journey]: 'gs',
         [queryParamKeys.count]: '0',
+        [queryParamKeys.page]:'1',
+        [queryParamKeys.rowsPerPage]:'20',
+        [queryParamKeys.sort]:'most_relevant'
       };
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
@@ -128,7 +142,7 @@ describe('Classifier Search Controller', () => {
 
     it('should redirect to date search page when there are no items for the parent category', async () => {
       request = {
-        query: { level: '2', 'parent[]': 'lv1-001,lv1-002' },
+        query: { level: '2', 'parent[]': 'lv1-001' },
       } as any;
 
       (getClassifierThemes as jest.Mock).mockResolvedValue([]);
@@ -138,18 +152,21 @@ describe('Classifier Search Controller', () => {
 
       const payloadQuery = {
         level: '2',
-        'parent[]': 'lv1-001,lv1-002',
+        'parent[]': 'lv1-001',
       };
 
       const queryParamsObject = {
         [queryParamKeys.level]: '1',
-        [queryParamKeys.parent]: 'lv1-001,lv1-002',
+        [queryParamKeys.parent]: 'lv1-001',
         [queryParamKeys.journey]: 'gs',
         [queryParamKeys.count]: '10',
+        [queryParamKeys.page]:'1',
+        [queryParamKeys.rowsPerPage]:'20',
+        [queryParamKeys.sort]:'most_relevant'
       };
 
       const queryString = upsertQueryParams(request.query, queryParamsObject, false);
-      const skipPathUrl = `${skipPath}?${queryString}`;
+      const skipPathUrl = `${results}?${queryString}`;
 
       expect(response.redirect).toHaveBeenCalledWith(skipPathUrl);
     });

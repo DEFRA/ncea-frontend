@@ -3,7 +3,9 @@ import { getAccessTabData } from './getAccessTabData';
 import { getAccumulatedCoordinatesNCenter } from './getBoundingBoxData';
 import { getGeneralTabData } from './getGeneralTabData';
 import { getGeographyTabData } from './getGeographyTabData';
+import { getGovernanceTabData } from './getGovernanceTab';
 import { getLicenseTabData } from './getLicenseTabData';
+import { getNaturalTab } from './getNaturalCapitalTab';
 import { getOrganisationDetails } from './getOrganisationDetails';
 import { getQualityTabData } from './getQualityTabData';
 import { toggleContent } from './toggleContent';
@@ -110,7 +112,7 @@ const formatSearchResponse = async (
     }
 
     if (isDetails) {
-      const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem, publishedBy);
+      const otherDetails: IOtherSearchItem = await getOtherDetails(searchItem);
       item = { ...item, ...otherDetails };
     }
 
@@ -121,20 +123,20 @@ const formatSearchResponse = async (
   return finalResponse;
 };
 
-const getOtherDetails = async (
-  searchItem: Record<string, any>,
-  publishedBy: Record<string, any>,
-): Promise<IOtherSearchItem> => {
+const getOtherDetails = async (searchItem: Record<string, any>): Promise<IOtherSearchItem> => {
   const projectId: string =
     searchItem?._source?.OrgNceaIdentifiers?.projectId ?? searchItem?._source?.OrgNceaIdentifiers?.projectNumber;
+
   return {
     ...getGeneralTabData(searchItem),
     ...getAccessTabData(searchItem),
     ...getQualityTabData(searchItem),
-    ncea_group_reference: searchItem?._source?.metadataIdentifier ?? '',
+    ncea_group_reference: searchItem?._source?.parentUuid ?? '',
     metadata_standard: searchItem?._source?.standardNameObject?.default ?? '',
     project_number: projectId ?? '',
-    ...getLicenseTabData(searchItem, publishedBy),
+    ...getLicenseTabData(searchItem),
+    ...getNaturalTab(searchItem),
+    ...getGovernanceTabData(searchItem),
     ...getGeographyTabData(searchItem),
   };
 };

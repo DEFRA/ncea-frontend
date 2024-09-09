@@ -250,22 +250,22 @@ describe('Home Screen', () => {
     });
 
     describe('Educational Copy block elements', () => {
-      it('should render 9 child elements', async () => {
+      it('should render 11 child elements', async () => {
         const videoContainer = document?.querySelector(
           '.educational-copy-container',
         );
-        expect(videoContainer?.childElementCount).toEqual(9);
+        expect(videoContainer?.childElementCount).toEqual(11);
       });
     });
   });
 
-  describe('Questionnaire search container block heading', () => {
-    it('should render the questionnaire search container heading', async () => {
+  describe('Natural capital container block heading', () => {
+    it('should render the Natural capital container heading', async () => {
       expect(
         document
           ?.querySelectorAll('.govuk-heading-m')?.[2]
           ?.textContent?.trim(),
-      ).toBe('Questionnaire search');
+      ).toBe('Natural capital');
     });
 
     it('should not render the custom large class for heading', async () => {

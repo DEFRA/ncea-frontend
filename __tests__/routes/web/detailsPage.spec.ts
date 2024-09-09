@@ -194,9 +194,9 @@ describe('Details route template', () => {
     });
 
     describe('Tab block details', () => {
-      it('should render the 5 tabs', async () => {
+      it('should render the 7 tabs', async () => {
         const tabList = document?.querySelector('.govuk-tabs__list');
-        expect(tabList?.childElementCount).toEqual(5);
+        expect(tabList?.childElementCount).toEqual(7);
       });
     });
 
@@ -407,21 +407,22 @@ describe('Details route template', () => {
       });
 
       it('should render the Go to resource text', async () => {
-        const openDataTagElement = document.querySelector(
-          '.open-data-block--tag',
-        );
+        const openDataTagElement = document.querySelector('.open-data-block--tag');
+
         expect(openDataTagElement).toBeDefined();
         expect(openDataTagElement?.tagName?.toLowerCase()).toBe('span');
-        expect(openDataTagElement?.textContent?.trim()).toBe(
-          'Access to this data resource is by application to the owner - please refer to access tab for further details',
-        );
+
+        const normalizedText = openDataTagElement?.textContent?.replace(/\s+/g, ' ').trim();
+        const expectedText = 'Access to this data resource is by application to the owner - please refer to access tab for further details';
+
+        expect(normalizedText).toBe(expectedText);
       });
     });
 
     describe('Tab block details', () => {
-      it('should render the 5 tabs', async () => {
+      it('should render the 7 tabs', async () => {
         const tabList = document?.querySelector('.govuk-tabs__list');
-        expect(tabList?.childElementCount).toEqual(5);
+        expect(tabList?.childElementCount).toEqual(7);
       });
     });
 

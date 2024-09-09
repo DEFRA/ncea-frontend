@@ -1,0 +1,22 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% set buttonAttributes = {
+  classes: "govuk-button--secondary govuk-!-margin-bottom-0",
+  text: 'Skip'
+} %}
+{% if params.count > 10000 %}
+  {% set buttonAttributes = buttonAttributes | merge({
+    href: '#',
+    attributes: {
+      'data-do-storage-skip': '',
+      'onclick': "openSkipQuestionnaireModal('" + params.skipPath + "')"
+    }
+  }) %}
+{% else %}
+  {% set buttonAttributes = buttonAttributes | merge({
+   href: params.skipPath,
+    attributes: {
+      'data-do-storage-skip': ''
+    }
+  }) %}
+{% endif %}
+{{ govukButton(buttonAttributes) }}
