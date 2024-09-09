@@ -175,7 +175,7 @@ const generateQueryBuilderPayload = (requestQuery: RequestQuery): ISearchPayload
   return searchPayload;
 };
 
- const appendPublication = (resourceTypes: string): string => {
+const appendPublication = (resourceTypes: string): string => {
   if (resourceTypes.includes('nonGeographicDataset') && !resourceTypes.includes('publication')) {
     resourceTypes += ',publication';
   } else if (resourceTypes.includes('publication') && !resourceTypes.includes('nonGeographicDataset')) {
