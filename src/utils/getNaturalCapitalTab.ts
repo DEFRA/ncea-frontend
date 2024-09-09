@@ -59,9 +59,7 @@ const generateTableHeader = (hasCategory: boolean, hasSubcategory: boolean): str
 };
 
 const generateTableRows = (data: Record<string, any>[], hasCategory: boolean, hasSubcategory: boolean): string => {
-  return data
-    .map(item => generateTableRow(item, hasCategory, hasSubcategory))
-    .join('');
+  return data.map((item) => generateTableRow(item, hasCategory, hasSubcategory)).join('');
 };
 
 const generateTableRow = (item: Record<string, any>, hasCategory: boolean, hasSubcategory: boolean): string => {
