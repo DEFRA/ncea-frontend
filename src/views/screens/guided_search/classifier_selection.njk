@@ -102,9 +102,15 @@
             {%- include 'partials/skip_questionnaire_model/modal.njk' -%}
             {{ skipQuestionnaire({ count: count, skipPath: skipPath }) }}
           {% endif %}
-          {{ govukButton({ text: "Next", attributes: {
+          {% if nextLevel > 3 %}
+            {{ govukButton({ text: "See results", attributes: {
             'data-next-question': ''
           } }) }}
+          {% else %}
+            {{ govukButton({ text: "Next", attributes: {
+            'data-next-question': ''
+          } }) }}
+          {% endif %}
         </div>
       </div>
     </div>
@@ -113,37 +119,37 @@
 {{ super() }}
 <script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
 <script>
-function handleError(group, action) {
-  const formGroup = group.closest('.govuk-form-group');
-  let errorElement = formGroup.querySelector('.govuk-error-message');
-
-  if (action === 'apply') {
-    if (!errorElement) {
-      const errorHTML = '';
-
-      formGroup.insertAdjacentHTML('afterbegin', errorHTML);
-      formGroup.classList.add('govuk-form-group--error');
-    }
-  } else if (action === 'remove') {
-    if ([...group.querySelectorAll('input[type="checkbox"]')].some(checkbox => checkbox.checked)) {
-      if (errorElement) {
-        errorElement.remove();
+  function handleError(group, action) {
+    const formGroup = group.closest('.govuk-form-group');
+    let errorElement = formGroup.querySelector('.govuk-error-message');
+    if (action === 'apply') {
+      if (! errorElement) {
+        const errorHTML = '';
+        formGroup.insertAdjacentHTML('afterbegin', errorHTML);
+        formGroup.classList.add('govuk-form-group--error');
       }
-      formGroup.classList.remove('govuk-form-group--error');
+    } else if (action === 'remove') {
+      if ([... group.querySelectorAll('input[type="checkbox"]')].some(checkbox => checkbox.checked)) {
+        if (errorElement) {
+          errorElement.remove();
+        }
+        formGroup.classList.remove('govuk-form-group--error');
+      }
     }
   }
-}
-document.getElementById('classifier-search').addEventListener('submit', function (event) {
-  const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="parent[]"]:checked'));
-  const checkboxGroups = document.querySelectorAll('.govuk-checkboxes');
-  const isAnyCheckboxNotSelected = selectedCheckboxes.length === 0;
-
-  if (isAnyCheckboxNotSelected) {
-    event.preventDefault();
-    document.getElementById("errorBlock").style.display = '';
-    checkboxGroups.forEach(group => handleError(group, 'apply'));
-  } else {
-    checkboxGroups.forEach(group => handleError(group, 'remove'));
-  }
-});
+  document.getElementById('classifier-search').addEventListener('submit', function (event) {
+    const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="parent[]"]:checked'));
+    const checkboxGroups = document.querySelectorAll('.govuk-checkboxes');
+    const isAnyCheckboxNotSelected = selectedCheckboxes.length === 0;
+    if (isAnyCheckboxNotSelected) {
+      event.preventDefault();
+      document
+        .getElementById("errorBlock")
+        .style
+        .display = '';
+      checkboxGroups.forEach(group => handleError(group, 'apply'));
+    } else {
+      checkboxGroups.forEach(group => handleError(group, 'remove'));
+    }
+  });
 </script>{% endblock %}

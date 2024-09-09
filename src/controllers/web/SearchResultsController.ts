@@ -208,9 +208,22 @@ const SearchResultsController = {
     let resourceTypeValues = '';
     if (payload?.['resource_type'] && Array.isArray(payload?.['resource_type'])) {
       resourceTypeValues = payload['resource_type'].join(',');
+      if (payload['resource_type'].includes('nonGeographicDataset') && !resourceTypeValues.includes('publication')) {
+        resourceTypeValues += ',publication';
+      }
+      if (payload['resource_type'].includes('publication') && !resourceTypeValues.includes('nonGeographicDataset')) {
+        resourceTypeValues += ',nonGeographicDataset';
+      }
     } else if (payload?.['resource_type'] && typeof payload?.['resource_type'] === 'string') {
       resourceTypeValues = payload?.['resource_type'];
+      if (resourceTypeValues.includes('nonGeographicDataset') && !resourceTypeValues.includes('publication')) {
+        resourceTypeValues += ',publication';
+      }
+      if (resourceTypeValues.includes('publication') && !resourceTypeValues.includes('nonGeographicDataset')) {
+        resourceTypeValues += ',nonGeographicDataset';
+      }
     }
+
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.resourceType]: resourceTypeValues,
       [queryParamKeys.page]: '1',

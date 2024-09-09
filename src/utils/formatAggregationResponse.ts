@@ -42,6 +42,19 @@ const formatAggregationResponse = async (
       const apiAggValues = apiResponse?.aggregations?.[filterOption.key];
       const { isTerm, isDate } = filterOption;
       if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues?.buckets.length > 0) {
+        let nonGeoIndex = -1;
+        let publicationIndex = -1;
+        apiAggValues.buckets.forEach((bucket, index) => {
+          if (bucket.key === "nonGeographicDataset") nonGeoIndex = index;
+          if (bucket.key === "publication") publicationIndex = index;
+        });
+
+        if (nonGeoIndex !== -1 && publicationIndex !== -1) {
+          apiAggValues.buckets[nonGeoIndex].doc_count += apiAggValues.buckets[publicationIndex].doc_count;
+          apiAggValues.buckets.splice(publicationIndex, 1);
+        } else if (nonGeoIndex === -1 && publicationIndex !== -1) {
+          apiAggValues.buckets[publicationIndex].key = "nonGeographicDataset";
+        }
         finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
           const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
           let text: string = capitalizeWords(wordsWithSpace);

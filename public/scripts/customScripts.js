@@ -479,9 +479,48 @@ const classifierBackLinkHandler = () => {
 
 const searchResultBackLinkHandler = () => {
   const backLinkElements = document.querySelector('.back-link-search-result');
+  const sessionData = getStorageData();
+  const classifierData = sessionData.fields['classifier-search'] || {};
   if (backLinkElements) {
     backLinkElements.addEventListener('click', () => {
-        window.history.go(-1);
+if(Object.keys(classifierData).length >0){
+
+      const currentLevel = classifierData.currentLevel;
+      const levelKeys = Object.keys(classifierData).filter(key => key.startsWith('level'));
+
+      const currentLevelNumber = currentLevel && parseInt(currentLevel.replace('level', ''));
+      let level = currentLevelNumber || 1;
+      let associatedLevel = [];
+
+      if (currentLevelNumber > 1) {
+          const previousLevel = `level${currentLevelNumber - 1}`;
+          if (classifierData[previousLevel]) {
+              associatedLevel = classifierData[previousLevel];
+          }
+      } else {
+          associatedLevel = [];
+      }
+      const parents = associatedLevel;
+      const params = new URLSearchParams({ level });
+      parents.forEach(parent => params.append('parent[]', parent));
+      const url = `/classifier-search?${params.toString()}`;
+      window.location.href = url;
+    }else{
+      window.location = '/'
+    }
+    });
+  }
+};
+
+const clickToSeeLinkHandler = () => {
+  const clickToSeeLinkElements = document.querySelector('.count-block-link');
+  if (clickToSeeLinkElements) {
+    clickToSeeLinkElements.addEventListener('click', () => {
+      const sessionData = getStorageData();
+      const urlParams = new URLSearchParams(window.location.search);
+      const currentLevel = parseInt(urlParams.get('level'), 10);
+      sessionData.fields['classifier-search']['currentLevel'] = 'level'+currentLevel;
+      storeStorageData(sessionData);
     });
   }
 };
@@ -527,6 +566,7 @@ if (typeof Storage !== 'undefined') {
 
     resetStorage();
     skipStorage();
+    clickToSeeLinkHandler();
     nextQuestion();
     previousQuestion();
     attachTodayDateEventListener();
