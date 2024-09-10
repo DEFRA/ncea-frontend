@@ -199,7 +199,7 @@ const _generateDateRangeQuery = (
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
   const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
-  const newParentArray = [...new Set(parentArray)]
+  const newParentArray = [...new Set(parentArray)];
   const filterBlock: estypes.QueryDslQueryContainer[] =
     (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
@@ -249,7 +249,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
 
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
-  const newParentArray = [...new Set(parentArray)]
+  const newParentArray = [...new Set(parentArray)];
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
