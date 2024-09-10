@@ -1,3 +1,4 @@
 variables:
 - group: azureVariables-test
 - group: searchWebAppVariables-test
+- group: classifierMicroserviceVariables-test

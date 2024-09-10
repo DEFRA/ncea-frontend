@@ -18,10 +18,10 @@ const clientOptions: ClientOptions = {
       username: elasticSearchUsername as string,
       password: elasticSearchPassword as string,
     },
-    // tls: {
-    //   ca: fs.readFileSync(certPath),
-    //   rejectUnauthorized: true,
-    // },
+    tls: {
+      ca: fs.readFileSync(certPath),
+      rejectUnauthorized: true,
+    },
   }),
 };
 const client = new Client(clientOptions);

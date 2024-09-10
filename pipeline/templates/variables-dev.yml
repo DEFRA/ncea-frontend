@@ -1,3 +1,4 @@
 variables:
 - group: azureVariables-dev
 - group: searchWebAppVariables-dev
+- group: classifierMicroserviceVariables-dev
