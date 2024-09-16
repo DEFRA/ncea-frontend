@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { validateDate } from '../utils/formatDate';
 
 const thisYear = new Date().getFullYear();
 
@@ -11,6 +12,7 @@ export const dateSchema = Joi.object({
     'number.empty': `The date must include a year`,
     'any.required': `The date must include a year`,
     'number.max': `The date must be in the past`,
+    'any.valid': 'The date must be a valid date',
     'any.custom': `The dates must be in chronological order`,
   }),
   'to-date-day': Joi.number().allow('').min(1).max(31).optional().label('Day'),
@@ -26,6 +28,7 @@ export const dateSchema = Joi.object({
       'number.max': `The date must be in the past`,
       'number.min': `The year must be in chronological order`,
       'any.custom': `The dates must be in chronological order`,
+      'any.valid': 'The date must be a valid date',
       'any.ref': `The from year is missing`,
     })
     .custom((value, helpers) => {
@@ -49,7 +52,22 @@ export const dateSchema = Joi.object({
             ],
           });
         }
+        if (
+          !validateDate(
+            Number(fields['from-date-day']),
+            Number(fields['from-date-month']),
+            Number(fields['from-date-year']),
+          )
+        ) {
+          return helpers.error('any.valid', { errors: ['from-date-month'] });
+        }
+        if (
+          !validateDate(Number(fields['to-date-day']), Number(fields['to-date-month']), Number(fields['to-date-year']))
+        ) {
+          return helpers.error('any.valid', { errors: ['to-date-month'] });
+        }
       }
+
       return value;
     }, 'date-questionnaire-validation'),
 }).options({ abortEarly: false });

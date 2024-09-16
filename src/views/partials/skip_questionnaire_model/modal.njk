@@ -1,29 +1,28 @@
 {% extends 'partials/modal/template.njk' %}
-
 {% from 'govuk/components/button/macro.njk' import govukButton %}
-
-{% set extraClass = ' resource-modal'%}
-
+{% set extraClass = ' skip-questionnaire-modal' %}
 {% block modalContent %}
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave find natural capital data</h1>
-    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue managed by:<br/><span id='resource_party'></span></p>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to view 10,000
+      <br/>results</h1>
+    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>Select more categories to<br/> narrow down your results
+    </p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       {{ govukButton({
-        text: 'Cancel',
+        text: 'Select more',
         classes: 'govuk-button--secondary govuk-!-margin-bottom-0',
+        href: '#',
         attributes: {
-          onclick: 'closeDataModal()'
+          onclick: 'closeSkipQuestionnaireModal()'
         }
     }) }}
       {{ govukButton({
-        text: 'Open site',
+        text: 'See results',
         classes: 'govuk-!-margin-bottom-0',
-        id: 'resource-locator-link',
+        id: "skip",
         href: '#',
         attributes: {
-          onclick: 'closeDataModal()',
-          target: '_blank'
+          onclick: 'closeSkipQuestionnaireModal()'
         }
     }) }}
     </div>

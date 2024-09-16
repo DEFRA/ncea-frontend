@@ -29,7 +29,7 @@ exports[`Results block template Guided search journey Search results with empty 
   <meta http-equiv="Expires" content="0">
 
   <link rel="stylesheet" href="/assets/css/ol.css">
-
+  
     
   </head>
   <body class="govuk-template__body app-body-class">
@@ -137,7 +137,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
     
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -161,13 +161,13 @@ exports[`Results block template Guided search journey Search results with empty 
   role="img"
   class="govuk-header__logotype"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 152 30"
+  viewBox="0 0 148 30"
   height="30"
-  width="152"
+  width="148"
   aria-label="GOV.UK"
 >
   <title>GOV.UK</title>
-  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+  <path d="M22.6 10.4c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m-5.9 6.7c-.9.4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m10.8-3.7c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s0 2-1 2.4m3.3 4.8c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4M17 4.7l2.3 1.2V2.5l-2.3.7-.2-.2.9-3h-3.4l.9 3-.2.2c-.1.1-2.3-.7-2.3-.7v3.4L15 4.7c.1.1.1.2.2.2l-1.3 4c-.1.2-.1.4-.1.6 0 1.1.8 2 1.9 2.2h.7c1-.2 1.9-1.1 1.9-2.1 0-.2 0-.4-.1-.6l-1.3-4c-.1-.2 0-.2.1-.3m-7.6 5.7c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m-5 3c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s.1 2 1 2.4m-3.2 4.8c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m14.8 11c4.4 0 8.6.3 12.3.8 1.1-4.5 2.4-7 3.7-8.8l-2.5-.9c.2 1.3.3 1.9 0 2.7-.4-.4-.8-1.1-1.1-2.3l-1.2 4c.7-.5 1.3-.8 2-.9-1.1 2.5-2.6 3.1-3.5 3-1.1-.2-1.7-1.2-1.5-2.1.3-1.2 1.5-1.5 2.1-.1 1.1-2.3-.8-3-2-2.3 1.9-1.9 2.1-3.5.6-5.6-2.1 1.6-2.1 3.2-1.2 5.5-1.2-1.4-3.2-.6-2.5 1.6.9-1.4 2.1-.5 1.9.8-.2 1.1-1.7 2.1-3.5 1.9-2.7-.2-2.9-2.1-2.9-3.6.7-.1 1.9.5 2.9 1.9l.4-4.3c-1.1 1.1-2.1 1.4-3.2 1.4.4-1.2 2.1-3 2.1-3h-5.4s1.7 1.9 2.1 3c-1.1 0-2.1-.2-3.2-1.4l.4 4.3c1-1.4 2.2-2 2.9-1.9-.1 1.5-.2 3.4-2.9 3.6-1.9.2-3.4-.8-3.5-1.9-.2-1.3 1-2.2 1.9-.8.7-2.3-1.2-3-2.5-1.6.9-2.2.9-3.9-1.2-5.5-1.5 2-1.3 3.7.6 5.6-1.2-.7-3.1 0-2 2.3.6-1.4 1.8-1.1 2.1.1.2.9-.3 1.9-1.5 2.1-.9.2-2.4-.5-3.5-3 .6 0 1.2.3 2 .9l-1.2-4c-.3 1.1-.7 1.9-1.1 2.3-.3-.8-.2-1.4 0-2.7l-2.9.9C1.3 23 2.6 25.5 3.7 30c3.7-.5 7.9-.8 12.3-.8m28.3-11.6c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H55v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zM71.5 6.8c1.5 0 2.9.3 4.2.8 1.2.6 2.3 1.3 3.1 2.3.9 1 1.5 2.1 2 3.4s.7 2.7.7 4.2-.2 2.9-.7 4.2c-.4 1.3-1.1 2.4-2 3.4-.9 1-1.9 1.7-3.1 2.3-1.2.6-2.6.8-4.2.8s-2.9-.3-4.2-.8c-1.2-.6-2.3-1.3-3.1-2.3-.9-1-1.5-2.1-2-3.4-.4-1.3-.7-2.7-.7-4.2s.2-2.9.7-4.2c.4-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.5 2.6-.8 4.2-.8zm0 17.6c.9 0 1.7-.2 2.4-.5s1.3-.8 1.7-1.4c.5-.6.8-1.3 1.1-2.2.2-.8.4-1.7.4-2.7v-.1c0-1-.1-1.9-.4-2.7-.2-.8-.6-1.6-1.1-2.2-.5-.6-1.1-1.1-1.7-1.4-.7-.3-1.5-.5-2.4-.5s-1.7.2-2.4.5-1.3.8-1.7 1.4c-.5.6-.8 1.3-1.1 2.2-.2.8-.4 1.7-.4 2.7v.1c0 1 .1 1.9.4 2.7.2.8.6 1.6 1.1 2.2.5.6 1.1 1.1 1.7 1.4.6.3 1.4.5 2.4.5zM88.9 28 83 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L148 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
 </svg>
 
         
@@ -178,7 +178,7 @@ exports[`Results block template Guided search journey Search results with empty 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
     
     
@@ -195,77 +195,42 @@ exports[`Results block template Guided search journey Search results with empty 
   
       <div class="govuk-width-container">
         
-  
+    
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link help-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
 
 
-  <div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
+    
+
+<a href="#" class="govuk-back-link back-link-search-result">Back</a>
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
-  
-
-  </ol>
-</div>
-
-
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-
+    <h1 class="govuk-heading-l ">Search results</h1>
+    <div class="govuk-grid-row govuk-!-text-align-right">
+      
   
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
-      
-        Search
-      
-    </h1>
+  
     
-    <div class="search-block" data-module="search">
-      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-        
+  
 
-<div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" for="search_term">
-    Search
-  </label>
+<a href="/" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+  New search
+</a>
 
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="results">
-      </form>
     </div>
-  </div>
-</div>
-
-  
-    <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
+    
+      <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -412,87 +377,56 @@ exports[`Results block template Guided search journey Search results with empty 
 
   </div>
 </div></div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
-          Filters
-        </h2>
-        <div class="govuk-section-break--visible"></div>
-        
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+            Filters
+          </h2>
+          <div class="govuk-section-break--visible"></div>
+          
 
 
 
   
-      </div>
-      <div class="govuk-grid-column-two-thirds">
-        
 
 
-
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          
 
 
 
 
 
   <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
-    0 results found 
+    0 results found
+    
   </h2>
   <div class="govuk-section-break--visible"></div>
-
+  
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">
+      Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   
 
 
 
-
   <div class='search-result__item'>
     <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-    <p class='search-result__content search-result__content--empty'>
-      
-        Choose different answers to see results.
-      
-
-      
-        <div class="govuk-button-group">
-          
-  
-
-  
-    
-  
-
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-previous-page="">
-  Previous question
-</button>
-
-          
-  
-
-  
-    
-  
-
-<a href="/classifier-search?level=1" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
-  Restart questionnaire search
-</a>
-
-        </div>
-      
+    <p class='search-result__content search-result__content--empty govuk-!-margin-bottom-8'>
+      There are no results that match your search. Try a new search using different keywords or filters.
     </p>
   </div>
 
 
 
-
+        </div>
       </div>
-    </div>
+    
   
-
-
         </main>
       </div>
     
@@ -582,7 +516,7 @@ exports[`Results block template Guided search journey Search results with empty 
 
 
     
-  
+    
   
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
@@ -595,15 +529,15 @@ exports[`Results block template Guided search journey Search results with empty 
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
 
-  <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script src="/assets/scripts/ol.js"></script>
-  <script>
-    var isViewMapResults = true;
-  </script>
-  <script type="module" src="/assets/scripts/location.js"></script>
-  <script type="module" src="/assets/scripts/filters.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
-
+    <script type="module" src="/assets/scripts/dataModal.js"></script>
+    <script src="/assets/scripts/ol.js"></script>
+    <script>
+      var isViewMapResults = true;
+    </script>
+    <script type="module" src="/assets/scripts/location.js"></script>
+    <script type="module" src="/assets/scripts/filters.js"></script>
+    <script type="module" src="/assets/scripts/details.js"></script>
+  
   </body>
 </html>
 "
@@ -615,7 +549,7 @@ exports[`Results block template Guided search journey Search results with error 
   <head>
     <meta charset="utf-8">
     <title>
-  Find Natural Capital data - GOV.UK
+  Find natural capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -638,7 +572,7 @@ exports[`Results block template Guided search journey Search results with error 
   <meta http-equiv="Expires" content="0">
 
   <link rel="stylesheet" href="/assets/css/ol.css">
-
+  
     
   </head>
   <body class="govuk-template__body app-body-class">
@@ -746,7 +680,7 @@ exports[`Results block template Guided search journey Search results with error 
 
     
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -770,13 +704,13 @@ exports[`Results block template Guided search journey Search results with error 
   role="img"
   class="govuk-header__logotype"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 152 30"
+  viewBox="0 0 148 30"
   height="30"
-  width="152"
+  width="148"
   aria-label="GOV.UK"
 >
   <title>GOV.UK</title>
-  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+  <path d="M22.6 10.4c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m-5.9 6.7c-.9.4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m10.8-3.7c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s0 2-1 2.4m3.3 4.8c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4M17 4.7l2.3 1.2V2.5l-2.3.7-.2-.2.9-3h-3.4l.9 3-.2.2c-.1.1-2.3-.7-2.3-.7v3.4L15 4.7c.1.1.1.2.2.2l-1.3 4c-.1.2-.1.4-.1.6 0 1.1.8 2 1.9 2.2h.7c1-.2 1.9-1.1 1.9-2.1 0-.2 0-.4-.1-.6l-1.3-4c-.1-.2 0-.2.1-.3m-7.6 5.7c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m-5 3c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s.1 2 1 2.4m-3.2 4.8c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m14.8 11c4.4 0 8.6.3 12.3.8 1.1-4.5 2.4-7 3.7-8.8l-2.5-.9c.2 1.3.3 1.9 0 2.7-.4-.4-.8-1.1-1.1-2.3l-1.2 4c.7-.5 1.3-.8 2-.9-1.1 2.5-2.6 3.1-3.5 3-1.1-.2-1.7-1.2-1.5-2.1.3-1.2 1.5-1.5 2.1-.1 1.1-2.3-.8-3-2-2.3 1.9-1.9 2.1-3.5.6-5.6-2.1 1.6-2.1 3.2-1.2 5.5-1.2-1.4-3.2-.6-2.5 1.6.9-1.4 2.1-.5 1.9.8-.2 1.1-1.7 2.1-3.5 1.9-2.7-.2-2.9-2.1-2.9-3.6.7-.1 1.9.5 2.9 1.9l.4-4.3c-1.1 1.1-2.1 1.4-3.2 1.4.4-1.2 2.1-3 2.1-3h-5.4s1.7 1.9 2.1 3c-1.1 0-2.1-.2-3.2-1.4l.4 4.3c1-1.4 2.2-2 2.9-1.9-.1 1.5-.2 3.4-2.9 3.6-1.9.2-3.4-.8-3.5-1.9-.2-1.3 1-2.2 1.9-.8.7-2.3-1.2-3-2.5-1.6.9-2.2.9-3.9-1.2-5.5-1.5 2-1.3 3.7.6 5.6-1.2-.7-3.1 0-2 2.3.6-1.4 1.8-1.1 2.1.1.2.9-.3 1.9-1.5 2.1-.9.2-2.4-.5-3.5-3 .6 0 1.2.3 2 .9l-1.2-4c-.3 1.1-.7 1.9-1.1 2.3-.3-.8-.2-1.4 0-2.7l-2.9.9C1.3 23 2.6 25.5 3.7 30c3.7-.5 7.9-.8 12.3-.8m28.3-11.6c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H55v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zM71.5 6.8c1.5 0 2.9.3 4.2.8 1.2.6 2.3 1.3 3.1 2.3.9 1 1.5 2.1 2 3.4s.7 2.7.7 4.2-.2 2.9-.7 4.2c-.4 1.3-1.1 2.4-2 3.4-.9 1-1.9 1.7-3.1 2.3-1.2.6-2.6.8-4.2.8s-2.9-.3-4.2-.8c-1.2-.6-2.3-1.3-3.1-2.3-.9-1-1.5-2.1-2-3.4-.4-1.3-.7-2.7-.7-4.2s.2-2.9.7-4.2c.4-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.5 2.6-.8 4.2-.8zm0 17.6c.9 0 1.7-.2 2.4-.5s1.3-.8 1.7-1.4c.5-.6.8-1.3 1.1-2.2.2-.8.4-1.7.4-2.7v-.1c0-1-.1-1.9-.4-2.7-.2-.8-.6-1.6-1.1-2.2-.5-.6-1.1-1.1-1.7-1.4-.7-.3-1.5-.5-2.4-.5s-1.7.2-2.4.5-1.3.8-1.7 1.4c-.5.6-.8 1.3-1.1 2.2-.2.8-.4 1.7-.4 2.7v.1c0 1 .1 1.9.4 2.7.2.8.6 1.6 1.1 2.2.5.6 1.1 1.1 1.7 1.4.6.3 1.4.5 2.4.5zM88.9 28 83 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L148 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
 </svg>
 
         
@@ -787,7 +721,7 @@ exports[`Results block template Guided search journey Search results with error 
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
     
     
@@ -804,77 +738,42 @@ exports[`Results block template Guided search journey Search results with error 
   
       <div class="govuk-width-container">
         
-  
+    
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link help-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
 
 
-  <div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
+    
+
+<a href="#" class="govuk-back-link">Back</a>
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
-  
-
-  </ol>
-</div>
-
-
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-
+    <h1 class="govuk-heading-l ">Search results</h1>
+    <div class="govuk-grid-row govuk-!-text-align-right">
+      
   
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
-      
-        Search
-      
-    </h1>
+  
     
-    <div class="search-block" data-module="search">
-      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-        
+  
 
-<div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" for="search_term">
-    Search
-  </label>
+<a href="/" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+  New search
+</a>
 
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="results">
-      </form>
     </div>
-  </div>
-</div>
-
-  
-    <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
+    
+      <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -1021,22 +920,22 @@ exports[`Results block template Guided search journey Search results with error 
 
   </div>
 </div></div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
-          Filters
-        </h2>
-        <div class="govuk-section-break--visible"></div>
-        
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+            Filters
+          </h2>
+          <div class="govuk-section-break--visible"></div>
+          
 
 
 
   
-      </div>
-      <div class="govuk-grid-column-two-thirds">
-        
 
 
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          
 
 
 
@@ -1048,14 +947,10 @@ exports[`Results block template Guided search journey Search results with error 
 
 
 
-
-
-
+        </div>
       </div>
-    </div>
+    
   
-
-
         </main>
       </div>
     
@@ -1145,7 +1040,7 @@ exports[`Results block template Guided search journey Search results with error 
 
 
     
-  
+    
   
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
@@ -1158,15 +1053,15 @@ exports[`Results block template Guided search journey Search results with error 
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
 
-  <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script src="/assets/scripts/ol.js"></script>
-  <script>
-    var isViewMapResults = true;
-  </script>
-  <script type="module" src="/assets/scripts/location.js"></script>
-  <script type="module" src="/assets/scripts/filters.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
-
+    <script type="module" src="/assets/scripts/dataModal.js"></script>
+    <script src="/assets/scripts/ol.js"></script>
+    <script>
+      var isViewMapResults = true;
+    </script>
+    <script type="module" src="/assets/scripts/location.js"></script>
+    <script type="module" src="/assets/scripts/filters.js"></script>
+    <script type="module" src="/assets/scripts/details.js"></script>
+  
   </body>
 </html>
 "
@@ -1201,7 +1096,7 @@ exports[`Results block template Quick search journey Search results with data sh
   <meta http-equiv="Expires" content="0">
 
   <link rel="stylesheet" href="/assets/css/ol.css">
-
+  
     
   </head>
   <body class="govuk-template__body app-body-class">
@@ -1309,7 +1204,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
     
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -1333,13 +1228,13 @@ exports[`Results block template Quick search journey Search results with data sh
   role="img"
   class="govuk-header__logotype"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 152 30"
+  viewBox="0 0 148 30"
   height="30"
-  width="152"
+  width="148"
   aria-label="GOV.UK"
 >
   <title>GOV.UK</title>
-  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+  <path d="M22.6 10.4c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m-5.9 6.7c-.9.4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m10.8-3.7c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s0 2-1 2.4m3.3 4.8c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4M17 4.7l2.3 1.2V2.5l-2.3.7-.2-.2.9-3h-3.4l.9 3-.2.2c-.1.1-2.3-.7-2.3-.7v3.4L15 4.7c.1.1.1.2.2.2l-1.3 4c-.1.2-.1.4-.1.6 0 1.1.8 2 1.9 2.2h.7c1-.2 1.9-1.1 1.9-2.1 0-.2 0-.4-.1-.6l-1.3-4c-.1-.2 0-.2.1-.3m-7.6 5.7c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m-5 3c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s.1 2 1 2.4m-3.2 4.8c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m14.8 11c4.4 0 8.6.3 12.3.8 1.1-4.5 2.4-7 3.7-8.8l-2.5-.9c.2 1.3.3 1.9 0 2.7-.4-.4-.8-1.1-1.1-2.3l-1.2 4c.7-.5 1.3-.8 2-.9-1.1 2.5-2.6 3.1-3.5 3-1.1-.2-1.7-1.2-1.5-2.1.3-1.2 1.5-1.5 2.1-.1 1.1-2.3-.8-3-2-2.3 1.9-1.9 2.1-3.5.6-5.6-2.1 1.6-2.1 3.2-1.2 5.5-1.2-1.4-3.2-.6-2.5 1.6.9-1.4 2.1-.5 1.9.8-.2 1.1-1.7 2.1-3.5 1.9-2.7-.2-2.9-2.1-2.9-3.6.7-.1 1.9.5 2.9 1.9l.4-4.3c-1.1 1.1-2.1 1.4-3.2 1.4.4-1.2 2.1-3 2.1-3h-5.4s1.7 1.9 2.1 3c-1.1 0-2.1-.2-3.2-1.4l.4 4.3c1-1.4 2.2-2 2.9-1.9-.1 1.5-.2 3.4-2.9 3.6-1.9.2-3.4-.8-3.5-1.9-.2-1.3 1-2.2 1.9-.8.7-2.3-1.2-3-2.5-1.6.9-2.2.9-3.9-1.2-5.5-1.5 2-1.3 3.7.6 5.6-1.2-.7-3.1 0-2 2.3.6-1.4 1.8-1.1 2.1.1.2.9-.3 1.9-1.5 2.1-.9.2-2.4-.5-3.5-3 .6 0 1.2.3 2 .9l-1.2-4c-.3 1.1-.7 1.9-1.1 2.3-.3-.8-.2-1.4 0-2.7l-2.9.9C1.3 23 2.6 25.5 3.7 30c3.7-.5 7.9-.8 12.3-.8m28.3-11.6c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H55v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zM71.5 6.8c1.5 0 2.9.3 4.2.8 1.2.6 2.3 1.3 3.1 2.3.9 1 1.5 2.1 2 3.4s.7 2.7.7 4.2-.2 2.9-.7 4.2c-.4 1.3-1.1 2.4-2 3.4-.9 1-1.9 1.7-3.1 2.3-1.2.6-2.6.8-4.2.8s-2.9-.3-4.2-.8c-1.2-.6-2.3-1.3-3.1-2.3-.9-1-1.5-2.1-2-3.4-.4-1.3-.7-2.7-.7-4.2s.2-2.9.7-4.2c.4-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.5 2.6-.8 4.2-.8zm0 17.6c.9 0 1.7-.2 2.4-.5s1.3-.8 1.7-1.4c.5-.6.8-1.3 1.1-2.2.2-.8.4-1.7.4-2.7v-.1c0-1-.1-1.9-.4-2.7-.2-.8-.6-1.6-1.1-2.2-.5-.6-1.1-1.1-1.7-1.4-.7-.3-1.5-.5-2.4-.5s-1.7.2-2.4.5-1.3.8-1.7 1.4c-.5.6-.8 1.3-1.1 2.2-.2.8-.4 1.7-.4 2.7v.1c0 1 .1 1.9.4 2.7.2.8.6 1.6 1.1 2.2.5.6 1.1 1.1 1.7 1.4.6.3 1.4.5 2.4.5zM88.9 28 83 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L148 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
 </svg>
 
         
@@ -1350,7 +1245,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
     
     
@@ -1367,77 +1262,42 @@ exports[`Results block template Quick search journey Search results with data sh
   
       <div class="govuk-width-container">
         
-  
+    
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link help-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
 
 
-  <div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
+    
+
+<a href="#" class="govuk-back-link back-link-search-result">Back</a>
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
-  
-
-  </ol>
-</div>
-
-
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-
+    <h1 class="govuk-heading-l ">Search results</h1>
+    <div class="govuk-grid-row govuk-!-text-align-right">
+      
   
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
-      
-        Search
-      
-    </h1>
+  
     
-    <div class="search-block" data-module="search">
-      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-        
+  
 
-<div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" for="search_term">
-    Search
-  </label>
+<a href="/" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+  New search
+</a>
 
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="results">
-      </form>
     </div>
-  </div>
-</div>
-
-  
-    <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
+    
+      <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -1584,23 +1444,22 @@ exports[`Results block template Quick search journey Search results with data sh
 
   </div>
 </div></div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
-          Filters
-        </h2>
-        <div class="govuk-section-break--visible"></div>
-        
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+            Filters
+          </h2>
+          <div class="govuk-section-break--visible"></div>
+          
 
 
 
   
-      </div>
-      <div class="govuk-grid-column-two-thirds">
-        
 
 
-
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          
 
 
 
@@ -1610,27 +1469,45 @@ exports[`Results block template Quick search journey Search results with data sh
     2 results
   </h2>
   <div class="govuk-section-break--visible"></div>
-
-<div class='map-container'>
-    <div id="map-results-block">
-      <a href="javascript:void(0);" id='map-result-button' disabled="true" onclick="openMapModal()" role="button" draggable="false" class='govuk-button govuk-button--map govuk-!-margin-bottom-4' data-module='govuk-button'>
-      View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
-      <svg class='govuk-button__start-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-          <path d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10 6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z" fill="white"/>
-        </svg>
-      </a>
+  
+    <div class='map-container'>
+      <div id="map-results-block">
+        <a
+          href="javascript:void(0);"
+          id='map-result-button'
+          disabled="true"
+          onclick="openMapModal()"
+          role="button"
+          draggable="false"
+          class='govuk-button govuk-button--map govuk-!-margin-bottom-4'
+          data-module='govuk-button'>
+          View&nbsp;<span id="map-result-count"></span>&nbsp;results on a map
+          <svg
+            class='govuk-button__start-icon'
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="20"
+            viewBox="0 0 16 20"
+            fill="none">
+            <path
+              d="M14 6C14 2.69 11.31 0 8 0C4.69 0 2 2.69 2 6C2 10.5 8 17 8 17C8 17 14 10.5 14 6ZM6 6C6 4.9 6.9 4 8 4C9.1 4 10 4.9 10
+                6C10 7.1 9.11 8 8 8C6.9 8 6 7.1 6 6ZM1 18V20H15V18H1Z"
+              fill="white"/>
+          </svg>
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="govuk-section-break--visible"></div>
-
+    <div class="govuk-section-break--visible"></div>
+  
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">
+      Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   
-  <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" id="sort_results" method="post">
-    
+    <form class='option-container govuk-section-break--visible' action="/sort-results?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" id="sort_results" method="post">
+      
 
 
 <div class="govuk-form-group option-group">
@@ -1644,7 +1521,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
       
       
-      <option value="best_match" selected>Best fit</option>
+      <option value="most_relevant" selected>Most relevant</option>
     
   
     
@@ -1662,8 +1539,7 @@ exports[`Results block template Quick search journey Search results with data sh
   </select>
 </div>
 
-
-    
+      
 
 
 <div class="govuk-form-group option-group">
@@ -1695,8 +1571,8 @@ exports[`Results block template Quick search journey Search results with data sh
   </select>
 </div>
 
-  </form>
-
+    </form>
+  
 
 
   <div class='search-result__items'>
@@ -1720,7 +1596,6 @@ exports[`Results block template Quick search journey Search results with data sh
         <p class='search-result__content'>
           Content 1
         </p>
-
         <div class='govuk-button-group search-result__button-group'>
           
 
@@ -1744,7 +1619,6 @@ exports[`Results block template Quick search journey Search results with data sh
   Go to resource
 </button>
 
-
           
   
 
@@ -1752,7 +1626,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<a href="/search/1?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/1?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
 </a>
 
@@ -1778,7 +1652,6 @@ exports[`Results block template Quick search journey Search results with data sh
         <p class='search-result__content'>
           Content 2
         </p>
-
         <div class='govuk-button-group search-result__button-group'>
           
 
@@ -1802,7 +1675,6 @@ exports[`Results block template Quick search journey Search results with data sh
   Go to resource
 </button>
 
-
           
   
 
@@ -1810,7 +1682,7 @@ exports[`Results block template Quick search journey Search results with data sh
     
   
 
-<a href="/search/2?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="/search/2?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   More info
 </a>
 
@@ -1818,15 +1690,11 @@ exports[`Results block template Quick search journey Search results with data sh
       </div>
     
   </div>
-
   <nav class="govuk-pagination" role="navigation" aria-label="Pagination"><ul class="govuk-pagination__list"><li class="govuk-pagination__item govuk-pagination__item--current">
-            <a class="govuk-link govuk-pagination__link" href="/search?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=best_match&amp;rty=all" aria-label="Page 1" aria-current="page" data-page-id="1">
+            <a class="govuk-link govuk-pagination__link" href="/search?q=marine&amp;jry=qs&amp;pg=1&amp;rpp=20&amp;srt=most_relevant&amp;rty=all" aria-label="Page 1" aria-current="page" data-page-id="1">
               1
             </a>
           </li></ul></nav>
-
-
-
 
 
 
@@ -1835,8 +1703,8 @@ exports[`Results block template Quick search journey Search results with data sh
   <div class="modal-content">
     
   <div class='data-container'>
-    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave the find natural capital data service</h1>
-    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue managed by<br/><span id='resource_party'></span></p>
+    <h1 class='govuk-heading-l data-container__heading-l govuk-!-margin-bottom-0'>You are about to leave find natural capital data</h1>
+    <p class='govuk-body-l data-container__body-l govuk-!-margin-bottom-0'>You are following a link to an external catalogue managed by:<br/><span id='resource_party'></span></p>
     <div class='govuk-button-group data-container__button-group govuk-!-margin-bottom-0'>
       
   
@@ -1866,11 +1734,10 @@ exports[`Results block template Quick search journey Search results with data sh
   </div>
 </div>
 
+        </div>
       </div>
-    </div>
+    
   
-
-
         </main>
       </div>
     
@@ -1960,7 +1827,7 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
     
-  
+    
   
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
@@ -1973,15 +1840,15 @@ exports[`Results block template Quick search journey Search results with data sh
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
 
-  <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script src="/assets/scripts/ol.js"></script>
-  <script>
-    var isViewMapResults = true;
-  </script>
-  <script type="module" src="/assets/scripts/location.js"></script>
-  <script type="module" src="/assets/scripts/filters.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
-
+    <script type="module" src="/assets/scripts/dataModal.js"></script>
+    <script src="/assets/scripts/ol.js"></script>
+    <script>
+      var isViewMapResults = true;
+    </script>
+    <script type="module" src="/assets/scripts/location.js"></script>
+    <script type="module" src="/assets/scripts/filters.js"></script>
+    <script type="module" src="/assets/scripts/details.js"></script>
+  
   </body>
 </html>
 "
@@ -2016,7 +1883,7 @@ exports[`Results block template Quick search journey Search results with empty d
   <meta http-equiv="Expires" content="0">
 
   <link rel="stylesheet" href="/assets/css/ol.css">
-
+  
     
   </head>
   <body class="govuk-template__body app-body-class">
@@ -2124,7 +1991,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
     
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -2148,13 +2015,13 @@ exports[`Results block template Quick search journey Search results with empty d
   role="img"
   class="govuk-header__logotype"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 152 30"
+  viewBox="0 0 148 30"
   height="30"
-  width="152"
+  width="148"
   aria-label="GOV.UK"
 >
   <title>GOV.UK</title>
-  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+  <path d="M22.6 10.4c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m-5.9 6.7c-.9.4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m10.8-3.7c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s0 2-1 2.4m3.3 4.8c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4M17 4.7l2.3 1.2V2.5l-2.3.7-.2-.2.9-3h-3.4l.9 3-.2.2c-.1.1-2.3-.7-2.3-.7v3.4L15 4.7c.1.1.1.2.2.2l-1.3 4c-.1.2-.1.4-.1.6 0 1.1.8 2 1.9 2.2h.7c1-.2 1.9-1.1 1.9-2.1 0-.2 0-.4-.1-.6l-1.3-4c-.1-.2 0-.2.1-.3m-7.6 5.7c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m-5 3c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s.1 2 1 2.4m-3.2 4.8c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m14.8 11c4.4 0 8.6.3 12.3.8 1.1-4.5 2.4-7 3.7-8.8l-2.5-.9c.2 1.3.3 1.9 0 2.7-.4-.4-.8-1.1-1.1-2.3l-1.2 4c.7-.5 1.3-.8 2-.9-1.1 2.5-2.6 3.1-3.5 3-1.1-.2-1.7-1.2-1.5-2.1.3-1.2 1.5-1.5 2.1-.1 1.1-2.3-.8-3-2-2.3 1.9-1.9 2.1-3.5.6-5.6-2.1 1.6-2.1 3.2-1.2 5.5-1.2-1.4-3.2-.6-2.5 1.6.9-1.4 2.1-.5 1.9.8-.2 1.1-1.7 2.1-3.5 1.9-2.7-.2-2.9-2.1-2.9-3.6.7-.1 1.9.5 2.9 1.9l.4-4.3c-1.1 1.1-2.1 1.4-3.2 1.4.4-1.2 2.1-3 2.1-3h-5.4s1.7 1.9 2.1 3c-1.1 0-2.1-.2-3.2-1.4l.4 4.3c1-1.4 2.2-2 2.9-1.9-.1 1.5-.2 3.4-2.9 3.6-1.9.2-3.4-.8-3.5-1.9-.2-1.3 1-2.2 1.9-.8.7-2.3-1.2-3-2.5-1.6.9-2.2.9-3.9-1.2-5.5-1.5 2-1.3 3.7.6 5.6-1.2-.7-3.1 0-2 2.3.6-1.4 1.8-1.1 2.1.1.2.9-.3 1.9-1.5 2.1-.9.2-2.4-.5-3.5-3 .6 0 1.2.3 2 .9l-1.2-4c-.3 1.1-.7 1.9-1.1 2.3-.3-.8-.2-1.4 0-2.7l-2.9.9C1.3 23 2.6 25.5 3.7 30c3.7-.5 7.9-.8 12.3-.8m28.3-11.6c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H55v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zM71.5 6.8c1.5 0 2.9.3 4.2.8 1.2.6 2.3 1.3 3.1 2.3.9 1 1.5 2.1 2 3.4s.7 2.7.7 4.2-.2 2.9-.7 4.2c-.4 1.3-1.1 2.4-2 3.4-.9 1-1.9 1.7-3.1 2.3-1.2.6-2.6.8-4.2.8s-2.9-.3-4.2-.8c-1.2-.6-2.3-1.3-3.1-2.3-.9-1-1.5-2.1-2-3.4-.4-1.3-.7-2.7-.7-4.2s.2-2.9.7-4.2c.4-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.5 2.6-.8 4.2-.8zm0 17.6c.9 0 1.7-.2 2.4-.5s1.3-.8 1.7-1.4c.5-.6.8-1.3 1.1-2.2.2-.8.4-1.7.4-2.7v-.1c0-1-.1-1.9-.4-2.7-.2-.8-.6-1.6-1.1-2.2-.5-.6-1.1-1.1-1.7-1.4-.7-.3-1.5-.5-2.4-.5s-1.7.2-2.4.5-1.3.8-1.7 1.4c-.5.6-.8 1.3-1.1 2.2-.2.8-.4 1.7-.4 2.7v.1c0 1 .1 1.9.4 2.7.2.8.6 1.6 1.1 2.2.5.6 1.1 1.1 1.7 1.4.6.3 1.4.5 2.4.5zM88.9 28 83 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L148 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
 </svg>
 
         
@@ -2165,7 +2032,7 @@ exports[`Results block template Quick search journey Search results with empty d
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
     
     
@@ -2182,77 +2049,42 @@ exports[`Results block template Quick search journey Search results with empty d
   
       <div class="govuk-width-container">
         
-  
+    
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link help-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
 
 
-  <div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
+    
+
+<a href="#" class="govuk-back-link back-link-search-result">Back</a>
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
-  
-
-  </ol>
-</div>
-
-
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-
+    <h1 class="govuk-heading-l ">Search results</h1>
+    <div class="govuk-grid-row govuk-!-text-align-right">
+      
   
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
-      
-        Search
-      
-    </h1>
+  
     
-    <div class="search-block" data-module="search">
-      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-        
+  
 
-<div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" for="search_term">
-    Search
-  </label>
+<a href="/" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+  New search
+</a>
 
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="results">
-      </form>
     </div>
-  </div>
-</div>
-
-  
-    <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
+    
+      <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -2399,62 +2231,56 @@ exports[`Results block template Quick search journey Search results with empty d
 
   </div>
 </div></div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
-          Filters
-        </h2>
-        <div class="govuk-section-break--visible"></div>
-        
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+            Filters
+          </h2>
+          <div class="govuk-section-break--visible"></div>
+          
 
 
 
   
-      </div>
-      <div class="govuk-grid-column-two-thirds">
-        
 
 
-
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          
 
 
 
 
 
   <h2 class='govuk-heading-m results-stats govuk-!-margin-bottom-2'>
-    0 results found 
+    0 results found
+    
   </h2>
   <div class="govuk-section-break--visible"></div>
-
+  
   <div class="no-script-container">
     <noscript>
-        <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">Enable or install JavaScript in your browser to use the map.</p>
+      <p id="map-results-unavailable" class="govuk-!-margin-0 govuk-!-margin-bottom-2 govuk-!-padding-0 govuk-heading-s">
+      Enable or install JavaScript in your browser to use the map.</p>
     </noscript>
   </div>
   
 
 
 
-
   <div class='search-result__item'>
     <h2 class='govuk-heading-m search-result__heading search-result__heading--empty'>There are no matching results</h2>
-    <p class='search-result__content search-result__content--empty'>
-      
-        Search with different keywords.
-      
-
-      
+    <p class='search-result__content search-result__content--empty govuk-!-margin-bottom-8'>
+      There are no results that match your search. Try a new search using different keywords or filters.
     </p>
   </div>
 
 
 
-
+        </div>
       </div>
-    </div>
+    
   
-
-
         </main>
       </div>
     
@@ -2544,7 +2370,7 @@ exports[`Results block template Quick search journey Search results with empty d
 
 
     
-  
+    
   
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
@@ -2557,15 +2383,15 @@ exports[`Results block template Quick search journey Search results with empty d
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
 
-  <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script src="/assets/scripts/ol.js"></script>
-  <script>
-    var isViewMapResults = true;
-  </script>
-  <script type="module" src="/assets/scripts/location.js"></script>
-  <script type="module" src="/assets/scripts/filters.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
-
+    <script type="module" src="/assets/scripts/dataModal.js"></script>
+    <script src="/assets/scripts/ol.js"></script>
+    <script>
+      var isViewMapResults = true;
+    </script>
+    <script type="module" src="/assets/scripts/location.js"></script>
+    <script type="module" src="/assets/scripts/filters.js"></script>
+    <script type="module" src="/assets/scripts/details.js"></script>
+  
   </body>
 </html>
 "
@@ -2577,7 +2403,7 @@ exports[`Results block template Quick search journey Search results with error s
   <head>
     <meta charset="utf-8">
     <title>
-  Find Natural Capital data - GOV.UK
+  Find natural capital data - GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -2600,7 +2426,7 @@ exports[`Results block template Quick search journey Search results with error s
   <meta http-equiv="Expires" content="0">
 
   <link rel="stylesheet" href="/assets/css/ol.css">
-
+  
     
   </head>
   <body class="govuk-template__body app-body-class">
@@ -2708,7 +2534,7 @@ exports[`Results block template Quick search journey Search results with error s
 
     
   <script>
-    var gtmIdValue = "GTM-PZJ4WBG7"
+    var gtmIdValue = "";
   </script>
   <script type="module" src="/assets/scripts/cookieScript.js"></script>
   <header class="header-container">
@@ -2732,13 +2558,13 @@ exports[`Results block template Quick search journey Search results with error s
   role="img"
   class="govuk-header__logotype"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 152 30"
+  viewBox="0 0 148 30"
   height="30"
-  width="152"
+  width="148"
   aria-label="GOV.UK"
 >
   <title>GOV.UK</title>
-  <path d="M6.7 12.2c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m-4.3 2.5c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1-.5 1 0 2.1 1 2.5m-1.3 4.8c1 .4 2.1-.1 2.5-1 .4-1-.1-2.1-1-2.5-1-.4-2.1.1-2.5 1-.4 1 0 2.1 1 2.5m10.4-5.8c1 .4 2.1-.1 2.5-1s-.1-2.1-1-2.5c-1-.4-2.1.1-2.5 1s0 2.1 1 2.5m17.4-1.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m4.3 2.5c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1 .5 1 0 2.1-1 2.5m1.3 4.8c-1 .4-2.1-.1-2.5-1-.4-1 .1-2.1 1-2.5 1-.4 2.1.1 2.5 1 .4 1 0 2.1-1 2.5m-10.4-5.8c-1 .4-2.1-.1-2.5-1s.1-2.1 1-2.5c1-.4 2.1.1 2.5 1s0 2.1-1 2.5m-5.3-4.9 2.4 1.3V6.5l-2.4.8c-.1-.1-.1-.2-.2-.2s1-3 1-3h-3.4l1 3c-.1.1-.2.1-.2.2-.1.1-2.4-.7-2.4-.7v3.5L17 8.8c-.1.1 0 .2.1.3l-1.4 4.2c-.1.2-.1.4-.1.7 0 1.1.8 2.1 1.9 2.2h.6C19.2 16 20 15.1 20 14c0-.2 0-.4-.1-.7l-1.4-4.2c.2-.1.3-.2.3-.3m-1 20.3c4.6 0 8.9.3 12.8.9 1.1-4.6 2.4-7.2 3.8-9.1l-2.6-.9c.3 1.3.3 1.9 0 2.8-.4-.4-.8-1.2-1.1-2.4l-1.2 4.2c.8-.5 1.4-.9 2-.9-1.2 2.6-2.7 3.2-3.6 3-1.2-.2-1.7-1.3-1.5-2.2.3-1.3 1.6-1.6 2.2-.1 1.2-2.4-.8-3.1-2.1-2.4 1.9-1.9 2.2-3.6.6-5.7-2.2 1.7-2.2 3.3-1.2 5.6-1.3-1.5-3.3-.7-2.5 1.7.9-1.4 2.1-.5 2 .8-.2 1.2-1.7 2.1-3.7 2-2.8-.2-3-2.2-3-3.7.7-.1 1.9.5 3 2l.4-4.4c-1.1 1.2-2.2 1.4-3.3 1.4.4-1.2 2.1-3.1 2.1-3.1h-5.5s1.8 2 2.1 3.1c-1.1 0-2.2-.3-3.3-1.4l.4 4.4c1.1-1.5 2.3-2.1 3-2-.1 1.6-.2 3.5-3 3.7-1.9.2-3.5-.8-3.7-2-.2-1.3 1-2.2 1.9-.8.7-2.4-1.3-3.1-2.6-1.7 1-2.3 1-4-1.2-5.6-1.6 2.1-1.3 3.8.6 5.7-1.3-.7-3.2 0-2.1 2.4.6-1.5 1.9-1.1 2.2.1.2.9-.4 1.9-1.5 2.2-1 .2-2.5-.5-3.7-3 .7 0 1.3.4 2 .9L5 20.4c-.3 1.2-.7 1.9-1.2 2.4-.3-.8-.2-1.5 0-2.8l-2.6.9C2.7 22.8 4 25.4 5.1 30c3.8-.5 8.2-.9 12.7-.9m30.5-11.5c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H59v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zm36.4-4.3c-.4-1.3-1.1-2.4-2-3.4-.9-1-1.9-1.7-3.1-2.3-1.2-.6-2.6-.8-4.2-.8s-2.9.3-4.2.8c-1.1.6-2.2 1.4-3 2.3-.9 1-1.5 2.1-2 3.4-.4 1.3-.7 2.7-.7 4.2s.2 2.9.7 4.2c.4 1.3 1.1 2.4 2 3.4.9 1 1.9 1.7 3.1 2.3 1.2.6 2.6.8 4.2.8 1.5 0 2.9-.3 4.2-.8 1.2-.6 2.3-1.3 3.1-2.3.9-1 1.5-2.1 2-3.4.4-1.3.7-2.7.7-4.2-.1-1.5-.3-2.9-.8-4.2zM81 17.6c0 1-.1 1.9-.4 2.7-.2.8-.6 1.6-1.1 2.2-.5.6-1.1 1.1-1.7 1.4-.7.3-1.5.5-2.4.5-.9 0-1.7-.2-2.4-.5s-1.3-.8-1.7-1.4c-.5-.6-.8-1.3-1.1-2.2-.2-.8-.4-1.7-.4-2.7v-.1c0-1 .1-1.9.4-2.7.2-.8.6-1.6 1.1-2.2.5-.6 1.1-1.1 1.7-1.4.7-.3 1.5-.5 2.4-.5.9 0 1.7.2 2.4.5s1.3.8 1.7 1.4c.5.6.8 1.3 1.1 2.2.2.8.4 1.7.4 2.7v.1zM92.9 28 87 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L152 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
+  <path d="M22.6 10.4c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m-5.9 6.7c-.9.4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4m10.8-3.7c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s0 2-1 2.4m3.3 4.8c-1 .4-2-.1-2.4-1-.4-.9.1-2 1-2.4.9-.4 2 .1 2.4 1s-.1 2-1 2.4M17 4.7l2.3 1.2V2.5l-2.3.7-.2-.2.9-3h-3.4l.9 3-.2.2c-.1.1-2.3-.7-2.3-.7v3.4L15 4.7c.1.1.1.2.2.2l-1.3 4c-.1.2-.1.4-.1.6 0 1.1.8 2 1.9 2.2h.7c1-.2 1.9-1.1 1.9-2.1 0-.2 0-.4-.1-.6l-1.3-4c-.1-.2 0-.2.1-.3m-7.6 5.7c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m-5 3c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s.1 2 1 2.4m-3.2 4.8c.9.4 2-.1 2.4-1 .4-.9-.1-2-1-2.4-.9-.4-2 .1-2.4 1s0 2 1 2.4m14.8 11c4.4 0 8.6.3 12.3.8 1.1-4.5 2.4-7 3.7-8.8l-2.5-.9c.2 1.3.3 1.9 0 2.7-.4-.4-.8-1.1-1.1-2.3l-1.2 4c.7-.5 1.3-.8 2-.9-1.1 2.5-2.6 3.1-3.5 3-1.1-.2-1.7-1.2-1.5-2.1.3-1.2 1.5-1.5 2.1-.1 1.1-2.3-.8-3-2-2.3 1.9-1.9 2.1-3.5.6-5.6-2.1 1.6-2.1 3.2-1.2 5.5-1.2-1.4-3.2-.6-2.5 1.6.9-1.4 2.1-.5 1.9.8-.2 1.1-1.7 2.1-3.5 1.9-2.7-.2-2.9-2.1-2.9-3.6.7-.1 1.9.5 2.9 1.9l.4-4.3c-1.1 1.1-2.1 1.4-3.2 1.4.4-1.2 2.1-3 2.1-3h-5.4s1.7 1.9 2.1 3c-1.1 0-2.1-.2-3.2-1.4l.4 4.3c1-1.4 2.2-2 2.9-1.9-.1 1.5-.2 3.4-2.9 3.6-1.9.2-3.4-.8-3.5-1.9-.2-1.3 1-2.2 1.9-.8.7-2.3-1.2-3-2.5-1.6.9-2.2.9-3.9-1.2-5.5-1.5 2-1.3 3.7.6 5.6-1.2-.7-3.1 0-2 2.3.6-1.4 1.8-1.1 2.1.1.2.9-.3 1.9-1.5 2.1-.9.2-2.4-.5-3.5-3 .6 0 1.2.3 2 .9l-1.2-4c-.3 1.1-.7 1.9-1.1 2.3-.3-.8-.2-1.4 0-2.7l-2.9.9C1.3 23 2.6 25.5 3.7 30c3.7-.5 7.9-.8 12.3-.8m28.3-11.6c0 .9.1 1.7.3 2.5.2.8.6 1.5 1 2.2.5.6 1 1.1 1.7 1.5.7.4 1.5.6 2.5.6.9 0 1.7-.1 2.3-.4s1.1-.7 1.5-1.1c.4-.4.6-.9.8-1.5.1-.5.2-1 .2-1.5v-.2h-5.3v-3.2h9.4V28H55v-2.5c-.3.4-.6.8-1 1.1-.4.3-.8.6-1.3.9-.5.2-1 .4-1.6.6s-1.2.2-1.8.2c-1.5 0-2.9-.3-4-.8-1.2-.6-2.2-1.3-3-2.3-.8-1-1.4-2.1-1.8-3.4-.3-1.4-.5-2.8-.5-4.3s.2-2.9.7-4.2c.5-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.6 2.6-.8 4.1-.8 1 0 1.9.1 2.8.3.9.2 1.7.6 2.4 1s1.4.9 1.9 1.5c.6.6 1 1.3 1.4 2l-3.7 2.1c-.2-.4-.5-.9-.8-1.2-.3-.4-.6-.7-1-1-.4-.3-.8-.5-1.3-.7-.5-.2-1.1-.2-1.7-.2-1 0-1.8.2-2.5.6-.7.4-1.3.9-1.7 1.5-.5.6-.8 1.4-1 2.2-.3.8-.4 1.9-.4 2.7zM71.5 6.8c1.5 0 2.9.3 4.2.8 1.2.6 2.3 1.3 3.1 2.3.9 1 1.5 2.1 2 3.4s.7 2.7.7 4.2-.2 2.9-.7 4.2c-.4 1.3-1.1 2.4-2 3.4-.9 1-1.9 1.7-3.1 2.3-1.2.6-2.6.8-4.2.8s-2.9-.3-4.2-.8c-1.2-.6-2.3-1.3-3.1-2.3-.9-1-1.5-2.1-2-3.4-.4-1.3-.7-2.7-.7-4.2s.2-2.9.7-4.2c.4-1.3 1.1-2.4 2-3.4.9-1 1.9-1.7 3.1-2.3 1.2-.5 2.6-.8 4.2-.8zm0 17.6c.9 0 1.7-.2 2.4-.5s1.3-.8 1.7-1.4c.5-.6.8-1.3 1.1-2.2.2-.8.4-1.7.4-2.7v-.1c0-1-.1-1.9-.4-2.7-.2-.8-.6-1.6-1.1-2.2-.5-.6-1.1-1.1-1.7-1.4-.7-.3-1.5-.5-2.4-.5s-1.7.2-2.4.5-1.3.8-1.7 1.4c-.5.6-.8 1.3-1.1 2.2-.2.8-.4 1.7-.4 2.7v.1c0 1 .1 1.9.4 2.7.2.8.6 1.6 1.1 2.2.5.6 1.1 1.1 1.7 1.4.6.3 1.4.5 2.4.5zM88.9 28 83 7h4.7l4 15.7h.1l4-15.7h4.7l-5.9 21h-5.7zm28.8-3.6c.6 0 1.2-.1 1.7-.3.5-.2 1-.4 1.4-.8.4-.4.7-.8.9-1.4.2-.6.3-1.2.3-2v-13h4.1v13.6c0 1.2-.2 2.2-.6 3.1s-1 1.7-1.8 2.4c-.7.7-1.6 1.2-2.7 1.5-1 .4-2.2.5-3.4.5-1.2 0-2.4-.2-3.4-.5-1-.4-1.9-.9-2.7-1.5-.8-.7-1.3-1.5-1.8-2.4-.4-.9-.6-2-.6-3.1V6.9h4.2v13c0 .8.1 1.4.3 2 .2.6.5 1 .9 1.4.4.4.8.6 1.4.8.6.2 1.1.3 1.8.3zm13-17.4h4.2v9.1l7.4-9.1h5.2l-7.2 8.4L148 28h-4.9l-5.5-9.4-2.7 3V28h-4.2V7zm-27.6 16.1c-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7-1.2-2.7-2.7-2.7z"></path>
 </svg>
 
         
@@ -2749,7 +2575,7 @@ exports[`Results block template Quick search journey Search results with error s
     
     
       <a href="/" class="govuk-header__link govuk-header__service-name">
-        Find Natural Capital data
+        Find natural capital data
       </a>
     
     
@@ -2766,77 +2592,42 @@ exports[`Results block template Quick search journey Search results with error s
   
       <div class="govuk-width-container">
         
-  
+    
   <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
       Beta
     </strong>
     <span class="govuk-phase-banner__text">
-      This is a new service - your <a class="govuk-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
+      This is a new service - your <a class="govuk-link help-link" rel="noreferrer noopener" target="_blank" href="https://defragroup.eu.qualtrics.com/jfe/form/SV_02KhhVirzVmY0QK">feedback</a> will help us to improve it.
     </span>
   </p>
 </div>
 
 
-  <div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
+    
+
+<a href="#" class="govuk-back-link">Back</a>
 
   
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="/" data-do-storage-reset="">Home</a>
-    </li>
-  
-
-  
-    <li class="govuk-breadcrumbs__list-item" aria-current="page">Search results</li>
-  
-
-  </ol>
-</div>
-
-
         <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
           
-
+    <h1 class="govuk-heading-l ">Search results</h1>
+    <div class="govuk-grid-row govuk-!-text-align-right">
+      
   
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full quick_search-container">
-    <h1 class="govuk-heading-m quick_search-container__heading-m quick_search-container__heading-m--large ">
-      
-        Search
-      
-    </h1>
+  
     
-    <div class="search-block" data-module="search">
-      <form action="/search" id="keyword" data-do-browser-storage method="post" role="search" class="search-block__form govuk-!-margin-top-4">
-        
+  
 
-<div class="govuk-form-group govuk-!-margin-bottom-4">
-  <label class="govuk-label search-block__label" for="search_term">
-    Search
-  </label>
+<a href="/" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-do-storage-reset="">
+  New search
+</a>
 
-
-  <div class="govuk-input__wrapper">
-    
-    <input class="govuk-input govuk-input govuk-!-margin-bottom-0 search-block__input" id="search_term" name="search_term" type="text" spellcheck="false" autocomplete="off" aria-controls="search-results" placeholder="Search" altName="q">
-      
-    <div class="govuk-input__suffix" aria-hidden="true"><button type="submit" class="search-block__button" data-do-quick-search="true">Search</button></div>
-    
-  </div>
-
-</div>
-
-        <input type="hidden" name="pageName" value="results">
-      </form>
     </div>
-  </div>
-</div>
-
-  
-    <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
+    
+      <div class="govuk-grid-row" id="map-result-block" data-action="/map-results" data-fetch-map-results>
 <div id="modal" class="modal map-modal">
   <div class="modal-content">
     
@@ -2983,22 +2774,22 @@ exports[`Results block template Quick search journey Search results with error s
 
   </div>
 </div></div>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
-        <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
-          Filters
-        </h2>
-        <div class="govuk-section-break--visible"></div>
-        
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <h2 class='govuk-heading-m filter-heading govuk-!-margin-bottom-2'>
+            Filters
+          </h2>
+          <div class="govuk-section-break--visible"></div>
+          
 
 
 
   
-      </div>
-      <div class="govuk-grid-column-two-thirds">
-        
 
 
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          
 
 
 
@@ -3010,14 +2801,10 @@ exports[`Results block template Quick search journey Search results with error s
 
 
 
-
-
-
+        </div>
       </div>
-    </div>
+    
   
-
-
         </main>
       </div>
     
@@ -3107,7 +2894,7 @@ exports[`Results block template Quick search journey Search results with error s
 
 
     
-  
+    
   
   <script type="module" src="/assets/all.js"></script>
   <script type="module">
@@ -3120,15 +2907,15 @@ exports[`Results block template Quick search journey Search results with error s
   <script type="text/javascript" src="/assets/scripts/appinsights.js"></script>
   <script type="module" src="/assets/scripts/customScripts.js"></script>
 
-  <script type="module" src="/assets/scripts/dataModal.js"></script>
-  <script src="/assets/scripts/ol.js"></script>
-  <script>
-    var isViewMapResults = true;
-  </script>
-  <script type="module" src="/assets/scripts/location.js"></script>
-  <script type="module" src="/assets/scripts/filters.js"></script>
-  <script type="module" src="/assets/scripts/details.js"></script>
-
+    <script type="module" src="/assets/scripts/dataModal.js"></script>
+    <script src="/assets/scripts/ol.js"></script>
+    <script>
+      var isViewMapResults = true;
+    </script>
+    <script type="module" src="/assets/scripts/location.js"></script>
+    <script type="module" src="/assets/scripts/filters.js"></script>
+    <script type="module" src="/assets/scripts/details.js"></script>
+  
   </body>
 </html>
 "

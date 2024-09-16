@@ -4,7 +4,7 @@
 const defaultSessionData = JSON.stringify({
   version: '',
   fields: {},
-  sort: 'best_match',
+  sort: 'most_relevant',
   filters: {},
   rowsPerPage: '20',
   page: 1,
@@ -14,6 +14,9 @@ const defaultSessionData = JSON.stringify({
 const localStorageKey = 'ncea-search-data';
 const expiryInMinutes = 15;
 const todayCheckbox = document.getElementById('today-date');
+const keywordElement = document.getElementById('keyword');
+const searchTermInput = document.getElementById("search_term");
+
 
 // Store the data to storage
 const storeStorageData = (newSessionData) => {
@@ -97,7 +100,7 @@ const isAllFieldEmpty = (formId) => {
   if (!form) {
     return true;
   }
-  
+
   if(formId === 'classifier-search'){
     const urlParams = new URLSearchParams(window.location.search);
     const levelNo = parseInt(urlParams.get('level'), 10);
@@ -161,7 +164,7 @@ const attachEventListeners = (form) => {
             if (valueIndex !== -1) {
               valuesArray.splice(valueIndex, 1);
             }
-          }); 
+          });
         }
 
         // Clean up empty levels
@@ -209,6 +212,11 @@ const previousQuestion = () => {
 };
 
 const skipStorage = () => {
+ //clear local storage if user comes to home page by clicking on 'find natural capital data' from header
+  if (  document.title === "NCEA Search Service Home" && keywordElement) {
+      storeStorageData(JSON.parse(defaultSessionData));
+      searchTermInput.value='';
+  }
   const skipElements = document.querySelectorAll('[data-do-storage-skip]');
   const urlParams = new URLSearchParams(window.location.search);
   const level = parseInt(urlParams.get('level'), 10);
@@ -379,9 +387,11 @@ const todayDateUncheck = (checked) => {
   } else {
       sessionData.fields['date'] = {
           ...sessionData.fields['date'],
-          tdcheck: '',
+          tdcheck: 'false',
       };
+
   }
+  storeStorageData(sessionData);
 }
 
 const toggleClassifierCheckbox = () => {
@@ -467,6 +477,54 @@ const classifierBackLinkHandler = () => {
   }
 };
 
+const searchResultBackLinkHandler = () => {
+  const backLinkElements = document.querySelector('.back-link-search-result');
+  const sessionData = getStorageData();
+  const classifierData = sessionData.fields['classifier-search'] || {};
+  if (backLinkElements) {
+    backLinkElements.addEventListener('click', () => {
+if(Object.keys(classifierData).length >0){
+
+      const currentLevel = classifierData.currentLevel;
+      const levelKeys = Object.keys(classifierData).filter(key => key.startsWith('level'));
+
+      const currentLevelNumber = currentLevel && parseInt(currentLevel.replace('level', ''));
+      let level = currentLevelNumber || 1;
+      let associatedLevel = [];
+
+      if (currentLevelNumber > 1) {
+          const previousLevel = `level${currentLevelNumber - 1}`;
+          if (classifierData[previousLevel]) {
+              associatedLevel = classifierData[previousLevel];
+          }
+      } else {
+          associatedLevel = [];
+      }
+      const parents = associatedLevel;
+      const params = new URLSearchParams({ level });
+      parents.forEach(parent => params.append('parent[]', parent));
+      const url = `/classifier-search?${params.toString()}`;
+      window.location.href = url;
+    }else{
+      window.location = '/'
+    }
+    });
+  }
+};
+
+const clickToSeeLinkHandler = () => {
+  const clickToSeeLinkElements = document.querySelector('.count-block-link');
+  if (clickToSeeLinkElements) {
+    clickToSeeLinkElements.addEventListener('click', () => {
+      const sessionData = getStorageData();
+      const urlParams = new URLSearchParams(window.location.search);
+      const currentLevel = parseInt(urlParams.get('level'), 10);
+      sessionData.fields['classifier-search']['currentLevel'] = 'level'+currentLevel;
+      storeStorageData(sessionData);
+    });
+  }
+};
+
 function redirectToClassifierSearch(){
   const sessionData = getStorageData();
   const classifierData = sessionData.fields['classifier-search'] || {};
@@ -508,12 +566,14 @@ if (typeof Storage !== 'undefined') {
 
     resetStorage();
     skipStorage();
+    clickToSeeLinkHandler();
     nextQuestion();
     previousQuestion();
     attachTodayDateEventListener();
     todayCheckboxStatus();
     attachDateInputListeners();
     classifierBackLinkHandler();
+    searchResultBackLinkHandler();
     toggleClassifierCheckbox();
    document.querySelector('.back-link-date') && document.querySelector('.back-link-date').addEventListener('click', redirectToClassifierSearch);
 
@@ -546,3 +606,4 @@ window.addEventListener('storage', (event) => {
 });
 
 export { getStorageData, fireEventAfterStorage, updateSubmitButtonState };
+

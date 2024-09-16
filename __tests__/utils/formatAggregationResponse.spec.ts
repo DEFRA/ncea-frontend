@@ -35,6 +35,48 @@ describe('formatAggregationResponse', () => {
     expect(result).toEqual(filterOptionsResponse);
   });
 
+  it('should merge nonGeographicDataset and publication buckets when both are present', async () => {
+    const apiResponse = {
+      aggregations: {
+        category: {
+          buckets: [
+            { key: 'nonGeographicDataset', doc_count: 5 },
+            { key: 'publication', doc_count: 10 },
+          ],
+        },
+      },
+    };
+  const filterOptions = [{ key: 'category', isTerm: true, propertyToRead: 'key', needCount: true }];
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+    expect(result.category).toEqual([{ value: 'nonGeographicDataset', text: 'Non Geographic Dataset (15)' }]);
+  });
+
+  it('should rename the publication bucket to nonGeographicDataset when only publication is present', async () => {
+    const apiResponse = {
+      aggregations: {
+        category: {
+          buckets: [{ key: 'publication', doc_count: 10 }],
+        },
+      },
+    };
+    const filterOptions = [{ key: 'category', isTerm: true, propertyToRead: 'key', needCount: true }];
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+    expect(result.category).toEqual([{ value: 'nonGeographicDataset', text: 'Non Geographic Dataset (10)' }]);
+  });
+
+  it('should not modify buckets if neither nonGeographicDataset nor publication are present', async () => {
+    const apiResponse = {
+      aggregations: {
+        category: {
+          buckets: [{ key: 'otherDataset', doc_count: 10 }],
+        },
+      },
+    };
+    const filterOptions = [{ key: 'category', isTerm: true, propertyToRead: 'key', needCount: true }];
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+    expect(result.category).toEqual([{ value: 'otherDataset', text: 'Other Dataset (10)' }]);
+  });
+
   it('should return formatted aggregation options for each filter option', async () => {
     const apiResponse = {
       aggregations: {
@@ -301,16 +343,13 @@ describe('formatClassifierResponse', () => {
 
 describe('Error handling in formatClassifierResponse', () => {
   it('should throw an error with the correct message when an error occurs', async () => {
-    // Mock data
     const apiResponse = {
       classifier_level: {
         classifier_values: {
-          buckets: [{ key: 'someKey' }],
+          buckets: [{ key: 'category' }],
         },
       },
     };
-
-    // Mock a function to throw an error
     jest.spyOn(Array.prototype, 'forEach').mockImplementationOnce(() => {
       throw new Error('Mock error');
     });

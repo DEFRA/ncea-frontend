@@ -81,4 +81,13 @@ const formatDate = (
   return formattedDate;
 };
 
-export { formatDate, getYear };
+const validateDate = (date: number, month: number, year: number): boolean => {
+  const dtStr = `${year}-${month}-${date}`;
+  const dt = new Date(dtStr);
+  const dtYear = dt.getFullYear();
+  const dtMonth = dt.getMonth() + 1;
+  const dtDate = dt.getDate();
+  return dtDate === date && dtMonth === month && dtYear === year;
+};
+
+export { formatDate, getYear, validateDate };

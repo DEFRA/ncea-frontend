@@ -18,15 +18,31 @@
     isResultPage: false,
     searchInputError : searchInputError
   }) }}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m">
-          Questionnaire search
-        </h2>
-        <p class="govuk-body">
-          A set of questions to narrow down your search for data and information.
-        </p>
-      </div>
+    <div class=" govuk-grid-column-full  govuk-grid-row ">
+      <h2 class="govuk-heading-m educational-copy-container__heading-m">
+        Natural capital
+      </h2>
+      <p class="govuk-body govuk-!-margin-bottom-6">
+        Natural capital is the parts of our natural environment that hold value for people, giving environmental, economic,
+        societal and cultural benefits. It is nature’s stock of living and non-living resources – including ecosystems, species,
+        freshwater, land, soils, minerals, air, and ocean – that provide flows of environmental (ecosystem) services.
+      </p>
+    </div>
+    <div class="govuk-grid-column-full  govuk-grid-row">
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-6">
+        Category search
+      </h2>
+      <p class="govuk-body govuk-!-margin-bottom-6">
+        All natural capital resources in this service are classified into broad themes and specific categories for better
+        clarity and understanding.
+      </p>
+      {# disabling it enable once glossary link is available #}
+      {# <p class="govuk-body govuk-!-margin-bottom-6">
+        <a href="#" target="_blank" class='help-link'>Natural capital classification glossary</a>
+      </p> #}
+      <p class="govuk-body govuk-!-margin-bottom-6">
+        Use these natural capital theme and classification filters to help narrow down your search
+      </p>
     </div>
     {{ govukButton({
     id: 'guided-search',
@@ -40,46 +56,47 @@
   }) }}
     <article class="govuk-grid-row" role="article">
       <div class="govuk-grid-column-full educational-copy-container">
-        <h1 class="govuk-heading-m govuk-\!-static-margin-0 educational-copy-container__heading-m">What the NCEA is</h1>
-        <p class="govuk-body">
-          The Department for Environment, Food and Rural Affairs’ (Defra)
-          <a href="https://www.gov.uk/government/publications/natural-capital-and-ecosystem-assessment-programme" target="_blank">
+        <h1 class="govuk-heading-m govuk-\!-static-margin-0 educational-copy-container__heading-m">Data types and sources</h1>
+        <p class="govuk-body govuk-!-margin-bottom-6">Use this service to find and access records and services such as:</p>
+        <ul class='govuk-!-margin-bottom-6'>
+          <li class="govuk-body-m ncea-static-page-line-item">raw data</li>
+          <li class="govuk-body-m ncea-static-page-line-item">reports</li>
+          <li class="govuk-body-m ncea-static-page-line-item">maps</li>
+          <li class="govuk-body-m ncea-static-page-line-item">time-series data</li>
+          <li class="govuk-body-m ncea-static-page-line-item">annual publications</li>
+          <li class="govuk-body-m ncea-static-page-line-item">web mapping</li>
+          <li class="govuk-body-m ncea-static-page-line-item">data viewer dashboards</li>
+        </ul>
+        <p class="govuk-body govuk-!-margin-bottom-6">
+          Marine and terrestrial data for the United Kingdom, UK Overseas Territories and other international locations are drawn
+          from several sources, including:</p>
+        <ul class="govuk-!-margin-bottom-6">
+          <li class="govuk-body-m ncea-static-page-line-item">
+            <a href="https://medin.org.uk/" target="_blank" class='help-link'>Marine Environmental Data & Information Network (MEDIN)</a>
+          </li>
+          <li class="govuk-body-m ncea-static-page-line-item">
+            <a href="https://jncc.gov.uk/" target="_blank" class='help-link'>Joint Nature Conservation Committee (JNCC)</a>
+          </li>
+        </ul>
+        <h1 class="govuk-heading-m govuk-\!-static-margin-0 educational-copy-container__heading-m">NCEA programme</h1>
+        <p class="govuk-body govuk-!-margin-bottom-6">The Department for Environment, Food and Rural Affairs’(Defra’s)
+          <a class='help-link' href="https://www.gov.uk/government/publications/natural-capital-and-ecosystem-assessment-programme" target="_blank">
           Natural Capital and Ecosystem Assessment (NCEA)</a>
-          programme is delivering a nationwide survey of England’s land, coast, and sea by mapping the location, extent and
-          condition of our ecosystems and the benefits they provide. Through comprehensive monitoring, innovative measurement and
-          the development of tools and guidance, NCEA is providing insights on how and why our environment is changing and the
-          impact of this, so that we can make informed decisions to better protect and manage our natural capital for people and
-          the planet.
+          programme is delivering a nationwide survey of England’s land, coast, and sea: mapping the location, extent and
+          condition of our ecosystems and the benefits they provide.</p>
+        <p class="govuk-body govuk-!-margin-bottom-4">Through comprehensive monitoring, innovative measurement and the development of tools and
+          guidance, NCEA is providing insights on how and why our environment is changing and the impact of this – so that we can
+          make informed decisions to better protect and manage our natural capital for people and the planet.
         </p>
-        <h1 class="govuk-heading-m govuk-\!-static-margin-0 educational-copy-container__heading-m">What natural capital is</h1>
-        <ul>
-          <li class="govuk-body">Natural capital is the living and non-living parts of our natural environment that hold value for
-            people, providing us with environmental, economic, societal and cultural benefits.</li>
-          <li class="govuk-body">It is nature’s stock of living and non-living resources – including ecosystems, species,
-            freshwater, land, soils, minerals, air, and ocean – that provide flows of environmental (ecosystem) services.</li>
-          <li class="govuk-body">Ecosystem services provide benefits for people and are necessary for our survival and well-being.</li>
-        </ul>
-        <h1 class="govuk-heading-m govuk-\!-static-margin-0 educational-copy-container__heading-m">What natural capital
-          approaches are</h1>
-        <ul>
-          <li class="govuk-body">Taking a natural capital approach is all about incorporating the wider benefits of the
-            environment into decision making.</li>
-          <li class="govuk-body">Natural capital evidence and approaches help us to account for and articulate the different ways
-            our natural assets hold value for people (be that cultural, social, economic or environmental value) and provide a
-            framework for incorporating this into decision making.</li>
-          <li class="govuk-body">This reduces the risk of undervaluing our natural environment and helps to inform how we can
-            better manage, protect, and enhance our natural assets and the services they provide.</li>
-        </ul>
-        <h1 class="govuk-heading-m govuk-\!-static-margin-0 educational-copy-container__heading-m">What data sources we use</h1>
-        <p class="govuk-body">You can use this search service to find and access data from several sources, including:</p>
-        <ul>
-          <li class="govuk-body">
-            <a href="https://medin.org.uk/" target="_blank">Marine Environmental Data & Information Network (MEDIN)</a>
-          </li>
-          <li class="govuk-body">
-            <a href="https://jncc.gov.uk/" target="_blank">Joint Nature Conservation Committee (JNCC)</a>
-          </li>
-        </ul>
+        <h1 class="govuk-heading-m govuk-\!-static-margin-0 govuk-!-margin-bottom-6">NCEA’s natural capital
+          approach</h1>
+        <p class="govuk-body govuk-!-margin-bottom-6">Taking a natural capital approach is about incorporating the wider benefits of the environment
+          into policy and decision making.
+        </p>
+        <p class="govuk-body ">Natural capital evidence and approaches help us to account for and articulate the different ways
+          our natural assets hold value for people (be that cultural, social, economic or environmental value) and provide a
+          framework for incorporating this into decision making. This reduces the risk of undervaluing our natural environment and
+          helps to inform how we can better manage, protect, and enhance our natural assets and the services they provide.</p>
       </div>
     </article>
   {% endblock %}

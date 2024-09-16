@@ -31,21 +31,21 @@ describe('queryStringHelper functions', () => {
       const requestQuery = { q: 'query' };
       const queryParamsObject = { jry: 'qs' };
       const result = upsertQueryParams(requestQuery, queryParamsObject);
-      expect(result).toBe('q=query&jry=qs&pg=1&rpp=20&srt=best_match');
+      expect(result).toBe('q=query&jry=qs&pg=1&rpp=20&srt=most_relevant');
     });
 
     test('should update existing query parameters', () => {
       const requestQuery = { jry: 'qs', q: 'oldQuery' };
       const queryParamsObject = { q: 'newQuery' };
       const result = upsertQueryParams(requestQuery, queryParamsObject);
-      expect(result).toBe('jry=qs&q=newQuery&pg=1&rpp=20&srt=best_match');
+      expect(result).toBe('jry=qs&q=newQuery&pg=1&rpp=20&srt=most_relevant');
     });
 
     test('should include default parameters if specified', () => {
       const requestQuery = { q: 'oldQuery' };
       const queryParamsObject = {};
       const result = upsertQueryParams(requestQuery, queryParamsObject, true);
-      expect(result).toBe('q=oldQuery&pg=1&rpp=20&srt=best_match');
+      expect(result).toBe('q=oldQuery&pg=1&rpp=20&srt=most_relevant');
     });
 
     test('should not include default parameters if not specified', () => {
@@ -67,13 +67,13 @@ describe('queryStringHelper functions', () => {
     test('should delete query parameters if exists', () => {
       const requestQuery = { sy: '2002', q: 'query', pg: '1' };
       const result = deleteQueryParams(requestQuery, ['sy']);
-      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match');
+      expect(result).toBe('q=query&pg=1&rpp=20&srt=most_relevant');
     });
 
     test('should delete multiple query parameters if exists', () => {
       const requestQuery = { sy: '2002', ty: '2023', q: 'query', pg: '1' };
       const result = deleteQueryParams(requestQuery, ['sy', 'ty']);
-      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match');
+      expect(result).toBe('q=query&pg=1&rpp=20&srt=most_relevant');
     });
 
     test('should delete query parameters if exists and return without default parameters', () => {
@@ -99,7 +99,7 @@ describe('queryStringHelper functions', () => {
     test('should include default parameters if specified', () => {
       const requestQuery = { q: 'query' };
       const result = readQueryParams(requestQuery, '', true);
-      expect(result).toBe('q=query&pg=1&rpp=20&srt=best_match');
+      expect(result).toBe('q=query&pg=1&rpp=20&srt=most_relevant');
     });
 
     test('should not include default parameters if not specified', () => {
@@ -303,7 +303,7 @@ describe('queryStringHelper functions', () => {
         fields: {
           keyword: { q: 'query' },
         },
-        sort: 'best_match',
+        sort: 'most_relevant',
         page: 1,
         rowsPerPage: 20,
         filters: {},
@@ -336,7 +336,7 @@ describe('queryStringHelper functions', () => {
         fields: {
           keyword: { q: 'query' },
         },
-        sort: 'best_match',
+        sort: 'most_relevant',
         page: 1,
         rowsPerPage: 20,
         filters: {

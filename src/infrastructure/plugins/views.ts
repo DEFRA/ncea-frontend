@@ -64,8 +64,8 @@ const customHapiViews = {
     isCached: process.env.NODE_ENV !== 'production',
     context: {
       assetPath: '/assets',
-      serviceName: 'Find Natural Capital data',
-      pageTitle: 'Find Natural Capital data - GOV.UK',
+      serviceName: 'Find natural capital data',
+      pageTitle: 'Find natural capital data - GOV.UK',
       routes: {
         homePage,
         searchResults,

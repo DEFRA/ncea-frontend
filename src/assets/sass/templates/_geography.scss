@@ -14,6 +14,25 @@
   }
 }
 
+.classifier-error-summary{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.govuk-error-summary {
+  margin-bottom: 40px;
+}
+.govuk-error-summary__body ul.govuk-list li {
+  font-weight: 700;
+  color: #d4351c;
+  font-size: 1.188rem;
+  line-height: 1.3157894737;
+}
+.govuk-error-summary__title{
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 20px;
+}
+
 .defra-map-clear-selection {
   &__block {
     display: none;

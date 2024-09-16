@@ -7,7 +7,7 @@ const setDefaultQueryParams = (searchParams: URLSearchParams): URLSearchParams =
   searchParams.set(queryParamKeys.page, page);
   const rowsPerPage = searchParams.get(queryParamKeys.rowsPerPage) ?? '20';
   searchParams.set(queryParamKeys.rowsPerPage, rowsPerPage);
-  const sort = searchParams.get(queryParamKeys.sort) ?? 'best_match';
+  const sort = searchParams.get(queryParamKeys.sort) ?? 'most_relevant';
   searchParams.set(queryParamKeys.sort, sort);
   return searchParams;
 };
@@ -175,6 +175,15 @@ const generateQueryBuilderPayload = (requestQuery: RequestQuery): ISearchPayload
   return searchPayload;
 };
 
+const appendPublication = (resourceTypes: string): string => {
+  if (resourceTypes.includes('nonGeographicDataset') && !resourceTypes.includes('publication')) {
+    resourceTypes += ',publication';
+  } else if (resourceTypes.includes('publication') && !resourceTypes.includes('nonGeographicDataset')) {
+    resourceTypes += ',nonGeographicDataset';
+  }
+  return resourceTypes;
+};
+
 export {
   getQueryStringParams,
   upsertQueryParams,
@@ -187,4 +196,5 @@ export {
   generateQueryBuilderFields,
   getClassifierParams,
   deleteQueryParams,
+  appendPublication,
 };

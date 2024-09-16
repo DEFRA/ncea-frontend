@@ -40,10 +40,10 @@
   }
 
   &-value {
+    overflow: auto;
     @include font-style-stack(16px, 20px, 300);
     color: $govuk-text-colour;
     text-align: left;
-
     p {
       margin: 0;
     }
@@ -99,6 +99,26 @@
 
 .detail-map {
   border: 2px solid $govuk-text-colour;
+}
+
+.details-table-full {
+  border-collapse: collapse;
+  width: 100%;
+}
+.details-table-full th,
+.details-table-full td {
+  padding: 8px 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.details-table-full th {
+  padding-top: 0;
+}
+
+.details-table-hr{
+  padding: 0 !important;
+  border-bottom: 1px solid #B1B4B6;
 }
 
 @media (min-width: 768px) {

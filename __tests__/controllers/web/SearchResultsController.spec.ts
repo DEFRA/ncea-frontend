@@ -10,6 +10,7 @@ import { Request, ResponseToolkit } from '@hapi/hapi';
 
 import { formattedDetailsResponse } from '../../data/documentDetailsResponse';
 import { processDetailsTabData } from '../../../src/utils/processDetailsTabData';
+import {appendPublication} from '../../../src/utils/queryStringHelper'
 import { quickSearchJoiError } from '../../data/quickSearch';
 import {
   getDocumentDetails,
@@ -48,7 +49,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -103,6 +104,8 @@ describe('Deals with search results controller', () => {
         queryString,
         hasStudyPeriodFilterApplied: false,
         resetStudyPeriodLink,
+        backLinkClasses: "back-link-search-result",
+        backLinkPath: "#",
       });
     });
 
@@ -113,7 +116,7 @@ describe('Deals with search results controller', () => {
         jry: 'gs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -168,6 +171,8 @@ describe('Deals with search results controller', () => {
         queryString,
         hasStudyPeriodFilterApplied: false,
         resetStudyPeriodLink,
+        backLinkClasses: "back-link-search-result",
+        backLinkPath: "#",
       });
     });
 
@@ -178,7 +183,7 @@ describe('Deals with search results controller', () => {
         jry: 'gs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const { quickSearchFID } = formIds;
       const request: Request = { query: { ...queryObject } } as any;
@@ -336,7 +341,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = {
         params: { id: '123' },
@@ -365,7 +370,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = {
         params: { id: '123' },
@@ -409,7 +414,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = {
@@ -431,7 +436,7 @@ describe('Deals with search results controller', () => {
         jry: 'gs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = {
@@ -545,14 +550,14 @@ describe('Deals with search results controller', () => {
     it('should build the query params and navigate to search page', async () => {
       const request: Request = {
         payload: {
-          sort: 'best_match',
+          sort: 'most_relevant',
           'page-results': '20',
         },
       } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
 
       const queryParamsObject: Record<string, string> = {
-        [queryParamKeys.sort]: 'best_match',
+        [queryParamKeys.sort]: 'most_relevant',
         [queryParamKeys.rowsPerPage]: '20',
         [queryParamKeys.page]: '1',
       };
@@ -575,7 +580,7 @@ describe('Deals with search results controller', () => {
         jry: 'qs',
         pg: '1',
         rpp: '20',
-        srt: 'best_match',
+        srt: 'most_relevant',
       };
       const request: Request = { query: { ...queryObject } } as any;
       const response: ResponseToolkit = { view: jest.fn() } as any;
@@ -615,4 +620,31 @@ describe('Deals with search results controller', () => {
       });
     });
   });
+
+  describe('appendPublication', () => {
+    it('should add "publication" if "nonGeographicDataset" is present but "publication" is not', () => {
+      const input = 'nonGeographicDataset';
+      const result = appendPublication(input);
+      expect(result).toBe('nonGeographicDataset,publication');
+    });
+
+    it('should add "nonGeographicDataset" if "publication" is present but "nonGeographicDataset" is not', () => {
+      const input = 'publication';
+      const result = appendPublication(input);
+      expect(result).toBe('publication,nonGeographicDataset');
+    });
+
+    it('should not modify resourceTypes if both "nonGeographicDataset" and "publication" are present', () => {
+      const input = 'nonGeographicDataset,publication';
+      const result = appendPublication(input);
+      expect(result).toBe('nonGeographicDataset,publication');
+    });
+
+    it('should not modify resourceTypes if neither "nonGeographicDataset" nor "publication" are present', () => {
+      const input = 'someOtherType';
+      const result = appendPublication(input);
+      expect(result).toBe('someOtherType');
+    });
+  });
+
 });

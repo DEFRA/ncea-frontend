@@ -2,19 +2,23 @@
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "partials/results_count/macro.njk" import resultsCount %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
-
+{% from 'partials/skip_questionnaire_model/macro.njk' import skipQuestionnaire %}
 {% block beforeContent %}
   {{ super() }}
   {% if nextLevel > 2 %}
-  {% include "partials/guided_search_breadcrumb/template.njk" %}
+    {% include "partials/guided_search_breadcrumb/template.njk" %}
   {% else %}
-  {{ govukBreadcrumbs({
+    {{ govukBreadcrumbs({
     items: [
       {
         text: "Home",
-        href: routes.homePage
+        href: routes.homePage,
+         attributes: {
+        'data-do-storage-reset': ''
+      }
       },
       {
         text: "Questionnaire search"
@@ -22,48 +26,62 @@
     ]
   }) }}
   {% endif %}
-
 {% endblock %}
-
 {% block content %}
-  <div class="govuk-grid-row">
+  {% if  nextLevel > 2 %}
     {% include "partials/results_count/template.njk" %}
-    <form method="GET" id="{{formId}}" action="{% if nextLevel > 3 %} {{skipPath}} {% else %} {{guidedClassifierSearchPath}} {% endif %}" data-do-browser-storage>
-     <input type="hidden" name="jry" value="{{journey}}" />
-     <input type="hidden" name="level" value="{% if nextLevel > 3 %}3{% else %}{{ nextLevel }}{% endif %}" />
-      <div class="govuk-grid-column-full govuk-!-padding-top-6">
-        {% for classify  in classifierItems %}
-          {% set checkboxItems = [] %}
-          {% set sectionIndex = loop.index %}
-          {% set legendClass = 'govuk-fieldset__legend--l' %}
-          {% if classify.sectionTitle.length > 0 %}
-            {% set sectionTitle = classify.sectionTitle %}
-          {% else %}
-            {% set sectionTitle = 'Select a natural capital theme' %}
-          {% endif %}
-          {% for item in classify.classifiers %}
-            {% set _ = checkboxItems.push({value: item.code, id: 'checkbox-'+sectionIndex+'-'+loop.index, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
-          {% endfor %}
-          {% if checkboxItems.length > 0 %}
-            {% set _ = checkboxItems.push({divider: "or" }) %}
-            {# {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %} #}
-            {% set _ = checkboxItems.push({value: classify.selectAll, id: 'checkboxall-'+sectionIndex+'-all', text: "Select all"}) %}
-          {% endif %}
-          {% if classify.sectionTitle.length > 0 %}
-            {% set sectionTitle = classify.sectionTitle %}
-          {% else %}
-            {% set sectionTitle = 'Select a natural capital theme' %}
-          {% endif %}
-
-          {% if classify.sectionIntroduction.length > 0 %}
-            {% set sectionIntro = classify.sectionIntroduction %}
-          {% elif nextLevel > 3 %}
-            {% set sectionIntro = '' %}
-            {% set legendClass = 'govuk-fieldset__legend--m' %}
-          {% else %}
-            {% set sectionIntro = 'Select all that apply' %}
-          {% endif %}
-          {{ govukCheckboxes({
+  {% else %}
+    {% include "partials/results_count/template.njk" %}
+    <div class='classifier-error-summary' id='errorBlock' style="display:none;">
+      {{ govukErrorSummary({
+         titleText: "There is a problem",
+         errorList: [
+        {
+           text: "You must select a theme to continue"
+        }
+        ]
+      }) }}
+    </div>
+  {% endif %}
+  <form method="GET" id="{{ formId }}" action="{% if nextLevel > 3 %} {{ skipPath }} {% else %} {{ guidedClassifierSearchPath }} {% endif %}" data-do-browser-storage>
+    <input type="hidden" name="jry" value="{{ journey }}"/>
+    {% if nextLevel > 3 %}
+      <input type="hidden" name="srt" value="most_relevant"/>
+      <input type="hidden" name="rpp" value="20"/>
+    {% endif %}
+    <input type="hidden" name="level" value="{% if nextLevel > 3 %}3{% else %}{{ nextLevel }}{% endif %}"/>
+    <div class="govuk-grid-column-full govuk-!-padding-top-6">
+      {% for classify  in classifierItems %}
+        {% set checkboxItems = [] %}
+        {% set sectionIndex = loop.index %}
+        {% set legendClass = 'govuk-fieldset__legend--l' %}
+        {% if classify.sectionTitle.length > 0 %}
+          {% set sectionTitle = classify.sectionTitle %}
+        {% else %}
+          {% set sectionTitle = 'Natural capital themes' %}
+        {% endif %}
+        {% for item in classify.classifiers %}
+          {% set _ = checkboxItems.push({value: item.code, id: 'checkbox-'+sectionIndex+'-'+loop.index, html: govukDetails({summaryText: item.value, text: item.text}) }) %}
+        {% endfor %}
+        {% if checkboxItems.length > 0 %}
+          {% set _ = checkboxItems.push({divider: "or" }) %}
+          {# {% set _ = checkboxItems.push({value: classify.selectAll, text: "Select all", behaviour: "exclusive"}) %} #}
+          {% set _ = checkboxItems.push({value: classify.selectAll, id: 'checkboxall-'+sectionIndex+'-all', text: "Select all"}) %}
+        {% endif %}
+        {% if classify.sectionTitle.length > 0 %}
+          {% set sectionTitle = classify.sectionTitle %}
+        {% else %}
+          {% set sectionTitle = 'Natural capital themes' %}
+        {% endif %}
+        {% if classify.sectionIntroduction.length > 0 %}
+          {% set sectionIntro = classify.sectionIntroduction %}
+        {% elif nextLevel > 3 %}
+          {% set sectionIntro = '' %}
+          {% set legendClass = 'govuk-fieldset__legend--m' %}
+        {% else %}
+          {% set sectionIntro = 'Select all that apply' %}
+        {% endif %}
+        {{ govukCheckboxes({
               name: "parent[]",
               fieldset: {
                 legend: {
@@ -77,19 +95,61 @@
               },
               items: checkboxItems
             }) }}
-        {% endfor %}
-        <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
-          <div class="govuk-button-group govuk-grid-column-one-half">
-          {{ govukButton({ text: "Skip", classes: "govuk-button--secondary govuk-!-margin-bottom-0", href: skipPath, attributes: {
-            'data-do-storage-skip': ''
-          } }) }}
-          {{ govukButton({ text: "Next", attributes: {
-            'data-to-disable': '',
+      {% endfor %}
+      <div class="govuk-grid-row  govuk-!-margin-top-4 govuk-!-margin-bottom-6 geography-buttons">
+        <div class="govuk-button-group govuk-grid-column-one-half">
+          {% if nextLevel > 2 %}
+            {%- include 'partials/skip_questionnaire_model/modal.njk' -%}
+            {{ skipQuestionnaire({ count: count, skipPath: skipPath }) }}
+          {% endif %}
+          {% if nextLevel > 3 %}
+            {{ govukButton({ text: "See results", attributes: {
             'data-next-question': ''
           } }) }}
-          </div>
+          {% else %}
+            {{ govukButton({ text: "Next", attributes: {
+            'data-next-question': ''
+          } }) }}
+          {% endif %}
         </div>
       </div>
-    </form>
-  </div>
-{% endblock %}
+    </div>
+  </form>
+</div>{% endblock %}{% block bodyEnd %}
+{{ super() }}
+<script type="module" src="{{ assetPath }}/scripts/dataModal.js"></script>
+<script>
+  function handleError(group, action) {
+    const formGroup = group.closest('.govuk-form-group');
+    let errorElement = formGroup.querySelector('.govuk-error-message');
+    if (action === 'apply') {
+      if (! errorElement) {
+        const errorHTML = '';
+        formGroup.insertAdjacentHTML('afterbegin', errorHTML);
+        formGroup.classList.add('govuk-form-group--error');
+      }
+    } else if (action === 'remove') {
+      if ([... group.querySelectorAll('input[type="checkbox"]')].some(checkbox => checkbox.checked)) {
+        if (errorElement) {
+          errorElement.remove();
+        }
+        formGroup.classList.remove('govuk-form-group--error');
+      }
+    }
+  }
+  document.getElementById('classifier-search').addEventListener('submit', function (event) {
+    const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="parent[]"]:checked'));
+    const checkboxGroups = document.querySelectorAll('.govuk-checkboxes');
+    const isAnyCheckboxNotSelected = selectedCheckboxes.length === 0;
+    if (isAnyCheckboxNotSelected) {
+      event.preventDefault();
+      document
+        .getElementById("errorBlock")
+        .style
+        .display = '';
+      checkboxGroups.forEach(group => handleError(group, 'apply'));
+    } else {
+      checkboxGroups.forEach(group => handleError(group, 'remove'));
+    }
+  });
+</script>{% endblock %}

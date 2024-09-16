@@ -7450,13 +7450,12 @@
   font-size: 36px;
 }
 .quick_search-container__caption-m {
-  width: 640px;
   font-size: 1.1875rem;
   font-style: normal;
   font-weight: 300;
   line-height: 25px;
   color: #0b0c0c;
-  padding-top: 20px;
+  padding-top: 30px;
 }
 @media screen and (max-width: 799px) {
   .quick_search-container__caption-m {
@@ -7594,6 +7593,17 @@
   max-height: 65%;
 }
 
+.skip-questionnaire-modal {
+  z-index: 1002;
+  background-color: #505a5f;
+  padding: 40px 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 630px;
+  max-height: 65%;
+}
+
 .map-modal {
   background-color: #ffffff;
   box-sizing: border-box;
@@ -7653,6 +7663,14 @@
   gap: 0px;
   opacity: 0px;
   margin-bottom: 14px;
+}
+
+.privacy_policy_last_updated {
+  color: #505a5f;
+  font-weight: 300;
+  line-height: 30px;
+  font-size: 1.5rem;
+  font-family: "GDS Transport", arial, sans-serif;
 }
 
 .educational-copy-container {
@@ -7789,6 +7807,28 @@
   float: right;
 }
 
+.classifier-error-summary {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.govuk-error-summary {
+  margin-bottom: 40px;
+}
+
+.govuk-error-summary__body ul.govuk-list li {
+  font-weight: 700;
+  color: #d4351c;
+  font-size: 1.188rem;
+  line-height: 1.3157894737;
+}
+
+.govuk-error-summary__title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 20px;
+}
+
 .defra-map-clear-selection__block {
   display: none;
   width: 150px;
@@ -7871,9 +7911,13 @@
   margin-bottom: 0;
 }
 
+.search-result-input-spacing {
+  margin-bottom: 60px;
+}
+
 .option-container {
   display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
+  grid-template-columns: 1.3fr 1.4fr;
   gap: 10px;
   margin-top: 15px;
 }
@@ -7886,7 +7930,7 @@
   font-weight: 300;
   line-height: 25px;
   min-width: auto;
-  width: 160px;
+  width: 210px;
 }
 .option-label {
   font-size: 1.1875rem;
@@ -8370,6 +8414,7 @@
   line-height: 20px;
 }
 .tab-content-value {
+  overflow: auto;
   font-size: 1rem;
   font-style: normal;
   font-weight: 300;
@@ -8434,6 +8479,27 @@
 
 .detail-map {
   border: 2px solid #0b0c0c;
+}
+
+.details-table-full {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.details-table-full th,
+.details-table-full td {
+  padding: 8px 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.details-table-full th {
+  padding-top: 0;
+}
+
+.details-table-hr {
+  padding: 0 !important;
+  border-bottom: 1px solid #B1B4B6;
 }
 
 @media (min-width: 768px) {

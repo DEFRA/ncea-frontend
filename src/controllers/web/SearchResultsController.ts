@@ -9,6 +9,7 @@ import { Lifecycle, Request, ResponseObject, ResponseToolkit } from '@hapi/hapi'
 import { getPaginationItems } from '../../utils/paginationBuilder';
 import { processDetailsTabData } from '../../utils/processDetailsTabData';
 import {
+  appendPublication,
   deleteQueryParams,
   generateQueryBuilderPayload,
   readQueryParams,
@@ -84,6 +85,8 @@ const SearchResultsController = {
         queryString,
         hasStudyPeriodFilterApplied,
         resetStudyPeriodLink,
+        backLinkPath: '#',
+        backLinkClasses: 'back-link-search-result',
       });
     } catch (error) {
       return response.view('screens/results/template', {
@@ -204,11 +207,16 @@ const SearchResultsController = {
   filterResourceTypeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload = request.payload as Record<string, string>;
     let resourceTypeValues = '';
-    if (payload?.['resource_type'] && Array.isArray(payload?.['resource_type'])) {
-      resourceTypeValues = payload['resource_type'].join(',');
-    } else if (payload?.['resource_type'] && typeof payload?.['resource_type'] === 'string') {
-      resourceTypeValues = payload?.['resource_type'];
+
+    if (payload?.['resource_type']) {
+      if (Array.isArray(payload['resource_type'])) {
+        resourceTypeValues = payload['resource_type'].join(',');
+      } else if (typeof payload['resource_type'] === 'string') {
+        resourceTypeValues = payload['resource_type'];
+      }
+      resourceTypeValues = appendPublication(resourceTypeValues);
     }
+
     const queryParamsObject: Record<string, string> = {
       [queryParamKeys.resourceType]: resourceTypeValues,
       [queryParamKeys.page]: '1',

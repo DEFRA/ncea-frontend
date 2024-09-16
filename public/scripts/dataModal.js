@@ -65,8 +65,27 @@ document.addEventListener('DOMContentLoaded', () => {
     unfreezeScroll();
   }
 
+
+  function openSkipQuestionnaireModal(skipPath) {
+    toggleModalContainer('skip-questionnaire-modal');
+    freezeScroll();
+    toggleOverlayContainer();
+    const resourcePartyElement = document.getElementById('skip');
+    if (resourcePartyElement) {
+      resourcePartyElement.href = skipPath;
+    }
+  }
+
+  function closeSkipQuestionnaireModal() {
+    toggleModalContainer('skip-questionnaire-modal');
+    toggleOverlayContainer();
+    unfreezeScroll();
+  }
+
   window.openDataModal = openDataModal;
   window.closeDataModal = closeDataModal;
   window.openMapModal = openMapModal;
   window.closeMapModal = closeMapModal;
+  window.openSkipQuestionnaireModal = openSkipQuestionnaireModal;
+  window.closeSkipQuestionnaireModal = closeSkipQuestionnaireModal;
 });
