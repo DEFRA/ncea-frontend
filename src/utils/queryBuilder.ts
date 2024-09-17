@@ -37,13 +37,6 @@ const _generateTermsBlock = (field: string, values: string[]): estypes.QueryDslQ
   };
 };
 
-const buildOrganizationMatchClauses = (organizations, path) => {
-  return organizations.map((org) => ({
-    match_phrase: {
-      [`${path}.organisationName`]: org,
-    },
-  }));
-};
 
 const _generateFieldExistsBlock = (field: string): estypes.QueryDslQueryContainer => {
   return {
@@ -286,6 +279,9 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
     const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
 
     if (originatorTypeFilters.length > 0) {
+      const scriptSource =
+        "if (doc['contactForResource.organisationName.keyword'].size() > 0) { String orgName = doc['contactForResource.organisationName.keyword'].value; String cleanOrgName = orgName.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); List targetOrgNames = []; for (String org : params.orgNames) { String cleanOrg = org.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); targetOrgNames.add(cleanOrg); } for (String targetOrgName : targetOrgNames) { if (cleanOrgName.equals(targetOrgName)) { return true; } } return false; } else { return false; }";
+
       mustBlock.push({
         bool: {
           should: [
@@ -301,8 +297,14 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
                         },
                       },
                       {
-                        bool: {
-                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contactForResource'),
+                        script: {
+                          script: {
+                            source: scriptSource,
+                            lang: 'painless',
+                            params: {
+                              orgNames: originatorTypeFilters,
+                            },
+                          },
                         },
                       },
                     ],
@@ -322,8 +324,14 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
                         },
                       },
                       {
-                        bool: {
-                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contact'),
+                        script: {
+                          script: {
+                            source: scriptSource,
+                            lang: 'painless',
+                            params: {
+                              orgNames: originatorTypeFilters,
+                            },
+                          },
                         },
                       },
                     ],
@@ -354,21 +362,28 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
 
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   const newParentArray = [...new Set(parentArray)];
+
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
 
     const filterBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
+
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
     const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
+
     if (fields?.date?.fdy && fields?.date?.tdy) {
       filterBlock.push(..._generateRangeBlock(fields.date));
     }
+
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
     if (originatorTypeFilters.length > 0) {
+      const scriptSource =
+        "if (doc['contactForResource.organisationName.keyword'].size() > 0) { String orgName = doc['contactForResource.organisationName.keyword'].value; String cleanOrgName = orgName.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); List targetOrgNames = []; for (String org : params.orgNames) { String cleanOrg = org.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); targetOrgNames.add(cleanOrg); } for (String targetOrgName : targetOrgNames) { if (cleanOrgName.equals(targetOrgName)) { return true; } } return false; } else { return false; }";
+
       mustBlock.push({
         bool: {
           should: [
@@ -384,8 +399,14 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
                         },
                       },
                       {
-                        bool: {
-                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contactForResource'),
+                        script: {
+                          script: {
+                            source: scriptSource,
+                            lang: 'painless',
+                            params: {
+                              orgNames: originatorTypeFilters,
+                            },
+                          },
                         },
                       },
                     ],
@@ -405,8 +426,14 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
                         },
                       },
                       {
-                        bool: {
-                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contact'),
+                        script: {
+                          script: {
+                            source: scriptSource,
+                            lang: 'painless',
+                            params: {
+                              orgNames: originatorTypeFilters,
+                            },
+                          },
                         },
                       },
                     ],
@@ -483,7 +510,7 @@ const _generateOriginatorFilterQuery = (searchBuilderPayload: ISearchBuilderPayl
       scripted_metric: {
         init_script: 'state.contacts = []; state.currentDocumentOrgName = [];',
         map_script:
-          "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+          "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null && cfr.organisationName != '') {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null && c.organisationName != '') {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
         combine_script: 'return state.contacts;',
         reduce_script:
           "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
