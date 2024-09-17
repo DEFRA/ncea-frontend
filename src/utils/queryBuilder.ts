@@ -8,7 +8,13 @@ import {
   ISearchPayload,
   IShapeCoordinates,
 } from '../interfaces/queryBuilder.interface';
-import { levelMap, mapResultMaxCount, resourceTypeFilterField, studyPeriodFilterField } from './constants';
+import {
+  levelMap,
+  mapResultMaxCount,
+  originatorTypeFilterField,
+  resourceTypeFilterField,
+  studyPeriodFilterField,
+} from './constants';
 
 const _generateQueryStringBlock = (
   searchTerm: string,
@@ -29,6 +35,14 @@ const _generateTermsBlock = (field: string, values: string[]): estypes.QueryDslQ
       [field]: values,
     },
   };
+};
+
+const buildOrganizationMatchClauses = (organizations, path) => {
+  return organizations.map((org) => ({
+    match_phrase: {
+      [`${path}.organisationName`]: org,
+    },
+  }));
 };
 
 const _generateFieldExistsBlock = (field: string): estypes.QueryDslQueryContainer => {
@@ -59,24 +73,60 @@ const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContaine
           {
             bool: {
               must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { lte: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.end.date': { gte: startDateValue } } },
+                {
+                  range: {
+                    'resourceTemporalExtentDetails.start.date': {
+                      lte: startDateValue,
+                    },
+                  },
+                },
+                {
+                  range: {
+                    'resourceTemporalExtentDetails.end.date': {
+                      gte: startDateValue,
+                    },
+                  },
+                },
               ],
             },
           },
           {
             bool: {
               must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.end.date': { lte: toDateValue } } },
+                {
+                  range: {
+                    'resourceTemporalExtentDetails.start.date': {
+                      gte: startDateValue,
+                    },
+                  },
+                },
+                {
+                  range: {
+                    'resourceTemporalExtentDetails.end.date': {
+                      lte: toDateValue,
+                    },
+                  },
+                },
               ],
             },
           },
           {
             bool: {
               must: [
-                { range: { 'resourceTemporalExtentDetails.start.date': { gte: startDateValue } } },
-                { range: { 'resourceTemporalExtentDetails.start.date': { lte: toDateValue } } },
+                {
+                  range: {
+                    'resourceTemporalExtentDetails.start.date': {
+                      gte: startDateValue,
+                    },
+                  },
+                },
+                {
+                  range: {
+                    'resourceTemporalExtentDetails.start.date': {
+                      lte: toDateValue,
+                    },
+                  },
+                },
               ],
             },
           },
@@ -232,6 +282,60 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
+
+    const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
+
+    if (originatorTypeFilters.length > 0) {
+      mustBlock.push({
+        bool: {
+          should: [
+            {
+              nested: {
+                path: 'contactForResource',
+                query: {
+                  bool: {
+                    must: [
+                      {
+                        match: {
+                          'contactForResource.role': 'originator',
+                        },
+                      },
+                      {
+                        bool: {
+                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contactForResource'),
+                        },
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+            {
+              nested: {
+                path: 'contact',
+                query: {
+                  bool: {
+                    must: [
+                      {
+                        match: {
+                          'contact.role': 'originator',
+                        },
+                      },
+                      {
+                        bool: {
+                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contact'),
+                        },
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+          ],
+        },
+      });
+    }
+
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
         must: [...mustBlock],
@@ -253,14 +357,66 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
+
     const filterBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
     const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
+    const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
     if (fields?.date?.fdy && fields?.date?.tdy) {
       filterBlock.push(..._generateRangeBlock(fields.date));
     }
     if (resourceTypeFilters.length > 0) {
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
+    }
+    if (originatorTypeFilters.length > 0) {
+      mustBlock.push({
+        bool: {
+          should: [
+            {
+              nested: {
+                path: 'contactForResource',
+                query: {
+                  bool: {
+                    must: [
+                      {
+                        match: {
+                          'contactForResource.role': 'originator',
+                        },
+                      },
+                      {
+                        bool: {
+                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contactForResource'),
+                        },
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+            {
+              nested: {
+                path: 'contact',
+                query: {
+                  bool: {
+                    must: [
+                      {
+                        match: {
+                          'contact.role': 'originator',
+                        },
+                      },
+                      {
+                        bool: {
+                          should: buildOrganizationMatchClauses(originatorTypeFilters, 'contact'),
+                        },
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+          ],
+        },
+      });
     }
     if (level && levelMap[level]) {
       filterBlock.push(_generateTermsBlock(levelMap[level], newParentArray));
@@ -310,13 +466,53 @@ const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPa
   return queryPayload;
 };
 
+const _generateOriginatorFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
+  const { docId = '' } = searchBuilderPayload;
+  if (docId === '') {
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    if (queryPayload?.query?.bool) {
+      queryPayload.query.bool = {
+        ...queryPayload.query.bool,
+        filter: [...filterBlock],
+      };
+    }
+  }
+  queryPayload.aggs = {
+    unique_originator_types: {
+      scripted_metric: {
+        init_script: 'state.contacts = []; state.currentDocumentOrgName = [];',
+        map_script:
+          "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+        combine_script: 'return state.contacts;',
+        reduce_script:
+          "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+      },
+    },
+  };
+  return queryPayload;
+};
+
 const generateFilterQuery = (
   searchBuilderPayload: ISearchBuilderPayload,
   { isStudyPeriod = false },
 ): estypes.SearchRequest => {
-  return isStudyPeriod
-    ? _generateStudyPeriodFilterQuery(searchBuilderPayload)
-    : _generateResourceTypeFilterQuery(searchBuilderPayload);
+  if (isStudyPeriod) {
+    return _generateStudyPeriodFilterQuery(searchBuilderPayload);
+  }
+
+  const resourceTypeFilterQuery = _generateResourceTypeFilterQuery(searchBuilderPayload);
+  const originatorFilterQuery = _generateOriginatorFilterQuery(searchBuilderPayload);
+
+  const combinedQuery: estypes.SearchRequest = {
+    ...resourceTypeFilterQuery,
+    aggs: {
+      ...resourceTypeFilterQuery.aggs,
+      ...originatorFilterQuery.aggs,
+    },
+  };
+
+  return combinedQuery;
 };
 
 export { generateSearchQuery, generateFilterQuery, buildCustomSortScriptForStudyPeriod };

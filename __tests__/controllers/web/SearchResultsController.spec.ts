@@ -71,6 +71,7 @@ describe('Deals with search results controller', () => {
       const paginationItems = getPaginationItems(1, 0, 10, queryObject);
       const queryString = readQueryParams(request.query);
       const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
+      const filterOriginatorTypePath = `${webRoutePaths.filterOriginatorType}?${queryString}`;
       const filterStudyPeriodPath = `${webRoutePaths.filterStudyPeriod}?${queryString}`;
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(
@@ -97,6 +98,7 @@ describe('Deals with search results controller', () => {
         filterOptions: processedFilterOptions,
         sortOptions: processedSortOptions,
         filterResourceTypePath,
+        filterOriginatorTypePath,
         filterStudyPeriodPath,
         sortSubmitPath,
         dateSearchPath: webRoutePaths.guidedDateSearch,
@@ -138,6 +140,7 @@ describe('Deals with search results controller', () => {
       const paginationItems = getPaginationItems(1, 0, 10, queryObject);
       const queryString = readQueryParams(request.query);
       const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
+      const filterOriginatorTypePath = `${webRoutePaths.filterOriginatorType}?${queryString}`;
       const filterStudyPeriodPath = `${webRoutePaths.filterStudyPeriod}?${queryString}`;
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(
@@ -164,6 +167,7 @@ describe('Deals with search results controller', () => {
         filterOptions: processedFilterOptions,
         sortOptions: processedSortOptions,
         filterResourceTypePath,
+        filterOriginatorTypePath,
         filterStudyPeriodPath,
         sortSubmitPath,
         dateSearchPath: webRoutePaths.guidedDateSearch,
@@ -602,6 +606,7 @@ describe('Deals with search results controller', () => {
         filterOptions: processedFilterOptions,
         filterInstance: 'map_results',
         filterResourceTypePath: '',
+        filterOriginatorTypePath:'',
         filterStudyPeriodPath: '',
       });
     });
@@ -616,6 +621,7 @@ describe('Deals with search results controller', () => {
         error,
         filterOptions: undefined,
         filterResourceTypePath: '',
+        filterOriginatorTypePath:'',
         filterStudyPeriodPath: '',
       });
     });

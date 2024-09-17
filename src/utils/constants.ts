@@ -11,6 +11,7 @@ export const webRoutePaths = {
   getMapResults: '/map-results',
   getMapFilters: '/map-filters',
   filterResourceType: '/resource-type-filter',
+  filterOriginatorType: '/originator-type-filter',
   filterStudyPeriod: '/study-period-filter',
   sortResults: '/sort-results',
   help: '/help',
@@ -51,6 +52,7 @@ export const requiredFieldsForMap: string[] = [
   'geom',
   'resourceIdentifier',
   'resourceType',
+  'originatorType',
   'resourceTemporalExtentDetails',
   'ownerOrgForResourceObject',
   'originatorOrgForResourceObject',
@@ -70,6 +72,7 @@ export const quickSearchTargetFields: string[] = [
   'tag.default',
   'cl_topic.default',
   'resourceType',
+  'originatorType',
   'supplementalInformationObject.default',
 ];
 
@@ -98,6 +101,7 @@ export const queryParamKeys = {
   sort: 'srt',
   journey: 'jry',
   resourceType: 'rty',
+  originatorType: 'oty',
   startYear: 'sy',
   toYear: 'ty',
   level: 'level',
@@ -105,16 +109,25 @@ export const queryParamKeys = {
 };
 
 export const uniqueResourceTypesKey: string = 'unique_resource_types';
+export const uniqueOriginatorTypesKey: string = 'unique_originator_types';
 export const startYearRangeKey: string = 'start_year_range';
 export const toYearRangeKey: string = 'to_year_range';
 export const yearRange: string = 'year';
 
 export const resourceTypeFilterField = 'resourceTypeFilter';
+export const originatorTypeFilterField = 'originatorTypeFilter';
 export const studyPeriodFilterField = 'studyPeriodFilter';
 
 export const defaultFilterOptions: IFilterOptions = [
   {
     key: uniqueResourceTypesKey,
+    needCount: true,
+    propertyToRead: 'key',
+    hasBucket: true,
+    isTerm: true,
+  },
+  {
+    key: uniqueOriginatorTypesKey,
     needCount: true,
     propertyToRead: 'key',
     hasBucket: true,

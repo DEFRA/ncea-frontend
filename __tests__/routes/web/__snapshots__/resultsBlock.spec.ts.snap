@@ -389,6 +389,8 @@ exports[`Results block template Guided search journey Search results with empty 
 
   
 
+    
+
 
         </div>
         <div class="govuk-grid-column-two-thirds">
@@ -932,6 +934,8 @@ exports[`Results block template Guided search journey Search results with error 
 
   
 
+    
+
 
         </div>
         <div class="govuk-grid-column-two-thirds">
@@ -1455,6 +1459,8 @@ exports[`Results block template Quick search journey Search results with data sh
 
 
   
+
+    
 
 
         </div>
@@ -2243,6 +2249,8 @@ exports[`Results block template Quick search journey Search results with empty d
 
   
 
+    
+
 
         </div>
         <div class="govuk-grid-column-two-thirds">
@@ -2785,6 +2793,8 @@ exports[`Results block template Quick search journey Search results with error s
 
 
   
+
+    
 
 
         </div>

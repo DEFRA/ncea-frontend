@@ -1,6 +1,11 @@
 import { RequestQuery } from '@hapi/hapi';
 import { ISearchFields, ISearchPayload } from '../interfaces/queryBuilder.interface';
-import { queryParamKeys, resourceTypeFilterField, studyPeriodFilterField } from './constants';
+import {
+  originatorTypeFilterField,
+  queryParamKeys,
+  resourceTypeFilterField,
+  studyPeriodFilterField,
+} from './constants';
 
 const setDefaultQueryParams = (searchParams: URLSearchParams): URLSearchParams => {
   const page = searchParams.get(queryParamKeys.page) ?? '1';
@@ -118,9 +123,10 @@ const getExtentParams = (searchParams: URLSearchParams): Record<string, string> 
 
 const getFilterParams = (searchParams: URLSearchParams): Record<string, string> => {
   const resourceType = searchParams.get(queryParamKeys.resourceType) ?? '';
+  const originatorType = searchParams.get(queryParamKeys.originatorType) ?? '';
   const startDate = searchParams.get(queryParamKeys.startYear) ?? '';
   const endDate = searchParams.get(queryParamKeys.toYear) ?? '';
-  return { resourceType, startDate, endDate };
+  return { resourceType, originatorType, startDate, endDate };
 };
 
 const generateCountPayload = (requestQuery: RequestQuery): ISearchPayload => {
@@ -163,6 +169,9 @@ const generateQueryBuilderPayload = (requestQuery: RequestQuery): ISearchPayload
     filters: {
       ...(filterParams.resourceType && {
         [resourceTypeFilterField]: filterParams.resourceType.split(','),
+      }),
+      ...(filterParams.originatorType && {
+        [originatorTypeFilterField]: filterParams.originatorType.split('|'),
       }),
       ...((filterParams.startDate || filterParams.endDate) && {
         [studyPeriodFilterField]: {

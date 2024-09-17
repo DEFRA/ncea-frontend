@@ -39,6 +39,11 @@ const searchResultsRoutes = [
   },
   {
     method: 'POST',
+    path: webRoutePaths.filterOriginatorType,
+    handler: SearchResultsController.filterOriginatorTypeHandler,
+  },
+  {
+    method: 'POST',
     path: webRoutePaths.filterStudyPeriod,
     handler: SearchResultsController.filterStudyPeriodHandler,
   },

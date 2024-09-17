@@ -7,6 +7,7 @@ import { IAggregationOptions } from '../../src/interfaces/searchResponse.interfa
 import {
   queryParamKeys,
   uniqueResourceTypesKey,
+  uniqueOriginatorTypesKey,
   startYearRangeKey,
   toYearRangeKey,
 } from '../../src/utils/constants';
@@ -18,6 +19,7 @@ describe('processFilterRSortOptions', () => {
         [startYearRangeKey]: [],
         [toYearRangeKey]: [],
         [uniqueResourceTypesKey]: [],
+        [uniqueOriginatorTypesKey]:[],
       };
       const requestQuery: RequestQuery = {};
 

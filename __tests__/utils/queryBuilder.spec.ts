@@ -2476,9 +2476,18 @@ describe('Build the search query', () => {
               field: 'resourceType',
             },
           },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
+          },
         },
         size: 0,
       };
+
 
       const result = generateFilterQuery(
         {
@@ -2550,6 +2559,14 @@ describe('Build the search query', () => {
               field: 'resourceType',
             },
           },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
+          },
         },
         size: 0,
       };
@@ -2608,6 +2625,14 @@ describe('Build the search query', () => {
             terms: {
               field: 'resourceType',
             },
+          },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
           },
         },
         size: 0,
@@ -2702,6 +2727,14 @@ describe('Build the search query', () => {
             terms: {
               field: 'resourceType',
             },
+          },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
           },
         },
         size: 0,
@@ -3064,6 +3097,14 @@ describe('Build the search query', () => {
               field: 'resourceType',
             },
           },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
+          },
         },
         size: 0,
       };
@@ -3143,6 +3184,14 @@ describe('Build the search query', () => {
             terms: {
               field: 'resourceType',
             },
+          },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
           },
         },
         size: 0,
@@ -3238,6 +3287,14 @@ describe('Build the search query', () => {
             terms: {
               field: 'resourceType',
             },
+          },
+          unique_originator_types:  {
+            "scripted_metric":  {
+             "combine_script": "return state.contacts;",
+             "init_script": "state.contacts = []; state.currentDocumentOrgName = [];",
+                    "map_script": "state.currentDocumentOrgName = new HashSet(); if (params._source.containsKey('contactForResource')) {for (cfr in params._source.contactForResource) {if (cfr.role == 'originator' && cfr.organisationName != null) {state.currentDocumentOrgName.add(cfr.organisationName.trim());}}} if (params._source.containsKey('contact')) {for (c in params._source.contact) {if (c.role == 'originator' && c.organisationName != null) {state.currentDocumentOrgName.add(c.organisationName.trim());}}} state.contacts.addAll(state.currentDocumentOrgName);",
+                       "reduce_script": "Map combined = [:]; for (contacts in states) { for (c in contacts) { if (combined.containsKey(c)) { combined[c] += 1; } else { combined[c] = 1; } } } List bucketList = []; for (entry in combined.entrySet()) { Map bucket = [:]; bucket['key'] = entry.getKey(); bucket['doc_count'] = entry.getValue(); bucketList.add(bucket); } return ['buckets': bucketList, 'doc_count_error_upper_bound': 0, 'sum_other_doc_count': 0];",
+             },
           },
         },
         size: 0,

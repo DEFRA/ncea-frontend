@@ -39,8 +39,11 @@ const formatAggregationResponse = async (
   try {
     const finalResponse: IAggregationOptions = {};
     filterOptions.forEach((filterOption: IFilterOption) => {
-      const apiAggValues = apiResponse?.aggregations?.[filterOption.key];
+      let apiAggValues = apiResponse?.aggregations?.[filterOption.key];
       const { isTerm, isDate } = filterOption;
+      if (apiAggValues?.value) {
+        apiAggValues = apiAggValues.value;
+      }
       if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues?.buckets.length > 0) {
         let nonGeoIndex = -1;
         let publicationIndex = -1;

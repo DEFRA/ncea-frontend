@@ -171,6 +171,7 @@ describe('queryStringHelper functions', () => {
         endDate: '',
         startDate: '',
         resourceType: 'test',
+        originatorType:''
       });
     });
 
@@ -181,6 +182,7 @@ describe('queryStringHelper functions', () => {
         resourceType: '',
         endDate: '',
         startDate: '',
+        originatorType:''
       });
     });
   });
