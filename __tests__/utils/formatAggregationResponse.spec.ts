@@ -15,6 +15,14 @@ import {
 } from '../../src/utils/constants';
 
 describe('formatAggregationResponse', () => {
+  it('should handle undefined apiAggValues', async () => {
+    const apiResponse = {
+      aggregations: {},
+    };
+    const filterOptions = [{ key: 'category', isTerm: true, propertyToRead: 'key', needCount: true }];
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+    expect(result.category).toBeUndefined();
+  });
   it('should return empty object when apiResponse is empty', async () => {
     const apiResponse = {
       hits: {
