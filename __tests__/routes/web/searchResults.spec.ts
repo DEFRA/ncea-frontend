@@ -346,8 +346,8 @@ describe('Results Screen', () => {
       });
     });
 
-    describe('Questionnaire search container block heading', () => {
-      it('should render the questionnaire search container heading', async () => {
+    describe('Category search container block heading', () => {
+      it('should render the Category search container heading', async () => {
         expect(
           document
             ?.querySelectorAll('.govuk-heading-m')?.[2]
@@ -364,8 +364,8 @@ describe('Results Screen', () => {
       });
     });
 
-    describe('Questionnaire search block action', () => {
-      it('should render the questionnaire search button', () => {
+    describe('Category search block action', () => {
+      it('should render the Category search button', () => {
         const anchorElement = document?.querySelector('.govuk-button--start');
         expect(anchorElement?.tagName?.toLowerCase()).toBe('a');
       });
