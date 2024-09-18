@@ -33,7 +33,7 @@ const upsertQueryParams = (
     Object.keys(queryParamsObject).forEach((key: string) => {
       const value: string = queryParamsObject[key] ?? '';
       if (value) {
-        searchParams.set(key, value);
+        searchParams.set(key, value.replace("\r",''));
       }
       if (!value && searchParams.has(key)) {
         searchParams.delete(key);
