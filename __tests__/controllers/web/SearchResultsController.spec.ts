@@ -653,4 +653,32 @@ describe('Deals with search results controller', () => {
     });
   });
 
+  describe('filterOriginatorTypeHandler', () => {
+
+    it('should handle string originator_type and redirect with correct query string', async () => {
+      const request: Request = {
+        payload: {
+          originator_type: ['type1'],
+        },
+      } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.originatorType]: 'type1',
+        [queryParamKeys.page]: '1',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+        false,
+      );
+      await SearchResultsController.filterOriginatorTypeHandler(
+        request,
+        response,
+      );
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
+    });
+  });
 });
