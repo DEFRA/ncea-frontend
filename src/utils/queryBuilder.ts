@@ -261,6 +261,72 @@ const _generateDateRangeQuery = (
   return filterBlock;
 };
 
+const _generateOriginatorTypeFilter = (originatorTypeFilters: string[]): estypes.QueryDslQueryContainer => {
+  const scriptSource =
+  "if (doc['contactForResource.organisationName.keyword'].size() > 0) { String orgName = doc['contactForResource.organisationName.keyword'].value; String cleanOrgName = orgName.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); List targetOrgNames = []; for (String org : params.orgNames) { String cleanOrg = org.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); targetOrgNames.add(cleanOrg); } for (String targetOrgName : targetOrgNames) { if (cleanOrgName.equals(targetOrgName)) { return true; } } return false; } else { return false; }";
+
+  return {
+    bool: {
+      should: [
+        {
+          nested: {
+            path: 'contactForResource',
+            query: {
+              bool: {
+                must: [
+                  {
+                    match: {
+                      'contactForResource.role': 'originator',
+                    },
+                  },
+                  {
+                    script: {
+                      script: {
+                        source: scriptSource,
+                        lang: 'painless',
+                        params: {
+                          orgNames: originatorTypeFilters,
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+        {
+          nested: {
+            path: 'contact',
+            query: {
+              bool: {
+                must: [
+                  {
+                    match: {
+                      'contact.role': 'originator',
+                    },
+                  },
+                  {
+                    script: {
+                      script: {
+                        source: scriptSource,
+                        lang: 'painless',
+                        params: {
+                          orgNames: originatorTypeFilters,
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      ],
+    },
+  };
+};
+
 const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
   const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
@@ -277,71 +343,8 @@ const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estyp
     }
 
     const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
-
     if (originatorTypeFilters.length > 0) {
-      const scriptSource =
-        "if (doc['contactForResource.organisationName.keyword'].size() > 0) { String orgName = doc['contactForResource.organisationName.keyword'].value; String cleanOrgName = orgName.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); List targetOrgNames = []; for (String org : params.orgNames) { String cleanOrg = org.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); targetOrgNames.add(cleanOrg); } for (String targetOrgName : targetOrgNames) { if (cleanOrgName.equals(targetOrgName)) { return true; } } return false; } else { return false; }";
-
-      mustBlock.push({
-        bool: {
-          should: [
-            {
-              nested: {
-                path: 'contactForResource',
-                query: {
-                  bool: {
-                    must: [
-                      {
-                        match: {
-                          'contactForResource.role': 'originator',
-                        },
-                      },
-                      {
-                        script: {
-                          script: {
-                            source: scriptSource,
-                            lang: 'painless',
-                            params: {
-                              orgNames: originatorTypeFilters,
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                },
-              },
-            },
-            {
-              nested: {
-                path: 'contact',
-                query: {
-                  bool: {
-                    must: [
-                      {
-                        match: {
-                          'contact.role': 'originator',
-                        },
-                      },
-                      {
-                        script: {
-                          script: {
-                            source: scriptSource,
-                            lang: 'painless',
-                            params: {
-                              orgNames: originatorTypeFilters,
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                },
-              },
-            },
-          ],
-        },
-      });
+      mustBlock.push(_generateOriginatorTypeFilter(originatorTypeFilters));
     }
 
     if (queryPayload?.query?.bool) {
@@ -381,69 +384,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
     if (originatorTypeFilters.length > 0) {
-      const scriptSource =
-        "if (doc['contactForResource.organisationName.keyword'].size() > 0) { String orgName = doc['contactForResource.organisationName.keyword'].value; String cleanOrgName = orgName.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); List targetOrgNames = []; for (String org : params.orgNames) { String cleanOrg = org.replace(',', '').replace(\"'\", '').replace('-', '').trim().toLowerCase(); targetOrgNames.add(cleanOrg); } for (String targetOrgName : targetOrgNames) { if (cleanOrgName.equals(targetOrgName)) { return true; } } return false; } else { return false; }";
-
-      mustBlock.push({
-        bool: {
-          should: [
-            {
-              nested: {
-                path: 'contactForResource',
-                query: {
-                  bool: {
-                    must: [
-                      {
-                        match: {
-                          'contactForResource.role': 'originator',
-                        },
-                      },
-                      {
-                        script: {
-                          script: {
-                            source: scriptSource,
-                            lang: 'painless',
-                            params: {
-                              orgNames: originatorTypeFilters,
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                },
-              },
-            },
-            {
-              nested: {
-                path: 'contact',
-                query: {
-                  bool: {
-                    must: [
-                      {
-                        match: {
-                          'contact.role': 'originator',
-                        },
-                      },
-                      {
-                        script: {
-                          script: {
-                            source: scriptSource,
-                            lang: 'painless',
-                            params: {
-                              orgNames: originatorTypeFilters,
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                },
-              },
-            },
-          ],
-        },
-      });
+      mustBlock.push(_generateOriginatorTypeFilter(originatorTypeFilters));
     }
     if (level && levelMap[level]) {
       filterBlock.push(_generateTermsBlock(levelMap[level], newParentArray));
