@@ -658,7 +658,7 @@ describe('Deals with search results controller', () => {
     it('should handle string originator_type and redirect with correct query string', async () => {
       const request: Request = {
         payload: {
-          originator_type: ['type1'],
+          originator_type: 'type1',
         },
       } as any;
       const response: ResponseToolkit = { redirect: jest.fn() } as any;
@@ -680,5 +680,108 @@ describe('Deals with search results controller', () => {
         `${webRoutePaths.results}?${queryString}`,
       );
     });
+
+    it('should handle array originator_type with multiple types and redirect with correct query string', async () => {
+      const request: Request = {
+        payload: {
+          originator_type: ['type1', 'type2'],
+        },
+      } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.originatorType]: 'type1|type2',
+        [queryParamKeys.page]: '1',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+        false,
+      );
+      await SearchResultsController.filterOriginatorTypeHandler(
+        request,
+        response,
+      );
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
+    });
+
+    it('should handle undefined originator_type and redirect with correct query string', async () => {
+      const request: Request = {
+        payload: {},
+      } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.originatorType]: '',
+        [queryParamKeys.page]: '1',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+        false,
+      );
+      await SearchResultsController.filterOriginatorTypeHandler(
+        request,
+        response,
+      );
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
+    });
+
+    it('should handle null originator_type and redirect with correct query string', async () => {
+      const request: Request = {
+        payload: {
+          originator_type: null,
+        },
+      } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.originatorType]: '',
+        [queryParamKeys.page]: '1',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+        false,
+      );
+      await SearchResultsController.filterOriginatorTypeHandler(
+        request,
+        response,
+      );
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
+    });
+
+    it('should handle empty array originator_type and redirect with correct query string', async () => {
+      const request: Request = {
+        payload: {
+          originator_type: [],
+        },
+      } as any;
+      const response: ResponseToolkit = { redirect: jest.fn() } as any;
+
+      const queryParamsObject: Record<string, string> = {
+        [queryParamKeys.originatorType]: '',
+        [queryParamKeys.page]: '1',
+      };
+      const queryString: string = upsertQueryParams(
+        request.query,
+        queryParamsObject,
+        false,
+      );
+      await SearchResultsController.filterOriginatorTypeHandler(
+        request,
+        response,
+      );
+      expect(response.redirect).toHaveBeenCalledWith(
+        `${webRoutePaths.results}?${queryString}`,
+      );
+    });
+
   });
 });
