@@ -58,15 +58,27 @@ const formatAggregationResponse = async (
         } else if (nonGeoIndex === -1 && publicationIndex !== -1) {
           apiAggValues.buckets[publicationIndex].key = 'nonGeographicDataset';
         }
-        finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
-          const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
-          let text: string = capitalizeWords(wordsWithSpace);
-          if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
-          return {
-            value: bucket[filterOption.propertyToRead],
-            text,
-          };
-        });
+        if(apiAggValues?.type === 'originator'){
+          finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
+            const wordsWithSpace = bucket[filterOption.propertyToRead];
+            let text: string = wordsWithSpace;
+            if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
+            return {
+              value: bucket[filterOption.propertyToRead],
+              text,
+            };
+          });
+        }else{
+          finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
+            const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
+            let text: string = capitalizeWords(wordsWithSpace);
+            if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
+            return {
+              value: bucket[filterOption.propertyToRead],
+              text,
+            };
+          });
+        }
       } else if (isDate) {
         const maxYearDateString: string =
           apiResponse?.aggregations?.[`max_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
