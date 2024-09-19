@@ -15,6 +15,32 @@ import {
 } from '../../src/utils/constants';
 
 describe('formatAggregationResponse', () => {
+  it('should assign apiAggValues.value to apiAggValues when apiAggValues.value exists', async () => {
+    const apiResponse = {
+      aggregations: {
+        category: {
+          value: { buckets: [{ key: 'testBucket', doc_count: 5 }] },
+        },
+      },
+    };
+    const filterOptions = [{ key: 'category', isTerm: true, propertyToRead: 'key', needCount: true }];
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+    expect(result.category).toEqual([{ value: 'testBucket', text: 'Test Bucket (5)' }]);
+  });
+
+  it('should not modify apiAggValues when apiAggValues.value does not exist', async () => {
+    const apiResponse = {
+      aggregations: {
+        category: {
+          buckets: [{ key: 'otherBucket', doc_count: 10 }],
+        },
+      },
+    };
+    const filterOptions = [{ key: 'category', isTerm: true, propertyToRead: 'key', needCount: true }];
+    const result = await formatAggregationResponse(apiResponse, filterOptions);
+    expect(result.category).toEqual([{ value: 'otherBucket', text: 'Other Bucket (10)' }]);
+  });
+
   it('should return empty object when apiResponse is empty', async () => {
     const apiResponse = {
       hits: {

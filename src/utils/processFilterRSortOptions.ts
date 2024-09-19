@@ -1,21 +1,30 @@
 import { RequestQuery } from '@hapi/hapi';
 import { readQueryParams } from './queryStringHelper';
 import { IAggregationOption, IAggregationOptions } from '../interfaces/searchResponse.interface';
-import { queryParamKeys, startYearRangeKey, toYearRangeKey, uniqueResourceTypesKey } from './constants';
+import {
+  queryParamKeys,
+  startYearRangeKey,
+  toYearRangeKey,
+  uniqueOriginatorTypesKey,
+  uniqueResourceTypesKey,
+} from './constants';
 
 const processFilterOptions = async (
   filterOptions: IAggregationOptions,
   requestQuery: RequestQuery,
 ): Promise<IAggregationOptions> => {
-  const { startYear, toYear, resourceType } = queryParamKeys;
+  const { startYear, toYear, resourceType, originatorType } = queryParamKeys;
   const startYearValue = readQueryParams(requestQuery, startYear);
   const toYearValue = readQueryParams(requestQuery, toYear);
   const resourceTypeValue = readQueryParams(requestQuery, resourceType).split(',');
 
+  const originatorTypeValue = readQueryParams(requestQuery, originatorType).split('|');
   const startYearOptions: IAggregationOption[] = filterOptions[startYearRangeKey] ?? [];
   const toYearOptions: IAggregationOption[] = filterOptions[toYearRangeKey] ?? [];
 
   const resourceTypeOptions: IAggregationOption[] = filterOptions[uniqueResourceTypesKey] ?? [];
+
+  const originatorTypeOptions: IAggregationOption[] = filterOptions[uniqueOriginatorTypesKey] ?? [];
 
   startYearOptions.forEach((option: IAggregationOption) => {
     if (option.value === startYearValue) option.selected = true;
@@ -38,8 +47,13 @@ const processFilterOptions = async (
     if (resourceTypeValue.includes(option.value)) option.checked = true;
   });
 
+  originatorTypeOptions.forEach((option: IAggregationOption) => {
+    if (originatorTypeValue.includes(option.value)) option.checked = true;
+  });
+
   return {
     [uniqueResourceTypesKey]: [...resourceTypeOptions],
+    [uniqueOriginatorTypesKey]: [...originatorTypeOptions],
     [startYearRangeKey]: [...startYearOptions],
     [toYearRangeKey]: [...toYearOptions],
   };

@@ -7,17 +7,65 @@ import { IAggregationOptions } from '../../src/interfaces/searchResponse.interfa
 import {
   queryParamKeys,
   uniqueResourceTypesKey,
+  uniqueOriginatorTypesKey,
   startYearRangeKey,
   toYearRangeKey,
 } from '../../src/utils/constants';
 
 describe('processFilterRSortOptions', () => {
   describe('processFilterOptions', () => {
+    test('should correctly process originatorTypeOptions with no matching values', async () => {
+      const filterOptions: IAggregationOptions = {
+        [uniqueOriginatorTypesKey]: [
+          { value: 'type1', text: 'Type 1', checked: false },
+          { value: 'type2', text: 'Type 2', checked: false },
+        ],
+      };
+      const requestQuery: RequestQuery = {
+        [queryParamKeys.originatorType]: 'type3',
+      };
+
+      const result = await processFilterOptions(filterOptions, requestQuery);
+
+      expect(result?.[uniqueOriginatorTypesKey]?.[0]?.checked ?? '').toBe(false);
+      expect(result?.[uniqueOriginatorTypesKey]?.[1]?.checked ?? '').toBe(false);
+    });
+
+    test('should correctly process originatorTypeOptions with some matching values', async () => {
+      const filterOptions: IAggregationOptions = {
+        [uniqueOriginatorTypesKey]: [
+          { value: 'type1', text: 'Type 1', checked: false },
+          { value: 'type2', text: 'Type 2', checked: false },
+        ],
+      };
+      const requestQuery: RequestQuery = {
+        [queryParamKeys.originatorType]: 'type1',
+      };
+
+      const result = await processFilterOptions(filterOptions, requestQuery);
+
+      expect(result?.[uniqueOriginatorTypesKey]?.[0]?.checked ?? '').toBe(true);
+      expect(result?.[uniqueOriginatorTypesKey]?.[1]?.checked ?? '').toBe(false);
+    });
+
+    test('should correctly process originatorTypeOptions when options array is empty', async () => {
+      const filterOptions: IAggregationOptions = {
+        [uniqueOriginatorTypesKey]: [],
+      };
+      const requestQuery: RequestQuery = {
+        [queryParamKeys.originatorType]: 'type1',
+      };
+
+      const result = await processFilterOptions(filterOptions, requestQuery);
+
+      expect(result?.[uniqueOriginatorTypesKey]?.length).toBe(0);
+    });
     test('should return default aggregation options when no query params provided', async () => {
       const filterOptions: IAggregationOptions = {
         [startYearRangeKey]: [],
         [toYearRangeKey]: [],
         [uniqueResourceTypesKey]: [],
+        [uniqueOriginatorTypesKey]:[],
       };
       const requestQuery: RequestQuery = {};
 

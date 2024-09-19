@@ -23,6 +23,7 @@ import {
   requiredFieldsForMap,
   startYearRangeKey,
   toYearRangeKey,
+  uniqueOriginatorTypesKey,
   uniqueResourceTypesKey,
   webRoutePaths,
 } from '../../utils/constants';
@@ -51,14 +52,21 @@ const SearchResultsController = {
         { isStudyPeriod: false },
         isQuickSearchJourney,
       );
+      const originatorTypeFilterOptions: IAggregationOptions = await getFilterOptions(
+        payload,
+        { isStudyPeriod: false },
+        isQuickSearchJourney,
+      );
       const filterOptions: IAggregationOptions = {
         [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
+        [uniqueOriginatorTypesKey]: originatorTypeFilterOptions[uniqueOriginatorTypesKey] ?? [],
         [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
         [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
       };
       const paginationItems = getPaginationItems(page, searchResults?.total ?? 0, rowsPerPage, request.query);
       const queryString = readQueryParams(request.query);
       const filterResourceTypePath = `${webRoutePaths.filterResourceType}?${queryString}`;
+      const filterOriginatorTypePath = `${webRoutePaths.filterOriginatorType}?${queryString}`;
       const filterStudyPeriodPath = `${webRoutePaths.filterStudyPeriod}?${queryString}`;
       const sortSubmitPath = `${webRoutePaths.sortResults}?${queryString}`;
       const processedFilterOptions = await processFilterOptions(filterOptions, request.query);
@@ -78,6 +86,7 @@ const SearchResultsController = {
         filterOptions: processedFilterOptions,
         sortOptions: processedSortOptions,
         filterResourceTypePath,
+        filterOriginatorTypePath,
         filterStudyPeriodPath,
         sortSubmitPath,
         dateSearchPath: webRoutePaths.guidedDateSearch,
@@ -163,8 +172,14 @@ const SearchResultsController = {
         },
         isQuickSearchJourney,
       );
+      const originatorTypeFilterOptions: IAggregationOptions = await getFilterOptions(
+        mapPayload,
+        { isStudyPeriod: false },
+        isQuickSearchJourney,
+      );
       const filterOptions: IAggregationOptions = {
         [uniqueResourceTypesKey]: resourceTypeFilterOptions[uniqueResourceTypesKey] ?? [],
+        [uniqueOriginatorTypesKey]: originatorTypeFilterOptions[uniqueOriginatorTypesKey] ?? [],
         [startYearRangeKey]: studyPeriodFilterOptions[startYearRangeKey] ?? [],
         [toYearRangeKey]: studyPeriodFilterOptions[toYearRangeKey] ?? [],
       };
@@ -173,6 +188,7 @@ const SearchResultsController = {
         filterOptions: processedFilterOptions,
         filterInstance: 'map_results',
         filterResourceTypePath: '',
+        filterOriginatorTypePath: '',
         filterStudyPeriodPath: '',
       });
     } catch (error) {
@@ -180,6 +196,7 @@ const SearchResultsController = {
         error,
         filterOptions: undefined,
         filterResourceTypePath: '',
+        filterOriginatorTypePath: '',
         filterStudyPeriodPath: '',
       });
     }
@@ -224,6 +241,25 @@ const SearchResultsController = {
     const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
     return response.redirect(`${webRoutePaths.results}?${queryString}`);
   },
+
+  filterOriginatorTypeHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const payload = request.payload as Record<string, string>;
+    let originatorTypeValues = '';
+
+    if (payload?.['originator_type'] && Array.isArray(payload?.['originator_type'])) {
+      originatorTypeValues = payload['originator_type'].join('|');
+    } else if (payload?.['originator_type'] && typeof payload?.['originator_type'] === 'string') {
+      originatorTypeValues = payload?.['originator_type'];
+    }
+
+    const queryParamsObject: Record<string, string> = {
+      [queryParamKeys.originatorType]: originatorTypeValues,
+      [queryParamKeys.page]: '1',
+    };
+    const queryString: string = upsertQueryParams(request.query, queryParamsObject, false);
+    return response.redirect(`${webRoutePaths.results}?${queryString}`);
+  },
+
   filterStudyPeriodHandler: async (request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
     const payload = request.payload as Record<string, string>;
     const queryParamsObject: Record<string, string> = {

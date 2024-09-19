@@ -7,6 +7,7 @@ import { invokeAjaxCall } from './fetchResults.js';
 import {
   addFilterHeadingClickListeners,
   attachStudyPeriodChangeListener,
+  addFilterOriginatorHeadingClickListeners,
 } from './filters.js';
 
 const index3 = 3;
@@ -40,6 +41,7 @@ const defaultFilterOptions = {
   startYear: '',
   toYear: '',
   resourceType: [],
+  originatorType: [],
 };
 let appliedFilterOptions = { ...defaultFilterOptions };
 const markerOverlays = [];
@@ -438,10 +440,10 @@ const getHighlighterMarkerStyle = (iconPath) => {
   return new ol.style.Style({
     image: new ol.style.Icon({
       src: iconPath,
-      anchor: [0.5,1],
+      anchor: [0.5, 1],
       scale: 1.0,
     }),
-    zIndex: 10
+    zIndex: 10,
   });
 };
 
@@ -491,9 +493,13 @@ function resetFilterData() {
   const resourceTypeForm = document.getElementById(
     'resource_type_filter-map_results',
   );
-  if (studyPeriodForm && resourceTypeForm) {
+  const originatorTypeForm = document.getElementById(
+    'originator_type_filter-map_results',
+  );
+  if (studyPeriodForm && resourceTypeForm && originatorTypeForm) {
     studyPeriodForm.reset();
     resourceTypeForm.reset();
+    originatorTypeForm.reset();
   }
 }
 
@@ -606,13 +612,23 @@ const attachMapResultsFilterCheckboxChangeListener = () => {
   if (mapResultsFilterCheckboxes.length) {
     mapResultsFilterCheckboxes.forEach((checkbox) => {
       checkbox.addEventListener('change', function (event) {
-        const { value, checked } = event.target;
-        const index = appliedFilterOptions.resourceType.indexOf(value);
-        if (checked && index === -1) {
-          appliedFilterOptions.resourceType.push(value);
+        const { value, checked, id } = event.target;
+         if(id.includes("originator_type")){
+          const indexOriginator =
+          appliedFilterOptions.originatorType.indexOf(value);
+        if (checked && indexOriginator === -1) {
+          appliedFilterOptions.originatorType.push(value);
         } else {
-          appliedFilterOptions.resourceType.splice(index, 1);
+          appliedFilterOptions.originatorType.splice(indexOriginator, 1);
         }
+         }else{
+          const index = appliedFilterOptions.resourceType.indexOf(value);
+          if (checked && index === -1) {
+            appliedFilterOptions.resourceType.push(value);
+          } else {
+            appliedFilterOptions.resourceType.splice(index, 1);
+          }
+         }
         resetData = true;
         invokeMapResults(true);
         invokeMapFilters();
@@ -678,6 +694,7 @@ const getMapFilters = async (path) => {
     const mapFiltersHtml = await response.text();
     document.getElementById(filterBlockId).innerHTML = mapFiltersHtml;
     addFilterHeadingClickListeners('map_results');
+    addFilterOriginatorHeadingClickListeners("map_results");
     attachStudyPeriodChangeListener('map_results');
     attachMapResultsFilterCheckboxChangeListener();
     const mapFilterStartYear = document.getElementById(
@@ -693,13 +710,17 @@ const getMapFilters = async (path) => {
 
 const getPathWithQueryParams = (basePath, needOriginalQueryParams) => {
   const queryParams = new URLSearchParams(window.location.search);
-  const { startYear, toYear, resourceType } = appliedFilterOptions;
+  const { startYear, toYear, resourceType, originatorType } =
+    appliedFilterOptions;
   if (startYear && toYear && !needOriginalQueryParams) {
     queryParams.set('sy', startYear);
     queryParams.set('ty', toYear);
   }
   if (resourceType.length > 0 && !needOriginalQueryParams) {
     queryParams.set('rty', resourceType.join(','));
+  }
+  if (originatorType.length > 0 && !needOriginalQueryParams) {
+    queryParams.set('oty', originatorType.join('|'));
   }
   const queryString = queryParams.size > 0 ? `?${queryParams.toString()}` : '';
   return `${basePath}${queryString}`;
@@ -854,14 +875,14 @@ function keyupHandler(event) {
   const key = event.key;
   //Will be required if Tab press
   // if (key === 'Tab') {
-    const visibleMarkers = markerLayer
-      .getSource()
-      .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
-    visibleMarkers.forEach((marker, index) => {
-      createTooltipOverlay(index);
-      const coord = marker.getGeometry().getCoordinates();
-      markerOverlays[index].setPosition(coord);
-    });
+  const visibleMarkers = markerLayer
+    .getSource()
+    .getFeaturesInExtent(map.getView().calculateExtent(map.getSize()));
+  visibleMarkers.forEach((marker, index) => {
+    createTooltipOverlay(index);
+    const coord = marker.getGeometry().getCoordinates();
+    markerOverlays[index].setPosition(coord);
+  });
   // }
 }
 

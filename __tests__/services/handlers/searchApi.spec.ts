@@ -4,6 +4,7 @@ import { ISearchPayload } from '../../../src/interfaces/queryBuilder.interface';
 import {
   resourceTypeFilterField,
   uniqueResourceTypesKey,
+  uniqueOriginatorTypesKey,
   yearRange,
 } from '../../../src/utils/constants';
 import {
@@ -248,6 +249,7 @@ describe('Search API', () => {
       const filterOptionsResponse: IAggregationOptions = {
         [yearRange]: [],
         [uniqueResourceTypesKey]: [],
+        [uniqueOriginatorTypesKey]:[]
       };
       expect(result).toEqual(filterOptionsResponse);
     });

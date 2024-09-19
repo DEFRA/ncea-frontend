@@ -24,6 +24,7 @@ type ClassifierLevel = {
 type ApiResponse = {
   classifier_level?: ClassifierLevel;
 };
+
 const generateRange = (start, end): IAggregationOption[] => {
   return Array.from({ length: end - start + 1 }, (_, index) => ({
     value: String(start + index),
@@ -38,53 +39,66 @@ const formatAggregationResponse = async (
 ): Promise<IAggregationOptions> => {
   try {
     const finalResponse: IAggregationOptions = {};
-    filterOptions.forEach((filterOption: IFilterOption) => {
-      const apiAggValues = apiResponse?.aggregations?.[filterOption.key];
-      const { isTerm, isDate } = filterOption;
-      if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues?.buckets.length > 0) {
-        let nonGeoIndex = -1;
-        let publicationIndex = -1;
-        apiAggValues.buckets.forEach((bucket, index) => {
-          if (bucket.key === 'nonGeographicDataset') nonGeoIndex = index;
-          if (bucket.key === 'publication') publicationIndex = index;
-        });
 
-        if (nonGeoIndex !== -1 && publicationIndex !== -1) {
-          apiAggValues.buckets[nonGeoIndex].doc_count += apiAggValues.buckets[publicationIndex].doc_count;
-          apiAggValues.buckets.splice(publicationIndex, 1);
-        } else if (nonGeoIndex === -1 && publicationIndex !== -1) {
-          apiAggValues.buckets[publicationIndex].key = 'nonGeographicDataset';
-        }
-        finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
-          const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
-          let text: string = capitalizeWords(wordsWithSpace);
-          if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
-          return {
-            value: bucket[filterOption.propertyToRead],
-            text,
-          };
-        });
+    const handleBuckets = (buckets) => {
+      let nonGeoIndex = -1;
+      let publicationIndex = -1;
+      buckets.forEach((bucket, index) => {
+        if (bucket.key === 'nonGeographicDataset') nonGeoIndex = index;
+        if (bucket.key === 'publication') publicationIndex = index;
+      });
+
+      if (nonGeoIndex !== -1 && publicationIndex !== -1) {
+        buckets[nonGeoIndex].doc_count += buckets[publicationIndex].doc_count;
+        buckets.splice(publicationIndex, 1);
+      } else if (nonGeoIndex === -1 && publicationIndex !== -1) {
+        buckets[publicationIndex].key = 'nonGeographicDataset';
+      }
+    };
+    const formatBucket = (bucket, filterOption, capitalize = true) => {
+      const wordsWithSpace = capitalize
+        ? addSpaces(bucket[filterOption.propertyToRead])
+        : bucket[filterOption.propertyToRead];
+
+      let text = capitalize ? capitalizeWords(wordsWithSpace) : wordsWithSpace;
+      if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
+
+      return {
+        value: bucket[filterOption.propertyToRead],
+        text,
+      };
+    };
+    const handleDate = (filterOption, finalResponse) => {
+      const maxYearDateString: string =
+        apiResponse?.aggregations?.[`max_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
+      const minYearDateString: string =
+        apiResponse?.aggregations?.[`min_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
+      if (maxYearDateString && minYearDateString) {
+        const maxYear: number = Math.floor(parseInt(getYear(maxYearDateString)));
+        const minYear: number = Math.floor(parseInt(getYear(minYearDateString)));
+        const yearRange: IAggregationOption[] = generateRange(minYear, maxYear);
+        finalResponse[startYearRangeKey] = yearRange;
+        finalResponse[toYearRangeKey] = yearRange;
+      } else {
+        finalResponse[startYearRangeKey] = [];
+        finalResponse[toYearRangeKey] = [];
+      }
+    };
+    filterOptions.forEach((filterOption: IFilterOption) => {
+      let apiAggValues = apiResponse?.aggregations?.[filterOption.key];
+      const { isTerm, isDate } = filterOption;
+
+      if (apiAggValues?.value) apiAggValues = apiAggValues.value;
+
+      if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues.buckets.length > 0) {
+        handleBuckets(apiAggValues.buckets);
+
+        finalResponse[filterOption.key] =
+          apiAggValues.type === 'originator'
+            ? apiAggValues.buckets.map((bucket) => formatBucket(bucket, filterOption, false))
+            : apiAggValues.buckets.map((bucket) => formatBucket(bucket, filterOption));
       } else if (isDate) {
-        const maxYearDateString: string =
-          apiResponse?.aggregations?.[`max_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
-        const minYearDateString: string =
-          apiResponse?.aggregations?.[`min_${filterOption.key}`]?.[filterOption.propertyToRead] ?? '';
-        if (maxYearDateString && minYearDateString) {
-          const maxYearValue: string = getYear(maxYearDateString);
-          const minYearValue: string = getYear(minYearDateString);
-          const maxYear: number = Math.floor(parseInt(maxYearValue));
-          const minYear: number = Math.floor(parseInt(minYearValue));
-          const yearRange: IAggregationOption[] = generateRange(minYear, maxYear);
-          finalResponse[startYearRangeKey] = yearRange.map((year) => ({
-            ...year,
-          }));
-          finalResponse[toYearRangeKey] = yearRange.map((year) => ({
-            ...year,
-          }));
-        } else {
-          finalResponse[startYearRangeKey] = [];
-          finalResponse[toYearRangeKey] = [];
-        }
+        handleDate(filterOption, finalResponse);
       } else {
         finalResponse[uniqueResourceTypesKey] = [];
         finalResponse[startYearRangeKey] = [];
