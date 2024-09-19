@@ -29,10 +29,7 @@ const _generateQueryStringBlock = (
   };
 };
 
-const _generateTermsBlock = (
-  field: string,
-  values: string[],
-): estypes.QueryDslQueryContainer => {
+const _generateTermsBlock = (field: string, values: string[]): estypes.QueryDslQueryContainer => {
   return {
     terms: {
       [field]: values,
@@ -40,17 +37,13 @@ const _generateTermsBlock = (
   };
 };
 
-const _generateFieldExistsBlock = (
-  field: string,
-): estypes.QueryDslQueryContainer => {
+const _generateFieldExistsBlock = (field: string): estypes.QueryDslQueryContainer => {
   return {
     exists: { field },
   };
 };
 
-const _generateRangeBlock = (
-  fields: IDateValues,
-): estypes.QueryDslQueryContainer[] => {
+const _generateRangeBlock = (fields: IDateValues): estypes.QueryDslQueryContainer[] => {
   const startDateValue: string = generateDateString({
     year: parseInt(fields.fdy!),
     month: parseInt(fields.fdm ?? ''),
@@ -137,9 +130,7 @@ const _generateRangeBlock = (
   return rangeBlock;
 };
 
-const _generateGeoShapeBlock = (
-  geoCoordinates: IGeoCoordinates,
-): estypes.QueryDslQueryContainer => {
+const _generateGeoShapeBlock = (geoCoordinates: IGeoCoordinates): estypes.QueryDslQueryContainer => {
   const geoShape: IShapeCoordinates = {
     type: 'envelope',
     coordinates: [
@@ -191,24 +182,11 @@ const _generateSortBlock = (sort: string): estypes.Sort => {
   return sortBlock;
 };
 
-const _generateOtherQueryProperties = (
-  searchBuilderPayload: ISearchBuilderPayload,
-): estypes.SearchRequest => {
-  const {
-    searchFieldsObject,
-    isCount = false,
-    isAggregation = false,
-    docId = '',
-  } = searchBuilderPayload;
-  const {
-    sort,
-    rowsPerPage,
-    page,
-    requiredFields = [],
-  } = (searchFieldsObject as ISearchPayload) ?? {};
+const _generateOtherQueryProperties = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const { searchFieldsObject, isCount = false, isAggregation = false, docId = '' } = searchBuilderPayload;
+  const { sort, rowsPerPage, page, requiredFields = [] } = (searchFieldsObject as ISearchPayload) ?? {};
 
-  const isSort: boolean =
-    sort !== '' && !isCount && docId === '' && !isAggregation;
+  const isSort: boolean = sort !== '' && !isCount && docId === '' && !isAggregation;
   const sortBlock: estypes.Sort = isSort ? _generateSortBlock(sort) : '';
 
   return {
@@ -221,30 +199,18 @@ const _generateOtherQueryProperties = (
       rowsPerPage !== mapResultMaxCount && {
         from: page === 1 ? 0 : (page - 1) * rowsPerPage,
       }),
-    ...(!isCount &&
-      docId === '' &&
-      !isAggregation && { _source: requiredFields }),
+    ...(!isCount && docId === '' && !isAggregation && { _source: requiredFields }),
   } as estypes.SearchRequest;
 };
 
-const _generateQuery = (
-  searchBuilderPayload: ISearchBuilderPayload,
-): estypes.SearchRequest => {
-  const {
-    searchFieldsObject,
-    fieldsToSearch = [],
-    docId = '',
-  } = searchBuilderPayload;
-  const { fields, fieldsExist = [] } =
-    (searchFieldsObject as ISearchPayload) ?? {};
+const _generateQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const { searchFieldsObject, fieldsToSearch = [], docId = '' } = searchBuilderPayload;
+  const { fields, fieldsExist = [] } = (searchFieldsObject as ISearchPayload) ?? {};
 
   const searchTerm: string = fields?.keyword?.q as string;
 
-  const mustBlock: estypes.QueryDslQueryContainer[] = docId
-    ? [_generateQueryStringBlock(docId, ['_id'])]
-    : [];
-  if (searchTerm && docId === '')
-    mustBlock.push(_generateQueryStringBlock(searchTerm, fieldsToSearch));
+  const mustBlock: estypes.QueryDslQueryContainer[] = docId ? [_generateQueryStringBlock(docId, ['_id'])] : [];
+  if (searchTerm && docId === '') mustBlock.push(_generateQueryStringBlock(searchTerm, fieldsToSearch));
   if (fieldsExist.length > 0 && docId === '') {
     fieldsExist.forEach((field: string) => {
       mustBlock.push(_generateFieldExistsBlock(field));
@@ -273,19 +239,12 @@ const _generateDateRangeQuery = (
 ): estypes.QueryDslQueryContainer[] => {
   const { searchFieldsObject } = searchBuilderPayload;
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
-  const { level, parent } =
-    (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
-  const parentArray =
-    typeof parent === 'string'
-      ? (parent as string).split(',').map((item) => item.trim())
-      : [];
+  const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
+  const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   const newParentArray = [...new Set(parentArray)];
   const filterBlock: estypes.QueryDslQueryContainer[] =
-    (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ??
-    [];
-  const studyPeriodFilter: IDateValues = (filters?.[
-    studyPeriodFilterField
-  ] as IDateValues) ?? { fdy: '', tdy: '' };
+    (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
+  const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
   if (studyPeriodFilter?.fdy && studyPeriodFilter?.tdy) {
     const newFields: IDateValues = {
       fdy: studyPeriodFilter?.fdy,
@@ -296,16 +255,12 @@ const _generateDateRangeQuery = (
     filterBlock.push(..._generateRangeBlock(fields.date));
   }
   if (fields?.classify?.level && fields.classify.parent) {
-    filterBlock.push(
-      _generateTermsBlock(level && levelMap[level], newParentArray),
-    );
+    filterBlock.push(_generateTermsBlock(level && levelMap[level], newParentArray));
   }
   return filterBlock;
 };
 
-const _generateOriginatorTypeFilter = (
-  originatorTypeFilters: string[],
-): estypes.QueryDslQueryContainer => {
+const _generateOriginatorTypeFilter = (originatorTypeFilters: string[]): estypes.QueryDslQueryContainer => {
   const scriptSource =
     "if (doc['contactForResource.organisationName.keyword'].size() > 0) { String orgName = doc['contactForResource.organisationName.keyword'].value; String cleanOrgName = orgName.replace(',', '').replace(\"'\", '').replace('-', '').trim(); List targetOrgNames = []; for (String org : params.orgNames) { String cleanOrg = org.replace(',', '').replace(\"'\", '').replace('-', '').trim(); targetOrgNames.add(cleanOrg); } for (String targetOrgName : targetOrgNames) { if (cleanOrgName.equals(targetOrgName)) { return true; } } return false; } else { return false; }";
 
@@ -371,34 +326,22 @@ const _generateOriginatorTypeFilter = (
   };
 };
 
-const generateSearchQuery = (
-  searchBuilderPayload: ISearchBuilderPayload,
-): estypes.SearchRequest => {
-  const queryPayload: estypes.SearchRequest =
-    _generateQuery(searchBuilderPayload);
+const generateSearchQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { filters } = (searchFieldsObject as ISearchPayload) ?? {};
   if (docId === '') {
-    const filterBlock: estypes.QueryDslQueryContainer[] =
-      _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
     const mustBlock: estypes.QueryDslQueryContainer[] =
-      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ??
-      [];
+      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
 
-    const resourceTypeFilters: string[] =
-      (filters?.[resourceTypeFilterField] as string[]) ?? [];
+    const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
 
     if (resourceTypeFilters.length > 0) {
-      mustBlock.push(
-        _generateTermsBlock(
-          'resourceType',
-          filters[resourceTypeFilterField] as string[],
-        ),
-      );
+      mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
 
-    const originatorTypeFilters: string[] =
-      (filters?.[originatorTypeFilterField] as string[]) ?? [];
+    const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
     if (originatorTypeFilters.length > 0) {
       mustBlock.push(_generateOriginatorTypeFilter(originatorTypeFilters));
     }
@@ -413,47 +356,31 @@ const generateSearchQuery = (
   return queryPayload;
 };
 
-const _generateStudyPeriodFilterQuery = (
-  searchBuilderPayload: ISearchBuilderPayload,
-): estypes.SearchRequest => {
-  const queryPayload: estypes.SearchRequest =
-    _generateQuery(searchBuilderPayload);
+const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { searchFieldsObject, docId = '' } = searchBuilderPayload;
   const { fields, filters } = searchFieldsObject as ISearchPayload;
-  const { level, parent } =
-    (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
+  const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
 
-  const parentArray =
-    typeof parent === 'string'
-      ? (parent as string).split(',').map((item) => item.trim())
-      : [];
+  const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
   const newParentArray = [...new Set(parentArray)];
 
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =
-      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ??
-      [];
+      (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
 
     const filterBlock: estypes.QueryDslQueryContainer[] =
-      (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ??
-      [];
+      (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
 
-    const resourceTypeFilters: string[] =
-      (filters?.[resourceTypeFilterField] as string[]) ?? [];
-    const originatorTypeFilters: string[] =
-      (filters?.[originatorTypeFilterField] as string[]) ?? [];
+    const resourceTypeFilters: string[] = (filters?.[resourceTypeFilterField] as string[]) ?? [];
+    const originatorTypeFilters: string[] = (filters?.[originatorTypeFilterField] as string[]) ?? [];
 
     if (fields?.date?.fdy && fields?.date?.tdy) {
       filterBlock.push(..._generateRangeBlock(fields.date));
     }
 
     if (resourceTypeFilters.length > 0) {
-      mustBlock.push(
-        _generateTermsBlock(
-          'resourceType',
-          filters[resourceTypeFilterField] as string[],
-        ),
-      );
+      mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
     if (originatorTypeFilters.length > 0) {
       mustBlock.push(_generateOriginatorTypeFilter(originatorTypeFilters));
@@ -484,15 +411,11 @@ const _generateStudyPeriodFilterQuery = (
   return queryPayload;
 };
 
-const _generateResourceTypeFilterQuery = (
-  searchBuilderPayload: ISearchBuilderPayload,
-): estypes.SearchRequest => {
-  const queryPayload: estypes.SearchRequest =
-    _generateQuery(searchBuilderPayload);
+const _generateResourceTypeFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { docId = '' } = searchBuilderPayload;
   if (docId === '') {
-    const filterBlock: estypes.QueryDslQueryContainer[] =
-      _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
         ...queryPayload.query.bool,
@@ -510,15 +433,11 @@ const _generateResourceTypeFilterQuery = (
   return queryPayload;
 };
 
-const _generateOriginatorFilterQuery = (
-  searchBuilderPayload: ISearchBuilderPayload,
-): estypes.SearchRequest => {
-  const queryPayload: estypes.SearchRequest =
-    _generateQuery(searchBuilderPayload);
+const _generateOriginatorFilterQuery = (searchBuilderPayload: ISearchBuilderPayload): estypes.SearchRequest => {
+  const queryPayload: estypes.SearchRequest = _generateQuery(searchBuilderPayload);
   const { docId = '' } = searchBuilderPayload;
   if (docId === '') {
-    const filterBlock: estypes.QueryDslQueryContainer[] =
-      _generateDateRangeQuery(searchBuilderPayload, queryPayload);
+    const filterBlock: estypes.QueryDslQueryContainer[] = _generateDateRangeQuery(searchBuilderPayload, queryPayload);
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
         ...queryPayload.query.bool,
@@ -549,10 +468,8 @@ const generateFilterQuery = (
     return _generateStudyPeriodFilterQuery(searchBuilderPayload);
   }
 
-  const resourceTypeFilterQuery =
-    _generateResourceTypeFilterQuery(searchBuilderPayload);
-  const originatorFilterQuery =
-    _generateOriginatorFilterQuery(searchBuilderPayload);
+  const resourceTypeFilterQuery = _generateResourceTypeFilterQuery(searchBuilderPayload);
+  const originatorFilterQuery = _generateOriginatorFilterQuery(searchBuilderPayload);
 
   const combinedQuery: estypes.SearchRequest = {
     ...resourceTypeFilterQuery,
@@ -565,8 +482,4 @@ const generateFilterQuery = (
   return combinedQuery;
 };
 
-export {
-  generateSearchQuery,
-  generateFilterQuery,
-  buildCustomSortScriptForStudyPeriod,
-};
+export { generateSearchQuery, generateFilterQuery, buildCustomSortScriptForStudyPeriod };

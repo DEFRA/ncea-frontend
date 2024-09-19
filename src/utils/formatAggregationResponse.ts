@@ -40,7 +40,7 @@ const formatAggregationResponse = async (
   try {
     const finalResponse: IAggregationOptions = {};
 
-    const handleBuckets = (buckets, filterOption) => {
+    const handleBuckets = (buckets) => {
       let nonGeoIndex = -1;
       let publicationIndex = -1;
       buckets.forEach((bucket, index) => {
@@ -91,11 +91,12 @@ const formatAggregationResponse = async (
       if (apiAggValues?.value) apiAggValues = apiAggValues.value;
 
       if (isTerm && apiAggValues && Array.isArray(apiAggValues.buckets) && apiAggValues.buckets.length > 0) {
-        handleBuckets(apiAggValues.buckets, filterOption);
+        handleBuckets(apiAggValues.buckets);
 
-        finalResponse[filterOption.key] = apiAggValues.type === 'originator'
-          ? apiAggValues.buckets.map(bucket => formatBucket(bucket, filterOption, false))
-          : apiAggValues.buckets.map(bucket => formatBucket(bucket, filterOption));
+        finalResponse[filterOption.key] =
+          apiAggValues.type === 'originator'
+            ? apiAggValues.buckets.map((bucket) => formatBucket(bucket, filterOption, false))
+            : apiAggValues.buckets.map((bucket) => formatBucket(bucket, filterOption));
       } else if (isDate) {
         handleDate(filterOption, finalResponse);
       } else {

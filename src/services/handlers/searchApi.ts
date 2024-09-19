@@ -24,8 +24,6 @@ const getSearchResults = async (
         }),
       };
       const payload = generateSearchQuery(searchBuilderPayload);
-
-      console.log('getSearchResults--------------------', JSON.stringify(payload));
       const response = await performQuery<estypes.SearchResponse>(payload);
       const finalResponse: ISearchResults = await formatSearchResponse(response, false, isMapResults);
       return finalResponse;
@@ -75,8 +73,7 @@ const getFilterOptions = async (
       const payload = generateFilterQuery(searchBuilderPayload, {
         isStudyPeriod,
       });
-      //  payload.terminate_after = 10000;
-      console.log('pay--------------------', JSON.stringify(payload));
+      payload.terminate_after = 10000;
       const response = await performQuery<estypes.SearchResponse>(payload);
       const finalResponse: IAggregationOptions = await formatAggregationResponse(response, defaultFilterOptions);
       return finalResponse;
