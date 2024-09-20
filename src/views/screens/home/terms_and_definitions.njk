@@ -1,0 +1,47 @@
+{% extends "layout/default.njk" %}
+{% from "govuk/components/accordion/macro.njk" import govukAccordion %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% set items = [] %}
+{% for section in classifierItemsTheme %}
+  {% for classifier in section.classifiers %}
+    {% set detailsHtml = '<p>' ~ section.sectionIntroduction ~ '</p>' %}
+    {% for category in classifierItemsCategoryNew %}
+      {% if classifier.name == category.sectionTitle %}
+        {% set detailsHtml = detailsHtml +  '<p class="govuk-body-s">' ~ category.sectionIntroduction ~ '</p>' | safe %}
+        {% for cl in category.classifiers %}
+          {% set detailsHtml = detailsHtml + govukDetails({
+          summaryText: cl.name,
+          html: cl.text
+        }) | safe %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% set accordionItem = {
+     heading: {
+        html:classifier.name
+      },
+      content: {
+        html: detailsHtml
+      }
+    } %}
+    {% set items = items.concat(accordionItem) %}
+  {% endfor %}
+{% endfor %}
+{% block content %}
+  <div class="govuk-grid-row govuk-!-margin-top-5">
+    <div class="govuk-grid-column-full">
+      <h1 class="details-title  govuk-!-margin-bottom-5">Natural capital classifications</h1>
+      <p class="govuk-body-m">
+        The metadata records in this service are classified using terms from a natural capital vocabulary created specifically
+        to support the category search. These terms draw on existing marine and terrestrial vocabularies that we’ve organised
+        into a three-level hierarchy by assigning vocabulary terms used in the category search through machine learning where
+        possible. The terms and definitions are provided for reference; this vocabulary has not been designed to generally apply
+        to natural capital and should not be re-used outside of the NCEA category search.
+      </p>
+      {{ govukAccordion({
+        id: "accordion-id",
+        items: items
+      }) }}
+    </div>
+  </div>
+{% endblock %}

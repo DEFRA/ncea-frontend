@@ -1,6 +1,7 @@
 'use strict';
 
 import { ISearchPayload } from '../../interfaces/queryBuilder.interface';
+import { getClassifierThemes } from '../../services/handlers/classifierApi';
 import { getSearchResultsCount } from '../../services/handlers/searchApi';
 import { IGuidedSearchStepsMatrix, IStepRouteMatrix } from '../../interfaces/guidedSearch.interface';
 import { Request, ResponseObject, ResponseToolkit } from '@hapi/hapi';
@@ -87,6 +88,24 @@ const HomeController = {
       pageTitle: pageTitles.cookiePolicy,
     });
   },
+  termsAndDefinitionsGlossaryHandler: async(request: Request, response: ResponseToolkit): Promise<ResponseObject> => {
+    const classifierItemsTheme = await getClassifierThemes("1");
+    const classifierItemsCategory = await getClassifierThemes("2");
+    const classifierItemsSubcategory = await getClassifierThemes("3");
+    const classifierItemsCategoryNew = classifierItemsCategory.map(section => {
+      if (section.sectionTitle === "Natural assets") {
+        return { ...section, sectionTitle: "Natural asset" };
+      }
+      return section;
+    });
+    return response.view('screens/home/terms_and_definitions', {
+      pageTitle: pageTitles.termsAndDefGlossary,
+      classifierItemsTheme,
+      classifierItemsCategoryNew,
+      classifierItemsSubcategory
+    });
+  },
 };
 
 export { HomeController };
+

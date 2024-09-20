@@ -40,6 +40,12 @@ const homeRoutes = [
     path: webRoutePaths.cookiePolicy,
     handler: HomeController.cookiePolicyHandler,
   },
+  {
+    method: 'GET',
+    path: webRoutePaths.termsAndDefGlossary,
+    handler: HomeController.termsAndDefinitionsGlossaryHandler,
+  },
 ];
 
 export { homeRoutes };
+

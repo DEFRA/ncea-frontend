@@ -18,6 +18,7 @@ export const webRoutePaths = {
   termsAndConditions: '/terms-conditions',
   privacyPolicy: '/privacy-policy',
   cookiePolicy: '/cookie-policy',
+  termsAndDefGlossary: '/terms_and_definitions',
   mdc: '/mdc/mdc.xsd',
   mdcClassifiers: '/mdc/classifiers.xsd',
   mdcIdentifiers: '/mdc/identifiers.xsd',
@@ -220,6 +221,7 @@ export const pageTitles = {
   termsAndConditions: 'Terms and conditions',
   privacyPolicy: 'Privacy policy',
   cookiePolicy: 'Cookies',
+  termsAndDefGlossary: 'Natural capital classifications',
   Classifier: [
     'NCEA questionnaire search - natural capital theme',
     'NCEA Guided Search- Categories',
