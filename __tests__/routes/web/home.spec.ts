@@ -277,8 +277,8 @@ describe('Home Screen', () => {
     });
   });
 
-  describe('Questionnaire search block action', () => {
-    it('should render the questionnaire search button', () => {
+  describe('Category search block action', () => {
+    it('should render the Category search button', () => {
       const anchorElement = document?.querySelector('.govuk-button--start');
       expect(anchorElement?.tagName?.toLowerCase()).toBe('a');
     });
