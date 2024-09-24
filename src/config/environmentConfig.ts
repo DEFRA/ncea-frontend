@@ -29,7 +29,9 @@ const config: EnvironmentConfig = {
     clientId: process.env.CLIENT_ID || 'Enter_the_Application_Id_Here',
     clientSecret: process.env.CLIENT_SECRET || 'Enter_the_Application_Secret_Here',
     authority: process.env.AUTHORITY || 'https://Enter_the_Tenant_Subdomain_Here.ciamlogin.com/',
-    scopes: [process.env.SCOPES || 'api://Enter_the_Web_Api_Application_Id_Here']
+    scopes: [process.env.SCOPES || 'api://Enter_the_Web_Api_Application_Id_Here'],
+    clientIdSecretName: '',
+    clientSecretName: ''
   }
 };
 

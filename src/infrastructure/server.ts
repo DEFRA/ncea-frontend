@@ -30,6 +30,11 @@ const initializeServer = async (): Promise<Server> => {
     environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
     customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
   }
+  const classifierApiClientId = await getSecret(environmentConfig.classifierApi.clientIdSecretName);
+  const classifierApiClientSecret = await getSecret(environmentConfig.classifierApi.clientSecretName);
+  environmentConfig.classifierApi.clientId = classifierApiClientId;
+  environmentConfig.classifierApi.clientSecret = classifierApiClientSecret;
+
   // Register vendors plugins
   await server.register([inert, vision]);
 

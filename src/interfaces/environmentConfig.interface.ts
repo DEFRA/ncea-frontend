@@ -16,5 +16,7 @@ export interface EnvironmentConfig {
     clientSecret: string;
     authority: string;
     scopes: Array<string>;
+    clientIdSecretName: string;
+    clientSecretName: string;
   }
 }

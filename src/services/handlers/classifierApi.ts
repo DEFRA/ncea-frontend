@@ -30,7 +30,7 @@ const transformClassifierLevel3Details = (Level2Classifiers: Classify[]): Classi
 const invokeClassifierApi = async (level: string, parents: string = ''): Promise<AxiosResponse> => {
   try {
     let url = `${environmentConfig.classifierApi.endpoint}api/classifiers?level=${level}`;
-
+    
     if (parents) {
       url = url + `&Parents=${parents}`;
     }
@@ -41,7 +41,7 @@ const invokeClassifierApi = async (level: string, parents: string = ''): Promise
       headers: {
           Authorization: `Bearer ${authResponse.accessToken}`
       }
-  };
+    };
     const response: AxiosResponse = await axios.get(url, options);
     return response;
   } catch (error: unknown) {

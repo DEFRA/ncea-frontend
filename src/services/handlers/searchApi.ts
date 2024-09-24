@@ -23,7 +23,9 @@ const getSearchResults = async (
           fieldsToSearch: quickSearchTargetFields,
         }),
       };
-      const payload = generateSearchQuery(searchBuilderPayload);
+      let payload = generateSearchQuery(searchBuilderPayload);
+      // payload.track_total_hits = false;
+      console.log(JSON.stringify(payload));
       const response = await performQuery<estypes.SearchResponse>(payload);
       const finalResponse: ISearchResults = await formatSearchResponse(response, false, isMapResults);
       return finalResponse;
