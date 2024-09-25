@@ -31,7 +31,8 @@ const config: EnvironmentConfig = {
     authority: process.env.CLASSIFIER_API_AUTHORITY,
     scopes: process.env.SCOPES,
     clientIdSecretName: '',
-    clientSecretName: ''
+    clientSecretName: '',
+    scopeSecretName: ''
   }
 };
 
