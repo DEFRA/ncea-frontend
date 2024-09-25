@@ -63,7 +63,7 @@ steps:
         env.ES_USERNAME=$(elasticSearchUser)
         env.ES_PASSWORD=$(elasticSearchPassword)
         env.CLASSIFIER_API=$(classifierApiBaseUri)
-        env.CLASSIFIER_API_AUTHORITY=$(classifierApiAuthority)
+        env.CLASSIFIER_API_AUTHORITY=$(azureADTenantId)
         env.WEBDOMAIN=$(webdomain)
         env.GTM_ID=$(gtmId)
     install: true

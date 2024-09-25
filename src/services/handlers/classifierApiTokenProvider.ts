@@ -11,7 +11,7 @@ export const apiConfig = {
 const msalConfig = {
     auth: {
         clientId: environmentConfig.classifierApi.clientId,
-        authority: environmentConfig.classifierApi.authority,
+        authority: `https://login.microsoftonline.com/${environmentConfig.classifierApi.authority}`,
         clientSecret: environmentConfig.classifierApi.clientSecret
     },
     system: {
