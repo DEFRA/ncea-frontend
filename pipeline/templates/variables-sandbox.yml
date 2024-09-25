@@ -1,3 +1,4 @@
 variables:
 - group: azureVariables-sandbox
 - group: searchWebAppVariables-sandbox
+- group: classifierMicroserviceVariables-sandbox

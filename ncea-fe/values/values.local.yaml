@@ -65,5 +65,6 @@ env:
   AZURE_KEYVAULT_URL: https://devnceinfkvt1401.vault.azure.net/
   ELASTICSEARCH_API: http://elasticsearch.geonetwork.svc.cluster.local/
   CLASSIFIER_API: https://dev-ncea-classifier.azure.defra.cloud/
+  CLASSIFIER_API_AUTHORITY: https://login.microsoftonline.com/b0a4086e-0a02-47f6-b6b0-0197b4eeeff9
   WEBDOMAIN: https://dev-ncea-search.azure.defra.cloud/
   GTM_ID: GTM-PZJ4WBG7

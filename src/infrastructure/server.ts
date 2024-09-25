@@ -27,9 +27,19 @@ const server: Server = Hapi.server({
 const initializeServer = async (): Promise<Server> => {
   if (!shouldPushToAppInsights) {
     const appInsightsConnectionString = await getSecret(appInsightsConnectionStringSecretName);
+
     environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
     customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
   }
+  const classifierApiClientId = await getSecret(environmentConfig.classifierApi.clientIdSecretName);
+  const classifierApiClientSecret = await getSecret(environmentConfig.classifierApi.clientSecretName);
+  const scopeSecret = await getSecret(environmentConfig.classifierApi.scopeSecretName);
+  environmentConfig.classifierApi.clientId = classifierApiClientId;
+  environmentConfig.classifierApi.clientSecret = classifierApiClientSecret;
+  environmentConfig.classifierApi.scopes = scopeSecret;
+
+  console.log({environmentConfig});
+
   // Register vendors plugins
   await server.register([inert, vision]);
 
