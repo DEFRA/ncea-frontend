@@ -68,5 +68,8 @@ export const environmentSchema: Joi.ObjectSchema = Joi.object({
     clientSecretName: Joi.string().allow('').default('').messages({
       'string.base': 'Classifier API client secret name must be a string',
     }),
+    scopeSecretName: Joi.string().allow('').default('').messages({
+      'string.base': 'Classifier API scope secret must be a string',
+    }),
   })
 });
