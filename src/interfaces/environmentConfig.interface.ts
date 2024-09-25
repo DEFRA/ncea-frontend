@@ -11,11 +11,11 @@ export interface EnvironmentConfig {
   elasticSearchPassword?: string;
   webDomain?: string;
   classifierApi: {
-    endpoint: string;
-    clientId: string;
-    clientSecret: string;
-    authority: string;
-    scopes: Array<string>;
+    endpoint: string | undefined;
+    clientId: string | undefined;
+    clientSecret: string | undefined;
+    authority: string | undefined;
+    scopes: string | undefined;
     clientIdSecretName: string;
     clientSecretName: string;
   }

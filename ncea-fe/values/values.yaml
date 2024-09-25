@@ -81,3 +81,4 @@ env:
   CLASSIFIER_API: $(classifierApiBaseUri)
   WEBDOMAIN: $(webdomain)
   GTM_ID: $(gtmId)
+  CLASSIFIER_API_AUTHORITY: $(classifierApiAuthority)

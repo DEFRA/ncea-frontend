@@ -89,7 +89,7 @@ describe('Environment environmentConfig', () => {
           clientId: Joi.string().allow('').default(''),
           clientSecret: Joi.string().allow('').default(''),
           authority: Joi.string().allow('').default(''),
-          scopes: Joi.array().items(Joi.string()).min(1).required()
+          scopes: Joi.string().allow('').default(''),
         })
       });
 

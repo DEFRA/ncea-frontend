@@ -27,6 +27,7 @@ const server: Server = Hapi.server({
 const initializeServer = async (): Promise<Server> => {
   if (!shouldPushToAppInsights) {
     const appInsightsConnectionString = await getSecret(appInsightsConnectionStringSecretName);
+
     environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
     customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
   }

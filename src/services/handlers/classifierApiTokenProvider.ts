@@ -1,8 +1,7 @@
 const msal = require('@azure/msal-node');
 import { environmentConfig } from '../../config/environmentConfig';
-
 export const tokenRequest = {
-    scopes: [`${environmentConfig.classifierApi.scopes}/.default`],
+    scopes: [`api://${environmentConfig.classifierApi.scopes}/.default`],
 };
 
 export const apiConfig = {
