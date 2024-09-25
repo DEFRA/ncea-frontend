@@ -30,8 +30,9 @@ const config: EnvironmentConfig = {
     clientSecret: process.env.CLIENT_SECRET,
     authority: process.env.CLASSIFIER_API_AUTHORITY,
     scopes: process.env.SCOPES,
-    clientIdSecretName: '',
-    clientSecretName: ''
+    clientIdSecretName: 'daemon-app-clientid',
+    clientSecretName: 'daemon-app-secret',
+    scopeSecretName: 'classifier-app-api-clientid'
   }
 };
 

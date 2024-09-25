@@ -31,10 +31,13 @@ const initializeServer = async (): Promise<Server> => {
     environmentConfig.appInsightsConnectionString = appInsightsConnectionString;
     customHapiViews.options.context.appInsightsConnectionString = appInsightsConnectionString;
   }
-  const classifierApiClientId = await getSecret(environmentConfig.classifierApi.clientIdSecretName);
-  const classifierApiClientSecret = await getSecret(environmentConfig.classifierApi.clientSecretName);
-  environmentConfig.classifierApi.clientId = classifierApiClientId;
-  environmentConfig.classifierApi.clientSecret = classifierApiClientSecret;
+  const clientId = await getSecret(environmentConfig.classifierApi.clientIdSecretName);
+  const clientSecret = await getSecret(environmentConfig.classifierApi.clientSecretName);
+  const scope = await getSecret(environmentConfig.classifierApi.scopeSecretName);
+
+  environmentConfig.classifierApi.clientId = clientId;
+  environmentConfig.classifierApi.clientSecret = clientSecret;
+  environmentConfig.classifierApi.scopes = scope;
 
   // Register vendors plugins
   await server.register([inert, vision]);

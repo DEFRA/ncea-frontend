@@ -18,5 +18,6 @@ export interface EnvironmentConfig {
     scopes: string | undefined;
     clientIdSecretName: string;
     clientSecretName: string;
+    scopeSecretName: string;
   }
 }

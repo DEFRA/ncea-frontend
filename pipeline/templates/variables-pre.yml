@@ -1,5 +1,4 @@
 variables:
 - group: azureVariables-pre
 - group: searchWebAppVariables-pre
-- group: classifierMicroserviceVariables-pre
 - group: pipelineVariables
