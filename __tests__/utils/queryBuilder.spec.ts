@@ -2129,7 +2129,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['all'], parent: ['lvl1-001'], },
+        filters: { [resourceTypeFilterField]: ['all'] },
         rowsPerPage: 20,
         page: 1,
       };
@@ -2352,7 +2352,7 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
-    it('should build the search query when filtering with both resourceType and study period', () => {
+    it('should build the search query when filtering with both resourceType , study period and classifier', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           keyword: {
