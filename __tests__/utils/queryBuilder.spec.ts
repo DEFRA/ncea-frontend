@@ -218,6 +218,31 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.filter).toHaveLength(2);
     });
 
+    it('should generate a query with default isStudyPeriod (false)', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          classify: {
+            level: '2',
+            parent: ['lv2-009'],
+          },
+        },
+        filters: {},
+        sort: '',
+        rowsPerPage: 10,
+        page: 1,
+      };
+
+      const searchBuilderPayload: ISearchBuilderPayload = {
+        searchFieldsObject,
+        isCount: false,
+        isAggregation: false,
+      };
+
+      const result = generateFilterQuery(searchBuilderPayload, {});
+
+      expect(result.query?.bool?.filter).toBeDefined();
+     });
+
     it('should build the search query correctly with only search term', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
