@@ -2366,6 +2366,7 @@ describe('Build the search query', () => {
             fdy: '2017',
             tdy: '2022',
           },
+          parent: ['lvl1-001'],
         },
         rowsPerPage: 20,
         page: 1,
@@ -3120,6 +3121,7 @@ describe('Build the search query', () => {
             fdy: '2017',
             tdy: '2022',
           },
+
         },
         rowsPerPage: 20,
         page: 1,
@@ -3921,6 +3923,7 @@ describe('Build the search query', () => {
             fdy: '2017',
             tdy: '2022',
           },
+          parent: ['lvl1-001'],
         },
         rowsPerPage: 20,
         page: 1,
