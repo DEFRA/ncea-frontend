@@ -199,6 +199,7 @@ const _generateDateRangeQuery = (
   const { filters, fields } = (searchFieldsObject as ISearchPayload) ?? {};
   const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+  const newParentArray = [...new Set(parentArray)];
   const filterBlock: estypes.QueryDslQueryContainer[] =
     (queryPayload.query?.bool?.filter as estypes.QueryDslQueryContainer[]) ?? [];
   const studyPeriodFilter: IDateValues = (filters?.[studyPeriodFilterField] as IDateValues) ?? { fdy: '', tdy: '' };
@@ -212,7 +213,7 @@ const _generateDateRangeQuery = (
     filterBlock.push(..._generateRangeBlock(fields.date));
   }
   if (fields?.classify?.level && fields.classify.parent) {
-    filterBlock.push(_generateTermsBlock(level && levelMap[level], parentArray));
+    filterBlock.push(_generateTermsBlock(level && levelMap[level], newParentArray));
   }
   return filterBlock;
 };
@@ -248,6 +249,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
   const { level, parent } = (searchFieldsObject?.fields.classify as ISearchPayload) ?? {};
 
   const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+  const newParentArray = [...new Set(parentArray)];
   if (docId === '') {
     const mustBlock: estypes.QueryDslQueryContainer[] =
       (queryPayload.query?.bool?.must as estypes.QueryDslQueryContainer[]) ?? [];
@@ -261,7 +263,7 @@ const _generateStudyPeriodFilterQuery = (searchBuilderPayload: ISearchBuilderPay
       mustBlock.push(_generateTermsBlock('resourceType', filters[resourceTypeFilterField] as string[]));
     }
     if (level && levelMap[level]) {
-      filterBlock.push(_generateTermsBlock(levelMap[level], parentArray));
+      filterBlock.push(_generateTermsBlock(levelMap[level], newParentArray));
     }
     if (queryPayload?.query?.bool) {
       queryPayload.query.bool = {
