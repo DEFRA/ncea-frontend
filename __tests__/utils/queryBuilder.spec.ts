@@ -8,6 +8,8 @@ import {
   buildCustomSortScriptForStudyPeriod,
   generateFilterQuery,
   generateSearchQuery,
+  generateQueryStringBlock,
+  generateQuery,
 } from '../../src/utils/queryBuilder';
 
 const oldestStudySortScript = buildCustomSortScriptForStudyPeriod('asc');
@@ -15,6 +17,44 @@ const newestStudySortScript = buildCustomSortScriptForStudyPeriod('desc');
 
 describe('Build the search query', () => {
   describe('Search query without sort', () => {
+
+    it('should generate a query string block without fieldsToSearch (default to empty array)', () => {
+      const searchTerm = 'testSearchTerm';
+
+      const result = generateQueryStringBlock(searchTerm);
+
+      expect(result).toEqual({
+        query_string: {
+          query: 'testSearchTerm',
+          default_operator: 'AND',
+        },
+      });
+    });
+
+    it('should generate a query without fieldsToSearch (default to empty array)', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          classify: {
+            level: '1',
+            parent: ['parent1'],
+          },
+        },
+        sort: '',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const searchBuilderPayload: ISearchBuilderPayload = {
+        searchFieldsObject,
+        docId: '',
+      };
+
+      const result = generateQuery(searchBuilderPayload);
+
+      expect(result.query?.bool?.must).toBeUndefined();
+    });
+
     it('should build the search query correctly with date range and when fields are not provided', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
