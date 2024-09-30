@@ -57,8 +57,9 @@ const formatAggregationResponse = async (
         }
         finalResponse[filterOption.key] = apiAggValues?.buckets.map((bucket) => {
           const wordsWithSpace = addSpaces(bucket[filterOption.propertyToRead]);
-          let text: string = capitalizeWords(wordsWithSpace);
-          if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
+          const text: string = capitalizeWords(wordsWithSpace);
+          //commented the count part for resource tyoe
+          // if (filterOption.needCount) text += ` (${bucket['doc_count']})`;
           return {
             value: bucket[filterOption.propertyToRead],
             text,

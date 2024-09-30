@@ -8,6 +8,8 @@ import {
   buildCustomSortScriptForStudyPeriod,
   generateFilterQuery,
   generateSearchQuery,
+  generateQueryStringBlock,
+  generateQuery,
 } from '../../src/utils/queryBuilder';
 
 const oldestStudySortScript = buildCustomSortScriptForStudyPeriod('asc');
@@ -15,6 +17,44 @@ const newestStudySortScript = buildCustomSortScriptForStudyPeriod('desc');
 
 describe('Build the search query', () => {
   describe('Search query without sort', () => {
+
+    it('should generate a query string block without fieldsToSearch (default to empty array)', () => {
+      const searchTerm = 'testSearchTerm';
+
+      const result = generateQueryStringBlock(searchTerm);
+
+      expect(result).toEqual({
+        query_string: {
+          query: 'testSearchTerm',
+          default_operator: 'AND',
+        },
+      });
+    });
+
+    it('should generate a query without fieldsToSearch (default to empty array)', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          classify: {
+            level: '1',
+            parent: ['parent1'],
+          },
+        },
+        sort: '',
+        filters: {},
+        rowsPerPage: 20,
+        page: 1,
+      };
+
+      const searchBuilderPayload: ISearchBuilderPayload = {
+        searchFieldsObject,
+        docId: '',
+      };
+
+      const result = generateQuery(searchBuilderPayload);
+
+      expect(result.query?.bool?.must).toBeUndefined();
+    });
+
     it('should build the search query correctly with date range and when fields are not provided', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -217,6 +257,31 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.must).toHaveLength(1);
       expect(result.query?.bool?.filter).toHaveLength(2);
     });
+
+    it('should generate a query with default isStudyPeriod (false)', () => {
+      const searchFieldsObject: ISearchPayload = {
+        fields: {
+          classify: {
+            level: '2',
+            parent: ['lv2-009'],
+          },
+        },
+        filters: {},
+        sort: '',
+        rowsPerPage: 10,
+        page: 1,
+      };
+
+      const searchBuilderPayload: ISearchBuilderPayload = {
+        searchFieldsObject,
+        isCount: false,
+        isAggregation: false,
+      };
+
+      const result = generateFilterQuery(searchBuilderPayload, {});
+
+      expect(result.query?.bool?.filter).toBeDefined();
+     });
 
     it('should build the search query correctly with only search term', () => {
       const searchFieldsObject: ISearchPayload = {
@@ -2177,7 +2242,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset'] },
+        filters: { [resourceTypeFilterField]: ['dataset'],  parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -2227,7 +2292,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'],  parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -2352,7 +2417,7 @@ describe('Build the search query', () => {
       expect(result.query?.bool?.filter).toHaveLength(1);
     });
 
-    it('should build the search query when filtering with both resourceType and study period', () => {
+    it('should build the search query when filtering with both resourceType , study period and classifier', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
           keyword: {
@@ -2366,6 +2431,7 @@ describe('Build the search query', () => {
             fdy: '2017',
             tdy: '2022',
           },
+          parent: ['lvl1-001'],
         },
         rowsPerPage: 20,
         page: 1,
@@ -2994,6 +3060,31 @@ describe('Build the search query', () => {
       expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toEqual([]);
     }
   });
+
+  it('should return an empty array if parent is not provided', () => {
+    const parent = undefined;
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual([]);
+  });
+
+  it('should return an empty array if parent is an empty string', () => {
+    const parent = '';
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual(['']);
+  });
+
+  it('should split the parent string by comma and trim each item', () => {
+    const parent = 'lv3-020, lv3-021 ,lv3-022';
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual(['lv3-020', 'lv3-021', 'lv3-022']);
+  });
+
+  it('should return an empty array if parent is a non-string value', () => {
+    const parent = 12345;
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual([]);
+  });
+
     it('should build the search query for resourceType aggregation with study period filter', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
@@ -3095,6 +3186,7 @@ describe('Build the search query', () => {
             fdy: '2017',
             tdy: '2022',
           },
+
         },
         rowsPerPage: 20,
         page: 1,
@@ -3565,7 +3657,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'],  parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -3625,7 +3717,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'], parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -3790,7 +3882,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'], parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -3896,6 +3988,7 @@ describe('Build the search query', () => {
             fdy: '2017',
             tdy: '2022',
           },
+          parent: ['lvl1-001'],
         },
         rowsPerPage: 20,
         page: 1,
