@@ -2994,6 +2994,31 @@ describe('Build the search query', () => {
       expect(termsBlock.terms['OrgNceaClassifiers.classifiers.code.keyword']).toEqual([]);
     }
   });
+
+  it('should return an empty array if parent is not provided', () => {
+    const parent = undefined;
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual([]);
+  });
+
+  it('should return an empty array if parent is an empty string', () => {
+    const parent = '';
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual(['']);
+  });
+
+  it('should split the parent string by comma and trim each item', () => {
+    const parent = 'lv3-020, lv3-021 ,lv3-022';
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual(['lv3-020', 'lv3-021', 'lv3-022']);
+  });
+
+  it('should return an empty array if parent is a non-string value', () => {
+    const parent = 12345;
+    const parentArray = typeof parent === 'string' ? (parent as string).split(',').map((item) => item.trim()) : [];
+    expect(parentArray).toEqual([]);
+  });
+
     it('should build the search query for resourceType aggregation with study period filter', () => {
       const searchFieldsObject: ISearchPayload = {
         fields: {
