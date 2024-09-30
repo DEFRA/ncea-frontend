@@ -2129,7 +2129,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['all'] },
+        filters: { [resourceTypeFilterField]: ['all'], parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -2177,7 +2177,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset'] },
+        filters: { [resourceTypeFilterField]: ['dataset'],  parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -2227,7 +2227,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'],  parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -3592,7 +3592,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'],  parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -3652,7 +3652,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'], parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
@@ -3817,7 +3817,7 @@ describe('Build the search query', () => {
           },
         },
         sort: 'most_relevant',
-        filters: { [resourceTypeFilterField]: ['dataset', 'series'] },
+        filters: { [resourceTypeFilterField]: ['dataset', 'series'], parent: ['lvl1-001'], },
         rowsPerPage: 20,
         page: 1,
       };
