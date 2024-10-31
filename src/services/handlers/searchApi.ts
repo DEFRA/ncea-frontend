@@ -30,7 +30,7 @@ const getSearchResults = async (
     } else {
       return Promise.resolve({ total: 0, items: [] });
     }
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
+    /* eslint-disable  @typescript-eslint/no-explicit-any  */
   } catch (error: any) {
     throw new Error(`Error fetching results: ${error.message}`);
   }
